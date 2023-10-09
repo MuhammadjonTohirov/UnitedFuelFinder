@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 extension String: NetResBody {
     
@@ -70,6 +71,23 @@ public extension String {
 
     func localize(arguments: CVarArg...) -> String {
         String.init(format: self.localize, arguments: arguments)
+    }
+    
+//    attributed string localize
+    func localize(attributes: [NSAttributedString.Key: Any]) -> AttributedString {
+        return AttributedString(NSAttributedString(string: self, attributes: attributes))
+    }
+    
+    func highlight(text: String, color: UIColor) -> NSAttributedString {
+        guard let range = self.range(of: text) else {
+            return NSAttributedString(string: self)
+        }
+        
+        let _range = NSRange(range, in: self)
+        
+        let attr = NSMutableAttributedString(string: self)
+        attr.addAttribute(.foregroundColor, value: color, range: _range)
+        return attr
     }
     
     func onlyNumberFormat(with mask: String) -> String {
@@ -139,4 +157,10 @@ public extension String {
 
 extension Bool: NetResBody {
     
+}
+
+public extension NSAttributedString {
+    var toSwiftUI: AttributedString {
+        AttributedString(self)
+    }
 }

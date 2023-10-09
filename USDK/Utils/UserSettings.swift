@@ -14,7 +14,7 @@ final public class UserSettings {
     
     public private(set) var userAvatarURL: URL = URL.base.appendingPath("api", "Client", "ProfileAvatar")
     
-    @codableWrapper(key: "language")
+    @codableWrapper(key: "language", Language.english)
     public var language: Language? {
         didSet {
 //            guard let realm = Realm.new, oldValue != language, !isAccessTokenExpired else {
@@ -35,4 +35,7 @@ final public class UserSettings {
 //    accessToken
     @codableWrapper(key: "accessToken")
     public var accessToken: String?
+    
+    @codableWrapper(key: "lastActiveDate")
+    public var lastActiveDate: Date?
 }

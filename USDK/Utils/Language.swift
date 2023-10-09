@@ -39,7 +39,7 @@ public enum Language: Int, Codable {
     public var code: String {
         switch self {
         case .uzbek:
-            return "uz-UZ"
+            return "uz"
 
         case .russian:
             return "ru"
