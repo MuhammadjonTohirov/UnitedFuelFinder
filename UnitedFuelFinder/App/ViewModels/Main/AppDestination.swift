@@ -57,6 +57,12 @@ enum AppDestination: Hashable, ScreenRoute {
             SelectLanguageView()
         case .loading:
             LoadingView(viewModel: LoadingViewModel())
+        case .pin:
+            PinCodeView(viewModel: .init(title: "setup_pin".localize, reason: .setup))
+        case .auth:
+            AuthView()
+        case .main:
+            HomeView()
         default:
             EmptyView()
         }

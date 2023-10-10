@@ -38,4 +38,10 @@ final public class UserSettings {
     
     @codableWrapper(key: "lastActiveDate")
     public var lastActiveDate: Date?
+    
+    @codableWrapper(key: "appPin")
+    public var appPin: String?
+    
+    @codableWrapper(key: "canShowMain", false)
+    public var canShowMain: Bool?
 }

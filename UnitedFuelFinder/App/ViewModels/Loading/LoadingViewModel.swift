@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import USDK
 
 protocol LoadingViewModelProtocol {
     func initialize()
@@ -15,9 +16,16 @@ protocol LoadingViewModelProtocol {
 
 final class LoadingViewModel: LoadingViewModelProtocol {
     func initialize() {
-        Task(priority: .high) {
+        Task(priority: .medium) {
             try await Task.sleep(for: .seconds(1))
+            
+            if UserSettings.shared.canShowMain ?? false {
+                mainRouter?.navigate(to: .main)
+                return
+            }
+            
             mainRouter?.navigate(to: .language)
+            
 //            let isOK = await UserNetworkService.shared.refreshToken()
 //            
 //            let hasPin = UserSettings.shared.appPin != nil

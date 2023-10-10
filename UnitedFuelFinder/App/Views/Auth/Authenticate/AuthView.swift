@@ -10,9 +10,11 @@ import SwiftUI
 import UnitedUIKit
 
 struct AuthView: View {
-    @State var username: String = ""
+    @StateObject var viewModel: AuthorizationViewModel = .init()
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
+            Spacer()
             Text(
                 "welcome_to".localize.highlight(
                     text: "Fuel Finder",
@@ -29,7 +31,7 @@ struct AuthView: View {
             .padding(.horizontal, Padding.medium)
             
             YTextField(
-                text: $username,
+                text: $viewModel.username,
                 placeholder: "sample@domain.com",
                 contentType: UITextContentType.emailAddress,
                 autoCapitalization: .never,
@@ -41,16 +43,37 @@ struct AuthView: View {
                 .emailAddress
             )
             .padding(.horizontal, Padding.small)
-            .background(
-                RoundedRectangle(
-                    cornerRadius: 10
-                ).stroke(lineWidth: 1).foregroundStyle(
-                    Color.init(uiColor: .placeholderText)
-                )
-            )
+            .modifier(YTextFieldBackgroundCleanStyle())
             .padding(
                 Padding.medium
             )
+            
+            CheckButton(
+                isSelected: $viewModel.isOfferAccepted,
+                text: "auth_agree_offer".localize.highlight(
+                    text: "auth_offer".localize,
+                    color: .accent
+                ).toSwiftUI
+            ) {
+                debugPrint("Show offer")
+            }
+            .padding(.horizontal, Padding.medium)
+            
+            Spacer()
+            
+            SubmitButton {
+                viewModel.showOtp()
+            } label: {
+                Text("login".localize)
+            }
+            .padding()
+
+        }.fullScreenCover(isPresented: $viewModel.showOTPConfirm) {
+            if let vm = viewModel.otpViewModel {
+                ZStack {
+                    OTPView(viewModel: vm)
+                }
+            }
         }
     }
 }

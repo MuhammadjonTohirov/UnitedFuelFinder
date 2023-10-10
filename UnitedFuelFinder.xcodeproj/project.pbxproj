@@ -40,6 +40,56 @@
 		2EDF8C5A2AD345C1003D64FC /* YPhoneField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C552AD345C1003D64FC /* YPhoneField.swift */; };
 		2EDF8C5B2AD345C1003D64FC /* YTextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C562AD345C1003D64FC /* YTextField+Extension.swift */; };
 		2EDF8C5E2AD3462B003D64FC /* Padding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C5D2AD3462B003D64FC /* Padding.swift */; };
+		2EDF8C602AD43822003D64FC /* CheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C5F2AD43822003D64FC /* CheckButton.swift */; };
+		2EDF8C632AD44251003D64FC /* PinCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C622AD44251003D64FC /* PinCodeView.swift */; };
+		2EDF8C662AD4428E003D64FC /* KeyboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C652AD4428E003D64FC /* KeyboardView.swift */; };
+		2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C672AD442AE003D64FC /* KeyboardKey.swift */; };
+		2EDF8C6A2AD44306003D64FC /* CGFloat+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C692AD44306003D64FC /* CGFloat+Extension.swift */; };
+		2EDF8C6C2AD44329003D64FC /* Number+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C6B2AD44329003D64FC /* Number+Extension.swift */; };
+		2EDF8C702AD44401003D64FC /* PinCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C6F2AD44401003D64FC /* PinCodeViewModel.swift */; };
+		2EDF8C722AD44407003D64FC /* KeyboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C712AD44407003D64FC /* KeyboardViewModel.swift */; };
+		2EDF8C742AD444E2003D64FC /* TopLeftDismissModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C732AD444E2003D64FC /* TopLeftDismissModifier.swift */; };
+		2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C762AD44565003D64FC /* OTPView.swift */; };
+		2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */; };
+		2EDF8C7C2AD44AA9003D64FC /* YTextFieldCleanStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C7B2AD44AA9003D64FC /* YTextFieldCleanStyle.swift */; };
+		2EDF8C7E2AD44BCF003D64FC /* YTextFieldBottomInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C7D2AD44BCF003D64FC /* YTextFieldBottomInfo.swift */; };
+		2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */; };
+		2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C952AD474AA003D64FC /* HomeView.swift */; };
+		2EDF8CC22AD482F0003D64FC /* MapCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C9A2AD482F0003D64FC /* MapCircle.swift */; };
+		2EDF8CC32AD482F0003D64FC /* MapPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C9B2AD482F0003D64FC /* MapPolyline.swift */; };
+		2EDF8CC42AD482F0003D64FC /* MapMultiPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C9C2AD482F0003D64FC /* MapMultiPolygon.swift */; };
+		2EDF8CC52AD482F0003D64FC /* RendererMapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C9D2AD482F0003D64FC /* RendererMapOverlay.swift */; };
+		2EDF8CC62AD482F0003D64FC /* MapOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C9E2AD482F0003D64FC /* MapOverlay.swift */; };
+		2EDF8CC72AD482F0003D64FC /* MapPolygon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C9F2AD482F0003D64FC /* MapPolygon.swift */; };
+		2EDF8CC82AD482F0003D64FC /* MapMultiPolyline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA02AD482F0003D64FC /* MapMultiPolyline.swift */; };
+		2EDF8CC92AD482F0003D64FC /* MapScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA22AD482F0003D64FC /* MapScale.swift */; };
+		2EDF8CCA2AD482F0003D64FC /* MapZoomControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA32AD482F0003D64FC /* MapZoomControl.swift */; };
+		2EDF8CCB2AD482F0003D64FC /* MapPitchControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA42AD482F0003D64FC /* MapPitchControl.swift */; };
+		2EDF8CCC2AD482F0003D64FC /* MapUserTrackingButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA52AD482F0003D64FC /* MapUserTrackingButton.swift */; };
+		2EDF8CCD2AD482F0003D64FC /* MapCompass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA62AD482F0003D64FC /* MapCompass.swift */; };
+		2EDF8CCE2AD482F0003D64FC /* MapKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA82AD482F0003D64FC /* MapKit.swift */; };
+		2EDF8CCF2AD482F0003D64FC /* NativeHostingController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CA92AD482F0003D64FC /* NativeHostingController.swift */; };
+		2EDF8CD02AD482F0003D64FC /* NativeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CAA2AD482F0003D64FC /* NativeColor.swift */; };
+		2EDF8CD12AD482F0003D64FC /* Identifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CAB2AD482F0003D64FC /* Identifiable.swift */; };
+		2EDF8CD22AD482F0003D64FC /* MapRegistry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CAC2AD482F0003D64FC /* MapRegistry.swift */; };
+		2EDF8CD32AD482F0003D64FC /* Map+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CAE2AD482F0003D64FC /* Map+Coordinator.swift */; };
+		2EDF8CD42AD482F0003D64FC /* Map+UIKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CAF2AD482F0003D64FC /* Map+UIKit.swift */; };
+		2EDF8CD52AD482F0003D64FC /* Map+Watch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB02AD482F0003D64FC /* Map+Watch.swift */; };
+		2EDF8CD62AD482F0003D64FC /* Map+Watch+Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB12AD482F0003D64FC /* Map+Watch+Coordinator.swift */; };
+		2EDF8CD72AD482F0003D64FC /* Map+AppKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB22AD482F0003D64FC /* Map+AppKit.swift */; };
+		2EDF8CD82AD482F0003D64FC /* UMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB32AD482F0003D64FC /* UMap.swift */; };
+		2EDF8CD92AD482F0003D64FC /* SingleValueBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB52AD482F0003D64FC /* SingleValueBuilder.swift */; };
+		2EDF8CDA2AD482F0003D64FC /* MapCameraZoomRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB62AD482F0003D64FC /* MapCameraZoomRange.swift */; };
+		2EDF8CDB2AD482F0003D64FC /* MapInteractionModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB72AD482F0003D64FC /* MapInteractionModes.swift */; };
+		2EDF8CDC2AD482F0003D64FC /* MapInformationVisibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB82AD482F0003D64FC /* MapInformationVisibility.swift */; };
+		2EDF8CDD2AD482F0003D64FC /* UserTrackingMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CB92AD482F0003D64FC /* UserTrackingMode.swift */; };
+		2EDF8CDE2AD482F0003D64FC /* MapCameraBoundary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CBA2AD482F0003D64FC /* MapCameraBoundary.swift */; };
+		2EDF8CDF2AD482F0003D64FC /* MKMapAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CBC2AD482F0003D64FC /* MKMapAnnotationView.swift */; };
+		2EDF8CE02AD482F0003D64FC /* MapMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CBD2AD482F0003D64FC /* MapMarker.swift */; };
+		2EDF8CE12AD482F0003D64FC /* ImageAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CBE2AD482F0003D64FC /* ImageAnnotation.swift */; };
+		2EDF8CE22AD482F0003D64FC /* ViewMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CBF2AD482F0003D64FC /* ViewMapAnnotation.swift */; };
+		2EDF8CE32AD482F0003D64FC /* MapPin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CC02AD482F0003D64FC /* MapPin.swift */; };
+		2EDF8CE42AD482F0003D64FC /* MapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8CC12AD482F0003D64FC /* MapAnnotation.swift */; };
 		2EE91D012AD07D5C00A425B5 /* USDK.docc in Sources */ = {isa = PBXBuildFile; fileRef = 2EE91D002AD07D5C00A425B5 /* USDK.docc */; };
 		2EE91D022AD07D5C00A425B5 /* USDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 2EE91CFF2AD07D5C00A425B5 /* USDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		2EE91D052AD07D5C00A425B5 /* USDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EE91CFD2AD07D5C00A425B5 /* USDK.framework */; };
@@ -152,6 +202,56 @@
 		2EDF8C552AD345C1003D64FC /* YPhoneField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPhoneField.swift; sourceTree = "<group>"; };
 		2EDF8C562AD345C1003D64FC /* YTextField+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "YTextField+Extension.swift"; sourceTree = "<group>"; };
 		2EDF8C5D2AD3462B003D64FC /* Padding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Padding.swift; sourceTree = "<group>"; };
+		2EDF8C5F2AD43822003D64FC /* CheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckButton.swift; sourceTree = "<group>"; };
+		2EDF8C622AD44251003D64FC /* PinCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeView.swift; sourceTree = "<group>"; };
+		2EDF8C652AD4428E003D64FC /* KeyboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardView.swift; sourceTree = "<group>"; };
+		2EDF8C672AD442AE003D64FC /* KeyboardKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardKey.swift; sourceTree = "<group>"; };
+		2EDF8C692AD44306003D64FC /* CGFloat+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGFloat+Extension.swift"; sourceTree = "<group>"; };
+		2EDF8C6B2AD44329003D64FC /* Number+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extension.swift"; sourceTree = "<group>"; };
+		2EDF8C6F2AD44401003D64FC /* PinCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinCodeViewModel.swift; sourceTree = "<group>"; };
+		2EDF8C712AD44407003D64FC /* KeyboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardViewModel.swift; sourceTree = "<group>"; };
+		2EDF8C732AD444E2003D64FC /* TopLeftDismissModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopLeftDismissModifier.swift; sourceTree = "<group>"; };
+		2EDF8C762AD44565003D64FC /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
+		2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
+		2EDF8C7B2AD44AA9003D64FC /* YTextFieldCleanStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextFieldCleanStyle.swift; sourceTree = "<group>"; };
+		2EDF8C7D2AD44BCF003D64FC /* YTextFieldBottomInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextFieldBottomInfo.swift; sourceTree = "<group>"; };
+		2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
+		2EDF8C952AD474AA003D64FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2EDF8C9A2AD482F0003D64FC /* MapCircle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCircle.swift; sourceTree = "<group>"; };
+		2EDF8C9B2AD482F0003D64FC /* MapPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPolyline.swift; sourceTree = "<group>"; };
+		2EDF8C9C2AD482F0003D64FC /* MapMultiPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapMultiPolygon.swift; sourceTree = "<group>"; };
+		2EDF8C9D2AD482F0003D64FC /* RendererMapOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RendererMapOverlay.swift; sourceTree = "<group>"; };
+		2EDF8C9E2AD482F0003D64FC /* MapOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapOverlay.swift; sourceTree = "<group>"; };
+		2EDF8C9F2AD482F0003D64FC /* MapPolygon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPolygon.swift; sourceTree = "<group>"; };
+		2EDF8CA02AD482F0003D64FC /* MapMultiPolyline.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapMultiPolyline.swift; sourceTree = "<group>"; };
+		2EDF8CA22AD482F0003D64FC /* MapScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapScale.swift; sourceTree = "<group>"; };
+		2EDF8CA32AD482F0003D64FC /* MapZoomControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapZoomControl.swift; sourceTree = "<group>"; };
+		2EDF8CA42AD482F0003D64FC /* MapPitchControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPitchControl.swift; sourceTree = "<group>"; };
+		2EDF8CA52AD482F0003D64FC /* MapUserTrackingButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapUserTrackingButton.swift; sourceTree = "<group>"; };
+		2EDF8CA62AD482F0003D64FC /* MapCompass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCompass.swift; sourceTree = "<group>"; };
+		2EDF8CA82AD482F0003D64FC /* MapKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapKit.swift; sourceTree = "<group>"; };
+		2EDF8CA92AD482F0003D64FC /* NativeHostingController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeHostingController.swift; sourceTree = "<group>"; };
+		2EDF8CAA2AD482F0003D64FC /* NativeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NativeColor.swift; sourceTree = "<group>"; };
+		2EDF8CAB2AD482F0003D64FC /* Identifiable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Identifiable.swift; sourceTree = "<group>"; };
+		2EDF8CAC2AD482F0003D64FC /* MapRegistry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapRegistry.swift; sourceTree = "<group>"; };
+		2EDF8CAE2AD482F0003D64FC /* Map+Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Map+Coordinator.swift"; sourceTree = "<group>"; };
+		2EDF8CAF2AD482F0003D64FC /* Map+UIKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Map+UIKit.swift"; sourceTree = "<group>"; };
+		2EDF8CB02AD482F0003D64FC /* Map+Watch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Map+Watch.swift"; sourceTree = "<group>"; };
+		2EDF8CB12AD482F0003D64FC /* Map+Watch+Coordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Map+Watch+Coordinator.swift"; sourceTree = "<group>"; };
+		2EDF8CB22AD482F0003D64FC /* Map+AppKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Map+AppKit.swift"; sourceTree = "<group>"; };
+		2EDF8CB32AD482F0003D64FC /* UMap.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UMap.swift; sourceTree = "<group>"; };
+		2EDF8CB52AD482F0003D64FC /* SingleValueBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleValueBuilder.swift; sourceTree = "<group>"; };
+		2EDF8CB62AD482F0003D64FC /* MapCameraZoomRange.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCameraZoomRange.swift; sourceTree = "<group>"; };
+		2EDF8CB72AD482F0003D64FC /* MapInteractionModes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInteractionModes.swift; sourceTree = "<group>"; };
+		2EDF8CB82AD482F0003D64FC /* MapInformationVisibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapInformationVisibility.swift; sourceTree = "<group>"; };
+		2EDF8CB92AD482F0003D64FC /* UserTrackingMode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserTrackingMode.swift; sourceTree = "<group>"; };
+		2EDF8CBA2AD482F0003D64FC /* MapCameraBoundary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapCameraBoundary.swift; sourceTree = "<group>"; };
+		2EDF8CBC2AD482F0003D64FC /* MKMapAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKMapAnnotationView.swift; sourceTree = "<group>"; };
+		2EDF8CBD2AD482F0003D64FC /* MapMarker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapMarker.swift; sourceTree = "<group>"; };
+		2EDF8CBE2AD482F0003D64FC /* ImageAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAnnotation.swift; sourceTree = "<group>"; };
+		2EDF8CBF2AD482F0003D64FC /* ViewMapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewMapAnnotation.swift; sourceTree = "<group>"; };
+		2EDF8CC02AD482F0003D64FC /* MapPin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPin.swift; sourceTree = "<group>"; };
+		2EDF8CC12AD482F0003D64FC /* MapAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapAnnotation.swift; sourceTree = "<group>"; };
 		2EE91CFD2AD07D5C00A425B5 /* USDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = USDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EE91CFF2AD07D5C00A425B5 /* USDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = USDK.h; sourceTree = "<group>"; };
 		2EE91D002AD07D5C00A425B5 /* USDK.docc */ = {isa = PBXFileReference; lastKnownFileType = folder.documentationcatalog; path = USDK.docc; sourceTree = "<group>"; };
@@ -262,6 +362,8 @@
 		2E527A722ACC83A1005B8B95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2EDF8C942AD474A6003D64FC /* Home */,
+				2EDF8C812AD452D6003D64FC /* Auth */,
 				2E527A752ACC83B0005B8B95 /* Intro */,
 			);
 			path = Views;
@@ -278,8 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				2E527A762ACC83C0005B8B95 /* SelectLanguageView.swift */,
-				2E527A782ACC83DB005B8B95 /* AuthView.swift */,
-				2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */,
 				2EDF8C452AD2DD58003D64FC /* LoadingView.swift */,
 			);
 			path = Intro;
@@ -296,6 +396,7 @@
 		2EDF8C2E2AD2A352003D64FC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2EDF8C982AD482E3003D64FC /* Map */,
 				2EDF8C512AD345C1003D64FC /* TextFields */,
 				2EDF8C482AD2EE00003D64FC /* Loading */,
 				2EDF8C472AD2EDF8003D64FC /* Buttons */,
@@ -307,6 +408,9 @@
 			isa = PBXGroup;
 			children = (
 				2EDF8C382AD2BDE7003D64FC /* RectModifer.swift */,
+				2EDF8C732AD444E2003D64FC /* TopLeftDismissModifier.swift */,
+				2EDF8C7B2AD44AA9003D64FC /* YTextFieldCleanStyle.swift */,
+				2EDF8C7D2AD44BCF003D64FC /* YTextFieldBottomInfo.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -353,6 +457,7 @@
 			children = (
 				2EDF8C2F2AD2A35F003D64FC /* SubmitButton.swift */,
 				2EDF8C332AD2A8CE003D64FC /* RadioButton.swift */,
+				2EDF8C5F2AD43822003D64FC /* CheckButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -368,6 +473,7 @@
 		2EDF8C4B2AD309EC003D64FC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				2EDF8C6D2AD443F4003D64FC /* Auth */,
 				2EDF8C4F2AD321B1003D64FC /* Main */,
 				2EDF8C4C2AD309EF003D64FC /* Loading */,
 			);
@@ -398,7 +504,6 @@
 				2EDF8C532AD345C1003D64FC /* YTextField.swift */,
 				2EDF8C542AD345C1003D64FC /* YFormattedField.swift */,
 				2EDF8C552AD345C1003D64FC /* YPhoneField.swift */,
-				2EDF8C562AD345C1003D64FC /* YTextField+Extension.swift */,
 			);
 			path = TextFields;
 			sourceTree = "<group>";
@@ -409,6 +514,184 @@
 				2EDF8C5D2AD3462B003D64FC /* Padding.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		2EDF8C642AD4427E003D64FC /* Pin */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C622AD44251003D64FC /* PinCodeView.swift */,
+				2EDF8C652AD4428E003D64FC /* KeyboardView.swift */,
+				2EDF8C672AD442AE003D64FC /* KeyboardKey.swift */,
+			);
+			path = Pin;
+			sourceTree = "<group>";
+		};
+		2EDF8C6D2AD443F4003D64FC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C912AD466C9003D64FC /* Authorization */,
+				2EDF8C782AD445BB003D64FC /* OTP */,
+				2EDF8C6E2AD443F8003D64FC /* Pin */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		2EDF8C6E2AD443F8003D64FC /* Pin */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C6F2AD44401003D64FC /* PinCodeViewModel.swift */,
+				2EDF8C712AD44407003D64FC /* KeyboardViewModel.swift */,
+			);
+			path = Pin;
+			sourceTree = "<group>";
+		};
+		2EDF8C752AD44560003D64FC /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C762AD44565003D64FC /* OTPView.swift */,
+			);
+			path = OTP;
+			sourceTree = "<group>";
+		};
+		2EDF8C782AD445BB003D64FC /* OTP */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */,
+			);
+			path = OTP;
+			sourceTree = "<group>";
+		};
+		2EDF8C812AD452D6003D64FC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C832AD452F1003D64FC /* Authenticate */,
+				2EDF8C822AD452E9003D64FC /* RegisterProfile */,
+				2EDF8C752AD44560003D64FC /* OTP */,
+				2EDF8C642AD4427E003D64FC /* Pin */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		2EDF8C822AD452E9003D64FC /* RegisterProfile */ = {
+			isa = PBXGroup;
+			children = (
+				2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */,
+			);
+			path = RegisterProfile;
+			sourceTree = "<group>";
+		};
+		2EDF8C832AD452F1003D64FC /* Authenticate */ = {
+			isa = PBXGroup;
+			children = (
+				2E527A782ACC83DB005B8B95 /* AuthView.swift */,
+			);
+			path = Authenticate;
+			sourceTree = "<group>";
+		};
+		2EDF8C912AD466C9003D64FC /* Authorization */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */,
+			);
+			path = Authorization;
+			sourceTree = "<group>";
+		};
+		2EDF8C942AD474A6003D64FC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C952AD474AA003D64FC /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		2EDF8C982AD482E3003D64FC /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8CBB2AD482F0003D64FC /* Annotations */,
+				2EDF8CB42AD482F0003D64FC /* Configuration */,
+				2EDF8CA72AD482F0003D64FC /* Extensions */,
+				2EDF8CAD2AD482F0003D64FC /* Map */,
+				2EDF8C992AD482F0003D64FC /* Overlays */,
+				2EDF8CA12AD482F0003D64FC /* Views */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		2EDF8C992AD482F0003D64FC /* Overlays */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8C9A2AD482F0003D64FC /* MapCircle.swift */,
+				2EDF8C9B2AD482F0003D64FC /* MapPolyline.swift */,
+				2EDF8C9C2AD482F0003D64FC /* MapMultiPolygon.swift */,
+				2EDF8C9D2AD482F0003D64FC /* RendererMapOverlay.swift */,
+				2EDF8C9E2AD482F0003D64FC /* MapOverlay.swift */,
+				2EDF8C9F2AD482F0003D64FC /* MapPolygon.swift */,
+				2EDF8CA02AD482F0003D64FC /* MapMultiPolyline.swift */,
+			);
+			path = Overlays;
+			sourceTree = "<group>";
+		};
+		2EDF8CA12AD482F0003D64FC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8CA22AD482F0003D64FC /* MapScale.swift */,
+				2EDF8CA32AD482F0003D64FC /* MapZoomControl.swift */,
+				2EDF8CA42AD482F0003D64FC /* MapPitchControl.swift */,
+				2EDF8CA52AD482F0003D64FC /* MapUserTrackingButton.swift */,
+				2EDF8CA62AD482F0003D64FC /* MapCompass.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2EDF8CA72AD482F0003D64FC /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8CA82AD482F0003D64FC /* MapKit.swift */,
+				2EDF8CA92AD482F0003D64FC /* NativeHostingController.swift */,
+				2EDF8CAA2AD482F0003D64FC /* NativeColor.swift */,
+				2EDF8CAB2AD482F0003D64FC /* Identifiable.swift */,
+				2EDF8CAC2AD482F0003D64FC /* MapRegistry.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2EDF8CAD2AD482F0003D64FC /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8CAE2AD482F0003D64FC /* Map+Coordinator.swift */,
+				2EDF8CAF2AD482F0003D64FC /* Map+UIKit.swift */,
+				2EDF8CB02AD482F0003D64FC /* Map+Watch.swift */,
+				2EDF8CB12AD482F0003D64FC /* Map+Watch+Coordinator.swift */,
+				2EDF8CB22AD482F0003D64FC /* Map+AppKit.swift */,
+				2EDF8CB32AD482F0003D64FC /* UMap.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		2EDF8CB42AD482F0003D64FC /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8CB52AD482F0003D64FC /* SingleValueBuilder.swift */,
+				2EDF8CB62AD482F0003D64FC /* MapCameraZoomRange.swift */,
+				2EDF8CB72AD482F0003D64FC /* MapInteractionModes.swift */,
+				2EDF8CB82AD482F0003D64FC /* MapInformationVisibility.swift */,
+				2EDF8CB92AD482F0003D64FC /* UserTrackingMode.swift */,
+				2EDF8CBA2AD482F0003D64FC /* MapCameraBoundary.swift */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		2EDF8CBB2AD482F0003D64FC /* Annotations */ = {
+			isa = PBXGroup;
+			children = (
+				2EDF8CBC2AD482F0003D64FC /* MKMapAnnotationView.swift */,
+				2EDF8CBD2AD482F0003D64FC /* MapMarker.swift */,
+				2EDF8CBE2AD482F0003D64FC /* ImageAnnotation.swift */,
+				2EDF8CBF2AD482F0003D64FC /* ViewMapAnnotation.swift */,
+				2EDF8CC02AD482F0003D64FC /* MapPin.swift */,
+				2EDF8CC12AD482F0003D64FC /* MapAnnotation.swift */,
+			);
+			path = Annotations;
 			sourceTree = "<group>";
 		};
 		2EE91CFE2AD07D5C00A425B5 /* USDK */ = {
@@ -447,6 +730,8 @@
 				2EE91D0C2AD07DA500A425B5 /* Date+Extensions.swift */,
 				2EE91D0E2AD07DA500A425B5 /* Realm+Extensions.swift */,
 				2EE91D0F2AD07DA500A425B5 /* String+Extensions.swift */,
+				2EDF8C692AD44306003D64FC /* CGFloat+Extension.swift */,
+				2EDF8C6B2AD44329003D64FC /* Number+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -513,6 +798,7 @@
 		2EE91D652AD1DD8D00A425B5 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				2EDF8C562AD345C1003D64FC /* YTextField+Extension.swift */,
 				2EDF8BFF2AD1E1FA003D64FC /* UIApp+Extension.swift */,
 				2EDF8C2A2AD28B6B003D64FC /* Color+Extension.swift */,
 			);
@@ -711,13 +997,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EDF8C442AD2DCB8003D64FC /* MainViewModel.swift in Sources */,
+				2EDF8C702AD44401003D64FC /* PinCodeViewModel.swift in Sources */,
 				2E527A432ACC80C6005B8B95 /* MainView.swift in Sources */,
 				2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */,
+				2EDF8C632AD44251003D64FC /* PinCodeView.swift in Sources */,
+				2EDF8C722AD44407003D64FC /* KeyboardViewModel.swift in Sources */,
+				2EDF8C662AD4428E003D64FC /* KeyboardView.swift in Sources */,
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
 				2E527A792ACC83DB005B8B95 /* AuthView.swift in Sources */,
+				2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */,
 				2EDF8C462AD2DD58003D64FC /* LoadingView.swift in Sources */,
+				2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */,
 				2EDF8C412AD2D865003D64FC /* AppDestination.swift in Sources */,
+				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
+				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
 				2E527A412ACC80C6005B8B95 /* UnitedFuelFinderApp.swift in Sources */,
+				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
 				2EDF8C4E2AD309F9003D64FC /* LoadingViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -732,8 +1027,10 @@
 				2EE91D302AD07F3600A425B5 /* Network.swift in Sources */,
 				2EE91D422AD0808300A425B5 /* URLRequest+Extensions.swift in Sources */,
 				2EE91D212AD07DAD00A425B5 /* CodableWrapper.swift in Sources */,
+				2EDF8C6A2AD44306003D64FC /* CGFloat+Extension.swift in Sources */,
 				2EE91D202AD07DAD00A425B5 /* Logging.swift in Sources */,
 				2EE91D232AD07DAD00A425B5 /* YKeychainWrapper.swift in Sources */,
+				2EDF8C6C2AD44329003D64FC /* Number+Extension.swift in Sources */,
 				2EE91D012AD07D5C00A425B5 /* USDK.docc in Sources */,
 				2EE91D222AD07DAD00A425B5 /* AnyWrapper.swift in Sources */,
 				2EE91D432AD0808300A425B5 /* NSMutableData+Extensions.swift in Sources */,
@@ -754,20 +1051,59 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EDF8CE02AD482F0003D64FC /* MapMarker.swift in Sources */,
 				2EDF8C002AD1E1FA003D64FC /* UIApp+Extension.swift in Sources */,
 				2EDF8C572AD345C1003D64FC /* TextFieldProtocol.swift in Sources */,
 				2EDF8C342AD2A8CE003D64FC /* RadioButton.swift in Sources */,
 				2EDF8C5A2AD345C1003D64FC /* YPhoneField.swift in Sources */,
+				2EDF8CDA2AD482F0003D64FC /* MapCameraZoomRange.swift in Sources */,
+				2EDF8CD32AD482F0003D64FC /* Map+Coordinator.swift in Sources */,
+				2EDF8CD02AD482F0003D64FC /* NativeColor.swift in Sources */,
+				2EDF8CE12AD482F0003D64FC /* ImageAnnotation.swift in Sources */,
+				2EDF8CC32AD482F0003D64FC /* MapPolyline.swift in Sources */,
 				2EDF8C592AD345C1003D64FC /* YFormattedField.swift in Sources */,
+				2EDF8CCC2AD482F0003D64FC /* MapUserTrackingButton.swift in Sources */,
+				2EDF8CD42AD482F0003D64FC /* Map+UIKit.swift in Sources */,
+				2EDF8CD82AD482F0003D64FC /* UMap.swift in Sources */,
 				2EDF8C5B2AD345C1003D64FC /* YTextField+Extension.swift in Sources */,
+				2EDF8C742AD444E2003D64FC /* TopLeftDismissModifier.swift in Sources */,
+				2EDF8C602AD43822003D64FC /* CheckButton.swift in Sources */,
 				2EDF8C302AD2A35F003D64FC /* SubmitButton.swift in Sources */,
 				2EE91D7A2AD1DDCC00A425B5 /* AppWindowGroup.swift in Sources */,
+				2EDF8CCA2AD482F0003D64FC /* MapZoomControl.swift in Sources */,
+				2EDF8CCE2AD482F0003D64FC /* MapKit.swift in Sources */,
+				2EDF8CC62AD482F0003D64FC /* MapOverlay.swift in Sources */,
+				2EDF8CC42AD482F0003D64FC /* MapMultiPolygon.swift in Sources */,
+				2EDF8CDC2AD482F0003D64FC /* MapInformationVisibility.swift in Sources */,
 				2EE91D712AD1DDC100A425B5 /* UnitedUIKit.docc in Sources */,
+				2EDF8CD12AD482F0003D64FC /* Identifiable.swift in Sources */,
+				2EDF8CD62AD482F0003D64FC /* Map+Watch+Coordinator.swift in Sources */,
+				2EDF8CC82AD482F0003D64FC /* MapMultiPolyline.swift in Sources */,
+				2EDF8CD52AD482F0003D64FC /* Map+Watch.swift in Sources */,
+				2EDF8CE42AD482F0003D64FC /* MapAnnotation.swift in Sources */,
+				2EDF8CDB2AD482F0003D64FC /* MapInteractionModes.swift in Sources */,
 				2EDF8C392AD2BDE7003D64FC /* RectModifer.swift in Sources */,
+				2EDF8C7E2AD44BCF003D64FC /* YTextFieldBottomInfo.swift in Sources */,
 				2EDF8C4A2AD2EE08003D64FC /* ActivityIndicatorView.swift in Sources */,
+				2EDF8CCB2AD482F0003D64FC /* MapPitchControl.swift in Sources */,
+				2EDF8CC22AD482F0003D64FC /* MapCircle.swift in Sources */,
+				2EDF8CC52AD482F0003D64FC /* RendererMapOverlay.swift in Sources */,
+				2EDF8CCD2AD482F0003D64FC /* MapCompass.swift in Sources */,
+				2EDF8CC72AD482F0003D64FC /* MapPolygon.swift in Sources */,
+				2EDF8CCF2AD482F0003D64FC /* NativeHostingController.swift in Sources */,
 				2EDF8C5E2AD3462B003D64FC /* Padding.swift in Sources */,
 				2EDF8C582AD345C1003D64FC /* YTextField.swift in Sources */,
+				2EDF8CD22AD482F0003D64FC /* MapRegistry.swift in Sources */,
+				2EDF8CE22AD482F0003D64FC /* ViewMapAnnotation.swift in Sources */,
+				2EDF8CD92AD482F0003D64FC /* SingleValueBuilder.swift in Sources */,
+				2EDF8CD72AD482F0003D64FC /* Map+AppKit.swift in Sources */,
+				2EDF8C7C2AD44AA9003D64FC /* YTextFieldCleanStyle.swift in Sources */,
+				2EDF8CE32AD482F0003D64FC /* MapPin.swift in Sources */,
+				2EDF8CDD2AD482F0003D64FC /* UserTrackingMode.swift in Sources */,
 				2EDF8C032AD1E234003D64FC /* NoitificationContentView.swift in Sources */,
+				2EDF8CDF2AD482F0003D64FC /* MKMapAnnotationView.swift in Sources */,
+				2EDF8CDE2AD482F0003D64FC /* MapCameraBoundary.swift in Sources */,
+				2EDF8CC92AD482F0003D64FC /* MapScale.swift in Sources */,
 				2EDF8C2B2AD28B6B003D64FC /* Color+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -924,6 +1260,7 @@
 				DEVELOPMENT_TEAM = 84D2TM7KGZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to locate you on the map";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -954,6 +1291,7 @@
 				DEVELOPMENT_TEAM = 84D2TM7KGZ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to locate you on the map";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

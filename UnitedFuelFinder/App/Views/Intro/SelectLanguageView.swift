@@ -22,7 +22,7 @@ struct SelectLanguageView: View {
                 Spacer()
                 
                 SubmitButton {
-                    
+                    mainRouter?.navigate(to: .auth)
                 } label: {
                     Text("continue".localize)
                 }
