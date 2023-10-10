@@ -69,11 +69,19 @@ extension UIApplication {
     }
     
     public var safeArea: UIEdgeInsets {
-        activeWindow?.safeAreaInsets ?? .zero
+        guard let activeView = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return .zero
+        }
+        
+        return activeView.safeAreaInsets
     }
     
     public var screenFrame: CGRect {
-        activeWindow?.frame ?? .zero
+        guard let activeView = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return .zero
+        }
+        
+        return activeView.frame
     }
     
     public var hasDynamicIsland: Bool {

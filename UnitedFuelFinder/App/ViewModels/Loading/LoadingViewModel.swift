@@ -19,11 +19,11 @@ final class LoadingViewModel: LoadingViewModelProtocol {
         Task(priority: .medium) {
             try await Task.sleep(for: .seconds(1))
             
-            if UserSettings.shared.canShowMain ?? false {
-                mainRouter?.navigate(to: .main)
-                return
-            }
-            
+//            if UserSettings.shared.canShowMain ?? false {
+//                mainRouter?.navigate(to: .main)
+//                return
+//            }
+//            
             mainRouter?.navigate(to: .language)
             
 //            let isOK = await UserNetworkService.shared.refreshToken()

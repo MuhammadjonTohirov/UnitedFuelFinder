@@ -4,6 +4,12 @@
     "%lld" : {
 
     },
+    "$4.42" : {
+
+    },
+    "23.37 ml • NEWARK NJ" : {
+
+    },
     "60" : {
 
     },
@@ -168,6 +174,12 @@
         }
       }
     },
+    "Fair Lawn, Peterson, USA" : {
+
+    },
+    "Get Direction" : {
+
+    },
     "login" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -190,6 +202,9 @@
           }
         }
       }
+    },
+    "Map" : {
+
     },
     "next" : {
       "extractionState" : "manual",
@@ -237,6 +252,12 @@
         }
       }
     },
+    "Retail price $5.1" : {
+
+    },
+    "Save $0.68 per gallon " : {
+
+    },
     "setup_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -259,6 +280,9 @@
           }
         }
       }
+    },
+    "TA/Petro" : {
+
     },
     "welcome_to" : {
       "extractionState" : "manual",

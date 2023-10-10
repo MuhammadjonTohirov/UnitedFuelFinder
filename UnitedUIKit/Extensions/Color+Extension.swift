@@ -14,6 +14,10 @@ public extension Color {
         .init(uiColor: .label)
     }
     
+    static var background: Color {
+        .init(uiColor: .systemBackground)
+    }
+    
     static var secondaryBackground: Color {
         .init(uiColor: .secondarySystemBackground)
     }
