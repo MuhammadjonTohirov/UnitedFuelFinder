@@ -154,6 +154,8 @@
 		2EF3A1F82ADD8C6400CA8DE2 /* AuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1F72ADD8C6400CA8DE2 /* AuthService.swift */; };
 		2EF3A1FB2ADD8CCF00CA8DE2 /* AuthNetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1FA2ADD8CCF00CA8DE2 /* AuthNetworkRouter.swift */; };
 		2EF3A1FD2ADD8FBE00CA8DE2 /* NetResLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1FC2ADD8FBE00CA8DE2 /* NetResLogin.swift */; };
+		2EF3A2002ADD920500CA8DE2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */; };
+		2EF3A2022ADD950E00CA8DE2 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -342,6 +344,8 @@
 		2EF3A1F72ADD8C6400CA8DE2 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		2EF3A1FA2ADD8CCF00CA8DE2 /* AuthNetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNetworkRouter.swift; sourceTree = "<group>"; };
 		2EF3A1FC2ADD8FBE00CA8DE2 /* NetResLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResLogin.swift; sourceTree = "<group>"; };
+		2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -465,6 +469,7 @@
 		2E527A722ACC83A1005B8B95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2EF3A1FE2ADD91FF00CA8DE2 /* Settings */,
 				2E0E4DEC2AD9189D00E846B6 /* GoogleMap */,
 				2EDF8C942AD474A6003D64FC /* Home */,
 				2EDF8C812AD452D6003D64FC /* Auth */,
@@ -982,6 +987,15 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		2EF3A1FE2ADD91FF00CA8DE2 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */,
+				2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1168,7 +1182,9 @@
 				2EDF8C722AD44407003D64FC /* KeyboardViewModel.swift in Sources */,
 				2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */,
 				2EDF8C662AD4428E003D64FC /* KeyboardView.swift in Sources */,
+				2EF3A2002ADD920500CA8DE2 /* SettingsView.swift in Sources */,
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
+				2EF3A2022ADD950E00CA8DE2 /* ContactUsView.swift in Sources */,
 				2E527A792ACC83DB005B8B95 /* AuthView.swift in Sources */,
 				2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */,
 				2EDF8C462AD2DD58003D64FC /* LoadingView.swift in Sources */,
