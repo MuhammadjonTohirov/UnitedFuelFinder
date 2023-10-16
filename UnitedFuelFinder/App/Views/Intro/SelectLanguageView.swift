@@ -22,7 +22,7 @@ struct SelectLanguageView: View {
                 Spacer()
                 
                 SubmitButton {
-                    mainRouter?.navigate(to: .auth)
+                    onClickContinue()
                 } label: {
                     Text("continue".localize)
                 }
@@ -60,6 +60,11 @@ struct SelectLanguageView: View {
     
     private func selectLanguage(_ lang: Language) {
         mainViewModel.set(language: lang)
+    }
+    
+    private func onClickContinue() {
+        UserSettings.shared.isLanguageSelected = true
+        mainRouter?.navigate(to: .auth)
     }
 }
 

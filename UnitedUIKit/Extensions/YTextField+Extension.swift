@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension View {
+public extension View {
     func placeholder(
         _ text: String,
         when shouldShow: Bool,
@@ -26,9 +26,27 @@ extension View {
                 self
             }
         }
+    
+    func keyboardDismissable() -> some View {
+        self.toolbar {
+            ToolbarItemGroup(placement: .keyboard) {
+                HStack {
+                    EmptyView()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    
+                    Button(action: {UIApplication.shared.dismissKeyboard()}, label: {
+                        
+                        Image(systemName: "keyboard.chevron.compact.down")
+                            .foregroundStyle(Color.label)
+                    })
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                }
+            }
+        }
+    }
 }
 
-extension YTextField {
+public extension YTextField {
     func keyboardType(_ type: UIKeyboardType) -> YTextField {
         var view = self
         view.keyboardType = type

@@ -7,12 +7,48 @@
 
 import Foundation
 import USDK
+import SwiftUI
+
+enum AuthRoute: ScreenRoute {
+    static func == (lhs: AuthRoute, rhs: AuthRoute) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    case otp(OtpViewModel)
+    case register
+    case pin(PinCodeViewModel)
+    
+    var id: String {
+        return "\(self)"
+    }
+    
+    @ViewBuilder
+    var screen: some View {
+        switch self {
+        case .otp(let vm):
+            OTPView(viewModel: vm)
+        case .register:
+            RegisterProfileView()
+        case .pin(let vm):
+            PinCodeView(viewModel: vm)
+        }
+    }
+}
 
 class AuthorizationViewModel: ObservableObject {
     @Published var username: String = ""
     @Published var isOfferAccepted: Bool = false
-    @Published var showOTPConfirm: Bool = false
+    @Published var route: AuthRoute? = nil {
+        didSet {
+            present = route != nil
+        }
+    }
     
+    @Published var present: Bool = false
     var otpViewModel: OtpViewModel?
     
     func showOtp() {
@@ -25,17 +61,25 @@ class AuthorizationViewModel: ObservableObject {
             self.closeOTP()
             return (false, nil)
         }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            self.showOTPConfirm = true
+            self.route = .otp(self.otpViewModel!)
         }
     }
     
     private func closeOTP() {
         DispatchQueue.main.async {
-            self.showOTPConfirm = false
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.showMain()
+            self.route = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                self.otpViewModel = nil
+                self.showFillProfile()
             }
+        }
+    }
+    
+    private func showFillProfile() {
+        DispatchQueue.main.async {
+            self.route = .register
         }
     }
     

@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-public struct YTextFieldBackgroundCleanStyle: ViewModifier {
-    public var padding: CGFloat = 0
-    
+public struct YTextFieldBorderStyle: ViewModifier {
+    var padding: CGFloat = 0
+    var borderColor: Color = .init(uiColor: .placeholderText)
     public init(padding: CGFloat = 0) {
         self.padding = padding
     }
@@ -19,10 +19,16 @@ public struct YTextFieldBackgroundCleanStyle: ViewModifier {
             .padding(.leading, padding)
             .background(
                 RoundedRectangle(
-                    cornerRadius: 10
+                    cornerRadius: 8
                 ).stroke(lineWidth: 1).foregroundStyle(
-                    Color.init(uiColor: .placeholderText)
+                    borderColor
                 )
             )
+    }
+    
+    public func set(borderColor: Color) -> Self {
+        var v = self
+        v.borderColor = borderColor
+        return v
     }
 }

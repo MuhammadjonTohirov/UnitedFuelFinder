@@ -44,4 +44,10 @@ final public class UserSettings {
     
     @codableWrapper(key: "canShowMain", false)
     public var canShowMain: Bool?
+    
+    @codableWrapper(key: "isLanguageSelected", false)
+    public var isLanguageSelected: Bool?
+    
+    @codableWrapper(key: "lastOTP", nil)
+    public var lastOTP: String?
 }

@@ -13,6 +13,21 @@ struct AuthView: View {
     @StateObject var viewModel: AuthorizationViewModel = .init()
     
     var body: some View {
+        mainBody
+    }
+    
+    private var mainBody: some View {
+        NavigationStack {
+            innerBody
+                .keyboardDismissable()
+                .navigationDestination(isPresented: $viewModel.present) {
+                    viewModel.route?.screen
+                }
+        }
+        .ignoresSafeArea(.keyboard, edges: .all)
+    }
+    
+    private var innerBody: some View {
         VStack(alignment: .leading, spacing: 10) {
             Spacer()
             Text(
@@ -25,40 +40,44 @@ struct AuthView: View {
             .padding(.horizontal, Padding.medium)
             
             Text(
-                "Let’s sign you in".localize
+                "lets_sign_in_you".localize
             )
             .font(.system(size: 14, weight: .semibold))
             .padding(.horizontal, Padding.medium)
             
-            YTextField(
-                text: $viewModel.username,
-                placeholder: "sample@domain.com",
-                contentType: UITextContentType.emailAddress,
-                autoCapitalization: .never,
-                left: {
-                    Image(systemName: "person.fill")
-                        .padding(.trailing, Padding.small)
+            VStack(alignment: .leading) {
+                YRoundedTextField {
+                    YTextField(
+                        text: $viewModel.username,
+                        placeholder: "sample@domain.com",
+                        contentType: UITextContentType.emailAddress,
+                        autoCapitalization: .never,
+                        left: {
+                            Image(systemName: "person.fill")
+                                .padding(.trailing, Padding.small)
+                        }
+                    )
+                    .keyboardType(
+                        .emailAddress
+                    )
                 }
-            ).keyboardType(
-                .emailAddress
-            )
-            .padding(.horizontal, Padding.small)
-            .modifier(YTextFieldBackgroundCleanStyle())
-            .padding(
-                Padding.medium
-            )
-            
-            CheckButton(
-                isSelected: $viewModel.isOfferAccepted,
-                text: "auth_agree_offer".localize.highlight(
-                    text: "auth_offer".localize,
-                    color: .accent
-                ).toSwiftUI
-            ) {
-                debugPrint("Show offer")
+                .padding(
+                    .horizontal, Padding.medium
+                )
+                
+                CheckButton(
+                    isSelected: $viewModel.isOfferAccepted,
+                    text: "auth_agree_offer".localize.highlight(
+                        text: "auth_offer".localize,
+                        color: .accent
+                    ).toSwiftUI
+                ) {
+                    debugPrint("Show offer")
+                }
+                .padding(.horizontal, Padding.medium)
+                .padding(.bottom, Padding.large)
+                
             }
-            .padding(.horizontal, Padding.medium)
-            
             Spacer()
             
             SubmitButton {
@@ -66,14 +85,8 @@ struct AuthView: View {
             } label: {
                 Text("login".localize)
             }
-            .padding()
-
-        }.fullScreenCover(isPresented: $viewModel.showOTPConfirm) {
-            if let vm = viewModel.otpViewModel {
-                ZStack {
-                    OTPView(viewModel: vm)
-                }
-            }
+            .padding(.horizontal, Padding.default)
+            .padding(.bottom, Padding.medium)
         }
     }
 }

@@ -76,6 +76,38 @@ struct YPhoneField: View, TextFieldProtocol {
             _text.wrappedValue = newValue.onlyNumberFormat(with: format)
         }
     }
+    
+    func set(hintColor: Color) -> YPhoneField {
+        return self
+    }
+    
+    func set(font: Font) -> YPhoneField {
+        return self
+    }
+    
+    func set(format: String) -> YPhoneField {
+        return self
+    }
+    
+    func set(placeholderAlignment align: Alignment) -> YPhoneField {
+        return self
+    }
+    
+    func set(formatter: NumberFormatter) -> YPhoneField {
+        return self
+    }
+    
+    func set(height: CGFloat) -> YPhoneField {
+        return self
+    }
+    
+    func set(haveTitle: Bool) -> YPhoneField {
+        return self
+    }
+    
+    func keyboardType(_ type: UIKeyboardType) -> YPhoneField {
+        return self
+    }
 }
 
 struct YPhoneField_Preview: PreviewProvider {

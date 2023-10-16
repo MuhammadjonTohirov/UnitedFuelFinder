@@ -18,6 +18,9 @@ struct RectModifer: ViewModifier {
                 GeometryReader { proxy in
                     Color.clear
                         .preference(key: SizePreferenceKey.self, value: proxy.frame(in: .global))
+                        .onAppear {
+                            rect = proxy.frame(in: .global)
+                        }
                 }
             )
             .onPreferenceChange(SizePreferenceKey.self) { preferences in

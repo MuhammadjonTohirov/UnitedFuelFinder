@@ -87,4 +87,13 @@ extension UIApplication {
     public var hasDynamicIsland: Bool {
         safeArea.top > 51
     }
+    
+    public func dismissKeyboard() {
+        guard let activeView = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return
+        }
+        
+
+        activeView.endEditing(true)
+    }
 }

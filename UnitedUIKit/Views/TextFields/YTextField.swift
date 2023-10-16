@@ -17,17 +17,21 @@ public struct YTextValidator {
 }
 
 public struct YTextField: View, TextFieldProtocol {
-    @Binding<String> var text: String
-    
     private var placeholder: String = ""
     private var isSecure: Bool = false
-    @State private var passwordVisible: Bool = false
     
     var keyboardType: UIKeyboardType = .default
-
     var height: CGFloat = 56
-    
     var haveTitle: Bool = false
+
+    @Binding<String> public var text: String
+    @State private var hintOpacity: Double = 0
+    @State private var zStackAlignment: Alignment = .leading
+    @State private var hintFontSize: CGFloat = 13
+    @State private var hintColor: Color = Color(.secondaryLabel)
+    @State private var formatter: NumberFormatter?
+    @State private var passwordVisible: Bool = false
+    @State private var oldValue: String = ""
     
     private var font: Font = {
         .system(size: 14, weight: .medium)
@@ -41,22 +45,15 @@ public struct YTextField: View, TextFieldProtocol {
     
     private var format: String?
     
-    @State private var hintOpacity: Double = 0
-    @State private var zStackAlignment: Alignment = .leading
-    @State private var hintFontSize: CGFloat = 13
-    @State private var hintColor: Color = Color("dark_gray")
-    @State private var formatter: NumberFormatter?
-    @State private var oldValue: String = ""
-    
     private var validator: YTextValidator = .init { _ in
         return true
     }
     
     private var placeholderAlignment: Alignment = .leading
-    private var topupHintColor: Color = Color("dark_gray")
-    private var placeholderColor: Color = Color("dark_gray")
-    private(set) var left: () -> any View
-    private(set) var right: () -> any View
+    private var topupHintColor: Color = Color(.secondaryLabel)
+    private var placeholderColor: Color = Color(uiColor: .placeholderText)
+    private(set) public var left: () -> any View
+    private(set) public var right: () -> any View
     
     public init(
         text: Binding<String>,

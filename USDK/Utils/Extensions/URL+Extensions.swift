@@ -11,11 +11,11 @@ import UniformTypeIdentifiers
 public extension URL {
     
     static var base: URL {
-        .init(string: "http://95.47.127.26:50000")!//http://95.47.127.26:50000/
+        .init(string: "http://178.33.123.109:5000")!//http://95.47.127.26:50000/
     }
     
     static var keyHeader: (key: String, value: String) {
-        ("X-APP-SERIAL", "d0673c9b400460f7a2950eb71bd3bab5b0729351d5e93a5aa2c4aa3f269f6ee0")
+        ("X-APP-SERIAL", "8414a9c59a238c35d345e7804c20e982efc9e390b6969a38e5c4789993e49800")
     }
     
     static var langHeader: (key: String, value: String) {

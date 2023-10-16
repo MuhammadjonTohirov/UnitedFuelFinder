@@ -57,7 +57,7 @@ class PinCodeViewModel: ObservableObject {
     @Published var pin: String = ""
 
     let reason: PinViewReason
-    var title: String = "Введите PIN-код"
+    var title: String = ""
 
     let maxCharacters: Int = 4
 

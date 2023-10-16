@@ -32,7 +32,7 @@ public struct TopLeftDismissModifier: ViewModifier {
             }
             .zIndex(1)
             .frame(width: 20, height: 20)
-            .position(x: 40, y: 20)
+            .position(x: Padding.large, y: Padding.large)
             
             content
         }
