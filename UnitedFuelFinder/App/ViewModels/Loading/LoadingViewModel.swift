@@ -17,12 +17,12 @@ protocol LoadingViewModelProtocol {
 final class LoadingViewModel: LoadingViewModelProtocol {
     func initialize() {
         Task(priority: .medium) {
-            try await Task.sleep(for: .seconds(1))
+            try await Task.sleep(for: .seconds(0))
             
-            if UserSettings.shared.canShowMain ?? false {
-                mainRouter?.navigate(to: .main)
-                return
-            }
+//            if UserSettings.shared.canShowMain ?? false {
+//                mainRouter?.navigate(to: .main)
+//                return
+//            }
             
             if UserSettings.shared.isLanguageSelected ?? false {
                 mainRouter?.navigate(to: .auth)

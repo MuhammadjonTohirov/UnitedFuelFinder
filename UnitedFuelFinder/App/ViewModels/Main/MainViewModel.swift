@@ -7,6 +7,7 @@
 
 import Foundation
 import USDK
+import GoogleMaps
 
 class MainViewRouter {
     var delegate: AppDelegate?
@@ -27,6 +28,8 @@ final class MainViewModel: ObservableObject {
         self.route = route
         mainRouter = self
         UserSettings.shared.lastActiveDate = Date()
+        GMSServices.provideAPIKey(URL.googleMapsApiKey)
+        Logging.l("GMaps \(GMSServices.sdkVersion())")
     }
     
     func set(language: Language) {

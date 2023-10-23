@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%@" : {
+
+    },
     "%lld" : {
 
     },
@@ -12,6 +15,29 @@
     },
     "23.37 ml • NEWARK NJ" : {
 
+    },
+    "address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil"
+          }
+        }
+      }
     },
     "auth_agree_offer" : {
       "extractionState" : "manual",
@@ -55,6 +81,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Talab va takliflar"
+          }
+        }
+      }
+    },
+    "clear" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tozalash"
           }
         }
       }
@@ -151,6 +200,9 @@
         }
       }
     },
+    "Destination address" : {
+
+    },
     "done" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -196,9 +248,6 @@
           }
         }
       }
-    },
-    "Fair Lawn, Peterson, USA" : {
-
     },
     "first_name" : {
       "extractionState" : "manual",
@@ -341,6 +390,52 @@
         }
       }
     },
+    "loading" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Загрузка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yuklanmoqda"
+          }
+        }
+      }
+    },
+    "loading_address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка адреса"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil qidirilmoqda"
+          }
+        }
+      }
+    },
     "login" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -364,9 +459,6 @@
         }
       }
     },
-    "Map" : {
-
-    },
     "next" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -386,6 +478,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Keyingi"
+          }
+        }
+      }
+    },
+    "no_address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет адреса"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil yo'q"
           }
         }
       }

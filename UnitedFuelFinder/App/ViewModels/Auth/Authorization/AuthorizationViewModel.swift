@@ -87,4 +87,12 @@ class AuthorizationViewModel: ObservableObject {
         mainRouter?.navigate(to: .main)
         UserSettings.shared.canShowMain = true
     }
+    
+    func onClickLogin() {
+        Task.init {
+            guard let result = await AuthService.shared.verifyAccount(username) else {
+                return
+            }
+        }
+    }
 }

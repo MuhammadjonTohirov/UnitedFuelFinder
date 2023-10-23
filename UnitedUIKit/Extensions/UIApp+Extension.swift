@@ -84,6 +84,14 @@ extension UIApplication {
         return activeView.frame
     }
     
+    public var safeAreaFrame: CGRect {
+        guard let activeView = (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first else {
+            return .zero
+        }
+        
+        return activeView.safeAreaLayoutGuide.layoutFrame
+    }
+    
     public var hasDynamicIsland: Bool {
         safeArea.top > 51
     }

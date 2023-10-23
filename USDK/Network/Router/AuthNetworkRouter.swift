@@ -14,6 +14,8 @@ enum UserNetworkRouter: URLRequestProtocol {
             return URL.base.appendingPath("Account", "ClientVerify")
         case .login:
             return URL.base.appendingPath("Account", "ClientLogin")
+        case .register:
+            return URL.base.appendingPath("Account", "ClientRegister")
         }
     }
     
@@ -23,12 +25,14 @@ enum UserNetworkRouter: URLRequestProtocol {
             return request.asData
         case .login(let request):
             return request.asData
+        case .register(let request):
+            return request.asData
         }
     }
     
     var method: HTTPMethod {
         switch self {
-        case .verifyAccount, .login:
+        default:
             return .post
         }
     }
@@ -37,10 +41,7 @@ enum UserNetworkRouter: URLRequestProtocol {
         var request: URLRequest?
         
         switch self {
-        case .verifyAccount:
-            request = URLRequest.new(url: url, withAuth: false)
-            request?.httpBody = self.body
-        case .login:
+        case .verifyAccount, .login, .register:
             request = URLRequest.new(url: url, withAuth: false)
             request?.httpBody = self.body
         }
@@ -52,6 +53,7 @@ enum UserNetworkRouter: URLRequestProtocol {
     
     case verifyAccount(request: NetReqVerifyAccount)
     case login(request: NetReqLogin)
+    case register(request: NetReqRegister)
     
     
 }

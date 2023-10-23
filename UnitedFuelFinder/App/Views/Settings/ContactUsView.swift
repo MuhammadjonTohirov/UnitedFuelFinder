@@ -58,7 +58,6 @@ struct ContactUsView: View {
     }
 }
 
-
 #Preview {
     ContactUsView()
 }

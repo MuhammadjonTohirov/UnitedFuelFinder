@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import UnitedUIKit
+import USDK
 
 struct RegisterProfileView: View {
     @State private var firstName: String = ""
@@ -33,6 +34,7 @@ struct RegisterProfileView: View {
                 
                 SubmitButton {
                     mainRouter?.navigate(to: .main)
+                    UserSettings.shared.canShowMain = true
                 } label: {
                     Text("continue".localize)
                 }

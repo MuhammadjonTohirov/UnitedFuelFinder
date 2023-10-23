@@ -14,6 +14,8 @@ public struct AuthService {
         let result: NetRes<NetResVerifyAccount>? = await Network.send(request: UserNetworkRouter.verifyAccount(request: .init(email: username)))
         
         if let data = result?.data {
+            UserSettings.shared.session = data.session
+            UserSettings.shared.lastOTP = data.code
             return (data.exists, data.code, data.session)
         }
         
@@ -21,11 +23,22 @@ public struct AuthService {
     }
     
     public func login(session: String, code: String, username: String) async -> Bool {
-        let result: NetRes<NetResLogin>? = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session))))
+        guard let result: NetRes<NetResLogin> = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session)))),
+                let data = result.data else {
+            return false
+        }
         
-//        handle response for access and refresh token
+        UserSettings.shared.accessToken = data.accessToken
+        UserSettings.shared.refreshToken = data.refreshToken
+        UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
         
-        return result?.data != nil
+        return result.data != nil
+    }
+    
+    public func register(with request: NetReqRegister) async -> Bool {
+        let result: NetRes<String>? = await Network.send(request: UserNetworkRouter.register(request: request))
+        
+        return result?.success ?? false
     }
     
     public func confirm(otp: String) async -> Bool {

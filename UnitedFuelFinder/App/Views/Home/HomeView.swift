@@ -8,45 +8,81 @@
 import Foundation
 import SwiftUI
 import UnitedUIKit
-import MapKit
+import GoogleMaps
+import USDK
 
 struct HomeView: View {
-    @State private var region = MKCoordinateRegion()
-    @State private var userTrackingMode = UserTrackingMode.followWithHeading
     @State private var bottomSheetFrame: CGRect = .zero
     @State private var screenFrame: CGRect = .zero
+    
+    @ObservedObject var viewModel: HomeViewModel = .init()
+    @State private var isDragging: Bool = false
+    @State private var pointerFrame: CGRect = .zero
+    
+    private let pointerHeight: CGFloat = 158
     private let locationManager = CLLocationManager()
-
+    
+    private var bottomSheetBottomPadding: CGFloat {
+        isDragging ? -bottomSheetFrame.height + 80 : 0
+    }
+    
     var body: some View {
         ZStack {
-            UMap(coordinateRegion: $region, userTrackingMode: $userTrackingMode)
-                .ignoresSafeArea()
-                .padding(.bottom, -16)
-                .overlay {
-                    ZStack {
-                        mapGradientOverlay
-                        
-                        Image("icon_settings")
-                            .resizable()
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.label)
-                            .frame(width: 32, height: 32)
-                            .position(x: screenFrame.width - 32, y: 20)
-                            .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
-                    }
-                }.padding(.bottom, bottomSheetFrame.height - 10)
-            
-            VStack(spacing: 0) {
-                Spacer()
-                bottomSheetView
+            GMapsView(
+                pickedLocation: $viewModel.pickedLocation,
+                isDragging: $isDragging,
+                screenCenter: pointerFrame.center
+            )
+            .set(currentLocation: viewModel.currentLocation)
+            .set(
+                from: self.viewModel.fromLocation?.coordinate,
+                to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
+                onStartDrawing: {
+                    Logging.l("Before start drawing")
+                    viewModel.onStartDrawingRoute()
+                },
+                onEndDrawing: {
+                    Logging.l("After end drawing")
+                    viewModel.onEndDrawingRoute()
+                }
+            )
+            .ignoresSafeArea()
+            .padding(.bottom, 8)
+            .overlay {
+                ZStack {
+                    mapGradientOverlay
+                    
+                    settingsButton
+                    
+                    PinPointerView(
+                        isActive: isDragging,
+                        type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
+                    .frame(height: pointerHeight)
+                    .readRect(rect: $pointerFrame)
+                    .offset(.init(width: 0, height: -(pointerHeight / 2)))
+                    .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
+                }
             }
+            .ignoresSafeArea(.container, edges: .bottom)
+            .padding(.bottom, -14)
+            .onChange(of: viewModel.pickedLocation, perform: { value in
+                if viewModel.state == .routing {
+                    return
+                }
+                
+                self.viewModel.reloadAddress()
+            })
             
-            currentLocationNavView
+            bottomContent
+            
+            BouncingLoadingView(message: "Searching route")
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background {
+                    Color.background.opacity(0.5)
+                        .ignoresSafeArea()
+                }
+                .opacity(viewModel.isDrawing ? 1 : 0)
         }
-        .onChange(of: screenFrame, perform: { value in
-            region = .init(center: .init(latitude: 40.793624, longitude: -74.264141), span: .init(latitudeDelta: 1, longitudeDelta: 1))
-            
-        })
         .background {
             GeometryReader(content: { geometry in
                 Color.clear.onAppear {
@@ -54,11 +90,115 @@ struct HomeView: View {
                 }
             })
         }
+        .onAppear {
+            viewModel.onAppear()
+            viewModel.focusToCurrentLocation()
+        }
     }
     
-    var currentLocationNavView: some View {
-        Button.init(role: .none) {
+    private var bottomContent: some View {
+        VStack {
+            Spacer()
+            HStack {
+                if viewModel.state == .selectTo {
+                    backButtonView
+                        .padding(.leading, 8)
+                        .padding(.bottom, 8)
+                }
+                
+                if viewModel.state == .routing {
+                    clearRouteButton
+                        .padding(.leading, 8)
+                        .padding(.bottom, 8)
+                }
+
+                Spacer()
+                currentLocationNavView
+                    .padding(.trailing, 8)
+                    .padding(.bottom, 8)
+            }
             
+            HomeBottomSheetView(
+                input: .init(
+                    from: .init(
+                        title: viewModel.fromAddress.nilIfEmpty ?? "No address",
+                        isLoading: viewModel.isLoadingAddress || isDragging,
+                        onClickBody: {
+                            debugPrint("OnClick body 1")
+                        }, onClickMap: {
+                            // skip this method
+                            debugPrint("OnClick map 1")
+                        }
+                    ),
+                    to: .init(
+                        title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
+                        isLoading: viewModel.state == .selectTo ? viewModel.isLoadingAddress : false,
+                        onClickBody: {
+                            debugPrint("OnClick body 2")
+                        }, onClickMap: {
+                            debugPrint("OnClick map 2")
+                            self.viewModel.onClickSelectToPointOnMap()
+                        }
+                    ),
+                    
+                    state: viewModel.state != .selectTo ? .mainView : .destinationView,
+                    onClickReady: {
+                        // draw route
+                        viewModel.onClickDrawRoute()
+                    },
+                    distance: viewModel.distance
+                )
+            )
+            
+            .background {
+                GeometryReader(content: { geometry in
+                    Color.clear.onAppear {
+                        bottomSheetFrame = geometry.frame(in: .global)
+                    }
+                })
+            }
+            .padding(.bottom, bottomSheetBottomPadding)
+        }
+    }
+    
+    private var settingsButton: some View {
+        VStack {
+            HStack {
+                Image("icon_settings")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(Color.label)
+                    .frame(width: 32, height: 32)
+                    .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
+                    .opacity(0)
+                Spacer()
+                VStack {
+                    Text("address".localize)
+                        .font(.system(size: 13))
+                        .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.7)))
+                    
+                    Text("\(viewModel.fromAddress)")
+                        .font(.system(size: 13))
+                        .multilineTextAlignment(.center)
+                }.opacity(isDragging ? 1 : 0)
+                Spacer()
+                Image("icon_settings")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(Color.label)
+                    .frame(width: 32, height: 32)
+                    .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
+            }
+            .frame(maxWidth: .infinity)
+            
+            Spacer()
+        }.padding(.horizontal, Padding.medium)
+        
+    }
+    
+    private var currentLocationNavView: some View {
+        Button {
+            self.viewModel.focusToCurrentLocation()
         } label: {
             Circle()
                 .frame(width: 40, height: 40)
@@ -66,25 +206,56 @@ struct HomeView: View {
                 .overlay {
                     Image("icon_navigation")
                         .renderingMode(.template)
-                        .foregroundStyle(Color.label)
+                        .foregroundStyle(Color.label.opacity(0.5))
                 }
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
-                .position(
-                    x: bottomSheetFrame.width - 40,
-                    y: bottomSheetFrame.origin.y - 100
-                )
+        }
+    }
+    
+    private var clearRouteButton: some View {
+        Button(action: {
+            viewModel.onClickBack()
+            viewModel.clearDestination()
+        }, label: {
+            Text("clear".localize)
+                .font(.system(size: 14))
+                .foregroundStyle(Color.label.opacity(0.5))
+                .padding(.horizontal, 4)
+                .frame(height: 40)
+                .frame(minWidth: 80)
+                .background {
+                    RoundedRectangle(cornerRadius: 20)
+                        .foregroundStyle(Color.background)
+                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
+                }
+        })
+    }
+    
+    private var backButtonView: some View {
+        Button {
+            self.viewModel.onClickBack()
+        } label: {
+            Circle()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(Color.background)
+                .overlay {
+                    Image(systemName: "arrow.left")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.label.opacity(0.5))
+                }
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
         }
     }
     
     var mapGradientOverlay: some View {
         VStack {
             Rectangle()
-                .frame(maxHeight: 300)
+                .frame(maxHeight: 200)
                 .ignoresSafeArea(edges: .top)
                 .foregroundStyle(
                     LinearGradient(
                         colors: [
-                            Color.background,
+                            Color.background.opacity(0.6),
                             Color.background.opacity(0)
                         ],
                         startPoint: .top,
@@ -95,166 +266,8 @@ struct HomeView: View {
             Spacer()
         }.allowsHitTesting(false)
     }
-    
-    var bottomSheetView: some View {
-        VStack {
-            fromPointView
-                .padding(.top, Padding.small / 2)
-            toPointView
-            ScrollView(.horizontal) {
-                HStack {
-                    gasStationItem
-                    gasStationItem
-                }
-                .padding(.horizontal, Padding.medium)
-            }
-            .padding(.horizontal, -Padding.medium)
-            .scrollIndicators(.never)
-            .padding(.top, 10)
-        }
-        .padding(Padding.medium)
-        .background {
-            RoundedRectangle(cornerRadius: 10)
-                .foregroundStyle(Color.background)
-                .ignoresSafeArea()
-                .shadow(color: .black.opacity(0.2), radius: 20, x: 0, y: 0)
-        }
-        .background {
-            GeometryReader(content: { geometry in
-                Color.clear.onAppear {
-                    bottomSheetFrame = geometry.frame(in: .global)
-                }
-            })
-        }
-    }
-    
-    var gasStationItem: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Image("image_ta")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 32)
-                
-                VStack(alignment: .leading) {
-                    Text("TA/Petro")
-                    Text("23.37 ml • NEWARK NJ")
-                }
-                .font(.system(size: 12))
-                
-                Spacer()
-                
-                Text("$4.42")
-                    .foregroundStyle(.white)
-                    .font(.system(size: 12))
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 4)
-                    .background {
-                        RoundedRectangle(
-                            cornerRadius: 4
-                        ).foregroundStyle(
-                            Color.accentColor
-                        )
-                    }
-            }
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Save $0.68 per gallon ")
-                    Text("Retail price $5.1")
-                }
-                .font(.system(size: 12))
-                
-                Spacer()
-                
-                Label(
-                    title: {
-                        Text("Get Direction")
-                    },
-                    icon: {
-                        Image(
-                            "icon_navigator"
-                        ).renderingMode(
-                            .template
-                        ).foregroundStyle(
-                            Color.white
-                        )
-                    }
-                )
-                    .foregroundStyle(.white)
-                    .font(.system(size: 12))
-                    .padding(.vertical, 2)
-                    .padding(.horizontal, 4)
-                    .background {
-                        RoundedRectangle(
-                            cornerRadius: 6
-                        ).foregroundStyle(
-                            Color.accentColor
-                        )
-                    }
-            }
-        }
-        .padding(Padding.medium)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(Color.secondaryBackground)
-        }
-        .frame(minWidth: UIApplication.shared.screenFrame.width * 0.8)
-    }
-    
-    var fromPointView: some View {
-        RoundedRectangle(cornerRadius: 8)
-            .frame(height: 40)
-            .foregroundStyle(Color.secondaryBackground)
-            .overlay {
-                HStack {
-                    Image("icon_point_circle")
-                        .renderingMode(.template)
-                        .foregroundStyle(Color.label)
-
-                    Text("Fair Lawn, Peterson, USA")
-                        .font(.system(size: 13))
-                    Spacer()
-                    Divider()
-                        .padding(6)
-                    Image(systemName: "arrow.forward")
-                }
-                .padding(.horizontal, 10)
-            }
-    }
-    
-    var toPointView: some View {
-        HStack {
-            RoundedRectangle(cornerRadius: 8)
-                .frame(height: 40)
-                .foregroundStyle(Color.secondaryBackground)
-                .overlay {
-                    HStack {
-                        Image("icon_pin_search")
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.label)
-
-                        Text("Fair Lawn, Peterson, USA")
-                            .font(.system(size: 13))
-                        Spacer()
-                        Divider()
-                            .padding(6)
-                        Image(systemName: "arrow.forward")
-                    }
-                    .padding(.horizontal, 10)
-                }
-            
-            RoundedRectangle(cornerRadius: 8)
-                .frame(width: 51, height: 40)
-                .foregroundStyle(Color.secondaryBackground)
-                .overlay {
-                    Text("Map")
-                        .font(.system(size: 13))
-                }
-        }
-    }
 }
 
 #Preview {
-    HomeView()
+    MainView()
 }

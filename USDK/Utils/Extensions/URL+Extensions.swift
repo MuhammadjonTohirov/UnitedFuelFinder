@@ -15,12 +15,14 @@ public extension URL {
     }
     
     static var keyHeader: (key: String, value: String) {
-        ("X-APP-SERIAL", "8414a9c59a238c35d345e7804c20e982efc9e390b6969a38e5c4789993e49800")
+        ("X-APP-SERIAL", "05b98cfe82fb89571ec9c0fbaeddd63987391f5aa6461062f784364622302e63")
     }
     
     static var langHeader: (key: String, value: String) {
         ("X-LANG-CODE", (UserSettings.shared.language ?? .russian).smallCode)
     }
+    
+    static let googleMapsApiKey = "AIzaSyBFH2jjU7u1bSJA2ELl50rhCzLATJ4JoMo"
     
     static let yuzpayURL: URL = URL.init(string: "https://yuzpay.uz/")!
     
@@ -39,6 +41,10 @@ public extension URL {
         }
         
         return url
+    }
+    
+    static func googleRoutingAPI(from: String, to: String) -> URL? {
+        return URL(string: "https://maps.googleapis.com/maps/api/directions/json?origin=\(from)&destination=\(to)&key=\(URL.googleMapsApiKey)")
     }
     
     var fileSize: UInt64 {

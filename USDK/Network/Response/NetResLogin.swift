@@ -20,7 +20,7 @@ import Foundation
 
 public struct NetResLogin: NetResBody {
     public let accessToken: String
-    public let expiresIn: Int
+    public let expiresIn: Double
     public let refreshToken: String
     public let tokenType: String
     public let notBeforePolicy: Int

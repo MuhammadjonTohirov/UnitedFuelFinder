@@ -32,9 +32,14 @@ final public class UserSettings {
         }
     }
     
-//    accessToken
     @codableWrapper(key: "accessToken")
     public var accessToken: String?
+    
+    @codableWrapper(key: "refreshToken")
+    public var refreshToken: String?
+    
+    @codableWrapper(key: "tokenExpireDate")
+    public var tokenExpireDate: Date?
     
     @codableWrapper(key: "lastActiveDate")
     public var lastActiveDate: Date?
@@ -50,4 +55,7 @@ final public class UserSettings {
     
     @codableWrapper(key: "lastOTP", nil)
     public var lastOTP: String?
+    
+    @codableWrapper(key: "session", nil)
+    public var session: String?
 }
