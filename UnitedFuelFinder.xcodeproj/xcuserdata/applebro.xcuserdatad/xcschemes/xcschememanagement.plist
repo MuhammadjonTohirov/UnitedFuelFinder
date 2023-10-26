@@ -46,10 +46,10 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
-		<key>USDK.xcscheme_^#shared#^_</key>
+		<key>SDK.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>1</integer>
+			<integer>7</integer>
 		</dict>
 		<key>UnitedFuelFinder.xcscheme_^#shared#^_</key>
 		<dict>
@@ -59,12 +59,22 @@
 		<key>UnitedUIKit.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>6</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>2E527A3C2ACC80C6005B8B95</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EE91CFC2AD07D5C00A425B5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2EF121BD2AEAC30900D76378</key>
 		<dict>
 			<key>primary</key>
 			<true/>

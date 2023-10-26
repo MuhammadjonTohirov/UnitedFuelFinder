@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "(None)" : {
+
+    },
     "%@" : {
 
     },
@@ -27,14 +30,37 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Адрес"
+            "state" : "translated",
+            "value" : "Адреc"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manzil"
+          }
+        }
+      }
+    },
+    "address_info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address info"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адресная информация"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil ma'lumotlari"
           }
         }
       }
@@ -84,6 +110,9 @@
           }
         }
       }
+    },
+    "Blue" : {
+
     },
     "clear" : {
       "extractionState" : "manual",
@@ -298,6 +327,12 @@
     "Get Direction" : {
 
     },
+    "Green" : {
+
+    },
+    "Indigo" : {
+
+    },
     "insert_creds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -401,8 +436,8 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Загрузка"
+            "state" : "translated",
+            "value" : "Загрузкa"
           }
         },
         "uz" : {
@@ -459,6 +494,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "next" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -505,6 +546,15 @@
         }
       }
     },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
+    },
     "otp_sent_to_email" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -524,6 +574,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elektron pochtaga yuborilgan OTPni kiriting"
+          }
+        }
+      }
+    },
+    "personal_details" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personal details"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Личная информация"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaxsiy ma'lumotlar"
           }
         }
       }
@@ -550,6 +623,12 @@
           }
         }
       }
+    },
+    "Red" : {
+
+    },
+    "Regular" : {
+
     },
     "Retail price $5.1" : {
 
@@ -580,6 +659,9 @@
     "Save $0.68 per gallon " : {
 
     },
+    "Selected" : {
+
+    },
     "setup_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -603,7 +685,13 @@
         }
       }
     },
+    "SwiftUI" : {
+
+    },
     "TA/Petro" : {
+
+    },
+    "Violet" : {
 
     },
     "welcome_to" : {
@@ -628,6 +716,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     }
   },
   "version" : "1.0"

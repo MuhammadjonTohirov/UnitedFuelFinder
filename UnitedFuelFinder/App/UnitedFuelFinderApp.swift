@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import UnitedUIKit
 import RealmSwift
 
 @main

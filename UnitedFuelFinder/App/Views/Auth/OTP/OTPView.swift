@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import UnitedUIKit
+
 
 struct OTPView: View {
     @ObservedObject var viewModel: OtpViewModel
@@ -24,6 +24,7 @@ struct OTPView: View {
             }
             .padding(.bottom, Padding.medium)
             .ignoresSafeArea(.keyboard, edges: .all)
+            
         }
         .overlay {
             GeometryReader(content: { geometry in
@@ -71,7 +72,7 @@ struct OTPView: View {
                 HStack {
                     Rectangle()
                         .frame(width: 0.5, height: 44)
-                        .foregroundColor(Color("gray"))
+                        .foregroundColor(Color.init(uiColor: .secondaryLabel))
                         .padding(.trailing, 4)
                     Text(viewModel.shouldResend ? "retry".localize : viewModel.counter)
                         .font(.system(size: 14, weight: .medium))
@@ -87,11 +88,16 @@ struct OTPView: View {
             .keyboardType(.numberPad)
             .set(format: "XXXXXX")
         })
+        .set(error: viewModel.otpErrorMessage)
         .onChange(of: viewModel.otp, perform: { _ in
             self.viewModel.onTypingOtp()
         })
-        .modifier(YTextFieldBottomInfo(text: viewModel.otpErrorMessage, color: Color.red))
         .padding(Padding.default)
+        .alert(isPresented: $viewModel.showAlert, error: viewModel.otpErrorMessage) {
+            Button("ok".localize.uppercased(), role: .cancel) {
+                viewModel.showAlert = false
+            }
+        }
     }
     
     private var nextButton: some View {
@@ -106,4 +112,10 @@ struct OTPView: View {
 
 #Preview {
     OTPView(viewModel: OtpViewModel(username: "master@mail.uz"))
+}
+
+extension String: LocalizedError {
+    public var errorDescription: String? {
+        return self
+    }
 }

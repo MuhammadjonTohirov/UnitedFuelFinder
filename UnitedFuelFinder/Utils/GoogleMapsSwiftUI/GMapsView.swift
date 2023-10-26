@@ -22,7 +22,7 @@
 import GoogleMaps
 import GoogleMapsCore
 import SwiftUI
-import USDK
+
 import CoreLocation
 
 class GMapsViewModel: ObservableObject {

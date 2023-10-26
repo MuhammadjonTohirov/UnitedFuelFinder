@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import USDK
+
+
 
 protocol OtpModelDelegate: NSObject {
     func otp(model: OtpViewModel, isSuccess: Bool)
@@ -101,9 +102,23 @@ final class OtpViewModel: ObservableObject {
     
     func onClickConfirm() {
         self.showLoader()
+        
         Task {
-            let _ = await self.confirmOTP?(otp)
-            hideLoader()
+            guard let result = await self.confirmOTP?(otp) else {
+                return
+            }
+            
+            let isOK = result.0
+
+            DispatchQueue.main.async {
+                self.hideLoader()
+
+                if !isOK {
+                    self.otpErrorMessage = result.1?.nilIfEmpty ?? "invalid_otp".localize
+                    
+                    return
+                }
+            }
         }
     }
     

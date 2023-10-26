@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import UnitedUIKit
-import USDK
+
+
 
 struct RegisterProfileView: View {
     @State private var firstName: String = ""
@@ -19,16 +19,20 @@ struct RegisterProfileView: View {
     
     var body: some View {
         ZStack {
-            VStack(alignment: .leading, spacing: 34) {
+            VStack(alignment: .leading, spacing: 28) {
                 topHeading
-                    .padding(.top, UIApplication.shared.screenFrame.height * 0.13)
                     
-                fields
-                    .keyboardDismissable()
+                personalDetails
                 
-                Spacer()
+                addressInfo
+                
+                Text("")
+                    .frame(height: 100)
             }
-
+            .scrollable()
+            .keyboardDismissable()
+            
+            
             VStack {
                 Spacer()
                 
@@ -59,8 +63,13 @@ struct RegisterProfileView: View {
             .font(.system(size: 14, weight: .semibold))
         }
     }
-    private var fields: some View {
-        VStack {
+    
+    private var personalDetails: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("personal_details".localize)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.init(.label))
+            
             YRoundedTextField {
                 YTextField(text: $firstName, placeholder: "first_name".localize, contentType: .givenName)
             }
@@ -77,16 +86,37 @@ struct RegisterProfileView: View {
             }
         }
     }
+    
+    private var addressInfo: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("address_info".localize)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.init(.label))
+            
+            SelectionButton(title: "State", value: "") {
+                
+            }
+            
+            SelectionButton(title: "City", value: "") {
+                
+            }
+            
+            YRoundedTextField {
+                YTextField(text: $phoneNumber, placeholder: "address".localize, contentType: .telephoneNumber)
+                    .keyboardType(.decimalPad)
+            }
+            
+            YRoundedTextField {
+                YTextField(text: $fuelCardNumber, placeholder: "zip".localize)
+                    .keyboardType(.asciiCapableNumberPad)
+            }
+        }
+    }
 }
 
 
 #Preview {
-    @State var present: Bool = true
-    return NavigationView {
-        Text("")
-            .fullScreenCover(isPresented: $present, content: {
-                RegisterProfileView()
-                    .presentationDetents(.init(arrayLiteral: .fraction(0.99)))
-            })
-    }
+    NavigationView(content: {
+        RegisterProfileView()
+    })
 }

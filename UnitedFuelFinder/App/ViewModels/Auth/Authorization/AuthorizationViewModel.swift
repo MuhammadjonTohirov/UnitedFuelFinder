@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import USDK
+
 import SwiftUI
 
 enum AuthRoute: ScreenRoute {
@@ -49,6 +49,9 @@ class AuthorizationViewModel: ObservableObject {
     }
     
     @Published var present: Bool = false
+    
+    @Published var isLoading: Bool = false
+    
     var otpViewModel: OtpViewModel?
     
     func showOtp() {
@@ -57,9 +60,15 @@ class AuthorizationViewModel: ObservableObject {
             guard let self else {
                 return (false, nil)
             }
+            
+            guard UserSettings.shared.lastOTP == otp else {
+                return (false, "invalid_otp".localize)
+            }
+            
             try? await Task.sleep(for: .seconds(0.5))
             self.closeOTP()
-            return (false, nil)
+            
+            return (true, nil)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -89,10 +98,29 @@ class AuthorizationViewModel: ObservableObject {
     }
     
     func onClickLogin() {
+        showLoading()
         Task.init {
-            guard let result = await AuthService.shared.verifyAccount(username) else {
+            guard let _ = await AuthService.shared.verifyAccount(username) else {
+                self.hideLoading()
                 return
             }
+            
+            DispatchQueue.main.async {
+                self.hideLoading()
+                self.showOtp()
+            }
+        }
+    }
+    
+    func showLoading() {
+        mainIfNeeded {
+            self.isLoading = true
+        }
+    }
+    
+    func hideLoading() {
+        mainIfNeeded {
+            self.isLoading = false
         }
     }
 }

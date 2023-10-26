@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import UnitedUIKit
+
 
 struct LoadingView: View {
     var viewModel: LoadingViewModelProtocol

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import USDK
+
 
 protocol LoadingViewModelProtocol {
     func initialize()
@@ -17,6 +17,8 @@ protocol LoadingViewModelProtocol {
 final class LoadingViewModel: LoadingViewModelProtocol {
     func initialize() {
         Task(priority: .medium) {
+            await CommonService.shared.syncStates()
+            
             try await Task.sleep(for: .seconds(0))
             
 //            if UserSettings.shared.canShowMain ?? false {

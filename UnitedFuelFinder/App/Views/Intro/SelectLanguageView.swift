@@ -7,8 +7,8 @@
 
 import Foundation
 import SwiftUI
-import UnitedUIKit
-import USDK
+
+
 
 struct SelectLanguageView: View {
     @State private var submitButtonRect: CGRect = .zero

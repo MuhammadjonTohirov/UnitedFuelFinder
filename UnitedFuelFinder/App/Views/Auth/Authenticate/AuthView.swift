@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import UnitedUIKit
+
 
 struct AuthView: View {
     @StateObject var viewModel: AuthorizationViewModel = .init()
@@ -61,6 +61,7 @@ struct AuthView: View {
                         .emailAddress
                     )
                 }
+                
                 .padding(
                     .horizontal, Padding.medium
                 )
@@ -81,10 +82,12 @@ struct AuthView: View {
             Spacer()
             
             SubmitButton {
-                viewModel.showOtp()
+                viewModel.onClickLogin()
             } label: {
                 Text("login".localize)
             }
+            .set(isLoading: viewModel.isLoading)
+            .set(isEnabled: viewModel.isOfferAccepted && !viewModel.username.isEmpty)
             .padding(.horizontal, Padding.default)
             .padding(.bottom, Padding.medium)
         }

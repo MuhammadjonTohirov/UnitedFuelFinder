@@ -6,8 +6,8 @@
 //
 
 import SwiftUI
-import UnitedUIKit
-import USDK
+
+
 
 struct MainView: View {
     @ObservedObject var viewModel = MainViewModel(route: .loading)
