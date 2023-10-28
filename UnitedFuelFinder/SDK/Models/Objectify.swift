@@ -8,6 +8,6 @@
 import Foundation
 import RealmSwift
 
-//protocol Objectify {
-//    var asObject: Object {get}
-//}
+protocol Objectify {
+    var asObject: Object {get}
+}

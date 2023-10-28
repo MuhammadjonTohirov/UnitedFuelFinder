@@ -19,7 +19,7 @@ enum AuthRoute: ScreenRoute {
     }
     
     case otp(OtpViewModel)
-    case register
+    case register(_ completion: (Bool) -> Void)
     case pin(PinCodeViewModel)
     
     var id: String {
@@ -31,15 +31,19 @@ enum AuthRoute: ScreenRoute {
         switch self {
         case .otp(let vm):
             OTPView(viewModel: vm)
-        case .register:
-            RegisterProfileView()
+        case .register(let completion):
+            RegisterProfileView(onRegisterResult: completion)
         case .pin(let vm):
             PinCodeView(viewModel: vm)
         }
     }
 }
 
-class AuthorizationViewModel: ObservableObject {
+class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
+    var alert: AlertToast = .init(displayMode: .alert, type: .regular)
+    
+    @Published var shouldShowAlert: Bool = false
+    
     @Published var username: String = ""
     @Published var isOfferAccepted: Bool = false
     @Published var route: AuthRoute? = nil {
@@ -51,6 +55,8 @@ class AuthorizationViewModel: ObservableObject {
     @Published var present: Bool = false
     
     @Published var isLoading: Bool = false
+    
+    var needRegistration: Bool = false
     
     var otpViewModel: OtpViewModel?
     
@@ -81,31 +87,39 @@ class AuthorizationViewModel: ObservableObject {
             self.route = nil
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                 self.otpViewModel = nil
-                self.showFillProfile()
+                self.needRegistration ?
+                self.showFillProfile() :
+                self.getAccessToken()
             }
         }
     }
     
     private func showFillProfile() {
         DispatchQueue.main.async {
-            self.route = .register
+            self.route = .register({ isRegistered in
+                if isRegistered {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        self.getAccessToken()
+                    }
+                }
+            })
         }
     }
     
     private func showMain() {
         mainRouter?.navigate(to: .main)
-        UserSettings.shared.canShowMain = true
     }
     
-    func onClickLogin() {
+    func onClickVerifyUsername() {
         showLoading()
         Task.init {
-            guard let _ = await AuthService.shared.verifyAccount(username) else {
+            guard let result = await AuthService.shared.verifyAccount(username) else {
                 self.hideLoading()
                 return
             }
             
             DispatchQueue.main.async {
+                self.needRegistration = !result.exist
                 self.hideLoading()
                 self.showOtp()
             }
@@ -121,6 +135,41 @@ class AuthorizationViewModel: ObservableObject {
     func hideLoading() {
         mainIfNeeded {
             self.isLoading = false
+        }
+    }
+    
+    private func getAccessToken() {
+        Task {
+            guard let session = UserSettings.shared.session, let code = UserSettings.shared.lastOTP else {
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.isLoading = true
+            }
+            
+            let (isOK, error) = await AuthService.shared.login(session: session, code: code, username: self.username)
+            
+            DispatchQueue.main.async {
+                self.isLoading = false
+                
+                if isOK {
+                    self.showMain()
+                } else {
+                    switch error {
+                    case .userAlreadyExists:
+                        self.showError(message: "user_already_exists".localize)
+                    case .notConfirmedByAdmin:
+                        self.showError(message: "not_confirmed_by_admin".localize)
+                    case .unknown:
+                        self.showError(message: "undefined_error".localize)
+                    case .custom(let error):
+                        self.showError(message: error.nilIfEmpty ?? "undefined_error".localize)
+                    default:
+                        break
+                    }
+                }
+            }
         }
     }
 }

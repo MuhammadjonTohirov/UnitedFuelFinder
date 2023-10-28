@@ -31,6 +31,9 @@ final public class UserSettings {
 //            }
         }
     }
+
+    @codableWrapper(key: "userEmail")
+    public var userEmail: String?
     
     @codableWrapper(key: "accessToken")
     public var accessToken: String?
@@ -47,8 +50,9 @@ final public class UserSettings {
     @codableWrapper(key: "appPin")
     public var appPin: String?
     
-    @codableWrapper(key: "canShowMain", false)
-    public var canShowMain: Bool?
+    public var canShowMain: Bool {
+        return accessToken?.nilIfEmpty != nil && Date() < tokenExpireDate ?? Date() && userEmail?.nilIfEmpty != nil
+    }
     
     @codableWrapper(key: "isLanguageSelected", false)
     public var isLanguageSelected: Bool?

@@ -7,6 +7,13 @@
 
 import Foundation
 
+enum AuthNetworkErrorReason: Error {
+    case notConfirmedByAdmin
+    case userAlreadyExists
+    case unknown
+    case custom(String)
+}
+
 public struct AuthService {
     public static let shared = AuthService()
     
@@ -16,29 +23,48 @@ public struct AuthService {
         if let data = result?.data {
             UserSettings.shared.session = data.session
             UserSettings.shared.lastOTP = data.code
+            UserSettings.shared.userEmail = username
             return (data.exists, data.code, data.session)
         }
         
         return nil
     }
     
-    public func login(session: String, code: String, username: String) async -> Bool {
+    func login(session: String, code: String, username: String) async -> (Bool, AuthNetworkErrorReason?) {
         guard let result: NetRes<NetResLogin> = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session)))),
                 let data = result.data else {
-            return false
+            return (false, .unknown)
         }
         
         UserSettings.shared.accessToken = data.accessToken
         UserSettings.shared.refreshToken = data.refreshToken
         UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
-        
-        return result.data != nil
+        let isOK = result.data != nil
+        return (isOK, isOK ? nil : (result.code == 500 ? .notConfirmedByAdmin : .unknown))
     }
     
-    public func register(with request: NetReqRegister) async -> Bool {
+    func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {
         let result: NetRes<String>? = await Network.send(request: UserNetworkRouter.register(request: request))
         
-        return result?.success ?? false
+        
+        return (result?.success ?? false, result?.error?.nilIfEmpty == nil ? nil : .custom(result?.error ?? "") )
+    }
+    
+    func refreshToken() async -> Bool {
+        guard let token = UserSettings.shared.refreshToken else {
+            return false
+        }
+        
+        let result: NetRes<NetResRefreshToken>? = await Network.send(request: UserNetworkRouter.refresh(refreshToken: token))
+        
+        if let data = result?.data {
+            UserSettings.shared.accessToken = data.accessToken
+            UserSettings.shared.refreshToken = data.refreshToken
+            UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
+            return true
+        }
+        
+        return false
     }
     
     public func confirm(otp: String) async -> Bool {

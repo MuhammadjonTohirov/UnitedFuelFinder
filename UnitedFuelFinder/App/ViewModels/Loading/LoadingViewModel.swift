@@ -19,12 +19,14 @@ final class LoadingViewModel: LoadingViewModelProtocol {
         Task(priority: .medium) {
             await CommonService.shared.syncStates()
             
-            try await Task.sleep(for: .seconds(0))
-            
-//            if UserSettings.shared.canShowMain ?? false {
-//                mainRouter?.navigate(to: .main)
-//                return
-//            }
+            if UserSettings.shared.canShowMain {
+                if await AuthService.shared.refreshToken() {
+                    mainRouter?.navigate(to: .main)
+                } else {
+                    mainRouter?.navigate(to: .auth)
+                }
+                return
+            }
             
             if UserSettings.shared.isLanguageSelected ?? false {
                 mainRouter?.navigate(to: .auth)
@@ -32,29 +34,6 @@ final class LoadingViewModel: LoadingViewModelProtocol {
             }
             
             mainRouter?.navigate(to: .language)
-            
-//            let isOK = await UserNetworkService.shared.refreshToken()
-//            
-//            let hasPin = UserSettings.shared.appPin != nil
-//            let hasLanguage = UserSettings.shared.language != nil
-//            
-//            DispatchQueue.main.async {
-//                if !hasLanguage {
-//                    mainRouter?.navigate(to: .intro)
-//                    return
-//                }
-//                
-//                if !isOK {
-//                    mainRouter?.navigate(to: .auth)
-//                    return
-//                }
-//                
-//                if hasPin {
-//                    mainRouter?.navigate(to: .pin)
-//                } else {
-//                    mainRouter?.navigate(to: .auth)
-//                }
-//            }
         }
     }
     

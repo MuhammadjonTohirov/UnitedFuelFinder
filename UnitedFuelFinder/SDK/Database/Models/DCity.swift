@@ -8,8 +8,8 @@
 import Foundation
 import RealmSwift
 
-public class DCity: Object {
-    @Persisted(primaryKey: true) var id: Int
+public class DCity: Object, Identifiable {
+    @Persisted(primaryKey: true) public var id: Int
     @Persisted var name: String
     @Persisted var stateId: String
     @Persisted var lat: Double

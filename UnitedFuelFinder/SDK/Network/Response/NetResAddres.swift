@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct NetResState: NetResBody {
+struct NetResState: NetResBody, StateObjectProtocol {
     var id: String
     var name: String
     
@@ -17,7 +17,7 @@ struct NetResState: NetResBody {
     }
 }
 
-struct NetResCity: NetResBody {
+struct NetResCity: NetResBody, CityObjectProtocol {
     var id: Int
     var stateId: String
     var name: String

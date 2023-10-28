@@ -89,7 +89,7 @@ fileprivate struct AnimatedXmark: View {
 //MARK: - Main View
 
 @available(iOS 13, macOS 11, *)
-public struct AlertToast: View{
+public struct AlertToast: View {
     
     public enum BannerAnimation{
         case slide, pop
@@ -180,6 +180,58 @@ public struct AlertToast: View{
         }
     }
     
+    /// Alert Button
+    public struct AlertButton: Equatable, Identifiable {
+        public static func == (lhs: AlertToast.AlertButton, rhs: AlertToast.AlertButton) -> Bool {
+            lhs.id == rhs.id
+        }
+        
+        public var id: String {
+            "\(style)_\(title)"
+        }
+        
+        /// Button title
+        public var title: String
+        
+        /// Button action
+        public var action: (() -> Void)?
+        
+        /// Button style
+        public var style: AlertToast.AlertButton.ButtonStyle
+        
+        /// Button style
+        public enum ButtonStyle: Equatable{
+            
+            /// Default style
+            case `default`
+            
+            /// Cancel style
+            case cancel
+            
+            /// Destructive style
+            case destructive
+        }
+        
+        /// Init
+        public init(title: String, action: (() -> Void)? = nil, style: AlertToast.AlertButton.ButtonStyle = .default){
+            self.title = title
+            self.action = action
+            self.style = style
+        }
+        
+        var body: some View {
+            Button(action: {
+                action?()
+            }, label: {
+                Text(title)
+                    .frame(minWidth: 60)
+                    .font(.system(size: 14, weight: .medium, design: .default))
+                    .foregroundColor(style == .destructive ? .init(uiColor: .systemRed) : .accentColor)
+            })
+            .buttonStyle(.bordered)
+        }
+    }
+    
     ///The display mode
     /// - `alert`
     /// - `hud`
@@ -196,6 +248,7 @@ public struct AlertToast: View{
     ///The subtitle of the alert (`Optional(String)`)
     public var subTitle: String? = nil
     
+    public var buttons: [AlertToast.AlertButton] = []
     ///Customize your alert appearance
     public var style: AlertStyle? = nil
     
@@ -216,11 +269,12 @@ public struct AlertToast: View{
     ///Short init with most used parameters
     public init(displayMode: DisplayMode,
                 type: AlertType,
-                title: String? = nil){
+                title: String? = nil, buttons: [AlertToast.AlertButton] = []) {
         
         self.displayMode = displayMode
         self.type = type
         self.title = title
+        self.buttons = buttons
     }
     
     ///Banner from the bottom of the view
@@ -236,7 +290,8 @@ public struct AlertToast: View{
                         Image(systemName: "checkmark")
                             .foregroundColor(color)
                     case .error(let color):
-                        Image(systemName: "xmark")
+                        Image("icon_error")
+                            .renderingMode(.template)
                             .foregroundColor(color)
                     case .systemImage(let name, let color):
                         Image(systemName: name)
@@ -281,7 +336,7 @@ public struct AlertToast: View{
                         .hudModifier()
                         .foregroundColor(color)
                 case .error(let color):
-                    Image(systemName: "xmark")
+                    Image("icon_error")
                         .hudModifier()
                         .foregroundColor(color)
                 case .systemImage(let name, let color):
@@ -333,7 +388,7 @@ public struct AlertToast: View{
     ///Alert View
     public var alert: some View {
         VStack{
-            switch type{
+            switch type {
             case .complete(let color):
                 Spacer()
                 AnimatedCheckmark(color: color)
@@ -374,12 +429,21 @@ public struct AlertToast: View{
                         .multilineTextAlignment(.center)
                         .textColor(style?.titleColor ?? nil)
                 }
-                if subTitle != nil{
+                if subTitle != nil {
                     Text(LocalizedStringKey(subTitle ?? ""))
                         .font(style?.subTitleFont ?? Font.footnote)
                         .opacity(0.7)
                         .multilineTextAlignment(.center)
                         .textColor(style?.subtitleColor ?? nil)
+                }
+                
+                HStack {
+//                    setup buttons if buttons is not empty
+                    if !buttons.isEmpty{
+                        ForEach(buttons) { button in
+                            button.body
+                        }
+                    }
                 }
             }
         }
@@ -387,10 +451,11 @@ public struct AlertToast: View{
         .withFrame(type != .regular && type != .loading)
         .alertBackground(style?.backgroundColor ?? nil)
         .cornerRadius(10)
+        .padding(.horizontal, 32)
     }
     
     ///Body init determine by `displayMode`
-    public var body: some View{
+    public var body: some View {
         switch displayMode{
         case .alert:
             alert
@@ -403,7 +468,7 @@ public struct AlertToast: View{
 }
 
 @available(iOS 13, macOS 11, *)
-public struct AlertToastModifier: ViewModifier{
+public struct AlertToastModifier: ViewModifier {
     
     ///Presentation `Binding<Bool>`
     @Binding var isPresenting: Bool
@@ -441,8 +506,8 @@ public struct AlertToastModifier: ViewModifier{
     }
     
     @ViewBuilder
-    public func main() -> some View{
-        if isPresenting{
+    public func main() -> some View {
+        if isPresenting {
             
             switch alert().displayMode{
             case .alert:
@@ -557,13 +622,13 @@ public struct AlertToastModifier: ViewModifier{
                 })
         case .alert:
             content
-                .overlay(ZStack{
-                    main()
-                        .offset(y: offsetY)
-                }
-                            .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
-                            .edgesIgnoringSafeArea(.all)
-                            .animation(Animation.spring(), value: isPresenting))
+                .overlay(
+                    ZStack {
+                        main().offset(y: offsetY)
+                    }
+                        .frame(maxWidth: screen.width, maxHeight: screen.height, alignment: .center)
+                        .edgesIgnoringSafeArea(.all)
+                        .animation(Animation.spring(), value: isPresenting))
                 .valueChanged(value: isPresenting, onChange: { (presented) in
                     if presented{
                         onAppearAction()
@@ -666,7 +731,7 @@ fileprivate extension Image{
 }
 
 //@available(iOS 13, macOS 11, *)
-public extension View{
+public extension View {
     
     /// Return some view w/o frame depends on the condition.
     /// This view modifier function is set by default to:
@@ -681,8 +746,14 @@ public extension View{
     ///   - show: Binding<Bool>
     ///   - alert: () -> AlertToast
     /// - Returns: `AlertToast`
-    func toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: Bool = true, offsetY: CGFloat = 0, alert: @escaping () -> AlertToast, onTap: (() -> ())? = nil, completion: (() -> ())? = nil) -> some View{
-        modifier(AlertToastModifier(isPresenting: isPresenting, duration: duration, tapToDismiss: tapToDismiss, offsetY: offsetY, alert: alert, onTap: onTap, completion: completion))
+    func toast(isPresenting: Binding<Bool>, duration: Double = 2, tapToDismiss: Bool = true, offsetY: CGFloat = 0, alert: @escaping () -> AlertToast, onTap: (() -> ())? = nil, completion: (() -> ())? = nil) -> some View {
+        modifier(
+            AlertToastModifier(
+                isPresenting: isPresenting, duration: duration,
+                tapToDismiss: tapToDismiss, offsetY: offsetY,
+                alert: alert, onTap: onTap, completion: completion
+            )
+        )
     }
     
     /// Choose the alert background
@@ -708,4 +779,13 @@ public extension View{
             }
         }
     }
+}
+
+#Preview {
+    @State var isPresented = true
+    return Color.init(uiColor: .systemYellow)
+        .ignoresSafeArea()
+        .modifier(AlertToastModifier(isPresenting: $isPresented, alert: {
+            .init(displayMode: .alert, type: .error(.error), title: "Google")
+        }))
 }

@@ -7,14 +7,6 @@
 
 import Foundation
 
-//{
-//  "email": "user@example.com",
-//  "confirm": {
-//    "code": "string",
-//    "session": "string"
-//  }
-//}
-
 struct NetReqLogin: Codable {
     let email: String
     let confirm: NetReqLoginConfirm

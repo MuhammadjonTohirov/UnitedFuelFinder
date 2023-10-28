@@ -11,7 +11,7 @@ import SwiftUI
 
 struct AuthView: View {
     @StateObject var viewModel: AuthorizationViewModel = .init()
-    
+    @State var showAlert: Bool = false
     var body: some View {
         mainBody
     }
@@ -19,6 +19,7 @@ struct AuthView: View {
     private var mainBody: some View {
         NavigationStack {
             innerBody
+                .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 1)
                 .keyboardDismissable()
                 .navigationDestination(isPresented: $viewModel.present) {
                     viewModel.route?.screen
@@ -44,7 +45,6 @@ struct AuthView: View {
             )
             .font(.system(size: 14, weight: .semibold))
             .padding(.horizontal, Padding.medium)
-            
             VStack(alignment: .leading) {
                 YRoundedTextField {
                     YTextField(
@@ -76,13 +76,13 @@ struct AuthView: View {
                     debugPrint("Show offer")
                 }
                 .padding(.horizontal, Padding.medium)
+                .padding(.top, Padding.small / 2)
                 .padding(.bottom, Padding.large)
-                
             }
             Spacer()
             
             SubmitButton {
-                viewModel.onClickLogin()
+                viewModel.onClickVerifyUsername()
             } label: {
                 Text("login".localize)
             }

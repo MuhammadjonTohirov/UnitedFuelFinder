@@ -63,6 +63,11 @@ enum AppDestination: Hashable, ScreenRoute {
             AuthView()
         case .main:
             HomeView()
+        case .test:
+            NavigationView {
+                TestView()
+                    .navigationBarTitleDisplayMode(.inline)
+            }
         default:
             EmptyView()
         }

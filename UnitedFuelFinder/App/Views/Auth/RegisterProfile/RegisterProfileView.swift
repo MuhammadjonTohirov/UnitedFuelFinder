@@ -8,19 +8,16 @@
 import Foundation
 import SwiftUI
 
-
-
 struct RegisterProfileView: View {
-    @State private var firstName: String = ""
-    @State private var lastName: String = ""
-    @State private var phoneNumber: String = ""
-    @State private var fuelCardNumber: String = ""
-    @State private var screenRect: CGRect = .zero
-    
+    @StateObject var viewModel = RegisterViewModel()
+    var onRegisterResult: (Bool) -> Void
+    @Environment (\.presentationMode) private var presentationMode
+
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
                 topHeading
+                    .padding(.top, Padding.large)
                     
                 personalDetails
                 
@@ -31,23 +28,31 @@ struct RegisterProfileView: View {
             }
             .scrollable()
             .keyboardDismissable()
-            
+            .toast($viewModel.shouldShowAlert, viewModel.alert)
             
             VStack {
                 Spacer()
                 
                 SubmitButton {
-                    mainRouter?.navigate(to: .main)
-                    UserSettings.shared.canShowMain = true
+                    viewModel.doRegister { success in
+                        success ? presentationMode.wrappedValue.dismiss() : ()
+                    }
+                    
                 } label: {
                     Text("continue".localize)
                 }
+                .set(isLoading: viewModel.isLoading)
+                .set(isEnabled: viewModel.isValidForm)
                 .padding(.bottom, Padding.medium)
             }
             .ignoresSafeArea(.keyboard, edges: .all)
         }
         .padding(.horizontal, Padding.default)
-        .readRect(rect: $screenRect)
+        .readRect(rect: $viewModel.screenRect)
+        .sheet(isPresented: $viewModel.showScreen, content: {
+            viewModel.route?.screen
+        })
+        
     }
     
     private var topHeading: some View {
@@ -71,17 +76,17 @@ struct RegisterProfileView: View {
                 .foregroundColor(.init(.label))
             
             YRoundedTextField {
-                YTextField(text: $firstName, placeholder: "first_name".localize, contentType: .givenName)
+                YTextField(text: $viewModel.firstName, placeholder: "first_name".localize, contentType: .givenName)
             }
             YRoundedTextField {
-                YTextField(text: $lastName, placeholder: "last_name".localize, contentType: .familyName)
+                YTextField(text: $viewModel.lastName, placeholder: "last_name".localize, contentType: .familyName)
             }
             YRoundedTextField {
-                YTextField(text: $phoneNumber, placeholder: "phone_number".localize, contentType: .telephoneNumber)
+                YTextField(text: $viewModel.phoneNumber, placeholder: "phone_number".localize, contentType: .telephoneNumber)
                     .keyboardType(.decimalPad)
             }
             YRoundedTextField {
-                YTextField(text: $fuelCardNumber, placeholder: "fuel_number".localize)
+                YTextField(text: $viewModel.fuelCardNumber, placeholder: "fuel_number".localize)
                     .keyboardType(.asciiCapableNumberPad)
             }
         }
@@ -93,22 +98,26 @@ struct RegisterProfileView: View {
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
-            SelectionButton(title: "State", value: "") {
-                
+            SelectionButton(title: "State", value: viewModel.state?.name ?? "") {
+                viewModel.route = .selectState($viewModel.state)
             }
             
-            SelectionButton(title: "City", value: "") {
+            SelectionButton(title: "City", value: viewModel.city?.name ?? "") {
+                guard let stateId = viewModel.state?.id else {
+                    return
+                }
                 
+                viewModel.route = .selectCity($viewModel.city, stateId)
             }
             
             YRoundedTextField {
-                YTextField(text: $phoneNumber, placeholder: "address".localize, contentType: .telephoneNumber)
-                    .keyboardType(.decimalPad)
+                YTextField(text: $viewModel.address, placeholder: "address".localize, contentType: .streetAddressLine1)
+                    .keyboardType(.default)
             }
             
             YRoundedTextField {
-                YTextField(text: $fuelCardNumber, placeholder: "zip".localize)
-                    .keyboardType(.asciiCapableNumberPad)
+                YTextField(text: $viewModel.zip, placeholder: "zip".localize, contentType: .postalCode)
+                    .keyboardType(.numberPad)
             }
         }
     }
@@ -117,6 +126,8 @@ struct RegisterProfileView: View {
 
 #Preview {
     NavigationView(content: {
-        RegisterProfileView()
+        RegisterProfileView { _ in
+            
+        }
     })
 }

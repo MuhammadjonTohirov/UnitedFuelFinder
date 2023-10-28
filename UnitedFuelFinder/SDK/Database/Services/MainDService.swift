@@ -10,21 +10,24 @@ import RealmSwift
 
 public class MainDService {
     public static let shared = MainDService()
-    private(set) lazy var realm: Realm? = {Realm.new}()
-//    
-//    public func addState(_ states: [StateItem]) {
-//        realm?.trySafeWrite({
-//            states.map({$0.asObject}).forEach { state in
-//                self.realm?.add(state)
-//            }
-//        })
-//    }
-//    
-//    public func addCity(_ cities: [CityItem]) {
-//        realm?.trySafeWrite({
-//            cities.map({$0.asObject}).forEach { city in
-//                self.realm?.add(city)
-//            }
-//        })
-//    }
+    
+    public func addState(_ states: [StateItem]) {
+        DataBase.writeThread.async {
+            Realm.new?.trySafeWrite({ realm in
+                states.map({$0.asObject}).forEach { state in
+                    realm.add(state)
+                }
+            })
+        }
+    }
+    
+    public func addCity(_ cities: [CityItem]) {
+        DataBase.writeThread.async {
+            Realm.new?.trySafeWrite({ realm in
+                cities.map({$0.asObject}).forEach { city in
+                    realm.add(city)
+                }
+            })
+        }
+    }
 }

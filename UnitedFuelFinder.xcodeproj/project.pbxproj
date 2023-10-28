@@ -29,6 +29,10 @@
 		2E243DAE2AE163E8008C3E8C /* FromPointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */; };
 		2E243DB02AE163EE008C3E8C /* ToPointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAF2AE163EE008C3E8C /* ToPointButton.swift */; };
 		2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */; };
+		2E29B8E52AEB7B93001EC1BE /* SelectStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */; };
+		2E2D1EC12AEBD96300559A1D /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */; };
+		2E2D1EC32AEBE41500559A1D /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC22AEBE41500559A1D /* SelectCityView.swift */; };
+		2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC52AEBF96200559A1D /* Alertable.swift */; };
 		2E3F17C82AD9126300F4DC52 /* GoogleMapsBase.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C52AD9126300F4DC52 /* GoogleMapsBase.xcframework */; };
 		2E3F17C92AD9126300F4DC52 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */; };
 		2E3F17CA2AD9126300F4DC52 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C72AD9126300F4DC52 /* GoogleMapsCore.xcframework */; };
@@ -153,6 +157,7 @@
 		2E5DF9912AEACE11005BE20D /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 2E5DF9902AEACE11005BE20D /* Realm */; };
 		2E5DF9932AEACE11005BE20D /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 2E5DF9922AEACE11005BE20D /* RealmSwift */; };
 		2E5DF9952AEACEC9005BE20D /* SearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF9942AEACEC9005BE20D /* SearchField.swift */; };
+		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */; };
@@ -216,6 +221,10 @@
 		2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromPointButton.swift; sourceTree = "<group>"; };
 		2E243DAF2AE163EE008C3E8C /* ToPointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPointButton.swift; sourceTree = "<group>"; };
 		2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetInput.swift; sourceTree = "<group>"; };
+		2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateView.swift; sourceTree = "<group>"; };
+		2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
+		2E2D1EC22AEBE41500559A1D /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
+		2E2D1EC52AEBF96200559A1D /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
 		2E3F17C52AD9126300F4DC52 /* GoogleMapsBase.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsBase.xcframework; sourceTree = "<group>"; };
 		2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
 		2E3F17C72AD9126300F4DC52 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
@@ -339,6 +348,7 @@
 		2E5DF91F2AEACD63005BE20D /* Objectify.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Objectify.swift; sourceTree = "<group>"; };
 		2E5DF9202AEACD63005BE20D /* AddressObjects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddressObjects.swift; sourceTree = "<group>"; };
 		2E5DF9942AEACEC9005BE20D /* SearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchField.swift; sourceTree = "<group>"; };
+		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -566,6 +576,7 @@
 			children = (
 				2E5DF8A92AEACD63005BE20D /* SoundEffect.swift */,
 				2E5DF8AA2AEACD63005BE20D /* Padding.swift */,
+				2E2D1EC52AEBF96200559A1D /* Alertable.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -783,6 +794,7 @@
 				2E5DF8F82AEACD63005BE20D /* NetResAddres.swift */,
 				2E5DF8F92AEACD63005BE20D /* NetResVerifyAccount.swift */,
 				2E5DF8FA2AEACD63005BE20D /* NetResLogin.swift */,
+				2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1026,6 +1038,8 @@
 			isa = PBXGroup;
 			children = (
 				2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */,
+				2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */,
+				2E2D1EC22AEBE41500559A1D /* SelectCityView.swift */,
 			);
 			path = RegisterProfile;
 			sourceTree = "<group>";
@@ -1042,6 +1056,7 @@
 			isa = PBXGroup;
 			children = (
 				2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */,
+				2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -1221,6 +1236,7 @@
 				2E5DF9562AEACD63005BE20D /* Identifiable.swift in Sources */,
 				2E5DF9382AEACD63005BE20D /* CGRect+Extension.swift in Sources */,
 				2E5DF9442AEACD63005BE20D /* BlurView.swift in Sources */,
+				2E2D1EC12AEBD96300559A1D /* RegisterViewModel.swift in Sources */,
 				2E5DF9852AEACD64005BE20D /* URLSession+Extensions.swift in Sources */,
 				2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */,
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
@@ -1251,10 +1267,13 @@
 				2E5DF98C2AEACD64005BE20D /* UserSettings.swift in Sources */,
 				2E5DF9482AEACD63005BE20D /* MapInteractionModes.swift in Sources */,
 				2E5DF9772AEACD64005BE20D /* AuthService.swift in Sources */,
+				2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */,
 				2E5DF9822AEACD64005BE20D /* DispatchQueue+Extensions.swift in Sources */,
 				2E5DF9272AEACD63005BE20D /* PreviewSupport.swift in Sources */,
+				2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */,
 				2EDF8C662AD4428E003D64FC /* KeyboardView.swift in Sources */,
 				2E5DF98D2AEACD64005BE20D /* Objectify.swift in Sources */,
+				2E29B8E52AEB7B93001EC1BE /* SelectStateView.swift in Sources */,
 				2E5DF96E2AEACD64005BE20D /* NetResAddres.swift in Sources */,
 				2E5DF9542AEACD63005BE20D /* NativeHostingController.swift in Sources */,
 				2E5DF9762AEACD64005BE20D /* NetResProtocol.swift in Sources */,
@@ -1286,6 +1305,7 @@
 				2EF3A2022ADD950E00CA8DE2 /* ContactUsView.swift in Sources */,
 				2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */,
 				2E5DF9362AEACD63005BE20D /* UIApp+Extension.swift in Sources */,
+				2E2D1EC32AEBE41500559A1D /* SelectCityView.swift in Sources */,
 				2E5DF9882AEACD64005BE20D /* URL+Extensions.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
 				2E5DF95C2AEACD63005BE20D /* MapPin.swift in Sources */,

@@ -28,12 +28,6 @@ public extension URL {
     
     static let googleMapsApiKey = "AIzaSyBFH2jjU7u1bSJA2ELl50rhCzLATJ4JoMo"
     
-    static let yuzpayURL: URL = URL.init(string: "https://yuzpay.uz/")!
-    
-    static let tadiURL: URL = URL.init(string: "https://tadi.uz/")!
-    
-    static let telegramBotURL: URL = URL.init(string: "https://t.me/yuzpaybot")!
-    
     func appendingPath(_ pathList: Any...) -> URL {
         var url = self
         pathList.forEach { path in

@@ -43,19 +43,19 @@ extension Realm {
 }
 
 extension Realm {
-    public func trySafeWrite(_ block: () throws -> Void, completionHandler: ((NSError?) -> Void)? = nil) {
+    public func trySafeWrite(_ block: (Realm) throws -> Void, completionHandler: ((NSError?) -> Void)? = nil) {
         do {
             
             func write() throws {
                 beginWrite()
-                try block()
+                try block(self)
                 try commitWrite()
                 
                 completionHandler?(nil)
             }
             
             if isInWriteTransaction {
-                try block()
+                try block(self)
                 completionHandler?(nil)
             } else {
                 try write()
@@ -68,7 +68,7 @@ extension Realm {
     }
     
     public func reCreate<E: Object>(object: E, with id: String) -> E {
-        self.trySafeWrite {
+        self.trySafeWrite { _ in
             if let obj = self.object(ofType: E.self, forPrimaryKey: id) {
                 self.delete(obj)
             }
