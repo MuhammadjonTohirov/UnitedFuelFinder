@@ -50,4 +50,18 @@ final public class UserSettings {
     
     @codableWrapper(key: "session", nil)
     public var session: String?
+    
+    func clear() {
+        accessToken = nil
+        refreshToken = nil
+        tokenExpireDate = nil
+        lastActiveDate = nil
+        appPin = nil
+        isLanguageSelected = nil
+        lastOTP = nil
+        session = nil
+        userInfo = nil
+        userEmail = nil
+        language = nil
+    }
 }

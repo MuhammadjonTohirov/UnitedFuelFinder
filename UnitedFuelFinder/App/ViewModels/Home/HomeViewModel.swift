@@ -26,6 +26,7 @@ enum HomeRouter: ScreenRoute {
     
     case settings
     
+    @ViewBuilder
     var screen: some View {
         switch self {
         case .settings:
@@ -105,6 +106,7 @@ final class HomeViewModel: ObservableObject {
     private(set) var toLocationCandidate: CLLocation?
     
     @Published var stations: [StationItem] = []
+    @Published var stationsMarkers: [GMSMarker] = []
     
     var distance: String {
         guard let from = fromLocation, let to = toLocation else {
@@ -124,18 +126,23 @@ final class HomeViewModel: ObservableObject {
         guard !didAppear else {
             return
         }
+        
+        didAppear = true
+        
         //Will be executed if the screen is presented for the first time
         locationManager.requestLocationPermission()
         
         locationManager.startUpdatingLocation()
         
         locationManager.locationUpdateHandler = { [weak self] newLocation in
-        
+            
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.filterStationsByDefault()
         }
+        
+        focusToCurrentLocation()
     }
     
     func focusToCurrentLocation() {
@@ -171,10 +178,10 @@ final class HomeViewModel: ObservableObject {
             break
         }
         
-        self.showLoader(message: "finding_route".localize)
+        self.showLoader(message: "detecting_address".localize)
         
         locationManager.getAddressFromLatLon(latitude: loc.latitude, longitude: loc.longitude) { address in
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 self.hideLoader()
                 if self.state == .selectFrom {
                     self.fromAddress = address
@@ -266,8 +273,10 @@ final class HomeViewModel: ObservableObject {
 
             let stations = await MainService.shared.findStations(atCity: "\(user.city)")
             Logging.l("Number of stations in \(user.city) \(stations.count)")
+                        
             await MainActor.run {
                 self.stations = stations.sorted(by: {$0.distance(from: self.locationManager.currentLocation?.coordinate ?? .init()) < $1.distance(from: self.locationManager.currentLocation?.coordinate ?? .init())})
+                self.stationsMarkers = self.stations.map({$0.asMarker})
             }
             
             self.hideLoader()

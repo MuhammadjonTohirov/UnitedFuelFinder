@@ -37,24 +37,23 @@ struct SelectLanguageView: View {
         VStack(spacing: 40) {
             RadioButton(isSelected: mainViewModel.language == Language.english, title: {
                 Text(Language.english.name)
-                    .foregroundStyle(Color.label)
             }, action: {
                 selectLanguage(.english)
-            })
+            }).set(enabled: true)
             
             RadioButton(isSelected: mainViewModel.language == Language.uzbek, title: {
                 Text(Language.uzbek.name)
-                    .foregroundStyle(Color.label)
             }, action: {
                 selectLanguage(.uzbek)
             })
+            .set(enabled: false)
             
             RadioButton(isSelected: mainViewModel.language == Language.russian, title: {
                 Text(Language.russian.name)
-                    .foregroundStyle(Color.label)
             }, action: {
                 selectLanguage(.russian)
             })
+            .set(enabled: false)
         }
     }
     

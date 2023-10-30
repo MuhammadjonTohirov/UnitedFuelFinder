@@ -14,16 +14,23 @@ public struct RadioButton<Content: View>: View {
     @State private var contentRect: CGRect = .zero
     @State private var titleRect: CGRect = .zero
     
+    var isEnabled: Bool = true
+    
     public init(isSelected: Bool, title: @escaping () -> Content, action: @escaping () -> Void) {
         self.isSelected = isSelected
         self.title = title
         self.action = action
     }
     
+    @ViewBuilder
     public var body: some View {
-        Button(action: action, label: {
+        if isEnabled {
+            Button(action: action, label: {
+                innerBody
+            })
+        } else {
             innerBody
-        })
+        }
     }
     
     var innerBody: some View {
@@ -36,6 +43,7 @@ public struct RadioButton<Content: View>: View {
                 
             title()
                 .font(.system(size: 16, weight: .semibold))
+                .foregroundStyle(self.isEnabled ? Color.label : Color.secondary)
                 .background(content: {
                     GeometryReader(content: { geometry in
                         Rectangle()
@@ -59,6 +67,14 @@ public struct RadioButton<Content: View>: View {
     }
 }
 
+extension RadioButton {
+    func set(enabled: Bool) -> Self {
+        var v = self
+        v.isEnabled = enabled
+        return v
+    }
+}
+
 #Preview {
     VStack(spacing: 40) {
         RadioButton(isSelected: true, title: {
@@ -74,6 +90,7 @@ public struct RadioButton<Content: View>: View {
         }, action: {
             
         })
+        .set(enabled: false)
         
         RadioButton(isSelected: true, title: {
             Text("Русский")

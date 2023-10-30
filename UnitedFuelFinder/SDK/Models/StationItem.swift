@@ -64,18 +64,18 @@ struct StationItem: NetResBody, Identifiable {
         self.stateId = item.stateId
         self.discountPercent = item.discountPercent
         self.retailPrice = item.retailPrice
-        self.iconUrl = item.iconUrl ?? "http://178.33.123.109:5000/station-icon.png"
+        self.iconUrl = item.iconUrl
     }
 }
 
-
+fileprivate let _imageView: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station1"))
 extension StationItem {
     var asMarker: GMSMarker {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng)
         marker.title = self.name
         marker.snippet = self.address
-        marker.iconView = MarkerImageView.create(url: URL(string: self.iconUrl ?? ""), placeholder: UIImage(named: "icon_station1"))
+        marker.iconView = _imageView
         marker.iconView?.frame.size = .init(width: 32, height: 32)
         return marker
     }

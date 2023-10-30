@@ -43,8 +43,13 @@ public class MarkerImageView: UIView {
         imageView.image = placeholder
     }
     
+    func set(url: URL?) {
+        self.url = url
+        setupImage()
+    }
+    
     private func setupImage() {
-        imageView.kf.setImage(with: url, placeholder: placeholder, options: [.transition(.fade(0.2))])
+        imageView.kf.setImage(with: url, placeholder: placeholder, options: [.transition(.fade(0.2)), .scaleFactor(0.1)])
     }
     
     static func create(url: URL? = nil, placeholder: UIImage? = nil) -> MarkerImageView {

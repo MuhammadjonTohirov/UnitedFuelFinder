@@ -36,8 +36,9 @@ struct Network {
             guard await onReceive(code: code) else {
                 return nil
             }
+            
             Logging.l("--- --- RESPONSE --- ---")
-            Logging.l("Response: \(result.1)")
+            
             let res = try JSONDecoder().decode(NetRes<T>.self, from: data)
             
             Logging.l(res.asString)
@@ -57,7 +58,7 @@ struct Network {
     private static func onReceive(code: Int) async -> Bool {
         if code == 401 {
             await URLSession.shared.cancelAllTasks()
-//            UserSettings.shared.clearUserDetails()
+            UserSettings.shared.clear()
             delegate?.onAuthRequired()
             return false
         }

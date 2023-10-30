@@ -36,7 +36,7 @@ struct GMapsView: UIViewControllerRepresentable {
     @Binding var isDragging: Bool
     
     var screenCenter: CGPoint
-    var markers: [GMSMarker] = []
+    @Binding var markers: [GMSMarker]
     
     fileprivate var onStartDrawing: (() -> Void)?
     fileprivate var onEndDrawing: (() -> Void)?
@@ -44,11 +44,11 @@ struct GMapsView: UIViewControllerRepresentable {
     fileprivate var routeFrom: CLLocationCoordinate2D?
     fileprivate var routeTo: CLLocationCoordinate2D?
     
-    init(pickedLocation: Binding<CLLocation?>, isDragging: Binding<Bool>, screenCenter: CGPoint, markers: [GMSMarker] = []) {
+    init(pickedLocation: Binding<CLLocation?>, isDragging: Binding<Bool>, screenCenter: CGPoint, markers: Binding<[GMSMarker]>) {
         self._isDragging = isDragging
         self._pickedLocation = pickedLocation
         self.screenCenter = screenCenter
-        self.markers = markers
+        self._markers = markers
     }
     
     func makeCoordinator() -> Coordinator {
@@ -94,6 +94,7 @@ struct GMapsView: UIViewControllerRepresentable {
     }
     
     func updateUIViewController(_ uiViewController: MapViewController, context: Context) {
+        Logging.l("MapView update ui called")
         if let location {
             let position = GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
             
@@ -107,8 +108,19 @@ struct GMapsView: UIViewControllerRepresentable {
             context.coordinator.endDrawing()
         }
         
+//        context.coordinator.setupMarkers(onMap: uiViewController.map)
+        let region = uiViewController.map.projection.visibleRegion()
+        
         markers.forEach { marker in
-            marker.map = uiViewController.map
+            if region.contains(marker.position) {
+                if marker.map == nil {
+                    marker.map = uiViewController.map
+                }
+            } else {
+                if marker.map != nil {
+                    marker.map = nil
+                }
+            }
         }
     }
 
@@ -158,6 +170,7 @@ struct GMapsView: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
             debugPrint("Stop move")
+            
             withAnimation(.default) {
                 self.parent.isDragging = false
             }
@@ -303,7 +316,21 @@ struct GMapsView: UIViewControllerRepresentable {
             }
         }
         
-        
+        func setupMarkers(onMap map: GMSMapView) {
+            let region = map.projection.visibleRegion()
+
+            self.parent.markers.forEach { marker in
+                if region.contains(marker.position) {
+                    if marker.map == nil {
+                        marker.map = map
+                    }
+                } else {
+                    if marker.map != nil {
+                        marker.map = nil
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -320,5 +347,20 @@ extension CLLocationCoordinate2D {
         let lon2 = lon1 + atan2(sin(bearing) * sin(distRadians) * cos(lat1), cos(distRadians) - sin(lat1) * sin(lat2))
 
         return CLLocationCoordinate2D(latitude: lat2 * 180 / Double.pi, longitude: lon2 * 180 / Double.pi)
+    }
+}
+
+extension GMSVisibleRegion {
+    func contains(_ coordinate: CLLocationCoordinate2D) -> Bool {
+        let latitude = coordinate.latitude
+        let longitude = coordinate.longitude
+        let topLat = self.farLeft.latitude
+        let bottomLat = self.nearRight.latitude
+        let leftLng = self.farLeft.longitude
+        let rightLng = self.nearRight.longitude
+        return (topLat >= latitude &&
+            bottomLat <= latitude &&
+            leftLng <= longitude &&
+            rightLng >= longitude)
     }
 }

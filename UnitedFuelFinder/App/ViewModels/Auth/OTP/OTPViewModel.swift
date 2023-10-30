@@ -40,11 +40,11 @@ final class OtpViewModel: ObservableObject {
     
     weak var delegate: OtpModelDelegate?
     
-    private var maxCounterValue: Double = 10
+    private var maxCounterValue: Double = 120
     private var counterValue: Double = 0
     private var timer: Timer?
     
-    init(title: String = "confirm_otp".localize, username: String, maxCounterValue: Double = 10) {
+    init(title: String = "confirm_otp".localize, username: String, maxCounterValue: Double = 120) {
         self.title = title
         self.username = username
         self.maxCounterValue = maxCounterValue

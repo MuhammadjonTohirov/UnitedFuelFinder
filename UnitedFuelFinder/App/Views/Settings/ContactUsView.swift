@@ -31,7 +31,9 @@ struct ContactUsView: View {
             )
             Spacer()
         }
+        .navigationTitle("contact_us".localize)
         .padding(.horizontal, 20)
+        .padding(.top, Padding.medium)
     }
     
     func row<IMG: View>(image: IMG, title: String, details: String = "") -> some View {

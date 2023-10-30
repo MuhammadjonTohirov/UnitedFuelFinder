@@ -38,7 +38,7 @@ struct HomeView: View {
                 pickedLocation: $viewModel.pickedLocation,
                 isDragging: $isDragging,
                 screenCenter: pointerFrame.center,
-                markers: viewModel.stations.map({$0.asMarker})
+                markers: $viewModel.stationsMarkers
             )
             .set(currentLocation: viewModel.currentLocation)
             .set(
@@ -98,7 +98,6 @@ struct HomeView: View {
         }
         .onAppear {
             viewModel.onAppear()
-            viewModel.focusToCurrentLocation()
         }
     }
     
@@ -205,11 +204,12 @@ struct HomeView: View {
                 VStack {
                     Text("address".localize)
                         .font(.system(size: 13))
-                        .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.7)))
+                        .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.6)))
                     
                     Text("\(viewModel.fromAddress)")
-                        .font(.system(size: 13))
+                        .font(.system(size: 13, weight: .medium))
                         .multilineTextAlignment(.center)
+                        .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.8)))
                 }.opacity(isDragging ? 1 : 0)
                 Spacer()
                 Image("icon_settings")
@@ -277,7 +277,7 @@ struct HomeView: View {
         }
     }
     
-    var mapGradientOverlay: some View {
+    private var mapGradientOverlay: some View {
         VStack {
             Rectangle()
                 .frame(maxHeight: 200)

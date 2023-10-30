@@ -82,7 +82,7 @@ struct HomeBottomSheetView: View {
             
             ToPointButton(text: input.to.title, isLoading: input.to.isLoading, onClickMap: input.to.onClickMap, onClickBody: input.to.onClickBody)
             
-            HStack {
+            LazyHStack {
                 ForEach(stations) { station in
                     gasStationItem(station)
                 }
@@ -94,19 +94,21 @@ struct HomeBottomSheetView: View {
                         .foregroundStyle(Color.secondaryBackground)
                         .overlay {
                             Text("view_all".localize)
-                                .font(.system(size: 16, weight: .medium))
-                                .foregroundStyle(Color.label.opacity(0.8))
+                                .font(.system(size: 14, weight: .medium))
+                                .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                         }
                         .onTapGesture {
                             onClickMoreButton?()
                         }
                 }
             }
+            .frame(maxHeight: 120)
             .padding(.horizontal, Padding.medium)
             .scrollable(axis: .horizontal)
             .padding(.horizontal, -Padding.medium)
             .scrollIndicators(.never)
             .padding(.top, 10)
+            
         }
         
     }
