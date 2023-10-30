@@ -27,11 +27,18 @@ struct HomeView: View {
     }
     
     var body: some View {
+        NavigationView {
+            innerBody
+        }
+    }
+    
+    var innerBody: some View {
         ZStack {
             GMapsView(
                 pickedLocation: $viewModel.pickedLocation,
                 isDragging: $isDragging,
-                screenCenter: pointerFrame.center
+                screenCenter: pointerFrame.center,
+                markers: viewModel.stations.map({$0.asMarker})
             )
             .set(currentLocation: viewModel.currentLocation)
             .set(
@@ -49,19 +56,7 @@ struct HomeView: View {
             .ignoresSafeArea()
             .padding(.bottom, 8)
             .overlay {
-                ZStack {
-                    mapGradientOverlay
-                    
-                    settingsButton
-                    
-                    PinPointerView(
-                        isActive: isDragging,
-                        type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
-                    .frame(height: pointerHeight)
-                    .readRect(rect: $pointerFrame)
-                    .offset(.init(width: 0, height: -(pointerHeight / 2)))
-                    .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
-                }
+                bodyOverlay
             }
             .ignoresSafeArea(.container, edges: .bottom)
             .padding(.bottom, -14)
@@ -75,14 +70,25 @@ struct HomeView: View {
             
             bottomContent
             
-            BouncingLoadingView(message: "Searching route")
+            BouncingLoadingView(message: viewModel.loadingMessage)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
                 .background {
                     Color.background.opacity(0.5)
                         .ignoresSafeArea()
                 }
-                .opacity(viewModel.isDrawing ? 1 : 0)
+                .opacity(viewModel.isLoading ? 1 : 0)
         }
+        .navigation(isActive: $viewModel.push, destination: {
+            viewModel.route?.screen
+        })
+        .sheet(isPresented: $viewModel.present, content: {
+            NavigationView {
+                viewModel.presentableRoute?.screen
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle("all_stations".localize)
+            }
+            .presentationDetents([.fraction(0.95)])
+        })
         .background {
             GeometryReader(content: { geometry in
                 Color.clear.onAppear {
@@ -93,6 +99,26 @@ struct HomeView: View {
         .onAppear {
             viewModel.onAppear()
             viewModel.focusToCurrentLocation()
+        }
+    }
+    
+    private var bodyOverlay: some View {
+        ZStack {
+            mapGradientOverlay
+            
+            Button {
+                self.viewModel.onClickSettings()
+            } label: {
+                settingsButton
+            }
+            
+            PinPointerView(
+                isActive: isDragging,
+                type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
+            .frame(height: pointerHeight)
+            .readRect(rect: $pointerFrame)
+            .offset(.init(width: 0, height: -(pointerHeight / 2)))
+            .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
         }
     }
     
@@ -122,7 +148,7 @@ struct HomeView: View {
                 input: .init(
                     from: .init(
                         title: viewModel.fromAddress.nilIfEmpty ?? "No address",
-                        isLoading: viewModel.isLoadingAddress || isDragging,
+                        isLoading: viewModel.isDetectingAddress || isDragging,
                         onClickBody: {
                             debugPrint("OnClick body 1")
                         }, onClickMap: {
@@ -132,7 +158,7 @@ struct HomeView: View {
                     ),
                     to: .init(
                         title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
-                        isLoading: viewModel.state == .selectTo ? viewModel.isLoadingAddress : false,
+                        isLoading: viewModel.state == .selectTo ? viewModel.isDetectingAddress : false,
                         onClickBody: {
                             debugPrint("OnClick body 2")
                         }, onClickMap: {
@@ -147,9 +173,13 @@ struct HomeView: View {
                         viewModel.onClickDrawRoute()
                     },
                     distance: viewModel.distance
-                )
+                ),
+                stations: Array(self.viewModel.stations[0..<min(viewModel.stations.count, 6)]),
+                hasMoreButton: self.viewModel.stations.count > 6,
+                onClickMoreButton: {
+                    viewModel.onClickViewAllStations()
+                }
             )
-            
             .background {
                 GeometryReader(content: { geometry in
                     Color.clear.onAppear {

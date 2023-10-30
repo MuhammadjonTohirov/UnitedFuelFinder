@@ -57,7 +57,7 @@ struct SelectCityView: View {
             
             return item.name.lowercased().contains(key.lowercased())
         }
-        .navigationTitle("Select state")
+        .navigationTitle("select_city".localize)
         .onAppear {
             syncCities()
         }

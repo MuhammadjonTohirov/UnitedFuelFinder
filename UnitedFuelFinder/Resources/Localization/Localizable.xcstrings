@@ -10,13 +10,17 @@
     "%@" : {
 
     },
+    "%@ • %@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ • %2$@"
+          }
+        }
+      }
+    },
     "%lld" : {
-
-    },
-    "$4.42" : {
-
-    },
-    "23.37 ml • NEWARK NJ" : {
 
     },
     "address" : {
@@ -61,6 +65,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manzil ma'lumotlari"
+          }
+        }
+      }
+    },
+    "all_stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все АЗС"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha shaxobchalar"
           }
         }
       }
@@ -301,6 +328,29 @@
         }
       }
     },
+    "from" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "From"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Из пункта"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu yerdan"
+          }
+        }
+      }
+    },
     "fuel_number" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -325,7 +375,20 @@
       }
     },
     "Get Direction" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Направление"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yo'nalish oling"
+          }
+        }
+      }
     },
     "Green" : {
 
@@ -546,6 +609,29 @@
         }
       }
     },
+    "no_item_found" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No item found"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Элемент не найден"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hech nima topilmadi"
+          }
+        }
+      }
+    },
     "One or None" : {
 
     },
@@ -630,7 +716,7 @@
     "Regular" : {
 
     },
-    "Retail price $5.1" : {
+    "Retail price %@" : {
 
     },
     "retry" : {
@@ -656,11 +742,54 @@
         }
       }
     },
-    "Save $0.68 per gallon " : {
+    "Save %@ per gallon " : {
 
     },
-    "Select state" : {
-
+    "select_city" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select city"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите город"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaharni tanlang"
+          }
+        }
+      }
+    },
+    "select_state" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Select state"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выберите штат"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shtatni tanlang"
+          }
+        }
+      }
     },
     "Selected" : {
 
@@ -688,11 +817,77 @@
         }
       }
     },
+    "stations_at_radius" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stations in radius %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заправки в радиусе %@"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ doiradagi shahobchalar"
+          }
+        }
+      }
+    },
     "SwiftUI" : {
 
     },
-    "TA/Petro" : {
-
+    "to" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "К месту"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "U yerga"
+          }
+        }
+      }
+    },
+    "view_all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View All"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посмотреть все"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barini ko'rish"
+          }
+        }
+      }
     },
     "Violet" : {
 

@@ -48,6 +48,7 @@ struct GMapsView: UIViewControllerRepresentable {
         self._isDragging = isDragging
         self._pickedLocation = pickedLocation
         self.screenCenter = screenCenter
+        self.markers = markers
     }
     
     func makeCoordinator() -> Coordinator {
@@ -73,6 +74,7 @@ struct GMapsView: UIViewControllerRepresentable {
         
         v.onStartDrawing = onStartDrawing
         v.onEndDrawing = onEndDrawing
+
         return v
     }
     
@@ -87,10 +89,6 @@ struct GMapsView: UIViewControllerRepresentable {
         mapController.set(padding: .init(
             top: 0, left: 0,
             bottom: bottom, right: 0))
-        let center = mapController.view.center
-        
-        debugPrint("Center \(center)")
-        
         
         return mapController
     }
@@ -107,6 +105,10 @@ struct GMapsView: UIViewControllerRepresentable {
         } else {
             context.coordinator.clearRoute(onMap: uiViewController.map)
             context.coordinator.endDrawing()
+        }
+        
+        markers.forEach { marker in
+            marker.map = uiViewController.map
         }
     }
 
@@ -126,16 +128,13 @@ struct GMapsView: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             debugPrint("didTap marker")
+            
             return true
         }
         
         func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
             debugPrint("didTapAt coordinate \(coordinate)")
             
-//            let from = coordinate
-//            let to = CLLocationCoordinate2D(latitude: coordinate.latitude + 0.05, longitude: coordinate.longitude + 0.05)
-//            
-//            setMapMarkersRoute(vLoc: from, toLoc: to, on: mapView)
         }
         
         func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
@@ -209,6 +208,14 @@ struct GMapsView: UIViewControllerRepresentable {
             
             self.markerB?.map = nil
             self.markerB = nil
+        }
+        
+        func clearMarkers(onMap map: GMSMapView) {
+            self.parent.markers.forEach { marker in
+                marker.map = nil
+            }
+            
+            self.parent.markers = []
         }
         
         func endDrawing() {
@@ -295,6 +302,23 @@ struct GMapsView: UIViewControllerRepresentable {
                 }
             }
         }
+        
+        
     }
 }
 
+
+extension CLLocationCoordinate2D {
+//    coordinateWithBearing
+    func coordinateWithBearing(bearing:Double, distanceMeters:Double) -> CLLocationCoordinate2D {
+        let distRadians = distanceMeters / (6372797.6) // earth radius in meters
+
+        let lat1 = self.latitude * Double.pi / 180
+        let lon1 = self.longitude * Double.pi / 180
+
+        let lat2 = asin(sin(lat1) * cos(distRadians) + cos(lat1) * sin(distRadians) * cos(bearing))
+        let lon2 = lon1 + atan2(sin(bearing) * sin(distRadians) * cos(lat1), cos(distRadians) - sin(lat1) * sin(lat2))
+
+        return CLLocationCoordinate2D(latitude: lat2 * 180 / Double.pi, longitude: lon2 * 180 / Double.pi)
+    }
+}

@@ -46,7 +46,7 @@ struct SelectStateView: View {
             
             return item.name.lowercased().contains(key.lowercased())
         }
-        .navigationTitle("Select state")
+        .navigationTitle("select_state".localize)
         .onAppear {
             Task {
                 await CommonService.shared.syncStates()

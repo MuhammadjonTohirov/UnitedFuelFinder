@@ -43,9 +43,18 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
 }
 
 struct TestView: View {
-    
+    @State var stations: [StationItem] = []
     var body: some View {
-        EmptyView()
+        AllStationsView(from: nil, to: nil, radius: "25 km", stations: stations)
+        .onAppear {
+            Task {
+                let sts = await MainService.shared.findStations(atCity: "1")
+                
+                DispatchQueue.main.async {
+                    stations = sts
+                }
+            }
+        }
     }
 }
 

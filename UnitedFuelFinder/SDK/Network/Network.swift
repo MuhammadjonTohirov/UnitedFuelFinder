@@ -36,10 +36,10 @@ struct Network {
             guard await onReceive(code: code) else {
                 return nil
             }
-            
+            Logging.l("--- --- RESPONSE --- ---")
+            Logging.l("Response: \(result.1)")
             let res = try JSONDecoder().decode(NetRes<T>.self, from: data)
             
-            Logging.l("--- --- RESPONSE --- ---")
             Logging.l(res.asString)
             
             guard await onReceive(code: res.code ?? code) else {
@@ -49,7 +49,7 @@ struct Network {
             return res
 
         } catch let error {
-            Logging.l(error.localizedDescription)
+            Logging.l("Error: \(error.localizedDescription)")
             return nil
         }
     }

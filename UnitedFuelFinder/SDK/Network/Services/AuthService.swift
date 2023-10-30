@@ -72,4 +72,14 @@ public struct AuthService {
         return otp == UserSettings.shared.lastOTP
     }
     
+    func syncUserInfo() async {
+        let response: NetRes<NetResUserInfo>? = await Network.send(request: UserNetworkRouter.userInfo)
+        UserSettings.shared.userInfo = response?.data?.asModel
+    }
+}
+
+extension NetResUserInfo {
+    var asModel: UserInfo {
+        .init(res: self)
+    }
 }

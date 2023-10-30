@@ -21,7 +21,7 @@ struct SettingsView: View {
             row(image: Image("icon_feedback")
                 .resizable()
                 .frame(width: 24, height: 24),
-                title: "Edit profile"
+                title: "Feedback"
             )
             
             Divider()
@@ -43,13 +43,17 @@ struct SettingsView: View {
             Divider()
             
             row(image: Image("icon_logout")
+                .renderingMode(.template)
                 .resizable()
+                .foregroundStyle(Color.init(uiColor: .systemRed))
                 .frame(width: 22, height: 22).padding(.leading, -2),
-                title: "Contact"
+                title: "Logout"
             )
             
             Spacer()
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("settings".localize.capitalized)
         .padding(.horizontal, 20)
     }
     

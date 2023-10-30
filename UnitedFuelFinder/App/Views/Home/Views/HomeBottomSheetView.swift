@@ -12,6 +12,17 @@ import SwiftUI
 
 struct HomeBottomSheetView: View {
     var input: HomeBottomSheetInput
+    var stations: [StationItem] = []
+    var hasMoreButton: Bool
+    var onClickMoreButton: (() -> Void)? = nil
+    private var stationItemHeight: CGFloat = 110
+    
+    init(input: HomeBottomSheetInput, stations: [StationItem], hasMoreButton: Bool, onClickMoreButton: (() -> Void)? = nil) {
+        self.input = input
+        self.stations = stations
+        self.hasMoreButton = hasMoreButton
+        self.onClickMoreButton = onClickMoreButton
+    }
     
     var body: some View {
         innerBody
@@ -59,7 +70,7 @@ struct HomeBottomSheetView: View {
             } label: {
                 Text("done".localize)
             }.padding(.top, Padding.small)
-
+            
         }
         .frame(maxWidth: .infinity)
     }
@@ -68,16 +79,31 @@ struct HomeBottomSheetView: View {
         VStack {
             FromPointButton(text: input.from.title, isLoading: input.from.isLoading, onClickBody: input.from.onClickBody)
                 .padding(.top, Padding.small / 2)
-                
+            
             ToPointButton(text: input.to.title, isLoading: input.to.isLoading, onClickMap: input.to.onClickMap, onClickBody: input.to.onClickBody)
             
-            ScrollView(.horizontal) {
-                HStack {
-                    gasStationItem
-                    gasStationItem
+            HStack {
+                ForEach(stations) { station in
+                    gasStationItem(station)
                 }
-                .padding(.horizontal, Padding.medium)
+                
+                if hasMoreButton {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(height: stationItemHeight)
+                        .frame(width: UIApplication.shared.screenFrame.width * 0.8)
+                        .foregroundStyle(Color.secondaryBackground)
+                        .overlay {
+                            Text("view_all".localize)
+                                .font(.system(size: 16, weight: .medium))
+                                .foregroundStyle(Color.label.opacity(0.8))
+                        }
+                        .onTapGesture {
+                            onClickMoreButton?()
+                        }
+                }
             }
+            .padding(.horizontal, Padding.medium)
+            .scrollable(axis: .horizontal)
             .padding(.horizontal, -Padding.medium)
             .scrollIndicators(.never)
             .padding(.top, 10)
@@ -85,77 +111,21 @@ struct HomeBottomSheetView: View {
         
     }
     
-    private var gasStationItem: some View {
-        VStack(spacing: 16) {
-            HStack {
-                Image("image_ta")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 32)
-                
-                VStack(alignment: .leading) {
-                    Text("TA/Petro")
-                    Text("23.37 ml • NEWARK NJ")
-                }
-                .font(.system(size: 12))
-                
-                Spacer()
-                
-                Text("$4.42")
-                    .foregroundStyle(.white)
-                    .font(.system(size: 12))
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 4)
-                    .background {
-                        RoundedRectangle(
-                            cornerRadius: 4
-                        ).foregroundStyle(
-                            Color.accentColor
-                        )
-                    }
-            }
-            
-            HStack {
-                VStack(alignment: .leading) {
-                    Text("Save $0.68 per gallon ")
-                    Text("Retail price $5.1")
-                }
-                .font(.system(size: 12))
-                
-                Spacer()
-                
-                Label(
-                    title: {
-                        Text("Get Direction")
-                    },
-                    icon: {
-                        Image(
-                            "icon_navigator"
-                        ).renderingMode(
-                            .template
-                        ).foregroundStyle(
-                            Color.white
-                        )
-                    }
-                )
-                    .foregroundStyle(.white)
-                    .font(.system(size: 12))
-                    .padding(.vertical, 2)
-                    .padding(.horizontal, 4)
-                    .background {
-                        RoundedRectangle(
-                            cornerRadius: 6
-                        ).foregroundStyle(
-                            Color.accentColor
-                        )
-                    }
-            }
-        }
-        .padding(Padding.medium)
-        .background {
-            RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(Color.secondaryBackground)
-        }
-        .frame(minWidth: UIApplication.shared.screenFrame.width * 0.8)
+    private func gasStationItem(_ station: StationItem) -> some View {
+        GasStationItemView(station: station, stationItemHeight: stationItemHeight)
     }
+}
+
+#Preview {
+    HomeBottomSheetView(input: .init(from: .init(title: "A", isLoading: false, onClickBody: {
+        
+    }, onClickMap: {
+        
+    }), to: .init(title: "B", isLoading: false, onClickBody: {
+        
+    }, onClickMap: {
+        
+    }), onClickReady: {
+        
+    }, distance: "10"), stations: [], hasMoreButton: true)
 }

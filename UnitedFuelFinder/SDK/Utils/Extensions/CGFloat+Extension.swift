@@ -28,3 +28,13 @@ public extension CGFloat {
         height(812, limit: limit).limitTop(self)
     }
 }
+
+
+extension Float {
+    var asMoney: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.locale = Locale(identifier: "en_US")
+        return formatter.string(from: NSNumber(value: self)) ?? ""
+    }
+}

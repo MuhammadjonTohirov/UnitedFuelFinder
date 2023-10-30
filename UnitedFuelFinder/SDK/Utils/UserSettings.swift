@@ -15,25 +15,13 @@ final public class UserSettings {
     public private(set) var userAvatarURL: URL = URL.baseAPI.appendingPath("Client", "ProfileAvatar")
     
     @codableWrapper(key: "language", Language.english)
-    public var language: Language? {
-        didSet {
-//            guard let realm = Realm.new, oldValue != language, !isAccessTokenExpired else {
-//                return
-//            }
-//            
-//            let categories = realm.objects(DMerchantCategory.self)
-//            realm.trySafeWrite {
-//                realm.delete(categories)
-//            }
-//
-//            Task {
-//                await MainNetworkService.shared.syncMerchantCategories()
-//            }
-        }
-    }
+    public var language: Language?
 
     @codableWrapper(key: "userEmail")
     public var userEmail: String?
+    
+    @codableWrapper(key: "userInfo")
+    public var userInfo: UserInfo?
     
     @codableWrapper(key: "accessToken")
     public var accessToken: String?
@@ -51,7 +39,7 @@ final public class UserSettings {
     public var appPin: String?
     
     public var canShowMain: Bool {
-        return accessToken?.nilIfEmpty != nil && Date() < tokenExpireDate ?? Date() && userEmail?.nilIfEmpty != nil
+        return accessToken?.nilIfEmpty != nil && userEmail?.nilIfEmpty != nil
     }
     
     @codableWrapper(key: "isLanguageSelected", false)
