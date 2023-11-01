@@ -19,7 +19,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
         Task(priority: .medium) {
             await CommonService.shared.syncStates()
             
-            if UserSettings.shared.canShowMain {
+            if UserSettings.shared.hasValidToken {
                 if await AuthService.shared.refreshToken() {
                     mainRouter?.navigate(to: .main)
                 } else {

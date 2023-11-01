@@ -479,11 +479,11 @@
 			children = (
 				2E5DF8902AEACD63005BE20D /* AppUIKit */,
 				2E5DF8ED2AEACD63005BE20D /* SDK */,
-				2E0E4DEA2AD917D000E846B6 /* Info.plist */,
 				2EDF8C3F2AD2D84C003D64FC /* App */,
 				2EDF8C3A2AD2CCD2003D64FC /* Resources */,
 				2EE91D4F2AD10C9800A425B5 /* Utils */,
 				2E527A462ACC80C8005B8B95 /* Preview Content */,
+				2E0E4DEA2AD917D000E846B6 /* Info.plist */,
 			);
 			path = UnitedFuelFinder;
 			sourceTree = "<group>";

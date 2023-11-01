@@ -38,7 +38,7 @@ final public class UserSettings {
     @codableWrapper(key: "appPin")
     public var appPin: String?
     
-    public var canShowMain: Bool {
+    public var hasValidToken: Bool {
         return accessToken?.nilIfEmpty != nil && userEmail?.nilIfEmpty != nil
     }
     

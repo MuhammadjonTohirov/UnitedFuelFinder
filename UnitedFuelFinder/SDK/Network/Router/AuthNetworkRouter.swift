@@ -11,11 +11,11 @@ enum UserNetworkRouter: URLRequestProtocol {
     var url: URL {
         switch self {
         case .verifyAccount:
-            return URL.baseAPI.appendingPath("Account", "ClientVerify")
+            return URL.baseAPI.appendingPath("Account", "DriverVerify")
         case .login:
-            return URL.baseAPI.appendingPath("Account", "ClientLogin")
+            return URL.baseAPI.appendingPath("Account", "DriverLogin")
         case .register:
-            return URL.baseAPI.appendingPath("Account", "ClientRegister")
+            return URL.baseAPI.appendingPath("Account", "DriverRegister")
         case .refresh(let refreshToken):
             return URL.baseAPI.appendingPath("Account", "RefreshToken").queries(.init(name: "token", value: refreshToken))
         case .userInfo:

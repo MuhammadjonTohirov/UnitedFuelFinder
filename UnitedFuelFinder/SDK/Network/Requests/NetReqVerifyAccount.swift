@@ -8,7 +8,7 @@
 import Foundation
 
 //{
-//  "email": "Tokhirov.mukhammadjon@gmail.com"
+//  "email": "tokhirov.mukhammadjon@gmail.com"
 //}
 
 struct NetReqVerifyAccount: Codable {

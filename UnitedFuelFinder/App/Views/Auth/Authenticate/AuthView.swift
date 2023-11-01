@@ -63,7 +63,6 @@ struct AuthView: View {
                             .emailAddress
                         )
                     }
-                    
                     .padding(
                         .horizontal, Padding.medium
                     )
