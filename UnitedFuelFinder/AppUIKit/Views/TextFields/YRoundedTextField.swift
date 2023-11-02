@@ -48,7 +48,6 @@ public struct YRoundedTextField<Content: TextFieldProtocol>: View {
                 .focused($isFocused)
                 .onChange(of: isFocused) { val in
                     onFocusChanged?(val)
-                    print(val)
                 }
             
             if hasError {
