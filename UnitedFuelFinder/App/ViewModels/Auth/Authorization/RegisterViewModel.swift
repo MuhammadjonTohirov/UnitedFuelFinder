@@ -11,6 +11,7 @@ import SwiftUI
 enum RegisterRoute: ScreenRoute {
     case selectState(_ state: Binding<DState?>)
     case selectCity(_ city: Binding<DCity?>, _ stateId: String)
+    case selectCompany(_company: Binding<DCompany?>)
     
     var id: String {
         switch self {
@@ -18,6 +19,8 @@ enum RegisterRoute: ScreenRoute {
             return "state"
         case .selectCity:
             return "city"
+        case .selectCompany:
+            return "company"
         }
     }
     
@@ -35,6 +38,10 @@ enum RegisterRoute: ScreenRoute {
         case .selectCity(let city, let stateId):
             NavigationView {
                 SelectCityView(city: city, stateId: stateId)
+            }
+        case .selectCompany(let company):
+            NavigationView{
+                SelectCompanyView(company: company)
             }
         }
     }
@@ -62,6 +69,7 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
 
     @Published var state: DState?
     @Published var city: DCity?
+    @Published var company: DCompany?
     @Published var isLoading = false
     @Published var companyId: Int?
     
