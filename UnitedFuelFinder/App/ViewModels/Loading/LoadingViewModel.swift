@@ -18,6 +18,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
     func initialize() {
         Task(priority: .medium) {
             await CommonService.shared.syncStates()
+            await CommonService.shared.syncCompanies()
             
             if UserSettings.shared.hasValidToken {
                 if await AuthService.shared.refreshToken() {

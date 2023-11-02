@@ -14,6 +14,8 @@ enum CommonNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Common", "States")
         case .cities(let id):
             return URL.baseAPI.appendingPath("Common", "Cities").queries(.init(name: "state", value: id))
+        case .companies:
+            return URL.baseAPI.appendingPath("Common", "Companies")
         }
     }
     
@@ -29,7 +31,7 @@ enum CommonNetworkRouter: URLRequestProtocol {
         var request: URLRequest?
         
         switch self {
-        case .states, .cities:
+        case .states, .cities, .companies:
             request = URLRequest.new(url: url, withAuth: false)
         }
         
@@ -40,4 +42,5 @@ enum CommonNetworkRouter: URLRequestProtocol {
     
     case states
     case cities(id: String)
+    case companies
 }

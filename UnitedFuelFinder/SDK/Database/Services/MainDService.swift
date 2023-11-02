@@ -30,4 +30,14 @@ public class MainDService {
             })
         }
     }
+    
+    public func addCompanies(_ companies: [CompanyItem]) {
+        DataBase.writeThread.async {
+            Realm.new?.trySafeWrite({ realm in
+                companies.map({$0.asObject}).forEach { city in
+                    realm.add(city)
+                }
+            })
+        }
+    }
 }

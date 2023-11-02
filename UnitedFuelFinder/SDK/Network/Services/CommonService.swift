@@ -31,4 +31,15 @@ public struct CommonService {
         let items = (result?.data ?? []).map({CityItem(res: $0)})
         MainDService.shared.addCity(items)
     }
+    
+    public func syncCompanies() async {
+        guard DCompany.allCompanies().isEmpty else {
+            return
+        }
+        
+        let result: NetRes<[NetResCompany]>? = await Network.send(request: CommonNetworkRouter.companies)
+        let items = (result?.data ?? []).map({CompanyItem(res: $0)})
+        
+        MainDService.shared.addCompanies(items)
+    }
 }
