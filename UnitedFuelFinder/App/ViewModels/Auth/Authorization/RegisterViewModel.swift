@@ -59,10 +59,11 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     @Published var fuelCardNumber: String = ""
     @Published var screenRect: CGRect = .zero
     @Published var address: String = ""
-    @Published var zip: String = ""
+
     @Published var state: DState?
     @Published var city: DCity?
     @Published var isLoading = false
+    @Published var companyId: Int?
     
     var isValidForm: Bool {
         !firstName.isEmpty &&
@@ -70,9 +71,8 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
         !phoneNumber.isEmpty &&
         !fuelCardNumber.isEmpty &&
         !address.isEmpty &&
-        !zip.isEmpty &&
         state != nil &&
-        city != nil
+        city != nil && companyId != nil
     }
  
     func doRegister(completion: @escaping (Bool) -> Void) {
@@ -87,10 +87,11 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
             DispatchQueue.main.async {
                 self.isLoading = true
             }
-            
+
             let req: NetReqRegister = .init(firstName: firstName, lastName: lastName,
                                             phone: phoneNumber, email: email, cardNumber: fuelCardNumber,
-                                            state: state!.id, city: city!.id, address: address, zip: zip, confirm: .init(code: code, session: session))
+                                            state: state!.id, city: city!.id, address: address, companyId: companyId!,
+                                            confirm: .init(code: code, session: session))
             
             let result = await AuthService.shared.register(with: req)
             
