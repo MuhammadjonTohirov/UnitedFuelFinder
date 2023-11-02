@@ -792,6 +792,9 @@
     "Orange" : {
 
     },
+    "Organization requisites" : {
+
+    },
     "otp_sent_to_email" : {
       "extractionState" : "manual",
       "localizations" : {

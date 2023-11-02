@@ -102,7 +102,7 @@ struct RegisterProfileView: View {
             }
             
             YRoundedTextField {
-                YTextField(text: $cardNumber, placeholder:                        "Card Number. Ex-1254 528 987".localize, contentType: .creditCardNumber)
+                YTextField(text: $cardNumber, placeholder: "Card Number. Ex-1254 528 987".localize, contentType: .creditCardNumber)
                     .keyboardType(.numberPad)
             }
         }
