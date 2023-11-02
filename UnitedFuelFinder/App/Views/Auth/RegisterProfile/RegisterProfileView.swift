@@ -10,6 +10,7 @@ import SwiftUI
 
 struct RegisterProfileView: View {
     @StateObject var viewModel = RegisterViewModel()
+    @State private var cardNumber: String = ""
     var onRegisterResult: (Bool) -> Void
     @Environment (\.presentationMode) private var presentationMode
 
@@ -20,6 +21,8 @@ struct RegisterProfileView: View {
                     .padding(.top, Padding.large)
                     
                 personalDetails
+                
+                organizationRequisites
                 
                 addressInfo
                 
@@ -85,16 +88,29 @@ struct RegisterProfileView: View {
                 YTextField(text: $viewModel.phoneNumber, placeholder: "phone_number".localize, contentType: .telephoneNumber)
                     .keyboardType(.decimalPad)
             }
+        }
+    }
+    
+    private var organizationRequisites: some View{
+        VStack(alignment: .leading, spacing: 16) {
+            Text("Organization requisites")
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.init(.label))
+            
+            SelectionButton(title: "Company", value: viewModel.state?.name ?? "") {
+                viewModel.route = .selectState($viewModel.state)
+            }
+            
             YRoundedTextField {
-                YTextField(text: $viewModel.fuelCardNumber, placeholder: "fuel_number".localize)
-                    .keyboardType(.asciiCapableNumberPad)
+                YTextField(text: $cardNumber, placeholder:                        "Card Number. Ex-1254 528 987".localize, contentType: .creditCardNumber)
+                    .keyboardType(.numberPad)
             }
         }
     }
     
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("address_info".localize)
+            Text("Address Information".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
@@ -113,11 +129,6 @@ struct RegisterProfileView: View {
             YRoundedTextField {
                 YTextField(text: $viewModel.address, placeholder: "address".localize, contentType: .streetAddressLine1)
                     .keyboardType(.default)
-            }
-            
-            YRoundedTextField {
-                YTextField(text: $viewModel.zip, placeholder: "zip".localize, contentType: .postalCode)
-                    .keyboardType(.numberPad)
             }
         }
     }
