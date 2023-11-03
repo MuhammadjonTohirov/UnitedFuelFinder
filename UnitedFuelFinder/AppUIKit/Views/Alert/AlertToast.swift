@@ -395,7 +395,10 @@ public struct AlertToast: View {
                 Spacer()
             case .error(let color):
                 Spacer()
-                AnimatedXmark(color: color)
+                Image("icon_error")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(color)
                 Spacer()
             case .systemImage(let name, let color):
                 Spacer()

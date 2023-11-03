@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RegisterProfileView: View {
     @StateObject var viewModel = RegisterViewModel()
-    @State private var cardNumber: String = ""
+
     var onRegisterResult: (Bool) -> Void
     @Environment (\.presentationMode) private var presentationMode
 
@@ -97,12 +97,12 @@ struct RegisterProfileView: View {
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
-            SelectionButton(title: "Company", value: viewModel.state?.name ?? "") {
-                viewModel.route = .selectState($viewModel.state)
+            SelectionButton(title: "Company", value: viewModel.company?.name ?? "") {
+                viewModel.route = .selectCompany($viewModel.company)
             }
             
             YRoundedTextField {
-                YTextField(text: $cardNumber, placeholder: "Card Number. Ex-1254 528 987".localize, contentType: .creditCardNumber)
+                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 528 987".localize, contentType: .creditCardNumber)
                     .keyboardType(.numberPad)
             }
         }

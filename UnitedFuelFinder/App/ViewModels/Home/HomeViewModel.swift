@@ -271,8 +271,8 @@ final class HomeViewModel: ObservableObject {
                 return
             }
 
-            let stations = await MainService.shared.findStations(atCity: "\(user.city)")
-            Logging.l("Number of stations in \(user.city) \(stations.count)")
+            let stations = await MainService.shared.findStations(atCity: "\(user.cityId ?? -1)")
+            Logging.l("Number of stations in \(user.cityName ?? "") \(stations.count)")
                         
             await MainActor.run {
                 self.stations = stations.sorted(by: {$0.distance(from: self.locationManager.currentLocation?.coordinate ?? .init()) < $1.distance(from: self.locationManager.currentLocation?.coordinate ?? .init())})

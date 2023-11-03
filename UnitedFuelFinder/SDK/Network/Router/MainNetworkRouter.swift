@@ -11,7 +11,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     var url: URL {
         switch self {
         case .stationsInCity(let cityId):
-            return URL.baseAPI.appendingPath("Client", "Stations", cityId)
+            return URL.baseAPI.appendingPath("Driver", "Stations", cityId)
         }
     }
     

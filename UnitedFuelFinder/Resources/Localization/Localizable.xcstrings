@@ -783,6 +783,29 @@
         }
       }
     },
+    "not_confirmed_by_admin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This user has not been confirmed yet. An email will be sent once the account is confirmed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот пользователь еще не подтвержден. Электронная почта будет отправлена после подтверждения учетной записи."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bu foydalanuvchi tasdiqlanmagan. Tasdiqlangach, elektron pochtaga xabari yuboriladi"
+          }
+        }
+      }
+    },
     "One or None" : {
 
     },
@@ -866,6 +889,46 @@
     },
     "Red" : {
 
+    },
+    "registration_failure" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Registration failed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Регистрация не удалась"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ro‘yxatdan o‘tish amalga oshmadi"
+          }
+        }
+      }
+    },
+    "registration_success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Successfully registered"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Успешная регистрация"
+          }
+        }
+      }
     },
     "Regular" : {
 
@@ -1068,6 +1131,29 @@
     },
     "Violet" : {
 
+    },
+    "warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Warning"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внимание!"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diqqat"
+          }
+        }
+      }
     },
     "welcome_to" : {
       "extractionState" : "manual",

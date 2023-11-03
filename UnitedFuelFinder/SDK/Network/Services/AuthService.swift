@@ -31,16 +31,19 @@ public struct AuthService {
     }
     
     func login(session: String, code: String, username: String) async -> (Bool, AuthNetworkErrorReason?) {
-        guard let result: NetRes<NetResLogin> = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session)))),
-                let data = result.data else {
+        guard let result: NetRes<NetResLogin> = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session)))) else {
             return (false, .unknown)
+        }
+        
+        guard let data = result.data else {
+            return (false, .notConfirmedByAdmin)
         }
         
         UserSettings.shared.accessToken = data.accessToken
         UserSettings.shared.refreshToken = data.refreshToken
         UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
         let isOK = result.data != nil
-        return (isOK, isOK ? nil : (result.code == 500 ? .notConfirmedByAdmin : .unknown))
+        return (isOK, isOK ? nil : (result.code == 400 ? .notConfirmedByAdmin : .unknown))
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {

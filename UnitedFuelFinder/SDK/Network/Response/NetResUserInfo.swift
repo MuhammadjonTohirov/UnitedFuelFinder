@@ -8,18 +8,20 @@
 import Foundation
 
 //{
-//   "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//   "fullName": "string",
-//   "email": "string",
-//   "phone": "string",
-//   "cardNumber": "string",
-//   "address": "string",
-//   "city": 0,
-//   "state": "string",
-//   "zip": "string",
-//   "confirmed": true,
-//   "deleted": true
-// }
+//    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
+//    "fullName": "string",
+//    "email": "string",
+//    "phone": "string",
+//    "cardNumber": "string",
+//    "companyId": 0,
+//    "companyName": "string",
+//    "address": "string",
+//    "cityId": 0,
+//    "cityName": "string",
+//    "state": "string",
+//    "confirmed": true,
+//    "deleted": true
+//  }
 
 struct NetResUserInfo: NetResBody {
     let id: String?
@@ -27,10 +29,12 @@ struct NetResUserInfo: NetResBody {
     let email: String
     let phone: String
     let cardNumber: String
-    let address: String
-    let city: Int
-    let state: String
-    let zip: String
+    let companyId: Int?
+    let companyName: String?
+    let address: String?
+    let cityId: Int?
+    let cityName: String?
+    let state: String?
     let confirmed: Bool?
     let deleted: Bool?
 }

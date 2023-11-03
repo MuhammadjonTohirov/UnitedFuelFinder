@@ -26,4 +26,11 @@ public class DState: Object, StateObjectProtocol, Identifiable {
     static func allStates() -> Results<DState> {
         Realm.new!.objects(DState.self)
     }
+    
+    static func clear() {
+        Realm.new?.trySafeWrite({ realm in
+            let objs = realm.objects(DState.self)
+            realm.delete(objs)
+        })
+    }
 }

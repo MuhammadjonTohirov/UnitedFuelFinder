@@ -20,8 +20,17 @@ struct AuthView: View {
     private var mainBody: some View {
         NavigationStack {
             innerBody
-                .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 1)
+//                .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 1)
                 .keyboardDismissable()
+                .alert("warning".localize,
+                       isPresented: $viewModel.shouldShowAlert,
+                       actions: {
+                    Button("ok".localize.uppercased()) {
+                        viewModel.hideAlert()
+                    }
+                }, message: {
+                    Text(viewModel.alert.title ?? "")
+                })
                 .navigationDestination(isPresented: $viewModel.present) {
                     viewModel.route?.screen
                 }

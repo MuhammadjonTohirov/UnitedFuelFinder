@@ -11,7 +11,7 @@ import SwiftUI
 enum RegisterRoute: ScreenRoute {
     case selectState(_ state: Binding<DState?>)
     case selectCity(_ city: Binding<DCity?>, _ stateId: String)
-    case selectCompany(_company: Binding<DCompany?>)
+    case selectCompany(_ company: Binding<DCompany?>)
     
     var id: String {
         switch self {
@@ -71,7 +71,6 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     @Published var city: DCity?
     @Published var company: DCompany?
     @Published var isLoading = false
-    @Published var companyId: Int?
     
     var isValidForm: Bool {
         !firstName.isEmpty &&
@@ -80,7 +79,7 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
         !fuelCardNumber.isEmpty &&
         !address.isEmpty &&
         state != nil &&
-        city != nil && companyId != nil
+        city != nil && company != nil
     }
  
     func doRegister(completion: @escaping (Bool) -> Void) {
@@ -98,7 +97,7 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
 
             let req: NetReqRegister = .init(firstName: firstName, lastName: lastName,
                                             phone: phoneNumber, email: email, cardNumber: fuelCardNumber,
-                                            state: state!.id, city: city!.id, address: address, companyId: companyId!,
+                                            state: state!.id, city: city!.id, address: address, companyId: company!.id,
                                             confirm: .init(code: code, session: session))
             
             let result = await AuthService.shared.register(with: req)

@@ -7,6 +7,22 @@
 
 import Foundation
 
+//{
+//      "id": 0,
+//      "name": "string",
+//      "lat": 0,
+//      "lng": 0,
+//      "isDeleted": true,
+//      "cityId": 0,
+//      "customerId": 0,
+//      "address": "string",
+//      "phone": "string",
+//      "stateId": "string",
+//      "discountPercent": 0,
+//      "retailPrice": 0,
+//      "number": "string"
+//    }
+
 struct NetResStationItem: NetResBody {
     var id: Int
     var name: String
@@ -14,12 +30,13 @@ struct NetResStationItem: NetResBody {
     var lng: Double
     var isDeleted: Bool
     var cityId: Int
-    var companyId: Int
+    var customerId: Int
     var address: String?
     var phone: String?
     var stateId: String
     var discountPercent: Float?
     var retailPrice: Float?
+    var number: String?
     var iconUrl: String?
     
     enum CodingKeys: String, CodingKey {
@@ -29,12 +46,13 @@ struct NetResStationItem: NetResBody {
         case lng
         case isDeleted
         case cityId
-        case companyId
+        case customerId
         case address
         case phone
         case stateId
         case discountPercent
         case retailPrice
+        case number
         case iconUrl = "icon_url"
     }
 }

@@ -14,6 +14,7 @@ protocol Alertable: NSObject {
     func showAlert(message: String)
     func showError(message: String)
     
+    func hideAlert()
     func showCustomAlert(alert: AlertToast)
 }
 
@@ -29,6 +30,12 @@ extension Alertable {
         DispatchQueue.main.async {
             self.alert = .init(displayMode: .alert, type: .error(.init(uiColor: .systemRed)), title: message)
             self.shouldShowAlert = true
+        }
+    }
+    
+    func hideAlert() {
+        DispatchQueue.main.async {
+            self.shouldShowAlert = false
         }
     }
     

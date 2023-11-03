@@ -19,7 +19,7 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .refresh(let refreshToken):
             return URL.baseAPI.appendingPath("Account", "RefreshToken").queries(.init(name: "token", value: refreshToken))
         case .userInfo:
-            return URL.baseAPI.appendingPath("Client", "UserInfo")
+            return URL.baseAPI.appendingPath("Driver", "UserInfo")
         }
     }
     

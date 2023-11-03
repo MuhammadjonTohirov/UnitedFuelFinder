@@ -35,4 +35,11 @@ public class DCity: Object, Identifiable {
         let cities = Realm.new!.objects(DCity.self).filter("stateId = %@", byStateId)
         return cities
     }
+    
+    static func clear() {
+        Realm.new?.trySafeWrite({ realm in
+            let objs = realm.objects(DCity.self)
+            realm.delete(objs)
+        })
+    }
 }

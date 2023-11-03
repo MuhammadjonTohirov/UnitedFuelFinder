@@ -26,15 +26,21 @@ struct SelectCompanyView: View {
             }, label: {
                 VStack(spacing: 0) {
                     HStack {
-                        Text(item.name)
-                            .foregroundStyle(Color.label)
-                            .font(.system(size: 14))
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(item.name)
+                                .foregroundStyle(Color.label)
+                                .font(.system(size: 13, weight: .medium))
+                            
+                            Text(item.address)
+                                .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                                .font(.system(size: 12))
+                        }
                         Spacer()
                         
                         Image(systemName: "checkmark")
                             .opacity(company == item ? 1 : 0)
                     }
-                    .frame(height: 48)
+                    .frame(height: 62)
                     Divider()
                 }
             })
@@ -54,3 +60,7 @@ struct SelectCompanyView: View {
     }
 }
 
+#Preview {
+    @State var company: DCompany?
+    return SelectCompanyView(company: $company)
+}

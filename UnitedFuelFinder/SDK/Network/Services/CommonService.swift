@@ -11,6 +11,7 @@ public struct CommonService {
     public static let shared = CommonService()
     
     public func syncStates() async {
+        DState.clear()
         guard DState.allStates().isEmpty else {
             return
         }
@@ -22,6 +23,7 @@ public struct CommonService {
     }
     
     public func syncCities(forState stateId: String) async {
+        DCity.clear()
         guard DCity.allCities(byStateId: stateId).isEmpty else {
             return
         }

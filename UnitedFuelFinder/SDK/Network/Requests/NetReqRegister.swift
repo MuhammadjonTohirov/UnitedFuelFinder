@@ -34,7 +34,6 @@ public struct NetReqRegister: Codable {
     let city: Int
     let companyId: Int
     let address: String
-    let zip: String
     let confirm: NetReqRegisterConfirm
     
     init(firstName: String, lastName: String, phone: String, email: String, cardNumber: String, state: String, city: Int, address: String, companyId: Int, confirm: NetReqRegisterConfirm) {
@@ -46,7 +45,6 @@ public struct NetReqRegister: Codable {
         self.state = state
         self.city = city
         self.address = address
-        self.zip = ""
         self.companyId = companyId
         self.confirm = confirm
     }

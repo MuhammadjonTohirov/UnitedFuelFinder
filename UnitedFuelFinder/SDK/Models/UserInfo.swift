@@ -8,43 +8,49 @@
 import Foundation
 
 public struct UserInfo: Codable {
-    let id: String
+    let id: String?
     let fullName: String
     let email: String
     let phone: String
     let cardNumber: String
-    let address: String
-    let city: Int
-    let state: String
-    let zip: String
-    let confirmed: Bool
-    let deleted: Bool
+    let companyId: Int?
+    let companyName: String?
+    let address: String?
+    let cityId: Int?
+    let cityName: String?
+    let state: String?
+    let confirmed: Bool?
+    let deleted: Bool?
     
-    public init(id: String, fullName: String, email: String, phone: String, cardNumber: String, address: String, city: Int, state: String, zip: String, confirmed: Bool, deleted: Bool) {
+    init(id: String?, fullName: String, email: String, phone: String, cardNumber: String, companyId: Int?, companyName: String?, address: String?, cityId: Int?, cityName: String?, state: String?, confirmed: Bool?, deleted: Bool?) {
         self.id = id
         self.fullName = fullName
         self.email = email
         self.phone = phone
         self.cardNumber = cardNumber
+        self.companyId = companyId
+        self.companyName = companyName
         self.address = address
-        self.city = city
+        self.cityId = cityId
+        self.cityName = cityName
         self.state = state
-        self.zip = zip
         self.confirmed = confirmed
         self.deleted = deleted
     }
     
     init(res: NetResUserInfo) {
-        self.id = res.id ?? res.email
+        self.id = res.id
         self.fullName = res.fullName
         self.email = res.email
         self.phone = res.phone
         self.cardNumber = res.cardNumber
+        self.companyId = res.companyId
+        self.companyName = res.companyName
         self.address = res.address
-        self.city = res.city
+        self.cityId = res.cityId
+        self.cityName = res.cityName
         self.state = res.state
-        self.zip = res.zip
-        self.confirmed = res.confirmed ?? true
-        self.deleted = res.deleted ?? false
+        self.confirmed = res.confirmed
+        self.deleted = res.deleted
     }
 }

@@ -168,6 +168,7 @@
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
 		2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */; };
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
+		2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */; };
 		2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */; };
@@ -372,6 +373,7 @@
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
 		2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyItem.swift; sourceTree = "<group>"; };
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
+		2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCompanyView.swift; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsView.swift; sourceTree = "<group>"; };
 		2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationItemView.swift; sourceTree = "<group>"; };
@@ -1091,6 +1093,7 @@
 		2EDF8C822AD452E9003D64FC /* RegisterProfile */ = {
 			isa = PBXGroup;
 			children = (
+				2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */,
 				2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */,
 				2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */,
 				2E2D1EC22AEBE41500559A1D /* SelectCityView.swift */,
@@ -1277,6 +1280,7 @@
 				2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */,
 				2E5DF9782AEACD64005BE20D /* CommonService.swift in Sources */,
 				2E5DF93D2AEACD63005BE20D /* RadioButton.swift in Sources */,
+				2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */,
 				2E5DF93F2AEACD63005BE20D /* ActivityIndicatorView.swift in Sources */,
 				2E5DF9582AEACD63005BE20D /* MKMapAnnotationView.swift in Sources */,
 				2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */,

@@ -16,7 +16,7 @@ struct StationItem: NetResBody, Identifiable {
     var lng: Double
     var isDeleted: Bool
     var cityId: Int
-    var companyId: Int
+    var customerId: Int
     var address: String?
     var phone: String?
     var stateId: String
@@ -36,14 +36,14 @@ struct StationItem: NetResBody, Identifiable {
         ((discountPercent ?? 0) / 100 * (retailPrice ?? 0)).asMoney
     }
     
-    init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, companyId: Int, address: String? = nil, phone: String? = nil, stateId: String, discountPercent: Float? = nil, retailPrice: Float? = nil) {
+    init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String, discountPercent: Float? = nil, retailPrice: Float? = nil) {
         self.id = id
         self.name = name
         self.lat = lat
         self.lng = lng
         self.isDeleted = isDeleted
         self.cityId = cityId
-        self.companyId = companyId
+        self.customerId = customerId
         self.address = address
         self.phone = phone
         self.stateId = stateId
@@ -58,7 +58,7 @@ struct StationItem: NetResBody, Identifiable {
         self.lng = item.lng
         self.isDeleted = item.isDeleted
         self.cityId = item.cityId
-        self.companyId = item.companyId
+        self.customerId = item.customerId
         self.address = item.address
         self.phone = item.phone
         self.stateId = item.stateId
