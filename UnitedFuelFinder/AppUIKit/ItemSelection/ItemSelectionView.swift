@@ -12,7 +12,7 @@ import RealmSwift
 public struct ItemSelectionView<C: Object & Identifiable>: View {
     var data: Results<C>
     @State private var searchText: String = ""
-    
+    @State private var isSearchPresented: Bool = true
     var listItem: (C) -> any View
     var onSearching: (C, String) -> Bool
     
@@ -38,7 +38,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
                 })
             }
         })
-        .searchable(text: $searchText)
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
     }
 }
 
