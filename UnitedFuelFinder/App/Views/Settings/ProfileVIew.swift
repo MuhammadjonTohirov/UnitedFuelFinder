@@ -1,39 +1,43 @@
 //
-//  RegisterProfileView.swift
+//  ProfileVIew.swift
 //  UnitedFuelFinder
 //
-//  Created by applebro on 03/10/23.
+//  Created by Sardorbek Saydamatov on 05/11/23.
 //
 
-import Foundation
 import SwiftUI
 
-struct RegisterProfileView: View {
-    @StateObject var viewModel = RegisterViewModel()
-    
-    @FocusState private var isFocused: Bool
 
+
+struct ProfileVIew: View {
+    @StateObject var viewModel = RegisterViewModel()
+    @FocusState private var isFocused: Bool
     var onRegisterResult: (Bool) -> Void
     @Environment (\.presentationMode) private var presentationMode
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
-                topHeading
-                    .padding(.top, Padding.large)
                     
                 personalDetails
-                
-                organizationRequisites
                 
                 addressInfo
                 
                 Text("")
                     .frame(height: 100)
             }
-            .scrollable()
             .keyboardDismissable()
             .toast($viewModel.shouldShowAlert, viewModel.alert)
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }, label: {
+                        Image(systemName: "chevron.left")
+                            .foregroundColor(.init(.label))
+                    })
+                }
+            })
             
             VStack {
                 Spacer()
@@ -44,7 +48,7 @@ struct RegisterProfileView: View {
                     }
                     
                 } label: {
-                    Text("continue".localize)
+                    Text("Save".localize)
                 }
                 .set(isLoading: viewModel.isLoading)
                 .set(isEnabled: viewModel.isValidForm)
@@ -60,25 +64,13 @@ struct RegisterProfileView: View {
         
     }
     
-    private var topHeading: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text(
-                "lets_create_account".localize
-            )
-            .font(.system(size: 24, weight: .semibold))
-            
-            Text(
-                "insert_creds".localize
-            )
-            .font(.system(size: 14, weight: .semibold))
-        }
-    }
     
     private var personalDetails: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("personal_details".localize)
-                .font(.system(size: 16, weight: .medium))
+            Text("Edit profile")
+                .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(.init(.label))
+                .padding(.vertical, Padding.large)
             
             YRoundedTextField {
                 YTextField(text: $viewModel.firstName, placeholder: "first_name".localize, contentType: .givenName)
@@ -93,22 +85,6 @@ struct RegisterProfileView: View {
         }
     }
     
-    private var organizationRequisites: some View{
-        VStack(alignment: .leading, spacing: 16) {
-            Text("Organization requisites")
-                .font(.system(size: 16, weight: .medium))
-                .foregroundColor(.init(.label))
-            
-            SelectionButton(title: "Company", value: viewModel.company?.name ?? "") {
-                viewModel.route = .selectCompany($viewModel.company)
-            }
-            
-            YRoundedTextField {
-                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 528 987".localize, contentType: .creditCardNumber)
-                    .keyboardType(.numberPad)
-            }
-        }
-    }
     
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -137,15 +113,14 @@ struct RegisterProfileView: View {
                     RoundedRectangle(cornerRadius: 10)
                         .stroke(isFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5), lineWidth: 0.6)
                     )
-                .focused($isFocused)
-        }
+                .focused($isFocused)        }
     }
 }
 
 
 #Preview {
     NavigationView(content: {
-        RegisterProfileView { _ in
+        ProfileVIew { _ in
             
         }
     })

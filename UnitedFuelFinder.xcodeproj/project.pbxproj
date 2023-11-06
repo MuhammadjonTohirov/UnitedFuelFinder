@@ -196,6 +196,7 @@
 		2EF3A1EA2ADD88F900CA8DE2 /* GMapsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1E02ADD88F900CA8DE2 /* GMapsView.swift */; };
 		2EF3A2002ADD920500CA8DE2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */; };
 		2EF3A2022ADD950E00CA8DE2 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */; };
+		841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D81052AF75DBC00C5932C /* ProfileVIew.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -400,6 +401,7 @@
 		2EF3A1E02ADD88F900CA8DE2 /* GMapsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GMapsView.swift; sourceTree = "<group>"; };
 		2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
+		841D81052AF75DBC00C5932C /* ProfileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVIew.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1178,6 +1180,7 @@
 			children = (
 				2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */,
 				2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */,
+				841D81052AF75DBC00C5932C /* ProfileVIew.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1269,6 +1272,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2E5DF94A2AEACD63005BE20D /* UserTrackingMode.swift in Sources */,
+				841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */,
 				2E36A74D2AEF9D930033363E /* NetResUserInfo.swift in Sources */,
 				2E5DF9252AEACD63005BE20D /* TopLeftDismissModifier.swift in Sources */,
 				2E5DF9292AEACD63005BE20D /* MultiPicker.swift in Sources */,
