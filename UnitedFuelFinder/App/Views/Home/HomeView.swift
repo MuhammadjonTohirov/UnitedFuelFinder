@@ -81,11 +81,10 @@ struct HomeView: View {
         .navigation(isActive: $viewModel.push, destination: {
             viewModel.route?.screen
         })
-        .sheet(isPresented: $viewModel.present, content: {
+        .fullScreenCover(isPresented: $viewModel.present, content: {
             NavigationView {
                 viewModel.presentableRoute?.screen
                     .navigationBarTitleDisplayMode(.inline)
-                    .navigationTitle("all_stations".localize)
             }
             .presentationDetents([.fraction(0.95)])
         })
@@ -149,7 +148,9 @@ struct HomeView: View {
                         title: viewModel.fromAddress.nilIfEmpty ?? "No address",
                         isLoading: viewModel.isDetectingAddress || isDragging,
                         onClickBody: {
-                            debugPrint("OnClick body 1")
+                            viewModel.presentableRoute = .searchAddress({ result in
+                                self.viewModel.setupFromAddress(with: result)
+                            })
                         }, onClickMap: {
                             // skip this method
                             debugPrint("OnClick map 1")
@@ -159,7 +160,9 @@ struct HomeView: View {
                         title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
                         isLoading: viewModel.state == .selectTo ? viewModel.isDetectingAddress : false,
                         onClickBody: {
-                            debugPrint("OnClick body 2")
+                            viewModel.presentableRoute = .searchAddress({ result in
+                                self.viewModel.setupToAddress(with: result)
+                            })
                         }, onClickMap: {
                             debugPrint("OnClick map 2")
                             self.viewModel.onClickSelectToPointOnMap()

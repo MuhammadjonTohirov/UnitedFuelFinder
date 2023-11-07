@@ -46,6 +46,9 @@
         }
       }
     },
+    "Address" : {
+
+    },
     "address_info" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -137,6 +140,9 @@
           }
         }
       }
+    },
+    "Blue" : {
+
     },
     "clear" : {
       "extractionState" : "manual",
@@ -338,6 +344,9 @@
         }
       }
     },
+    "Edit profile" : {
+
+    },
     "enter_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -468,6 +477,12 @@
           }
         }
       }
+    },
+    "Green" : {
+
+    },
+    "Indigo" : {
+
     },
     "insert_creds" : {
       "extractionState" : "manual",
@@ -699,6 +714,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "next" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -768,6 +789,29 @@
         }
       }
     },
+    "no_results" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No results"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Элемент не найден"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Natija mavjud emas "
+          }
+        }
+      }
+    },
     "not_confirmed_by_admin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -790,6 +834,15 @@
           }
         }
       }
+    },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
     },
     "Organization requisites" : {
 
@@ -863,6 +916,9 @@
         }
       }
     },
+    "Red" : {
+
+    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -903,6 +959,9 @@
         }
       }
     },
+    "Regular" : {
+
+    },
     "Retail price %@" : {
 
     },
@@ -931,6 +990,29 @@
     },
     "Save %@ per gallon " : {
 
+    },
+    "search_address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search address"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil qidirish"
+          }
+        }
+      }
     },
     "select_city" : {
       "extractionState" : "manual",
@@ -1050,6 +1132,9 @@
         }
       }
     },
+    "SwiftUI" : {
+
+    },
     "to" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1096,6 +1181,9 @@
         }
       }
     },
+    "Violet" : {
+
+    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1141,6 +1229,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     }
   },
   "version" : "1.0"

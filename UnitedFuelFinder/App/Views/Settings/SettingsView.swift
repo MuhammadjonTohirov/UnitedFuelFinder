@@ -16,18 +16,11 @@ struct SettingsView: View {
         VStack(spacing: 12) {
             row(image: Image("icon_edit")
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24)
                 .padding(.bottom, 2)
                 .padding(.leading, 2), title: "Edit profile"
-            ) {
-                
-            }
-            
-            Divider()
-            row(image: Image("icon_feedback")
-                .resizable()
-                .frame(width: 24, height: 24),
-                title: "Feedback"
             ) {
                 
             }
@@ -36,6 +29,8 @@ struct SettingsView: View {
             
             row(image: Image("icon_lang")
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
                 title: "Language", details: "English"
             ) {
@@ -44,8 +39,10 @@ struct SettingsView: View {
             
             Divider()
             
-            row(image: Image("icon_contact")
+            row(image: Image("icon_feedback")
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
                 title: "Contact"
             ) {

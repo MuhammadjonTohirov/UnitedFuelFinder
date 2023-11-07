@@ -10,8 +10,8 @@ import SwiftUI
 
 
 struct ProfileVIew: View {
-    @StateObject var viewModel = RegisterViewModel()
-    @FocusState private var isFocused: Bool
+    @StateObject var viewModel = ProfileViewModel()
+    @FocusState private var isAddressFocused: Bool
     var onRegisterResult: (Bool) -> Void
     @Environment (\.presentationMode) private var presentationMode
 
@@ -43,9 +43,7 @@ struct ProfileVIew: View {
                 Spacer()
                 
                 SubmitButton {
-                    viewModel.doRegister { success in
-                        success ? presentationMode.wrappedValue.dismiss() : ()
-                    }
+//                    do update
                     
                 } label: {
                     Text("Save".localize)
@@ -61,7 +59,9 @@ struct ProfileVIew: View {
         .sheet(isPresented: $viewModel.showScreen, content: {
             viewModel.route?.screen
         })
-        
+        .onAppear {
+            viewModel.onAppear()
+        }
     }
     
     
@@ -111,9 +111,10 @@ struct ProfileVIew: View {
                 .lineLimit(5, reservesSpace: true)
                 .background(
                     RoundedRectangle(cornerRadius: 10)
-                        .stroke(isFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5), lineWidth: 0.6)
-                    )
-                .focused($isFocused)        }
+                        .stroke(isAddressFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5), lineWidth: 0.6)
+                )
+                .focused($isAddressFocused)
+        }
     }
 }
 

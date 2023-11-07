@@ -33,4 +33,12 @@ public class DState: Object, StateObjectProtocol, Identifiable {
             realm.delete(objs)
         })
     }
+    
+    static func item(id: String) -> DState? {
+        guard let realm = Realm.new else {
+            return nil
+        }
+        
+        return realm.object(ofType: DState.self, forPrimaryKey: id)
+    }
 }

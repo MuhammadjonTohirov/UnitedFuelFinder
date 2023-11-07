@@ -48,16 +48,21 @@ enum HomePresentableSheets: ScreenRoute {
         switch self {
         case .allStations:
             return "all_stations"
+        case .searchAddress:
+            return "search_address"
         }
     }
     
     case allStations(_ stations: [StationItem], _ from: String?, _ to: String?, _ radius: String?)
+    case searchAddress(_ completion: (SearchAddressViewModel.SearchAddressResult) -> Void)
     
     @ViewBuilder
     var screen: some View {
         switch self {
         case .allStations(let stations, let from, let to, let radius):
             AllStationsView(from: from, to: to, radius: radius, stations: stations)
+        case .searchAddress(let completion):
+            SearchAddressView(onResult: completion)
         }
     }
 }
@@ -295,5 +300,17 @@ final class HomeViewModel: ObservableObject {
             self.loadingMessage = ""
             self.isLoading = false
         }
+    }
+    
+    func setupFromAddress(with res: SearchAddressViewModel.SearchAddressResult) {
+        self.fromLocation = .init(latitude: res.lat, longitude: res.lng)
+        self.fromAddress = res.address
+        self.focusToLocation(self.fromLocation!)
+    }
+    
+    func setupToAddress(with res: SearchAddressViewModel.SearchAddressResult) {
+        self.toLocation = .init(latitude: res.lat, longitude: res.lng)
+        self.toAddress = res.address
+        self.onClickDrawRoute()
     }
 }

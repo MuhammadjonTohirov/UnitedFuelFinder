@@ -15,11 +15,11 @@ protocol StateObjectProtocol {
 
 protocol CityObjectProtocol {
     var id: Int {get}
-    var stateId: String {get}
-    var name: String {get}
+    var stateId: String? {get}
+    var name: String? {get}
     var lat: Double {get}
     var lng: Double {get}
-    var timezone: String {get}
+    var timezone: String? {get}
 }
 
 public struct StateItem: StateObjectProtocol, Objectify {
@@ -43,13 +43,13 @@ public struct StateItem: StateObjectProtocol, Objectify {
 
 public struct CityItem: CityObjectProtocol, Objectify {
     var id: Int
-    var stateId: String
-    var name: String
+    var stateId: String?
+    var name: String?
     var lat: Double
     var lng: Double
-    var timezone: String
+    var timezone: String?
     
-    public init(id: Int, stateId: String, name: String, lat: Double, lng: Double, timezone: String) {
+    public init(id: Int, stateId: String?, name: String, lat: Double, lng: Double, timezone: String?) {
         self.id = id
         self.stateId = stateId
         self.name = name
@@ -68,6 +68,6 @@ public struct CityItem: CityObjectProtocol, Objectify {
     }
     
     var asObject: Object {
-        DCity(id: id, name: name, stateId: stateId, lat: lat, lng: lng, timezone: timezone)
+        DCity(id: id, name: name ?? "", stateId: stateId ?? "", lat: lat, lng: lng, timezone: timezone ?? "")
     }
 }

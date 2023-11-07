@@ -41,6 +41,7 @@ struct AllStationsView: View {
                 Spacer()
             }
         }
+        .navigationTitle("all_stations".localize)
         .searchable(text: $searchText)
     }
     

@@ -396,7 +396,6 @@ public struct AlertToast: View {
             case .error(let color):
                 Spacer()
                 Image("icon_error")
-                    .resizable()
                     .renderingMode(.template)
                     .foregroundStyle(color)
                 Spacer()

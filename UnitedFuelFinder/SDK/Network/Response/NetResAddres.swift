@@ -19,11 +19,11 @@ struct NetResState: NetResBody, StateObjectProtocol {
 
 struct NetResCity: NetResBody, CityObjectProtocol {
     var id: Int
-    var stateId: String
-    var name: String
+    var stateId: String?
+    var name: String?
     var lat: Double
     var lng: Double
-    var timezone: String
+    var timezone: String?
     
     init(id: Int, stateId: String, name: String, lat: Double, lng: Double, timezone: String) {
         self.id = id

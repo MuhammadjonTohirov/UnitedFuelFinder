@@ -42,4 +42,9 @@ public class DCity: Object, Identifiable {
             realm.delete(objs)
         })
     }
+    
+    static func item(id: Int) -> DCity? {
+        let realm = Realm.new!
+        return realm.object(ofType: DCity.self, forPrimaryKey: id)
+    }
 }
