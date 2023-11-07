@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SettingsView: View {
+    @State private var showEditProfile: Bool = false
     @State private var showContactUs: Bool = false
     @State private var showLogoutAlert: Bool = false
     
@@ -22,7 +23,7 @@ struct SettingsView: View {
                 .padding(.bottom, 2)
                 .padding(.leading, 2), title: "Edit profile"
             ) {
-                
+                showEditProfile = true
             }
              
             Divider()
@@ -84,6 +85,9 @@ struct SettingsView: View {
         .padding(.top, Padding.medium)
         .navigation(isActive: $showContactUs) {
             ContactUsView()
+        }
+        .navigation(isActive: $showEditProfile) {
+            ProfileVIew()
         }
     }
     

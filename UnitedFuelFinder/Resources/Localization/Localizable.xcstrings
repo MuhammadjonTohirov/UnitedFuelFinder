@@ -23,6 +23,18 @@
     "%lld" : {
 
     },
+    "$ 4.45" : {
+
+    },
+    "2.0%" : {
+
+    },
+    "12:30 12/10/2023" : {
+
+    },
+    "23.37ml" : {
+
+    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -71,6 +83,9 @@
           }
         }
       }
+    },
+    "All comments" : {
+
     },
     "all_stations" : {
       "extractionState" : "manual",
@@ -321,6 +336,12 @@
         }
       }
     },
+    "Discount" : {
+
+    },
+    "Distance" : {
+
+    },
     "done" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -344,8 +365,28 @@
         }
       }
     },
-    "Edit profile" : {
-
+    "edit_profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Изменение профиля"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Profilni tahrirlash"
+          }
+        }
+      }
     },
     "enter_pin" : {
       "extractionState" : "manual",
@@ -422,18 +463,18 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "From"
+            "value" : "Edit profile"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Из пункта"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Bu yerdan"
           }
         }
@@ -529,6 +570,9 @@
           }
         }
       }
+    },
+    "Latest comments" : {
+
     },
     "lets_create_account" : {
       "extractionState" : "manual",
@@ -713,6 +757,15 @@
           }
         }
       }
+    },
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's" : {
+
+    },
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and" : {
+
+    },
+    "More comments" : {
+
     },
     "Multi" : {
 
@@ -916,6 +969,38 @@
         }
       }
     },
+    "Post" : {
+
+    },
+    "Post feedbacks" : {
+
+    },
+    "Price" : {
+
+    },
+    "profile_updated_failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update profile failed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить профиль не удалось"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil yangilanishda xatolik"
+          }
+        }
+      }
+    },
     "Red" : {
 
     },
@@ -987,6 +1072,9 @@
           }
         }
       }
+    },
+    "Richard st. New York, 10010" : {
+
     },
     "Save %@ per gallon " : {
 
@@ -1135,6 +1223,9 @@
     "SwiftUI" : {
 
     },
+    "TA/Petro" : {
+
+    },
     "to" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1230,7 +1321,13 @@
         }
       }
     },
+    "Write comment" : {
+
+    },
     "Yellow" : {
+
+    },
+    "You" : {
 
     }
   },

@@ -15,7 +15,7 @@ public class MainDService {
         DataBase.writeThread.async {
             Realm.new?.trySafeWrite({ realm in
                 states.map({$0.asObject}).forEach { state in
-                    realm.add(state)
+                    realm.add(state, update: .modified)
                 }
             })
         }
@@ -25,7 +25,7 @@ public class MainDService {
         DataBase.writeThread.async {
             Realm.new?.trySafeWrite({ realm in
                 cities.map({$0.asObject}).forEach { city in
-                    realm.add(city)
+                    realm.add(city, update: .modified)
                 }
             })
         }
@@ -35,8 +35,16 @@ public class MainDService {
         DataBase.writeThread.async {
             Realm.new?.trySafeWrite({ realm in
                 companies.map({$0.asObject}).forEach { city in
-                    realm.add(city)
+                    realm.add(city, update: .modified)
                 }
+            })
+        }
+    }
+    
+    public func addSearchAddress(_ address: SearchedAddress) {
+        DataBase.writeThread.async {
+            Realm.new?.trySafeWrite({ realm in
+                realm.add(address.asObject, update: .modified)
             })
         }
     }

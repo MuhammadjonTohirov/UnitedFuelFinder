@@ -65,6 +65,10 @@ struct SearchAddressView: View {
                                 .padding(.vertical, Padding.small)
                                 .foregroundStyle(Color.label)
                                 .lineLimit(1)
+                            Spacer()
+                        }
+                        .background {
+                            Rectangle().foregroundStyle(Color.clear)
                         }
                     }
 

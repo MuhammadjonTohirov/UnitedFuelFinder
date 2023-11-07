@@ -12,13 +12,10 @@ import SwiftUI
 struct ProfileVIew: View {
     @StateObject var viewModel = ProfileViewModel()
     @FocusState private var isAddressFocused: Bool
-    var onRegisterResult: (Bool) -> Void
-    @Environment (\.presentationMode) private var presentationMode
 
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
-                    
                 personalDetails
                 
                 addressInfo
@@ -26,25 +23,15 @@ struct ProfileVIew: View {
                 Text("")
                     .frame(height: 100)
             }
+            .scrollable()
             .keyboardDismissable()
-            .toast($viewModel.shouldShowAlert, viewModel.alert)
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(.init(.label))
-                    })
-                }
-            })
+            .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 1.5)
             
             VStack {
                 Spacer()
                 
                 SubmitButton {
-//                    do update
-                    
+                    viewModel.editProfile()
                 } label: {
                     Text("Save".localize)
                 }
@@ -55,6 +42,7 @@ struct ProfileVIew: View {
             .ignoresSafeArea(.keyboard, edges: .all)
         }
         .padding(.horizontal, Padding.default)
+        .navigationBarTitleDisplayMode(.inline)
         .readRect(rect: $viewModel.screenRect)
         .sheet(isPresented: $viewModel.showScreen, content: {
             viewModel.route?.screen
@@ -67,7 +55,7 @@ struct ProfileVIew: View {
     
     private var personalDetails: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Edit profile")
+            Text("edit_profile".localize)
                 .font(.system(size: 24, weight: .semibold))
                 .foregroundColor(.init(.label))
                 .padding(.vertical, Padding.large)
@@ -107,11 +95,17 @@ struct ProfileVIew: View {
             TextField("", text: $viewModel.address, prompt: Text("Address"), axis: .vertical)
                 .padding()
                 .textContentType(.streetAddressLine1)
-                .font(Font.custom("SF Compact", size: 13))
+                .font(Font.system(size: 14, weight: .regular))
                 .lineLimit(5, reservesSpace: true)
+                .padding(2)
                 .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(isAddressFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5), lineWidth: 0.6)
+                    RoundedRectangle(
+                        cornerRadius: 8
+                    )
+                    .stroke(lineWidth: 1).foregroundStyle(
+                        isAddressFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5)
+                    )
+                    .padding(.horizontal, 1)
                 )
                 .focused($isAddressFocused)
         }
@@ -120,9 +114,5 @@ struct ProfileVIew: View {
 
 
 #Preview {
-    NavigationView(content: {
-        ProfileVIew { _ in
-            
-        }
-    })
+    ProfileVIew()
 }

@@ -172,6 +172,8 @@
 		2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */; };
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
 		2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */; };
+		2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */; };
+		2E7D8DB02AFAEB650074AB7E /* DSearchedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAF2AFAEB650074AB7E /* DSearchedAddress.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */; };
 		2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */; };
@@ -383,6 +385,8 @@
 		2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyItem.swift; sourceTree = "<group>"; };
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
 		2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCompanyView.swift; sourceTree = "<group>"; };
+		2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqEditProfile.swift; sourceTree = "<group>"; };
+		2E7D8DAF2AFAEB650074AB7E /* DSearchedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSearchedAddress.swift; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsView.swift; sourceTree = "<group>"; };
 		2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationItemView.swift; sourceTree = "<group>"; };
@@ -812,6 +816,7 @@
 				2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */,
 				2E5DF8F02AEACD63005BE20D /* DCity.swift */,
 				2E5DF8F12AEACD63005BE20D /* DState.swift */,
+				2E7D8DAF2AFAEB650074AB7E /* DSearchedAddress.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -859,6 +864,7 @@
 				2E5DF8FE2AEACD63005BE20D /* NetReqVerifyAccount.swift */,
 				2E5DF8FF2AEACD63005BE20D /* NetReqLogin.swift */,
 				2E36A7442AEECDD00033363E /* NetReqFilterStations.swift */,
+				2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1350,6 +1356,7 @@
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
+				2E7D8DB02AFAEB650074AB7E /* DSearchedAddress.swift in Sources */,
 				2E5DF9652AEACD63005BE20D /* MapZoomControl.swift in Sources */,
 				2E5DF97D2AEACD64005BE20D /* YKeychainWrapper.swift in Sources */,
 				2E5DF9602AEACD63005BE20D /* UMap.swift in Sources */,
@@ -1450,6 +1457,7 @@
 				2E5DF97A2AEACD64005BE20D /* AuthNetworkRouter.swift in Sources */,
 				2EF3A1EA2ADD88F900CA8DE2 /* GMapsView.swift in Sources */,
 				2E243DB02AE163EE008C3E8C /* ToPointButton.swift in Sources */,
+				2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */,
 				2E5DF9452AEACD63005BE20D /* AlertToast.swift in Sources */,
 				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
 				2E5DF9842AEACD64005BE20D /* NSMutableData+Extensions.swift in Sources */,

@@ -12,8 +12,10 @@ public struct BouncingLoadingView: View {
     @State var animate: Bool = false
     @State var opacity: CGFloat = 1
     @State private var radiusPercentage: CGFloat = 0
+    
     private var message: String = ""
-    let circleRadius: CGFloat
+    private let circleRadius: CGFloat
+    
     public init(animate: Bool = false, circleRadius: CGFloat = 60, opacity: CGFloat = 1, message: String = "") {
         self.animate = animate
         self.circleRadius = circleRadius
@@ -23,7 +25,6 @@ public struct BouncingLoadingView: View {
     
     public var body: some View {
         ZStack {
-            
             VStack {
                 RadialGradient(gradient: Gradient(colors: [
                     Color.accentColor,
@@ -42,7 +43,6 @@ public struct BouncingLoadingView: View {
                             .blur(radius: 10)
                     }
             }
-                
         }
         .ignoresSafeArea()
         .onAppear {

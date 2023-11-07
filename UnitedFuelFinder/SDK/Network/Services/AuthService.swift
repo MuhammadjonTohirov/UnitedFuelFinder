@@ -79,6 +79,25 @@ public struct AuthService {
         let response: NetRes<NetResUserInfo>? = await Network.send(request: UserNetworkRouter.userInfo)
         UserSettings.shared.userInfo = response?.data?.asModel
     }
+    
+    func editUserInfo(firstName: String, lastName: String, phone: String, state: String, city: Int, address: String) async -> Bool {
+        let req = NetReqEditProfile.init(firstName: firstName, lastName: lastName, phone: phone, state: state, city: city, address: address)
+        let result: NetRes<String>? = await Network.send(request: UserNetworkRouter.editUserInfo(request: req))
+        let isOK = result?.success ?? false
+        
+        if isOK, let user = UserSettings.shared.userInfo, let _city = DCity.item(id: city) {
+            
+            let _user = UserInfo.init(id: user.id, fullName: [firstName, lastName].joined(separator: " "),
+                          email: user.email,
+                          phone: user.phone,
+                          cardNumber: user.cardNumber,
+                          companyId: user.companyId, companyName: user.companyName,
+                          address: address, cityId: city, cityName: _city.name, state: state, confirmed: true, deleted: false)
+            UserSettings.shared.userInfo = _user
+        }
+        
+        return isOK
+    }
 }
 
 extension NetResUserInfo {

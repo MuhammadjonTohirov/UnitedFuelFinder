@@ -131,12 +131,18 @@ struct RegisterProfileView: View {
             TextField("", text: $viewModel.address, prompt: Text("Address"), axis: .vertical)
                 .padding()
                 .textContentType(.streetAddressLine1)
-                .font(Font.custom("SF Compact", size: 13))
+                .font(Font.system(size: 14, weight: .regular))
                 .lineLimit(5, reservesSpace: true)
+                .padding(2)
                 .background(
-                    RoundedRectangle(cornerRadius: 10)
-                        .stroke(isFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5), lineWidth: 0.6)
+                    RoundedRectangle(
+                        cornerRadius: 8
                     )
+                    .stroke(lineWidth: 1).foregroundStyle(
+                        isFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5)
+                    )
+                    .padding(.horizontal, 1)
+                )
                 .focused($isFocused)
         }
     }
