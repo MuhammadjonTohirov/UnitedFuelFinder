@@ -197,6 +197,8 @@
 		2EF3A2002ADD920500CA8DE2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */; };
 		2EF3A2022ADD950E00CA8DE2 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */; };
 		841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D81052AF75DBC00C5932C /* ProfileVIew.swift */; };
+		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
+		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -402,6 +404,8 @@
 		2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
 		841D81052AF75DBC00C5932C /* ProfileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVIew.swift; sourceTree = "<group>"; };
+		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -939,6 +943,8 @@
 			isa = PBXGroup;
 			children = (
 				2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */,
+				84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */,
+				846A291C2AFAB355008A8E0B /* CommentsView.swift */,
 			);
 			path = AllStations;
 			sourceTree = "<group>";
@@ -1288,7 +1294,9 @@
 				2E5DF93F2AEACD63005BE20D /* ActivityIndicatorView.swift in Sources */,
 				2E5DF9582AEACD63005BE20D /* MKMapAnnotationView.swift in Sources */,
 				2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */,
+				846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */,
 				2E5DF9522AEACD63005BE20D /* MapMultiPolyline.swift in Sources */,
+				84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */,
 				2E5DF9422AEACD63005BE20D /* YRoundedTextField.swift in Sources */,
 				2E243DA62AE02D01008C3E8C /* HomeBottomSheetView.swift in Sources */,
 				2E5DF92A2AEACD63005BE20D /* SupportingTypes.swift in Sources */,
