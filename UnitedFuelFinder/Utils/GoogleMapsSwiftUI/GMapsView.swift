@@ -145,7 +145,6 @@ struct GMapsView: UIViewControllerRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-            debugPrint("didTap marker")
             parent.onClickMarker?(marker)
             return true
         }

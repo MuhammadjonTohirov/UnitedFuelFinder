@@ -16,19 +16,29 @@ struct HomeView: View {
     @State private var screenFrame: CGRect = .zero
     
     @ObservedObject var viewModel: HomeViewModel = .init()
-    @State private var isDragging: Bool = false
     @State private var pointerFrame: CGRect = .zero
     
     private let pointerHeight: CGFloat = 158
     private let locationManager = CLLocationManager()
     
     private var bottomSheetBottomPadding: CGFloat {
-        isDragging ? -bottomSheetFrame.height + 80 : 0
+        viewModel.isDragging ? -bottomSheetFrame.height + 80 : 0
     }
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             innerBody
+                .navigationBarTitleDisplayMode(.inline)
+//                .navigationTitle("home".localize.capitalized)
+                .toolbar(content: {
+                    ToolbarItem(placement: .topBarTrailing) {
+                        Button {
+                            self.viewModel.onClickSettings()
+                        } label: {
+                            settingsButton
+                        }
+                    }
+                })
         }
     }
     
@@ -36,7 +46,7 @@ struct HomeView: View {
         ZStack {
             GMapsView(
                 pickedLocation: $viewModel.pickedLocation,
-                isDragging: $isDragging,
+                isDragging: $viewModel.isDragging,
                 screenCenter: pointerFrame.center,
                 markers: $viewModel.stationsMarkers
             )
@@ -54,7 +64,9 @@ struct HomeView: View {
                 }
             )
             .set(onClickMarker: { marker in
-                viewModel.route = .stationDetails
+                if let st = marker.station {
+                    viewModel.route = .stationDetails(station: st)
+                }
             })
             .ignoresSafeArea()
             .padding(.bottom, 8)
@@ -121,14 +133,8 @@ struct HomeView: View {
         ZStack {
             mapGradientOverlay
             
-            Button {
-                self.viewModel.onClickSettings()
-            } label: {
-                settingsButton
-            }
-            
             PinPointerView(
-                isActive: isDragging,
+                isActive: viewModel.isDragging,
                 type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
             .frame(height: pointerHeight)
             .readRect(rect: $pointerFrame)
@@ -154,16 +160,22 @@ struct HomeView: View {
                 }
 
                 Spacer()
+
+                filterView
+                    .padding(.trailing, 8)
+                    .padding(.bottom, 8)
+
                 currentLocationNavView
                     .padding(.trailing, 8)
                     .padding(.bottom, 8)
+                
             }
             
             HomeBottomSheetView(
                 input: .init(
                     from: .init(
                         title: viewModel.fromAddress.nilIfEmpty ?? "No address",
-                        isLoading: viewModel.isDetectingAddress || isDragging,
+                        isLoading: viewModel.isDetectingAddressFrom || viewModel.isDragging,
                         onClickBody: {
                             viewModel.presentableRoute = .searchAddress({ result in
                                 self.viewModel.setupFromAddress(with: result)
@@ -175,7 +187,7 @@ struct HomeView: View {
                     ),
                     to: .init(
                         title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
-                        isLoading: viewModel.state == .selectTo ? viewModel.isDetectingAddress : false,
+                        isLoading: viewModel.state == .selectTo ? viewModel.isDetectingAddressTo : false,
                         onClickBody: {
                             viewModel.presentableRoute = .searchAddress({ result in
                                 self.viewModel.setupToAddress(with: result)
@@ -197,6 +209,10 @@ struct HomeView: View {
                 hasMoreButton: self.viewModel.stations.count > 6,
                 onClickMoreButton: {
                     viewModel.onClickViewAllStations()
+                }, onClickNavigate: { station in
+                    viewModel.focusToLocation(station.clLocation)
+                }, onClickOpen: { station in
+                    viewModel.route = .stationDetails(station: station)
                 }
             )
             .background {
@@ -211,39 +227,12 @@ struct HomeView: View {
     }
     
     private var settingsButton: some View {
-        VStack {
-            HStack {
-                Image("icon_settings")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundStyle(Color.label)
-                    .frame(width: 32, height: 32)
-                    .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
-                    .opacity(0)
-                Spacer()
-                VStack {
-                    Text("address".localize)
-                        .font(.system(size: 13))
-                        .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.6)))
-                    
-                    Text("\(viewModel.fromAddress)")
-                        .font(.system(size: 13, weight: .medium))
-                        .multilineTextAlignment(.center)
-                        .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.8)))
-                }.opacity(isDragging ? 1 : 0)
-                Spacer()
-                Image("icon_settings")
-                    .resizable()
-                    .renderingMode(.template)
-                    .foregroundStyle(Color.label)
-                    .frame(width: 32, height: 32)
-                    .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
-            }
-            .frame(maxWidth: .infinity)
-            
-            Spacer()
-        }.padding(.horizontal, Padding.medium)
-        
+        Image("icon_settings")
+            .resizable()
+            .renderingMode(.template)
+            .foregroundStyle(Color.label)
+            .frame(width: 32, height: 32)
+            .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
     }
     
     private var currentLocationNavView: some View {
@@ -252,11 +241,29 @@ struct HomeView: View {
         } label: {
             Circle()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(Color.background)
+                .foregroundStyle(Color.init(uiColor: .systemBackground))
                 .overlay {
                     Image("icon_navigation")
                         .renderingMode(.template)
-                        .foregroundStyle(Color.label.opacity(0.5))
+                        .foregroundStyle(Color.label.opacity(0.8))
+                }
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
+        }
+    }
+    
+    private var filterView: some View {
+        Button {
+            
+        } label: {
+            Circle()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .overlay {
+                    Image("icon_filter")
+                        .resizable()
+                        .renderingMode(.template)
+                        .frame(width: 20, height: 20)
+                        .foregroundStyle(Color.label.opacity(0.8))
                 }
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
         }
@@ -312,7 +319,23 @@ struct HomeView: View {
                         endPoint: .bottom
                     )
                 )
-            
+                .overlay {
+                    VStack {
+                        Text("address".localize)
+                            .font(.system(size: 13))
+                            .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.6)))
+                        
+                        Text("\(viewModel.fromAddress)")
+                            .font(.system(size: 13, weight: .medium))
+                            .multilineTextAlignment(.center)
+                            .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.8)))
+                        Spacer()
+                    }
+                    .frame(maxWidth: UIApplication.shared.screenFrame.width * 2 / 3 )
+                    .opacity(viewModel.isDragging ? 1 : 0)
+                    .padding(.top, UIApplication.shared.safeArea.top)
+                    .ignoresSafeArea()
+                }
             Spacer()
         }.allowsHitTesting(false)
     }

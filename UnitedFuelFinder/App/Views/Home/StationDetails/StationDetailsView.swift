@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct StationDetailsView: View {
+    var station: StationItem
     
     @Environment (\.dismiss) var dismiss
     @FocusState private var isFocused: Bool
@@ -16,46 +17,36 @@ struct StationDetailsView: View {
     @State private var commentsPresented: Bool = false
     
     var body: some View {
-        ZStack {
-            ScrollView(showsIndicators: false) {
-                
-                headerView
-        
-                details
-                
-                postFeedbacks
-                
-                comments
-                
-                Text("")
-                    .frame(height: 50)
-            }
-            .toolbar(content: {
-                ToolbarItem(placement: .topBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "arrow.backward")
-                            .foregroundStyle(Color.init(uiColor: .label))
-                            .fontWeight(.bold)
-                    })
-                }
-            })
-            .ignoresSafeArea()
+        VStack {
+            headerView
+            
+            details
+            
+            postFeedbacks
+            
+            comments
+            
+            Text("")
+                .frame(height: 50)
         }
+        .scrollable(showIndicators: false)
+        .ignoresSafeArea(.container)
+        .keyboardDismissable()
         .fullScreenCover(isPresented: $commentsPresented, content: {
             CommentsView()
         })
     }
     
     private var headerView: some View {
-        VStack(alignment: .leading, spacing: -40) {
+        GeometryReader(content: { geometry in
             Image("station")
                 .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(maxWidth: .infinity)
-                .ignoresSafeArea()
-        }
+                .aspectRatio(contentMode: .fill)
+                .stretchable(in: geometry)
+        })
+        .frame(height: UIApplication.shared.screenFrame.height * 0.45)
+        .ignoresSafeArea()
+
     }
     
     private var details: some View {
@@ -66,10 +57,10 @@ struct StationDetailsView: View {
                     .frame(width: 44, height: 32)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text("TA/Petro")
+                    Text(station.name)
                         .font(.system(size: 13, weight: .semibold))
                     
-                    Text("Richard st. New York, 10010")
+                    Text(station.address ?? "unknown_address".localize)
                         .font(.system(size: 12))
                 }
             }
@@ -82,20 +73,20 @@ struct StationDetailsView: View {
             [
                 row(
                     title: "distance".localize,
-                    detail: Text("2.37 ml")
+                    detail: Text(station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate))
                         .font(.system(size: 12, weight: .medium))
                 ),
                 
                 row(
                     title: "price".localize,
-                    detail: Text("$4.43")
+                    detail: Text(station.actualPriceInfo)
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Color.init(uiColor: .systemGreen))
                 ),
                 
                 row(
                     title: "discount".localize,
-                    detail: Text("2.0 %")
+                    detail: Text(station.discountInfo)
                         .font(.system(size: 12, weight: .medium))
                 )
             ].vstack(spacing: Padding.small)
@@ -148,7 +139,7 @@ struct StationDetailsView: View {
             Button(action: {
                 
             }, label: {
-                Text("Post")
+                Text("post".localize.capitalized)
                     .font(.system(size: 13, weight: .semibold))
             })
             .frame(width: 99, height: 40)
@@ -172,7 +163,7 @@ struct StationDetailsView: View {
             }
             
             SubmitButton {
-                
+                self.commentsPresented = true
             } label: {
                 Text("more_comments".localize)
             }
@@ -216,11 +207,5 @@ struct StationDetailsView: View {
         .frame(maxHeight: 120)
         .padding(.horizontal, Padding.medium)
         .padding(.vertical, Padding.small / 2)
-    }
-}
-
-#Preview {
-    NavigationView {
-        StationDetailsView()
     }
 }

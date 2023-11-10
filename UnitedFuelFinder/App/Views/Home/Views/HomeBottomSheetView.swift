@@ -9,19 +9,26 @@ import Foundation
 import SwiftUI
 
 
-
 struct HomeBottomSheetView: View {
     var input: HomeBottomSheetInput
     var stations: [StationItem] = []
     var hasMoreButton: Bool
     var onClickMoreButton: (() -> Void)? = nil
+    var onClickNavigate: ((StationItem) -> Void)? = nil
+    var onClickOpen: ((StationItem) -> Void)? = nil
     private var stationItemHeight: CGFloat = 110
     
-    init(input: HomeBottomSheetInput, stations: [StationItem], hasMoreButton: Bool, onClickMoreButton: (() -> Void)? = nil) {
+    init(input: HomeBottomSheetInput, stations: [StationItem], hasMoreButton: Bool,
+         onClickMoreButton: (() -> Void)? = nil,
+         onClickNavigate: ((StationItem) -> Void)? = nil,
+         onClickOpen: ((StationItem) -> Void)? = nil
+    ) {
         self.input = input
         self.stations = stations
         self.hasMoreButton = hasMoreButton
         self.onClickMoreButton = onClickMoreButton
+        self.onClickNavigate = onClickNavigate
+        self.onClickOpen = onClickOpen
     }
     
     var body: some View {
@@ -84,7 +91,9 @@ struct HomeBottomSheetView: View {
             
             LazyHStack {
                 ForEach(stations) { station in
-                    gasStationItem(station)
+                    gasStationItem(station).onTapGesture {
+                        self.onClickOpen?(station)
+                    }
                 }
                 
                 if hasMoreButton {
@@ -116,7 +125,7 @@ struct HomeBottomSheetView: View {
     private func gasStationItem(_ station: StationItem) -> some View {
         GasStationItemView(station: station, stationItemHeight: stationItemHeight)
             .set { st in
-                
+                self.onClickNavigate?(st)
             }
     }
 }
@@ -132,5 +141,7 @@ struct HomeBottomSheetView: View {
         
     }), onClickReady: {
         
-    }, distance: "10"), stations: [], hasMoreButton: true)
+    }, distance: "10"), stations: [], hasMoreButton: true) { st in
+        
+    }
 }

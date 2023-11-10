@@ -70,3 +70,16 @@ public extension View {
         }
     }
 }
+
+extension View {
+
+    @ViewBuilder
+    func stretchable(in geo: GeometryProxy) -> some View {
+        let width = geo.size.width
+        let height = geo.size.height
+        let minY = geo.frame(in: .global).minY
+        let useStandard = minY <= 0
+        self.frame(width: width, height: height + (useStandard ? 0 : minY))
+            .offset(y: useStandard ? 0 : -minY)
+    }
+}

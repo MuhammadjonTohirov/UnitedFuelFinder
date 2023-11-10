@@ -77,6 +77,7 @@ extension StationItem {
         marker.snippet = self.address
         marker.iconView = _imageView
         marker.iconView?.frame.size = .init(width: 32, height: 32)
+        marker.station = self
         return marker
     }
     
@@ -100,5 +101,17 @@ extension StationItem {
         let isMore1000 = Int(distance) / 1000 > 0
         let unit = isMore1000 ? "km" : "m"
         return String(format: "%.1f \(unit)",  isMore1000 ? distance / 1000 : distance)
+    }
+}
+
+extension GMSMarker {
+    var station: StationItem? {
+        set(station) {
+            self.userData = station
+        }
+        
+        get {
+            self.userData as? StationItem
+        }
     }
 }

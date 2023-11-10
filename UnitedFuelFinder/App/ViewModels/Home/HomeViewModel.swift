@@ -17,6 +17,10 @@ enum HomeViewState {
 }
 
 enum HomeRouter: ScreenRoute {
+    static func == (lhs: HomeRouter, rhs: HomeRouter) -> Bool {
+        lhs.id == rhs.id
+    }
+    
     var id: String {
         switch self {
         case .settings:
@@ -27,16 +31,20 @@ enum HomeRouter: ScreenRoute {
     }
     
     case settings
-    case stationDetails
+    case stationDetails(station: StationItem)
     
     @ViewBuilder
     var screen: some View {
         switch self {
         case .settings:
             SettingsView()
-        case .stationDetails:
-            StationDetailsView()
+        case .stationDetails(let station):
+            StationDetailsView(station: station)
         }
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
     }
 }
 
@@ -103,8 +111,9 @@ final class HomeViewModel: ObservableObject {
     @Published var pickedLocation: CLLocation?
 
     @Published private(set) var isLoading: Bool = false
-
-    @Published var isDetectingAddress: Bool = false
+    @Published var isDragging: Bool = false
+    @Published var isDetectingAddressFrom: Bool = false
+    @Published var isDetectingAddressTo: Bool = false
     
     private(set) var loadingMessage: String = ""
     
@@ -178,26 +187,33 @@ final class HomeViewModel: ObservableObject {
         switch self.state {
         case .selectFrom:
             self.fromLocation = pickedLocation
+            self.isDetectingAddressFrom = true
         case .selectTo:
             self.toLocation = pickedLocation
+            self.isDetectingAddressTo = true
         case .routing:
             break
         }
         
-        self.showLoader(message: "detecting_address".localize)
-        
         locationManager.getAddressFromLatLon(latitude: loc.latitude, longitude: loc.longitude) { address in
-            self.hideLoader()
+            
             if self.state == .selectFrom {
                 self.fromAddress = address
             } else {
                 self.toAddress = address
             }
+            
+            DispatchQueue.main.async {
+                self.isDetectingAddressTo = false
+                self.isDetectingAddressFrom = false
+            }
         }
         
         if state == .selectFrom {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                self.filterStationsByDefault()
+                if !self.isDragging {
+                    self.filterStationsByDefault()
+                }
             }
         }
     }
@@ -214,7 +230,7 @@ final class HomeViewModel: ObservableObject {
     func onClickSettings() {
         self.route = .settings
     }
-    
+        
     func onClickViewAllStations() {
         self.presentableRoute = .allStations(self.stations, nil, nil, "25 km")
     }
@@ -321,5 +337,11 @@ final class HomeViewModel: ObservableObject {
         self.toLocation = .init(latitude: res.lat, longitude: res.lng)
         self.toAddress = res.address
         self.onClickDrawRoute()
+    }
+}
+
+extension StationItem {
+    var clLocation: CLLocation {
+        .init(latitude: lat, longitude: lng)
     }
 }

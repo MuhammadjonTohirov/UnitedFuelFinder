@@ -23,15 +23,6 @@
     "%lld" : {
 
     },
-    "$4.43" : {
-
-    },
-    "2.0 %" : {
-
-    },
-    "2.37 ml" : {
-
-    },
     "12:30 12/10/2023" : {
 
     },
@@ -329,6 +320,46 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Manzilni aniqlash"
+          }
+        }
+      }
+    },
+    "discount" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discount"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скидка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chegirma"
+          }
+        }
+      }
+    },
+    "distance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distance"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расстояние"
           }
         }
       }
@@ -933,7 +964,14 @@
 
     },
     "Orange" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Erice"
+          }
+        }
+      }
     },
     "Organization requisites" : {
 
@@ -1007,9 +1045,6 @@
         }
       }
     },
-    "Post" : {
-
-    },
     "post_feedback" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1017,6 +1052,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post feedback"
+          }
+        }
+      }
+    },
+    "price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narx"
           }
         }
       }
@@ -1115,9 +1173,6 @@
           }
         }
       }
-    },
-    "Richard st. New York, 10010" : {
-
     },
     "Save %@ per gallon " : {
 
@@ -1264,9 +1319,6 @@
       }
     },
     "SwiftUI" : {
-
-    },
-    "TA/Petro" : {
 
     },
     "to" : {
