@@ -115,6 +115,9 @@ struct HomeBottomSheetView: View {
     
     private func gasStationItem(_ station: StationItem) -> some View {
         GasStationItemView(station: station, stationItemHeight: stationItemHeight)
+            .set { st in
+                
+            }
     }
 }
 

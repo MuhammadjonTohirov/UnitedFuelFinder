@@ -9,10 +9,13 @@ import Foundation
 import AVKit
 
 public struct SEffect {
-//    public static var soundPlayer: AVAudioPlayer?
-    
+
     public static func rigid() {
         let generator = UIImpactFeedbackGenerator(style: .rigid)
         generator.impactOccurred()
+    }
+    
+    public static func vibrate() {
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
     }
 }

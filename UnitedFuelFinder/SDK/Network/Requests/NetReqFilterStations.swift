@@ -8,14 +8,10 @@
 import Foundation
 
 public struct NetReqFilterStations: Codable {
-    public var from: NetReqLocation?
-    public var to: NetReqLocation?
-    public var current: NetReqLocation?
-    public var distance: Int?
+    public var current: NetReqLocation
+    public var distance: Double
     
-    public init(from: NetReqLocation?, to: NetReqLocation?, current: NetReqLocation?, distance: Int?) {
-        self.from = from
-        self.to = to
+    public init(current: NetReqLocation, distance: Double) {
         self.current = current
         self.distance = distance
     }

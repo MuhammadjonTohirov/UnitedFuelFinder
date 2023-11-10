@@ -168,6 +168,8 @@
 		2E60B61B2AF8751500573049 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61A2AF8751500573049 /* ProfileViewModel.swift */; };
 		2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */; };
 		2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */; };
+		2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266E92AFD140A008099D0 /* YTextView.swift */; };
+		2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266EB2AFD193B008099D0 /* RateView.swift */; };
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
 		2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */; };
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
@@ -381,6 +383,8 @@
 		2E60B61A2AF8751500573049 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
 		2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewModel.swift; sourceTree = "<group>"; };
+		2E7266E92AFD140A008099D0 /* YTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextView.swift; sourceTree = "<group>"; };
+		2E7266EB2AFD193B008099D0 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
 		2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyItem.swift; sourceTree = "<group>"; };
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
@@ -654,6 +658,7 @@
 				2E5DF8BB2AEACD63005BE20D /* TextFields */,
 				2E5DF8C02AEACD63005BE20D /* Alert */,
 				2E5DF8C32AEACD63005BE20D /* Map */,
+				2E7266EB2AFD193B008099D0 /* RateView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -683,6 +688,7 @@
 			children = (
 				2E5DF8BC2AEACD63005BE20D /* TextFieldProtocol.swift */,
 				2E5DF8BD2AEACD63005BE20D /* YTextField.swift */,
+				2E7266E92AFD140A008099D0 /* YTextView.swift */,
 				2E5DF8BE2AEACD63005BE20D /* YRoundedTextField.swift */,
 				2E5DF8BF2AEACD63005BE20D /* YPhoneField.swift */,
 				2E5DF9942AEACEC9005BE20D /* SearchField.swift */,
@@ -975,14 +981,14 @@
 			path = SearchAddress;
 			sourceTree = "<group>";
 		};
-		2EB189F92AEFF42600BCFBE3 /* AllStations */ = {
+		2EB189F92AEFF42600BCFBE3 /* StationDetails */ = {
 			isa = PBXGroup;
 			children = (
 				2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */,
 				84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */,
 				846A291C2AFAB355008A8E0B /* CommentsView.swift */,
 			);
-			path = AllStations;
+			path = StationDetails;
 			sourceTree = "<group>";
 		};
 		2EBD43C62AE510220033401A /* Extensions */ = {
@@ -1168,7 +1174,7 @@
 			isa = PBXGroup;
 			children = (
 				2E60B61C2AFA8C3300573049 /* SearchAddress */,
-				2EB189F92AEFF42600BCFBE3 /* AllStations */,
+				2EB189F92AEFF42600BCFBE3 /* StationDetails */,
 				2EBFB99C2ADF9F8F007FA786 /* Views */,
 				2EDF8C952AD474AA003D64FC /* HomeView.swift */,
 			);
@@ -1451,6 +1457,7 @@
 				2E5DF97F2AEACD64005BE20D /* Logging.swift in Sources */,
 				2E5DF94F2AEACD63005BE20D /* RendererMapOverlay.swift in Sources */,
 				2E5DF9952AEACEC9005BE20D /* SearchField.swift in Sources */,
+				2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */,
 				2E5DF9832AEACD64005BE20D /* String+Extensions.swift in Sources */,
 				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
 				2E5DF94E2AEACD63005BE20D /* MapMultiPolygon.swift in Sources */,
@@ -1459,6 +1466,7 @@
 				2E243DB02AE163EE008C3E8C /* ToPointButton.swift in Sources */,
 				2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */,
 				2E5DF9452AEACD63005BE20D /* AlertToast.swift in Sources */,
+				2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */,
 				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
 				2E5DF9842AEACD64005BE20D /* NSMutableData+Extensions.swift in Sources */,
 				2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */,
@@ -1620,7 +1628,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1656,7 +1664,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

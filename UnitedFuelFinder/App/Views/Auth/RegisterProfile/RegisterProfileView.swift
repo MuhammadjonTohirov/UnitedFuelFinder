@@ -10,8 +10,6 @@ import SwiftUI
 
 struct RegisterProfileView: View {
     @StateObject var viewModel = RegisterViewModel()
-    
-    @FocusState private var isFocused: Bool
 
     var onRegisterResult: (Bool) -> Void
     @Environment (\.presentationMode) private var presentationMode
@@ -128,22 +126,7 @@ struct RegisterProfileView: View {
                 viewModel.route = .selectCity($viewModel.city, stateId)
             }
             
-            TextField("", text: $viewModel.address, prompt: Text("Address"), axis: .vertical)
-                .padding()
-                .textContentType(.streetAddressLine1)
-                .font(Font.system(size: 14, weight: .regular))
-                .lineLimit(5, reservesSpace: true)
-                .padding(2)
-                .background(
-                    RoundedRectangle(
-                        cornerRadius: 8
-                    )
-                    .stroke(lineWidth: 1).foregroundStyle(
-                        isFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5)
-                    )
-                    .padding(.horizontal, 1)
-                )
-                .focused($isFocused)
+            YTextView(text: $viewModel.address, placeholder: "address".localize.capitalized)
         }
     }
 }

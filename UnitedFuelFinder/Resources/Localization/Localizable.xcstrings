@@ -23,16 +23,16 @@
     "%lld" : {
 
     },
-    "$ 4.45" : {
+    "$4.43" : {
 
     },
-    "2.0%" : {
+    "2.0 %" : {
+
+    },
+    "2.37 ml" : {
 
     },
     "12:30 12/10/2023" : {
-
-    },
-    "23.37ml" : {
 
     },
     "address" : {
@@ -57,9 +57,6 @@
           }
         }
       }
-    },
-    "Address" : {
-
     },
     "address_info" : {
       "extractionState" : "manual",
@@ -336,12 +333,6 @@
         }
       }
     },
-    "Discount" : {
-
-    },
-    "Distance" : {
-
-    },
     "done" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -503,22 +494,6 @@
         }
       }
     },
-    "Get Direction" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Направление"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yo'nalish oling"
-          }
-        }
-      }
-    },
     "Green" : {
 
     },
@@ -571,8 +546,28 @@
         }
       }
     },
-    "Latest comments" : {
-
+    "latest_comments" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest comments"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Последние отзывы"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So'ngi izohlar"
+          }
+        }
+      }
     },
     "lets_create_account" : {
       "extractionState" : "manual",
@@ -764,14 +759,57 @@
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and" : {
 
     },
-    "More comments" : {
-
+    "more_comments" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "More comments"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Больше отзывов"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boshqa izohlar"
+          }
+        }
+      }
     },
     "Multi" : {
 
     },
     "MultiPicker" : {
 
+    },
+    "navigate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Навигация"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Navigatsya"
+          }
+        }
+      }
     },
     "next" : {
       "extractionState" : "manual",
@@ -807,13 +845,13 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Нет адреса"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Manzil yo'q"
           }
         }
@@ -972,11 +1010,16 @@
     "Post" : {
 
     },
-    "Post feedbacks" : {
-
-    },
-    "Price" : {
-
+    "post_feedback" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Post feedback"
+          }
+        }
+      }
     },
     "profile_updated_failed" : {
       "extractionState" : "manual",
@@ -1321,8 +1364,28 @@
         }
       }
     },
-    "Write comment" : {
-
+    "write_comment" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write comment"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Написать комментарий"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izoh yozing"
+          }
+        }
+      }
     },
     "Yellow" : {
 

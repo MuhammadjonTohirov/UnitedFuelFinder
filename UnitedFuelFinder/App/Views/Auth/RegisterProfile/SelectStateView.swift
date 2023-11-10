@@ -12,7 +12,7 @@ import RealmSwift
 struct SelectStateView: View {
     @Binding var state: DState?
     @ObservedResults(DState.self, configuration: Realm.config) var states
-    
+    @State private var date: Date = Date()
     @State var searchText: String = ""
     
     var body: some View {
@@ -24,20 +24,12 @@ struct SelectStateView: View {
                 }
                 
                 state = item
+                date = Date()
             }, label: {
-                VStack(spacing: 0) {
-                    HStack {
-                        Text(item.name)
-                            .foregroundStyle(Color.label)
-                            .font(.system(size: 14))
-                        Spacer()
-                        
-                        Image(systemName: "checkmark")
-                            .opacity(state == item ? 1 : 0)
-                    }
-                    .frame(height: 48)
-                    Divider()
-                }
+                Text(item.name)
+                    .foregroundStyle(Color.label)
+                    .font(.system(size: 14))
+                    .frame(height: 40)
             })
         } onSearching: { item, key in
             if key.isEmpty {
@@ -45,6 +37,8 @@ struct SelectStateView: View {
             }
             
             return item.name.lowercased().contains(key.lowercased())
+        }  onSelectChange: { items in
+            self.state = items.first
         }
         .navigationTitle("select_state".localize)
         .onAppear {

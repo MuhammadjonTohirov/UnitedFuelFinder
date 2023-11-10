@@ -21,6 +21,7 @@ public struct BouncingLoadingView: View {
         self.circleRadius = circleRadius
         self.opacity = opacity
         self.message = message
+        self.radiusPercentage = 0
     }
     
     public var body: some View {

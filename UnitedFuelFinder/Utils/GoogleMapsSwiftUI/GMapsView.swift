@@ -40,7 +40,7 @@ struct GMapsView: UIViewControllerRepresentable {
     
     fileprivate var onStartDrawing: (() -> Void)?
     fileprivate var onEndDrawing: (() -> Void)?
-    
+    fileprivate var onClickMarker: ((GMSMarker) -> Void)?
     fileprivate var routeFrom: CLLocationCoordinate2D?
     fileprivate var routeTo: CLLocationCoordinate2D?
     
@@ -53,6 +53,12 @@ struct GMapsView: UIViewControllerRepresentable {
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
+    }
+    
+    func set(onClickMarker: @escaping (GMSMarker) -> Void) -> Self {
+        var v = self
+        v.onClickMarker = onClickMarker
+        return v
     }
     
     func set(currentLocation: CLLocation?) -> Self {
@@ -140,7 +146,7 @@ struct GMapsView: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             debugPrint("didTap marker")
-            
+            parent.onClickMarker?(marker)
             return true
         }
         

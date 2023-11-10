@@ -10,9 +10,10 @@ import SwiftUI
 import RealmSwift
 
 struct SelectCityView: View {
-    @Binding var city: DCity?
     @ObservedResults(DCity.self, configuration: Realm.config) var cities
+    @Binding var city: DCity?
     var stateId: String
+    
     @State private var isLoading: Bool = false
     @State var searchText: String = ""
     
@@ -28,34 +29,18 @@ struct SelectCityView: View {
     
     var innerBody: some View {
         ItemSelectionView(data: cities) { item in
-            Button(action: {
-                if city == item {
-                    city = nil
-                    return
-                }
-                
-                city = item
-            }, label: {
-                VStack(spacing: 0) {
-                    HStack {
-                        Text(item.name)
-                            .foregroundStyle(Color.label)
-                            .font(.system(size: 14))
-                        Spacer()
-                        
-                        Image(systemName: "checkmark")
-                            .opacity(city == item ? 1 : 0)
-                    }
-                    .frame(height: 48)
-                    Divider()
-                }
-            })
+            Text(item.name)
+                .foregroundStyle(Color.label)
+                .font(.system(size: 14))
+                .frame(height: 42)
         } onSearching: { item, key in
             if key.isEmpty {
                 return true
             }
             
             return item.name.lowercased().contains(key.lowercased())
+        } onSelectChange: { items in
+            self.city = items.first
         }
         .navigationTitle("select_city".localize)
         .onAppear {
@@ -76,4 +61,18 @@ struct SelectCityView: View {
     }
 }
 
+class SelectCityPreviewModel: ObservableObject {
+    @Published var city: DCity?
+}
 
+struct SelectCityPreview: View {
+    @StateObject var vm = SelectCityPreviewModel()
+    
+    var body: some View {
+        SelectCityView(city: $vm.city, stateId: "NY")
+    }
+}
+
+#Preview {
+    SelectCityPreview()
+}

@@ -12,6 +12,8 @@ struct GasStationItemView: View {
     var station: StationItem
     var stationItemHeight: CGFloat = 120
     
+    var onClickNavigate: ((StationItem) -> Void)?
+    
     init(station: StationItem, stationItemHeight: CGFloat = 110) {
         self.station = station
         self.stationItemHeight = stationItemHeight
@@ -34,17 +36,10 @@ struct GasStationItemView: View {
                 Spacer()
                 
                 Text(station.actualPriceInfo)
-                    .foregroundStyle(.white)
+                    .foregroundStyle(Color.label)
                     .font(.system(size: 12))
                     .padding(.vertical, 4)
                     .padding(.horizontal, 4)
-                    .background {
-                        RoundedRectangle(
-                            cornerRadius: 4
-                        ).foregroundStyle(
-                            Color.accentColor
-                        )
-                    }
             }
             
             HStack {
@@ -56,31 +51,7 @@ struct GasStationItemView: View {
                 
                 Spacer()
                 
-                Label(
-                    title: {
-                        Text("Get Direction")
-                    },
-                    icon: {
-                        Image(
-                            "icon_navigator"
-                        ).renderingMode(
-                            .template
-                        ).foregroundStyle(
-                            Color.white
-                        )
-                    }
-                )
-                .foregroundStyle(.white)
-                .font(.system(size: 12))
-                .padding(.vertical, 2)
-                .padding(.horizontal, 4)
-                .background {
-                    RoundedRectangle(
-                        cornerRadius: 6
-                    ).foregroundStyle(
-                        Color.accentColor
-                    )
-                }
+                navigateButton
             }
         }
         .padding(Padding.medium)
@@ -90,5 +61,48 @@ struct GasStationItemView: View {
                 .foregroundStyle(Color.secondaryBackground)
         }
         .frame(minWidth: UIApplication.shared.screenFrame.width * 0.8)
+    }
+    
+    private var navigateButton: some View {
+        Button(action: {
+            self.onClickNavigate?(station)
+        }, label: {
+            Label(
+                title: {
+                    Text("navigate".localize)
+                        .font(.system(size: 12, weight: .medium))
+                },
+                icon: {
+                    Image(
+                        "icon_navigation_point"
+                    ).renderingMode(
+                        .template
+                    )
+                    .resizable()
+                    .frame(width: 18, height: 18)
+                    .foregroundStyle(
+                        Color.white
+                    )
+                }
+            )
+            .foregroundStyle(.white)
+            .font(.system(size: 12))
+            .padding(.vertical, 6)
+            .padding(.horizontal, 8)
+            .background {
+                RoundedRectangle(
+                    cornerRadius: 6
+                ).foregroundStyle(
+                    Color.accentColor
+                )
+            }
+        })
+    }
+    
+    func set(navigate: @escaping (StationItem) -> Void) -> Self {
+        var v = self
+        v.onClickNavigate = navigate
+        
+        return v
     }
 }

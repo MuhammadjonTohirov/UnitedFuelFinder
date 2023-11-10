@@ -53,6 +53,9 @@ struct HomeView: View {
                     viewModel.onEndDrawingRoute()
                 }
             )
+            .set(onClickMarker: { marker in
+                viewModel.route = .stationDetails
+            })
             .ignoresSafeArea()
             .padding(.bottom, 8)
             .overlay {
@@ -70,13 +73,27 @@ struct HomeView: View {
             
             bottomContent
             
-            BouncingLoadingView(message: viewModel.loadingMessage)
+//            BouncingLoadingView(message: viewModel.loadingMessage)
+//                .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                .background {
+//                    Color.background.opacity(0.5)
+//                        .ignoresSafeArea()
+//                }
+//                .opacity(viewModel.isLoading ? 1 : 0)
+            Rectangle()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background {
-                    Color.background.opacity(0.5)
-                        .ignoresSafeArea()
-                }
-                .opacity(viewModel.isLoading ? 1 : 0)
+                .foregroundStyle(Color.background.opacity(0.6))
+                .ignoresSafeArea()
+                .overlay {
+                    ProgressView {
+                        Text(viewModel.loadingMessage)
+                            .background {
+                                Capsule()
+                                    .foregroundStyle(Color.background)
+                                    .blur(radius: 10)
+                            }
+                    }
+                }.opacity(viewModel.isLoading ? 1 : 0)
         }
         .navigation(isActive: $viewModel.push, destination: {
             viewModel.route?.screen

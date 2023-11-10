@@ -21,16 +21,21 @@ enum HomeRouter: ScreenRoute {
         switch self {
         case .settings:
             return "settings"
+        case .stationDetails:
+            return "stationDetailsmghv bn "
         }
     }
     
     case settings
+    case stationDetails
     
     @ViewBuilder
     var screen: some View {
         switch self {
         case .settings:
             SettingsView()
+        case .stationDetails:
+            StationDetailsView()
         }
     }
 }
@@ -142,11 +147,7 @@ final class HomeViewModel: ObservableObject {
         locationManager.locationUpdateHandler = { [weak self] newLocation in
             
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.filterStationsByDefault()
-        }
-        
+                
         focusToCurrentLocation()
     }
     
@@ -186,13 +187,17 @@ final class HomeViewModel: ObservableObject {
         self.showLoader(message: "detecting_address".localize)
         
         locationManager.getAddressFromLatLon(latitude: loc.latitude, longitude: loc.longitude) { address in
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.hideLoader()
-                if self.state == .selectFrom {
-                    self.fromAddress = address
-                } else {
-                    self.toAddress = address
-                }
+            self.hideLoader()
+            if self.state == .selectFrom {
+                self.fromAddress = address
+            } else {
+                self.toAddress = address
+            }
+        }
+        
+        if state == .selectFrom {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.filterStationsByDefault()
             }
         }
     }
@@ -275,9 +280,13 @@ final class HomeViewModel: ObservableObject {
             guard let user = UserSettings.shared.userInfo else {
                 return
             }
+            
+            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
+                return
+            }
 
-            let stations = await MainService.shared.findStations(atCity: "\(user.cityId ?? -1)")
-            Logging.l("Number of stations in \(user.cityName ?? "") \(stations.count)")
+            let stations = await MainService.shared.filterStations(atLocation: (c.latitude, c.longitude), in: 10)
+            Logging.l("Number of stations at \(c) in radius \(10) is \(stations.count)")
                         
             await MainActor.run {
                 self.stations = stations.sorted(by: {$0.distance(from: self.locationManager.currentLocation?.coordinate ?? .init()) < $1.distance(from: self.locationManager.currentLocation?.coordinate ?? .init())})

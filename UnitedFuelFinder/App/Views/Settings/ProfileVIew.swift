@@ -11,7 +11,6 @@ import SwiftUI
 
 struct ProfileVIew: View {
     @StateObject var viewModel = ProfileViewModel()
-    @FocusState private var isAddressFocused: Bool
 
     var body: some View {
         ZStack {
@@ -92,22 +91,7 @@ struct ProfileVIew: View {
                 viewModel.route = .selectCity($viewModel.city, stateId)
             }
             
-            TextField("", text: $viewModel.address, prompt: Text("Address"), axis: .vertical)
-                .padding()
-                .textContentType(.streetAddressLine1)
-                .font(Font.system(size: 14, weight: .regular))
-                .lineLimit(5, reservesSpace: true)
-                .padding(2)
-                .background(
-                    RoundedRectangle(
-                        cornerRadius: 8
-                    )
-                    .stroke(lineWidth: 1).foregroundStyle(
-                        isAddressFocused ? Color.black.opacity(0.8) : Color.gray.opacity(0.5)
-                    )
-                    .padding(.horizontal, 1)
-                )
-                .focused($isAddressFocused)
+            YTextView(text: $viewModel.address, placeholder: "address".localize.capitalized)
         }
     }
 }

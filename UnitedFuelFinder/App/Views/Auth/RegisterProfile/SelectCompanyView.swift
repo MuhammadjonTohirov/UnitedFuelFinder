@@ -16,40 +16,24 @@ struct SelectCompanyView: View {
     
     var body: some View {
         ItemSelectionView(data: companies) { item in
-            Button(action: {
-                if company == item {
-                    company = nil
-                    return
-                }
-                
-                company = item
-            }, label: {
-                VStack(spacing: 0) {
-                    HStack {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text(item.name)
-                                .foregroundStyle(Color.label)
-                                .font(.system(size: 13, weight: .medium))
-                            
-                            Text(item.address)
-                                .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                                .font(.system(size: 12))
-                        }
-                        Spacer()
-                        
-                        Image(systemName: "checkmark")
-                            .opacity(company == item ? 1 : 0)
-                    }
-                    .frame(height: 62)
-                    Divider()
-                }
-            })
+            VStack(alignment: .leading, spacing: 4) {
+                Text(item.name)
+                    .foregroundStyle(Color.label)
+                    .font(.system(size: 13, weight: .medium))
+                    
+                Text(item.address)
+                    .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                    .font(.system(size: 12))
+            }
+            .frame(height: 56)
         } onSearching: { item, key in
             if key.isEmpty {
                 return true
             }
             
             return item.name.lowercased().contains(key.lowercased())
+        }  onSelectChange: { items in
+            self.company = items.first
         }
         .navigationTitle("select_state".localize)
         .onAppear {

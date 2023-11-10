@@ -9,21 +9,47 @@ import Foundation
 import SwiftUI
 import RealmSwift
 
+internal class ItemSelectionViewModel<C: Object & Identifiable>: ObservableObject {
+    @Published var searchText: String = ""
+    @Published var isSearchPresented: Bool = true
+    
+    var selectedObjectsIds: Set<C.ID> = []
+}
+
 public struct ItemSelectionView<C: Object & Identifiable>: View {
     var data: Results<C>
-    @State private var searchText: String = ""
-    @State private var isSearchPresented: Bool = true
+    var multiSelect: Bool = false
+    
+    @StateObject private var viewModel = ItemSelectionViewModel<C>()
+    
     var listItem: (C) -> any View
     var onSearching: (C, String) -> Bool
+    var onSelectChange: (Set<C>) -> Void
     
     @Environment (\.presentationMode) var presentationMode
     
     public var body: some View {
         LazyVStack(content: {
             ForEach(data.filter({
-                onSearching($0, searchText)
+                onSearching($0, viewModel.searchText)
             })) { item in
-                AnyView(listItem(item))
+                VStack {
+                    Button(action: {
+                        self.onSelect(item)
+                        self.onSelectChange(Set(data.filter({self.viewModel.selectedObjectsIds.contains($0.id)})))
+                    }, label: {
+                        HStack {
+                            AnyView(listItem(item))
+                            
+                            Spacer()
+
+                            Image(systemName: "checkmark")
+                                .opacity(viewModel.selectedObjectsIds.contains(item.id) ? 1 : 0)
+                        }
+                    })
+                    
+                    Divider()
+                }
             }
         })
         .scrollable()
@@ -38,7 +64,19 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
                 })
             }
         })
-        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
+        .searchable(text: $viewModel.searchText, placement: .navigationBarDrawer(displayMode: .always))
+    }
+    
+    private func onSelect(_ item: C) {
+        if viewModel.selectedObjectsIds.contains(item.id) {
+            viewModel.selectedObjectsIds.remove(item.id)
+        }
+        
+        if !multiSelect {
+            viewModel.selectedObjectsIds.removeAll()
+        }
+        
+        viewModel.selectedObjectsIds.insert(item.id)
     }
 }
 
@@ -46,12 +84,6 @@ struct TestView: View {
     @State var stations: [StationItem] = []
     var body: some View {
         HomeView()
-    }
-}
-
-#Preview {
-    NavigationView {
-        TestView()
     }
 }
 

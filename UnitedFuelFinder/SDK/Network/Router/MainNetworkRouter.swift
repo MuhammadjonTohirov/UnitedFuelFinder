@@ -12,11 +12,15 @@ enum MainNetworkRouter: URLRequestProtocol {
         switch self {
         case .stationsInCity(let cityId):
             return URL.baseAPI.appendingPath("Driver", "Stations", cityId)
+        case .filterStations:
+            return URL.baseAPI.appendingPath("Driver", "FilterStations")
         }
     }
     
     var body: Data? {
         switch self {
+        case .filterStations(let request):
+            return request.asData
         default:
             return nil
         }
@@ -24,6 +28,8 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     var method: HTTPMethod {
         switch self {
+        case .filterStations:
+            return .post
         default:
             return .get
         }
@@ -33,14 +39,15 @@ enum MainNetworkRouter: URLRequestProtocol {
         var request: URLRequest?
         
         switch self {
-        case .stationsInCity:
+        case .stationsInCity, .filterStations:
             request = URLRequest.new(url: url, withAuth: true)
         }
         
         request?.httpMethod = method.rawValue.uppercased()
-        
+        request?.httpBody = self.body
         return request!
     }
     
     case stationsInCity(_ cityId: String)
+    case filterStations(request: NetReqFilterStations)
 }
