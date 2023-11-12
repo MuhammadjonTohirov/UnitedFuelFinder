@@ -8,15 +8,32 @@
 import SwiftUI
 
 struct StationDetailsView: View {
-    var station: StationItem
     
     @Environment (\.dismiss) var dismiss
-    @FocusState private var isFocused: Bool
-    @State private var comment: String = ""
-    @State private var rating: Int = 0
+    
+    @StateObject var viewModel: StationDetailsViewModel = .init()
+    private var station: StationItem
+    
+    init(station: StationItem) {
+        self.station = station
+    }
+    
     @State private var commentsPresented: Bool = false
     
     var body: some View {
+        ZStack {
+            innerBody
+            
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "please_wait".localize)
+        }
+        .onAppear {
+            self.viewModel.station = station
+            viewModel.onAppear()
+        }
+        .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 1.5)
+    }
+    
+    var innerBody: some View {
         VStack {
             headerView
             
@@ -25,14 +42,12 @@ struct StationDetailsView: View {
             postFeedbacks
             
             comments
-            
-            Text("")
-                .frame(height: 50)
+                .padding(.bottom, 50)
         }
         .scrollable(showIndicators: false)
         .ignoresSafeArea(.container)
         .keyboardDismissable()
-        .fullScreenCover(isPresented: $commentsPresented, content: {
+        .navigation(isActive: $commentsPresented, destination: {
             CommentsView()
         })
     }
@@ -57,10 +72,10 @@ struct StationDetailsView: View {
                     .frame(width: 44, height: 32)
 
                 VStack(alignment: .leading, spacing: 8) {
-                    Text(station.name)
+                    Text(viewModel.name)
                         .font(.system(size: 13, weight: .semibold))
                     
-                    Text(station.address ?? "unknown_address".localize)
+                    Text(viewModel.address ?? "unknown_address".localize)
                         .font(.system(size: 12))
                 }
             }
@@ -73,20 +88,20 @@ struct StationDetailsView: View {
             [
                 row(
                     title: "distance".localize,
-                    detail: Text(station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate))
+                    detail: Text(viewModel.station?.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate) ?? "")
                         .font(.system(size: 12, weight: .medium))
                 ),
                 
                 row(
                     title: "price".localize,
-                    detail: Text(station.actualPriceInfo)
+                    detail: Text(viewModel.station?.actualPriceInfo ?? "")
                         .font(.system(size: 12, weight: .semibold))
                         .foregroundStyle(Color.init(uiColor: .systemGreen))
                 ),
                 
                 row(
                     title: "discount".localize,
-                    detail: Text(station.discountInfo)
+                    detail: Text(viewModel.station?.discountInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
                 )
             ].vstack(spacing: Padding.small)
@@ -115,7 +130,7 @@ struct StationDetailsView: View {
                 .font(.system(size: 14, weight: .medium))
             
             YTextView(
-                text: $comment,
+                text: $viewModel.comment,
                 placeholder: "write_comment".localize
             )
             .padding(.horizontal, Padding.medium)
@@ -131,13 +146,14 @@ struct StationDetailsView: View {
             RateView(starsCount: 5, rate: 0)
                 .set(onRateChange: { rate in
                     Logging.l(tag: "StationDetails", "Rate \(rate)")
+                    viewModel.rating = rate
                 })
                 .frame(width: 100, height: 20)
                 .padding(.leading, Padding.small / 2)
             Spacer()
             
             Button(action: {
-                
+                viewModel.postFeedback()
             }, label: {
                 Text("post".localize.capitalized)
                     .font(.system(size: 13, weight: .semibold))
@@ -158,8 +174,13 @@ struct StationDetailsView: View {
                 .fontWeight(.semibold)
                 .padding(.leading)
             
-            ForEach(0..<3) {index in
-                commentItem
+            ForEach(viewModel.commentList, id: \.id) { comment in
+                comment.view
+                    .set(onClickDelete: {
+                        viewModel.deleteFeedback(id: comment.id.asInt)
+                    })
+                    .padding(.horizontal, Padding.medium)
+                    .padding(.vertical, Padding.small / 2)
             }
             
             SubmitButton {
@@ -170,42 +191,10 @@ struct StationDetailsView: View {
             .padding(Padding.medium)
         }
     }
-    
-    private var commentItem: some View {
-        VStack(alignment: .leading, spacing: Padding.small) {
-            HStack {
-                Text("You")
-                    .fontWeight(.medium)
-                    .font(.system(size: 13, weight: .medium))
-                Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    Image(systemName: "trash")
-                        .foregroundStyle(.red)
-                })
-            }
-            
-            Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's")
-                .fontWeight(.light)
-                .font(.system(size: 12))
-            
-            HStack(spacing: 5) {
-                RateView(rate: 2)
-                    .frame(width: 80, height: 16)
-                Spacer()
-                Text("12:30 12/10/2023")
-                    .font(.system(size: 12))
-                    .foregroundStyle(.gray).opacity(0.7)
-            }
-        }
-        .padding(Padding.small)
-        .background(
-            RoundedRectangle(cornerRadius: 10)
-                .fill(Color.gray.opacity(0.04))
-        )
-        .frame(maxHeight: 120)
-        .padding(.horizontal, Padding.medium)
-        .padding(.vertical, Padding.small / 2)
+}
+
+#Preview {
+    NavigationView {
+        StationDetailsView(station: .init(id: 0, name: "Name", lat: 0, lng: 0, isDeleted: false, cityId: 1, customerId: 1, stateId: nil))
     }
 }

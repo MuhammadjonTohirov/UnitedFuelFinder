@@ -11,6 +11,7 @@ import SwiftUI
 public struct YTextView: View {
     @Binding public var text: String
     public var placeholder: String
+    public var lineLimit: Int = 5
     @FocusState private var isFocused: Bool
     
     public var body: some View {
@@ -18,7 +19,7 @@ public struct YTextView: View {
             .padding(Padding.medium)
             .textContentType(.streetAddressLine1)
             .font(Font.system(size: 14, weight: .regular))
-            .lineLimit(5, reservesSpace: true)
+            .lineLimit(lineLimit, reservesSpace: true)
             .background(
                 RoundedRectangle(
                     cornerRadius: 8

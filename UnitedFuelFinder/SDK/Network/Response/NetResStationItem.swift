@@ -33,7 +33,7 @@ struct NetResStationItem: NetResBody {
     var customerId: Int
     var address: String?
     var phone: String?
-    var stateId: String
+    var stateId: String?
     var discountPercent: Float?
     var retailPrice: Float?
     var number: String?

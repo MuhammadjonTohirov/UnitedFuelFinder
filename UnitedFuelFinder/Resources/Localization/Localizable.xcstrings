@@ -23,9 +23,6 @@
     "%lld" : {
 
     },
-    "12:30 12/10/2023" : {
-
-    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -784,9 +781,6 @@
         }
       }
     },
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's" : {
-
-    },
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and" : {
 
     },
@@ -1440,9 +1434,6 @@
       }
     },
     "Yellow" : {
-
-    },
-    "You" : {
 
     }
   },

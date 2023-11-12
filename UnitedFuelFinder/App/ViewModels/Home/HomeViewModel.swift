@@ -110,7 +110,7 @@ final class HomeViewModel: ObservableObject {
     
     @Published var pickedLocation: CLLocation?
 
-    @Published private(set) var isLoading: Bool = false
+    @Published var isLoading: Bool = false
     @Published var isDragging: Bool = false
     @Published var isDetectingAddressFrom: Bool = false
     @Published var isDetectingAddressTo: Bool = false

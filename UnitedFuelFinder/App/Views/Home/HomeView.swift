@@ -92,20 +92,7 @@ struct HomeView: View {
 //                        .ignoresSafeArea()
 //                }
 //                .opacity(viewModel.isLoading ? 1 : 0)
-            Rectangle()
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .foregroundStyle(Color.background.opacity(0.6))
-                .ignoresSafeArea()
-                .overlay {
-                    ProgressView {
-                        Text(viewModel.loadingMessage)
-                            .background {
-                                Capsule()
-                                    .foregroundStyle(Color.background)
-                                    .blur(radius: 10)
-                            }
-                    }
-                }.opacity(viewModel.isLoading ? 1 : 0)
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
         }
         .navigation(isActive: $viewModel.push, destination: {
             viewModel.route?.screen
@@ -167,8 +154,6 @@ struct HomeView: View {
 
                 currentLocationNavView
                     .padding(.trailing, 8)
-                    .padding(.bottom, 8)
-                
             }
             
             HomeBottomSheetView(
