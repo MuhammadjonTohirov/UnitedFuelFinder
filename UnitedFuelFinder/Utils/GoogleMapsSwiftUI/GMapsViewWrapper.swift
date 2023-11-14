@@ -27,10 +27,71 @@ import CoreLocation
 
 class GMapsViewModel: ObservableObject {
     @Published var address: String = ""
+    @Published var pickedLocation: CLLocation?
+    @Published var isDragging: Bool
+    var screenCenter: CGPoint
+    @Published var markers: [GMSMarker]
+
     var onAddressChanged: (() -> Void)?
+    
+    fileprivate var onStartDrawing: (() -> Void)?
+    fileprivate var onEndDrawing: (() -> Void)?
+    fileprivate var onClickMarker: ((GMSMarker) -> Void)?
+    fileprivate var routeFrom: CLLocationCoordinate2D?
+    fileprivate var routeTo: CLLocationCoordinate2D?
+    fileprivate var didRadiusChanged: Bool = true
+
+    fileprivate var radius: CLLocationDistance = .zero
+    private(set) var location: CLLocation?
+    
+    init(address: String, pickedLocation: CLLocation? = nil, isDragging: Bool, screenCenter: CGPoint, markers: [GMSMarker], onAddressChanged: (() -> Void)? = nil) {
+        self.address = address
+        self.pickedLocation = pickedLocation
+        self.isDragging = isDragging
+        self.screenCenter = screenCenter
+        self.markers = markers
+        self.onAddressChanged = onAddressChanged
+    }
+    
+    func set(radius: CLLocationDistance) {
+        self.radius = radius
+    }
+    
+    func set(onClickMarker: @escaping (GMSMarker) -> Void) -> Self {
+        var v = self
+        v.onClickMarker = onClickMarker
+        return v
+    }
+    
+    func set(currentLocation: CLLocation?) {
+        self.location = currentLocation
+    }
+    
+    func set(from: CLLocationCoordinate2D?, to: CLLocationCoordinate2D?, onStartDrawing: @escaping () -> Void, onEndDrawing: @escaping () -> Void) {
+        
+        if self.routeFrom != from {
+            self.routeFrom = from
+        }
+        
+        if self.routeTo != to {
+            self.routeTo = to
+        }
+        
+        self.onStartDrawing = onStartDrawing
+        self.onEndDrawing = onEndDrawing
+    }
 }
 
-struct GMapsView: UIViewControllerRepresentable {
+struct GMapsView: View {
+    
+    @ObservedObject var viewModel: GMapsViewModel
+    
+    var body: some View {
+        GMapsViewWrapper(pickedLocation: $viewModel.pickedLocation, isDragging: $viewModel.isDragging, screenCenter: viewModel.screenCenter, markers: $viewModel.markers)
+    }
+}
+
+struct GMapsViewWrapper: UIViewControllerRepresentable {
     private(set) var location: CLLocation?
     @Binding var pickedLocation: CLLocation?
     @Binding var isDragging: Bool
@@ -43,6 +104,9 @@ struct GMapsView: UIViewControllerRepresentable {
     fileprivate var onClickMarker: ((GMSMarker) -> Void)?
     fileprivate var routeFrom: CLLocationCoordinate2D?
     fileprivate var routeTo: CLLocationCoordinate2D?
+    fileprivate var didRadiusChanged: Bool = true
+
+    fileprivate var radius: CLLocationDistance = .zero
     
     init(pickedLocation: Binding<CLLocation?>, isDragging: Binding<Bool>, screenCenter: CGPoint, markers: Binding<[GMSMarker]>) {
         self._isDragging = isDragging
@@ -53,6 +117,12 @@ struct GMapsView: UIViewControllerRepresentable {
     
     func makeCoordinator() -> Coordinator {
         Coordinator(self)
+    }
+    
+    func set(radius: CLLocationDistance) -> Self {
+        var v = self
+        v.radius = radius
+        return v
     }
     
     func set(onClickMarker: @escaping (GMSMarker) -> Void) -> Self {
@@ -80,7 +150,7 @@ struct GMapsView: UIViewControllerRepresentable {
         
         v.onStartDrawing = onStartDrawing
         v.onEndDrawing = onEndDrawing
-
+        
         return v
     }
     
@@ -114,7 +184,7 @@ struct GMapsView: UIViewControllerRepresentable {
             context.coordinator.endDrawing()
         }
         
-//        context.coordinator.setupMarkers(onMap: uiViewController.map)
+//       MARK: markers drawing
         let region = uiViewController.map.projection.visibleRegion()
         
         markers.forEach { marker in
@@ -128,19 +198,24 @@ struct GMapsView: UIViewControllerRepresentable {
                 }
             }
         }
+        
+//       MARK: Radius change
+        if didRadiusChanged, let coordinate = self.pickedLocation?.coordinate {
+            context.coordinator.drawCircleByRadius(on: uiViewController.map, location: coordinate, radius: radius)
+        }
     }
 
     class Coordinator: NSObject, GMSMapViewDelegate {
         
-        var parent: GMapsView
+        var parent: GMapsViewWrapper
         var isRouting: Bool = false
         var hasDrawen: Bool = false
-        
+        private(set) var circle: GMSCircle?
         private(set) var currentRoutePolyline: GMSPolyline?
         private(set) var markerA: GMSMarker?
         private(set) var markerB: GMSMarker?
         
-        init(_ parent: GMapsView) {
+        init(_ parent: GMapsViewWrapper) {
             self.parent = parent
         }
         
@@ -165,6 +240,7 @@ struct GMapsView: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
             debugPrint("Will move \(gesture)")
+            removeCircle()
 
             if gesture {
                 withAnimation(.default) {
@@ -180,19 +256,9 @@ struct GMapsView: UIViewControllerRepresentable {
                 self.parent.isDragging = false
             }
             
-            let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
-            
-            let bottom = 158 / 2 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                var center = mapView.center
-                center.y -= bottom
-                let coordinate = mapView.projection.coordinate(for: center)
-                
-                self.parent.pickedLocation = CLLocation.init(
-                    latitude: coordinate.latitude,
-                    longitude: coordinate.longitude
-                )
+            readScreenCenterCoordinate(on: mapView)
+            if let l = self.parent.pickedLocation?.coordinate {
+                drawCircleByRadius(on: mapView, location: l, radius: parent.radius)
             }
         }
         
@@ -335,6 +401,45 @@ struct GMapsView: UIViewControllerRepresentable {
                     }
                 }
             }
+        }
+        
+        func drawCircleByRadius(on mapView: GMSMapView, location: CLLocationCoordinate2D, radius: CLLocationDistance) {
+            
+            if circle != nil {
+                // update circle
+                circle?.radius = radius.f.asMeters
+                Logging.l(tag: "GMapsView", "Update circle by \(radius)")
+                circle?.map = mapView
+                circle?.position = location
+                return
+            }
+            
+            // create circle
+            circle = .init(position: location, radius: radius.f.asMeters)
+            circle?.fillColor = UIColor(red: 0.35, green: 0, blue: 0, alpha: 0.05)
+            circle?.strokeColor = .red
+            circle?.strokeWidth = 2
+            circle?.map = mapView
+        }
+        
+        private func removeCircle() {
+            circle?.map = nil
+            circle = nil
+        }
+        
+        private func readScreenCenterCoordinate(on mapView: GMSMapView) {
+            let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
+            
+            let bottom = 158 / 2 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
+            
+            var center = mapView.center
+            center.y -= bottom
+            let coordinate = mapView.projection.coordinate(for: center)
+            
+            self.parent.pickedLocation = CLLocation.init(
+                latitude: coordinate.latitude,
+                longitude: coordinate.longitude
+            )
         }
     }
 }

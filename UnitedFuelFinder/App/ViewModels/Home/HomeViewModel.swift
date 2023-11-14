@@ -114,6 +114,8 @@ final class HomeViewModel: ObservableObject {
     @Published var isDragging: Bool = false
     @Published var isDetectingAddressFrom: Bool = false
     @Published var isDetectingAddressTo: Bool = false
+    @Published var radius: CLLocationDistance = 10
+    @Published var radiusValue: CGFloat = 10
     
     private(set) var loadingMessage: String = ""
     
@@ -126,6 +128,8 @@ final class HomeViewModel: ObservableObject {
     
     @Published var stations: [StationItem] = []
     @Published var stationsMarkers: [GMSMarker] = []
+    
+    private var loadStationsTask: DispatchWorkItem?
     
     var distance: String {
         guard let from = fromLocation, let to = toLocation else {
@@ -153,10 +157,6 @@ final class HomeViewModel: ObservableObject {
         
         locationManager.startUpdatingLocation()
         
-        locationManager.locationUpdateHandler = { [weak self] newLocation in
-            
-        }
-                
         focusToCurrentLocation()
     }
     
@@ -210,14 +210,126 @@ final class HomeViewModel: ObservableObject {
         }
         
         if state == .selectFrom {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                if !self.isDragging {
-                    self.filterStationsByDefault()
-                }
-            }
+            startFiltering()
         }
     }
     
+    func startFiltering() {
+        self.radius = self.radiusValue
+        loadStationsTask?.cancel()
+
+        loadStationsTask = .init(block: {
+            if !self.isDragging {
+                self.filterStationsByDefault()
+            }
+        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: loadStationsTask!)
+    }
+    
+    func clearDestination() {
+        mainIfNeeded {
+            self.hasDrawen = false
+            self.toAddress = ""
+            self.toLocation = nil
+        }
+    }
+    
+    func onStartDrawingRoute() {
+        self.showLoader(message: "drawing_route".localize)
+    }
+    
+    func onEndDrawingRoute() {
+        mainIfNeeded {
+            self.hideLoader()
+            self.hasDrawen = true
+        }
+    }
+    
+    private func filterStationsByRoute() {
+//        TODO: - Implement
+    }
+    
+    private func filterStationsByDefault() {
+//        mainIfNeeded {
+//            self.stations.removeAll()
+//        }
+
+        Task {
+            self.showLoader(message: "loading_stations".localize)
+
+            Logging.l(tag: "HomeViewModel", "Start loading stations")
+
+            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
+                return
+            }
+
+            let _stations = await MainService.shared.discountedStations(
+                atLocation: (c.latitude, c.longitude),
+                in: Int(radiusValue)
+            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
+            
+            Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radiusValue) is \(stations.count)")
+                    
+            await MainActor.run {
+                self.stationsMarkers.forEach { marker in
+                    marker.map = nil
+                }
+                
+                self.stationsMarkers.removeAll()
+//                crossection items of self.stations and _stations
+                let newStations = _stations.filter({station in
+                    !self.stations.contains(where: {$0.id == station.id})
+                })
+                
+                let oldStations = self.stations.filter({station in
+                    !_stations.contains(where: {$0.id == station.id})
+                })
+            
+                oldStations.forEach { station in
+                    if let index = self.stations.firstIndex(where: {$0.id == station.id}) {
+                        self.stations.remove(at: index)
+                    }
+                }
+                
+                withAnimation {
+                    self.stations = newStations + self.stations
+                    self.stationsMarkers = self.stations.map({$0.asMarker})
+                }
+            }
+            
+            self.hideLoader()
+        }
+    }
+    
+    func showLoader(message: String) {
+        mainIfNeeded {
+            self.loadingMessage = message
+            self.isLoading = true
+        }
+    }
+    
+    func hideLoader() {
+        mainIfNeeded {
+            self.loadingMessage = ""
+            self.isLoading = false
+        }
+    }
+    
+    func setupFromAddress(with res: SearchAddressViewModel.SearchAddressResult) {
+        self.fromLocation = .init(latitude: res.lat, longitude: res.lng)
+        self.fromAddress = res.address
+        self.focusToLocation(self.fromLocation!)
+    }
+    
+    func setupToAddress(with res: SearchAddressViewModel.SearchAddressResult) {
+        self.toLocation = .init(latitude: res.lat, longitude: res.lng)
+        self.toAddress = res.address
+        self.onClickDrawRoute()
+    }
+}
+
+extension HomeViewModel {
     func onClickSelectToPointOnMap() {
         withAnimation {
             self.state = .selectTo
@@ -248,95 +360,6 @@ final class HomeViewModel: ObservableObject {
         withAnimation {
             self.state = .routing
         }
-    }
-    
-    func clearDestination() {
-        DispatchQueue.main.async {
-            self.hasDrawen = false
-            self.toAddress = ""
-            self.toLocation = nil
-        }
-    }
-    
-    func onStartDrawingRoute() {
-        DispatchQueue.main.async {
-            self.isLoading = true
-        }
-    }
-    
-    func onEndDrawingRoute() {
-        DispatchQueue.main.async {
-            self.isLoading = false
-            self.hasDrawen = true
-        }
-    }
-    
-    func filterStations() {
-        if toLocation == nil {
-            filterStationsByDefault()
-            return
-        }
-        
-        filterStationsByRoute()
-    }
-    
-    private func filterStationsByRoute() {
-//        TODO: - Implement
-    }
-    
-    private func filterStationsByDefault() {
-        stations = []
-        Task {
-            self.showLoader(message: "loading_stations".localize)
-
-            await AuthService.shared.syncUserInfo()
-
-            Logging.l("Start loading stations")
-
-            guard let user = UserSettings.shared.userInfo else {
-                return
-            }
-            
-            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
-                return
-            }
-
-            let stations = await MainService.shared.filterStations(atLocation: (c.latitude, c.longitude), in: 10)
-            Logging.l("Number of stations at \(c) in radius \(10) is \(stations.count)")
-                        
-            await MainActor.run {
-                self.stations = stations.sorted(by: {$0.distance(from: self.locationManager.currentLocation?.coordinate ?? .init()) < $1.distance(from: self.locationManager.currentLocation?.coordinate ?? .init())})
-                self.stationsMarkers = self.stations.map({$0.asMarker})
-            }
-            
-            self.hideLoader()
-        }
-    }
-    
-    func showLoader(message: String) {
-        DispatchQueue.main.async {
-            self.loadingMessage = message
-            self.isLoading = true
-        }
-    }
-    
-    func hideLoader() {
-        DispatchQueue.main.async {
-            self.loadingMessage = ""
-            self.isLoading = false
-        }
-    }
-    
-    func setupFromAddress(with res: SearchAddressViewModel.SearchAddressResult) {
-        self.fromLocation = .init(latitude: res.lat, longitude: res.lng)
-        self.fromAddress = res.address
-        self.focusToLocation(self.fromLocation!)
-    }
-    
-    func setupToAddress(with res: SearchAddressViewModel.SearchAddressResult) {
-        self.toLocation = .init(latitude: res.lat, longitude: res.lng)
-        self.toAddress = res.address
-        self.onClickDrawRoute()
     }
 }
 

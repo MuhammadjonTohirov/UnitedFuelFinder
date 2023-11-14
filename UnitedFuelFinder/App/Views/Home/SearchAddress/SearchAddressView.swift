@@ -83,7 +83,7 @@ struct SearchAddressView: View {
     
     private func onSuccessResult(_ res: SearchAddressViewModel.SearchAddressResult) {
         onResult?(res)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+        mainIfNeeded {
             self.dismiss.callAsFunction()
         }
     }

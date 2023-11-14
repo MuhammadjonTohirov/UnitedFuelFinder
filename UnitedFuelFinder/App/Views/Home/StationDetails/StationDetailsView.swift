@@ -40,8 +40,9 @@ struct StationDetailsView: View {
             details
             
             postFeedbacks
-            
+        
             comments
+                .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
                 .padding(.bottom, 50)
         }
         .scrollable(showIndicators: false)
@@ -136,8 +137,6 @@ struct StationDetailsView: View {
             .padding(.horizontal, Padding.medium)
             
             starRating
-                Divider()
-                .padding(.bottom)
         }
     }
     
@@ -169,7 +168,9 @@ struct StationDetailsView: View {
     
     private var comments: some View {
         VStack(alignment: .leading) {
-            
+            Divider()
+                .padding(.bottom)
+
             Text("latest_comments".localize)
                 .fontWeight(.semibold)
                 .padding(.leading)

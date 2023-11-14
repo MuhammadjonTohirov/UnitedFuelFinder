@@ -95,7 +95,16 @@ public extension StationItem {
     }
     
     func distance(from coordinate: CLLocationCoordinate2D) -> Double {
-        GMSGeometryDistance(self.asMarker.position, coordinate)
+        Double(GMSGeometryDistance(self.asMarker.position, coordinate).f.asMile)
+    }
+    
+    var distanceFromCurrentLocation: Double {
+        let coordinate = GLocationManager.shared.currentLocation?.coordinate ?? .init(latitude: 0, longitude: 0)
+        return Double(GMSGeometryDistance(self.coordinate, coordinate).f.asMile)
+    }
+    
+    var coordinate: CLLocationCoordinate2D {
+        .init(latitude: self.lat, longitude: self.lng)
     }
     
     func distanceInfo(from coordinate: CLLocationCoordinate2D?) -> String {

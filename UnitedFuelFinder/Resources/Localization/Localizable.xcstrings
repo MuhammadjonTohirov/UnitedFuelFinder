@@ -23,6 +23,9 @@
     "%lld" : {
 
     },
+    "%lld mi" : {
+
+    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -859,6 +862,9 @@
         }
       }
     },
+    "No stations found" : {
+
+    },
     "no_address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1193,6 +1199,9 @@
           }
         }
       }
+    },
+    "Searching stations" : {
+
     },
     "select_city" : {
       "extractionState" : "manual",

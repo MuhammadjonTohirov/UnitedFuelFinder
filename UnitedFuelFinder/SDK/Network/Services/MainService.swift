@@ -24,6 +24,14 @@ struct MainService {
         return ((result?.data) ?? []).compactMap({.init(res: $0)})
     }
     
+    func discountedStations(atLocation location: (lat: Double, lng: Double), in distance: Int) async -> [StationItem] {
+        let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.discountedStations(
+            request: .init(current: .init(lat: location.lat, lng: location.lng), distance: Double(distance)))
+        )
+        
+        return ((result?.data) ?? []).compactMap({.init(res: $0)})
+    }
+    
     func feedbacksFor(station id: Int) async -> [StationCommentItem] {
         let result: NetRes<[NetResStationComment]>? = await Network.send(request: MainNetworkRouter.feedbacksFor(station: id))
         

@@ -29,7 +29,6 @@ struct HomeView: View {
         NavigationStack {
             innerBody
                 .navigationBarTitleDisplayMode(.inline)
-//                .navigationTitle("home".localize.capitalized)
                 .toolbar(content: {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
@@ -44,12 +43,13 @@ struct HomeView: View {
     
     var innerBody: some View {
         ZStack {
-            GMapsView(
+            GMapsViewWrapper(
                 pickedLocation: $viewModel.pickedLocation,
                 isDragging: $viewModel.isDragging,
                 screenCenter: pointerFrame.center,
                 markers: $viewModel.stationsMarkers
             )
+            .set(radius: viewModel.radius)
             .set(currentLocation: viewModel.currentLocation)
             .set(
                 from: self.viewModel.fromLocation?.coordinate,
@@ -84,15 +84,6 @@ struct HomeView: View {
             })
             
             bottomContent
-            
-//            BouncingLoadingView(message: viewModel.loadingMessage)
-//                .frame(maxWidth: .infinity, maxHeight: .infinity)
-//                .background {
-//                    Color.background.opacity(0.5)
-//                        .ignoresSafeArea()
-//                }
-//                .opacity(viewModel.isLoading ? 1 : 0)
-            CoveredLoadingView(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
         }
         .navigation(isActive: $viewModel.push, destination: {
             viewModel.route?.screen
@@ -127,6 +118,11 @@ struct HomeView: View {
             .readRect(rect: $pointerFrame)
             .offset(.init(width: 0, height: -(pointerHeight / 2)))
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
+            
+            VerticalValueAdjuster(currentValue: $viewModel.radiusValue) { value, percentage in
+                viewModel.startFiltering()
+            }
+            .position(x: 24, y: 8 + UIApplication.shared.safeArea.top)
         }
     }
     
@@ -147,10 +143,6 @@ struct HomeView: View {
                 }
 
                 Spacer()
-
-                filterView
-                    .padding(.trailing, 8)
-                    .padding(.bottom, 8)
 
                 currentLocationNavView
                     .padding(.trailing, 8)
@@ -192,6 +184,7 @@ struct HomeView: View {
                 ),
                 stations: Array(self.viewModel.stations[0..<min(viewModel.stations.count, 6)]),
                 hasMoreButton: self.viewModel.stations.count > 6,
+                isSearching: self.viewModel.isLoading,
                 onClickMoreButton: {
                     viewModel.onClickViewAllStations()
                 }, onClickNavigate: { station in

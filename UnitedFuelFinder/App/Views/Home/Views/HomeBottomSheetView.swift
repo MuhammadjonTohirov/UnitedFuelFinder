@@ -8,17 +8,17 @@
 import Foundation
 import SwiftUI
 
-
 struct HomeBottomSheetView: View {
     var input: HomeBottomSheetInput
     var stations: [StationItem] = []
     var hasMoreButton: Bool
-    var onClickMoreButton: (() -> Void)? = nil
-    var onClickNavigate: ((StationItem) -> Void)? = nil
-    var onClickOpen: ((StationItem) -> Void)? = nil
+    private var isSearching: Bool = false
+    private var onClickMoreButton: (() -> Void)? = nil
+    private var onClickNavigate: ((StationItem) -> Void)? = nil
+    private var onClickOpen: ((StationItem) -> Void)? = nil
     private var stationItemHeight: CGFloat = 110
     
-    init(input: HomeBottomSheetInput, stations: [StationItem], hasMoreButton: Bool,
+    init(input: HomeBottomSheetInput, stations: [StationItem], hasMoreButton: Bool, isSearching: Bool = false,
          onClickMoreButton: (() -> Void)? = nil,
          onClickNavigate: ((StationItem) -> Void)? = nil,
          onClickOpen: ((StationItem) -> Void)? = nil
@@ -29,6 +29,7 @@ struct HomeBottomSheetView: View {
         self.onClickMoreButton = onClickMoreButton
         self.onClickNavigate = onClickNavigate
         self.onClickOpen = onClickOpen
+        self.isSearching = isSearching
     }
     
     var body: some View {
@@ -115,11 +116,40 @@ struct HomeBottomSheetView: View {
             .padding(.horizontal, Padding.medium)
             .scrollable(axis: .horizontal)
             .padding(.horizontal, -Padding.medium)
-            .scrollIndicators(.never)
-            .padding(.top, 10)
-            
+            .scrollIndicators(.never)   
+            .overlay {
+                itemsOverlay
+            }
         }
-        
+    }
+    
+    @ViewBuilder
+    private var itemsOverlay: some View {
+        if isSearching {
+            VStack {
+                VStack {
+                    Image("icon_search_2")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                        .frame(width: 42, height: 42)
+                    
+                    Text("Searching stations")
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                }.opacity(self.stations.isEmpty ? 1 : 0)
+            }
+        } else {
+            VStack {
+                Image("icon_search_failed")
+                    .renderingMode(.template)
+                    .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                    .frame(width: 42, height: 42)
+                
+                Text("No stations found")
+                    .font(.system(size: 14, weight: .medium))
+                    .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+            }.opacity(self.stations.isEmpty ? 1 : 0)
+        }
     }
     
     private func gasStationItem(_ station: StationItem) -> some View {
@@ -141,7 +171,9 @@ struct HomeBottomSheetView: View {
         
     }), onClickReady: {
         
-    }, distance: "10"), stations: [], hasMoreButton: true) { st in
+    }, distance: "10"), stations: [
+        .init(id: 0, name: "A", lat: 0, lng: 0, isDeleted: false, cityId: 1, customerId: 2, stateId: "NY")
+    ], hasMoreButton: false, isSearching: true, onClickOpen:  { st in
         
-    }
+    })
 }

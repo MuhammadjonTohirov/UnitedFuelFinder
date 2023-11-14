@@ -24,6 +24,7 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func requestLocationPermission() {
+        
         locationManager.requestWhenInUseAuthorization()
         locationManager.allowsBackgroundLocationUpdates = true
     }

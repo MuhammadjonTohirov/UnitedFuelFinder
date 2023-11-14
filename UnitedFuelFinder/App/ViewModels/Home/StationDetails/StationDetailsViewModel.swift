@@ -40,12 +40,7 @@ class StationDetailsViewModel: NSObject, ObservableObject, Alertable {
         
         didAppear = true
     }
-    
-    private func didViewAppear() {
         
-        self.loadFeedbacks()
-    }
-    
     func loadFeedbacks() {
         guard let station else {
             return
@@ -98,6 +93,11 @@ class StationDetailsViewModel: NSObject, ObservableObject, Alertable {
         }
     }
     
+    private func didViewAppear() {
+        
+        self.loadFeedbacks()
+    }
+
     private func showLoader() {
         DispatchQueue.main.async {
             self.isLoading = true

@@ -38,3 +38,15 @@ extension Float {
         return formatter.string(from: NSNumber(value: self)) ?? ""
     }
 }
+
+extension CGFloat {
+///  from meters
+    var asMile: CGFloat {
+        self * 0.000621371192
+    }
+
+/// from miles
+    var asMeters: CGFloat {
+        self * 1609.344
+    }
+}
