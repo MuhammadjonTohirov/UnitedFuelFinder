@@ -96,7 +96,7 @@ struct AuthView: View {
                 SubmitButton {
                     viewModel.onClickVerifyUsername()
                 } label: {
-                    Text("login".localize)
+                    Text("authenticate".localize)
                 }
                 .set(isLoading: viewModel.isLoading)
                 .set(isEnabled: viewModel.isOfferAccepted && !viewModel.username.isEmpty)

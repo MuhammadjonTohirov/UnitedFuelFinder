@@ -66,14 +66,14 @@ enum HomePresentableSheets: ScreenRoute {
         }
     }
     
-    case allStations(_ stations: [StationItem], _ from: String?, _ to: String?, _ radius: String?)
+    case allStations(stations: [StationItem], from: String?, to: String?, radius: Int?, location: CLLocationCoordinate2D?, onNavigation: ((StationItem) -> Void)?, onClickItem: ((StationItem) -> Void)?)
     case searchAddress(_ completion: (SearchAddressViewModel.SearchAddressResult) -> Void)
     
     @ViewBuilder
     var screen: some View {
         switch self {
-        case .allStations(let stations, let from, let to, let radius):
-            AllStationsView(from: from, to: to, radius: radius, stations: stations)
+        case .allStations(let stations, let from, let to, let radius, let location, let onNav, let onOpen):
+            AllStationsView(from: from, to: to, location: location, radius: radius, onClickNavigate: onNav, onClickOpen: onOpen, stations: stations)
         case .searchAddress(let completion):
             SearchAddressView(onResult: completion)
         }
@@ -266,7 +266,7 @@ final class HomeViewModel: ObservableObject {
 
             let _stations = await MainService.shared.discountedStations(
                 atLocation: (c.latitude, c.longitude),
-                in: Int(radiusValue)
+                in: Int(radiusValue), limit: 1000
             ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
             
             Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radiusValue) is \(stations.count)")
@@ -344,7 +344,13 @@ extension HomeViewModel {
     }
         
     func onClickViewAllStations() {
-        self.presentableRoute = .allStations(self.stations, nil, nil, "25 km")
+        self.presentableRoute = .allStations(
+            stations: self.stations, from: nil, to: nil, radius: Int(radius),
+            location: self.fromLocation?.coordinate, onNavigation: { sta in
+                self.focusToLocation(sta.clLocation)
+            }, onClickItem: { sta in
+                self.route = .stationDetails(station: sta)
+            })
     }
     
     func onClickBack() {

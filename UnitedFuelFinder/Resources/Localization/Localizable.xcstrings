@@ -144,8 +144,28 @@
         }
       }
     },
-    "Blue" : {
-
+    "authenticate" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Authenticate"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Аутентификация"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Autentifikatsiya"
+          }
+        }
+      }
     },
     "clear" : {
       "extractionState" : "manual",
@@ -525,12 +545,6 @@
         }
       }
     },
-    "Green" : {
-
-    },
-    "Indigo" : {
-
-    },
     "insert_creds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -550,6 +564,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ma`lumotlaringizni kiriting"
+          }
+        }
+      }
+    },
+    "invalid_otp" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid OTP"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверный OTP"
           }
         }
       }
@@ -810,12 +841,6 @@
         }
       }
     },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
-    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -957,13 +982,8 @@
         }
       }
     },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
     "Orange" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1102,9 +1122,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1144,9 +1161,6 @@
           }
         }
       }
-    },
-    "Regular" : {
-
     },
     "Retail price %@" : {
 
@@ -1321,9 +1335,6 @@
         }
       }
     },
-    "SwiftUI" : {
-
-    },
     "to" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1369,9 +1380,6 @@
           }
         }
       }
-    },
-    "Violet" : {
-
     },
     "warning" : {
       "extractionState" : "manual",
@@ -1441,9 +1449,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     }
   },
   "version" : "1.0"

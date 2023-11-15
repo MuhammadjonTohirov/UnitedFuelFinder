@@ -20,14 +20,14 @@ enum MainNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "PostFeedback", stationId)
         case .deleteFeedback(let feedback):
             return URL.baseAPI.appendingPath("Driver", "DeleteFeedback", feedback)
-        case .discountedStations:
-            return URL.baseAPI.appendingPath("Driver", "DiscountedStations")
+        case .discountedStations(_, let limit):
+            return URL.baseAPI.appendingPath("Driver", "DiscountedStations").queries(.init(name: "limit", value: "\(limit)"))
         }
     }
     
     var body: Data? {
         switch self {
-        case .filterStations(let request), .discountedStations(let request):
+        case .filterStations(let request), .discountedStations(let request, _):
             return request.asData
         case .postFeedback(_, let request):
             return request.asData
@@ -62,7 +62,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     case stationsInCity(_ cityId: String)
     case filterStations(request: NetReqFilterStations)
-    case discountedStations(request: NetReqFilterStations)
+    case discountedStations(request: NetReqFilterStations, limit: Int)
     case feedbacksFor(station: Int)
     case postFeedback(station: Int, request: NetReqStationFeedback)
     case deleteFeedback(feedback: Int)

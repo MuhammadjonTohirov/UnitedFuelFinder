@@ -128,7 +128,7 @@ struct SettingsView: View {
     
     private func doLogout() {
         UserSettings.shared.clear()
-        
+        UserSettings.shared.language = .english
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             mainRouter?.navigate(to: .loading)
         }

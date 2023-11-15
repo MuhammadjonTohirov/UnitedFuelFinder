@@ -18,9 +18,12 @@ import Foundation
 //      "address": "string",
 //      "phone": "string",
 //      "stateId": "string",
-//      "discountPercent": 0,
+//      "discountPrice": 0,
 //      "retailPrice": 0,
-//      "number": "string"
+//      "priceUpdated": "2023-11-15T19:59:23.289Z",
+//      "number": "string",
+//      "note": "string",
+//      "logoUrl": "string"
 //    }
 
 struct NetResStationItem: NetResBody {
@@ -34,7 +37,7 @@ struct NetResStationItem: NetResBody {
     var address: String?
     var phone: String?
     var stateId: String?
-    var discountPercent: Float?
+    var discountPrice: Float?
     var retailPrice: Float?
     var number: String?
     var iconUrl: String?
@@ -50,7 +53,7 @@ struct NetResStationItem: NetResBody {
         case address
         case phone
         case stateId
-        case discountPercent
+        case discountPrice
         case retailPrice
         case number
         case iconUrl = "icon_url"

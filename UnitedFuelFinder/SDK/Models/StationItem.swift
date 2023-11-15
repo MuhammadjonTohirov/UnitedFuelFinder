@@ -20,12 +20,12 @@ public struct StationItem: Identifiable {
     public var address: String?
     public var phone: String?
     public var stateId: String?
-    public var discountPercent: Float?
+    public var discountPrice: Float?
     public var retailPrice: Float?
     public var iconUrl: String?
     
     public var actualPriceInfo: String {
-        ((retailPrice ?? 0) - ((discountPercent ?? 0) / 100 * (retailPrice ?? 0))).asMoney
+        ((retailPrice ?? 0) - (discountPrice ?? 0)).asMoney
     }
     
     public var retailPriceInfo: String {
@@ -33,10 +33,10 @@ public struct StationItem: Identifiable {
     }
     
     public var discountInfo: String {
-        ((discountPercent ?? 0) / 100 * (retailPrice ?? 0)).asMoney
+        discountPrice?.asMoney ?? "$0"
     }
     
-    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPercent: Float? = nil, retailPrice: Float? = nil) {
+    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil) {
         self.id = id
         self.name = name
         self.lat = lat
@@ -47,7 +47,7 @@ public struct StationItem: Identifiable {
         self.address = address
         self.phone = phone
         self.stateId = stateId
-        self.discountPercent = discountPercent
+        self.discountPrice = discountPrice
         self.retailPrice = retailPrice
     }
     
@@ -62,7 +62,7 @@ public struct StationItem: Identifiable {
         self.address = item.address
         self.phone = item.phone
         self.stateId = item.stateId
-        self.discountPercent = item.discountPercent
+        self.discountPrice = item.discountPrice
         self.retailPrice = item.retailPrice
         self.iconUrl = item.iconUrl
     }
@@ -129,5 +129,11 @@ public extension GMSMarker {
         get {
             self.userData as? StationItem
         }
+    }
+}
+
+extension StationItem {
+    var trustedDiscountPrice: Float {
+        self.discountPrice ?? 0
     }
 }

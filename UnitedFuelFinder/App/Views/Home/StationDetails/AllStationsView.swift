@@ -7,13 +7,18 @@
 
 import Foundation
 import SwiftUI
-
+import MapKit
 struct AllStationsView: View {
     var from: String?
     var to: String?
-    var radius: String?
-    var stations: [StationItem]
+    var location: CLLocationCoordinate2D?
+    var radius: Int?
     
+    var onClickNavigate: ((StationItem) -> Void)?
+    var onClickOpen: ((StationItem) -> Void)?
+    
+    @State var stations: [StationItem]
+    @Environment(\.presentationMode) var presentationMode
     var filteredStations: [StationItem] {
         stations.filter({$0.name.lowercased().starts(with: searchText.lowercased())})
     }
@@ -29,6 +34,18 @@ struct AllStationsView: View {
                 LazyVStack {
                     ForEach(filteredStations) { st in
                         GasStationItemView(station: st)
+                            .set(navigate: { station in
+                                presentationMode.wrappedValue.dismiss()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    self.onClickNavigate?(station)
+                                }
+                            })
+                            .onTapGesture {
+                                presentationMode.wrappedValue.dismiss()
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                    self.onClickOpen?(st)
+                                }
+                            }
                     }
                 }
                 .padding(.horizontal, Padding.medium)
@@ -43,13 +60,38 @@ struct AllStationsView: View {
         }
         .navigationTitle("all_stations".localize)
         .searchable(text: $searchText)
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }, label: {
+                    Text("cancel".localize.capitalized)
+                        .foregroundStyle(Color.label)
+                        .font(.system(size: 14, weight: .semibold))
+                })
+            }
+        })
+        .onAppear {
+//            Task {
+//                guard let loc = location, let rad = radius else {
+//                    return
+//                }
+//                
+//                let _stations = await MainService.shared.discountedStations(atLocation: (loc.latitude, loc.longitude), in: rad, limit: 1000)
+//                    .sorted(by: {$0.trustedDiscountPrice > $1.trustedDiscountPrice})
+//                
+//                await MainActor.run {
+//                    self.stations = _stations
+//                }
+//            }
+        }
     }
     
     var headlineView: any View {
         guard let from, let to else {
             if let radius {
                 return HStack {
-                    Text("stations_at_radius".localize(arguments: radius))
+                    Text("stations_at_radius".localize(arguments: "\(radius) mi"))
                         .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                         .font(.system(size: 13, weight: .regular))
                     Spacer()
@@ -82,7 +124,7 @@ struct AllStationsView: View {
 
 #Preview {
     @State var stations: [StationItem] = []
-    return AllStationsView(from: nil, to: nil, radius: "25 km", stations: stations)
+    return AllStationsView(from: nil, to: nil, radius: 25, stations: stations)
     .onAppear {
         Task {
             let sts = await MainService.shared.findStations(atCity: "1")
