@@ -110,18 +110,28 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         mainRouter?.navigate(to: .main)
     }
     
+    private func showPinSetup() {
+        self.route = .pin(.init(title: "setup_pin".localize, reason: .setup, onResult: { isOK in
+            if isOK {
+                self.showMain()
+            }
+        }))
+    }
+    
     func onClickVerifyUsername() {
         showLoading()
         Task.init {
-            guard let result = await AuthService.shared.verifyAccount(username) else {
-                self.hideLoading()
-                return
-            }
+            let response = await AuthService.shared.verifyAccount(username)
             
             DispatchQueue.main.async {
-                self.needRegistration = !result.exist
                 self.hideLoading()
-                self.showOtp()
+                
+                if let result = response.0 {
+                    self.needRegistration = !result.exist
+                    self.showOtp()
+                } else {
+                    self.showAlert(message: response.error ?? "Cannot verify account".localize)
+                }
             }
         }
     }
@@ -154,7 +164,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
                 self.isLoading = false
                 
                 if isOK {
-                    self.showMain()
+                    self.showPinSetup()
                 } else {
                     switch error {
                     case .userAlreadyExists:

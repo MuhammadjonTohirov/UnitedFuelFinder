@@ -67,6 +67,8 @@ class PinCodeViewModel: ObservableObject {
     
     var onResult: ((Bool) -> Void)?
     
+    @Published var errorText: String?
+    
     @Published var route: PinViewRoute?
     
     init(title: String, reason: PinViewReason, onResult: ((Bool) -> Void)? = nil) {
@@ -103,7 +105,7 @@ class PinCodeViewModel: ObservableObject {
     func onClickNext() {
         switch reason {
         case .login:
-            break
+            mainRouter?.navigate(to: .main)
         case .setup:
             route = .confirmWith(code: pin, completion: { [weak self] isOK in
                 guard let self else {
@@ -118,7 +120,9 @@ class PinCodeViewModel: ObservableObject {
                 self.onResult?(isOK)
             })
         case .confirm(let pin):
-            onResult?(pin == self.pin)
+            let isOK = pin == self.pin
+            self.errorText = !isOK ? "Invalid PIN" : nil
+            onResult?(isOK)
         }
     }
 }

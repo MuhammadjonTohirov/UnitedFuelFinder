@@ -48,7 +48,7 @@ struct StationDetailsView: View {
         .scrollable(showIndicators: false)
         .ignoresSafeArea(.container)
         .keyboardDismissable()
-        .navigation(isActive: $commentsPresented, destination: {
+        .navigationDestination(isPresented: $commentsPresented, destination: {
             CommentsView()
         })
     }

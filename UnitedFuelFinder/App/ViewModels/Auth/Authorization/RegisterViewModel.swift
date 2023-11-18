@@ -59,7 +59,7 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     }
     
     @Published var showScreen: Bool = false
-    
+    @Published var isOfferAccepted: Bool = false
     @Published var firstName: String = ""
     @Published var lastName: String = ""
     @Published var phoneNumber: String = ""
@@ -79,7 +79,7 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
         !fuelCardNumber.isEmpty &&
         !address.isEmpty &&
         state != nil &&
-        city != nil && company != nil
+        city != nil && company != nil && isOfferAccepted
     }
  
     func doRegister(completion: @escaping (Bool) -> Void) {

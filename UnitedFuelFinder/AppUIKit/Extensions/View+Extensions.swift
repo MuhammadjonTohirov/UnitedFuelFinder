@@ -28,30 +28,6 @@ public extension View {
         self.modifier(ScrollableModifier(axis: axis, indicators: showIndicators))
     }
     
-    func navigation<Item, Destination: View>(item: Binding<Item?>, @ViewBuilder destination: (Item) -> Destination) -> some View {
-        let isActive = Binding(
-            get: { item.wrappedValue != nil },
-            set: { value in
-                if !value {
-                    item.wrappedValue = nil
-                }
-            }
-        )
-        return navigation(isActive: isActive) {
-            item.wrappedValue.map(destination)
-        }
-    }
-    
-    func navigation<Destination: View>(isActive: Binding<Bool>, @ViewBuilder destination: () -> Destination) -> some View {
-        overlay(
-            NavigationLink(
-                destination: isActive.wrappedValue ? destination() : nil,
-                isActive: isActive,
-                label: { EmptyView() }
-            )
-        )
-    }
-    
     func horizontal(alignment: Alignment) -> some View {
         self
             .frame(maxWidth: .infinity, alignment: alignment)
@@ -81,5 +57,15 @@ extension View {
         let useStandard = minY <= 0
         self.frame(width: width, height: height + (useStandard ? 0 : minY))
             .offset(y: useStandard ? 0 : -minY)
+    }
+}
+
+extension View {
+    @ViewBuilder func set(hasDismiss: Bool) -> some View {
+        if hasDismiss {
+            self.modifier(TopLeftDismissModifier())
+        } else {
+            self
+        }
     }
 }

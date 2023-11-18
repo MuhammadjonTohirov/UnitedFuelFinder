@@ -85,7 +85,7 @@ struct HomeView: View {
             
             bottomContent
         }
-        .navigation(isActive: $viewModel.push, destination: {
+        .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
         })
         .fullScreenCover(isPresented: $viewModel.present, content: {

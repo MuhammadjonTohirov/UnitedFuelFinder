@@ -17,17 +17,17 @@ enum AuthNetworkErrorReason: Error {
 public struct AuthService {
     public static let shared = AuthService()
     
-    public func verifyAccount(_ username: String) async -> (exist: Bool, code: String, session: String)? {
+    public func verifyAccount(_ username: String) async -> ((exist: Bool, code: String, session: String)?, error: String?) {
         let result: NetRes<NetResVerifyAccount>? = await Network.send(request: UserNetworkRouter.verifyAccount(request: .init(email: username)))
         
         if let data = result?.data {
             UserSettings.shared.session = data.session
             UserSettings.shared.lastOTP = data.code
             UserSettings.shared.userEmail = username
-            return (data.exists, data.code, data.session)
+            return ((data.exists, data.code, data.session), nil)
         }
         
-        return nil
+        return (nil, "Unknown error".localize)
     }
     
     func login(session: String, code: String, username: String) async -> (Bool, AuthNetworkErrorReason?) {

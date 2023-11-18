@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-
-
 import LocalAuthentication
 
 struct PinCodeView: View {
@@ -20,7 +18,7 @@ struct PinCodeView: View {
         innerBody
             .set(hasDismiss: viewModel.reason.id == PinViewReason.confirm(pin: "").id)
     }
-    
+        
     var innerBody: some View {
         VStack(spacing: 0) {
             Spacer()
@@ -30,13 +28,15 @@ struct PinCodeView: View {
 
             Spacer()
 
-            HStack(spacing: Padding.medium) {
-                ForEach(0..<viewModel.maxCharacters, id: \.self) { id in
-                    pinItem(id)
-                }
-            }
-            .foregroundColor(.init(uiColor: .secondaryLabel))
-            .padding(Padding.large * 2)
+            Text("Invalid PIN")
+                .font(.system(size: 13, weight: .medium))
+                .foregroundStyle(Color.init(uiColor: .systemRed))
+                .padding(.bottom, Padding.medium)
+                .opacity(viewModel.errorText == nil ? 0 : 1)
+            
+            pinsView
+                .padding(.bottom, Padding.large * 2)
+                
             
             KeyboardView(text: $viewModel.pin, viewModel: viewModel.keyboardModel) {
                 if viewModel.reason == .login {
@@ -70,6 +70,15 @@ struct PinCodeView: View {
         }
     }
     
+    private var pinsView: some View {
+        HStack(spacing: Padding.medium) {
+            ForEach(0..<viewModel.maxCharacters, id: \.self) { id in
+                pinItem(id)
+            }
+        }
+        .foregroundColor(.init(uiColor: .secondaryLabel))
+    }
+    
     private func pinItem(_ id: Int) -> some View {
         Circle()
             .frame(width: 20.f.sh(limit: 0.2))
@@ -99,19 +108,6 @@ struct PinCodeView: View {
     }
 }
 
-struct PinCodeView_Preview: PreviewProvider {
-    static var previews: some View {
-        PinCodeView(viewModel: PinCodeViewModel(title: "setup_pin".localize, reason: .setup))
-    }
+#Preview {
+    PinCodeView(viewModel: PinCodeViewModel(title: "setup_pin".localize, reason: .setup))
 }
-
-extension View {
-    @ViewBuilder func set(hasDismiss: Bool) -> some View {
-        if hasDismiss {
-            self.modifier(TopLeftDismissModifier())
-        } else {
-            self
-        }
-    }
-}
-

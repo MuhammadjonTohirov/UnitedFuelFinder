@@ -8,11 +8,60 @@
 import Foundation
 import SwiftUI
 
-struct SettingsView: View {
-    @State private var showEditProfile: Bool = false
-    @State private var showContactUs: Bool = false
-    @State private var showLogoutAlert: Bool = false
+enum SettingsRoute: ScreenRoute {
+    var id: String {
+        switch self {
+        case .editProfile:
+            return "editProfile"
+        case .contactUs:
+            return "contactUs"
+        case .changePin:
+            return "changePin"
+        }
+    }
     
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
+    static func == (lhs: SettingsRoute, rhs: SettingsRoute) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    case editProfile
+    case contactUs
+    case changePin(result: (Bool) -> Void)
+    
+    @ViewBuilder
+    var screen: some View {
+        switch self {
+        case .editProfile:
+            ProfileVIew()
+        case .contactUs:
+            ContactUsView()
+        case .changePin(let res):
+            PinCodeView(viewModel: .init(title: "setup_pin".localize, reason: .setup, onResult: res))
+        }
+    }
+}
+
+class SettingsViewModel: ObservableObject {
+    var route: SettingsRoute? {
+        didSet {
+            self.present = route != nil
+        }
+    }
+    
+    @Published var present: Bool = false
+    
+    func navigate(to route: SettingsRoute) {
+        self.route = route
+    }
+}
+
+struct SettingsView: View {
+    @StateObject var viewModel: SettingsViewModel = SettingsViewModel()
+    @State private var showLogoutAlert: Bool = false
     var body: some View {
         VStack(spacing: 12) {
             row(image: Image("icon_edit")
@@ -23,7 +72,7 @@ struct SettingsView: View {
                 .padding(.bottom, 2)
                 .padding(.leading, 2), title: "Edit profile"
             ) {
-                showEditProfile = true
+                viewModel.navigate(to: .editProfile)
             }
              
             Divider()
@@ -40,6 +89,23 @@ struct SettingsView: View {
             
             Divider()
             
+            row(image: Image(systemName: "lock.open.rotation")
+                .resizable()
+                .renderingMode(.template)
+                .fixedSize()
+                .foregroundStyle(Color.label)
+                .frame(width: 24, height: 24),
+                title: "Change PIN-code"
+            ) {
+                viewModel.navigate(to: .changePin(result: { isOK in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                        viewModel.route = nil
+                    }
+                }))
+            }
+            
+            Divider()
+            
             row(image: Image("icon_feedback")
                 .resizable()
                 .renderingMode(.template)
@@ -47,7 +113,7 @@ struct SettingsView: View {
                 .frame(width: 24, height: 24),
                 title: "Contact"
             ) {
-                showContactUs = true
+                viewModel.navigate(to: .contactUs)
             }
             
             Divider()
@@ -83,11 +149,8 @@ struct SettingsView: View {
         .navigationTitle("settings".localize.capitalized)
         .padding(.horizontal, 20)
         .padding(.top, Padding.medium)
-        .navigation(isActive: $showContactUs) {
-            ContactUsView()
-        }
-        .navigation(isActive: $showEditProfile) {
-            ProfileVIew()
+        .navigationDestination(isPresented: $viewModel.present) {
+            viewModel.route?.screen
         }
     }
     
@@ -137,5 +200,7 @@ struct SettingsView: View {
 
 
 #Preview {
-    SettingsView()
+    NavigationView(content: {
+        SettingsView()
+    })
 }

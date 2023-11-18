@@ -35,7 +35,7 @@ public struct CheckButton: View {
                 }
         
             Text(text)
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 12, weight: .regular))
                 .onTapGesture(perform: onClickText)
         }
     }

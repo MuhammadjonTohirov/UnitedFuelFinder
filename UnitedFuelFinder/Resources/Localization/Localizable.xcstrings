@@ -10,44 +10,11 @@
     "%@" : {
 
     },
-    "%@ • %@" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "new",
-            "value" : "%1$@ • %2$@"
-          }
-        }
-      }
-    },
     "%lld" : {
 
     },
     "%lld mi" : {
 
-    },
-    "address" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Address"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Адреc"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Manzil"
-          }
-        }
-      }
     },
     "address_info" : {
       "extractionState" : "manual",
@@ -144,6 +111,29 @@
         }
       }
     },
+    "auth_offer_description" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To continue registration you should accept the offer, please feel free to read the whole offer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чтобы продолжить регистрацию, вам следует принять предложение. Пожалуйста, прочтите предложение целиком."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ro'yxatdan o'tishni davom ettirish uchun siz offertani qabul qilishingiz kerak, iltimos, uni to'liq o'qib chiqing "
+          }
+        }
+      }
+    },
     "authenticate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -166,6 +156,9 @@
           }
         }
       }
+    },
+    "Blue" : {
+
     },
     "clear" : {
       "extractionState" : "manual",
@@ -545,6 +538,12 @@
         }
       }
     },
+    "Green" : {
+
+    },
+    "Indigo" : {
+
+    },
     "insert_creds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -568,6 +567,9 @@
         }
       }
     },
+    "Invalid PIN" : {
+
+    },
     "invalid_otp" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -584,6 +586,9 @@
           }
         }
       }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "last_name" : {
       "extractionState" : "manual",
@@ -841,6 +846,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -982,8 +993,13 @@
         }
       }
     },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
     "Orange" : {
-      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1122,6 +1138,9 @@
         }
       }
     },
+    "Red" : {
+
+    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1161,6 +1180,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "Retail price %@" : {
 
@@ -1312,28 +1334,8 @@
         }
       }
     },
-    "stations_at_radius" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Stations in radius %@"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Заправки в радиусе %@"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "%@ doiradagi shahobchalar"
-          }
-        }
-      }
+    "SwiftUI" : {
+
     },
     "to" : {
       "extractionState" : "manual",
@@ -1380,6 +1382,9 @@
           }
         }
       }
+    },
+    "Violet" : {
+
     },
     "warning" : {
       "extractionState" : "manual",
@@ -1449,6 +1454,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     }
   },
   "version" : "1.0"

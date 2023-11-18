@@ -22,7 +22,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
             
             if UserSettings.shared.hasValidToken {
                 if await AuthService.shared.refreshToken() {
-                    mainRouter?.navigate(to: .main)
+                    mainRouter?.navigate(to: .pin)
                 } else {
                     mainRouter?.navigate(to: .auth)
                 }

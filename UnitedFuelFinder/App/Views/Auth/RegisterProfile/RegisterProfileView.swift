@@ -19,12 +19,14 @@ struct RegisterProfileView: View {
             VStack(alignment: .leading, spacing: 28) {
                 topHeading
                     .padding(.top, Padding.large)
-                    
+                
                 personalDetails
                 
                 organizationRequisites
                 
                 addressInfo
+                
+                offerView
                 
                 Text("")
                     .frame(height: 100)
@@ -127,6 +129,31 @@ struct RegisterProfileView: View {
             }
             
             YTextView(text: $viewModel.address, placeholder: "address".localize.capitalized)
+        }
+    }
+    
+    private var offerView: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            Text("Offer".localize)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.init(.label))
+            
+            Text("auth_offer_description".localize)
+                .font(.system(size: 12, weight: .regular))
+                .foregroundColor(.init(.label.opacity(0.7)))
+                .lineSpacing(4)
+            
+            CheckButton(
+                isSelected: $viewModel.isOfferAccepted,
+                text: "auth_agree_offer".localize.highlight(
+                    text: "auth_offer".localize,
+                    color: .accent
+                ).toSwiftUI
+            ) {
+                debugPrint("Show offer")
+            }
+            .padding(.top, Padding.small)
+            .padding(.bottom, Padding.large)
         }
     }
 }
