@@ -186,6 +186,11 @@
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */; };
 		2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */; };
+		2EB599672B09CE350038F5F0 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB599662B09CE350038F5F0 /* SwiftUITooltip */; };
+		2EB599692B09DB6A0038F5F0 /* RegularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB599682B09DB6A0038F5F0 /* RegularButton.swift */; };
+		2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996A2B09E39A0038F5F0 /* StationTipInfoView.swift */; };
+		2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996D2B09E5F90038F5F0 /* NotificationsView.swift */; };
+		2EB599702B09F6010038F5F0 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996F2B09F6010038F5F0 /* NotificationsViewModel.swift */; };
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */; };
@@ -408,6 +413,10 @@
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsView.swift; sourceTree = "<group>"; };
 		2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationItemView.swift; sourceTree = "<group>"; };
+		2EB599682B09DB6A0038F5F0 /* RegularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularButton.swift; sourceTree = "<group>"; };
+		2EB5996A2B09E39A0038F5F0 /* StationTipInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTipInfoView.swift; sourceTree = "<group>"; };
+		2EB5996D2B09E5F90038F5F0 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
+		2EB5996F2B09F6010038F5F0 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
@@ -445,6 +454,7 @@
 				2E0E4DE92AD915E800E846B6 /* UIKit.framework in Frameworks */,
 				2E0E4DE72AD915E000E846B6 /* SystemConfiguration.framework in Frameworks */,
 				2E0E4DE52AD915DB00E846B6 /* QuartzCore.framework in Frameworks */,
+				2EB599672B09CE350038F5F0 /* SwiftUITooltip in Frameworks */,
 				2E0E4DE32AD915D500E846B6 /* OpenGLES.framework in Frameworks */,
 				2E0E4DE12AD915CF00E846B6 /* Metal.framework in Frameworks */,
 				2E5DF9932AEACE11005BE20D /* RealmSwift in Frameworks */,
@@ -701,6 +711,7 @@
 				2E5DF8B52AEACD63005BE20D /* CheckButton.swift */,
 				2E5DF8B62AEACD63005BE20D /* SelectionButton.swift */,
 				2E5DF8B72AEACD63005BE20D /* RadioButton.swift */,
+				2EB599682B09DB6A0038F5F0 /* RegularButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -1026,6 +1037,15 @@
 			path = StationDetails;
 			sourceTree = "<group>";
 		};
+		2EB5996C2B09E5F10038F5F0 /* NotificationView */ = {
+			isa = PBXGroup;
+			children = (
+				2EB5996D2B09E5F90038F5F0 /* NotificationsView.swift */,
+				2EB5996F2B09F6010038F5F0 /* NotificationsViewModel.swift */,
+			);
+			path = NotificationView;
+			sourceTree = "<group>";
+		};
 		2EBD43C62AE510220033401A /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -1042,6 +1062,7 @@
 				2E243DA72AE067FB008C3E8C /* PinPointerView.swift */,
 				2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */,
 				2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */,
+				2EB5996A2B09E39A0038F5F0 /* StationTipInfoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1210,6 +1231,7 @@
 		2EDF8C942AD474A6003D64FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2EB5996C2B09E5F10038F5F0 /* NotificationView */,
 				2E60B61C2AFA8C3300573049 /* SearchAddress */,
 				2EB189F92AEFF42600BCFBE3 /* StationDetails */,
 				2EBFB99C2ADF9F8F007FA786 /* Views */,
@@ -1295,6 +1317,7 @@
 				2EDF8C282AD1F04A003D64FC /* SwiftKeychainWrapper */,
 				2E5DF9902AEACE11005BE20D /* Realm */,
 				2E5DF9922AEACE11005BE20D /* RealmSwift */,
+				2EB599662B09CE350038F5F0 /* SwiftUITooltip */,
 			);
 			productName = UnitedFuelFinder;
 			productReference = 2E527A3D2ACC80C6005B8B95 /* UnitedFuelFinder.app */;
@@ -1330,6 +1353,7 @@
 				2EE91D2B2AD07E6400A425B5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				2EE91D342AD07F8E00A425B5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				2E5DF98F2AEACE11005BE20D /* XCRemoteSwiftPackageReference "realm-swift" */,
+				2EB599652B09CE350038F5F0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
 			);
 			productRefGroup = 2E527A3E2ACC80C6005B8B95 /* Products */;
 			projectDirPath = "";
@@ -1477,6 +1501,7 @@
 				2E5DF9372AEACD63005BE20D /* YTextField+Extension.swift in Sources */,
 				2E5DF95D2AEACD63005BE20D /* MapAnnotation.swift in Sources */,
 				2E527A792ACC83DB005B8B95 /* AuthView.swift in Sources */,
+				2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */,
 				2E5DF9412AEACD63005BE20D /* YTextField.swift in Sources */,
 				2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */,
 				2E5DF9802AEACD64005BE20D /* DatabaseConfig.swift in Sources */,
@@ -1511,6 +1536,7 @@
 				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
 				2E5DF9842AEACD64005BE20D /* NSMutableData+Extensions.swift in Sources */,
 				2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */,
+				2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */,
 				2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */,
 				2E5DF97C2AEACD64005BE20D /* AnyWrapper.swift in Sources */,
 				2E5DF96A2AEACD63005BE20D /* DState.swift in Sources */,
@@ -1518,7 +1544,9 @@
 				2E36A7432AEECD380033363E /* MainService.swift in Sources */,
 				2E5DF94C2AEACD63005BE20D /* MapCircle.swift in Sources */,
 				2E36A7452AEECDD00033363E /* NetReqFilterStations.swift in Sources */,
+				2EB599702B09F6010038F5F0 /* NotificationsViewModel.swift in Sources */,
 				2E60B61B2AF8751500573049 /* ProfileViewModel.swift in Sources */,
+				2EB599692B09DB6A0038F5F0 /* RegularButton.swift in Sources */,
 				2E527A412ACC80C6005B8B95 /* UnitedFuelFinderApp.swift in Sources */,
 				2E5DF9262AEACD63005BE20D /* ItemSelectionView.swift in Sources */,
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
@@ -1672,7 +1700,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1709,7 +1737,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1771,6 +1799,14 @@
 				kind = branch;
 			};
 		};
+		2EB599652B09CE350038F5F0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quassum/SwiftUI-Tooltip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		2EE91D2B2AD07E6400A425B5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -1799,6 +1835,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E5DF98F2AEACE11005BE20D /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		2EB599662B09CE350038F5F0 /* SwiftUITooltip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2EB599652B09CE350038F5F0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
+			productName = SwiftUITooltip;
 		};
 		2EDF8C262AD1F04A003D64FC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

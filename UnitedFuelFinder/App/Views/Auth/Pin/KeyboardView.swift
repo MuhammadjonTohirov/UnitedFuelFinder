@@ -99,6 +99,7 @@ struct KeyboardView: View {
     
     func keyItem(_ val: Key) -> some View {
         Button {
+            SEffect.rigid()
             switch val {
             case .clear:
                 text = ""

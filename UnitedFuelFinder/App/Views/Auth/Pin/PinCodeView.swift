@@ -107,7 +107,3 @@ struct PinCodeView: View {
         }
     }
 }
-
-#Preview {
-    PinCodeView(viewModel: PinCodeViewModel(title: "setup_pin".localize, reason: .setup))
-}

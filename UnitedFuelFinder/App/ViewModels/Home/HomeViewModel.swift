@@ -27,11 +27,14 @@ enum HomeRouter: ScreenRoute {
             return "settings"
         case .stationDetails:
             return "stationDetailsmghv bn "
+        case .notifications:
+            return "notifications"
         }
     }
     
     case settings
     case stationDetails(station: StationItem)
+    case notifications
     
     @ViewBuilder
     var screen: some View {
@@ -40,6 +43,8 @@ enum HomeRouter: ScreenRoute {
             SettingsView()
         case .stationDetails(let station):
             StationDetailsView(station: station)
+        case .notifications:
+            NotificationsView()
         }
     }
     
@@ -112,10 +117,12 @@ final class HomeViewModel: ObservableObject {
 
     @Published var isLoading: Bool = false
     @Published var isDragging: Bool = false
+    @Published var isDrawing: Bool = false
     @Published var isDetectingAddressFrom: Bool = false
     @Published var isDetectingAddressTo: Bool = false
-    @Published var radius: CLLocationDistance = 10
-    @Published var radiusValue: CGFloat = 10
+    
+    @Published var radius: CLLocationDistance = 20
+    @Published var radiusValue: CGFloat = 20
     
     private(set) var loadingMessage: String = ""
     
@@ -127,6 +134,7 @@ final class HomeViewModel: ObservableObject {
     private(set) var toLocationCandidate: CLLocation?
     
     @Published var stations: [StationItem] = []
+    @Published var discountedStations: [StationItem] = []
     @Published var stationsMarkers: [GMSMarker] = []
     
     private var loadStationsTask: DispatchWorkItem?
@@ -184,6 +192,7 @@ final class HomeViewModel: ObservableObject {
         guard let loc = pickedLocation?.coordinate else {
             return
         }
+        
         switch self.state {
         case .selectFrom:
             self.fromLocation = pickedLocation
@@ -196,7 +205,6 @@ final class HomeViewModel: ObservableObject {
         }
         
         locationManager.getAddressFromLatLon(latitude: loc.latitude, longitude: loc.longitude) { address in
-            
             if self.state == .selectFrom {
                 self.fromAddress = address
             } else {
@@ -212,6 +220,10 @@ final class HomeViewModel: ObservableObject {
         if state == .selectFrom {
             startFiltering()
         }
+        
+        if state == .routing {
+            filterStationsByRoute()
+        }
     }
     
     func startFiltering() {
@@ -219,8 +231,9 @@ final class HomeViewModel: ObservableObject {
         loadStationsTask?.cancel()
 
         loadStationsTask = .init(block: {
-            if !self.isDragging {
+            if !self.isDragging && self.state == .selectFrom {
                 self.filterStationsByDefault()
+                self.filterStationsByDiscount()
             }
         })
         
@@ -232,85 +245,46 @@ final class HomeViewModel: ObservableObject {
             self.hasDrawen = false
             self.toAddress = ""
             self.toLocation = nil
+            self.stations = []
+            self.stationsMarkers.forEach { marker in
+                marker.map = nil
+            }
+            
+            self.stationsMarkers.removeAll()
         }
     }
     
     func onStartDrawingRoute() {
-        self.showLoader(message: "drawing_route".localize)
+        DispatchQueue.main.async {
+            self.stationsMarkers.forEach { marker in
+                marker.map = nil
+            }
+            
+            self.stationsMarkers.removeAll()
+            self.stations.removeAll()
+            
+            self.isDrawing = true
+        }
     }
     
     func onEndDrawingRoute() {
-        mainIfNeeded {
-            self.hideLoader()
+        DispatchQueue.main.async {
+            self.isDrawing = false
             self.hasDrawen = true
         }
-    }
-    
-    private func filterStationsByRoute() {
-//        TODO: - Implement
-    }
-    
-    private func filterStationsByDefault() {
-//        mainIfNeeded {
-//            self.stations.removeAll()
-//        }
-
-        Task {
-            self.showLoader(message: "loading_stations".localize)
-
-            Logging.l(tag: "HomeViewModel", "Start loading stations")
-
-            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
-                return
-            }
-
-            let _stations = await MainService.shared.discountedStations(
-                atLocation: (c.latitude, c.longitude),
-                in: Int(radiusValue), limit: 1000
-            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
-            
-            Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radiusValue) is \(stations.count)")
-                    
-            await MainActor.run {
-                self.stationsMarkers.forEach { marker in
-                    marker.map = nil
-                }
-                
-                self.stationsMarkers.removeAll()
-//                crossection items of self.stations and _stations
-                let newStations = _stations.filter({station in
-                    !self.stations.contains(where: {$0.id == station.id})
-                })
-                
-                let oldStations = self.stations.filter({station in
-                    !_stations.contains(where: {$0.id == station.id})
-                })
-            
-                oldStations.forEach { station in
-                    if let index = self.stations.firstIndex(where: {$0.id == station.id}) {
-                        self.stations.remove(at: index)
-                    }
-                }
-                
-                withAnimation {
-                    self.stations = newStations + self.stations
-                    self.stationsMarkers = self.stations.map({$0.asMarker})
-                }
-            }
-            
-            self.hideLoader()
-        }
+        
+        filterStationsByRoute()
     }
     
     func showLoader(message: String) {
-        mainIfNeeded {
+        DispatchQueue.main.async {
             self.loadingMessage = message
             self.isLoading = true
         }
     }
     
     func hideLoader() {
-        mainIfNeeded {
+        DispatchQueue.main.async {
             self.loadingMessage = ""
             self.isLoading = false
         }
@@ -342,6 +316,10 @@ extension HomeViewModel {
     func onClickSettings() {
         self.route = .settings
     }
+    
+    func onClickNotification() {
+        self.route = .notifications
+    }
         
     func onClickViewAllStations() {
         self.presentableRoute = .allStations(
@@ -372,5 +350,98 @@ extension HomeViewModel {
 extension StationItem {
     var clLocation: CLLocation {
         .init(latitude: lat, longitude: lng)
+    }
+}
+
+extension HomeViewModel {
+    private func filterStationsByRoute() {
+        DispatchQueue.main.async {
+            self.stations = []
+        }
+        
+        Task {
+            guard state == .routing, let toLocation, let fromLocation else {
+                return
+            }
+            let f = (fromLocation.coordinate.latitude, fromLocation.coordinate.longitude)
+            let t = (toLocation.coordinate.latitude, toLocation.coordinate.longitude)
+            
+            let _stations = await MainService.shared.filterStations(from: f, to: t, in: 10)
+                .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
+            
+            await MainActor.run {
+                self.stations = _stations
+                self.stationsMarkers = self.stations.map({$0.asMarker})
+            }
+        }
+    }
+    
+    private func filterStationsByDefault() {
+        Task {
+            self.showLoader(message: "loading_stations".localize)
+
+            Logging.l(tag: "HomeViewModel", "Start loading stations")
+
+            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
+                return
+            }
+
+            let _stations = await MainService.shared.discountedStations(
+                atLocation: (c.latitude, c.longitude),
+                in: Int(radiusValue), limit: -1
+            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
+            
+            Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radiusValue) is \(stations.count)")
+                    
+            await MainActor.run {
+                self.stationsMarkers.forEach { marker in
+                    marker.map = nil
+                }
+                
+                self.stationsMarkers.removeAll()
+
+                let newStations = _stations.filter({station in
+                    !self.stations.contains(where: {$0.id == station.id})
+                })
+                
+                let oldStations = self.stations.filter({station in
+                    !_stations.contains(where: {$0.id == station.id})
+                })
+            
+                oldStations.forEach { station in
+                    if let index = self.stations.firstIndex(where: {$0.id == station.id}) {
+                        self.stations.remove(at: index)
+                    }
+                }
+                
+                withAnimation {
+                    self.stations = newStations + self.stations
+                    self.stationsMarkers = self.stations.map({$0.asMarker})
+                }
+            }
+            
+            self.hideLoader()
+        }
+    }
+    
+    private func filterStationsByDiscount() {
+        Task {
+            self.showLoader(message: "loading_stations".localize)
+
+            Logging.l(tag: "HomeViewModel", "Start loading stations")
+
+            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
+                return
+            }
+
+            let _stations = await MainService.shared.discountedStations(
+                atLocation: (c.latitude, c.longitude),
+                in: Int(radiusValue), limit: 7
+            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
+
+            await MainActor.run {
+                self.discountedStations = _stations
+            }
+        }
     }
 }

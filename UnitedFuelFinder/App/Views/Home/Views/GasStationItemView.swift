@@ -29,7 +29,7 @@ struct GasStationItemView: View {
                 
                 VStack(alignment: .leading) {
                     Text(station.name)
-                    Text([station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate), station.state?.id ?? ""].joined(separator: " • "))
+                    Text([station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate), station.state?.id ?? ""].compactMap({$0.nilIfEmpty}).joined(separator: " • "))
                 }
                 .font(.system(size: 12))
                 

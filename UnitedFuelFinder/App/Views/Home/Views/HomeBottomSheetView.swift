@@ -172,7 +172,7 @@ struct HomeBottomSheetView: View {
     }), onClickReady: {
         
     }, distance: "10"), stations: [
-        .init(id: 0, name: "A", lat: 0, lng: 0, isDeleted: false, cityId: 1, customerId: 2, stateId: "NY")
+        .init(id: 0, name: "A", lat: 0, lng: 0, isDeleted: false, cityId: 1, customerId: 2, stateId: "NY", priceUpdated: "", note: "")
     ], hasMoreButton: false, isSearching: true, onClickOpen:  { st in
         
     })

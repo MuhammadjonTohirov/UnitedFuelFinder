@@ -72,18 +72,18 @@ struct AllStationsView: View {
             }
         })
         .onAppear {
-//            Task {
-//                guard let loc = location, let rad = radius else {
-//                    return
-//                }
-//                
-//                let _stations = await MainService.shared.discountedStations(atLocation: (loc.latitude, loc.longitude), in: rad, limit: 1000)
-//                    .sorted(by: {$0.trustedDiscountPrice > $1.trustedDiscountPrice})
-//                
-//                await MainActor.run {
-//                    self.stations = _stations
-//                }
-//            }
+            Task {
+                guard let loc = location, let rad = radius else {
+                    return
+                }
+                
+                let _stations = await MainService.shared.discountedStations(atLocation: (loc.latitude, loc.longitude), in: rad, limit: -1)
+                    .sorted(by: {$0.trustedDiscountPrice > $1.trustedDiscountPrice})
+                
+                await MainActor.run {
+                    self.stations = _stations
+                }
+            }
         }
     }
     

@@ -10,14 +10,18 @@ import SwiftUI
 public struct SubmitButton<Content: View>: View {
     var action: () -> Void
     var title: (() -> Content)?
+    var backgroundColor: Color
+    var height: CGFloat = 50
     
     private(set) var isLoading: Bool = false
     private(set) var isEnabled: Bool = true
     public init(
         action: @escaping () -> Void,
-        label: (() -> Content)?) {
+        label: (() -> Content)?, backgroundColor: Color = .accentColor, height: CGFloat = 50) {
         self.action = action
         self.title = label
+        self.backgroundColor = backgroundColor
+        self.height = height
     }
     
     public var body: some View {
@@ -27,7 +31,7 @@ public struct SubmitButton<Content: View>: View {
             },
             label: {
                 RoundedRectangle(cornerRadius: 6, style: .continuous)
-                    .foregroundStyle(Color.accentColor)
+                    .foregroundStyle(backgroundColor)
                     .overlay {
                         if let t = title?() {
                             t
@@ -53,7 +57,7 @@ public struct SubmitButton<Content: View>: View {
         })
         .font(.system(size: 14, weight: .semibold))
         .foregroundStyle(Color.white)
-        .frame(height: 50, alignment: .center)
+        .frame(height: height, alignment: .center)
         .frame(maxWidth: .infinity)
     }
     

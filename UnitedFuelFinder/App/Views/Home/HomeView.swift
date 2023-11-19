@@ -7,9 +7,8 @@
 
 import Foundation
 import SwiftUI
-
 import GoogleMaps
-
+import SwiftUITooltip
 
 struct HomeView: View {
     @State private var bottomSheetFrame: CGRect = .zero
@@ -17,6 +16,7 @@ struct HomeView: View {
     
     @ObservedObject var viewModel: HomeViewModel = .init()
     @State private var pointerFrame: CGRect = .zero
+    @State private var selectedMarker: GMSMarker?
     
     private let pointerHeight: CGFloat = 158
     private let locationManager = CLLocationManager()
@@ -28,6 +28,9 @@ struct HomeView: View {
     var body: some View {
         NavigationStack {
             innerBody
+                .overlay(content: {
+                    CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
+                })
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar(content: {
                     ToolbarItem(placement: .topBarTrailing) {
@@ -36,6 +39,15 @@ struct HomeView: View {
                         } label: {
                             settingsButton
                         }
+                    }
+                })
+                .toolbar(content: {
+                    ToolbarItem(placement: .topBarLeading) {
+                        Button(action: {
+                            self.viewModel.onClickNotification()
+                        }, label: {
+                            notificationButton
+                        })
                     }
                 })
         }
@@ -49,7 +61,7 @@ struct HomeView: View {
                 screenCenter: pointerFrame.center,
                 markers: $viewModel.stationsMarkers
             )
-            .set(radius: viewModel.radius)
+            .set(radius: self.viewModel.state == HomeViewState.selectFrom ? viewModel.radius : 0)
             .set(currentLocation: viewModel.currentLocation)
             .set(
                 from: self.viewModel.fromLocation?.coordinate,
@@ -63,10 +75,9 @@ struct HomeView: View {
                     viewModel.onEndDrawingRoute()
                 }
             )
-            .set(onClickMarker: { marker in
-                if let st = marker.station {
-                    viewModel.route = .stationDetails(station: st)
-                }
+            .set(onClickMarker: { marker, point in
+                self.selectedMarker = marker
+                
             })
             .ignoresSafeArea()
             .padding(.bottom, 8)
@@ -87,6 +98,17 @@ struct HomeView: View {
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
+        })
+        
+        .sheet(item: $selectedMarker, content: { marker in
+            if let st = selectedMarker?.station {
+                StationTipView(station: st, onClickShow: { station in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.viewModel.route = .stationDetails(station: station)
+                    }
+                })
+                .presentationDetents([.height(200)])
+            }
         })
         .fullScreenCover(isPresented: $viewModel.present, content: {
             NavigationView {
@@ -122,7 +144,7 @@ struct HomeView: View {
             VerticalValueAdjuster(currentValue: $viewModel.radiusValue) { value, percentage in
                 viewModel.startFiltering()
             }
-            .position(x: 24, y: 8 + UIApplication.shared.safeArea.top)
+            .position(x: 27, y: 24 + UIApplication.shared.safeArea.top)
         }
     }
     
@@ -141,9 +163,9 @@ struct HomeView: View {
                         .padding(.leading, 8)
                         .padding(.bottom, 8)
                 }
-
+                
                 Spacer()
-
+                
                 currentLocationNavView
                     .padding(.trailing, 8)
             }
@@ -182,8 +204,8 @@ struct HomeView: View {
                     },
                     distance: viewModel.distance
                 ),
-                stations: Array(self.viewModel.stations[0..<min(viewModel.stations.count, 6)]),
-                hasMoreButton: self.viewModel.stations.count > 6,
+                stations: Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
+                hasMoreButton: self.viewModel.discountedStations.count > 6,
                 isSearching: self.viewModel.isLoading,
                 onClickMoreButton: {
                     viewModel.onClickViewAllStations()
@@ -210,7 +232,16 @@ struct HomeView: View {
             .renderingMode(.template)
             .foregroundStyle(Color.label)
             .frame(width: 32, height: 32)
-            .shadow(color: Color.black.opacity(0.5), radius: 5, x: 0, y: 0)
+            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 0)
+    }
+    
+    private  var notificationButton: some View {
+        Image(systemName: "bell")
+            .resizable()
+            .renderingMode(.template)
+            .foregroundStyle(Color.label.opacity(0.8))
+            .frame(width: 24, height: 24)
+            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 0)
     }
     
     private var currentLocationNavView: some View {

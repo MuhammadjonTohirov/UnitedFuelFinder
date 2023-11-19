@@ -16,6 +16,23 @@
     "%lld mi" : {
 
     },
+    "address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адрес"
+          }
+        }
+      }
+    },
     "address_info" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -179,6 +196,32 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tozalash"
+          }
+        }
+      }
+    },
+    "Clear All" : {
+
+    },
+    "close" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Close"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрыть"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yopish"
           }
         }
       }
@@ -356,6 +399,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chegirma"
+          }
+        }
+      }
+    },
+    "discounted_price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discounted price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цена со скидкой"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chegirmadagi"
           }
         }
       }
@@ -587,9 +653,6 @@
         }
       }
     },
-    "Key" : {
-      "extractionState" : "manual"
-    },
     "last_name" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -609,6 +672,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Familya"
+          }
+        }
+      }
+    },
+    "last_update" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest update"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Последнее обновление"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So'ngi o'zgarish "
           }
         }
       }
@@ -898,6 +984,9 @@
         }
       }
     },
+    "No notifications" : {
+
+    },
     "No stations found" : {
 
     },
@@ -992,6 +1081,9 @@
           }
         }
       }
+    },
+    "Notifications" : {
+
     },
     "One or None" : {
 
@@ -1115,6 +1207,29 @@
         }
       }
     },
+    "prices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Цены"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narxlari"
+          }
+        }
+      }
+    },
     "profile_updated_failed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1182,10 +1297,65 @@
       }
     },
     "Regular" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regular"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обычный"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Muntazam"
+          }
+        }
+      }
     },
     "Retail price %@" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retail price %@"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chakana narxi %@"
+          }
+        }
+      }
+    },
+    "retail_price" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retail price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Розничная цена"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chakana narxi"
+          }
+        }
+      }
     },
     "retry" : {
       "extractionState" : "manual",
@@ -1334,6 +1504,29 @@
         }
       }
     },
+    "stations_at_radius" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stations at radius %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Станции в радиусе %@"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ radiusdagi stansiyalar"
+          }
+        }
+      }
+    },
     "SwiftUI" : {
 
     },
@@ -1379,6 +1572,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barini ko'rish"
+          }
+        }
+      }
+    },
+    "view_larger" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View larger"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Посмотреть больше"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ko'roq"
           }
         }
       }

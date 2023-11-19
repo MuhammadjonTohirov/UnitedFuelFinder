@@ -58,7 +58,7 @@ class GMapsViewModel: ObservableObject {
     }
     
     func set(onClickMarker: @escaping (GMSMarker) -> Void) -> Self {
-        var v = self
+        let v = self
         v.onClickMarker = onClickMarker
         return v
     }
@@ -101,7 +101,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     
     fileprivate var onStartDrawing: (() -> Void)?
     fileprivate var onEndDrawing: (() -> Void)?
-    fileprivate var onClickMarker: ((GMSMarker) -> Void)?
+    fileprivate var onClickMarker: ((_ marker: GMSMarker, _ frame: CGPoint) -> Void)?
     fileprivate var routeFrom: CLLocationCoordinate2D?
     fileprivate var routeTo: CLLocationCoordinate2D?
     fileprivate var didRadiusChanged: Bool = true
@@ -125,7 +125,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         return v
     }
     
-    func set(onClickMarker: @escaping (GMSMarker) -> Void) -> Self {
+    func set(onClickMarker: @escaping (_ marker: GMSMarker, _ frame: CGPoint) -> Void) -> Self {
         var v = self
         v.onClickMarker = onClickMarker
         return v
@@ -201,7 +201,11 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         
 //       MARK: Radius change
         if didRadiusChanged, let coordinate = self.pickedLocation?.coordinate {
-            context.coordinator.drawCircleByRadius(on: uiViewController.map, location: coordinate, radius: radius)
+            if radius > 0 {
+                context.coordinator.drawCircleByRadius(on: uiViewController.map, location: coordinate, radius: radius)
+            } else {
+                context.coordinator.removeCircle()
+            }
         }
     }
 
@@ -220,7 +224,10 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-            parent.onClickMarker?(marker)
+//            let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
+            let p = CLLocationCoordinate2D(latitude: marker.layer.latitude, longitude: marker.layer.longitude).toScreenPoint(on: mapView)
+            let bottom: CGFloat = 158 - UIApplication.shared.safeArea.bottom// + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
+            parent.onClickMarker?(marker, .init(x: p.x, y: p.y - bottom))
             return true
         }
         
@@ -422,7 +429,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             circle?.map = mapView
         }
         
-        private func removeCircle() {
+        func removeCircle() {
             circle?.map = nil
             circle = nil
         }

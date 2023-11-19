@@ -196,6 +196,6 @@ struct StationDetailsView: View {
 
 #Preview {
     NavigationView {
-        StationDetailsView(station: .init(id: 0, name: "Name", lat: 0, lng: 0, isDeleted: false, cityId: 1, customerId: 1, stateId: nil))
+        StationDetailsView(station: .init(id: 0, name: "Name", lat: 0, lng: 0, isDeleted: false, cityId: 1, customerId: 1, stateId: nil, priceUpdated: "", note: ""))
     }
 }

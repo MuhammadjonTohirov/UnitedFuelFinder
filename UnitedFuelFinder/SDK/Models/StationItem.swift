@@ -22,10 +22,12 @@ public struct StationItem: Identifiable {
     public var stateId: String?
     public var discountPrice: Float?
     public var retailPrice: Float?
-    public var iconUrl: String?
+    public var logoUrl: String?
+    public var note: String?
+    public var priceUpdated: String?
     
     public var actualPriceInfo: String {
-        ((retailPrice ?? 0) - (discountPrice ?? 0)).asMoney
+        discountPrice?.asMoney ?? "$0"
     }
     
     public var retailPriceInfo: String {
@@ -33,10 +35,10 @@ public struct StationItem: Identifiable {
     }
     
     public var discountInfo: String {
-        discountPrice?.asMoney ?? "$0"
+        ((retailPrice ?? 0) - (discountPrice ?? 0)).asMoney
     }
     
-    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil) {
+    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil, priceUpdated: String?, note: String?) {
         self.id = id
         self.name = name
         self.lat = lat
@@ -49,6 +51,8 @@ public struct StationItem: Identifiable {
         self.stateId = stateId
         self.discountPrice = discountPrice
         self.retailPrice = retailPrice
+        self.priceUpdated = priceUpdated
+        self.note = note
     }
     
     init(res item: NetResStationItem) {
@@ -64,7 +68,9 @@ public struct StationItem: Identifiable {
         self.stateId = item.stateId
         self.discountPrice = item.discountPrice
         self.retailPrice = item.retailPrice
-        self.iconUrl = item.iconUrl
+        self.logoUrl = item.logoUrl
+        self.priceUpdated = item.priceUpdated
+        self.note = item.note
     }
 }
 
@@ -120,7 +126,11 @@ public extension StationItem {
     }
 }
 
-public extension GMSMarker {
+extension GMSMarker: Identifiable {
+    public var id: String {
+        "\(self.position.latitude)-\(self.position.longitude)"
+    }
+    
     var station: StationItem? {
         set(station) {
             self.userData = station
@@ -135,5 +145,19 @@ public extension GMSMarker {
 extension StationItem {
     var trustedDiscountPrice: Float {
         self.discountPrice ?? 0
+    }
+    
+    //    priceUpdateDate with format "2023-11-19T06:13:47.785Z"
+    public var priceUpdateDate: Date? {
+        guard let priceUpdated = self.priceUpdated else { return nil }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        return formatter.date(from: priceUpdated)
+    }
+    
+    //        format 11/15/2023 22:51:49
+    public var priceUpdateInfo: String {
+        guard let date = priceUpdateDate else { return "" }
+        return date.toExtendedString(format: "MM/dd/yyyy HH:mm:ss")
     }
 }

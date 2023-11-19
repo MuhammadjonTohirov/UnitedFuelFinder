@@ -38,9 +38,11 @@ struct NetResStationItem: NetResBody {
     var phone: String?
     var stateId: String?
     var discountPrice: Float?
+    var priceUpdated: String
     var retailPrice: Float?
     var number: String?
-    var iconUrl: String?
+    var logoUrl: String?
+    var note: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -54,8 +56,10 @@ struct NetResStationItem: NetResBody {
         case phone
         case stateId
         case discountPrice
+        case priceUpdated
         case retailPrice
         case number
-        case iconUrl = "icon_url"
+        case note
+        case logoUrl = "logoUrl"
     }
 }
