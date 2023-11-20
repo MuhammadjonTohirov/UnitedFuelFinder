@@ -174,9 +174,6 @@
         }
       }
     },
-    "Blue" : {
-
-    },
     "clear" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -604,12 +601,6 @@
         }
       }
     },
-    "Green" : {
-
-    },
-    "Indigo" : {
-
-    },
     "insert_creds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -932,12 +923,6 @@
         }
       }
     },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
-    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1085,13 +1070,8 @@
     "Notifications" : {
 
     },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
     "Orange" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1253,9 +1233,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1297,6 +1274,7 @@
       }
     },
     "Regular" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -1527,9 +1505,6 @@
         }
       }
     },
-    "SwiftUI" : {
-
-    },
     "to" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1599,9 +1574,6 @@
         }
       }
     },
-    "Violet" : {
-
-    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1670,9 +1642,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     }
   },
   "version" : "1.0"
