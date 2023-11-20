@@ -42,25 +42,46 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     }
     
     func onAppear() {
-        guard let user = UserSettings.shared.userInfo, !didAppear else {
-            return
+        @Sendable func _onAppear() {
+            guard let user = UserSettings.shared.userInfo, !didAppear else {
+                return
+            }
+            
+            didAppear = true
+            var nameComponents = user.fullName.components(separatedBy: " ")
+            
+            firstName = nameComponents.first ?? ""
+            nameComponents.removeFirst()
+            lastName = nameComponents.joined(separator: " ")
+            phoneNumber = user.phone
+            address = user.address ?? ""
+            
+            if let _stateKey = user.state, let _state = DState.item(id: _stateKey) {
+                self.state = _state
+            }
+            
+            if let _city = DCity.item(id: user.cityId ?? -1) {
+                self.city = _city
+            }
         }
         
-        didAppear = true
-        var nameComponents = user.fullName.components(separatedBy: " ")
-        
-        firstName = nameComponents.first ?? ""
-        nameComponents.removeFirst()
-        lastName = nameComponents.joined(separator: " ")
-        phoneNumber = user.phone
-        address = user.address ?? ""
-        
-        if let _stateKey = user.state, let _state = DState.item(id: _stateKey) {
-            self.state = _state
-        }
-        
-        if let _city = DCity.item(id: user.cityId ?? -1) {
-            self.city = _city
+        if UserSettings.shared.userInfo == nil {
+            Task {
+                await AuthService.shared.syncUserInfo()
+                guard let user = UserSettings.shared.userInfo else {
+                    return
+                }
+                
+                if DCity.item(id: user.cityId ?? -1) == nil {
+                    await CommonService.shared.syncCities(forState: user.state ?? "")
+                }
+                
+                await MainActor.run {
+                    _onAppear()
+                }
+            }
+        } else {
+            _onAppear()
         }
     }
     

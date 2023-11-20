@@ -62,9 +62,11 @@ struct ProfileVIew: View {
             YRoundedTextField {
                 YTextField(text: $viewModel.firstName, placeholder: "first_name".localize, contentType: .givenName)
             }
+            
             YRoundedTextField {
                 YTextField(text: $viewModel.lastName, placeholder: "last_name".localize, contentType: .familyName)
             }
+            
             YRoundedTextField {
                 YTextField(text: $viewModel.phoneNumber, placeholder: "phone_number".localize, contentType: .telephoneNumber)
                     .keyboardType(.decimalPad)

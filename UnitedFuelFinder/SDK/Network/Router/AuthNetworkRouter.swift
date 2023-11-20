@@ -60,6 +60,7 @@ enum UserNetworkRouter: URLRequestProtocol {
             request?.httpBody = self.body
         case .userInfo, .editUserInfo:
             request = URLRequest.new(url: url, withAuth: true)
+            request?.httpBody = self.body
         }
         
         request?.httpMethod = method.rawValue.uppercased()
