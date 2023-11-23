@@ -41,15 +41,6 @@ struct HomeView: View {
                         }
                     }
                 })
-                .toolbar(content: {
-                    ToolbarItem(placement: .topBarLeading) {
-                        Button(action: {
-                            self.viewModel.onClickNotification()
-                        }, label: {
-                            notificationButton
-                        })
-                    }
-                })
         }
     }
     
@@ -166,7 +157,11 @@ struct HomeView: View {
                 
                 Spacer()
                 
-                currentLocationNavView
+                VStack {
+                    notificationButton
+                        
+                    currentLocationNavView
+                }
                     .padding(.trailing, 8)
             }
             
@@ -236,12 +231,21 @@ struct HomeView: View {
     }
     
     private  var notificationButton: some View {
-        Image(systemName: "bell")
-            .resizable()
-            .renderingMode(.template)
-            .foregroundStyle(Color.label.opacity(0.8))
-            .frame(width: 24, height: 24)
-            .shadow(color: Color.black.opacity(0.15), radius: 5, x: 0, y: 0)
+        Button {
+            self.viewModel.route = .notifications
+        } label: {
+            Circle()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .overlay {
+                    Image(systemName: "bell")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.label.opacity(0.8))
+                        .frame(width: 18, height: 18)
+                }
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
+        }
     }
     
     private var currentLocationNavView: some View {

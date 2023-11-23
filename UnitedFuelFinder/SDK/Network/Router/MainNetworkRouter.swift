@@ -22,6 +22,8 @@ enum MainNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "DeleteFeedback", feedback)
         case .discountedStations(_, let limit):
             return URL.baseAPI.appendingPath("Driver", "DiscountedStations").queries(.init(name: "limit", value: "\(limit)"))
+        case .getSessions:
+            return URL.baseAPI.appendingPath("Driver", "DeviceSessions")
         }
     }
     
@@ -66,4 +68,5 @@ enum MainNetworkRouter: URLRequestProtocol {
     case feedbacksFor(station: Int)
     case postFeedback(station: Int, request: NetReqStationFeedback)
     case deleteFeedback(feedback: Int)
+    case getSessions
 }

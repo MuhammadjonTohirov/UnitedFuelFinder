@@ -17,6 +17,8 @@ enum SettingsRoute: ScreenRoute {
             return "contactUs"
         case .changePin:
             return "changePin"
+        case .sessions:
+            return "sessions"
         }
     }
     
@@ -30,6 +32,7 @@ enum SettingsRoute: ScreenRoute {
     
     case editProfile
     case contactUs
+    case sessions
     case changePin(result: (Bool) -> Void)
     
     @ViewBuilder
@@ -41,6 +44,8 @@ enum SettingsRoute: ScreenRoute {
             ContactUsView()
         case .changePin(let res):
             PinCodeView(viewModel: .init(title: "setup_pin".localize, reason: .setup, onResult: res))
+        case .sessions:
+            SessionsView()
         }
     }
 }
@@ -102,6 +107,19 @@ struct SettingsView: View {
                         viewModel.route = nil
                     }
                 }))
+            }
+            
+            Divider()
+            
+            row(image: Image(systemName: "doc.badge.clock")
+                .resizable()
+                .renderingMode(.template)
+                .fixedSize()
+                .foregroundStyle(Color.label)
+                .frame(width: 24, height: 24),
+                title: "Active sessions"
+            ) {
+                viewModel.navigate(to: .sessions)
             }
             
             Divider()

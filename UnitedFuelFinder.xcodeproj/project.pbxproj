@@ -194,6 +194,9 @@
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */; };
+		2EDBE0372B0F359700123CE0 /* NetResSessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */; };
+		2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0382B0F35B800123CE0 /* SessionItem.swift */; };
+		2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE03A2B0F364700123CE0 /* SessionsView.swift */; };
 		2EDF8C272AD1F04A003D64FC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 2EDF8C262AD1F04A003D64FC /* Kingfisher */; };
 		2EDF8C292AD1F04A003D64FC /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = 2EDF8C282AD1F04A003D64FC /* SwiftKeychainWrapper */; };
 		2EDF8C3D2AD2CD3F003D64FC /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 2EDF8C3C2AD2CD3F003D64FC /* Localizable.xcstrings */; };
@@ -420,6 +423,9 @@
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResSessionItem.swift; sourceTree = "<group>"; };
+		2EDBE0382B0F35B800123CE0 /* SessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionItem.swift; sourceTree = "<group>"; };
+		2EDBE03A2B0F364700123CE0 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
 		2EDF8C3C2AD2CD3F003D64FC /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		2EDF8C402AD2D865003D64FC /* AppDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDestination.swift; sourceTree = "<group>"; };
 		2EDF8C432AD2DCB8003D64FC /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -881,10 +887,10 @@
 		2E5DF8F52AEACD63005BE20D /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				2E5DF9002AEACD63005BE20D /* Protocols */,
 				2E5DF8FB2AEACD63005BE20D /* Network.swift */,
 				2E5DF8F62AEACD63005BE20D /* Response */,
 				2E5DF8FC2AEACD63005BE20D /* Requests */,
-				2E5DF9002AEACD63005BE20D /* Protocols */,
 				2E5DF9032AEACD63005BE20D /* Services */,
 				2E5DF9062AEACD63005BE20D /* Router */,
 			);
@@ -903,6 +909,7 @@
 				2E36A7462AEECE2C0033363E /* NetResStationItem.swift */,
 				2E36A74C2AEF9D930033363E /* NetResUserInfo.swift */,
 				2E0F93D12B0134CF00660DEB /* NetResStationComment.swift */,
+				2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -997,6 +1004,7 @@
 				2E5DF91F2AEACD63005BE20D /* Objectify.swift */,
 				2E5DF9202AEACD63005BE20D /* AddressObjects.swift */,
 				2E36A74A2AEF94500033363E /* StationItem.swift */,
+				2EDBE0382B0F35B800123CE0 /* SessionItem.swift */,
 				2E36A74E2AEF9FDB0033363E /* UserInfo.swift */,
 			);
 			path = Models;
@@ -1291,6 +1299,7 @@
 				2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */,
 				2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */,
 				841D81052AF75DBC00C5932C /* ProfileVIew.swift */,
+				2EDBE03A2B0F364700123CE0 /* SessionsView.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1425,6 +1434,7 @@
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
 				2E7D8DB02AFAEB650074AB7E /* DSearchedAddress.swift in Sources */,
+				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
 				2E0F93CD2B012FCE00660DEB /* StationCommentItem.swift in Sources */,
 				2E5DF9652AEACD63005BE20D /* MapZoomControl.swift in Sources */,
 				2E5DF97D2AEACD64005BE20D /* YKeychainWrapper.swift in Sources */,
@@ -1501,6 +1511,7 @@
 				2E5DF9372AEACD63005BE20D /* YTextField+Extension.swift in Sources */,
 				2E5DF95D2AEACD63005BE20D /* MapAnnotation.swift in Sources */,
 				2E527A792ACC83DB005B8B95 /* AuthView.swift in Sources */,
+				2EDBE0372B0F359700123CE0 /* NetResSessionItem.swift in Sources */,
 				2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */,
 				2E5DF9412AEACD63005BE20D /* YTextField.swift in Sources */,
 				2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */,
@@ -1538,6 +1549,7 @@
 				2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */,
 				2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */,
 				2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */,
+				2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */,
 				2E5DF97C2AEACD64005BE20D /* AnyWrapper.swift in Sources */,
 				2E5DF96A2AEACD63005BE20D /* DState.swift in Sources */,
 				2E5DF9492AEACD63005BE20D /* MapInformationVisibility.swift in Sources */,

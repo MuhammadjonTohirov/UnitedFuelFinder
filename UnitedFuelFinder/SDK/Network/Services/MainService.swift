@@ -59,4 +59,10 @@ struct MainService {
 
         return result?.success ?? false
     }
+    
+    func getSessions() async -> [SessionItem] {
+        let result: NetRes<[NetResSessionItem]>? = await Network.send(request: MainNetworkRouter.getSessions)
+        
+        return ((result?.data) ?? []).compactMap({.init($0)})
+    }
 }

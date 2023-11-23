@@ -16,6 +16,9 @@
     "%lld mi" : {
 
     },
+    "Active sessions" : {
+
+    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -465,6 +468,9 @@
           }
         }
       }
+    },
+    "Driver: %@" : {
+
     },
     "edit_profile" : {
       "extractionState" : "manual",
