@@ -386,9 +386,9 @@ extension HomeViewModel {
                 return
             }
 
-            let _stations = await MainService.shared.filterStations(
+            let _stations = await MainService.shared.discountedStations(
                 atLocation: (c.latitude, c.longitude),
-                in: Int(radiusValue)
+                in: Int(radiusValue), limit: -1
             ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
             
             Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radiusValue) is \(stations.count)")

@@ -117,7 +117,7 @@ struct SettingsView: View {
                 .fixedSize()
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "Active sessions"
+                title: "Device sessions"
             ) {
                 viewModel.navigate(to: .sessions)
             }

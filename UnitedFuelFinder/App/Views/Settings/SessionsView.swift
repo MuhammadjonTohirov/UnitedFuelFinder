@@ -25,7 +25,7 @@ struct SessionsView: View {
                 }).scrollable()
             }
         }
-        .navigationTitle("Active sessions")
+        .navigationTitle("Device sessions")
         .onAppear {
             getSessions()
         }
