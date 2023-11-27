@@ -18,12 +18,14 @@ struct ToPointButton: View {
             RoundedRectangle(cornerRadius: 8)
                 .frame(height: 40)
                 .foregroundStyle(Color.secondaryBackground)
+                .onTapGesture(perform: onClickBody)
                 .overlay {
                     HStack {
                         Image("icon_pin_search")
                             .renderingMode(.template)
                             .foregroundStyle(Color.label)
-
+                            .foregroundStyle(Color.init(uiColor: .systemRed))
+                        
                         if isLoading {
                             HStack {
                                 ProgressView()
@@ -43,10 +45,11 @@ struct ToPointButton: View {
                             .foregroundStyle(Color.clear)
                             .overlay {
                                 Image(systemName: "arrow.forward")
-                            }.onTapGesture(perform: onClickBody)
+                            }
                     }
                     .padding(.horizontal, 10)
                 }
+                .onTapGesture(perform: onClickBody)
             
             Button(action: {onClickMap()}, label: {
                 RoundedRectangle(cornerRadius: 8)

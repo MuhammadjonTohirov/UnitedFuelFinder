@@ -72,15 +72,15 @@ enum HomePresentableSheets: ScreenRoute {
     }
     
     case allStations(stations: [StationItem], from: String?, to: String?, radius: Int?, location: CLLocationCoordinate2D?, onNavigation: ((StationItem) -> Void)?, onClickItem: ((StationItem) -> Void)?)
-    case searchAddress(_ completion: (SearchAddressViewModel.SearchAddressResult) -> Void)
+    case searchAddress(text: String, _ completion: (SearchAddressViewModel.SearchAddressResult) -> Void)
     
     @ViewBuilder
     var screen: some View {
         switch self {
         case .allStations(let stations, let from, let to, let radius, let location, let onNav, let onOpen):
             AllStationsView(from: from, to: to, location: location, radius: radius, onClickNavigate: onNav, onClickOpen: onOpen, stations: stations)
-        case .searchAddress(let completion):
-            SearchAddressView(onResult: completion)
+        case .searchAddress(let text, let completion):
+            SearchAddressView(text: text, onResult: completion)
         }
     }
 }
@@ -125,13 +125,14 @@ final class HomeViewModel: ObservableObject {
     @Published var radiusValue: CGFloat = 20
     
     private(set) var loadingMessage: String = ""
+    private(set) var customers: [CustomerItem] = []
     
     @Published var state: HomeViewState = .selectFrom
         
-    private(set) var hasDrawen: Bool = false
-    private(set) var fromLocation: CLLocation?
-    private(set) var toLocation: CLLocation?
-    private(set) var toLocationCandidate: CLLocation?
+    var hasDrawen: Bool = false
+    var fromLocation: CLLocation?
+    var toLocation: CLLocation?
+    var toLocationCandidate: CLLocation?
     
     @Published var stations: [StationItem] = []
     @Published var discountedStations: [StationItem] = []
@@ -166,6 +167,8 @@ final class HomeViewModel: ObservableObject {
         locationManager.startUpdatingLocation()
         
         focusToCurrentLocation()
+        
+        loadCustomers()
     }
     
     func focusToCurrentLocation() {
@@ -267,13 +270,19 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    func onEndDrawingRoute() {
+    func onEndDrawingRoute(_ isOK: Bool) {
         DispatchQueue.main.async {
             self.isDrawing = false
             self.hasDrawen = true
         }
         
-        filterStationsByRoute()
+        if isOK {
+            filterStationsByRoute()
+        } else {
+            DispatchQueue.main.async {
+                self.state = .selectFrom
+            }
+        }
     }
     
     func showLoader(message: String) {
@@ -301,147 +310,15 @@ final class HomeViewModel: ObservableObject {
         self.toAddress = res.address
         self.onClickDrawRoute()
     }
-}
-
-extension HomeViewModel {
-    func onClickSelectToPointOnMap() {
-        withAnimation {
-            self.state = .selectTo
-            if let toLocation {
-                focusToLocation(toLocation)
-            }
-        }
-    }
     
-    func onClickSettings() {
-        self.route = .settings
-    }
-    
-    func onClickNotification() {
-        self.route = .notifications
-    }
-        
-    func onClickViewAllStations() {
-        self.presentableRoute = .allStations(
-            stations: self.stations, from: nil, to: nil, radius: Int(radius),
-            location: self.fromLocation?.coordinate, onNavigation: { sta in
-                self.focusToLocation(sta.clLocation)
-            }, onClickItem: { sta in
-                self.route = .stationDetails(station: sta)
-            })
-    }
-    
-    func onClickBack() {
-        withAnimation {
-            self.state = .selectFrom
-            if let fromLocation {
-                focusToLocation(fromLocation)
-            }
-        }
-    }
-    
-    func onClickDrawRoute() {
-        withAnimation {
-            self.state = .routing
-        }
-    }
-}
-
-extension StationItem {
-    var clLocation: CLLocation {
-        .init(latitude: lat, longitude: lng)
-    }
-}
-
-extension HomeViewModel {
-    private func filterStationsByRoute() {
-        DispatchQueue.main.async {
-            self.stations = []
-        }
-        
+    func loadCustomers() {
         Task {
-            guard state == .routing, let toLocation, let fromLocation else {
-                return
-            }
-            let f = (fromLocation.coordinate.latitude, fromLocation.coordinate.longitude)
-            let t = (toLocation.coordinate.latitude, toLocation.coordinate.longitude)
-            
-            let _stations = await MainService.shared.filterStations(from: f, to: t, in: 10)
-                .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
+            let _customers = await MainService.shared.getCustomers()
             
             await MainActor.run {
-                self.stations = _stations
-                self.stationsMarkers = self.stations.map({$0.asMarker})
-            }
-        }
-    }
-    
-    private func filterStationsByDefault() {
-        Task {
-            self.showLoader(message: "loading_stations".localize)
-
-            Logging.l(tag: "HomeViewModel", "Start loading stations")
-
-            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
-                return
-            }
-
-            let _stations = await MainService.shared.discountedStations(
-                atLocation: (c.latitude, c.longitude),
-                in: Int(radiusValue), limit: -1
-            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
-            
-            Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radiusValue) is \(stations.count)")
-                    
-            await MainActor.run {
-                self.stationsMarkers.forEach { marker in
-                    marker.map = nil
-                }
-                
-                self.stationsMarkers.removeAll()
-
-                let newStations = _stations.filter({station in
-                    !self.stations.contains(where: {$0.id == station.id})
-                })
-                
-                let oldStations = self.stations.filter({station in
-                    !_stations.contains(where: {$0.id == station.id})
-                })
-            
-                oldStations.forEach { station in
-                    if let index = self.stations.firstIndex(where: {$0.id == station.id}) {
-                        self.stations.remove(at: index)
-                    }
-                }
-                
-                withAnimation {
-                    self.stations = newStations + self.stations
-                    self.stationsMarkers = self.stations.map({$0.asMarker})
-                }
-            }
-            
-            self.hideLoader()
-        }
-    }
-    
-    private func filterStationsByDiscount() {
-        Task {
-            self.showLoader(message: "loading_stations".localize)
-
-            Logging.l(tag: "HomeViewModel", "Start loading stations")
-
-            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
-                return
-            }
-
-            let _stations = await MainService.shared.discountedStations(
-                atLocation: (c.latitude, c.longitude),
-                in: Int(radiusValue), limit: 7
-            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
-
-            await MainActor.run {
-                self.discountedStations = _stations
+                self.customers = _customers
             }
         }
     }
 }
+

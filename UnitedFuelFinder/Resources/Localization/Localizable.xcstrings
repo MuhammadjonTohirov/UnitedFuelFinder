@@ -16,9 +16,6 @@
     "%lld mi" : {
 
     },
-    "Active sessions" : {
-
-    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -91,19 +88,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "I do agree with offer"
+            "value" : "I agree with Terms and conditions"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Я согласен с оферта"
+            "value" : "Я согласен с Условиями использования"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Talab va takliflarga roziman"
+            "value" : "Men talab va takliflarga roziman"
           }
         }
       }
@@ -114,19 +111,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "offer"
+            "value" : "Terms and conditions"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "оферта"
+            "state" : "needs_review",
+            "value" : "Условиями использования"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Talab va takliflar"
+            "value" : "talab va takliflar"
           }
         }
       }
@@ -202,9 +199,6 @@
           }
         }
       }
-    },
-    "Clear All" : {
-
     },
     "close" : {
       "extractionState" : "manual",
@@ -383,6 +377,9 @@
         }
       }
     },
+    "Device sessions" : {
+
+    },
     "discount" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -468,9 +465,6 @@
           }
         }
       }
-    },
-    "Driver: %@" : {
-
     },
     "edit_profile" : {
       "extractionState" : "manual",

@@ -100,7 +100,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     @Binding var markers: [GMSMarker]
     
     fileprivate var onStartDrawing: (() -> Void)?
-    fileprivate var onEndDrawing: (() -> Void)?
+    fileprivate var onEndDrawing: ((Bool) -> Void)?
     fileprivate var onClickMarker: ((_ marker: GMSMarker, _ frame: CGPoint) -> Void)?
     fileprivate var routeFrom: CLLocationCoordinate2D?
     fileprivate var routeTo: CLLocationCoordinate2D?
@@ -137,7 +137,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         return v
     }
     
-    func set(from: CLLocationCoordinate2D?, to: CLLocationCoordinate2D?, onStartDrawing: @escaping () -> Void, onEndDrawing: @escaping () -> Void) -> Self {
+    func set(from: CLLocationCoordinate2D?, to: CLLocationCoordinate2D?, onStartDrawing: @escaping () -> Void, onEndDrawing: @escaping (Bool) -> Void) -> Self {
         var v = self
         
         if v.routeFrom != from {
@@ -228,6 +228,12 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             let p = CLLocationCoordinate2D(latitude: marker.layer.latitude, longitude: marker.layer.longitude).toScreenPoint(on: mapView)
             let bottom: CGFloat = 158 - UIApplication.shared.safeArea.bottom// + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
             parent.onClickMarker?(marker, .init(x: p.x, y: p.y - bottom))
+            
+            if mapView.selectedMarker == nil {
+                mapView.selectedMarker = marker
+            } else {
+                mapView.selectedMarker = nil
+            }
             return true
         }
         
@@ -333,17 +339,20 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
                             DispatchQueue.main.async {
                                 let path = GMSPath(fromEncodedPath: points)
                                 let polyline = GMSPolyline(path: path)
-                                polyline.strokeColor = .red
+                                polyline.strokeColor = .systemGray
                                 polyline.strokeWidth = 4
                                 polyline.map = mapView
 
                                 self.currentRoutePolyline = polyline
-                                self.parent.onEndDrawing?()
+                                self.parent.onEndDrawing?(true)
                                 self.hasDrawen = true
                                 self.isRouting = false
                             }
                         } else {
                             debugPrint("No routes found")
+                            self.parent.onEndDrawing?(false)
+                            self.hasDrawen = false
+                            self.isRouting = false
                         }
                     } catch let error {
                         debugPrint("Error decoding directions: \(error.localizedDescription)")

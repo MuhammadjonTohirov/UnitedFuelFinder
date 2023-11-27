@@ -8,21 +8,22 @@
 import Foundation
 
 public extension Date {
+    static let serverFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
     static func formattedSeconds(_ dur: Double, _ shouldIncludeHours: Bool = true) -> String {
         let format = shouldIncludeHours ? "HH:mm:ss" : "mm:ss"
-        return Date.init(timeIntervalSince1970: dur - 6 * 3600).toExtendedString(format: format)
+        return Date.init(timeIntervalSince1970: dur - 6 * 3600).toString(format: format)
     }
     
     static let transactionSectionFormat = "d MMM yyyy, E"
     
-    static func from(string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS", timezone: TimeZone? = .init(abbreviation: "GMT+5")) -> Date? {
+    static func from(string: String, format: String = serverFormat, timezone: TimeZone? = .init(abbreviation: "GMT+5")) -> Date? {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timezone
         return formatter.date(from: string)
     }
     
-    func toExtendedString(format: String = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS", timezone: TimeZone? = .init(abbreviation: "GMT+5")) -> String {
+    func toString(format: String = serverFormat, timezone: TimeZone? = .init(abbreviation: "GMT+5")) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         formatter.timeZone = timezone
@@ -31,11 +32,11 @@ public extension Date {
     
     var month: Int {
         
-        return Int(self.toExtendedString(format: "MM"))!
+        return Int(self.toString(format: "MM"))!
     }
     
     var year: Int {
-        return Int(self.toExtendedString(format: "YY"))!
+        return Int(self.toString(format: "YY"))!
     }
     
     func after(days: Int) -> Date {

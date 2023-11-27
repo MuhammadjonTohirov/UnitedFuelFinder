@@ -25,9 +25,8 @@ extension SessionItem {
     }
     
     var date: Date? {
-//        2023-11-23T07:23:42.772Z
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.dateFormat = Date.serverFormat
         return formatter.date(from: loginTime ?? "")
     }
     

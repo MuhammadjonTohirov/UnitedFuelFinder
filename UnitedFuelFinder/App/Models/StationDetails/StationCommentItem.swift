@@ -35,6 +35,6 @@ struct StationCommentItem: Identifiable {
     }
     
     var dateValue: String {
-        date.toExtendedString(format: "HH:mm dd/MM/YYYY")
+        date.toString(format: "HH:mm dd/MM/YYYY")
     }
 }

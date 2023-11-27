@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import RealmSwift
 
 struct StationDetailsView: View {
     
@@ -16,6 +17,12 @@ struct StationDetailsView: View {
     
     init(station: StationItem) {
         self.station = station
+    }
+    
+    @ObservedResults(DCustomer.self, configuration: Realm.config) var customers
+    
+    var customer: DCustomer? {
+        customers.first(where: {$0.id == station.customerId})
     }
     
     @State private var commentsPresented: Bool = false

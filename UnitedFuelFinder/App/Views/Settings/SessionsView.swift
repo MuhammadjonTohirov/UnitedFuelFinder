@@ -36,11 +36,10 @@ struct SessionsView: View {
             Text(session.agent ?? "")
                 .font(.system(size: 13, weight: .semibold))
             
-            Text("Driver: \(session.driverId ?? "")")
+            Text(session.ip ?? "")
                 .font(.system(size: 12, weight: .regular))
             
             HStack {
-                Text(session.ip ?? "")
                 Spacer()
                 Text(session.beautifiedDateTime)
             }

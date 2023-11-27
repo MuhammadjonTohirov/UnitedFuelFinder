@@ -24,6 +24,10 @@ enum MainNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "DiscountedStations").queries(.init(name: "limit", value: "\(limit)"))
         case .getSessions:
             return URL.baseAPI.appendingPath("Driver", "DeviceSessions")
+        case .getAuditLogs:
+            return URL.baseAPI.appendingPath("Driver", "AuditLogs")
+        case .getCustomers:
+            return URL.baseAPI.appendingPath("Driver", "Customers")
         }
     }
     
@@ -50,16 +54,10 @@ enum MainNetworkRouter: URLRequestProtocol {
     }
     
     func request() -> URLRequest {
-        var request: URLRequest?
-        
-        switch self {
-        default:
-            request = URLRequest.new(url: url, withAuth: true)
-        }
-        
-        request?.httpMethod = method.rawValue.uppercased()
-        request?.httpBody = self.body
-        return request!
+        var request: URLRequest = URLRequest.new(url: url, withAuth: true)
+        request.httpMethod = method.rawValue.uppercased()
+        request.httpBody = self.body
+        return request
     }
     
     case stationsInCity(_ cityId: String)
@@ -69,4 +67,6 @@ enum MainNetworkRouter: URLRequestProtocol {
     case postFeedback(station: Int, request: NetReqStationFeedback)
     case deleteFeedback(feedback: Int)
     case getSessions
+    case getAuditLogs
+    case getCustomers
 }

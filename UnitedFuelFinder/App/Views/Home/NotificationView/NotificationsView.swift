@@ -31,17 +31,8 @@ struct NotificationsView: View {
             }
             .navigationBarTitle("Notifications")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarItems(trailing: Button(action: {
-                self.viewModel.onClearAll()
-            }) {
-                Text("Clear All")
-                    .foregroundColor(.red)
-            })
             .onAppear {
                 self.viewModel.onAppear()
-            }
-            .onDisappear {
-                self.viewModel.onDisappear()
             }
             if viewModel.isLoading {
                 ProgressView()
@@ -63,7 +54,7 @@ struct NotificationRow: View {
                 .foregroundColor(.secondary)
             HStack {
                 Spacer()
-                Text(notification.createdAt.toExtendedString(format: "dd/MM/yyyy HH:mm"))
+                Text(notification.createdAt ?? "")
                     .font(.system(size: 12))
                     .foregroundColor(.secondary)
             }

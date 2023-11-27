@@ -14,9 +14,16 @@ struct SearchAddressView: View {
     @StateObject var viewModel = SearchAddressViewModel()
     @Environment(\.dismiss) var dismiss
     @State private var searchCancellables = Set<AnyCancellable>()
-    
+    private var text: String
     var title: String = "search_address".localize
+    
     var onResult: ((SearchAddressViewModel.SearchAddressResult) -> Void)?
+    
+    init(title: String = "search_address".localize, text: String = "", onResult: ((SearchAddressViewModel.SearchAddressResult) -> Void)? = nil) {
+        self.title = title
+        self.onResult = onResult
+        self.text = text
+    }
     
     var body: some View {
         ZStack {
@@ -36,6 +43,7 @@ struct SearchAddressView: View {
         })
         .navigationTitle(title)
         .onAppear {
+            viewModel.addressText = text
             viewModel.onAppear()
         }
     }
@@ -48,37 +56,48 @@ struct SearchAddressView: View {
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                     .padding(Padding.large)
             } else {
-                ForEach(viewModel.addressList, id: \.self) { address in
-                    Button {
-                        viewModel.onClickAddress(address) { res in
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                if let res {
-                                    onSuccessResult(res)
-                                }
-                            }
-                        }
-                    } label: {
-                        HStack(alignment: .center) {
-                            Image(systemName: "mappin")
-                            Text(address)
-                                .font(.system(size: 12, weight: .regular))
-                                .padding(.vertical, Padding.small)
-                                .foregroundStyle(Color.label)
-                                .lineLimit(1)
-                            Spacer()
-                        }
-                        .background {
-                            Rectangle().foregroundStyle(Color.clear)
-                        }
-                    }
-
-                    Divider()
+                ForEach(viewModel.addressList, id: \.title) { address in
+                    addressView(address)
                 }
             }
         }
         .padding(.horizontal, 16)
         .scrollable(showIndicators: false)
         .searchable(text: $viewModel.addressText)
+    }
+    
+    private func addressView(_ address: SearchAddressItem) -> some View {
+        VStack {
+            Button {
+                viewModel.onClickAddress(address) { res in
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        if let res {
+                            onSuccessResult(res)
+                        }
+                    }
+                }
+            } label: {
+                HStack(alignment: .center) {
+                    address
+                        .icon
+                        .renderingMode(.template)
+                        .foregroundStyle(Color(address.type == .history ? .secondaryLabel : .accent))
+                    
+                    Text(address.title)
+                        .font(.system(size: 13, weight: .regular))
+                        .padding(.vertical, Padding.small)
+                        .foregroundStyle(Color.label)
+                        .lineLimit(1)
+                        .foregroundStyle(Color(address.type == .history ? .secondaryLabel : .label))
+                    Spacer()
+                }
+                .background {
+                    Rectangle().foregroundStyle(Color.clear)
+                }
+            }
+
+            Divider()
+        }
     }
     
     private func onSuccessResult(_ res: SearchAddressViewModel.SearchAddressResult) {

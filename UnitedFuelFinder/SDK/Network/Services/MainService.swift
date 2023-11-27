@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct MainService {
     static let shared = MainService()
@@ -64,5 +65,19 @@ struct MainService {
         let result: NetRes<[NetResSessionItem]>? = await Network.send(request: MainNetworkRouter.getSessions)
         
         return ((result?.data) ?? []).compactMap({.init($0)})
+    }
+    
+    func getAuditLogs() async -> [AuditLog] {
+        let result: NetRes<[NetResAuditLog]>? = await Network.send(request: MainNetworkRouter.getAuditLogs)
+        
+        return ((result?.data) ?? []).compactMap({.init($0)})
+    }
+    
+    func getCustomers() async -> [CustomerItem] {
+        let result: NetRes<[NetResCustomerItem]>? = await Network.send(request: MainNetworkRouter.getCustomers)
+        let customers = ((result?.data)?.map({CustomerItem.create(from: $0)})) ?? []
+        DCustomer.addAll(customers)
+        try? await Task.sleep(for: .seconds(1))
+        return customers
     }
 }

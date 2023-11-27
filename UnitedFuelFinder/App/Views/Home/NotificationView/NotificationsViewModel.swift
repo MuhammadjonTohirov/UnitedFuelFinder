@@ -8,13 +8,13 @@
 import Foundation
 
 class NotificationModel: Identifiable, Equatable {
-    var id: String
+    var id: Int
     var title: String
     var body: String
     var isRead: Bool
-    var createdAt: Date
+    var createdAt: String?
     
-    init(id: String, title: String, body: String, isRead: Bool, createdAt: Date) {
+    init(id: Int, title: String, body: String, isRead: Bool, createdAt: String) {
         self.id = id
         self.title = title
         self.body = body
@@ -25,6 +25,10 @@ class NotificationModel: Identifiable, Equatable {
     static func == (lhs: NotificationModel, rhs: NotificationModel) -> Bool {
         return lhs.id == rhs.id
     }
+    
+    static func create(with log: AuditLog) -> NotificationModel {
+        return NotificationModel(id: log.id ?? 0, title: log.action ?? "", body: log.note ?? "", isRead: true, createdAt: log.dateInfo)
+    }
 }
 
 class NotificationsViewModel: ObservableObject {
@@ -32,38 +36,18 @@ class NotificationsViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     
     func onAppear() {
+        loadNotifications()
+    }
+    
+    private func loadNotifications() {
         isLoading = true
-//        add mock data
-        notifications.append(NotificationModel(id: "1", title: "Test".localize, body: "Lorem ipsum dolor sit amet consectetur. Ac luctus amet nibh dictum faucibus eu. Tincidunt urna id amet tristique enim massa viverra aliquet. ".localize, isRead: false, createdAt: Date()))
-        notifications.append(NotificationModel(id: "2", title: "Test".localize, body: "Lorem ipsum dolor sit amet consectetur. Ac luctus amet nibh dictum faucibus eu. Tincidunt urna id amet tristique enim massa viverra aliquet. ".localize, isRead: false, createdAt: Date()))
-        isLoading = false
-//        NotificationsService.shared.getNotifications { [weak self] result in
-//            guard let self = self else { return }
-//            self.isLoading = false
-//            switch result {
-//            case .success(let notifications):
-//                self.notifications = notifications
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
-    }
-    
-    func onDisappear() {
-//        NotificationsService.shared.markAllAsRead()
         
-    }
-    
-    func onClearAll() {
-//        notifications = []
-//        NotificationsService.shared.clearAll { [weak self] result in
-//            guard let self = self else { return }
-//            switch result {
-//            case .success:
-//                self.notifications = []
-//            case .failure(let error):
-//                print(error.localizedDescription)
-//            }
-//        }
+        Task {
+            let logs = await MainService.shared.getAuditLogs()
+            await MainActor.run {
+                self.notifications = logs.map { NotificationModel.create(with: $0) }.sorted(by: {$0.id > $1.id})
+                self.isLoading = false
+            }
+        }
     }
 }

@@ -8,6 +8,8 @@
 import Foundation
 import RealmSwift
 import GoogleMaps
+import CoreLocation
+import SwiftUI
 
 public struct StationItem: Identifiable {
     public var id: Int
@@ -74,7 +76,9 @@ public struct StationItem: Identifiable {
     }
 }
 
-fileprivate let _imageView: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station1"))
+fileprivate let _imageView: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station_blue"))
+fileprivate let _imageView2: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station_green"))
+fileprivate let _imageView3: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station_red"))
 
 public extension StationItem {
     var asMarker: GMSMarker {
@@ -82,8 +86,27 @@ public extension StationItem {
         marker.position = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng)
         marker.title = self.name
         marker.snippet = self.address
-        marker.iconView = _imageView
-        marker.iconView?.frame.size = .init(width: 32, height: 32)
+        if customerId == 1 {
+            _imageView.set(text: self.name)
+            _imageView.set(url: nil, placeholder: self.stationImage)
+            marker.iconView = _imageView
+            marker.iconView?.frame.size = .init(width: 68, height: 32)
+        }
+        
+        if customerId == 2 {
+            _imageView2.set(text: self.name)
+            _imageView2.set(url: nil, placeholder: self.stationImage)
+            marker.iconView = _imageView2
+            marker.iconView?.frame.size = .init(width: 68, height: 32)
+        }
+        
+        if customerId > 2 {
+            _imageView3.set(text: self.name)
+            _imageView3.set(url: nil, placeholder: self.stationImage)
+            marker.iconView = _imageView3
+            marker.iconView?.frame.size = .init(width: 68, height: 32)
+        }
+        
         marker.station = self
         return marker
     }
@@ -147,17 +170,33 @@ extension StationItem {
         self.discountPrice ?? 0
     }
     
-    //    priceUpdateDate with format "2023-11-19T06:13:47.785Z"
     public var priceUpdateDate: Date? {
         guard let priceUpdated = self.priceUpdated else { return nil }
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        formatter.dateFormat = Date.serverFormat
         return formatter.date(from: priceUpdated)
     }
     
-    //        format 11/15/2023 22:51:49
     public var priceUpdateInfo: String {
         guard let date = priceUpdateDate else { return "" }
-        return date.toExtendedString(format: "MM/dd/yyyy HH:mm:ss")
+        return date.toString(format: "MM/dd/yyyy HH:mm:ss")
+    }
+    
+    var stationImage: UIImage {
+        switch customerId {
+        case 1:
+            return #imageLiteral(resourceName: "icon_station_blue.png")
+        case 2:
+            return #imageLiteral(resourceName: "icon_station_green.png")
+        default:
+            return #imageLiteral(resourceName: "icon_station_red.png")
+        }
+    }
+}
+
+
+extension StationItem {
+    var clLocation: CLLocation {
+        .init(latitude: lat, longitude: lng)
     }
 }

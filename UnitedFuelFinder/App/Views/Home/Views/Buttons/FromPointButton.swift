@@ -22,7 +22,8 @@ struct FromPointButton: View {
             Image("icon_point_circle")
                 .renderingMode(.template)
                 .foregroundStyle(Color.label)
-
+                .foregroundStyle(Color.green)
+            
             if isLoading {
                 HStack {
                     ProgressView()
@@ -44,14 +45,16 @@ struct FromPointButton: View {
                 .foregroundStyle(Color.clear)
                 .overlay {
                     Image(systemName: "arrow.forward")
-                }.onTapGesture(perform: onClickBody)
+                }
         }
         .padding(.horizontal, 10)
         .frame(height: 40)
         .background {
             RoundedRectangle(cornerRadius: 8)
                 .foregroundStyle(Color.secondaryBackground)
+                .onTapGesture(perform: onClickBody)
         }
+        .onTapGesture(perform: onClickBody)
     }
 }
 

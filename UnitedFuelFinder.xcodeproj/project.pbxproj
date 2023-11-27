@@ -30,6 +30,7 @@
 		2E0F93D42B01361400660DEB /* NetReqStationFeedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D32B01361400660DEB /* NetReqStationFeedback.swift */; };
 		2E0F93D72B013C4900660DEB /* CoveredLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D62B013C4900660DEB /* CoveredLoadingView.swift */; };
 		2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */; };
+		2E0FBEFD2B1307C400A39EBA /* HomeViewModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0FBEFC2B1307C400A39EBA /* HomeViewModel+Extensions.swift */; };
 		2E243DA62AE02D01008C3E8C /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA52AE02D01008C3E8C /* HomeBottomSheetView.swift */; };
 		2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA72AE067FB008C3E8C /* PinPointerView.swift */; };
 		2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */; };
@@ -182,7 +183,7 @@
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
 		2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */; };
 		2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */; };
-		2E7D8DB02AFAEB650074AB7E /* DSearchedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAF2AFAEB650074AB7E /* DSearchedAddress.swift */; };
+		2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */; };
 		2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */; };
@@ -191,9 +192,14 @@
 		2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996A2B09E39A0038F5F0 /* StationTipInfoView.swift */; };
 		2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996D2B09E5F90038F5F0 /* NotificationsView.swift */; };
 		2EB599702B09F6010038F5F0 /* NotificationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996F2B09F6010038F5F0 /* NotificationsViewModel.swift */; };
+		2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B192B13B1870055610A /* NetResCustomer.swift */; };
+		2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B1B2B13B1B90055610A /* CustomerItem.swift */; };
+		2EB76B1E2B13B1C20055610A /* DCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B1D2B13B1C20055610A /* DCustomer.swift */; };
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */; };
+		2ED9B7552B11F38800150F0D /* NetResAuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */; };
+		2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7562B11F3A800150F0D /* AuditLog.swift */; };
 		2EDBE0372B0F359700123CE0 /* NetResSessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */; };
 		2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0382B0F35B800123CE0 /* SessionItem.swift */; };
 		2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE03A2B0F364700123CE0 /* SessionsView.swift */; };
@@ -261,6 +267,7 @@
 		2E0F93D32B01361400660DEB /* NetReqStationFeedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqStationFeedback.swift; sourceTree = "<group>"; };
 		2E0F93D62B013C4900660DEB /* CoveredLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoveredLoadingView.swift; sourceTree = "<group>"; };
 		2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalValueAdjuster.swift; sourceTree = "<group>"; };
+		2E0FBEFC2B1307C400A39EBA /* HomeViewModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewModel+Extensions.swift"; sourceTree = "<group>"; };
 		2E243DA52AE02D01008C3E8C /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2E243DA72AE067FB008C3E8C /* PinPointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointerView.swift; sourceTree = "<group>"; };
 		2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyles.swift; sourceTree = "<group>"; };
@@ -412,7 +419,7 @@
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
 		2E7BC70E2AF40527003A1CE5 /* SelectCompanyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectCompanyView.swift; sourceTree = "<group>"; };
 		2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqEditProfile.swift; sourceTree = "<group>"; };
-		2E7D8DAF2AFAEB650074AB7E /* DSearchedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DSearchedAddress.swift; sourceTree = "<group>"; };
+		2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRecentSearchedAddress.swift; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsView.swift; sourceTree = "<group>"; };
 		2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationItemView.swift; sourceTree = "<group>"; };
@@ -420,9 +427,14 @@
 		2EB5996A2B09E39A0038F5F0 /* StationTipInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationTipInfoView.swift; sourceTree = "<group>"; };
 		2EB5996D2B09E5F90038F5F0 /* NotificationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsView.swift; sourceTree = "<group>"; };
 		2EB5996F2B09F6010038F5F0 /* NotificationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewModel.swift; sourceTree = "<group>"; };
+		2EB76B192B13B1870055610A /* NetResCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResCustomer.swift; sourceTree = "<group>"; };
+		2EB76B1B2B13B1B90055610A /* CustomerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerItem.swift; sourceTree = "<group>"; };
+		2EB76B1D2B13B1C20055610A /* DCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCustomer.swift; sourceTree = "<group>"; };
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResAuditLog.swift; sourceTree = "<group>"; };
+		2ED9B7562B11F3A800150F0D /* AuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditLog.swift; sourceTree = "<group>"; };
 		2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResSessionItem.swift; sourceTree = "<group>"; };
 		2EDBE0382B0F35B800123CE0 /* SessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionItem.swift; sourceTree = "<group>"; };
 		2EDBE03A2B0F364700123CE0 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
@@ -511,6 +523,15 @@
 				2E0F93CF2B0131FC00660DEB /* StationDetailsViewModel.swift */,
 			);
 			path = StationDetails;
+			sourceTree = "<group>";
+		};
+		2E0FBEFB2B1307B800A39EBA /* HomeViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */,
+				2E0FBEFC2B1307C400A39EBA /* HomeViewModel+Extensions.swift */,
+			);
+			path = HomeViewModel;
 			sourceTree = "<group>";
 		};
 		2E243DB12AE163F1008C3E8C /* Buttons */ = {
@@ -871,7 +892,8 @@
 				2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */,
 				2E5DF8F02AEACD63005BE20D /* DCity.swift */,
 				2E5DF8F12AEACD63005BE20D /* DState.swift */,
-				2E7D8DAF2AFAEB650074AB7E /* DSearchedAddress.swift */,
+				2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */,
+				2EB76B1D2B13B1C20055610A /* DCustomer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -910,6 +932,8 @@
 				2E36A74C2AEF9D930033363E /* NetResUserInfo.swift */,
 				2E0F93D12B0134CF00660DEB /* NetResStationComment.swift */,
 				2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */,
+				2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */,
+				2EB76B192B13B1870055610A /* NetResCustomer.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1006,6 +1030,8 @@
 				2E36A74A2AEF94500033363E /* StationItem.swift */,
 				2EDBE0382B0F35B800123CE0 /* SessionItem.swift */,
 				2E36A74E2AEF9FDB0033363E /* UserInfo.swift */,
+				2ED9B7562B11F3A800150F0D /* AuditLog.swift */,
+				2EB76B1B2B13B1B90055610A /* CustomerItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1078,9 +1104,9 @@
 		2EBFB99D2ADFA052007FA786 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2E0FBEFB2B1307B800A39EBA /* HomeViewModel */,
 				2E0F93CE2B0131F400660DEB /* StationDetails */,
 				2E60B61F2AFAB1DA00573049 /* SearchAddress */,
-				2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */,
 				2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */,
 			);
 			path = Home;
@@ -1392,7 +1418,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EB76B1E2B13B1C20055610A /* DCustomer.swift in Sources */,
 				2E5DF94A2AEACD63005BE20D /* UserTrackingMode.swift in Sources */,
+				2ED9B7552B11F38800150F0D /* NetResAuditLog.swift in Sources */,
 				841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */,
 				2E36A74D2AEF9D930033363E /* NetResUserInfo.swift in Sources */,
 				2E5DF9252AEACD63005BE20D /* TopLeftDismissModifier.swift in Sources */,
@@ -1433,7 +1461,7 @@
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
-				2E7D8DB02AFAEB650074AB7E /* DSearchedAddress.swift in Sources */,
+				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
 				2E0F93CD2B012FCE00660DEB /* StationCommentItem.swift in Sources */,
 				2E5DF9652AEACD63005BE20D /* MapZoomControl.swift in Sources */,
@@ -1443,6 +1471,7 @@
 				2E5DF9402AEACD63005BE20D /* TextFieldProtocol.swift in Sources */,
 				2E5DF92F2AEACD63005BE20D /* Combine+.swift in Sources */,
 				2E5DF9622AEACD63005BE20D /* Map+Watch+Coordinator.swift in Sources */,
+				2E0FBEFD2B1307C400A39EBA /* HomeViewModel+Extensions.swift in Sources */,
 				2E5DF9892AEACD64005BE20D /* Date+Extensions.swift in Sources */,
 				2E5DF9432AEACD63005BE20D /* YPhoneField.swift in Sources */,
 				2E36A74F2AEF9FDB0033363E /* UserInfo.swift in Sources */,
@@ -1465,6 +1494,8 @@
 				2E5DF98C2AEACD64005BE20D /* UserSettings.swift in Sources */,
 				2E5DF9482AEACD63005BE20D /* MapInteractionModes.swift in Sources */,
 				2E5DF9772AEACD64005BE20D /* AuthService.swift in Sources */,
+				2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */,
+				2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */,
 				2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */,
 				2E5DF9822AEACD64005BE20D /* DispatchQueue+Extensions.swift in Sources */,
 				2E5DF9272AEACD63005BE20D /* PreviewSupport.swift in Sources */,
@@ -1539,6 +1570,7 @@
 				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
 				2E5DF94E2AEACD63005BE20D /* MapMultiPolygon.swift in Sources */,
 				2E5DF97A2AEACD64005BE20D /* AuthNetworkRouter.swift in Sources */,
+				2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */,
 				2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */,
 				2E243DB02AE163EE008C3E8C /* ToPointButton.swift in Sources */,
 				2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */,

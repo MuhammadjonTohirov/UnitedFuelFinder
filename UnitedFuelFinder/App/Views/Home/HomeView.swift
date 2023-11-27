@@ -14,7 +14,7 @@ struct HomeView: View {
     @State private var bottomSheetFrame: CGRect = .zero
     @State private var screenFrame: CGRect = .zero
     
-    @ObservedObject var viewModel: HomeViewModel = .init()
+    @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
     @State private var pointerFrame: CGRect = .zero
     @State private var selectedMarker: GMSMarker?
     
@@ -61,9 +61,9 @@ struct HomeView: View {
                     Logging.l("Before start drawing")
                     viewModel.onStartDrawingRoute()
                 },
-                onEndDrawing: {
+                onEndDrawing: { isOK in
                     Logging.l("After end drawing")
-                    viewModel.onEndDrawingRoute()
+                    viewModel.onEndDrawingRoute(isOK)
                 }
             )
             .set(onClickMarker: { marker, point in
@@ -136,23 +136,22 @@ struct HomeView: View {
                 viewModel.startFiltering()
             }
             .position(x: 27, y: 24 + UIApplication.shared.safeArea.top)
+            .opacity(self.viewModel.state == .routing ? 0 : 1)
         }
     }
     
     private var bottomContent: some View {
         VStack {
             Spacer()
-            HStack {
+            HStack(alignment: .bottom) {
                 if viewModel.state == .selectTo {
                     backButtonView
                         .padding(.leading, 8)
-                        .padding(.bottom, 8)
                 }
                 
                 if viewModel.state == .routing {
                     clearRouteButton
                         .padding(.leading, 8)
-                        .padding(.bottom, 8)
                 }
                 
                 Spacer()
@@ -171,9 +170,7 @@ struct HomeView: View {
                         title: viewModel.fromAddress.nilIfEmpty ?? "No address",
                         isLoading: viewModel.isDetectingAddressFrom || viewModel.isDragging,
                         onClickBody: {
-                            viewModel.presentableRoute = .searchAddress({ result in
-                                self.viewModel.setupFromAddress(with: result)
-                            })
+                            self.viewModel.onClickSearchAddressFrom()
                         }, onClickMap: {
                             // skip this method
                             debugPrint("OnClick map 1")
@@ -183,9 +180,7 @@ struct HomeView: View {
                         title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
                         isLoading: viewModel.state == .selectTo ? viewModel.isDetectingAddressTo : false,
                         onClickBody: {
-                            viewModel.presentableRoute = .searchAddress({ result in
-                                self.viewModel.setupToAddress(with: result)
-                            })
+                            self.viewModel.onClickSearchAddressTo()
                         }, onClickMap: {
                             debugPrint("OnClick map 2")
                             self.viewModel.onClickSelectToPointOnMap()

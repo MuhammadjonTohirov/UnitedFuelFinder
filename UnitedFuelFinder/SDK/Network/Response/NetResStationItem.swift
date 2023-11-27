@@ -7,25 +7,6 @@
 
 import Foundation
 
-//{
-//      "id": 0,
-//      "name": "string",
-//      "lat": 0,
-//      "lng": 0,
-//      "isDeleted": true,
-//      "cityId": 0,
-//      "customerId": 0,
-//      "address": "string",
-//      "phone": "string",
-//      "stateId": "string",
-//      "discountPrice": 0,
-//      "retailPrice": 0,
-//      "priceUpdated": "2023-11-15T19:59:23.289Z",
-//      "number": "string",
-//      "note": "string",
-//      "logoUrl": "string"
-//    }
-
 struct NetResStationItem: NetResBody {
     var id: Int
     var name: String
