@@ -13,6 +13,7 @@ public class MarkerImageView: UIView, Identifiable {
     public var id: String
     
     private(set) var imageView: UIImageView = .init()
+    private(set) var imageBackgroundView = UIView()
     
     private(set) var url: URL?
     private(set) var placeholder: UIImage?
@@ -45,21 +46,32 @@ public class MarkerImageView: UIView, Identifiable {
     private func setupView() {
         self.backgroundView.backgroundColor = .systemBackground
 
-        self.addSubview(imageView)
+        self.addSubview(imageBackgroundView)
         self.addSubview(backgroundView)
         self.backgroundView.addSubview(label)
+        self.imageBackgroundView.addSubview(imageView)
+        
         self.label.font = .systemFont(ofSize: 10, weight: .medium)
         self.label.textAlignment = .center
         self.label.numberOfLines = 1
         
+        self.imageBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        self.imageBackgroundView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.imageBackgroundView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        self.imageBackgroundView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.imageBackgroundView.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        self.imageBackgroundView.clipsToBounds = true
+        self.imageBackgroundView.layer.cornerRadius = 12
+        
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.imageView.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
-        self.imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
-        self.imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
+        
+        self.imageView.centerXAnchor.constraint(equalTo: imageBackgroundView.centerXAnchor).isActive = true
+        self.imageView.centerYAnchor.constraint(equalTo: imageBackgroundView.centerYAnchor).isActive = true
+        self.imageView.heightAnchor.constraint(equalTo: imageBackgroundView.heightAnchor, multiplier: 0.48).isActive = true
+        self.imageView.widthAnchor.constraint(equalTo: imageBackgroundView.widthAnchor, multiplier: 0.48).isActive = true
         
         self.backgroundView.translatesAutoresizingMaskIntoConstraints = false
-        self.backgroundView.topAnchor.constraint(equalTo: self.imageView.bottomAnchor).isActive = true
+        self.backgroundView.topAnchor.constraint(equalTo: self.imageBackgroundView.bottomAnchor).isActive = true
         self.backgroundView.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.backgroundView.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
         self.backgroundView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
@@ -75,9 +87,10 @@ public class MarkerImageView: UIView, Identifiable {
         self.imageView.image = placeholder
     }
     
-    func set(url: URL?, placeholder: UIImage?) {
+    func set(url: URL?, placeholder: UIImage?, backgroundColor color: UIColor) {
         self.placeholder = placeholder
         self.url = url
+        self.imageBackgroundView.backgroundColor = color
         setupImage()
     }
     

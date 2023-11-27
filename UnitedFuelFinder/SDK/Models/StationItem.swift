@@ -76,34 +76,31 @@ public struct StationItem: Identifiable {
     }
 }
 
-fileprivate let _imageView: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station_blue"))
-fileprivate let _imageView2: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station_green"))
-fileprivate let _imageView3: MarkerImageView = MarkerImageView.create(url: nil, placeholder: UIImage(named: "icon_station_red"))
+fileprivate var stationImages: Set<MarkerImageView> = []
 
-public extension StationItem {
+fileprivate func stationImage(withIdentifier identifier: String) -> MarkerImageView? {
+    if !stationImages.contains(where: {$0.id == identifier}) {
+        stationImages.insert(.init(id: identifier, placeholder: nil))
+    }
+    
+    return stationImages.first(where: {$0.id == identifier})
+}
+
+extension StationItem {
+    var customer: CustomerItem? {
+        return DCustomer.all?.filter("id = %d", customerId).first?.asModel
+    }
+    
     var asMarker: GMSMarker {
         let marker = GMSMarker()
         marker.position = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng)
         marker.title = self.name
         marker.snippet = self.address
-        if customerId == 1 {
+        let color = UIColor.init(hexString: customer?.markerColor ?? "#ffffff")
+        if let _imageView = stationImage(withIdentifier: "station_\(customerId)") {
             _imageView.set(text: self.name)
-            _imageView.set(url: nil, placeholder: self.stationImage)
+            _imageView.set(url: nil, placeholder: UIImage(named: "icon_gas_station"), backgroundColor: color)
             marker.iconView = _imageView
-            marker.iconView?.frame.size = .init(width: 68, height: 32)
-        }
-        
-        if customerId == 2 {
-            _imageView2.set(text: self.name)
-            _imageView2.set(url: nil, placeholder: self.stationImage)
-            marker.iconView = _imageView2
-            marker.iconView?.frame.size = .init(width: 68, height: 32)
-        }
-        
-        if customerId > 2 {
-            _imageView3.set(text: self.name)
-            _imageView3.set(url: nil, placeholder: self.stationImage)
-            marker.iconView = _imageView3
             marker.iconView?.frame.size = .init(width: 68, height: 32)
         }
         
@@ -180,17 +177,6 @@ extension StationItem {
     public var priceUpdateInfo: String {
         guard let date = priceUpdateDate else { return "" }
         return date.toString(format: "MM/dd/yyyy HH:mm:ss")
-    }
-    
-    var stationImage: UIImage {
-        switch customerId {
-        case 1:
-            return #imageLiteral(resourceName: "icon_station_blue.png")
-        case 2:
-            return #imageLiteral(resourceName: "icon_station_green.png")
-        default:
-            return #imageLiteral(resourceName: "icon_station_red.png")
-        }
     }
 }
 

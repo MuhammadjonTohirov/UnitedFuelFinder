@@ -7,6 +7,7 @@
 
 import SwiftUI
 import RealmSwift
+import Kingfisher
 
 struct StationDetailsView: View {
     
@@ -17,12 +18,6 @@ struct StationDetailsView: View {
     
     init(station: StationItem) {
         self.station = station
-    }
-    
-    @ObservedResults(DCustomer.self, configuration: Realm.config) var customers
-    
-    var customer: DCustomer? {
-        customers.first(where: {$0.id == station.customerId})
     }
     
     @State private var commentsPresented: Bool = false
@@ -62,7 +57,13 @@ struct StationDetailsView: View {
     
     private var headerView: some View {
         GeometryReader(content: { geometry in
-            Image("station")
+            KFImage(URL(string: viewModel.station?.customer?.logoUrl ?? ""))
+                .placeholder {
+                    Image("image_placeholder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .stretchable(in: geometry)
+                }
                 .resizable()
                 .aspectRatio(contentMode: .fill)
                 .stretchable(in: geometry)
@@ -75,8 +76,15 @@ struct StationDetailsView: View {
     private var details: some View {
         VStack(alignment: .leading, spacing: 20) {
             HStack {
-                Image("image_ta")
+                KFImage(URL(string: viewModel.station?.customer?.iconUrl ?? ""))
+                    .placeholder {
+                        Image("image_placeholder")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 44, height: 32)
+                    }
                     .resizable()
+                    .aspectRatio(contentMode: .fit)
                     .frame(width: 44, height: 32)
 
                 VStack(alignment: .leading, spacing: 8) {
@@ -87,11 +95,7 @@ struct StationDetailsView: View {
                         .font(.system(size: 12))
                 }
             }
-            .padding(.leading)
-            
-            Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and")
-                .padding(.horizontal)
-                .font(.system(size: 12))
+            .padding(.leading)            
             
             [
                 row(
