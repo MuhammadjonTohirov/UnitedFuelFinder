@@ -93,19 +93,18 @@ struct RegisterProfileView: View {
         }
     }
     
-    private var organizationRequisites: some View{
+    private var organizationRequisites: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("Organization requisites")
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
-            SelectionButton(title: "Company", value: viewModel.company?.name ?? "") {
-                viewModel.route = .selectCompany($viewModel.company)
+            YRoundedTextField {
+                YTextField(text: $viewModel.companyName, placeholder: "Company name")
             }
             
             YRoundedTextField {
-                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 528 987".localize, contentType: .creditCardNumber)
-                    .keyboardType(.numberPad)
+                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 528 987".localize)
             }
         }
     }

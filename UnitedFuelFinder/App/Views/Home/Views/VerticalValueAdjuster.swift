@@ -18,7 +18,7 @@ struct VerticalValueAdjuster: View {
     @State private var isDragging = false
     @State private var bodyWidth: CGFloat = 8
     
-    var maxValue: CGFloat = 100
+    var maxValue: CGFloat = 10
     @Binding var currentValue: CGFloat
     var bodyHeight: CGFloat = 128
     

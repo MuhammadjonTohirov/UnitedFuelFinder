@@ -25,7 +25,7 @@ struct SessionsView: View {
                 }).scrollable()
             }
         }
-        .navigationTitle("Device sessions")
+        .navigationTitle("device_sess".localize)
         .onAppear {
             getSessions()
         }

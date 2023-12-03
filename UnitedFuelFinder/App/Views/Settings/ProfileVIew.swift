@@ -32,7 +32,7 @@ struct ProfileVIew: View {
                 SubmitButton {
                     viewModel.editProfile()
                 } label: {
-                    Text("Save".localize)
+                    Text("Save")
                 }
                 .set(isLoading: viewModel.isLoading)
                 .set(isEnabled: viewModel.isValidForm)
@@ -77,15 +77,15 @@ struct ProfileVIew: View {
     
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Address Information".localize)
+            Text("address_info".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
-            SelectionButton(title: "State", value: viewModel.state?.name ?? "") {
+            SelectionButton(title: "state".localize, value: viewModel.state?.name ?? "") {
                 viewModel.route = .selectState($viewModel.state)
             }
             
-            SelectionButton(title: "City", value: viewModel.city?.name ?? "") {
+            SelectionButton(title: "city".localize, value: viewModel.city?.name ?? "") {
                 guard let stateId = viewModel.state?.id else {
                     return
                 }

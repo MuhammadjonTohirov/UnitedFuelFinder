@@ -198,6 +198,7 @@
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */; };
+		2ED9A3202B164E1D009ADCE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */; };
 		2ED9B7552B11F38800150F0D /* NetResAuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */; };
 		2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7562B11F3A800150F0D /* AuditLog.swift */; };
 		2EDBE0372B0F359700123CE0 /* NetResSessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */; };
@@ -224,6 +225,10 @@
 		2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */; };
 		2EF3A2002ADD920500CA8DE2 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */; };
 		2EF3A2022ADD950E00CA8DE2 /* ContactUsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */; };
+		2EF746A52B1C4EB8009E2D8D /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746A42B1C4EB8009E2D8D /* HomeRouter.swift */; };
+		2EF746A72B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2EF746A62B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework */; };
+		2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */; };
+		2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */; };
 		841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D81052AF75DBC00C5932C /* ProfileVIew.swift */; };
 		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
 		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
@@ -433,6 +438,7 @@
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResAuditLog.swift; sourceTree = "<group>"; };
 		2ED9B7562B11F3A800150F0D /* AuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditLog.swift; sourceTree = "<group>"; };
 		2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResSessionItem.swift; sourceTree = "<group>"; };
@@ -458,6 +464,13 @@
 		2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GMapsViewWrapper.swift; sourceTree = "<group>"; };
 		2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactUsView.swift; sourceTree = "<group>"; };
+		2EF746A12B1C4D3C009E2D8D /* gpxgenerator_path.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = gpxgenerator_path.gpx; sourceTree = "<group>"; };
+		2EF746A22B1C4DBD009E2D8D /* Pitsburg.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Pitsburg.gpx; sourceTree = "<group>"; };
+		2EF746A32B1C4E28009E2D8D /* Pitsburg-Kansas.gpx */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "Pitsburg-Kansas.gpx"; sourceTree = "<group>"; };
+		2EF746A42B1C4EB8009E2D8D /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		2EF746A62B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsUtils.xcframework; sourceTree = "<group>"; };
+		2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Extensions.swift"; sourceTree = "<group>"; };
+		2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerViewsManager.swift; sourceTree = "<group>"; };
 		841D81052AF75DBC00C5932C /* ProfileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVIew.swift; sourceTree = "<group>"; };
 		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
@@ -471,6 +484,7 @@
 				2E5DF9912AEACE11005BE20D /* Realm in Frameworks */,
 				2E0E4DE92AD915E800E846B6 /* UIKit.framework in Frameworks */,
 				2E0E4DE72AD915E000E846B6 /* SystemConfiguration.framework in Frameworks */,
+				2EF746A72B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework in Frameworks */,
 				2E0E4DE52AD915DB00E846B6 /* QuartzCore.framework in Frameworks */,
 				2EB599672B09CE350038F5F0 /* SwiftUITooltip in Frameworks */,
 				2E0E4DE32AD915D500E846B6 /* OpenGLES.framework in Frameworks */,
@@ -501,6 +515,7 @@
 		2E0E4DEB2AD9182600E846B6 /* GoogleMaps */ = {
 			isa = PBXGroup;
 			children = (
+				2EF746A62B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework */,
 				2E3F17CB2AD914F400F4DC52 /* GoogleMaps.bundle */,
 				2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */,
 				2E3F17C52AD9126300F4DC52 /* GoogleMapsBase.xcframework */,
@@ -530,6 +545,7 @@
 			children = (
 				2EBFB99E2ADFA058007FA786 /* HomeViewModel.swift */,
 				2E0FBEFC2B1307C400A39EBA /* HomeViewModel+Extensions.swift */,
+				2EF746A42B1C4EB8009E2D8D /* HomeRouter.swift */,
 			);
 			path = HomeViewModel;
 			sourceTree = "<group>";
@@ -546,7 +562,6 @@
 		2E36A7502AEFB8EE0033363E /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				2E36A7512AEFB8F50033363E /* MarkerImageView.swift */,
 			);
 			path = Images;
 			sourceTree = "<group>";
@@ -554,6 +569,9 @@
 		2E527A342ACC80C6005B8B95 = {
 			isa = PBXGroup;
 			children = (
+				2EF746A32B1C4E28009E2D8D /* Pitsburg-Kansas.gpx */,
+				2EF746A22B1C4DBD009E2D8D /* Pitsburg.gpx */,
+				2EF746A12B1C4D3C009E2D8D /* gpxgenerator_path.gpx */,
 				2E0E4DEB2AD9182600E846B6 /* GoogleMaps */,
 				2E527A3F2ACC80C6005B8B95 /* UnitedFuelFinder */,
 				2E527A3E2ACC80C6005B8B95 /* Products */,
@@ -605,6 +623,7 @@
 		2E527A732ACC83A3005B8B95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */,
 				2E0F93CB2B012FC300660DEB /* StationDetails */,
 			);
 			path = Models;
@@ -615,6 +634,7 @@
 			children = (
 				2E527A762ACC83C0005B8B95 /* SelectLanguageView.swift */,
 				2EDF8C452AD2DD58003D64FC /* LoadingView.swift */,
+				2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -1265,6 +1285,7 @@
 		2EDF8C942AD474A6003D64FC /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				2EF746AE2B1CE964009E2D8D /* Marker */,
 				2EB5996C2B09E5F10038F5F0 /* NotificationView */,
 				2E60B61C2AFA8C3300573049 /* SearchAddress */,
 				2EB189F92AEFF42600BCFBE3 /* StationDetails */,
@@ -1328,6 +1349,15 @@
 				2EDBE03A2B0F364700123CE0 /* SessionsView.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		2EF746AE2B1CE964009E2D8D /* Marker */ = {
+			isa = PBXGroup;
+			children = (
+				2E36A7512AEFB8F50033363E /* MarkerImageView.swift */,
+				2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */,
+			);
+			path = Marker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1407,6 +1437,7 @@
 				2E527A482ACC80C8005B8B95 /* Preview Assets.xcassets in Resources */,
 				2E527A452ACC80C8005B8B95 /* Assets.xcassets in Resources */,
 				2EDF8C3D2AD2CD3F003D64FC /* Localizable.xcstrings in Resources */,
+				2ED9A3202B164E1D009ADCE9 /* Launch Screen.storyboard in Resources */,
 				2E3F17CC2AD914F500F4DC52 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1432,6 +1463,7 @@
 				2EDF8C702AD44401003D64FC /* PinCodeViewModel.swift in Sources */,
 				2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */,
 				2E0F93D22B0134CF00660DEB /* NetResStationComment.swift in Sources */,
+				2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */,
 				2E5DF9782AEACD64005BE20D /* CommonService.swift in Sources */,
 				2E5DF93D2AEACD63005BE20D /* RadioButton.swift in Sources */,
 				2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */,
@@ -1463,6 +1495,7 @@
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
+				2EF746A52B1C4EB8009E2D8D /* HomeRouter.swift in Sources */,
 				2E0F93CD2B012FCE00660DEB /* StationCommentItem.swift in Sources */,
 				2E5DF9652AEACD63005BE20D /* MapZoomControl.swift in Sources */,
 				2E5DF97D2AEACD64005BE20D /* YKeychainWrapper.swift in Sources */,
@@ -1606,6 +1639,7 @@
 				2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */,
 				2E5DF9662AEACD63005BE20D /* MapPitchControl.swift in Sources */,
 				2E5DF9332AEACD63005BE20D /* Padding.swift in Sources */,
+				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
 				2E5DF9812AEACD64005BE20D /* Array+Extensions.swift in Sources */,
 				2E5DF9342AEACD63005BE20D /* Color+Extension.swift in Sources */,
 				2E0F93D02B0131FC00660DEB /* StationDetailsViewModel.swift in Sources */,
@@ -1744,7 +1778,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1757,7 +1791,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1781,7 +1818,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 16;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1794,7 +1831,10 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

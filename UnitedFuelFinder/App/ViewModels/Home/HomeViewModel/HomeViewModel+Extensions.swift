@@ -14,7 +14,7 @@ protocol HomeViewModelProtocol: ObservableObject {
     var isDragging: Bool {get set}
     var state: HomeViewState {get set}
     
-    var currentLocation: CLLocation? {get set}
+    var focusableLocation: CLLocation? {get set}
     
     var fromAddress: String {get set}
     var toAddress: String {get set}
@@ -50,7 +50,7 @@ protocol HomeViewModelProtocol: ObservableObject {
     
     var distance: String {get}
     
-    func startFiltering()
+    func startFilterStations()
     func onAppear()
     
     func onClickSelectToPointOnMap()
@@ -186,7 +186,7 @@ extension HomeViewModel {
 
             Logging.l(tag: "HomeViewModel", "Start loading stations")
 
-            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
+            guard let c = lastCurrentLocation?.coordinate, state == .selectFrom else {
                 return
             }
 
@@ -203,49 +203,14 @@ extension HomeViewModel {
                 }
                 
                 self.stationsMarkers.removeAll()
-
-                let newStations = _stations.filter({station in
-                    !self.stations.contains(where: {$0.id == station.id})
-                })
-                
-                let oldStations = self.stations.filter({station in
-                    !_stations.contains(where: {$0.id == station.id})
-                })
-            
-                oldStations.forEach { station in
-                    if let index = self.stations.firstIndex(where: {$0.id == station.id}) {
-                        self.stations.remove(at: index)
-                    }
-                }
                 
                 withAnimation {
-                    self.stations = newStations + self.stations
-                    self.stationsMarkers = self.stations.map({$0.asMarker})
+                    self.discountedStations = _stations
+                    self.stationsMarkers = self.discountedStations.map({$0.asMarker})
                 }
             }
             
             self.hideLoader()
-        }
-    }
-    
-    func filterStationsByDiscount() {
-        Task {
-            self.showLoader(message: "loading_stations".localize)
-
-            Logging.l(tag: "HomeViewModel", "Start loading stations")
-
-            guard let c = pickedLocation?.coordinate, state == .selectFrom else {
-                return
-            }
-
-            let _stations = await MainService.shared.discountedStations(
-                atLocation: (c.latitude, c.longitude),
-                in: Int(radiusValue), limit: 7
-            ).sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
-
-            await MainActor.run {
-                self.discountedStations = _stations
-            }
         }
     }
 }

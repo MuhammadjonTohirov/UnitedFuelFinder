@@ -16,7 +16,7 @@ struct StationTipView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text(station.name)
+            Text(station.displayName)
                 .font(.system(size: 16, weight: .semibold))
             
             Divider()
@@ -25,9 +25,9 @@ struct StationTipView: View {
                 .font(.system(size: 14, weight: .medium))
             
             HStack {
-                Text("discounted_price".localize)
+                Text("discount".localize)
                 Spacer()
-                Text(station.actualPriceInfo)
+                Text(station.discountInfo)
             }
             
             HStack {
@@ -39,9 +39,9 @@ struct StationTipView: View {
             Divider()
             
             HStack {
-                Text("last_update".localize)
+                Text("address".localize)
                 Spacer()
-                Text(station.priceUpdateInfo)
+                Text(station.address ?? "")
             }
             
             

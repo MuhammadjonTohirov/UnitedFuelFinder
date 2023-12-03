@@ -15,7 +15,12 @@ final public class UserSettings {
     public private(set) var userAvatarURL: URL = URL.baseAPI.appendingPath("Client", "ProfileAvatar")
     
     @codableWrapper(key: "language", Language.english)
-    public var language: Language?
+    public var language: Language? {
+        didSet {
+            UserDefaults.standard.setValue([language?.code ?? "en"], forKey: "AppleLanguages")
+            UserDefaults.standard.synchronize()
+        }
+    }
 
     @codableWrapper(key: "userEmail")
     public var userEmail: String?

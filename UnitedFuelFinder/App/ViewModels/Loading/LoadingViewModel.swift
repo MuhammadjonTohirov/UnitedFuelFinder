@@ -33,12 +33,10 @@ final class LoadingViewModel: LoadingViewModelProtocol {
                 return
             }
             
-            if UserSettings.shared.isLanguageSelected ?? false {
-                mainRouter?.navigate(to: .auth)
-                return
-            }
-            
-            mainRouter?.navigate(to: .language)
+            mainRouter?.navigate(to: .auth)
+  
+//            We cannot use language screen for now
+//            mainRouter?.navigate(to: .language)
         }
     }
     

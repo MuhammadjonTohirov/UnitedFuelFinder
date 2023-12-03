@@ -52,8 +52,8 @@ struct HomeView: View {
                 screenCenter: pointerFrame.center,
                 markers: $viewModel.stationsMarkers
             )
-            .set(radius: self.viewModel.state == HomeViewState.selectFrom ? viewModel.radius : 0)
-            .set(currentLocation: viewModel.currentLocation)
+//            .set(radius: self.viewModel.state == HomeViewState.selectFrom ? viewModel.radius : 0)
+            .set(currentLocation: viewModel.focusableLocation)
             .set(
                 from: self.viewModel.fromLocation?.coordinate,
                 to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
@@ -133,7 +133,7 @@ struct HomeView: View {
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
             
             VerticalValueAdjuster(currentValue: $viewModel.radiusValue) { value, percentage in
-                viewModel.startFiltering()
+                viewModel.startFilterStations()
             }
             .position(x: 27, y: 24 + UIApplication.shared.safeArea.top)
             .opacity(self.viewModel.state == .routing ? 0 : 1)
@@ -236,7 +236,7 @@ struct HomeView: View {
                     Image(systemName: "bell")
                         .resizable()
                         .renderingMode(.template)
-                        .foregroundStyle(Color.label.opacity(0.8))
+                        .foregroundStyle(Color.label.opacity(0.5))
                         .frame(width: 18, height: 18)
                 }
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
@@ -253,7 +253,8 @@ struct HomeView: View {
                 .overlay {
                     Image("icon_navigation")
                         .renderingMode(.template)
-                        .foregroundStyle(Color.label.opacity(0.8))
+                        .foregroundStyle(Color.label.opacity(0.5))
+
                 }
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
         }

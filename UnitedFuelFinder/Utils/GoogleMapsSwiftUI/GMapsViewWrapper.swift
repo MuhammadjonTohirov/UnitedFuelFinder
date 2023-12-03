@@ -20,76 +20,11 @@
 //
 
 import GoogleMaps
+import GoogleMapsUtils
 import GoogleMapsCore
 import SwiftUI
 
 import CoreLocation
-
-class GMapsViewModel: ObservableObject {
-    @Published var address: String = ""
-    @Published var pickedLocation: CLLocation?
-    @Published var isDragging: Bool
-    var screenCenter: CGPoint
-    @Published var markers: [GMSMarker]
-
-    var onAddressChanged: (() -> Void)?
-    
-    fileprivate var onStartDrawing: (() -> Void)?
-    fileprivate var onEndDrawing: (() -> Void)?
-    fileprivate var onClickMarker: ((GMSMarker) -> Void)?
-    fileprivate var routeFrom: CLLocationCoordinate2D?
-    fileprivate var routeTo: CLLocationCoordinate2D?
-    fileprivate var didRadiusChanged: Bool = true
-
-    fileprivate var radius: CLLocationDistance = .zero
-    private(set) var location: CLLocation?
-    
-    init(address: String, pickedLocation: CLLocation? = nil, isDragging: Bool, screenCenter: CGPoint, markers: [GMSMarker], onAddressChanged: (() -> Void)? = nil) {
-        self.address = address
-        self.pickedLocation = pickedLocation
-        self.isDragging = isDragging
-        self.screenCenter = screenCenter
-        self.markers = markers
-        self.onAddressChanged = onAddressChanged
-    }
-    
-    func set(radius: CLLocationDistance) {
-        self.radius = radius
-    }
-    
-    func set(onClickMarker: @escaping (GMSMarker) -> Void) -> Self {
-        let v = self
-        v.onClickMarker = onClickMarker
-        return v
-    }
-    
-    func set(currentLocation: CLLocation?) {
-        self.location = currentLocation
-    }
-    
-    func set(from: CLLocationCoordinate2D?, to: CLLocationCoordinate2D?, onStartDrawing: @escaping () -> Void, onEndDrawing: @escaping () -> Void) {
-        
-        if self.routeFrom != from {
-            self.routeFrom = from
-        }
-        
-        if self.routeTo != to {
-            self.routeTo = to
-        }
-        
-        self.onStartDrawing = onStartDrawing
-        self.onEndDrawing = onEndDrawing
-    }
-}
-
-struct GMapsView: View {
-    
-    @ObservedObject var viewModel: GMapsViewModel
-    
-    var body: some View {
-        GMapsViewWrapper(pickedLocation: $viewModel.pickedLocation, isDragging: $viewModel.isDragging, screenCenter: viewModel.screenCenter, markers: $viewModel.markers)
-    }
-}
 
 struct GMapsViewWrapper: UIViewControllerRepresentable {
     private(set) var location: CLLocation?
@@ -98,7 +33,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     
     var screenCenter: CGPoint
     @Binding var markers: [GMSMarker]
-    
+
     fileprivate var onStartDrawing: (() -> Void)?
     fileprivate var onEndDrawing: ((Bool) -> Void)?
     fileprivate var onClickMarker: ((_ marker: GMSMarker, _ frame: CGPoint) -> Void)?
@@ -177,26 +112,22 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             uiViewController.map.animate(to: position)
         }
         
+        
+//       MARK: markers drawing
+        if context.coordinator.clusterManager == nil {
+            context.coordinator.setupCluster(
+                mapView: uiViewController.map,
+                withMarkers: self.markers
+            )
+        } else {
+            context.coordinator.updateCluster(withMarkers: self.markers)
+        }
+        
         if let from = self.routeFrom, let to = self.routeTo {
             context.coordinator.setMapMarkersRoute(vLoc: from, toLoc: to, on: uiViewController.map)
         } else {
             context.coordinator.clearRoute(onMap: uiViewController.map)
             context.coordinator.endDrawing()
-        }
-        
-//       MARK: markers drawing
-        let region = uiViewController.map.projection.visibleRegion()
-        
-        markers.forEach { marker in
-            if region.contains(marker.position) {
-                if marker.map == nil {
-                    marker.map = uiViewController.map
-                }
-            } else {
-                if marker.map != nil {
-                    marker.map = nil
-                }
-            }
         }
         
 //       MARK: Radius change
@@ -218,13 +149,47 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         private(set) var currentRoutePolyline: GMSPolyline?
         private(set) var markerA: GMSMarker?
         private(set) var markerB: GMSMarker?
+        private(set) var clusterManager: GMUClusterManager?
         
         init(_ parent: GMapsViewWrapper) {
             self.parent = parent
         }
         
+        func setupCluster(mapView: GMSMapView, withMarkers markers: [GMSMarker]) {
+            let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+            let renderer = GMUDefaultClusterRenderer(
+                mapView: mapView,
+                clusterIconGenerator: GMUDefaultClusterIconGenerator()
+            )
+            
+            clusterManager = GMUClusterManager(map: mapView, algorithm: algorithm, renderer: renderer)
+            clusterManager?.setMapDelegate(self)
+            // Add markers to the cluster manager
+            
+            updateCluster(withMarkers: markers)
+        }
+        
+        func updateCluster(withMarkers markers: [GMSMarker]) {
+            clusterManager?.clearItems()
+            markers.forEach { marker in
+                clusterManager?.add(markers)
+            }
+            clusterManager?.cluster()
+        }
+        
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-//            let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
+            let isCluster = marker.userData is GMUCluster
+            mapView.animate(toLocation: marker.position)
+
+            if isCluster {
+                mapView.animate(toZoom: mapView.camera.zoom + 1)
+                return true
+            } else {
+                return onClickStation(mapView, didTap: marker)
+            }
+        }
+        
+        private func onClickStation(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             let p = CLLocationCoordinate2D(latitude: marker.layer.latitude, longitude: marker.layer.longitude).toScreenPoint(on: mapView)
             let bottom: CGFloat = 158 - UIApplication.shared.safeArea.bottom// + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
             parent.onClickMarker?(marker, .init(x: p.x, y: p.y - bottom))

@@ -11,11 +11,13 @@ import UniformTypeIdentifiers
 public extension URL {
     
     static var base: URL {
-        .init(string: "http://178.33.123.109:5000")!//http://95.47.127.26:50000/
+//        Pro: http://15.235.212.129:5000/
+//        Dev: "http://178.33.123.109:5000"
+        .init(string: "http://15.235.212.129:5000/")!
     }
     
     static var baseAPI: URL {
-        .init(string: "http://178.33.123.109:5000/api")!//http://95.47.127.26:50000/
+        base.appendingPath("api")
     }
     
     static var keyHeader: (key: String, value: String) {

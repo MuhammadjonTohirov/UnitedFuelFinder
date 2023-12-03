@@ -75,22 +75,11 @@ struct SettingsView: View {
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24)
                 .padding(.bottom, 2)
-                .padding(.leading, 2), title: "Edit profile"
+                .padding(.leading, 2), title: "edit_profile".localize
             ) {
                 viewModel.navigate(to: .editProfile)
             }
              
-            Divider()
-            
-            row(image: Image("icon_lang")
-                .resizable()
-                .renderingMode(.template)
-                .foregroundStyle(Color.label)
-                .frame(width: 24, height: 24),
-                title: "Language", details: "English"
-            ) {
-                
-            }
             
             Divider()
             
@@ -100,7 +89,7 @@ struct SettingsView: View {
                 .fixedSize()
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "Change PIN-code"
+                title: "change_pin".localize
             ) {
                 viewModel.navigate(to: .changePin(result: { isOK in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
@@ -117,7 +106,7 @@ struct SettingsView: View {
                 .fixedSize()
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "Device sessions"
+                title: "device_sess".localize
             ) {
                 viewModel.navigate(to: .sessions)
             }
@@ -129,7 +118,7 @@ struct SettingsView: View {
                 .renderingMode(.template)
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "Contact"
+                title: "contact_us".localize
             ) {
                 viewModel.navigate(to: .contactUs)
             }
@@ -141,7 +130,7 @@ struct SettingsView: View {
                 .resizable()
                 .foregroundStyle(Color.init(uiColor: .systemRed))
                 .frame(width: 22, height: 22).padding(.leading, -2),
-                title: "Logout"
+                title: "logout".localize
             ) {
                 onClickLogout()
             }

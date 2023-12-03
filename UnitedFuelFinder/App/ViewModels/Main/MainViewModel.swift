@@ -29,6 +29,14 @@ final class MainViewModel: ObservableObject {
         UserSettings.shared.lastActiveDate = Date()
         GMSServices.provideAPIKey(URL.googleMapsApiKey)
         Logging.l("GMaps \(GMSServices.sdkVersion())")
+        
+        initLocalize()
+    }
+    
+    private func initLocalize() {
+        if UserSettings.shared.language?.code !=  (Locale.current.language.languageCode?.identifier ?? "en") {
+            UserSettings.shared.language = Language.language(Locale.current.language.languageCode?.identifier ?? "en")
+        }
     }
     
     func set(language: Language) {

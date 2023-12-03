@@ -12,7 +12,13 @@ import SwiftUI
 struct LoadingView: View {
     var viewModel: LoadingViewModelProtocol
     var body: some View {
-        ActivityIndicatorView()
+        Image("image_splash")
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .ignoresSafeArea()
+            .overlay {
+                ActivityIndicatorView()
+            }
             .onAppear(perform: {
                 viewModel.initialize()
             })

@@ -15,7 +15,7 @@ import Foundation
 //  "cardNumber": "string",
 //  "state": "string",
 //  "city": 0,
-//  "companyId": 0,
+//  "companyName": "",
 //  "address": "string",
 //  "zip": "string",
 //  "confirm": {
@@ -32,11 +32,11 @@ public struct NetReqRegister: Codable {
     let cardNumber: String
     let state: String
     let city: Int
-    let companyId: Int
+    let companyName: String
     let address: String
     let confirm: NetReqRegisterConfirm
     
-    init(firstName: String, lastName: String, phone: String, email: String, cardNumber: String, state: String, city: Int, address: String, companyId: Int, confirm: NetReqRegisterConfirm) {
+    init(firstName: String, lastName: String, phone: String, email: String, cardNumber: String, state: String, city: Int, address: String, companyName: String, confirm: NetReqRegisterConfirm) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
@@ -45,7 +45,7 @@ public struct NetReqRegister: Codable {
         self.state = state
         self.city = city
         self.address = address
-        self.companyId = companyId
+        self.companyName = companyName
         self.confirm = confirm
     }
 }

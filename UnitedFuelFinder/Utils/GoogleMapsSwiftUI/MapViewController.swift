@@ -20,6 +20,7 @@
 //
 
 import GoogleMaps
+import GoogleMapsUtils
 import SwiftUI
 import UIKit
 
@@ -30,7 +31,7 @@ class MapViewModel {
 class MapViewController: UIViewController {
     
     lazy var map = {GMSMapView(frame: .zero)}()
-    
+
     var isAnimating: Bool = false
     
     weak var delegate: GMSMapViewDelegate? {
@@ -48,8 +49,8 @@ class MapViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         self.view.addSubview(map)
         map.settings.compassButton = true
-        map.settings.rotateGestures = true
-        map.settings.allowScrollGesturesDuringRotateOrZoom = true
+        map.settings.rotateGestures = false
+        map.settings.allowScrollGesturesDuringRotateOrZoom = false
         map.settings.tiltGestures = true
         
         changeMapStyle(by: traitCollection.userInterfaceStyle)
@@ -57,6 +58,14 @@ class MapViewController: UIViewController {
         map.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         map.isBuildingsEnabled = true
         map.isMyLocationEnabled = true
+        
+//        let iconGenerator = GMUDefaultClusterIconGenerator()
+//        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
+//        let renderer = GMUDefaultClusterRenderer(mapView: map,
+//                                                 clusterIconGenerator: iconGenerator)
+//        clusterManager = GMUClusterManager(map: map, algorithm: algorithm,
+//                                           renderer: renderer)
+        
     }
     
     func set(padding: UIEdgeInsets) {

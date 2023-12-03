@@ -26,10 +26,15 @@ public struct StationItem: Identifiable {
     public var retailPrice: Float?
     public var logoUrl: String?
     public var note: String?
+    public var number: String?
     public var priceUpdated: String?
     
     public var actualPriceInfo: String {
-        discountPrice?.asMoney ?? "$0"
+        return actualPrice.asMoney
+    }
+    
+    public var actualPrice: Float {
+        (retailPrice ?? 0) - (discountPrice ?? 0)
     }
     
     public var retailPriceInfo: String {
@@ -37,7 +42,7 @@ public struct StationItem: Identifiable {
     }
     
     public var discountInfo: String {
-        ((retailPrice ?? 0) - (discountPrice ?? 0)).asMoney
+        (discountPrice ?? 0).asMoney
     }
     
     public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil, priceUpdated: String?, note: String?) {
@@ -73,17 +78,8 @@ public struct StationItem: Identifiable {
         self.logoUrl = item.logoUrl
         self.priceUpdated = item.priceUpdated
         self.note = item.note
+        self.number = item.number
     }
-}
-
-fileprivate var stationImages: Set<MarkerImageView> = []
-
-fileprivate func stationImage(withIdentifier identifier: String) -> MarkerImageView? {
-    if !stationImages.contains(where: {$0.id == identifier}) {
-        stationImages.insert(.init(id: identifier, placeholder: nil))
-    }
-    
-    return stationImages.first(where: {$0.id == identifier})
 }
 
 extension StationItem {
@@ -91,22 +87,6 @@ extension StationItem {
         return DCustomer.all?.filter("id = %d", customerId).first?.asModel
     }
     
-    var asMarker: GMSMarker {
-        let marker = GMSMarker()
-        marker.position = CLLocationCoordinate2D(latitude: self.lat, longitude: self.lng)
-        marker.title = self.name
-        marker.snippet = self.address
-        let color = UIColor.init(hexString: customer?.markerColor ?? "#ffffff")
-        if let _imageView = stationImage(withIdentifier: "station_\(customerId)") {
-            _imageView.set(text: self.name)
-            _imageView.set(url: nil, placeholder: UIImage(named: "icon_gas_station"), backgroundColor: color)
-            marker.iconView = _imageView
-            marker.iconView?.frame.size = .init(width: 68, height: 32)
-        }
-        
-        marker.station = self
-        return marker
-    }
     
     var city: DCity? {
         Realm.new?.object(ofType: DCity.self, forPrimaryKey: self.cityId)
@@ -144,45 +124,9 @@ extension StationItem {
         
         return String(format: "%.1f \(unit)",  isMore1000 ? distance / 1000 : distance)
     }
-}
-
-extension GMSMarker: Identifiable {
-    public var id: String {
-        "\(self.position.latitude)-\(self.position.longitude)"
-    }
     
-    var station: StationItem? {
-        set(station) {
-            self.userData = station
-        }
-        
-        get {
-            self.userData as? StationItem
-        }
-    }
-}
-
-extension StationItem {
-    var trustedDiscountPrice: Float {
-        self.discountPrice ?? 0
-    }
-    
-    public var priceUpdateDate: Date? {
-        guard let priceUpdated = self.priceUpdated else { return nil }
-        let formatter = DateFormatter()
-        formatter.dateFormat = Date.serverFormat
-        return formatter.date(from: priceUpdated)
-    }
-    
-    public var priceUpdateInfo: String {
-        guard let date = priceUpdateDate else { return "" }
-        return date.toString(format: "MM/dd/yyyy HH:mm:ss")
-    }
-}
-
-
-extension StationItem {
-    var clLocation: CLLocation {
-        .init(latitude: lat, longitude: lng)
+    var displayName: String {
+        let n = self.customer?.name ?? ""
+        return "\(n) \(number ?? "")"
     }
 }

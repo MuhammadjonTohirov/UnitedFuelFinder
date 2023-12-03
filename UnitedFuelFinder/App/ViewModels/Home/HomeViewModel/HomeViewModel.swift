@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import CoreLocation
 import GoogleMaps
-import SwiftUI
 
 enum HomeViewState {
     case selectFrom // or we can say default state
@@ -16,77 +14,8 @@ enum HomeViewState {
     case routing
 }
 
-enum HomeRouter: ScreenRoute {
-    static func == (lhs: HomeRouter, rhs: HomeRouter) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    var id: String {
-        switch self {
-        case .settings:
-            return "settings"
-        case .stationDetails:
-            return "stationDetailsmghv bn "
-        case .notifications:
-            return "notifications"
-        }
-    }
-    
-    case settings
-    case stationDetails(station: StationItem)
-    case notifications
-    
-    @ViewBuilder
-    var screen: some View {
-        switch self {
-        case .settings:
-            SettingsView()
-        case .stationDetails(let station):
-            StationDetailsView(station: station)
-        case .notifications:
-            NotificationsView()
-        }
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-}
-
-enum HomePresentableSheets: ScreenRoute {
-    static func == (lhs: HomePresentableSheets, rhs: HomePresentableSheets) -> Bool {
-        lhs.id == rhs.id
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
-    
-    var id: String {
-        switch self {
-        case .allStations:
-            return "all_stations"
-        case .searchAddress:
-            return "search_address"
-        }
-    }
-    
-    case allStations(stations: [StationItem], from: String?, to: String?, radius: Int?, location: CLLocationCoordinate2D?, onNavigation: ((StationItem) -> Void)?, onClickItem: ((StationItem) -> Void)?)
-    case searchAddress(text: String, _ completion: (SearchAddressViewModel.SearchAddressResult) -> Void)
-    
-    @ViewBuilder
-    var screen: some View {
-        switch self {
-        case .allStations(let stations, let from, let to, let radius, let location, let onNav, let onOpen):
-            AllStationsView(from: from, to: to, location: location, radius: radius, onClickNavigate: onNav, onClickOpen: onOpen, stations: stations)
-        case .searchAddress(let text, let completion):
-            SearchAddressView(text: text, onResult: completion)
-        }
-    }
-}
-
 final class HomeViewModel: ObservableObject {
-    @Published var currentLocation: CLLocation?
+    @Published var focusableLocation: CLLocation?
     
     var fromAddress: String = ""
     var toAddress: String = ""
@@ -121,8 +50,8 @@ final class HomeViewModel: ObservableObject {
     @Published var isDetectingAddressFrom: Bool = false
     @Published var isDetectingAddressTo: Bool = false
     
-    @Published var radius: CLLocationDistance = 20
-    @Published var radiusValue: CGFloat = 20
+    @Published var radius: CLLocationDistance = 2
+    @Published var radiusValue: CGFloat = 2
     
     private(set) var loadingMessage: String = ""
     private(set) var customers: [CustomerItem] = []
@@ -140,6 +69,7 @@ final class HomeViewModel: ObservableObject {
     
     private var loadStationsTask: DispatchWorkItem?
     
+    private(set) var lastCurrentLocation: CLLocation?
     var distance: String {
         guard let from = fromLocation, let to = toLocation else {
             return ""
@@ -161,6 +91,24 @@ final class HomeViewModel: ObservableObject {
         
         didAppear = true
         
+        locationManager.locationUpdateHandler = { [weak self] location in
+            guard let self = self else {
+                return
+            }
+            
+            let shiftDistance = self.locationManager.distance(from: self.lastCurrentLocation?.coordinate ?? location.coordinate, to: location.coordinate)
+            
+            if self.lastCurrentLocation == nil {
+                self.lastCurrentLocation = location
+            }
+            
+            // if distance more than 500 m
+            if self.state == .selectFrom && shiftDistance > 500 {
+                self.lastCurrentLocation = location
+                self.startFilterStations()
+            }
+        }
+        
         //Will be executed if the screen is presented for the first time
         locationManager.requestLocationPermission()
         
@@ -169,6 +117,7 @@ final class HomeViewModel: ObservableObject {
         focusToCurrentLocation()
         
         loadCustomers()
+        
     }
     
     func focusToCurrentLocation() {
@@ -176,6 +125,7 @@ final class HomeViewModel: ObservableObject {
             return
         }
         
+        self.lastCurrentLocation = location
         Logging.l("Current location \(location.coordinate)")
         
         focusToLocation(location)
@@ -183,10 +133,10 @@ final class HomeViewModel: ObservableObject {
     
     func focusToLocation(_ location: CLLocation) {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.currentLocation = location
+            self.focusableLocation = location
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.currentLocation = nil
+                self.focusableLocation = nil
             }
         }
     }
@@ -219,24 +169,19 @@ final class HomeViewModel: ObservableObject {
                 self.isDetectingAddressFrom = false
             }
         }
-        
-        if state == .selectFrom {
-            startFiltering()
-        }
-        
+
         if state == .routing {
             filterStationsByRoute()
         }
     }
     
-    func startFiltering() {
+    func startFilterStations() {
         self.radius = self.radiusValue
         loadStationsTask?.cancel()
 
         loadStationsTask = .init(block: {
             if !self.isDragging && self.state == .selectFrom {
                 self.filterStationsByDefault()
-                self.filterStationsByDiscount()
             }
         })
         

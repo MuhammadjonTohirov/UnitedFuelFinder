@@ -39,7 +39,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Address info"
+            "value" : "Address information"
           }
         },
         "ru" : {
@@ -57,7 +57,20 @@
       }
     },
     "All comments" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все комментарии"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha izohlar "
+          }
+        }
+      }
     },
     "all_stations" : {
       "extractionState" : "manual",
@@ -116,7 +129,7 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Условиями использования"
           }
         },
@@ -176,6 +189,52 @@
     },
     "Blue" : {
 
+    },
+    "change_pin" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change PIN-code"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить ПИН-код"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PIN kod"
+          }
+        }
+      }
+    },
+    "city" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "City"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Город"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shahar"
+          }
+        }
+      }
     },
     "clear" : {
       "extractionState" : "manual",
@@ -292,6 +351,29 @@
         }
       }
     },
+    "contact" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Contact"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Контакт"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biz bilan bog'lanish"
+          }
+        }
+      }
+    },
     "contact_us" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -377,8 +459,28 @@
         }
       }
     },
-    "Device sessions" : {
-
+    "device_sess" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Device sessions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сеансы устройства"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qurilmalar"
+          }
+        }
+      }
     },
     "discount" : {
       "extractionState" : "manual",
@@ -439,6 +541,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Расстояние"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Masofa"
           }
         }
       }
@@ -512,6 +620,29 @@
         }
       }
     },
+    "exit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Exit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выход"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chiqish"
+          }
+        }
+      }
+    },
     "finding_route" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -569,13 +700,13 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Из пункта"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Bu yerdan"
           }
         }
@@ -634,7 +765,20 @@
       }
     },
     "Invalid PIN" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверный PIN-код"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hato PIN"
+          }
+        }
+      }
     },
     "invalid_otp" : {
       "extractionState" : "manual",
@@ -649,6 +793,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Неверный OTP"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hato OTP "
           }
         }
       }
@@ -982,10 +1132,42 @@
       }
     },
     "No notifications" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет уведомлений"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habar yo'q"
+          }
+        }
+      }
     },
     "No stations found" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No stations found"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Заправок не найдено"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AYOQSH topilmadi"
+          }
+        }
+      }
     },
     "no_address" : {
       "extractionState" : "manual",
@@ -998,13 +1180,13 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Нет адреса"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Manzil yo'q"
           }
         }
@@ -1050,7 +1232,7 @@
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Natija mavjud emas "
           }
         }
@@ -1080,7 +1262,26 @@
       }
     },
     "Notifications" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уведомления"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Habarlar"
+          }
+        }
+      }
     },
     "One or None" : {
 
@@ -1093,13 +1294,26 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Erice"
+            "value" : "Orange"
           }
         }
       }
     },
     "Organization requisites" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Реквизиты организации"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tashkilot ma`lumotlari"
+          }
+        }
+      }
     },
     "otp_sent_to_email" : {
       "extractionState" : "manual",
@@ -1170,6 +1384,29 @@
         }
       }
     },
+    "please_wait" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Please wait"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пожалуйста, подождите."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iltimos kuting"
+          }
+        }
+      }
+    },
     "post_feedback" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1177,6 +1414,18 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Post feedback"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Опубликовать отзыв"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Izoh qoldirish "
           }
         }
       }
@@ -1313,6 +1562,12 @@
             "state" : "translated",
             "value" : "Успешная регистрация"
           }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ro'yxatdan o'tkazildi"
+          }
         }
       }
     },
@@ -1346,6 +1601,12 @@
             "value" : "Retail price %@"
           }
         },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розничная цена %@"
+          }
+        },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1365,13 +1626,13 @@
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Розничная цена"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Chakana narxi"
           }
         }
@@ -1400,8 +1661,37 @@
         }
       }
     },
+    "Save" : {
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранять"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saqlash"
+          }
+        }
+      }
+    },
     "Save %@ per gallon " : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сэкономьте %@ за галлон"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Har galondan %@ tejang"
+          }
+        }
+      }
     },
     "search_address" : {
       "extractionState" : "manual",
@@ -1427,7 +1717,20 @@
       }
     },
     "Searching stations" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск заправок"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AYOQSH qidirlmoqda"
+          }
+        }
+      }
     },
     "select_city" : {
       "extractionState" : "manual",
@@ -1476,7 +1779,20 @@
       }
     },
     "Selected" : {
-
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрано"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tanlangan"
+          }
+        }
+      }
     },
     "settings" : {
       "extractionState" : "manual",
@@ -1520,6 +1836,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "PIN-kodni sozlash"
+          }
+        }
+      }
+    },
+    "state" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "State"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Штат"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shtat"
           }
         }
       }

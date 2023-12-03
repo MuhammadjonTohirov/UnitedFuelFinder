@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Kingfisher
 
 struct GasStationItemView: View {
     var station: StationItem
@@ -22,10 +23,25 @@ struct GasStationItemView: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                Image("image_ta")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
+                KFImage(.init(string: station.customer?.iconUrl ?? ""))
+                    .placeholder {
+                        Image("image_placeholder")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(height: 32)
+                    }
+                    .setProcessor(
+                        ResizingImageProcessor(referenceSize: CGSize(width: 32, height: 32))
+                    )
+                    .cacheMemoryOnly()
+                    .fade(duration: 0.25)
                     .frame(height: 32)
+                    .aspectRatio(contentMode: .fit)
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle().stroke(Color.secondaryBackground, lineWidth: 1)
+                    )
+                    .padding(.trailing, 8)
                 
                 VStack(alignment: .leading) {
                     Text(station.name)
