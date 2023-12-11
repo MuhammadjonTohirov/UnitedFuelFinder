@@ -15,6 +15,7 @@ struct HomeView: View {
     @State private var screenFrame: CGRect = .zero
     
     @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
+    @EnvironmentObject var mainModel: MainViewModel
     @State private var pointerFrame: CGRect = .zero
     @State private var selectedMarker: GMSMarker?
     
@@ -52,7 +53,6 @@ struct HomeView: View {
                 screenCenter: pointerFrame.center,
                 markers: $viewModel.stationsMarkers
             )
-//            .set(radius: self.viewModel.state == HomeViewState.selectFrom ? viewModel.radius : 0)
             .set(currentLocation: viewModel.focusableLocation)
             .set(
                 from: self.viewModel.fromLocation?.coordinate,
@@ -77,7 +77,7 @@ struct HomeView: View {
             }
             .ignoresSafeArea(.container, edges: .bottom)
             .padding(.bottom, -14)
-            .onChange(of: viewModel.pickedLocation, perform: { value in
+            .onChange(of: $viewModel.pickedLocation, perform: { value in
                 if viewModel.state == .routing {
                     return
                 }
@@ -89,6 +89,7 @@ struct HomeView: View {
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
+                .environmentObject(mainModel)
         })
         
         .sheet(item: $selectedMarker, content: { marker in
@@ -105,6 +106,7 @@ struct HomeView: View {
             NavigationView {
                 viewModel.presentableRoute?.screen
                     .navigationBarTitleDisplayMode(.inline)
+                    .environmentObject(mainModel)
             }
             .presentationDetents([.fraction(0.95)])
         })
@@ -116,7 +118,9 @@ struct HomeView: View {
             })
         }
         .onAppear {
-            viewModel.onAppear()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                viewModel.onAppear()
+            }
         }
     }
     
@@ -167,7 +171,7 @@ struct HomeView: View {
             HomeBottomSheetView(
                 input: .init(
                     from: .init(
-                        title: viewModel.fromAddress.nilIfEmpty ?? "No address",
+                        title: viewModel.fromAddress.nilIfEmpty ?? "no_address".localize,
                         isLoading: viewModel.isDetectingAddressFrom || viewModel.isDragging,
                         onClickBody: {
                             self.viewModel.onClickSearchAddressFrom()

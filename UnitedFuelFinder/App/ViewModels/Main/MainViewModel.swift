@@ -21,7 +21,11 @@ var mainRouter: AppDelegate? = routerObject.delegate
 
 final class MainViewModel: ObservableObject {
     @Published var route: AppDestination = .loading
-    @Published var language: Language = UserSettings.shared.language ?? .english
+    @Published var language: Language = UserSettings.shared.language ?? .english {
+        didSet {
+            UserSettings.shared.language = language
+        }
+    }
     
     init(route: AppDestination = .loading) {
         self.route = route
@@ -30,12 +34,14 @@ final class MainViewModel: ObservableObject {
         GMSServices.provideAPIKey(URL.googleMapsApiKey)
         Logging.l("GMaps \(GMSServices.sdkVersion())")
         
-        initLocalize()
+//        initLocalize()
     }
     
+    @available(*, deprecated, message: "Not used for now")
     private func initLocalize() {
         if UserSettings.shared.language?.code !=  (Locale.current.language.languageCode?.identifier ?? "en") {
             UserSettings.shared.language = Language.language(Locale.current.language.languageCode?.identifier ?? "en")
+            language = UserSettings.shared.language!
         }
     }
     

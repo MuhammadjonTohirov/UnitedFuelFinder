@@ -53,6 +53,11 @@
 		2E3F17C92AD9126300F4DC52 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */; };
 		2E3F17CA2AD9126300F4DC52 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C72AD9126300F4DC52 /* GoogleMapsCore.xcframework */; };
 		2E3F17CC2AD914F500F4DC52 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E3F17CB2AD914F400F4DC52 /* GoogleMaps.bundle */; };
+		2E502D052B272CA8002CE669 /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D042B272CA8002CE669 /* SettingsAppearance.swift */; };
+		2E502D072B272CBA002CE669 /* SettingsSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D062B272CBA002CE669 /* SettingsSecurity.swift */; };
+		2E502D092B272D39002CE669 /* SettingsViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D082B272D39002CE669 /* SettingsViewUtils.swift */; };
+		2E502D0B2B2750D0002CE669 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D0A2B2750D0002CE669 /* SettingsViewModel.swift */; };
+		2E502D0D2B2759DE002CE669 /* SettingsMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D0C2B2759DE002CE669 /* SettingsMap.swift */; };
 		2E527A412ACC80C6005B8B95 /* UnitedFuelFinderApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E527A402ACC80C6005B8B95 /* UnitedFuelFinderApp.swift */; };
 		2E527A432ACC80C6005B8B95 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E527A422ACC80C6005B8B95 /* MainView.swift */; };
 		2E527A452ACC80C8005B8B95 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2E527A442ACC80C8005B8B95 /* Assets.xcassets */; };
@@ -176,6 +181,7 @@
 		2E60B61B2AF8751500573049 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61A2AF8751500573049 /* ProfileViewModel.swift */; };
 		2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */; };
 		2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */; };
+		2E67901A2B1FCC9300239B03 /* ChangeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */; };
 		2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266E92AFD140A008099D0 /* YTextView.swift */; };
 		2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266EB2AFD193B008099D0 /* RateView.swift */; };
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
@@ -295,6 +301,11 @@
 		2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
 		2E3F17C72AD9126300F4DC52 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
 		2E3F17CB2AD914F400F4DC52 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		2E502D042B272CA8002CE669 /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
+		2E502D062B272CBA002CE669 /* SettingsSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSecurity.swift; sourceTree = "<group>"; };
+		2E502D082B272D39002CE669 /* SettingsViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewUtils.swift; sourceTree = "<group>"; };
+		2E502D0A2B2750D0002CE669 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		2E502D0C2B2759DE002CE669 /* SettingsMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMap.swift; sourceTree = "<group>"; };
 		2E527A3D2ACC80C6005B8B95 /* UnitedFuelFinder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UnitedFuelFinder.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E527A402ACC80C6005B8B95 /* UnitedFuelFinderApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnitedFuelFinderApp.swift; sourceTree = "<group>"; };
 		2E527A422ACC80C6005B8B95 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -417,6 +428,7 @@
 		2E60B61A2AF8751500573049 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
 		2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewModel.swift; sourceTree = "<group>"; };
+		2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageView.swift; sourceTree = "<group>"; };
 		2E7266E92AFD140A008099D0 /* YTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextView.swift; sourceTree = "<group>"; };
 		2E7266EB2AFD193B008099D0 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
@@ -1060,6 +1072,7 @@
 			isa = PBXGroup;
 			children = (
 				2E60B61A2AF8751500573049 /* ProfileViewModel.swift */,
+				2E502D0A2B2750D0002CE669 /* SettingsViewModel.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1347,6 +1360,11 @@
 				2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */,
 				841D81052AF75DBC00C5932C /* ProfileVIew.swift */,
 				2EDBE03A2B0F364700123CE0 /* SessionsView.swift */,
+				2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */,
+				2E502D042B272CA8002CE669 /* SettingsAppearance.swift */,
+				2E502D062B272CBA002CE669 /* SettingsSecurity.swift */,
+				2E502D082B272D39002CE669 /* SettingsViewUtils.swift */,
+				2E502D0C2B2759DE002CE669 /* SettingsMap.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1469,6 +1487,7 @@
 				2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */,
 				2E5DF93F2AEACD63005BE20D /* ActivityIndicatorView.swift in Sources */,
 				2E5DF9582AEACD63005BE20D /* MKMapAnnotationView.swift in Sources */,
+				2E502D072B272CBA002CE669 /* SettingsSecurity.swift in Sources */,
 				2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */,
 				846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */,
 				2E5DF9522AEACD63005BE20D /* MapMultiPolyline.swift in Sources */,
@@ -1506,6 +1525,7 @@
 				2E5DF9622AEACD63005BE20D /* Map+Watch+Coordinator.swift in Sources */,
 				2E0FBEFD2B1307C400A39EBA /* HomeViewModel+Extensions.swift in Sources */,
 				2E5DF9892AEACD64005BE20D /* Date+Extensions.swift in Sources */,
+				2E502D0D2B2759DE002CE669 /* SettingsMap.swift in Sources */,
 				2E5DF9432AEACD63005BE20D /* YPhoneField.swift in Sources */,
 				2E36A74F2AEF9FDB0033363E /* UserInfo.swift in Sources */,
 				2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */,
@@ -1572,15 +1592,18 @@
 				2E5DF9882AEACD64005BE20D /* URL+Extensions.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
 				2E5DF95C2AEACD63005BE20D /* MapPin.swift in Sources */,
+				2E502D052B272CA8002CE669 /* SettingsAppearance.swift in Sources */,
 				2E5DF9372AEACD63005BE20D /* YTextField+Extension.swift in Sources */,
 				2E5DF95D2AEACD63005BE20D /* MapAnnotation.swift in Sources */,
 				2E527A792ACC83DB005B8B95 /* AuthView.swift in Sources */,
 				2EDBE0372B0F359700123CE0 /* NetResSessionItem.swift in Sources */,
 				2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */,
+				2E67901A2B1FCC9300239B03 /* ChangeLanguageView.swift in Sources */,
 				2E5DF9412AEACD63005BE20D /* YTextField.swift in Sources */,
 				2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */,
 				2E5DF9802AEACD64005BE20D /* DatabaseConfig.swift in Sources */,
 				2EDF8C462AD2DD58003D64FC /* LoadingView.swift in Sources */,
+				2E502D0B2B2750D0002CE669 /* SettingsViewModel.swift in Sources */,
 				2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */,
 				2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */,
 				2E5DF96B2AEACD63005BE20D /* Database.swift in Sources */,
@@ -1615,6 +1638,7 @@
 				2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */,
 				2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */,
 				2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */,
+				2E502D092B272D39002CE669 /* SettingsViewUtils.swift in Sources */,
 				2E5DF97C2AEACD64005BE20D /* AnyWrapper.swift in Sources */,
 				2E5DF96A2AEACD63005BE20D /* DState.swift in Sources */,
 				2E5DF9492AEACD63005BE20D /* MapInformationVisibility.swift in Sources */,
@@ -1778,7 +1802,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1818,7 +1842,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 19;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

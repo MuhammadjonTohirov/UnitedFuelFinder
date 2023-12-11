@@ -12,8 +12,8 @@ struct NetResStationItem: NetResBody {
     var name: String
     var lat: Double
     var lng: Double
-    var isDeleted: Bool
-    var cityId: Int
+    var isDeleted: Bool?
+    var cityId: Int?
     var customerId: Int
     var address: String?
     var phone: String?

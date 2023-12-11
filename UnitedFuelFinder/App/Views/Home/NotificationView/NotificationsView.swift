@@ -17,7 +17,7 @@ struct NotificationsView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 if viewModel.notifications.isEmpty {
-                    Text("No notifications")
+                    Text("no_notifications".localize)
                         .font(.system(size: 20))
                         .foregroundColor(.secondary)
                 } else {
@@ -29,7 +29,7 @@ struct NotificationsView: View {
                     }.scrollable()
                 }
             }
-            .navigationBarTitle("Notifications")
+            .navigationBarTitle("notifications".localize)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {
                 self.viewModel.onAppear()

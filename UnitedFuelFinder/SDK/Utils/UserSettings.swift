@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftKeychainWrapper
-//import RealmSwift
 
 final public class UserSettings {
     public static let shared = UserSettings()
@@ -55,6 +54,15 @@ final public class UserSettings {
     
     @codableWrapper(key: "session", nil)
     public var session: String?
+    
+    @codableWrapper(key: "lastFromLocation", nil)
+    public var fromLocation: Destination?
+    
+    @codableWrapper(key: "lastDestination", nil)
+    public var destination: Destination?
+    
+    @codableWrapper(key: "nearestItemsLogic", .currentLocation)
+    public var mapCenterType: MapCenterType?
     
     func clear() {
         accessToken = nil

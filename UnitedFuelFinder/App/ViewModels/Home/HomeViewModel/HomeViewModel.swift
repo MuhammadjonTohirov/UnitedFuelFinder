@@ -56,13 +56,30 @@ final class HomeViewModel: ObservableObject {
     private(set) var loadingMessage: String = ""
     private(set) var customers: [CustomerItem] = []
     
-    @Published var state: HomeViewState = .selectFrom
+    @Published var state: HomeViewState = .selectFrom {
+        didSet {
+            Logging.l(tag: "HomeViewModel", "State \(state)")
+        }
+    }
         
     var hasDrawen: Bool = false
-    var fromLocation: CLLocation?
-    var toLocation: CLLocation?
-    var toLocationCandidate: CLLocation?
+    var fromLocation: CLLocation? {
+        didSet {
+            Logging.l(tag: "HomeViewModel", "Set from location \(fromLocation?.coordinate ?? .init(latitude: 0, longitude: 0))")
+        }
+    }
     
+    var toLocation: CLLocation? {
+        didSet {
+            if let l = toLocation {
+                UserSettings.shared.destination = .init(latitude: l.coordinate.latitude, longitude: l.coordinate.longitude)
+            } else {
+                UserSettings.shared.destination = nil
+            }
+        }
+    }
+    var toLocationCandidate: CLLocation?
+    private(set) var timer: Timer?
     @Published var stations: [StationItem] = []
     @Published var discountedStations: [StationItem] = []
     @Published var stationsMarkers: [GMSMarker] = []
@@ -96,16 +113,8 @@ final class HomeViewModel: ObservableObject {
                 return
             }
             
-            let shiftDistance = self.locationManager.distance(from: self.lastCurrentLocation?.coordinate ?? location.coordinate, to: location.coordinate)
-            
             if self.lastCurrentLocation == nil {
                 self.lastCurrentLocation = location
-            }
-            
-            // if distance more than 500 m
-            if self.state == .selectFrom && shiftDistance > 500 {
-                self.lastCurrentLocation = location
-                self.startFilterStations()
             }
         }
         
@@ -114,10 +123,35 @@ final class HomeViewModel: ObservableObject {
         
         locationManager.startUpdatingLocation()
         
-        focusToCurrentLocation()
+        if UserSettings.shared.destination == nil || UserSettings.shared.fromLocation == nil {
+            focusToCurrentLocation()
+        }
         
         loadCustomers()
         
+        startRegularFetchingNearStations()
+        
+        restoreSavedRoute()
+    }
+    
+    private func restoreSavedRoute() {
+        if let des = UserSettings.shared.destination, let from = UserSettings.shared.fromLocation {
+            self.fromLocation = from.location
+            self.toLocation = des.location
+            self.onClickDrawRoute()
+
+            GLocationManager.shared.getAddressFromLatLon(latitude: des.latitude, longitude: des.longitude) { address in
+                self.toAddress = address
+            }
+        }
+    }
+    
+    private func startRegularFetchingNearStations() {
+        timer?.invalidate()
+        
+        timer = .scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+            self.startFilterStations()
+        })
     }
     
     func focusToCurrentLocation() {
@@ -148,8 +182,11 @@ final class HomeViewModel: ObservableObject {
         
         switch self.state {
         case .selectFrom:
-            self.fromLocation = pickedLocation
-            self.isDetectingAddressFrom = true
+            if UserSettings.shared.destination == nil {
+                self.fromLocation = pickedLocation
+                self.isDetectingAddressFrom = true
+                UserSettings.shared.fromLocation = .init(latitude: loc.latitude, longitude: loc.longitude)
+            }
         case .selectTo:
             self.toLocation = pickedLocation
             self.isDetectingAddressTo = true
@@ -177,15 +214,7 @@ final class HomeViewModel: ObservableObject {
     
     func startFilterStations() {
         self.radius = self.radiusValue
-        loadStationsTask?.cancel()
-
-        loadStationsTask = .init(block: {
-            if !self.isDragging && self.state == .selectFrom {
-                self.filterStationsByDefault()
-            }
-        })
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: loadStationsTask!)
+        self.filterStationsByDefault()
     }
     
     func clearDestination() {
@@ -193,6 +222,8 @@ final class HomeViewModel: ObservableObject {
             self.hasDrawen = false
             self.toAddress = ""
             self.toLocation = nil
+            UserSettings.shared.destination = nil
+            UserSettings.shared.fromLocation = nil
             self.stations = []
             self.stationsMarkers.forEach { marker in
                 marker.map = nil
@@ -226,6 +257,8 @@ final class HomeViewModel: ObservableObject {
         } else {
             DispatchQueue.main.async {
                 self.state = .selectFrom
+                self.toAddress = ""
+                self.toLocation = nil
             }
         }
     }
@@ -253,6 +286,7 @@ final class HomeViewModel: ObservableObject {
     func setupToAddress(with res: SearchAddressViewModel.SearchAddressResult) {
         self.toLocation = .init(latitude: res.lat, longitude: res.lng)
         self.toAddress = res.address
+        UserSettings.shared.destination = .init(latitude: res.lat, longitude: res.lng)
         self.onClickDrawRoute()
     }
     

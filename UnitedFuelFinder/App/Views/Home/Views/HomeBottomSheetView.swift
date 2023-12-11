@@ -58,7 +58,7 @@ struct HomeBottomSheetView: View {
     
     private var selectToView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Destination address")
+            Text("Destination address".localize)
                 .font(.system(size: 24, weight: .semibold))
             
             HStack {
@@ -133,7 +133,7 @@ struct HomeBottomSheetView: View {
                         .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                         .frame(width: 42, height: 42)
                     
-                    Text("Searching stations")
+                    Text("searching_stations".localize)
                         .font(.system(size: 14, weight: .medium))
                         .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                 }.opacity(self.stations.isEmpty ? 1 : 0)
@@ -145,7 +145,7 @@ struct HomeBottomSheetView: View {
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                     .frame(width: 42, height: 42)
                 
-                Text("No stations found")
+                Text("no_stations_found".localize)
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
             }.opacity(self.stations.isEmpty ? 1 : 0)

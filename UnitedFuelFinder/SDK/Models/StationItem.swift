@@ -17,7 +17,7 @@ public struct StationItem: Identifiable {
     public var lat: Double
     public var lng: Double
     public var isDeleted: Bool
-    public var cityId: Int
+    public var cityId: Int?
     public var customerId: Int
     public var address: String?
     public var phone: String?
@@ -67,7 +67,7 @@ public struct StationItem: Identifiable {
         self.name = item.name
         self.lat = item.lat
         self.lng = item.lng
-        self.isDeleted = item.isDeleted
+        self.isDeleted = item.isDeleted ?? false
         self.cityId = item.cityId
         self.customerId = item.customerId
         self.address = item.address

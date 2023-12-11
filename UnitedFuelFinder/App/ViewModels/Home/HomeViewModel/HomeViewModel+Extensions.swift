@@ -116,9 +116,7 @@ extension HomeViewModel: HomeViewModelProtocol {
     func onClickBack() {
         withAnimation {
             self.state = .selectFrom
-            if let fromLocation {
-                focusToLocation(fromLocation)
-            }
+            self.focusToCurrentLocation()
         }
     }
     
@@ -186,7 +184,8 @@ extension HomeViewModel {
 
             Logging.l(tag: "HomeViewModel", "Start loading stations")
 
-            guard let c = lastCurrentLocation?.coordinate, state == .selectFrom else {
+            
+            guard let c = UserSettings.shared.mapCenterType == .currentLocation ? lastCurrentLocation?.coordinate : self.pickedLocation?.coordinate else {
                 return
             }
 
@@ -199,14 +198,25 @@ extension HomeViewModel {
                     
             await MainActor.run {
                 self.stationsMarkers.forEach { marker in
-                    marker.map = nil
+                    if _stations.contains(where: { st in
+                        return marker.station?.number == st.number
+                    }) {
+                        marker.map = nil
+                    }
                 }
                 
-                self.stationsMarkers.removeAll()
+                self.stationsMarkers.removeAll { mr in
+                    if _stations.contains(where: { st in
+                        return mr.station?.number == st.number
+                    }) {
+                        return mr.map == nil
+                    }
+                    return false
+                }
                 
                 withAnimation {
                     self.discountedStations = _stations
-                    self.stationsMarkers = self.discountedStations.map({$0.asMarker})
+                    self.stationsMarkers.append(contentsOf: self.discountedStations.map({$0.asMarker}))
                 }
             }
             
@@ -215,3 +225,12 @@ extension HomeViewModel {
     }
 }
 
+
+public struct Destination: Codable {
+    public var latitude: Double
+    public var longitude: Double
+    
+    public var location: CLLocation {
+        .init(latitude: latitude, longitude: longitude)
+    }
+}

@@ -61,16 +61,16 @@ struct StationDetailsView: View {
                 .placeholder {
                     Image("image_placeholder")
                         .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .stretchable(in: geometry)
+                        .aspectRatio(contentMode: .fit)
+                        
                 }
-                .resizable()
+                .cacheMemoryOnly()
+                .fade(duration: 0.25)
                 .aspectRatio(contentMode: .fill)
                 .stretchable(in: geometry)
         })
         .frame(height: UIApplication.shared.screenFrame.height * 0.45)
         .ignoresSafeArea()
-
     }
     
     private var details: some View {
@@ -81,12 +81,21 @@ struct StationDetailsView: View {
                         Image("image_placeholder")
                             .resizable()
                             .aspectRatio(contentMode: .fit)
-                            .frame(width: 44, height: 32)
+                            .frame(height: 32)
                     }
-                    .resizable()
+                    .setProcessor(
+                        ResizingImageProcessor(referenceSize: CGSize(width: 32, height: 32))
+                    )
+                    .cacheMemoryOnly()
+                    .fade(duration: 0.25)
+                    .frame(height: 32)
                     .aspectRatio(contentMode: .fit)
-                    .frame(width: 44, height: 32)
-
+                    .clipShape(Circle())
+                    .overlay(
+                        Circle().stroke(Color.secondaryBackground, lineWidth: 1)
+                    )
+                    .padding(.trailing, 8)
+                
                 VStack(alignment: .leading, spacing: 8) {
                     Text(viewModel.name)
                         .font(.system(size: 13, weight: .semibold))

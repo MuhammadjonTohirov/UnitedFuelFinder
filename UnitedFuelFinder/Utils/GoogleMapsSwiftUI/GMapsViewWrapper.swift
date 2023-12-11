@@ -30,7 +30,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     private(set) var location: CLLocation?
     @Binding var pickedLocation: CLLocation?
     @Binding var isDragging: Bool
-    
+    @State var camera: GMSCameraPosition?
     var screenCenter: CGPoint
     @Binding var markers: [GMSMarker]
 
@@ -238,6 +238,11 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             if let l = self.parent.pickedLocation?.coordinate {
                 drawCircleByRadius(on: mapView, location: l, radius: parent.radius)
             }
+            
+            let lat = position.target.latitude
+            let lng = position.target.longitude
+            
+            parent.camera = GMSCameraPosition(latitude: lat, longitude: lng, zoom: position.zoom, bearing: 0, viewingAngle: 45)
         }
         
         func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {
@@ -346,6 +351,11 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     //add the markers for the 2 locations
+                    self.markerB?.map = nil
+                    self.markerB = nil
+                    self.markerA?.map = nil
+                    self.markerA = nil
+                    
                     self.markerB = GMSMarker.init(position: toLoc)
                     self.markerB!.map = mapView
                     self.markerB!.iconView = UIImageView(image: UIImage(named: "icon_to_point"))
