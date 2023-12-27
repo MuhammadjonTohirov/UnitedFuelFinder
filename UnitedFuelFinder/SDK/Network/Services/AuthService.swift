@@ -12,6 +12,19 @@ enum AuthNetworkErrorReason: Error {
     case userAlreadyExists
     case unknown
     case custom(String)
+    
+    var localizedDescription: String {
+        switch self {
+        case .notConfirmedByAdmin:
+            return "not_confirmed_by_admin".localize
+        case .userAlreadyExists:
+            return "user_already_exists".localize
+        case .unknown:
+            return "Unknown error".localize
+        case .custom(let message):
+            return message
+        }
+    }
 }
 
 public struct AuthService {
@@ -33,6 +46,10 @@ public struct AuthService {
     func login(session: String, code: String, username: String) async -> (Bool, AuthNetworkErrorReason?) {
         guard let result: NetRes<NetResLogin> = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session)))) else {
             return (false, .unknown)
+        }
+        
+        if !result.success && result.error?.contains("expire") ?? false {
+            return (false, .custom(result.error ?? "Unknown error"))
         }
         
         guard let data = result.data else {

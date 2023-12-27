@@ -51,7 +51,11 @@ final class OtpViewModel: ObservableObject {
     }
     
     func onTypingOtp() {
-        isValidForm = otp.count > 3
+        isValidForm = otp.count == 6
+        
+        if isValidForm {
+            onClickConfirm()
+        }
     }
     
     func onAppear() {

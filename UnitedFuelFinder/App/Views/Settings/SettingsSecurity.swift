@@ -43,7 +43,7 @@ struct SettingsSecurity: View {
             
             Spacer()
         }
-        .navigationTitle("appearance".localize)
+        .navigationTitle("security".localize)
         .padding(.horizontal, 20)
         .padding(.top, Padding.medium)
     }

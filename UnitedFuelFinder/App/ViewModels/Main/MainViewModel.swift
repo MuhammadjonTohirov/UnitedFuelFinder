@@ -13,11 +13,12 @@ class MainViewRouter {
 }
 
 protocol AppDelegate {
+    var timer: Timer? {get set}
     func navigate(to destination: AppDestination)
 }
 
 var routerObject = MainViewRouter()
-var mainRouter: AppDelegate? = routerObject.delegate
+var appDelegate: AppDelegate? = routerObject.delegate
 
 final class MainViewModel: ObservableObject {
     @Published var route: AppDestination = .loading
@@ -27,14 +28,14 @@ final class MainViewModel: ObservableObject {
         }
     }
     
+    var timer: Timer?
+    
     init(route: AppDestination = .loading) {
         self.route = route
-        mainRouter = self
+        appDelegate = self
         UserSettings.shared.lastActiveDate = Date()
         GMSServices.provideAPIKey(URL.googleMapsApiKey)
         Logging.l("GMaps \(GMSServices.sdkVersion())")
-        
-//        initLocalize()
     }
     
     @available(*, deprecated, message: "Not used for now")

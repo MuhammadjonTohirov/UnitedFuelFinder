@@ -33,6 +33,15 @@ struct OTPView: View {
                 })
             })
         }
+        .overlay {
+            Rectangle()
+                .ignoresSafeArea()
+                .foregroundColor(.black.opacity(0.15))
+                .overlay {
+                    ProgressView()
+                }
+                .opacity(self.viewModel.loading ? 1 : 0)
+        }
     }
     
     var innerBody: some View {

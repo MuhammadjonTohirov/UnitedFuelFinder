@@ -65,12 +65,15 @@ struct AuthView: View {
                             left: {
                                 Image(systemName: "person.fill")
                                     .padding(.trailing, Padding.small)
+                            }, onCommit: {
+                                viewModel.verifyEmail()
                             }
                         )
                         .keyboardType(
                             .emailAddress
                         )
                     }
+                    .set(error: viewModel.emailError ?? "")
                     .padding(
                         .horizontal, Padding.medium
                     )
@@ -98,7 +101,7 @@ struct AuthView: View {
                     Text("authenticate".localize)
                 }
                 .set(isLoading: viewModel.isLoading)
-                .set(isEnabled: viewModel.isOfferAccepted && !viewModel.username.isEmpty)
+                .set(isEnabled: viewModel.isValidForm)
                 .padding(.horizontal, Padding.default)
                 .padding(.bottom, Padding.medium)
             }

@@ -83,12 +83,14 @@ struct RegisterProfileView: View {
             YRoundedTextField {
                 YTextField(text: $viewModel.firstName, placeholder: "first_name".localize, contentType: .givenName)
             }
+            
             YRoundedTextField {
                 YTextField(text: $viewModel.lastName, placeholder: "last_name".localize, contentType: .familyName)
             }
+            
             YRoundedTextField {
                 YTextField(text: $viewModel.phoneNumber, placeholder: "phone_number".localize, contentType: .telephoneNumber)
-                    .keyboardType(.decimalPad)
+                    .keyboardType(.phonePad)
             }
         }
     }
@@ -104,7 +106,8 @@ struct RegisterProfileView: View {
             }
             
             YRoundedTextField {
-                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 528 987".localize)
+                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 5284 9871 1243".localize)
+                    .set(format: "XXXX XXXX XXXX XXXX")
             }
         }
     }

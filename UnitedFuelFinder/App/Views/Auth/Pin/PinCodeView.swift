@@ -41,7 +41,7 @@ struct PinCodeView: View {
             KeyboardView(text: $viewModel.pin, viewModel: viewModel.keyboardModel) {
                 if viewModel.reason == .login {
                     UserSettings.shared.appPin = nil
-                    mainRouter?.navigate(to: .auth)
+                    appDelegate?.navigate(to: .auth)
                 }
             }
             .onChange(of: viewModel.pin) { newValue in

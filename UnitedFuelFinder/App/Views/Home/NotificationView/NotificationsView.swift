@@ -51,7 +51,7 @@ struct NotificationRow: View {
                 .foregroundColor(.primary)
             Text(notification.body)
                 .font(.system(size: 14))
-                .foregroundColor(.secondary)
+                .foregroundColor(.label)
             HStack {
                 Spacer()
                 Text(notification.createdAt ?? "")

@@ -28,6 +28,8 @@ enum MainNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "AuditLogs")
         case .getCustomers:
             return URL.baseAPI.appendingPath("Driver", "Customers")
+        case .searchAddresses(let text):
+            return URL.baseAPI.appendingPath("Driver", "SearchLocations").queries(.init(name: "term", value: text))
         }
     }
     
@@ -69,4 +71,5 @@ enum MainNetworkRouter: URLRequestProtocol {
     case getSessions
     case getAuditLogs
     case getCustomers
+    case searchAddresses(text: String)
 }

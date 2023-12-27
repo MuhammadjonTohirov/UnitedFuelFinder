@@ -80,13 +80,6 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
     }
 }
 
-struct TestView: View {
-    @State var stations: [StationItem] = []
-    var body: some View {
-        HomeView()
-    }
-}
-
 extension UUID: Identifiable {
     public var id: String {
         self.uuidString
@@ -98,3 +91,105 @@ extension String: Identifiable {
         self
     }
 }
+
+class LabelView: UIView {
+//    contains icon and UIlabel in horizontal
+    var icon: UIImageView = UIImageView()
+    var label: UILabel = UILabel()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.addSubview(icon)
+        self.addSubview(label)
+        
+        icon.translatesAutoresizingMaskIntoConstraints = false
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        // regenerate constraints with padding 4
+        NSLayoutConstraint.activate([
+            icon.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            icon.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
+            icon.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4),
+            icon.widthAnchor.constraint(equalToConstant: 22),
+            icon.heightAnchor.constraint(equalToConstant: 22),
+            
+            label.leadingAnchor.constraint(equalTo: icon.trailingAnchor, constant: 4),
+            label.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
+            label.topAnchor.constraint(equalTo: self.topAnchor, constant: 4),
+            label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -4)
+        ])
+        
+        self.backgroundColor = UIColor.systemGray5
+        
+        self.icon.contentMode = .scaleAspectFit
+        
+        self.label.font = .systemFont(ofSize: 14)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setIcon(_ image: UIImage?) {
+        icon.image = image
+    }
+    
+    func setText(_ text: String) {
+        label.text = text
+    }
+    
+    func setTextColor(_ color: UIColor) {
+        label.textColor = color
+    }
+    
+    func setIconColor(_ color: UIColor) {
+        icon.tintColor = color
+    }
+    
+    func setBackgroudColor(_ color: UIColor) {
+        self.backgroundColor = color
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.cornerRadius = self.frame.height / 2
+    }
+}
+
+class TestViewController: UIViewController {
+    // put lableview at center
+    var labelView: LabelView = LabelView()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.addSubview(labelView)
+        
+        labelView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            labelView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            labelView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ])
+        
+        labelView.setIcon(UIImage(systemName: "mic.slash"))
+        labelView.setText("You are muted")
+        labelView.setIconColor(.white)
+        labelView.setTextColor(.white)
+        labelView.setBackgroudColor(.black.withAlphaComponent(0.5))
+    }
+    
+}
+
+struct TestWrapper: UIViewControllerRepresentable {
+    func makeUIViewController(context: Context) -> some UIViewController {
+        TestViewController()
+    }
+    
+    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
+        
+    }
+}
+
+#Preview(body: {
+    TestWrapper()
+})

@@ -168,7 +168,7 @@ extension HomeViewModel {
             let f = (fromLocation.coordinate.latitude, fromLocation.coordinate.longitude)
             let t = (toLocation.coordinate.latitude, toLocation.coordinate.longitude)
             
-            let _stations = await MainService.shared.filterStations(from: f, to: t, in: 10)
+            let _stations = await MainService.shared.filterStations(from: f, to: t, in: self.radius)
                 .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
             
             await MainActor.run {

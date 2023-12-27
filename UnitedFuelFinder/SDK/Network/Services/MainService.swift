@@ -80,4 +80,9 @@ struct MainService {
         try? await Task.sleep(for: .seconds(1))
         return customers
     }
+    
+    func searchAddresses(_ query: String) async -> [NetResSearchAddressItem] {
+        let result: NetRes<[NetResSearchAddressItem]>? = await Network.send(request: MainNetworkRouter.searchAddresses(text: query))
+        return result?.data ?? []
+    }
 }

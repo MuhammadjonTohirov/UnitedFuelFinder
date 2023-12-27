@@ -23,17 +23,17 @@ final class LoadingViewModel: LoadingViewModelProtocol {
             if UserSettings.shared.hasValidToken {
                 if await AuthService.shared.refreshToken() {
                     if UserSettings.shared.appPin == nil {
-                        mainRouter?.navigate(to: .auth)
+                        appDelegate?.navigate(to: .auth)
                     } else {                        
-                        mainRouter?.navigate(to: .pin)
+                        appDelegate?.navigate(to: .pin)
                     }
                 } else {
-                    mainRouter?.navigate(to: .auth)
+                    appDelegate?.navigate(to: .auth)
                 }
                 return
             }
             
-            mainRouter?.navigate(to: .auth)
+            appDelegate?.navigate(to: .auth)
   
 //            We cannot use language screen for now
 //            mainRouter?.navigate(to: .language)

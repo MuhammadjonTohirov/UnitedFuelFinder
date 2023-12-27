@@ -98,14 +98,14 @@ class PinCodeViewModel: ObservableObject {
     
     func onSuccessLogin() {
         DispatchQueue.main.async {
-            mainRouter?.navigate(to: .main)
+            appDelegate?.navigate(to: .main)
         }
     }
     
     func onClickNext() {
         switch reason {
         case .login:
-            mainRouter?.navigate(to: .main)
+            appDelegate?.navigate(to: .main)
         case .setup:
             route = .confirmWith(code: pin, completion: { [weak self] isOK in
                 guard let self else {

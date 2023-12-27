@@ -58,7 +58,7 @@ struct HomeBottomSheetView: View {
     
     private var selectToView: some View {
         VStack(alignment: .leading, spacing: 12) {
-            Text("Destination address".localize)
+            Text("destination_address".localize)
                 .font(.system(size: 24, weight: .semibold))
             
             HStack {

@@ -40,7 +40,11 @@ struct StationDetailsView: View {
             headerView
             
             details
-            
+                .background {
+                    Rectangle()
+                        .foregroundStyle(.background)
+                }
+                .zIndex(1)
             postFeedbacks
         
             comments
@@ -62,6 +66,7 @@ struct StationDetailsView: View {
                     Image("image_placeholder")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
+                        .clipped()
                         
                 }
                 .cacheMemoryOnly()
@@ -69,6 +74,7 @@ struct StationDetailsView: View {
                 .aspectRatio(contentMode: .fill)
                 .stretchable(in: geometry)
         })
+        .zIndex(0)
         .frame(height: UIApplication.shared.screenFrame.height * 0.45)
         .ignoresSafeArea()
     }

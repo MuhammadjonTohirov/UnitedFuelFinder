@@ -210,6 +210,9 @@
         }
       }
     },
+    "Blue" : {
+
+    },
     "change_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -459,6 +462,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joriy joylashuv"
+          }
+        }
+      }
+    },
+    "destination_address" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Destination address"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Адрес назначения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Belgilangan manzil"
           }
         }
       }
@@ -785,6 +811,15 @@
         }
       }
     },
+    "Green" : {
+
+    },
+    "Home page" : {
+
+    },
+    "Indigo" : {
+
+    },
     "insert_creds" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -820,6 +855,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hato PIN"
+          }
+        }
+      }
+    },
+    "invalid_email" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid email"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверная почта"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yaroqsiz email"
           }
         }
       }
@@ -1002,7 +1060,7 @@
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Oq"
           }
         }
@@ -1238,6 +1296,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1445,6 +1509,15 @@
         }
       }
     },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
+    },
     "Organization requisites" : {
       "localizations" : {
         "ru" : {
@@ -1483,6 +1556,12 @@
           }
         }
       }
+    },
+    "page 1" : {
+
+    },
+    "Page 2" : {
+
     },
     "personal_details" : {
       "extractionState" : "manual",
@@ -1668,6 +1747,9 @@
         }
       }
     },
+    "Red" : {
+
+    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1713,6 +1795,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "Retail price %@" : {
       "localizations" : {
@@ -2037,6 +2122,9 @@
         }
       }
     },
+    "SwiftUI" : {
+
+    },
     "theme" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2129,6 +2217,9 @@
         }
       }
     },
+    "Violet" : {
+
+    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2197,6 +2288,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     }
   },
   "version" : "1.0"

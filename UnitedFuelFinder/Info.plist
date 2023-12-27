@@ -20,9 +20,7 @@
 	</dict>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string>fetch</string>
 		<string>location</string>
-		<string>processing</string>
 		<string>remote-notification</string>
 	</array>
 </dict>

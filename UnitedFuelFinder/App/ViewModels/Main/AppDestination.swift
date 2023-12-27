@@ -64,10 +64,7 @@ enum AppDestination: Hashable, ScreenRoute {
         case .main:
             HomeView()
         case .test:
-            NavigationView {
-                TestView()
-                    .navigationBarTitleDisplayMode(.inline)
-            }
+            TestUI()
         default:
             EmptyView()
         }

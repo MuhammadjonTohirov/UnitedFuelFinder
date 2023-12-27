@@ -31,6 +31,7 @@ enum AuthRoute: ScreenRoute {
         switch self {
         case .otp(let vm):
             OTPView(viewModel: vm)
+
         case .register(let completion):
             RegisterProfileView(onRegisterResult: completion)
         case .pin(let vm):
@@ -46,6 +47,13 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     
     @Published var username: String = ""
     @Published var isOfferAccepted: Bool = false
+    
+    var isValidForm: Bool {
+        isOfferAccepted && username.isValidEmail
+    }
+    
+    @Published var emailError: String?
+    
     @Published var route: AuthRoute? = nil {
         didSet {
             present = route != nil
@@ -72,9 +80,27 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
             }
             
             try? await Task.sleep(for: .seconds(0.5))
-            self.closeOTP()
             
-            return (true, nil)
+            if self.needRegistration {
+                self.showFillProfile()
+                self.clearOTPModel()
+                return (true, nil)
+            }
+            
+            let error = await self.getAccessToken()
+            
+            await MainActor.run {
+                if let error {
+                    self.closeOTP()
+                    self.showOnError(error)
+                } else {
+                    self.needRegistration ? self.showFillProfile() : self.showPinSetup()
+
+                    self.clearOTPModel()
+                }
+            }
+            
+            return (error == nil, error?.localizedDescription)
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -85,12 +111,13 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     private func closeOTP() {
         DispatchQueue.main.async {
             self.route = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                self.otpViewModel = nil
-                self.needRegistration ?
-                self.showFillProfile() :
-                self.getAccessToken()
-            }
+            self.clearOTPModel()
+        }
+    }
+    
+    private func clearOTPModel(after: CGFloat = 0.6) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + after) {
+            self.otpViewModel = nil
         }
     }
     
@@ -99,7 +126,17 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
             self.route = .register({ isRegistered in
                 if isRegistered {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
-                        self.getAccessToken()
+                        Task {
+                            let error = await self.getAccessToken()
+                            
+                            DispatchQueue.main.async {
+                                if let error {
+                                    self.showOnError(error)
+                                } else {
+                                    self.showPinSetup()
+                                }
+                            }
+                        }
                     }
                 }
             })
@@ -107,7 +144,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     }
     
     private func showMain() {
-        mainRouter?.navigate(to: .main)
+        appDelegate?.navigate(to: .main)
     }
     
     private func showPinSetup() {
@@ -118,8 +155,18 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         }))
     }
     
+    func verifyEmail() {
+        guard username.isValidEmail else {
+            emailError = "invalid_email".localize
+            return
+        }
+        
+        emailError = nil
+    }
+    
     func onClickVerifyUsername() {
         showLoading()
+        
         Task.init {
             let response = await AuthService.shared.verifyAccount(username)
             
@@ -148,38 +195,32 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         }
     }
     
-    private func getAccessToken() {
-        Task {
-            guard let session = UserSettings.shared.session, let code = UserSettings.shared.lastOTP else {
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.isLoading = true
-            }
-            
-            let (isOK, error) = await AuthService.shared.login(session: session, code: code, username: self.username)
-            
-            DispatchQueue.main.async {
-                self.isLoading = false
-                
-                if isOK {
-                    self.showPinSetup()
-                } else {
-                    switch error {
-                    case .userAlreadyExists:
-                        self.showError(message: "user_already_exists".localize)
-                    case .notConfirmedByAdmin:
-                        self.showError(message: "not_confirmed_by_admin".localize)
-                    case .unknown:
-                        self.showError(message: "undefined_error".localize)
-                    case .custom(let error):
-                        self.showError(message: error.nilIfEmpty ?? "undefined_error".localize)
-                    default:
-                        break
-                    }
-                }
-            }
+    private func getAccessToken() async -> AuthNetworkErrorReason? {
+        guard let session = UserSettings.shared.session, let code = UserSettings.shared.lastOTP else {
+            return .custom("No session")
+        }
+        
+        showLoading()
+        
+        let (isOK, error) = await AuthService.shared.login(session: session, code: code, username: self.username)
+        
+        hideLoading()
+        
+        return isOK ? nil : error
+    }
+    
+    private func showOnError(_ error: AuthNetworkErrorReason) {
+        switch error {
+        case .userAlreadyExists:
+            self.showError(message: "user_already_exists".localize)
+        case .notConfirmedByAdmin:
+            self.showError(message: "not_confirmed_by_admin".localize)
+        case .unknown:
+            self.showError(message: "undefined_error".localize)
+        case .custom(let error):
+            self.showError(message: error.nilIfEmpty ?? "undefined_error".localize)
+//        default:
+//            break
         }
     }
 }

@@ -140,7 +140,6 @@ struct HomeView: View {
                 viewModel.startFilterStations()
             }
             .position(x: 27, y: 24 + UIApplication.shared.safeArea.top)
-            .opacity(self.viewModel.state == .routing ? 0 : 1)
         }
     }
     
@@ -287,17 +286,20 @@ struct HomeView: View {
             viewModel.onClickBack()
             viewModel.clearDestination()
         }, label: {
-            Text("clear".localize)
-                .font(.system(size: 14))
-                .foregroundStyle(Color.label.opacity(0.5))
-                .padding(.horizontal, 4)
-                .frame(height: 40)
-                .frame(minWidth: 80)
-                .background {
-                    RoundedRectangle(cornerRadius: 20)
-                        .foregroundStyle(Color.background)
-                        .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
+            Circle()
+                .frame(width: 40, height: 40)
+                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .overlay {
+                    Image(systemName: "arrow.clockwise")
+                        .resizable()
+                        .renderingMode(.template)
+                        .aspectRatio(contentMode: .fit)
+                        .fixedSize()
+                        .frame(width: 18, height: 18)
+                        .foregroundStyle(Color.label.opacity(0.8))
                 }
+                .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)
+                
         })
     }
     

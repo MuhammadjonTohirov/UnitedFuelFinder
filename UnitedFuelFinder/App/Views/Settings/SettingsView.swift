@@ -40,19 +40,6 @@ struct SettingsView: View {
             
             Divider()
             
-            SettingsViewUtils.row(image: Image("icon_map_settings")
-                .resizable()
-                .renderingMode(.template)
-                .fixedSize()
-                .foregroundStyle(Color.label)
-                .frame(width: 24, height: 24),
-                title: "map_settings".localize
-            ) {
-                viewModel.navigate(to: .mapSettings)
-            }
-            
-            Divider()
-            
             SettingsViewUtils.row(image: Image(systemName: "lock")
                 .resizable()
                 .renderingMode(.template)
@@ -123,8 +110,10 @@ struct SettingsView: View {
     private func doLogout() {
         UserSettings.shared.clear()
         UserSettings.shared.language = .english
+        appDelegate?.timer?.invalidate()
+        appDelegate?.timer = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            mainRouter?.navigate(to: .loading)
+            appDelegate?.navigate(to: .loading)
         }
     }
 }

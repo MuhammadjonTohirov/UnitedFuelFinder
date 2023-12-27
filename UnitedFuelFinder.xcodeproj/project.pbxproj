@@ -182,6 +182,8 @@
 		2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */; };
 		2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */; };
 		2E67901A2B1FCC9300239B03 /* ChangeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */; };
+		2E6F3CBB2B3C9FA80015C623 /* TestUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F3CBA2B3C9FA80015C623 /* TestUI.swift */; };
+		2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */; };
 		2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266E92AFD140A008099D0 /* YTextView.swift */; };
 		2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266EB2AFD193B008099D0 /* RateView.swift */; };
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
@@ -191,6 +193,7 @@
 		2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */; };
 		2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
+		2EAFDF582B34E1090058EED3 /* NetResSearchAddressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */; };
 		2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */; };
 		2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */; };
 		2EB599672B09CE350038F5F0 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB599662B09CE350038F5F0 /* SwiftUITooltip */; };
@@ -429,6 +432,8 @@
 		2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
 		2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewModel.swift; sourceTree = "<group>"; };
 		2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageView.swift; sourceTree = "<group>"; };
+		2E6F3CBA2B3C9FA80015C623 /* TestUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUI.swift; sourceTree = "<group>"; };
+		2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCoverUI.swift; sourceTree = "<group>"; };
 		2E7266E92AFD140A008099D0 /* YTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextView.swift; sourceTree = "<group>"; };
 		2E7266EB2AFD193B008099D0 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
@@ -438,6 +443,7 @@
 		2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqEditProfile.swift; sourceTree = "<group>"; };
 		2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRecentSearchedAddress.swift; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
+		2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResSearchAddressItem.swift; sourceTree = "<group>"; };
 		2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllStationsView.swift; sourceTree = "<group>"; };
 		2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GasStationItemView.swift; sourceTree = "<group>"; };
 		2EB599682B09DB6A0038F5F0 /* RegularButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegularButton.swift; sourceTree = "<group>"; };
@@ -590,6 +596,7 @@
 				2EE91D352AD07FC200A425B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
+			usesTabs = 0;
 		};
 		2E527A3E2ACC80C6005B8B95 /* Products */ = {
 			isa = PBXGroup;
@@ -624,6 +631,7 @@
 		2E527A722ACC83A1005B8B95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E6F3CB92B3C9FA20015C623 /* Test */,
 				2EF3A1FE2ADD91FF00CA8DE2 /* Settings */,
 				2EDF8C942AD474A6003D64FC /* Home */,
 				2EDF8C812AD452D6003D64FC /* Auth */,
@@ -752,6 +760,7 @@
 		2E5DF8B22AEACD63005BE20D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E6F3CBC2B3CA6210015C623 /* AppNavigator */,
 				2E36A7502AEFB8EE0033363E /* Images */,
 				2E5DF8B32AEACD63005BE20D /* Buttons */,
 				2E5DF8B82AEACD63005BE20D /* Loading */,
@@ -966,6 +975,7 @@
 				2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */,
 				2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */,
 				2EB76B192B13B1870055610A /* NetResCustomer.swift */,
+				2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1091,6 +1101,22 @@
 				2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */,
 			);
 			path = SearchAddress;
+			sourceTree = "<group>";
+		};
+		2E6F3CB92B3C9FA20015C623 /* Test */ = {
+			isa = PBXGroup;
+			children = (
+				2E6F3CBA2B3C9FA80015C623 /* TestUI.swift */,
+			);
+			path = Test;
+			sourceTree = "<group>";
+		};
+		2E6F3CBC2B3CA6210015C623 /* AppNavigator */ = {
+			isa = PBXGroup;
+			children = (
+				2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */,
+			);
+			path = AppNavigator;
 			sourceTree = "<group>";
 		};
 		2EB189F92AEFF42600BCFBE3 /* StationDetails */ = {
@@ -1480,6 +1506,7 @@
 				2E5DF9592AEACD63005BE20D /* MapMarker.swift in Sources */,
 				2EDF8C702AD44401003D64FC /* PinCodeViewModel.swift in Sources */,
 				2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */,
+				2EAFDF582B34E1090058EED3 /* NetResSearchAddressItem.swift in Sources */,
 				2E0F93D22B0134CF00660DEB /* NetResStationComment.swift in Sources */,
 				2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */,
 				2E5DF9782AEACD64005BE20D /* CommonService.swift in Sources */,
@@ -1624,6 +1651,7 @@
 				2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */,
 				2E5DF9832AEACD64005BE20D /* String+Extensions.swift in Sources */,
 				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
+				2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */,
 				2E5DF94E2AEACD63005BE20D /* MapMultiPolygon.swift in Sources */,
 				2E5DF97A2AEACD64005BE20D /* AuthNetworkRouter.swift in Sources */,
 				2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */,
@@ -1652,6 +1680,7 @@
 				2E5DF9262AEACD63005BE20D /* ItemSelectionView.swift in Sources */,
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
+				2E6F3CBB2B3C9FA80015C623 /* TestUI.swift in Sources */,
 				2E5DF9712AEACD64005BE20D /* Network.swift in Sources */,
 				2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */,
 				2EDF8C4E2AD309F9003D64FC /* LoadingViewModel.swift in Sources */,
@@ -1802,7 +1831,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1811,7 +1840,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "United Fuel Driver";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow for FaceId inorder to login with face";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to locate you on the map";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to find nearest discounted stations";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1842,7 +1871,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 22;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1851,7 +1880,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = "United Fuel Driver";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow for FaceId inorder to login with face";
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to locate you on the map";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to find nearest discounted stations";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

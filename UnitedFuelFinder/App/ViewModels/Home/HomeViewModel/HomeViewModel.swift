@@ -79,7 +79,7 @@ final class HomeViewModel: ObservableObject {
         }
     }
     var toLocationCandidate: CLLocation?
-    private(set) var timer: Timer?
+
     @Published var stations: [StationItem] = []
     @Published var discountedStations: [StationItem] = []
     @Published var stationsMarkers: [GMSMarker] = []
@@ -147,9 +147,9 @@ final class HomeViewModel: ObservableObject {
     }
     
     private func startRegularFetchingNearStations() {
-        timer?.invalidate()
+        appDelegate?.timer?.invalidate()
         
-        timer = .scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
+        appDelegate?.timer = .scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
             self.startFilterStations()
         })
     }

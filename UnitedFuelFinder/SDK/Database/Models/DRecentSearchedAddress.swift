@@ -20,6 +20,11 @@ public struct SearchedAddress: Objectify {
 public class DRecentSearchedAddress: Object, Identifiable {
     @Persisted(primaryKey: true) var title: String
     @Persisted var date: Date
+    
+    @Persisted var address: String = ""
+    @Persisted private(set) var lat: Double = 0
+    @Persisted private(set) var lng: Double = 0
+    
     public init(title: String, date: Date) {
         self.date = date
         super.init()
@@ -28,6 +33,15 @@ public class DRecentSearchedAddress: Object, Identifiable {
     
     public override init() {
         super.init()
+    }
+    
+    func set(lat: Double, lng: Double) {
+        self.lat = lat
+        self.lng = lng
+    }
+    
+    func set(address: String) {
+        self.address = address
     }
 }
 

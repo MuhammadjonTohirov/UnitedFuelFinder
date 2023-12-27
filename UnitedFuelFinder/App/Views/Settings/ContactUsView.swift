@@ -17,18 +17,43 @@ struct ContactUsView: View {
                 .padding(.bottom, 2)
                 .padding(.leading, 2), title: "UFC Client Service", details: "+1(888) 502 3442"
             )
+            .onTapGesture {
+                // call to +1(888) 502 3442
+                guard let url = URL(string: "tel://+18885023442") else { return }
+                
+                UIApplication.shared.open(url)
+            }
+            
             Divider()
+            
             row(image: Image("icon_contact")
                 .resizable()
                 .frame(width: 24, height: 24),
                 title: "Help Desk", details: "+1(888) 502 3442"
             )
+            .onTapGesture {
+                // call to +1(888) 502 3442
+                guard let url = URL(string: "tel://+18885023442") else { return }
+                
+                UIApplication.shared.open(url)
+            }
+            
             Divider()
+            
             row(image: Image("icon_email")
                 .resizable()
                 .frame(width: 24, height: 24),
                 title: "Email", details: "info@unitedtransportllc.org"
             )
+            .onTapGesture {
+                // send email to info@unitedtransportllc.org
+                guard let url = URL(string: "mailto:info@unitedtransportllc.org") else {
+                    return
+                }
+                
+                UIApplication.shared.open(url)
+            }
+            
             Spacer()
         }
         .navigationTitle("contact_us".localize)
