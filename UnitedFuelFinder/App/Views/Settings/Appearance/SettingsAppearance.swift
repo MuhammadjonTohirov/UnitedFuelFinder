@@ -13,13 +13,22 @@ enum SettingsAppearanceRouter: ScreenRoute {
         switch self {
         case .language:
             return "language"
+        case .theme:
+            return "theme"
         }
     }
     
     case language
+    case theme
     
+    @ViewBuilder
     var screen: some View {
-        ChangeLanguageView()
+        switch self {
+        case .language:
+            ChangeLanguageView()
+        case .theme:
+            ChangeThemeView()
+        }
     }
 }
 
@@ -59,9 +68,9 @@ struct SettingsAppearance: View {
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
                 title: "theme".localize,
-                details: "lite".localize
+                details: UserSettings.shared.theme?.name ?? ""
             ) {
-                
+               onClickChangeTheme()
             }
             
             Spacer()
@@ -76,5 +85,9 @@ struct SettingsAppearance: View {
     
     private func onClickChangLangugage() {
         viewModel.route = .language
+    }
+    
+    private func onClickChangeTheme() {
+        viewModel.route = .theme
     }
 }

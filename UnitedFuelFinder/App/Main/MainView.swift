@@ -15,7 +15,7 @@ struct MainView: View {
             .environmentObject(viewModel)
             .onAppear {
                 let appearance = UINavigationBarAppearance()
-                appearance.configureWithTransparentBackground()
+                appearance.configureWithOpaqueBackground()
                 
                 let back = UIBarButtonItemAppearance(style: .done)
                 back.normal.backgroundImage = UIImage()
@@ -29,6 +29,14 @@ struct MainView: View {
                 
                 UINavigationBar.appearance().standardAppearance = appearance
                 UINavigationBar.appearance().compactAppearance = appearance
+                
+                let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+                
+                if version != UserSettings.shared.currentVersion {
+                    DRecentSearchedAddress.deleteAll()
+                }
+                
+                UserSettings.shared.currentVersion = version
             }
     }
 }

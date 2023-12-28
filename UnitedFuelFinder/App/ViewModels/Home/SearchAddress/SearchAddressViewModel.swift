@@ -23,6 +23,7 @@ struct SearchAddressItem: Identifiable {
     var title: String
     var type: SearchAddressItem.SType
     var coordinate: CLLocation?
+    var address: String?
     
     var icon: Image {
         switch type {
@@ -37,6 +38,7 @@ struct SearchAddressItem: Identifiable {
 extension SearchAddressItem {
     init(res: NetResSearchAddressItem) {
         self.title = res.addressString
+        self.address = res.addressString
         self.type = .address
         self.coordinate = res.coords?.asLocation
     }
@@ -64,6 +66,7 @@ final class SearchAddressViewModel: ObservableObject {
         let lng: Double
     }
     
+    @Published public var addressHistoryList: [SearchAddressItem] = []
     @Published public var addressList: [SearchAddressItem] = []
     @Published public var addressText: String = ""
     @Published public var addressValue: String = ""
@@ -71,7 +74,13 @@ final class SearchAddressViewModel: ObservableObject {
     
     private var searchCancellables = Set<AnyCancellable>()
 
+    private var didAppear: Bool = false
     func onAppear() {
+        if didAppear {
+            return
+        }
+        
+        didAppear = true
         $addressText
             .debounce(for: .seconds(1), scheduler: DispatchQueue.main, options: nil)
             .sink(receiveValue: { [weak self] val in
@@ -86,8 +95,13 @@ final class SearchAddressViewModel: ObservableObject {
         }
     }
     
+    func dispose() {
+        searchCancellables.removeAll()
+    }
+    
     private func searchPlaces(_ text: String) {
         if text.isEmpty {
+            self.addressList = []
             return
         }
         
@@ -107,23 +121,25 @@ final class SearchAddressViewModel: ObservableObject {
     
     private func fetchRecentAddresses() {
         let recentItems = DRecentSearchedAddress.all()
-        addressList = recentItems.map { .init(title: $0.title, type: .history) }
+        addressHistoryList = recentItems.map { .init(title: $0.title, type: .history, coordinate: .init(latitude: $0.lat, longitude: $0.lng), address: $0.address) }
     }
     
     func onClickAddress(_ address: SearchAddressItem, completion: @escaping (SearchAddressResult?) -> Void) {
         if address.type == .history {
-            self.addressText = address.title
+            self.addressText = (address.address ?? "").nilIfEmpty ?? address.title
         }
         
         self.isLoading = true
         
         let _coor = address.coordinate?.coordinate ?? .init(latitude: 0, longitude: 0)
-        let _addr = DRecentSearchedAddress(title: self.addressText, date: Date())
-        _addr.set(lat: _coor.latitude, lng: _coor.longitude)
-        _addr.set(address: address.title)
         
-        DRecentSearchedAddress.add(.init(title: self.addressText, date: Date()))
+        DRecentSearchedAddress.add(.init(
+            title: self.addressText,
+            date: Date(), 
+            lat: _coor.latitude, lng: _coor.longitude,
+            address: address.address ?? address.title)
+        )
         
-        completion(.init(address: address.title, lat: _coor.latitude, lng: _coor.longitude))
+        completion(.init(address: address.address?.nilIfEmpty ?? address.title, lat: _coor.latitude, lng: _coor.longitude))
     }
 }

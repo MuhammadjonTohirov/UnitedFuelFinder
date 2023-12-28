@@ -13,6 +13,9 @@ final public class UserSettings {
     
     public private(set) var userAvatarURL: URL = URL.baseAPI.appendingPath("Client", "ProfileAvatar")
     
+    @codableWrapper(key: "currentAppVersion")
+    public var currentVersion: String?
+    
     @codableWrapper(key: "language", Language.english)
     public var language: Language? {
         didSet {
@@ -64,6 +67,9 @@ final public class UserSettings {
     @codableWrapper(key: "nearestItemsLogic", .currentLocation)
     public var mapCenterType: MapCenterType?
     
+    @codableWrapper(key: "theme", .system)
+    public var theme: Theme?
+    
     func clear() {
         accessToken = nil
         refreshToken = nil
@@ -76,5 +82,22 @@ final public class UserSettings {
         userInfo = nil
         userEmail = nil
         language = nil
+    }
+}
+
+public enum Theme: Codable {
+    case system
+    case light
+    case dark
+    
+    var name: String {
+        switch self {
+        case .system:
+            return "system".localize
+        case .light:
+            return "light".localize
+        case .dark:
+            return "dark".localize
+        }
     }
 }

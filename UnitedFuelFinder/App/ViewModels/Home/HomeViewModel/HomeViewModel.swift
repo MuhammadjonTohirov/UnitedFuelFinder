@@ -37,6 +37,7 @@ final class HomeViewModel: ObservableObject {
     }
     
     private var didAppear: Bool = false
+    private var didDisappear: Bool = false
     
     @Published var push: Bool = false
     
@@ -101,6 +102,7 @@ final class HomeViewModel: ObservableObject {
     private let locationManager: GLocationManager = .shared
     
     func onAppear() {
+        didDisappear = false
         //Always be exectued
         guard !didAppear else {
             return
@@ -132,6 +134,10 @@ final class HomeViewModel: ObservableObject {
         startRegularFetchingNearStations()
         
         restoreSavedRoute()
+    }
+    
+    func onDisappear() {
+        didDisappear = true
     }
     
     private func restoreSavedRoute() {
@@ -213,6 +219,10 @@ final class HomeViewModel: ObservableObject {
     }
     
     func startFilterStations() {
+        if didDisappear {
+            return
+        }
+        
         self.radius = self.radiusValue
         self.filterStationsByDefault()
     }

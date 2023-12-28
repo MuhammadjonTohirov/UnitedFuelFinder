@@ -186,6 +186,7 @@
 		2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */; };
 		2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266E92AFD140A008099D0 /* YTextView.swift */; };
 		2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266EB2AFD193B008099D0 /* RateView.swift */; };
+		2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */; };
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
 		2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */; };
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
@@ -436,6 +437,7 @@
 		2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCoverUI.swift; sourceTree = "<group>"; };
 		2E7266E92AFD140A008099D0 /* YTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextView.swift; sourceTree = "<group>"; };
 		2E7266EB2AFD193B008099D0 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
+		2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeThemeView.swift; sourceTree = "<group>"; };
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
 		2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyItem.swift; sourceTree = "<group>"; };
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
@@ -1119,6 +1121,16 @@
 			path = AppNavigator;
 			sourceTree = "<group>";
 		};
+		2E739C202B3DB1CA000350EA /* Appearance */ = {
+			isa = PBXGroup;
+			children = (
+				2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */,
+				2E502D042B272CA8002CE669 /* SettingsAppearance.swift */,
+				2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */,
+			);
+			path = Appearance;
+			sourceTree = "<group>";
+		};
 		2EB189F92AEFF42600BCFBE3 /* StationDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1382,12 +1394,11 @@
 		2EF3A1FE2ADD91FF00CA8DE2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				2E739C202B3DB1CA000350EA /* Appearance */,
 				2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */,
 				2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */,
 				841D81052AF75DBC00C5932C /* ProfileVIew.swift */,
 				2EDBE03A2B0F364700123CE0 /* SessionsView.swift */,
-				2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */,
-				2E502D042B272CA8002CE669 /* SettingsAppearance.swift */,
 				2E502D062B272CBA002CE669 /* SettingsSecurity.swift */,
 				2E502D082B272D39002CE669 /* SettingsViewUtils.swift */,
 				2E502D0C2B2759DE002CE669 /* SettingsMap.swift */,
@@ -1556,6 +1567,7 @@
 				2E5DF9432AEACD63005BE20D /* YPhoneField.swift in Sources */,
 				2E36A74F2AEF9FDB0033363E /* UserInfo.swift in Sources */,
 				2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */,
+				2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */,
 				2E5DF97B2AEACD64005BE20D /* CodableWrapper.swift in Sources */,
 				2E5DF92D2AEACD63005BE20D /* Extensions.swift in Sources */,
 				2EDF8C632AD44251003D64FC /* PinCodeView.swift in Sources */,
@@ -1831,7 +1843,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1847,12 +1859,11 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1871,7 +1882,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 22;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1887,12 +1898,11 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

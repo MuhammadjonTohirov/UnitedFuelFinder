@@ -16,7 +16,7 @@ struct SelectCityView: View {
     
     @State private var isLoading: Bool = false
     @State var searchText: String = ""
-    
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         ZStack {
             innerBody
@@ -41,6 +41,7 @@ struct SelectCityView: View {
             return item.name.lowercased().contains(key.lowercased())
         } onSelectChange: { items in
             self.city = items.first
+            self.dismiss.callAsFunction()
         }
         .navigationTitle("select_city".localize)
         .onAppear {

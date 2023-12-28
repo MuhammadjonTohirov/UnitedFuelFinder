@@ -18,7 +18,13 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     @Published var screenRect: CGRect = .zero
     @Published var address: String = ""
     
-    @Published var state: DState?
+    @Published var state: DState? {
+        didSet {
+            if oldValue != state {
+                city = nil
+            }
+        }
+    }
     @Published var city: DCity?
     @Published var isLoading = false
     

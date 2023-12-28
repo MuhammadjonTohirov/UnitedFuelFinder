@@ -141,7 +141,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     }
 
     class Coordinator: NSObject, GMSMapViewDelegate {
-        
         var parent: GMapsViewWrapper
         var isRouting: Bool = false
         var hasDrawen: Bool = false

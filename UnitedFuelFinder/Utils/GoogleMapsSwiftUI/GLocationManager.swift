@@ -60,22 +60,6 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
             let fullAddress = lines.joined(separator: ", ")
             completion(fullAddress)
         }
-        
-//        CLGeocoder().reverseGeocodeLocation(location) { placemarks, error in
-//            if let error = error {
-//                print("Error: \(error)")
-//                completion("Could not fetch address")
-//            } else if let placemark = placemarks?.first {
-//                var addressList: [String] = []
-//                addressList.append(placemark.name ?? "")
-//                addressList.append(placemark.locality ?? "")
-//                addressList.append(placemark.administrativeArea ?? "")
-//                addressList.append(placemark.isoCountryCode ?? "")
-//                
-//                let fullAddress = addressList.compactMap({$0.nilIfEmpty}).joined(separator: ", ")
-//                completion(fullAddress)
-//            }
-//        }
     }
     
     func distance(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> Double {

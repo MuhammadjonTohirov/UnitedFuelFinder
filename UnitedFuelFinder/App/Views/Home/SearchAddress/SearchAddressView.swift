@@ -46,18 +46,27 @@ struct SearchAddressView: View {
             viewModel.addressText = text
             viewModel.onAppear()
         }
+        .onDisappear {
+            viewModel.dispose()
+        }
     }
     
     private var innerBody: some View {
         VStack(alignment: .leading) {
-            if viewModel.addressList.isEmpty {
+            if viewModel.addressList.isEmpty && viewModel.addressHistoryList.isEmpty {
                 Text("no_results".localize)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                     .padding(Padding.large)
             } else {
-                ForEach(viewModel.addressList, id: \.title) { address in
-                    addressView(address)
+                if viewModel.addressList.isEmpty {
+                    ForEach(viewModel.addressHistoryList, id: \.id) { address in
+                        addressView(address)
+                    }
+                } else {
+                    ForEach(viewModel.addressList, id: \.id) { address in
+                        addressView(address)
+                    }
                 }
             }
         }
@@ -83,7 +92,7 @@ struct SearchAddressView: View {
                         .renderingMode(.template)
                         .foregroundStyle(Color(address.type == .history ? .secondaryLabel : .accent))
                     
-                    Text(address.title)
+                    Text(address.address?.nilIfEmpty ?? address.title)
                         .font(.system(size: 13, weight: .regular))
                         .padding(.vertical, Padding.small)
                         .foregroundStyle(Color.label)

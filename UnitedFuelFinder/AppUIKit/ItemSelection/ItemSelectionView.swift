@@ -77,6 +77,10 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         }
         
         viewModel.selectedObjectsIds.insert(item.id)
+        
+        if !multiSelect {
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
 

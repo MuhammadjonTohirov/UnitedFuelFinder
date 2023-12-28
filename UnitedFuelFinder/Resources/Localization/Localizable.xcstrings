@@ -210,9 +210,6 @@
         }
       }
     },
-    "Blue" : {
-
-    },
     "change_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -462,6 +459,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Joriy joylashuv"
+          }
+        }
+      }
+    },
+    "dark" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dark"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Темный"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qora"
           }
         }
       }
@@ -811,13 +831,7 @@
         }
       }
     },
-    "Green" : {
-
-    },
     "Home page" : {
-
-    },
-    "Indigo" : {
 
     },
     "insert_creds" : {
@@ -1039,6 +1053,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tizimga kirish."
+          }
+        }
+      }
+    },
+    "light" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Light"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Светлый"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oq"
           }
         }
       }
@@ -1296,12 +1333,6 @@
         }
       }
     },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
-    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1508,15 +1539,6 @@
           }
         }
       }
-    },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
-    "Orange" : {
-
     },
     "Organization requisites" : {
       "localizations" : {
@@ -1747,9 +1769,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1795,9 +1814,6 @@
           }
         }
       }
-    },
-    "Regular" : {
-
     },
     "Retail price %@" : {
       "localizations" : {
@@ -2122,8 +2138,28 @@
         }
       }
     },
-    "SwiftUI" : {
-
+    "system" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Системный"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tizim"
+          }
+        }
+      }
     },
     "theme" : {
       "extractionState" : "manual",
@@ -2217,9 +2253,6 @@
         }
       }
     },
-    "Violet" : {
-
-    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2288,9 +2321,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     }
   },
   "version" : "1.0"

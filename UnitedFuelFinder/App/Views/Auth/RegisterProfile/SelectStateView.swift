@@ -14,7 +14,7 @@ struct SelectStateView: View {
     @ObservedResults(DState.self, configuration: Realm.config) var states
     @State private var date: Date = Date()
     @State var searchText: String = ""
-    
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         ItemSelectionView(data: states) { item in
             Button(action: {
@@ -39,6 +39,7 @@ struct SelectStateView: View {
             return item.name.lowercased().contains(key.lowercased())
         }  onSelectChange: { items in
             self.state = items.first
+            self.dismiss.callAsFunction()
         }
         .navigationTitle("select_state".localize)
         .onAppear {

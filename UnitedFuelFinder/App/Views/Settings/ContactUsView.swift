@@ -13,6 +13,8 @@ struct ContactUsView: View {
         VStack(spacing: 12) {
             row(image: Image("icon_contact")
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24)
                 .padding(.bottom, 2)
                 .padding(.leading, 2), title: "UFC Client Service", details: "+1(888) 502 3442"
@@ -28,6 +30,8 @@ struct ContactUsView: View {
             
             row(image: Image("icon_contact")
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
                 title: "Help Desk", details: "+1(888) 502 3442"
             )
@@ -42,6 +46,8 @@ struct ContactUsView: View {
             
             row(image: Image("icon_email")
                 .resizable()
+                .renderingMode(.template)
+                .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
                 title: "Email", details: "info@unitedtransportllc.org"
             )
