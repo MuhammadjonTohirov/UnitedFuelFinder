@@ -6,7 +6,9 @@
 //
 
 import Foundation
+import UIKit
 import SwiftKeychainWrapper
+import CoreLocation
 
 final public class UserSettings {
     public static let shared = UserSettings()
@@ -41,6 +43,9 @@ final public class UserSettings {
     
     @codableWrapper(key: "lastActiveDate")
     public var lastActiveDate: Date?
+    
+    @codableWrapper(key: "currentAPIVersion")
+    public var currentAPIVersion: ServerVersion?
     
     @codableWrapper(key: "appPin")
     public var appPin: String?
@@ -83,6 +88,10 @@ final public class UserSettings {
         userEmail = nil
         language = nil
     }
+    
+    func setInterfaceStyle(style: UIUserInterfaceStyle) {
+        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = style
+    }
 }
 
 public enum Theme: Codable {
@@ -99,5 +108,22 @@ public enum Theme: Codable {
         case .dark:
             return "dark".localize
         }
+    }
+}
+
+extension CLLocationCoordinate2D: Codable {
+    public init(from decoder: Decoder) throws {
+        self.init()
+        
+        let container = try decoder.singleValueContainer()
+        let values = try container.decode([Double].self)
+        
+        latitude = values[0]
+        longitude = values[1]
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode([latitude, longitude])
     }
 }

@@ -14,6 +14,8 @@ struct MainView: View {
         viewModel.route.screen
             .environmentObject(viewModel)
             .onAppear {
+                UserSettings.shared.setInterfaceStyle(style: .light)
+                
                 let appearance = UINavigationBarAppearance()
                 appearance.configureWithOpaqueBackground()
                 

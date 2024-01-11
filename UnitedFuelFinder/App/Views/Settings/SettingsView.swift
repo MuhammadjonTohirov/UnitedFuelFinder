@@ -76,6 +76,17 @@ struct SettingsView: View {
             }
             
             Spacer()
+            
+            HStack {
+                Spacer()
+                
+                Text("v\(UserSettings.shared.currentAPIVersion ?? "")")
+                    .foregroundStyle(Color.secondary)
+                    .font(.caption)
+                
+                Spacer()
+            }
+            .padding()
         }
         .alert(isPresented: $showLogoutAlert) {
             Alert(

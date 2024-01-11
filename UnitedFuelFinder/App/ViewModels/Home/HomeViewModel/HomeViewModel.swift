@@ -16,6 +16,7 @@ enum HomeViewState {
 
 final class HomeViewModel: ObservableObject {
     @Published var focusableLocation: CLLocation?
+    @Published var hasNewVersion: Bool = false
     
     var fromAddress: String = ""
     var toAddress: String = ""
@@ -134,6 +135,24 @@ final class HomeViewModel: ObservableObject {
         startRegularFetchingNearStations()
         
         restoreSavedRoute()
+        
+        setupSyncVersion()
+    }
+    
+    private func setupSyncVersion() {
+        Task {
+            try await Task.sleep(for: .seconds(1))
+            if let serverVersion = await CommonService.shared.getVersion() {
+                
+                await MainActor.run {
+                    if let version = UserSettings.shared.currentAPIVersion {
+                        self.hasNewVersion = version.isNewVersion(serverVersion)
+                    }
+                }
+                
+                UserSettings.shared.currentAPIVersion = serverVersion
+            }
+        }
     }
     
     func onDisappear() {
@@ -172,12 +191,10 @@ final class HomeViewModel: ObservableObject {
     }
     
     func focusToLocation(_ location: CLLocation) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            self.focusableLocation = location
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.focusableLocation = nil
-            }
+        self.focusableLocation = location
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.focusableLocation = nil
         }
     }
     

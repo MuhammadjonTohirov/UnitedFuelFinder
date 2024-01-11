@@ -23,7 +23,8 @@ struct HomeView: View {
     private let locationManager = CLLocationManager()
     
     private var bottomSheetBottomPadding: CGFloat {
-        viewModel.isDragging ? -bottomSheetFrame.height + 80 : 0
+//        viewModel.isDragging ? -bottomSheetFrame.height + 80 : 0
+        0
     }
     
     var body: some View {
@@ -42,6 +43,16 @@ struct HomeView: View {
                         }
                     }
                 })
+                .alert("new_version".localize, isPresented: $viewModel.hasNewVersion) {
+                    Button(action: {
+                        mainModel.showAppOnAppstore()
+                    }, label: {
+                        Text("download".localize)
+                    })
+                } message: {
+                    Text("new_version_available_download".localize)
+                }
+
         }
     }
     
@@ -118,9 +129,7 @@ struct HomeView: View {
             })
         }
         .onAppear {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                viewModel.onAppear()
-            }
+            viewModel.onAppear()
         }
     }
     

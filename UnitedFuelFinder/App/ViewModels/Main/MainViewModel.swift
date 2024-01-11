@@ -15,6 +15,7 @@ class MainViewRouter {
 protocol AppDelegate {
     var timer: Timer? {get set}
     func navigate(to destination: AppDestination)
+    func showAppOnAppstore()
 }
 
 var routerObject = MainViewRouter()
@@ -57,5 +58,20 @@ extension MainViewModel: AppDelegate {
         DispatchQueue.main.async {
             self.route = destination
         }
+    }
+    
+    func showAppOnAppstore() {
+        guard let url = URL(string: URL.appstore) else { return }
+        UIApplication.shared.open(url)
+    }
+}
+
+extension URL {
+    static var appstore: String {
+        return "itms-apps://itunes.apple.com/app/id\(URL.appstoreID)"
+    }
+    
+    static var appstoreID: String {
+        return "6470516568"
     }
 }

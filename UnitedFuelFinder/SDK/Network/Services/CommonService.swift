@@ -34,4 +34,9 @@ public struct CommonService {
         
         MainDService.shared.addCompanies(items)
     }
+    
+    public func getVersion() async -> ServerVersion? {
+        let result: NetRes<ServerVersion>? = await Network.send(request: CommonNetworkRouter.version)
+        return result?.data
+    }
 }

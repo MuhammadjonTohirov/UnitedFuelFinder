@@ -32,7 +32,9 @@ enum SettingsAppearanceRouter: ScreenRoute {
     }
 }
 
-class SettingsAppearViewModel: ObservableObject {
+class SettingsAppearViewModel: NSObject, ObservableObject, Alertable {
+    var alert: AlertToast = .init(displayMode: .alert, type: .regular)
+    @Published var shouldShowAlert: Bool = false
     var route: SettingsAppearanceRouter? {
         didSet {
             pushRoute = route != nil
@@ -75,6 +77,7 @@ struct SettingsAppearance: View {
             
             Spacer()
         }
+        .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 2)
         .navigationTitle("appearance".localize)
         .padding(.horizontal, 20)
         .padding(.top, Padding.medium)
@@ -88,6 +91,6 @@ struct SettingsAppearance: View {
     }
     
     private func onClickChangeTheme() {
-        viewModel.route = .theme
+        viewModel.showAlert(message: "coming_soon".localize)
     }
 }

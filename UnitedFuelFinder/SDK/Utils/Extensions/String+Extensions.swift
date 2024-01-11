@@ -170,3 +170,36 @@ public extension NSAttributedString {
         AttributedString(self)
     }
 }
+
+// format: 1992.12.20
+public typealias ServerVersion = String
+
+extension ServerVersion {
+    
+    func isNewVersion(_ version: ServerVersion) -> Bool {
+        let current = self
+        let new = version
+        
+        let currentComponents = current.components(separatedBy: ".")
+        let newComponents = new.components(separatedBy: ".")
+        
+        guard currentComponents.count == newComponents.count else {
+            return false
+        }
+        
+        for i in 0..<currentComponents.count {
+            let currentComponent = currentComponents[i]
+            let newComponent = newComponents[i]
+            
+            guard let current = Int(currentComponent), let new = Int(newComponent) else {
+                return false
+            }
+            
+            if current < new {
+                return true
+            }
+        }
+        
+        return false
+    }
+}

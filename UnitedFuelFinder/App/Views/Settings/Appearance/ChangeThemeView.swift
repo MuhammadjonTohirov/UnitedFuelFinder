@@ -79,6 +79,6 @@ struct ChangeThemeView: View {
             style = .dark
         }
         
-        (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = style
+        UserSettings.shared.setInterfaceStyle(style: style)
     }
 }

@@ -210,6 +210,9 @@
         }
       }
     },
+    "Blue" : {
+
+    },
     "change_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -298,6 +301,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Yopish"
+          }
+        }
+      }
+    },
+    "coming_soon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Coming soon..."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Скоро будет..."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ishlab chiqilmoqda"
           }
         }
       }
@@ -670,6 +696,23 @@
         }
       }
     },
+    "download" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Download"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузите"
+          }
+        }
+      }
+    },
     "edit_profile" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -831,7 +874,13 @@
         }
       }
     },
+    "Green" : {
+
+    },
     "Home page" : {
+
+    },
+    "Indigo" : {
 
     },
     "insert_creds" : {
@@ -1333,6 +1382,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1352,6 +1407,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Navigatsya"
+          }
+        }
+      }
+    },
+    "new_version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New version"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новая версия"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangi versya"
+          }
+        }
+      }
+    },
+    "new_version_available_download" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update application to new version"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить приложение до новой версии"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Iltimos, ilovani yangilang."
           }
         }
       }
@@ -1539,6 +1640,15 @@
           }
         }
       }
+    },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
     },
     "Organization requisites" : {
       "localizations" : {
@@ -1769,6 +1879,9 @@
         }
       }
     },
+    "Red" : {
+
+    },
     "registration_failure" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1814,6 +1927,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "Retail price %@" : {
       "localizations" : {
@@ -2138,6 +2254,9 @@
         }
       }
     },
+    "SwiftUI" : {
+
+    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2207,6 +2326,9 @@
         }
       }
     },
+    "v%@" : {
+
+    },
     "view_all" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2252,6 +2374,9 @@
           }
         }
       }
+    },
+    "Violet" : {
+
     },
     "warning" : {
       "extractionState" : "manual",
@@ -2321,6 +2446,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     }
   },
   "version" : "1.0"
