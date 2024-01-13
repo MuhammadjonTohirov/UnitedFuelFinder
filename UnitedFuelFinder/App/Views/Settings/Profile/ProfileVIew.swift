@@ -11,7 +11,7 @@ import SwiftUI
 
 struct ProfileVIew: View {
     @StateObject var viewModel = ProfileViewModel()
-
+    
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {

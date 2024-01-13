@@ -12,6 +12,8 @@ import SwiftUI
 enum SettingsRoute: ScreenRoute {
     var id: String {
         switch self {
+        case .profile:
+            return "profile"
         case .editProfile:
             return "editProfile"
         case .contactUs:
@@ -47,6 +49,7 @@ enum SettingsRoute: ScreenRoute {
     case appearance
     case security
     case mapSettings
+    case profile
     
     @ViewBuilder
     var screen: some View {
@@ -61,6 +64,9 @@ enum SettingsRoute: ScreenRoute {
             SessionsView()
         case .language:
             ChangeLanguageView()
+        case .profile:
+            SettingsProfile()
+                .navigationTitle("profile".localize)
         case .appearance:
             SettingsAppearance()
                 .navigationTitle("appearance".localize)

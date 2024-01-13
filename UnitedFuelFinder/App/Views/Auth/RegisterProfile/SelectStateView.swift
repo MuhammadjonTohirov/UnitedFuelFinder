@@ -11,12 +11,41 @@ import RealmSwift
 
 struct SelectStateView: View {
     @Binding var state: DState?
-    @ObservedResults(DState.self, configuration: Realm.config) var states
+    @State private var states: [DState] = []
     @State private var date: Date = Date()
     @State var searchText: String = ""
+    @State private var isLoading: Bool = false
     @Environment(\.dismiss) var dismiss
+    
     var body: some View {
-        ItemSelectionView(data: states) { item in
+        ZStack {
+            if !isLoading {
+                innerBody
+                    .opacity(isLoading ? 0.5 : 1)
+            } else {
+                ProgressView()
+                    .opacity(isLoading ? 1 : 0)
+            }
+        }
+        .navigationTitle("select_state".localize)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            isLoading = true
+            Task {
+                await CommonService.shared.syncStates()
+                
+                try await Task.sleep(for: .milliseconds(300))
+                
+                await MainActor.run {
+                    self.states = DState.allStates().map({$0})
+                    self.isLoading = false
+                }
+            }
+        }
+    }
+    
+    var innerBody: some View {
+        ItemSelectionView(data: states, selectedItem: $state) { item in
             Button(action: {
                 if state == item {
                     state = nil
@@ -40,12 +69,6 @@ struct SelectStateView: View {
         }  onSelectChange: { items in
             self.state = items.first
             self.dismiss.callAsFunction()
-        }
-        .navigationTitle("select_state".localize)
-        .onAppear {
-            Task {
-                await CommonService.shared.syncStates()
-            }
         }
     }
 }

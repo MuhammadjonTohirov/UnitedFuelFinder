@@ -12,17 +12,12 @@ struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel = SettingsViewModel()
     @State private var showLogoutAlert: Bool = false
     @EnvironmentObject var mainModel: MainViewModel
+    
     var body: some View {
         VStack(spacing: 12) {
-            SettingsViewUtils.row(image: Image("icon_edit")
-                .resizable()
-                .renderingMode(.template)
-                .foregroundStyle(Color.label)
-                .frame(width: 24, height: 24)
-                .padding(.bottom, 2)
-                .padding(.leading, 2), title: "edit_profile".localize
+            SettingsViewUtils.row(image: userAvatar, title: UserSettings.shared.userInfo?.fullName ?? "profile".localize.capitalized
             ) {
-                viewModel.navigate(to: .editProfile)
+                viewModel.navigate(to: .profile)
             }
             
             Divider()
@@ -76,16 +71,20 @@ struct SettingsView: View {
             }
             
             Spacer()
-            
-            HStack {
+//            1.0.3
+//            2024.01.12
+            HStack(spacing: 2) {
                 Spacer()
+//                App version: 2024.02.14
                 
-                Text("v\(UserSettings.shared.currentAPIVersion ?? "")")
-                    .foregroundStyle(Color.secondary)
-                    .font(.caption)
+                Text("app_version".localize + ":")
+                    .foregroundStyle(Color.init(uiColor: .systemRed))
+                Text(UserSettings.shared.currentAPIVersion ?? "")
+                    .foregroundStyle(Color.label)
                 
                 Spacer()
             }
+            .font(.caption)
             .padding()
         }
         .alert(isPresented: $showLogoutAlert) {
@@ -112,6 +111,15 @@ struct SettingsView: View {
                 .environmentObject(self.mainModel)
                 .environmentObject(self.viewModel)
         }
+    }
+    
+    private var userAvatar: some View {
+        Image("icon_man_placeholder")
+            .resizable()
+            .renderingMode(.template)
+            .foregroundStyle(Color.label)
+            .frame(width: 24, height: 24)
+            .clipShape(Circle())
     }
     
     private func onClickLogout() {

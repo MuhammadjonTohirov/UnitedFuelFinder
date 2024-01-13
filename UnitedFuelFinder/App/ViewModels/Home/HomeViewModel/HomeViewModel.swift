@@ -16,7 +16,6 @@ enum HomeViewState {
 
 final class HomeViewModel: ObservableObject {
     @Published var focusableLocation: CLLocation?
-    @Published var hasNewVersion: Bool = false
     
     var fromAddress: String = ""
     var toAddress: String = ""
@@ -141,14 +140,16 @@ final class HomeViewModel: ObservableObject {
     
     private func setupSyncVersion() {
         Task {
+            await AuthService.shared.syncUserInfo()
+            
             try await Task.sleep(for: .seconds(1))
             if let serverVersion = await CommonService.shared.getVersion() {
-                
-                await MainActor.run {
-                    if let version = UserSettings.shared.currentAPIVersion {
-                        self.hasNewVersion = version.isNewVersion(serverVersion)
-                    }
-                }
+//                
+//                await MainActor.run {
+//                    if let version = UserSettings.shared.currentAPIVersion {
+//                        self.hasNewVersion = version.isNewVersion(serverVersion)
+//                    }
+//                }
                 
                 UserSettings.shared.currentAPIVersion = serverVersion
             }

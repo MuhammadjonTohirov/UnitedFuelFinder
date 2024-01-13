@@ -43,16 +43,6 @@ struct HomeView: View {
                         }
                     }
                 })
-                .alert("new_version".localize, isPresented: $viewModel.hasNewVersion) {
-                    Button(action: {
-                        mainModel.showAppOnAppstore()
-                    }, label: {
-                        Text("download".localize)
-                    })
-                } message: {
-                    Text("new_version_available_download".localize)
-                }
-
         }
     }
     

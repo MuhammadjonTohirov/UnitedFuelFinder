@@ -41,4 +41,8 @@ public class DState: Object, StateObjectProtocol, Identifiable {
         
         return realm.object(ofType: DState.self, forPrimaryKey: id)
     }
+    
+    var asModel: StateItem {
+        StateItem(id: id, name: name)
+    }
 }

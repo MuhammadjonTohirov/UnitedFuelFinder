@@ -95,6 +95,29 @@
         }
       }
     },
+    "app_version" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App version"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Версия приложения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ilova versyasi"
+          }
+        }
+      }
+    },
     "appearance" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -182,7 +205,7 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Ro'yxatdan o'tishni davom ettirish uchun siz offertani qabul qilishingiz kerak, iltimos, uni to'liq o'qib chiqing "
+            "value" : "Ro'yxatdan o'tishni davom ettirish uchun siz offertani qabul qilishingiz kerak, iltimos, uni to'liq o'qib chiqing."
           }
         }
       }
@@ -322,7 +345,7 @@
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "needs_review",
+            "state" : "translated",
             "value" : "Ishlab chiqilmoqda"
           }
         }
@@ -512,6 +535,29 @@
         }
       }
     },
+    "delete_profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить профиль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilni o'chirish"
+          }
+        }
+      }
+    },
     "destination_address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -564,7 +610,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Device sessions"
+            "value" : "Device session"
           }
         },
         "ru" : {
@@ -1601,19 +1647,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "This user has not been confirmed yet. An email will be sent once the account is confirmed"
+            "value" : "Your account should be verified by our customer support team. Without verification your are not able to login."
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Этот пользователь еще не подтвержден. Электронная почта будет отправлена после подтверждения учетной записи."
+            "value" : "Ваша учетная запись должна быть подтверждена нашей службой поддержки клиентов. Без проверки вы не сможете войти в систему."
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Bu foydalanuvchi tasdiqlanmagan. Tasdiqlangach, elektron pochtaga xabari yuboriladi"
+            "value" : "Hisobingiz mijozlarni qo‘llab-quvvatlash jamoasi tomonidan tekshirilishi kerak. Tasdiqlashsiz siz tizimga kira olmaysiz."
           }
         }
       }
@@ -1881,6 +1927,29 @@
     },
     "Red" : {
 
+    },
+    "register_warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your account should be verified by our customer support team. Without verification your are not able to login."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваша учетная запись должна быть подтверждена нашей службой поддержки клиентов. Без проверки вы не сможете войти в систему."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hisobingiz mijozlarni qo‘llab-quvvatlash jamoasi tomonidan tekshirilishi kerak. Tasdiqlashsiz siz tizimga kira olmaysiz."
+          }
+        }
+      }
     },
     "registration_failure" : {
       "extractionState" : "manual",
@@ -2325,9 +2394,6 @@
           }
         }
       }
-    },
-    "v%@" : {
-
     },
     "view_all" : {
       "extractionState" : "manual",

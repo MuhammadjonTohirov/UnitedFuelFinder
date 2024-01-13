@@ -74,4 +74,5 @@ enum UserNetworkRouter: URLRequestProtocol {
     case refresh(refreshToken: String)
     case userInfo
     case editUserInfo(request: NetReqEditProfile)
+    case deleteProfile
 }

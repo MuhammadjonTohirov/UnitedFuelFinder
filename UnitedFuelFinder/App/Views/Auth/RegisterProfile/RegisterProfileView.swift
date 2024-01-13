@@ -39,10 +39,7 @@ struct RegisterProfileView: View {
                 Spacer()
                 
                 SubmitButton {
-                    viewModel.doRegister { success in
-                        success ? presentationMode.wrappedValue.dismiss() : ()
-                    }
-                    
+                    onClickRegister()
                 } label: {
                     Text("continue".localize)
                 }
@@ -57,7 +54,24 @@ struct RegisterProfileView: View {
         .sheet(isPresented: $viewModel.showScreen, content: {
             viewModel.route?.screen
         })
-        
+        .alert(isPresented: $viewModel.showRegisterWarning) {
+            Alert(
+                title: Text("warning".localize),
+                message: Text("register_warning".localize),
+                dismissButton: .default(
+                    Text("ok".localize),
+                    action: {
+                        onClickRegister()
+                    }
+                )
+            )
+        }
+    }
+    
+    private func onClickRegister() {
+        viewModel.doRegister { success in
+            success ? presentationMode.wrappedValue.dismiss() : ()
+        }
     }
     
     private var topHeading: some View {

@@ -40,7 +40,7 @@ enum RegisterRoute: ScreenRoute {
                 SelectCityView(city: city, stateId: stateId)
             }
         case .selectCompany(let company):
-            NavigationView{
+            NavigationView {
                 SelectCompanyView(company: company)
             }
         }
@@ -73,6 +73,9 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
 
     @Published var isLoading = false
     
+    @Published var showRegisterWarning = false
+    private var didShowWarning: Bool = false
+    
     var isValidForm: Bool {
         !firstName.isEmpty &&
         !lastName.isEmpty &&
@@ -84,6 +87,16 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     }
  
     func doRegister(completion: @escaping (Bool) -> Void) {
+        guard didShowWarning else {
+            showRegisterWarning = true
+            didShowWarning = true
+            return
+        }
+        guard let stateModel = self.state?.asModel,
+              let cityModel = self.city?.asModel else {
+            return
+        }
+        
         Task {
             guard let email = UserSettings.shared.userEmail,
                   let code = UserSettings.shared.lastOTP,
@@ -95,10 +108,10 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
             DispatchQueue.main.async {
                 self.isLoading = true
             }
-
+            
             let req: NetReqRegister = .init(firstName: firstName, lastName: lastName,
                                             phone: phoneNumber, email: email, cardNumber: fuelCardNumber,
-                                            state: state!.id, city: city!.id, address: address, companyName: companyName,
+                                            state: stateModel.id, city: cityModel.id, address: address, companyName: companyName,
                                             confirm: .init(code: code, session: session))
             
             let result = await AuthService.shared.register(with: req)

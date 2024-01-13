@@ -17,16 +17,17 @@ internal class ItemSelectionViewModel<C: Object & Identifiable>: ObservableObjec
 }
 
 public struct ItemSelectionView<C: Object & Identifiable>: View {
-    var data: Results<C>
+    var data: [C]
     var multiSelect: Bool = false
     
     @StateObject private var viewModel = ItemSelectionViewModel<C>()
+    @Binding var selectedItem: C?
     
     var listItem: (C) -> any View
     var onSearching: (C, String) -> Bool
     var onSelectChange: (Set<C>) -> Void
     
-    @Environment (\.presentationMode) var presentationMode
+    @Environment (\.dismiss) var dismiss
     
     public var body: some View {
         LazyVStack(content: {
@@ -46,6 +47,10 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
                             Image(systemName: "checkmark")
                                 .opacity(viewModel.selectedObjectsIds.contains(item.id) ? 1 : 0)
                         }
+                        .overlay {
+                            Rectangle()
+                                .foregroundStyle(Color.background.opacity(0.05))
+                        }
                     })
                     
                     Divider()
@@ -58,7 +63,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss.callAsFunction()
                 }, label: {
                     Text("done".localize)
                 })
@@ -68,6 +73,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
     }
     
     private func onSelect(_ item: C) {
+        self.selectedItem = item
         if viewModel.selectedObjectsIds.contains(item.id) {
             viewModel.selectedObjectsIds.remove(item.id)
         }
@@ -79,7 +85,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         viewModel.selectedObjectsIds.insert(item.id)
         
         if !multiSelect {
-            presentationMode.wrappedValue.dismiss()
+            dismiss.callAsFunction()
         }
     }
 }

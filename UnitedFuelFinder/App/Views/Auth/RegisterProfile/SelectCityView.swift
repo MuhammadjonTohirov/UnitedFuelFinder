@@ -10,7 +10,7 @@ import SwiftUI
 import RealmSwift
 
 struct SelectCityView: View {
-    @ObservedResults(DCity.self, configuration: Realm.config) var cities
+    @State private var cities: [DCity] = []
     @Binding var city: DCity?
     var stateId: String
     
@@ -19,16 +19,23 @@ struct SelectCityView: View {
     @Environment(\.dismiss) var dismiss
     var body: some View {
         ZStack {
-            innerBody
-                .opacity(isLoading ? 0.5 : 1)
-            
-            ProgressView()
-                .opacity(isLoading ? 1 : 0)
+            if !isLoading {
+                innerBody
+                    .opacity(isLoading ? 0.5 : 1)
+            } else {
+                ProgressView()
+                    .opacity(isLoading ? 1 : 0)
+            }
+        }
+        .navigationTitle("select_city".localize)
+        .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            syncCities()
         }
     }
     
     var innerBody: some View {
-        ItemSelectionView(data: cities) { item in
+        ItemSelectionView(data: cities, selectedItem: $city) { item in
             Text(item.name)
                 .foregroundStyle(Color.label)
                 .font(.system(size: 14))
@@ -43,10 +50,6 @@ struct SelectCityView: View {
             self.city = items.first
             self.dismiss.callAsFunction()
         }
-        .navigationTitle("select_city".localize)
-        .onAppear {
-            syncCities()
-        }
     }
     
     
@@ -56,6 +59,17 @@ struct SelectCityView: View {
             await CommonService.shared.syncCities(forState: stateId)
             
             DispatchQueue.main.async {
+                
+            }
+        }
+        
+        Task {
+            await CommonService.shared.syncCities(forState: stateId)
+
+            try await Task.sleep(for: .milliseconds(300))
+            
+            await MainActor.run {
+                self.cities = DCity.allCities(byStateId: self.stateId).map({$0})
                 self.isLoading = false
             }
         }

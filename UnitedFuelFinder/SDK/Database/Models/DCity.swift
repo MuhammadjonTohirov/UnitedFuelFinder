@@ -47,4 +47,8 @@ public class DCity: Object, Identifiable {
         let realm = Realm.new!
         return realm.object(ofType: DCity.self, forPrimaryKey: id)
     }
+    
+    var asModel: CityItem {
+        CityItem(id: self.id, stateId: self.stateId, name: self.name, lat: self.lat, lng: self.lng, timezone: self.timezone)
+    }
 }

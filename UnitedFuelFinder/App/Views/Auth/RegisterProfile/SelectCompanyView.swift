@@ -10,12 +10,12 @@ import RealmSwift
 
 struct SelectCompanyView: View {
     @Binding var company: DCompany?
-    @ObservedResults(DCompany.self, configuration: Realm.config) var companies
+    @State private var companies: [DCompany] = []
     
     @State var searchText: String = ""
     
     var body: some View {
-        ItemSelectionView(data: companies) { item in
+        ItemSelectionView(data: companies, selectedItem: $company) { item in
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.name)
                     .foregroundStyle(Color.label)
@@ -39,6 +39,12 @@ struct SelectCompanyView: View {
         .onAppear {
             Task {
                 await CommonService.shared.syncCompanies()
+                
+                try await Task.sleep(for: .milliseconds(300))
+                
+                await MainActor.run {
+                    self.companies = DCompany.allCompanies().map({$0})
+                }
             }
         }
     }
