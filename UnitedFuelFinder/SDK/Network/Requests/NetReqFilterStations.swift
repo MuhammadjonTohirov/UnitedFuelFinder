@@ -34,5 +34,3 @@ public struct NetReqLocation: Codable {
         self.lng = lng
     }
 }
-
-

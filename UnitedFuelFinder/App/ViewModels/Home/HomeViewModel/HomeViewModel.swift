@@ -131,8 +131,6 @@ final class HomeViewModel: ObservableObject {
         
         loadCustomers()
         
-        startRegularFetchingNearStations()
-        
         restoreSavedRoute()
         
         setupSyncVersion()
@@ -172,12 +170,17 @@ final class HomeViewModel: ObservableObject {
         }
     }
     
-    private func startRegularFetchingNearStations() {
+    func startRegularFetchingNearStations() {
         appDelegate?.timer?.invalidate()
         
         appDelegate?.timer = .scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
             self.startFilterStations()
         })
+    }
+    
+    func stopRegularFetchingNearStations() {
+        appDelegate?.timer?.invalidate()
+        appDelegate?.timer = nil
     }
     
     func focusToCurrentLocation() {

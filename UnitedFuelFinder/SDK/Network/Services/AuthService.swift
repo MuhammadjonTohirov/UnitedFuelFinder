@@ -115,6 +115,22 @@ public struct AuthService {
         
         return isOK
     }
+    
+    func deleteProfileRequest() async -> Bool {
+        let response: NetRes<NetResDelete>? = await Network.send(request: UserNetworkRouter.deleteProfile)
+        
+        if let data = response?.data {
+            UserSettings.shared.session = data.session
+            return true
+        }
+        
+        return false
+    }
+    
+    func confirmDeleteProfile(session: String, code: String) async -> Bool {
+        let response: NetRes<String>? = await Network.send(request: UserNetworkRouter.confirmDeleteProfile(request: .init(code: code, session: session)))
+        return response?.success ?? false
+    }
 }
 
 extension NetResUserInfo {

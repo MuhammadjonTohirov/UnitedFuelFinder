@@ -78,16 +78,72 @@ enum SettingsRoute: ScreenRoute {
     }
 }
 
-class SettingsViewModel: ObservableObject {
+protocol SettingsProfileModelProtocol: ObservableObject {
+    var otpModel: OtpViewModel? {get set}
+    var alertShow: Bool {get set}
+    var otpShow: Bool {get set}
+
+    func showOTPForDeleteConfirm()
+    func confirmDeleteProfile(_ otp: String) async -> (Bool, String?)
+}
+
+class SettingsViewModel: NSObject, ObservableObject, SettingsProfileModelProtocol {
     var route: SettingsRoute? {
         didSet {
             self.present = route != nil
         }
     }
     
+    var otpModel: OtpViewModel?
+    @Published var alertShow: Bool = false
+    @Published var otpShow: Bool = false
+    
     @Published var present: Bool = false
     
     func navigate(to route: SettingsRoute) {
         self.route = route
+    }
+    
+    func showOTPForDeleteConfirm() {
+        otpModel = .init(username: UserSettings.shared.userEmail ?? "")
+        otpModel?.delegate = self
+        otpModel?.confirmOTP = { [weak self] (otp) async -> (Bool, String?) in
+            let res = await self?.confirmDeleteProfile(otp) ?? (false, nil)
+            
+            if res.0 {
+                self?.showLoadingScreen()
+            }
+            
+            return res
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            self.otpShow = true
+        }
+    }
+    
+    func confirmDeleteProfile(_ otp: String) async -> (Bool, String?) {
+        if let session = UserSettings.shared.session {
+            return (await AuthService.shared.confirmDeleteProfile(session: session, code: otp), nil)
+        }
+        
+        return (false, "invalid_otp".localize)
+    }
+    
+    private func showLoadingScreen() {
+        DispatchQueue.main.async {
+            self.otpShow = false
+            self.otpModel = nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                UserSettings.shared.clear()
+                appDelegate?.navigate(to: .loading)
+            }
+        }
+    }
+}
+
+extension SettingsViewModel: OtpModelDelegate {
+    func otp(model: OtpViewModel, isSuccess: Bool) {
+        
     }
 }

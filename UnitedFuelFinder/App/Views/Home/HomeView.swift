@@ -43,6 +43,14 @@ struct HomeView: View {
                         }
                     }
                 })
+            
+            .onAppear {
+                viewModel.onAppear()
+                viewModel.startRegularFetchingNearStations()
+            }
+            .onDisappear {
+                viewModel.stopRegularFetchingNearStations()
+            }
         }
     }
     
@@ -117,9 +125,6 @@ struct HomeView: View {
                     screenFrame = geometry.frame(in: .global)
                 }
             })
-        }
-        .onAppear {
-            viewModel.onAppear()
         }
     }
     

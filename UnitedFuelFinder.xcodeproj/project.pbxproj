@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E01E5DD2B52FAB000F6231D /* SettingsProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DC2B52FAB000F6231D /* SettingsProfile.swift */; };
+		2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DE2B53908100F6231D /* NetResDelete.swift */; };
+		2E01E5E12B53918C00F6231D /* NetReqDeleteConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */; };
 		2E0E4DCB2AD9157400E846B6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0E4DCA2AD9157400E846B6 /* Accelerate.framework */; };
 		2E0E4DCD2AD9157F00E846B6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0E4DCC2AD9157F00E846B6 /* CoreData.framework */; };
 		2E0E4DCF2AD9158600E846B6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0E4DCE2AD9158600E846B6 /* CoreGraphics.framework */; };
@@ -260,6 +262,8 @@
 
 /* Begin PBXFileReference section */
 		2E01E5DC2B52FAB000F6231D /* SettingsProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfile.swift; sourceTree = "<group>"; };
+		2E01E5DE2B53908100F6231D /* NetResDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResDelete.swift; sourceTree = "<group>"; };
+		2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqDeleteConfirm.swift; sourceTree = "<group>"; };
 		2E0E4DCA2AD9157400E846B6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2E0E4DCC2AD9157F00E846B6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2E0E4DCE2AD9158600E846B6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -989,6 +993,7 @@
 				2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */,
 				2EB76B192B13B1870055610A /* NetResCustomer.swift */,
 				2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */,
+				2E01E5DE2B53908100F6231D /* NetResDelete.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1002,6 +1007,7 @@
 				2E36A7442AEECDD00033363E /* NetReqFilterStations.swift */,
 				2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */,
 				2E0F93D32B01361400660DEB /* NetReqStationFeedback.swift */,
+				2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1586,6 +1592,7 @@
 				2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */,
 				2EDF8C722AD44407003D64FC /* KeyboardViewModel.swift in Sources */,
 				2E5DF9702AEACD64005BE20D /* NetResLogin.swift in Sources */,
+				2E01E5E12B53918C00F6231D /* NetReqDeleteConfirm.swift in Sources */,
 				2E5DF9232AEACD63005BE20D /* RectModifer.swift in Sources */,
 				2E5DF9632AEACD63005BE20D /* Map+AppKit.swift in Sources */,
 				2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */,
@@ -1714,6 +1721,7 @@
 				2E5DF9302AEACD63005BE20D /* Backport.swift in Sources */,
 				2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */,
 				2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */,
+				2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */,
 				2E5DF9662AEACD63005BE20D /* MapPitchControl.swift in Sources */,
 				2E5DF9332AEACD63005BE20D /* Padding.swift in Sources */,
 				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
@@ -1855,7 +1863,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1894,7 +1902,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

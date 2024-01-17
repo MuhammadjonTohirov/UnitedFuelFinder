@@ -233,9 +233,6 @@
         }
       }
     },
-    "Blue" : {
-
-    },
     "change_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -535,6 +532,29 @@
         }
       }
     },
+    "delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O'chirish"
+          }
+        }
+      }
+    },
     "delete_profile" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -554,6 +574,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Profilni o'chirish"
+          }
+        }
+      }
+    },
+    "delete_profile_message" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do you want to delete your profile?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Вы хотите удалить свой профиль?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilingizni oʻchirishni istaysizmi?"
           }
         }
       }
@@ -920,13 +963,7 @@
         }
       }
     },
-    "Green" : {
-
-    },
     "Home page" : {
-
-    },
-    "Indigo" : {
 
     },
     "insert_creds" : {
@@ -1428,12 +1465,6 @@
         }
       }
     },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
-    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1687,14 +1718,28 @@
         }
       }
     },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
-    "Orange" : {
-
+    "ok" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        }
+      }
     },
     "Organization requisites" : {
       "localizations" : {
@@ -1925,9 +1970,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "register_warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1996,9 +2038,6 @@
           }
         }
       }
-    },
-    "Regular" : {
-
     },
     "Retail price %@" : {
       "localizations" : {
@@ -2323,9 +2362,6 @@
         }
       }
     },
-    "SwiftUI" : {
-
-    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2441,9 +2477,6 @@
         }
       }
     },
-    "Violet" : {
-
-    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2512,9 +2545,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     }
   },
   "version" : "1.0"

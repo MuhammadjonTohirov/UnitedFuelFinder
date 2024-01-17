@@ -22,6 +22,10 @@ enum UserNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "UserInfo")
         case .editUserInfo:
             return URL.baseAPI.appendingPath("Driver", "UpdateProfile")
+        case .deleteProfile:
+            return URL.baseAPI.appendingPath("Driver", "DeleteAccount")
+        case .confirmDeleteProfile:
+            return URL.baseAPI.appendingPath("Driver", "ConfirmDelete")
         }
     }
     
@@ -35,6 +39,8 @@ enum UserNetworkRouter: URLRequestProtocol {
             return request.asData
         case .editUserInfo(let request):
             return request.asData
+        case .confirmDeleteProfile(let request):
+            return request.asData
         default:
             return nil
         }
@@ -46,6 +52,8 @@ enum UserNetworkRouter: URLRequestProtocol {
             return .get
         case .editUserInfo:
             return .put
+        case .deleteProfile:
+            return .delete
         default:
             return .post
         }
@@ -58,7 +66,7 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .verifyAccount, .login, .register, .refresh:
             request = URLRequest.new(url: url, withAuth: false)
             request?.httpBody = self.body
-        case .userInfo, .editUserInfo:
+        default:
             request = URLRequest.new(url: url, withAuth: true)
             request?.httpBody = self.body
         }
@@ -75,4 +83,5 @@ enum UserNetworkRouter: URLRequestProtocol {
     case userInfo
     case editUserInfo(request: NetReqEditProfile)
     case deleteProfile
+    case confirmDeleteProfile(request: NetReqDeleteConfirm)
 }

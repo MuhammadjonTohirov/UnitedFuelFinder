@@ -7,8 +7,6 @@
 
 import SwiftUI
 
-
-
 protocol OtpModelDelegate: NSObject {
     func otp(model: OtpViewModel, isSuccess: Bool)
 }
