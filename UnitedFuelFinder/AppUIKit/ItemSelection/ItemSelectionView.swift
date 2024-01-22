@@ -190,13 +190,17 @@ class TestViewController: UIViewController {
     
 }
 
-struct TestWrapper: UIViewControllerRepresentable {
-    func makeUIViewController(context: Context) -> some UIViewController {
-        TestViewController()
-    }
-    
-    func updateUIViewController(_ uiViewController: UIViewControllerType, context: Context) {
-        
+struct TestWrapper: View {
+    @State var alert = true
+    var body: some View {
+        Button {
+            alert = true
+        } label: {
+            Text("Alert")
+        }
+        .richAlert(type: .custom(image: Image("icon_success_check").resizable().frame(width: 56, height: 56, alignment: .center).anyView), title: "Successfully Registered", message: "This user should be confirmed by company administrator after registration process.", isPresented: $alert) {
+            Logging.l("On finish alert")
+        }
     }
 }
 

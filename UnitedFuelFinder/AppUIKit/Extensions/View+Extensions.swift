@@ -58,6 +58,10 @@ extension View {
         self.frame(width: width, height: height + (useStandard ? 0 : minY))
             .offset(y: useStandard ? 0 : -minY)
     }
+    
+    var anyView: AnyView {
+        AnyView(self)
+    }
 }
 
 extension View {

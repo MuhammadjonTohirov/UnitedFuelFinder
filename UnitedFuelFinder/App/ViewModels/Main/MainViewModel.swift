@@ -16,6 +16,47 @@ protocol AppDelegate {
     var timer: Timer? {get set}
     func navigate(to destination: AppDestination)
     func showAppOnAppstore()
+    
+    func defaultNavigationSetup()
+    func transparentNavigationSetup()
+}
+
+extension AppDelegate {
+    func defaultNavigationSetup() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithOpaqueBackground()
+        
+        let back = UIBarButtonItemAppearance(style: .done)
+        back.normal.backgroundImage = UIImage()
+        
+        back.normal.titlePositionAdjustment = .init(horizontal: -1000, vertical: 0)
+        
+        appearance.backButtonAppearance = back
+        appearance.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
+        appearance.shadowImage = UIImage()
+        appearance.shadowColor = .clear
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+    }
+    
+    func transparentNavigationSetup() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        
+        let back = UIBarButtonItemAppearance(style: .done)
+        back.normal.backgroundImage = UIImage()
+        
+        back.normal.titlePositionAdjustment = .init(horizontal: -1000, vertical: 0)
+        
+        appearance.backButtonAppearance = back
+        appearance.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
+        appearance.shadowImage = UIImage()
+        appearance.shadowColor = .clear
+        
+        UINavigationBar.appearance().standardAppearance = appearance
+        UINavigationBar.appearance().compactAppearance = appearance
+    }
 }
 
 var routerObject = MainViewRouter()

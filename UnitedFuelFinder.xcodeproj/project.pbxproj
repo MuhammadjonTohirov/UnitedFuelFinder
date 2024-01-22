@@ -184,6 +184,7 @@
 		2E60B61B2AF8751500573049 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61A2AF8751500573049 /* ProfileViewModel.swift */; };
 		2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */; };
 		2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */; };
+		2E60E6942B5EACEC009E1CE5 /* RichAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E60E6932B5EACEC009E1CE5 /* RichAlertView.swift */; };
 		2E67901A2B1FCC9300239B03 /* ChangeLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */; };
 		2E6F3CBB2B3C9FA80015C623 /* TestUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F3CBA2B3C9FA80015C623 /* TestUI.swift */; };
 		2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */; };
@@ -438,6 +439,7 @@
 		2E60B61A2AF8751500573049 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		2E60B61D2AFA8C3C00573049 /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
 		2E60B6202AFAB1E400573049 /* SearchAddressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAddressViewModel.swift; sourceTree = "<group>"; };
+		2E60E6932B5EACEC009E1CE5 /* RichAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RichAlertView.swift; sourceTree = "<group>"; };
 		2E6790192B1FCC9300239B03 /* ChangeLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageView.swift; sourceTree = "<group>"; };
 		2E6F3CBA2B3C9FA80015C623 /* TestUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUI.swift; sourceTree = "<group>"; };
 		2E6F3CBD2B3CA62F0015C623 /* PageCoverUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageCoverUI.swift; sourceTree = "<group>"; };
@@ -829,6 +831,7 @@
 			children = (
 				2E5DF8C12AEACD63005BE20D /* BlurView.swift */,
 				2E5DF8C22AEACD63005BE20D /* AlertToast.swift */,
+				2E60E6932B5EACEC009E1CE5 /* RichAlertView.swift */,
 			);
 			path = Alert;
 			sourceTree = "<group>";
@@ -1531,6 +1534,7 @@
 				2E5DF97E2AEACD64005BE20D /* Language.swift in Sources */,
 				2E5DF9642AEACD63005BE20D /* MapScale.swift in Sources */,
 				2EDF8C442AD2DCB8003D64FC /* MainViewModel.swift in Sources */,
+				2E60E6942B5EACEC009E1CE5 /* RichAlertView.swift in Sources */,
 				2E5DF9592AEACD63005BE20D /* MapMarker.swift in Sources */,
 				2EDF8C702AD44401003D64FC /* PinCodeViewModel.swift in Sources */,
 				2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */,

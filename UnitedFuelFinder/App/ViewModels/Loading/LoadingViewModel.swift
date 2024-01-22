@@ -21,7 +21,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
 //            await CommonService.shared.syncCompanies()
             
             if UserSettings.shared.hasValidToken {
-                if await AuthService.shared.refreshToken() {
+                if await AuthService.shared.refreshToken(), await AuthService.shared.syncUserInfo() {
                     if UserSettings.shared.appPin == nil {
                         appDelegate?.navigate(to: .auth)
                     } else {                        
@@ -34,9 +34,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
             }
             
             appDelegate?.navigate(to: .auth)
-  
-//            We cannot use language screen for now
-//            mainRouter?.navigate(to: .language)
+
         }
     }
     

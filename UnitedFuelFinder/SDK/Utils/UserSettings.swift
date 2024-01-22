@@ -86,7 +86,10 @@ final public class UserSettings {
         session = nil
         userInfo = nil
         userEmail = nil
-        language = nil
+        language = .english
+        currentVersion = nil
+        destination = nil
+        fromLocation = nil
     }
     
     func setInterfaceStyle(style: UIUserInterfaceStyle) {

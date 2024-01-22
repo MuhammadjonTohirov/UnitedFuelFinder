@@ -57,37 +57,9 @@ enum TestPage: Identifiable, Hashable {
 }
 
 struct TestUI: View {
-    @State var page: TestPage?
-
+ 
     var body: some View {
-        ZStack {
-            Button(action: {
-                showPage1()
-            }, label: {
-                Text("Home page")
-            })
-        }
-        .navigate(item: $page, destination: { item in
-            item.screen()
-        })
-        .onAppear(perform: {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                showPage1()
-            }
-        })
-    }
-    
-    private func showPage1() {
-        self.page = .page1(showNewPage: {
-            self.page = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                self.showPage2()
-            }
-        })
-    }
-    
-    private func showPage2() {
-        self.page = .page2
+        TestWrapper()
     }
 }
 

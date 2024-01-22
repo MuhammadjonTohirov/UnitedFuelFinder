@@ -74,7 +74,6 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     @Published var isLoading = false
     
     @Published var showRegisterWarning = false
-    private var didShowWarning: Bool = false
     
     var isValidForm: Bool {
         !firstName.isEmpty &&
@@ -87,11 +86,6 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     }
  
     func doRegister(completion: @escaping (Bool) -> Void) {
-        guard didShowWarning else {
-            showRegisterWarning = true
-            didShowWarning = true
-            return
-        }
         guard let stateModel = self.state?.asModel,
               let cityModel = self.city?.asModel else {
             return
@@ -123,5 +117,9 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
                 completion(result.0)
             }
         }
+    }
+    
+    func onSuccessRegister() {
+        self.showRegisterWarning = true
     }
 }

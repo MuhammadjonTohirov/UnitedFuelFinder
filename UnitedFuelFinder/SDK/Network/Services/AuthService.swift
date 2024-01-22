@@ -92,9 +92,12 @@ public struct AuthService {
         return otp == UserSettings.shared.lastOTP
     }
     
-    func syncUserInfo() async {
+    @discardableResult
+    func syncUserInfo() async -> Bool {
         let response: NetRes<NetResUserInfo>? = await Network.send(request: UserNetworkRouter.userInfo)
         UserSettings.shared.userInfo = response?.data?.asModel
+        
+        return response?.data != nil
     }
     
     func editUserInfo(firstName: String, lastName: String, phone: String, state: String, city: Int, address: String) async -> Bool {

@@ -57,7 +57,7 @@ struct SettingsProfile: View {
                 OTPView(viewModel: vm)
             }
         })
-        .navigationTitle(UserSettings.shared.userInfo?.fullName ?? "")
+        .navigationTitle(UserSettings.shared.userInfo?.fullName ?? "profile".localize)
         .padding(.horizontal, 20)
         .padding(.top, Padding.medium)
     }

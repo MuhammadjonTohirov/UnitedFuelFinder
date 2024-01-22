@@ -12,7 +12,7 @@ struct RegisterProfileView: View {
     @StateObject var viewModel = RegisterViewModel()
 
     var onRegisterResult: (Bool) -> Void
-    @Environment (\.presentationMode) private var presentationMode
+    @Environment (\.dismiss) private var dismiss
 
     var body: some View {
         ZStack {
@@ -54,23 +54,21 @@ struct RegisterProfileView: View {
         .sheet(isPresented: $viewModel.showScreen, content: {
             viewModel.route?.screen
         })
-        .alert(isPresented: $viewModel.showRegisterWarning) {
-            Alert(
-                title: Text("warning".localize),
-                message: Text("register_warning".localize),
-                dismissButton: .default(
-                    Text("ok".localize),
-                    action: {
-                        onClickRegister()
-                    }
-                )
-            )
+        .onAppear {
+            appDelegate?.transparentNavigationSetup()
         }
+        .richAlert(
+            type: .custom(image: Image("icon_success_check").resizable().frame(width: 56, height: 56, alignment: .center).anyView),
+            title: "registration_success".localize,
+            message: "register_warning".localize,
+            isPresented: $viewModel.showRegisterWarning) {
+                dismissView()
+            }
     }
     
     private func onClickRegister() {
         viewModel.doRegister { success in
-            success ? presentationMode.wrappedValue.dismiss() : ()
+            success ? viewModel.onSuccessRegister() : ()
         }
     }
     
@@ -111,7 +109,7 @@ struct RegisterProfileView: View {
     
     private var organizationRequisites: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Organization requisites")
+            Text("organization_reqs".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
@@ -129,7 +127,7 @@ struct RegisterProfileView: View {
     
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("Address Information".localize)
+            Text("address_info".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
@@ -151,7 +149,7 @@ struct RegisterProfileView: View {
     
     private var offerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("Offer".localize)
+            Text("offer".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
@@ -172,6 +170,10 @@ struct RegisterProfileView: View {
             .padding(.top, Padding.small)
             .padding(.bottom, Padding.large)
         }
+    }
+    
+    private func dismissView() {
+        dismiss.callAsFunction()
     }
 }
 

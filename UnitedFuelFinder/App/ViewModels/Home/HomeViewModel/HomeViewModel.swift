@@ -108,6 +108,8 @@ final class HomeViewModel: ObservableObject {
             return
         }
         
+        appDelegate?.defaultNavigationSetup()
+        
         didAppear = true
         
         locationManager.locationUpdateHandler = { [weak self] location in

@@ -56,6 +56,9 @@
         }
       }
     },
+    "Alert" : {
+
+    },
     "All comments" : {
       "localizations" : {
         "ru" : {
@@ -232,6 +235,9 @@
           }
         }
       }
+    },
+    "Blue" : {
+
     },
     "change_pin" : {
       "extractionState" : "manual",
@@ -963,7 +969,10 @@
         }
       }
     },
-    "Home page" : {
+    "Green" : {
+
+    },
+    "Indigo" : {
 
     },
     "insert_creds" : {
@@ -1465,6 +1474,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1741,6 +1756,15 @@
         }
       }
     },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
+    },
     "Organization requisites" : {
       "localizations" : {
         "ru" : {
@@ -1753,6 +1777,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tashkilot ma`lumotlari"
+          }
+        }
+      }
+    },
+    "organization_reqs" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Organization requisites"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Реквизиты организации"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tashkilot rekvizitlari"
           }
         }
       }
@@ -1924,6 +1971,29 @@
         }
       }
     },
+    "profile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profile"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Профиль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profil"
+          }
+        }
+      }
+    },
     "profile_updated" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1969,6 +2039,9 @@
           }
         }
       }
+    },
+    "Red" : {
+
     },
     "register_warning" : {
       "extractionState" : "manual",
@@ -2038,6 +2111,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "Retail price %@" : {
       "localizations" : {
@@ -2362,6 +2438,9 @@
         }
       }
     },
+    "SwiftUI" : {
+
+    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2477,6 +2556,9 @@
         }
       }
     },
+    "Violet" : {
+
+    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2545,6 +2627,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     }
   },
   "version" : "1.0"
