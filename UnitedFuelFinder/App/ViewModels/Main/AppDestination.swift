@@ -28,6 +28,8 @@ enum AppDestination: Hashable, ScreenRoute {
             return "auth"
         case .main:
             return "main"
+        case .mainTab:
+            return "mainTab"
         case .loading:
             return "loading"
         case .language:
@@ -46,6 +48,7 @@ enum AppDestination: Hashable, ScreenRoute {
     case intro
     case auth
     case main
+    case mainTab
     case language
     case loading
     case pin
@@ -65,6 +68,8 @@ enum AppDestination: Hashable, ScreenRoute {
             TabMapView()
         case .test:
             TestUI()
+        case .mainTab:
+            MainTabView()
         default:
             EmptyView()
         }
