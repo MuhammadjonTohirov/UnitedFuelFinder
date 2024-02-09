@@ -36,7 +36,7 @@ struct MainTabView: View {
                     Text("map".localize)
                 }
             
-            Text("Page3")
+            SettingsView()
                 .tabItem {
                     Image("icon_settings")
                         .renderingMode(.template)
