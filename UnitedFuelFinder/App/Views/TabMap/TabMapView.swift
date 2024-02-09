@@ -10,7 +10,7 @@ import SwiftUI
 import GoogleMaps
 import SwiftUITooltip
 
-struct HomeView: View {
+struct TabMapView: View {
     @State private var bottomSheetFrame: CGRect = .zero
     @State private var screenFrame: CGRect = .zero
     
@@ -56,43 +56,44 @@ struct HomeView: View {
     
     var innerBody: some View {
         ZStack {
-            GMapsViewWrapper(
-                pickedLocation: $viewModel.pickedLocation,
-                isDragging: $viewModel.isDragging,
-                screenCenter: pointerFrame.center,
-                markers: $viewModel.stationsMarkers
-            )
-            .set(currentLocation: viewModel.focusableLocation)
-            .set(
-                from: self.viewModel.fromLocation?.coordinate,
-                to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
-                onStartDrawing: {
-                    Logging.l("Before start drawing")
-                    viewModel.onStartDrawingRoute()
-                },
-                onEndDrawing: { isOK in
-                    Logging.l("After end drawing")
-                    viewModel.onEndDrawingRoute(isOK)
-                }
-            )
-            .set(onClickMarker: { marker, point in
-                self.selectedMarker = marker
-                
-            })
-            .ignoresSafeArea()
-            .padding(.bottom, 8)
-            .overlay {
-                bodyOverlay
-            }
-            .ignoresSafeArea(.container, edges: .bottom)
-            .padding(.bottom, -14)
-            .onChange(of: $viewModel.pickedLocation, perform: { value in
-                if viewModel.state == .routing {
-                    return
-                }
-                
-                self.viewModel.reloadAddress()
-            })
+//            GMapsViewWrapper(
+//                pickedLocation: $viewModel.pickedLocation,
+//                isDragging: $viewModel.isDragging,
+//                screenCenter: pointerFrame.center,
+//                markers: $viewModel.stationsMarkers
+//            )
+//            .set(currentLocation: viewModel.focusableLocation)
+//            .set(
+//                from: self.viewModel.fromLocation?.coordinate,
+//                to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
+//                onStartDrawing: {
+//                    Logging.l("Before start drawing")
+//                    viewModel.onStartDrawingRoute()
+//                },
+//                onEndDrawing: { isOK in
+//                    Logging.l("After end drawing")
+//                    viewModel.onEndDrawingRoute(isOK)
+//                }
+//            )
+//            .set(onClickMarker: { marker, point in
+//                if marker.hasStation {
+//                    self.selectedMarker = marker
+//                }
+//            })
+//            .ignoresSafeArea()
+//            .padding(.bottom, 8)
+//            .overlay {
+//                bodyOverlay
+//            }
+//            .ignoresSafeArea(.container, edges: .bottom)
+//            .padding(.bottom, -14)
+//            .onChange(of: $viewModel.pickedLocation, perform: { value in
+//                if viewModel.state == .routing {
+//                    return
+//                }
+//                
+//                self.viewModel.reloadAddress()
+//            })
             
             bottomContent
         }
@@ -361,5 +362,9 @@ struct HomeView: View {
 }
 
 #Preview {
-    MainView()
+    UserSettings.shared.accessToken = UserSettings.testAccessToken
+    UserSettings.shared.refreshToken = UserSettings.testRefreshToken
+    UserSettings.shared.userEmail = UserSettings.testEmail
+    UserSettings.shared.appPin = "0000"
+    return MainView()
 }

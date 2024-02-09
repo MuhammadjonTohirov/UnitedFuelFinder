@@ -46,6 +46,10 @@ extension GMSMarker: Identifiable {
             self.userData as? StationItem
         }
     }
+    
+    var hasStation: Bool {
+        station != nil
+    }
 }
 
 extension StationItem {

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "image_loading_page.png",
+      "filename" : "icon_map_2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "icon_map_2@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "icon_map_2@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

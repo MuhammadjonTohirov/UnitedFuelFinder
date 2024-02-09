@@ -7,25 +7,13 @@
 
 import Foundation
 
-//{
-//    "id": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-//    "fullName": "string",
-//    "email": "string",
-//    "phone": "string",
-//    "cardNumber": "string",
-//    "companyId": 0,
-//    "companyName": "string",
-//    "address": "string",
-//    "cityId": 0,
-//    "cityName": "string",
-//    "state": "string",
-//    "confirmed": true,
-//    "deleted": true
-//  }
-
 struct NetResUserInfo: NetResBody {
     let id: String?
     let fullName: String
+    
+    let firstName: String?
+    let lastName: String?
+    
     let email: String
     let phone: String
     let cardNumber: String
@@ -38,3 +26,4 @@ struct NetResUserInfo: NetResBody {
     let confirmed: Bool?
     let deleted: Bool?
 }
+

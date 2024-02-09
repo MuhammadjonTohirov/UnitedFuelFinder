@@ -48,24 +48,17 @@ class MapViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         self.view.addSubview(map)
-        map.settings.compassButton = true
+        map.settings.compassButton = false
         map.settings.rotateGestures = false
         map.settings.allowScrollGesturesDuringRotateOrZoom = false
         map.settings.tiltGestures = true
+        map.preferredFrameRate = .maximum
         
         changeMapStyle(by: traitCollection.userInterfaceStyle)
 
         map.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        map.isBuildingsEnabled = true
+        map.isBuildingsEnabled = false
         map.isMyLocationEnabled = true
-        
-//        let iconGenerator = GMUDefaultClusterIconGenerator()
-//        let algorithm = GMUNonHierarchicalDistanceBasedAlgorithm()
-//        let renderer = GMUDefaultClusterRenderer(mapView: map,
-//                                                 clusterIconGenerator: iconGenerator)
-//        clusterManager = GMUClusterManager(map: map, algorithm: algorithm,
-//                                           renderer: renderer)
-        
     }
     
     func set(padding: UIEdgeInsets) {

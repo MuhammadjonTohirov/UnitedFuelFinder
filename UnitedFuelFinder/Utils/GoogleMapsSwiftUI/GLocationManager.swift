@@ -24,7 +24,6 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func requestLocationPermission() {
-        
         locationManager.requestWhenInUseAuthorization()
         locationManager.allowsBackgroundLocationUpdates = true
     }
@@ -36,6 +35,10 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
             } else {
                 print("Location services are not enabled.")
                 // Handle the case where location services are not enabled.
+            }
+            
+            if let lastLocation = self.locationManager.location {
+                self.locationUpdateHandler?(lastLocation)
             }
         }
     }

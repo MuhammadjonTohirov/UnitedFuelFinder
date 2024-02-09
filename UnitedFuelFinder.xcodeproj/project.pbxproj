@@ -191,6 +191,7 @@
 		2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266E92AFD140A008099D0 /* YTextView.swift */; };
 		2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266EB2AFD193B008099D0 /* RateView.swift */; };
 		2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */; };
+		2E7739FF2B6AA4D1007A65BF /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7739FE2B6AA4D1007A65BF /* MainTabView.swift */; };
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
 		2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */; };
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
@@ -233,7 +234,7 @@
 		2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C762AD44565003D64FC /* OTPView.swift */; };
 		2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */; };
 		2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */; };
-		2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C952AD474AA003D64FC /* HomeView.swift */; };
+		2EDF8C962AD474AA003D64FC /* TabMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C952AD474AA003D64FC /* TabMapView.swift */; };
 		2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1D92ADD88F900CA8DE2 /* City.swift */; };
 		2EF3A1E62ADD88F900CA8DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */; };
 		2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */; };
@@ -446,6 +447,7 @@
 		2E7266E92AFD140A008099D0 /* YTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YTextView.swift; sourceTree = "<group>"; };
 		2E7266EB2AFD193B008099D0 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeThemeView.swift; sourceTree = "<group>"; };
+		2E7739FE2B6AA4D1007A65BF /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
 		2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyItem.swift; sourceTree = "<group>"; };
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
@@ -485,7 +487,7 @@
 		2EDF8C762AD44565003D64FC /* OTPView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPView.swift; sourceTree = "<group>"; };
 		2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
-		2EDF8C952AD474AA003D64FC /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		2EDF8C952AD474AA003D64FC /* TabMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabMapView.swift; sourceTree = "<group>"; };
 		2EF121B62AEAC1F600D76378 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EF3A1D92ADD88F900CA8DE2 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -650,9 +652,10 @@
 		2E527A722ACC83A1005B8B95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E7739FD2B6AA4C1007A65BF /* TabView */,
 				2E6F3CB92B3C9FA20015C623 /* Test */,
 				2EF3A1FE2ADD91FF00CA8DE2 /* Settings */,
-				2EDF8C942AD474A6003D64FC /* Home */,
+				2EDF8C942AD474A6003D64FC /* TabMap */,
 				2EDF8C812AD452D6003D64FC /* Auth */,
 				2E527A752ACC83B0005B8B95 /* Intro */,
 			);
@@ -1151,6 +1154,14 @@
 			path = Appearance;
 			sourceTree = "<group>";
 		};
+		2E7739FD2B6AA4C1007A65BF /* TabView */ = {
+			isa = PBXGroup;
+			children = (
+				2E7739FE2B6AA4D1007A65BF /* MainTabView.swift */,
+			);
+			path = TabView;
+			sourceTree = "<group>";
+		};
 		2EB189F92AEFF42600BCFBE3 /* StationDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1353,7 +1364,7 @@
 			path = Authorization;
 			sourceTree = "<group>";
 		};
-		2EDF8C942AD474A6003D64FC /* Home */ = {
+		2EDF8C942AD474A6003D64FC /* TabMap */ = {
 			isa = PBXGroup;
 			children = (
 				2EF746AE2B1CE964009E2D8D /* Marker */,
@@ -1361,9 +1372,9 @@
 				2E60B61C2AFA8C3300573049 /* SearchAddress */,
 				2EB189F92AEFF42600BCFBE3 /* StationDetails */,
 				2EBFB99C2ADF9F8F007FA786 /* Views */,
-				2EDF8C952AD474AA003D64FC /* HomeView.swift */,
+				2EDF8C952AD474AA003D64FC /* TabMapView.swift */,
 			);
-			path = Home;
+			path = TabMap;
 			sourceTree = "<group>";
 		};
 		2EE91D352AD07FC200A425B5 /* Frameworks */ = {
@@ -1661,7 +1672,7 @@
 				2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */,
 				2E67901A2B1FCC9300239B03 /* ChangeLanguageView.swift in Sources */,
 				2E5DF9412AEACD63005BE20D /* YTextField.swift in Sources */,
-				2EDF8C962AD474AA003D64FC /* HomeView.swift in Sources */,
+				2EDF8C962AD474AA003D64FC /* TabMapView.swift in Sources */,
 				2E5DF9802AEACD64005BE20D /* DatabaseConfig.swift in Sources */,
 				2EDF8C462AD2DD58003D64FC /* LoadingView.swift in Sources */,
 				2E502D0B2B2750D0002CE669 /* SettingsViewModel.swift in Sources */,
@@ -1703,6 +1714,7 @@
 				2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */,
 				2E502D092B272D39002CE669 /* SettingsViewUtils.swift in Sources */,
 				2E5DF97C2AEACD64005BE20D /* AnyWrapper.swift in Sources */,
+				2E7739FF2B6AA4D1007A65BF /* MainTabView.swift in Sources */,
 				2E5DF96A2AEACD63005BE20D /* DState.swift in Sources */,
 				2E5DF9492AEACD63005BE20D /* MapInformationVisibility.swift in Sources */,
 				2E36A7432AEECD380033363E /* MainService.swift in Sources */,
@@ -1867,7 +1879,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1887,7 +1899,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -1906,7 +1918,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -1926,7 +1938,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

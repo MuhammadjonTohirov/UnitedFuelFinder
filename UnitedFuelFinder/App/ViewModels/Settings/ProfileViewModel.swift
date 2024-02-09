@@ -56,9 +56,11 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
             didAppear = true
             var nameComponents = user.fullName.components(separatedBy: " ")
             
-            firstName = nameComponents.first ?? ""
+            firstName = user.firstName ?? nameComponents.first ?? ""
+            
             nameComponents.removeFirst()
-            lastName = nameComponents.joined(separator: " ")
+            
+            lastName = user.lastName ?? nameComponents.joined(separator: " ")
             phoneNumber = user.phone
             address = user.address ?? ""
             
@@ -66,7 +68,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                 self.state = _state
             }
             
-            if let _city = DCity.item(id: user.cityId ?? -1) {
+            if let _city = DCity.item(id: user.cityId ?? Int(user.cityName ?? "-1") ?? -1) {
                 self.city = _city
             }
         }
@@ -78,7 +80,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                     return
                 }
                 
-                if DCity.item(id: user.cityId ?? -1) == nil {
+                if DCity.item(id: user.cityId ?? Int(user.cityName ?? "-1") ?? -1) == nil {
                     await CommonService.shared.syncCities(forState: user.state ?? "")
                 }
                 

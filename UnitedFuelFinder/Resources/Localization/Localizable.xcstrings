@@ -831,6 +831,29 @@
         }
       }
     },
+    "email" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Email"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Эл. адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elektron pochta"
+          }
+        }
+      }
+    },
     "enter_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -971,6 +994,29 @@
     },
     "Green" : {
 
+    },
+    "help_desk" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Help Desk"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Служба поддержки"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ma'lumot markazi"
+          }
+        }
+      }
     },
     "Indigo" : {
 
@@ -1765,22 +1811,6 @@
     "Orange" : {
 
     },
-    "Organization requisites" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Реквизиты организации"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Tashkilot ma`lumotlari"
-          }
-        }
-      }
-    },
     "organization_reqs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1831,6 +1861,12 @@
 
     },
     "Page 2" : {
+
+    },
+    "Page2" : {
+
+    },
+    "Page3" : {
 
     },
     "personal_details" : {
@@ -2227,7 +2263,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Search address"
+            "value" : "Поиск адреса"
           }
         },
         "uz" : {
@@ -2506,6 +2542,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "U yerga"
+          }
+        }
+      }
+    },
+    "ufc_client_service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UFC Client Service"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Служба поддержки клиентов UFC"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "UFC Mijoz Xizmati"
           }
         }
       }

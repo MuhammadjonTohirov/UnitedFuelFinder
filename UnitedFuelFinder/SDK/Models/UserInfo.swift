@@ -10,6 +10,10 @@ import Foundation
 public struct UserInfo: Codable {
     let id: String?
     let fullName: String
+    
+    var firstName: String?
+    var lastName: String?
+    
     let email: String
     let phone: String
     let cardNumber: String
@@ -52,5 +56,7 @@ public struct UserInfo: Codable {
         self.state = res.state
         self.confirmed = res.confirmed
         self.deleted = res.deleted
+        self.firstName = res.firstName
+        self.lastName = res.lastName
     }
 }

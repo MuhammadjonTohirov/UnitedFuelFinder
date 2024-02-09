@@ -14,8 +14,9 @@ struct LoadingView: View {
     var body: some View {
         Image("image_splash")
             .resizable()
-            .aspectRatio(contentMode: .fill)
             .ignoresSafeArea()
+            .frame(maxHeight: .infinity)
+            .aspectRatio(contentMode: .fill)
             .overlay {
                 ActivityIndicatorView()
             }

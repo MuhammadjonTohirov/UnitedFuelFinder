@@ -15,21 +15,21 @@ struct ChangeLanguageView: View {
         VStack(spacing: Padding.medium) {
             row(title: Language.english.name, isSelected: UserSettings.shared.language == .english) {
                 UserSettings.shared.language = .english
-                dismiss.callAsFunction()
+                showMain()
             }
             
             Divider()
             
             row(title: Language.russian.name, isSelected: UserSettings.shared.language == .russian) {
                 UserSettings.shared.language = .russian
-                dismiss.callAsFunction()
+                showMain()
             }
             
             Divider()
             
             row(title: Language.uzbek.name, isSelected: UserSettings.shared.language == .uzbek) {
                 UserSettings.shared.language = .uzbek
-                dismiss.callAsFunction()
+                showMain()
             }
             
             Spacer()
@@ -63,6 +63,12 @@ struct ChangeLanguageView: View {
     private func onClickContinue() {
         UserSettings.shared.isLanguageSelected = true
         appDelegate?.navigate(to: .auth)
+    }
+    
+    private func showMain() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            appDelegate?.navigate(to: .loading)
+        }
     }
 }
 

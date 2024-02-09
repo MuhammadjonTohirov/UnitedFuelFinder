@@ -84,6 +84,7 @@ public struct AuthService {
             return true
         }
         
+        Logging.l("Unable to refresh token")
         return false
     }
     
@@ -97,6 +98,7 @@ public struct AuthService {
         let response: NetRes<NetResUserInfo>? = await Network.send(request: UserNetworkRouter.userInfo)
         UserSettings.shared.userInfo = response?.data?.asModel
         
+        Logging.l("User sync \(response?.data != nil)")
         return response?.data != nil
     }
     

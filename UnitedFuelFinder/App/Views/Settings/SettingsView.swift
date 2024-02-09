@@ -28,7 +28,7 @@ struct SettingsView: View {
                 .fixedSize()
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "appearance".localize
+                                  title: "appearance".localize
             ) {
                 viewModel.navigate(to: .appearance)
             }
@@ -41,7 +41,7 @@ struct SettingsView: View {
                 .fixedSize()
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "security".localize
+                                  title: "security".localize
             ) {
                 viewModel.navigate(to: .security)
             }
@@ -53,7 +53,7 @@ struct SettingsView: View {
                 .renderingMode(.template)
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "contact_us".localize
+                                  title: "contact_us".localize
             ) {
                 viewModel.navigate(to: .contactUs)
             }
@@ -65,19 +65,18 @@ struct SettingsView: View {
                 .resizable()
                 .foregroundStyle(Color.init(uiColor: .systemRed))
                 .frame(width: 22, height: 22).padding(.leading, -2),
-                title: "logout".localize
+                                  title: "logout".localize
             ) {
                 onClickLogout()
             }
             
             Spacer()
-//            1.0.3
-//            2024.01.12
+            
             HStack(spacing: 2) {
                 Spacer()
-//                App version: 2024.02.14
                 
                 Text("app_version".localize + ":")
+                    .fontWeight(.semibold)
                     .foregroundStyle(Color.init(uiColor: .systemRed))
                 Text(UserSettings.shared.currentAPIVersion ?? "")
                     .foregroundStyle(Color.label)

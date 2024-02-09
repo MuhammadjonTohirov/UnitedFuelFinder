@@ -88,6 +88,7 @@ final class HomeViewModel: ObservableObject {
     private var loadStationsTask: DispatchWorkItem?
     
     private(set) var lastCurrentLocation: CLLocation?
+    
     var distance: String {
         guard let from = fromLocation, let to = toLocation else {
             return ""
@@ -128,7 +129,9 @@ final class HomeViewModel: ObservableObject {
         locationManager.startUpdatingLocation()
         
         if UserSettings.shared.destination == nil || UserSettings.shared.fromLocation == nil {
-            focusToCurrentLocation()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.focusToCurrentLocation()
+            }
         }
         
         loadCustomers()

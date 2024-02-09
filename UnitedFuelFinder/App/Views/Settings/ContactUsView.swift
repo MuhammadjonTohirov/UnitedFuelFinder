@@ -17,7 +17,7 @@ struct ContactUsView: View {
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24)
                 .padding(.bottom, 2)
-                .padding(.leading, 2), title: "UFC Client Service", details: "+1(888) 502 3442"
+                .padding(.leading, 2), title: "ufc_client_service".localize, details: "+1(888) 502 3442"
             )
             .onTapGesture {
                 // call to +1(888) 502 3442
@@ -33,7 +33,7 @@ struct ContactUsView: View {
                 .renderingMode(.template)
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "Help Desk", details: "+1(888) 502 3442"
+                title: "help_desk".localize, details: "+1(888) 502 3442"
             )
             .onTapGesture {
                 // call to +1(888) 502 3442
@@ -49,7 +49,7 @@ struct ContactUsView: View {
                 .renderingMode(.template)
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),
-                title: "Email", details: "info@unitedtransportllc.org"
+                title: "email".localize, details: "info@unitedtransportllc.org"
             )
             .onTapGesture {
                 // send email to info@unitedtransportllc.org

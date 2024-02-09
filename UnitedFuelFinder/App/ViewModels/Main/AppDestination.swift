@@ -62,7 +62,7 @@ enum AppDestination: Hashable, ScreenRoute {
         case .auth:
             AuthView()
         case .main:
-            HomeView()
+            TabMapView()
         case .test:
             TestUI()
         default:
