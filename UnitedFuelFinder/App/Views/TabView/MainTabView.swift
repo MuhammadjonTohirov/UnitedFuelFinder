@@ -40,7 +40,7 @@ struct MainTabView: View {
                 .tabItem {
                     Image("icon_settings")
                         .renderingMode(.template)
-                    Text("profile".localize)
+                    Text("settings".localize)
                 }
         }
         .accentColor(.accent)
