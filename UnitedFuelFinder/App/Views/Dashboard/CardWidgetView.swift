@@ -16,7 +16,7 @@ struct CardWidgetView: View {
         GeometryReader {geo in
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("Enregy trucking")
+                    Text("Enregy trucking".localize)
                     
                     Spacer()
                     
@@ -52,9 +52,11 @@ struct CardWidgetView: View {
             }
             .padding()
         }
-        .frame(width: 335, height: 143)
+        .frame(maxWidth: .infinity)
+        .frame(height: 143)
         .background(Color(hex: "#FCB527"))
         .cornerRadius(16)
+        .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
     }
 }
 
