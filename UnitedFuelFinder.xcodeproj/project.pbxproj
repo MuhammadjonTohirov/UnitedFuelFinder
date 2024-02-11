@@ -248,6 +248,7 @@
 		8422A6852B77996200017681 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6842B77996200017681 /* DashboardView.swift */; };
 		8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6862B77B05000017681 /* CardWidgetView.swift */; };
 		8422A6952B781B5400017681 /* PopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6942B781B5400017681 /* PopularStationsView.swift */; };
+		8422A6972B782BD600017681 /* DiscountStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6962B782BD600017681 /* DiscountStationView.swift */; };
 		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
 		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
 /* End PBXBuildFile section */
@@ -508,6 +509,7 @@
 		8422A6842B77996200017681 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		8422A6862B77B05000017681 /* CardWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWidgetView.swift; sourceTree = "<group>"; };
 		8422A6942B781B5400017681 /* PopularStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularStationsView.swift; sourceTree = "<group>"; };
+		8422A6962B782BD600017681 /* DiscountStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStationView.swift; sourceTree = "<group>"; };
 		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1459,6 +1461,7 @@
 				8422A6842B77996200017681 /* DashboardView.swift */,
 				8422A6862B77B05000017681 /* CardWidgetView.swift */,
 				8422A6942B781B5400017681 /* PopularStationsView.swift */,
+				8422A6962B782BD600017681 /* DiscountStationView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1660,6 +1663,7 @@
 				2E5DF93C2AEACD63005BE20D /* SelectionButton.swift in Sources */,
 				2E5DF9322AEACD63005BE20D /* SoundEffect.swift in Sources */,
 				2E5DF9672AEACD63005BE20D /* MapUserTrackingButton.swift in Sources */,
+				8422A6972B782BD600017681 /* DiscountStationView.swift in Sources */,
 				2E5DF9312AEACD63005BE20D /* NoitificationContentView.swift in Sources */,
 				2E5DF9242AEACD63005BE20D /* YTextFieldCleanStyle.swift in Sources */,
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
