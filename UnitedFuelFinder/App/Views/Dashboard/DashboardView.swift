@@ -40,6 +40,24 @@ struct DashboardView: View {
             ForEach(0..<2) {_ in 
                 TransactionView(title: "TRN12938", location: "PILOT BURBANK 287", gallon: 73.02, totalSum: 300, savedAmount: 34.21, price: 4.11, driver: "Aliev Vali", cardNumber: "•••• 1232", date: "12:00 10.11.2023")
             }
+            
+            HStack {
+                Text("Populated invoices")
+                Spacer()
+                Button(action: {
+                    
+                }, label: {
+                    Text("View all")
+                })
+            }
+            
+            ForEach(0..<2) {_ in
+                InvoicesView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
+                    .padding(.bottom)
+            }
+            
+//            Text("")
+//                .frame(height: 50)
         }
         .padding(.horizontal)
         .font(.system(size: 14))

@@ -250,6 +250,7 @@
 		8422A6952B781B5400017681 /* PopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6942B781B5400017681 /* PopularStationsView.swift */; };
 		8422A6972B782BD600017681 /* DiscountStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6962B782BD600017681 /* DiscountStationView.swift */; };
 		8422A6992B784B6200017681 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6982B784B6200017681 /* TransactionView.swift */; };
+		8422A69B2B785AFB00017681 /* InvoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A69A2B785AFB00017681 /* InvoicesView.swift */; };
 		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
 		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
 /* End PBXBuildFile section */
@@ -512,6 +513,7 @@
 		8422A6942B781B5400017681 /* PopularStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularStationsView.swift; sourceTree = "<group>"; };
 		8422A6962B782BD600017681 /* DiscountStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStationView.swift; sourceTree = "<group>"; };
 		8422A6982B784B6200017681 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		8422A69A2B785AFB00017681 /* InvoicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesView.swift; sourceTree = "<group>"; };
 		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1465,6 +1467,7 @@
 				8422A6942B781B5400017681 /* PopularStationsView.swift */,
 				8422A6962B782BD600017681 /* DiscountStationView.swift */,
 				8422A6982B784B6200017681 /* TransactionView.swift */,
+				8422A69A2B785AFB00017681 /* InvoicesView.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -1606,6 +1609,7 @@
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
+				8422A69B2B785AFB00017681 /* InvoicesView.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
 				2EF746A52B1C4EB8009E2D8D /* HomeRouter.swift in Sources */,
 				2E0F93CD2B012FCE00660DEB /* StationCommentItem.swift in Sources */,

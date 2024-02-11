@@ -96,8 +96,16 @@ struct TransactionView: View {
 struct Line: Shape {
     func path(in rect: CGRect) -> Path {
         var path = Path()
-        path.move(to: CGPoint(x: 0, y: 0))
-        path.addLine(to: CGPoint(x: rect.width, y: 0))
+        let dashLength: CGFloat = 3 // Adjust the dash length as needed
+        let gapLength: CGFloat = 3 // Adjust the gap length as needed
+        let totalLength = dashLength + gapLength
+        
+        var currentPosition: CGFloat = 0
+        while currentPosition <= rect.width {
+            path.move(to: CGPoint(x: currentPosition, y: 0))
+            path.addLine(to: CGPoint(x: min(currentPosition + dashLength, rect.width), y: 0))
+            currentPosition += totalLength
+        }
         return path
     }
 }
