@@ -27,6 +27,19 @@ struct DashboardView: View {
             Text("Top discounted stations".localize)
             stationDetail
                 .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+            
+            HStack {
+                Text("Transferring transactions")
+                Spacer()
+                Button(action: {
+                    
+                }, label: {
+                    Text("View all")
+                })
+            }
+            ForEach(0..<2) {_ in 
+                TransactionView(title: "TRN12938", location: "PILOT BURBANK 287", gallon: 73.02, totalSum: 300, savedAmount: 34.21, price: 4.11, driver: "Aliev Vali", cardNumber: "•••• 1232", date: "12:00 10.11.2023")
+            }
         }
         .padding(.horizontal)
         .font(.system(size: 14))
