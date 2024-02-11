@@ -538,6 +538,9 @@
         }
       }
     },
+    "Dashboard" : {
+
+    },
     "delete" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1267,6 +1270,29 @@
         }
       }
     },
+    "list" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лист"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List"
+          }
+        }
+      }
+    },
     "lite" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1447,6 +1473,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asosiy nuqta"
+          }
+        }
+      }
+    },
+    "map" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карты"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Harita"
           }
         }
       }
@@ -1866,9 +1915,6 @@
     "Page1" : {
 
     },
-    "Page3" : {
-
-    },
     "personal_details" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2075,6 +2121,9 @@
           }
         }
       }
+    },
+    "Radius (in miles)" : {
+
     },
     "Red" : {
 
@@ -2405,6 +2454,9 @@
         }
       }
     },
+    "Settings" : {
+
+    },
     "setup_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2428,6 +2480,9 @@
         }
       }
     },
+    "Sorted by" : {
+
+    },
     "state" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2450,6 +2505,9 @@
           }
         }
       }
+    },
+    "Stations" : {
+
     },
     "stations_at_radius" : {
       "extractionState" : "manual",

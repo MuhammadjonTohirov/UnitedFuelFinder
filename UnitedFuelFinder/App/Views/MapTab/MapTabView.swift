@@ -10,11 +10,11 @@ import SwiftUI
 import GoogleMaps
 import SwiftUITooltip
 
-struct TabMapView: View {
+struct MapTabView: View {
     @State private var bottomSheetFrame: CGRect = .zero
     @State private var screenFrame: CGRect = .zero
     
-    @ObservedObject var viewModel: HomeViewModel = HomeViewModel()
+    @EnvironmentObject var viewModel: MapTabViewModel
     @EnvironmentObject var mainModel: MainViewModel
     @State private var pointerFrame: CGRect = .zero
     @State private var selectedMarker: GMSMarker?
@@ -23,27 +23,30 @@ struct TabMapView: View {
     private let locationManager = CLLocationManager()
     
     private var bottomSheetBottomPadding: CGFloat {
-//        viewModel.isDragging ? -bottomSheetFrame.height + 80 : 0
         0
     }
     
     var body: some View {
-        NavigationStack {
+        ZStack {
             innerBody
                 .overlay(content: {
                     CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
                 })
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbar(content: {
-                    ToolbarItem(placement: .topBarTrailing) {
-                        Button {
-                            self.viewModel.onClickSettings()
-                        } label: {
-                            settingsButton
-                        }
-                    }
-                })
-            
+//                .toolbar(content: {
+//                    ToolbarItem(placement: .topBarTrailing) {
+//                        Image("icon_filter_2")
+//                            .onTapGesture {
+//                                self.viewModel.route = .filter
+//                            }
+//                    }
+//                })
+//                .toolbar(content: {
+//                    ToolbarItem(placement: .principal) {
+//                        toggleView
+//                    }
+//                })
+                
             .onAppear {
                 viewModel.onAppear()
                 viewModel.startRegularFetchingNearStations()
@@ -56,6 +59,7 @@ struct TabMapView: View {
     
     var innerBody: some View {
         ZStack {
+            
 //            GMapsViewWrapper(
 //                pickedLocation: $viewModel.pickedLocation,
 //                isDragging: $viewModel.isDragging,
@@ -164,12 +168,9 @@ struct TabMapView: View {
                 
                 Spacer()
                 
-                VStack {
-                    notificationButton
-                        
-                    currentLocationNavView
-                }
-                    .padding(.trailing, 8)
+                currentLocationNavView
+                    .padding(.trailing, 16)
+                    .padding(.bottom, 8)
             }
             
             HomeBottomSheetView(
@@ -202,7 +203,7 @@ struct TabMapView: View {
                     },
                     distance: viewModel.distance
                 ),
-                stations: Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
+                stations: [], //Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
                 hasMoreButton: self.viewModel.discountedStations.count > 6,
                 isSearching: self.viewModel.isLoading,
                 onClickMoreButton: {
@@ -366,5 +367,5 @@ struct TabMapView: View {
     UserSettings.shared.refreshToken = UserSettings.testRefreshToken
     UserSettings.shared.userEmail = UserSettings.testEmail
     UserSettings.shared.appPin = "0000"
-    return MainView()
+    return MapTabView()
 }

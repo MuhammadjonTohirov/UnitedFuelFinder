@@ -14,13 +14,18 @@ enum HomeViewState {
     case routing
 }
 
-final class HomeViewModel: ObservableObject {
+enum HomeBodyState: Int {
+    case map = 0
+    case list
+}
+
+final class MapTabViewModel: ObservableObject {
     @Published var focusableLocation: CLLocation?
-    
+    @Published var bodyState: HomeBodyState = .map
     var fromAddress: String = ""
     var toAddress: String = ""
     
-    var route: HomeRouter? {
+    var route: MapTabRouter? {
         didSet {
             DispatchQueue.main.async {
                 self.push = self.route != nil
