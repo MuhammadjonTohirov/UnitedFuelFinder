@@ -52,6 +52,9 @@ struct MainTabView: View {
                 }
         default:
             Text("")
+//            if mainViewModel.isLoading {
+//                LoadingView()
+//            } 
         }
     }
     
