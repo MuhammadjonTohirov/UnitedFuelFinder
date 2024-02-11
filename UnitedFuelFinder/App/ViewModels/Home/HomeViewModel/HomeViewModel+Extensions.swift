@@ -19,7 +19,7 @@ protocol HomeViewModelProtocol: ObservableObject {
     var fromAddress: String {get set}
     var toAddress: String {get set}
     
-    var route: HomeRouter? {get set}
+    var route: MapTabRouter? {get set}
     
     var presentableRoute: HomePresentableSheets? {get set}
     
@@ -85,7 +85,7 @@ extension HomeViewModelProtocol {
 }
 
 // MARK: - ClickActions
-extension HomeViewModel: HomeViewModelProtocol {
+extension MapTabViewModel: HomeViewModelProtocol {
     func onClickSelectToPointOnMap() {
         withAnimation {
             self.state = .selectTo
@@ -155,7 +155,7 @@ extension HomeViewModel: HomeViewModelProtocol {
 }
 
 // MARK: - Filter methods
-extension HomeViewModel {
+extension MapTabViewModel {
     func filterStationsByRoute() {
         DispatchQueue.main.async {
             self.stations = []

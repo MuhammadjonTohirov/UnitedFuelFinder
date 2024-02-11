@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-enum HomeRouter: ScreenRoute {
-    static func == (lhs: HomeRouter, rhs: HomeRouter) -> Bool {
+enum MapTabRouter: ScreenRoute {
+    static func == (lhs: MapTabRouter, rhs: MapTabRouter) -> Bool {
         lhs.id == rhs.id
     }
     
@@ -22,12 +22,15 @@ enum HomeRouter: ScreenRoute {
             return "stationDetailsmghv bn "
         case .notifications:
             return "notifications"
+        case .filter:
+            return "filter"
         }
     }
     
     case settings
     case stationDetails(station: StationItem)
     case notifications
+    case filter
     
     @ViewBuilder
     var screen: some View {
@@ -38,6 +41,8 @@ enum HomeRouter: ScreenRoute {
             StationDetailsView(station: station)
         case .notifications:
             NotificationsView()
+        case .filter:
+            MapFilterView()
         }
     }
     

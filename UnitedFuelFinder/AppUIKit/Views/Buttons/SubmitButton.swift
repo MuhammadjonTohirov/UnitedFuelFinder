@@ -30,7 +30,7 @@ public struct SubmitButton<Content: View>: View {
                 (isLoading || !isEnabled) ? () : action()
             },
             label: {
-                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .foregroundStyle(backgroundColor)
                     .overlay {
                         if let t = title?() {

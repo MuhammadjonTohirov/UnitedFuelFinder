@@ -14,6 +14,20 @@ struct SettingsView: View {
     @EnvironmentObject var mainModel: MainViewModel
     
     var body: some View {
+        innerBody
+            .toolbar(content: {
+                ToolbarItem(placement: .principal) {
+                    Text("settings".localize)
+                }
+            })
+            .toolbar(content: {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Text("")
+                }
+            })
+    }
+    
+    var innerBody: some View {
         VStack(spacing: 12) {
             SettingsViewUtils.row(image: userAvatar, title: UserSettings.shared.userInfo?.fullName ?? "profile".localize.capitalized
             ) {
