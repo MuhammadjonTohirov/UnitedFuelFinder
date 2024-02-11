@@ -54,3 +54,31 @@ extension UIColor {
         self.init(red: red, green: green, blue: blue, alpha: 1)
     }
 }
+
+extension Color {
+    init(hex: String) {
+        let hexString = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+        let scanner = Scanner(string: hexString)
+        
+        if hexString.hasPrefix("#") {
+            scanner.currentIndex = scanner.string.index(after: scanner.currentIndex)
+        }
+        
+        var color: UInt64 = 0
+        
+        scanner.scanHexInt64(&color)
+        
+        let mask: UInt64 = 0x000000FF
+        
+        let r = Int(color >> 16) & Int(mask)
+        let g = Int(color >> 8) & Int(mask)
+        let b = Int(color) & Int(mask)
+        
+        let red = Double(r) / 255.0
+        let green = Double(g) / 255.0
+        let blue = Double(b) / 255.0
+        
+        self.init(red: red, green: green, blue: blue)
+    }
+}
