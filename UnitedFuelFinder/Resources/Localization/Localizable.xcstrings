@@ -4,7 +4,19 @@
     "" : {
 
     },
+    "($%@ saved)" : {
+
+    },
+    "($%@)" : {
+
+    },
     "(None)" : {
+
+    },
+    "******" : {
+
+    },
+    "#%lld" : {
 
     },
     "%@" : {
@@ -14,6 +26,28 @@
 
     },
     "%lld mi" : {
+
+    },
+    "$ %lld" : {
+
+    },
+    "$%@" : {
+
+    },
+    "$%@ " : {
+
+    },
+    "$%@/$%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "$%1$@/$%2$@"
+          }
+        }
+      }
+    },
+    "$%lld" : {
 
     },
     "address" : {
@@ -354,6 +388,9 @@
         }
       }
     },
+    "Company" : {
+
+    },
     "confirm_otp" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -515,6 +552,9 @@
         }
       }
     },
+    "Dahsboard" : {
+
+    },
     "dark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -537,6 +577,12 @@
           }
         }
       }
+    },
+    "Dashboard" : {
+
+    },
+    "Date" : {
+
     },
     "delete" : {
       "extractionState" : "manual",
@@ -808,6 +854,9 @@
         }
       }
     },
+    "Driver" : {
+
+    },
     "edit_profile" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -946,6 +995,9 @@
         }
       }
     },
+    "Focus" : {
+
+    },
     "from" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1019,6 +1071,9 @@
       }
     },
     "Indigo" : {
+
+    },
+    "Information" : {
 
     },
     "insert_creds" : {
@@ -1267,6 +1322,29 @@
         }
       }
     },
+    "list" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Лист"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "List"
+          }
+        }
+      }
+    },
     "lite" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1447,6 +1525,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Asosiy nuqta"
+          }
+        }
+      }
+    },
+    "map" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Map"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карты"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Harita"
           }
         }
       }
@@ -1866,7 +1967,7 @@
     "Page1" : {
 
     },
-    "Page3" : {
+    "per gallon" : {
 
     },
     "personal_details" : {
@@ -1937,6 +2038,9 @@
           }
         }
       }
+    },
+    "Populated invoices" : {
+
     },
     "post_feedback" : {
       "extractionState" : "manual",
@@ -2076,6 +2180,9 @@
         }
       }
     },
+    "Radius (in miles)" : {
+
+    },
     "Red" : {
 
     },
@@ -2149,6 +2256,9 @@
       }
     },
     "Regular" : {
+
+    },
+    "Retail price " : {
 
     },
     "Retail price %@" : {
@@ -2234,6 +2344,9 @@
           }
         }
       }
+    },
+    "Save " : {
+
     },
     "Save %@ per gallon " : {
       "localizations" : {
@@ -2405,6 +2518,9 @@
         }
       }
     },
+    "Settings" : {
+
+    },
     "setup_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2428,6 +2544,9 @@
         }
       }
     },
+    "Sorted by" : {
+
+    },
     "state" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2450,6 +2569,9 @@
           }
         }
       }
+    },
+    "Stations" : {
+
     },
     "stations_at_radius" : {
       "extractionState" : "manual",
@@ -2546,6 +2668,9 @@
         }
       }
     },
+    "Transferring transactions" : {
+
+    },
     "ufc_client_service" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2568,6 +2693,9 @@
           }
         }
       }
+    },
+    "View all" : {
+
     },
     "view_all" : {
       "extractionState" : "manual",

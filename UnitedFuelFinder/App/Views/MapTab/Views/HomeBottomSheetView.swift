@@ -90,65 +90,35 @@ struct HomeBottomSheetView: View {
             
             ToPointButton(text: input.to.title, isLoading: input.to.isLoading, onClickMap: input.to.onClickMap, onClickBody: input.to.onClickBody)
             
-            LazyHStack {
-                ForEach(stations) { station in
-                    gasStationItem(station).onTapGesture {
-                        self.onClickOpen?(station)
+            if !stations.isEmpty {
+                LazyHStack {
+                    ForEach(stations) { station in
+                        gasStationItem(station).onTapGesture {
+                            self.onClickOpen?(station)
+                        }
+                    }
+                    
+                    if hasMoreButton {
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(height: stationItemHeight)
+                            .frame(width: UIApplication.shared.screenFrame.width * 0.8)
+                            .foregroundStyle(Color.secondaryBackground)
+                            .overlay {
+                                Text("view_all".localize)
+                                    .font(.system(size: 14, weight: .medium))
+                                    .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                            }
+                            .onTapGesture {
+                                onClickMoreButton?()
+                            }
                     }
                 }
-                
-                if hasMoreButton {
-                    RoundedRectangle(cornerRadius: 10)
-                        .frame(height: stationItemHeight)
-                        .frame(width: UIApplication.shared.screenFrame.width * 0.8)
-                        .foregroundStyle(Color.secondaryBackground)
-                        .overlay {
-                            Text("view_all".localize)
-                                .font(.system(size: 14, weight: .medium))
-                                .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                        }
-                        .onTapGesture {
-                            onClickMoreButton?()
-                        }
-                }
+                .frame(maxHeight: 120)
+                .padding(.horizontal, Padding.medium)
+                .scrollable(axis: .horizontal)
+                .padding(.horizontal, -Padding.medium)
+                .scrollIndicators(.never)
             }
-            .frame(maxHeight: 120)
-            .padding(.horizontal, Padding.medium)
-            .scrollable(axis: .horizontal)
-            .padding(.horizontal, -Padding.medium)
-            .scrollIndicators(.never)   
-            .overlay {
-                itemsOverlay
-            }
-        }
-    }
-    
-    @ViewBuilder
-    private var itemsOverlay: some View {
-        if isSearching {
-            VStack {
-                VStack {
-                    Image("icon_search_2")
-                        .renderingMode(.template)
-                        .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                        .frame(width: 42, height: 42)
-                    
-                    Text("searching_stations".localize)
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                }.opacity(self.stations.isEmpty ? 1 : 0)
-            }
-        } else {
-            VStack {
-                Image("icon_search_failed")
-                    .renderingMode(.template)
-                    .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                    .frame(width: 42, height: 42)
-                
-                Text("no_stations_found".localize)
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-            }.opacity(self.stations.isEmpty ? 1 : 0)
         }
     }
     
