@@ -78,6 +78,7 @@ struct DiscountStationView: View {
                     }
                     .padding(.horizontal)
                 }
+                .foregroundColor(.black)
             }
             .frame(width: 325, height: 120)
             .edgesIgnoringSafeArea(.vertical)

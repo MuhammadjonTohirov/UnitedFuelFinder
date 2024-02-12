@@ -33,7 +33,6 @@ struct PopularStationsView: View {
                                 Spacer()
                                 
                                 Text("#\(item.value)")
-                                    .foregroundStyle(Color.black)
                                     .font(.system(size: 12))
                                     .fontWeight(.semibold)
                             }
@@ -43,6 +42,7 @@ struct PopularStationsView: View {
                                 .frame(width: CGFloat(item.value) * 10, height: 8)
                                 .cornerRadius(4)
                         }
+                        .foregroundColor(.black)
                         .padding(.horizontal)
                     }
                 }
