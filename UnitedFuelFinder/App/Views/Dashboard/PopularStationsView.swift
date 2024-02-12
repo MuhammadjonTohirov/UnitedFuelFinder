@@ -10,7 +10,7 @@ import SwiftUI
 struct PopularStationsView: View {
     let data: [(title: String, value: Int)]
     let defaultColors: [Color] = [.accentColor, .blue, .green]
-    
+
     var body: some View {
         GeometryReader {geo in
             ZStack {

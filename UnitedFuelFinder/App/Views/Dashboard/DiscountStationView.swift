@@ -33,6 +33,7 @@ struct DiscountStationView: View {
                         }
                         .font(.system(size: 12))
                         .foregroundStyle(.gray)
+
                         Spacer()
                         
                         let discountedPrice = price - discount
