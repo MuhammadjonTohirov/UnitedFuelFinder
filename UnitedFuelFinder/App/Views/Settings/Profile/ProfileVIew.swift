@@ -15,6 +15,23 @@ struct ProfileVIew: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
+
+                VStack(spacing: 8) {
+                    Image("icon_man_placeholder")
+                        .resizable()
+                        .frame(width: 80, height: 80, alignment: .center)
+                        .clipShape(Circle())
+                    
+                    Button(action: {
+                        
+                    }, label: {
+                        Text("edit".localize)
+                            .font(.system(size: 13, weight: .medium))
+                            .frame(maxWidth: .infinity)
+                    })
+                }
+                .padding(.top, Padding.default/2)
+                
                 personalDetails
                 
                 addressInfo
@@ -41,6 +58,7 @@ struct ProfileVIew: View {
             .ignoresSafeArea(.keyboard, edges: .all)
         }
         .padding(.horizontal, Padding.default)
+        .navigationTitle("edit_profile".localize)
         .navigationBarTitleDisplayMode(.inline)
         .readRect(rect: $viewModel.screenRect)
         .sheet(isPresented: $viewModel.showScreen, content: {
@@ -54,11 +72,6 @@ struct ProfileVIew: View {
     
     private var personalDetails: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text("edit_profile".localize)
-                .font(.system(size: 24, weight: .semibold))
-                .foregroundColor(.init(.label))
-                .padding(.vertical, Padding.large)
-            
             YRoundedTextField {
                 YTextField(text: $viewModel.firstName, placeholder: "first_name".localize, contentType: .givenName)
             }
@@ -100,5 +113,7 @@ struct ProfileVIew: View {
 
 
 #Preview {
-    ProfileVIew()
+    NavigationView {
+        ProfileVIew()
+    }
 }

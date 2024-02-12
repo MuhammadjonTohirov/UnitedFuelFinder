@@ -238,6 +238,12 @@
 		2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */; };
 		2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */; };
 		2EDF8C962AD474AA003D64FC /* MapTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C952AD474AA003D64FC /* MapTabView.swift */; };
+		2EE7472D2B78F7B600FAC8F7 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE747272B78F7B600FAC8F7 /* DashboardView.swift */; };
+		2EE7472E2B78F7B600FAC8F7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE747282B78F7B600FAC8F7 /* TransactionView.swift */; };
+		2EE7472F2B78F7B600FAC8F7 /* InvoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE747292B78F7B600FAC8F7 /* InvoicesView.swift */; };
+		2EE747302B78F7B600FAC8F7 /* DiscountStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7472A2B78F7B600FAC8F7 /* DiscountStationView.swift */; };
+		2EE747312B78F7B600FAC8F7 /* PopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7472B2B78F7B600FAC8F7 /* PopularStationsView.swift */; };
+		2EE747322B78F7B600FAC8F7 /* CardWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7472C2B78F7B600FAC8F7 /* CardWidgetView.swift */; };
 		2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1D92ADD88F900CA8DE2 /* City.swift */; };
 		2EF3A1E62ADD88F900CA8DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */; };
 		2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */; };
@@ -500,6 +506,12 @@
 		2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		2EDF8C952AD474AA003D64FC /* MapTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabView.swift; sourceTree = "<group>"; };
+		2EE747272B78F7B600FAC8F7 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		2EE747282B78F7B600FAC8F7 /* TransactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		2EE747292B78F7B600FAC8F7 /* InvoicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoicesView.swift; sourceTree = "<group>"; };
+		2EE7472A2B78F7B600FAC8F7 /* DiscountStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountStationView.swift; sourceTree = "<group>"; };
+		2EE7472B2B78F7B600FAC8F7 /* PopularStationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularStationsView.swift; sourceTree = "<group>"; };
+		2EE7472C2B78F7B600FAC8F7 /* CardWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardWidgetView.swift; sourceTree = "<group>"; };
 		2EF121B62AEAC1F600D76378 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EF3A1D92ADD88F900CA8DE2 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -1415,6 +1427,19 @@
 			path = MapTab;
 			sourceTree = "<group>";
 		};
+		2EE747262B78F7B600FAC8F7 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				2EE747272B78F7B600FAC8F7 /* DashboardView.swift */,
+				2EE747282B78F7B600FAC8F7 /* TransactionView.swift */,
+				2EE747292B78F7B600FAC8F7 /* InvoicesView.swift */,
+				2EE7472A2B78F7B600FAC8F7 /* DiscountStationView.swift */,
+				2EE7472B2B78F7B600FAC8F7 /* PopularStationsView.swift */,
+				2EE7472C2B78F7B600FAC8F7 /* CardWidgetView.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		2EE91D352AD07FC200A425B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1634,6 +1659,7 @@
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
+				2EE7472F2B78F7B600FAC8F7 /* InvoicesView.swift in Sources */,
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
 				8422A69B2B785AFB00017681 /* InvoicesView.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
@@ -1652,6 +1678,7 @@
 				2E5DF9432AEACD63005BE20D /* YPhoneField.swift in Sources */,
 				2E36A74F2AEF9FDB0033363E /* UserInfo.swift in Sources */,
 				2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */,
+				2EE747322B78F7B600FAC8F7 /* CardWidgetView.swift in Sources */,
 				2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */,
 				2E5DF97B2AEACD64005BE20D /* CodableWrapper.swift in Sources */,
 				2E5DF92D2AEACD63005BE20D /* Extensions.swift in Sources */,
@@ -1674,6 +1701,7 @@
 				2E5DF9772AEACD64005BE20D /* AuthService.swift in Sources */,
 				2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */,
 				2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */,
+				2EE7472E2B78F7B600FAC8F7 /* TransactionView.swift in Sources */,
 				2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */,
 				8422A6992B784B6200017681 /* TransactionView.swift in Sources */,
 				2E5DF9822AEACD64005BE20D /* DispatchQueue+Extensions.swift in Sources */,
@@ -1716,6 +1744,7 @@
 				2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */,
 				2E5DF9362AEACD63005BE20D /* UIApp+Extension.swift in Sources */,
 				2E2D1EC32AEBE41500559A1D /* SelectCityView.swift in Sources */,
+				2EE747312B78F7B600FAC8F7 /* PopularStationsView.swift in Sources */,
 				2E5DF9882AEACD64005BE20D /* URL+Extensions.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
 				8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */,
@@ -1783,6 +1812,7 @@
 				2E60B61B2AF8751500573049 /* ProfileViewModel.swift in Sources */,
 				2EB599692B09DB6A0038F5F0 /* RegularButton.swift in Sources */,
 				2E527A412ACC80C6005B8B95 /* UnitedFuelFinderApp.swift in Sources */,
+				2EE7472D2B78F7B600FAC8F7 /* DashboardView.swift in Sources */,
 				2E5DF9262AEACD63005BE20D /* ItemSelectionView.swift in Sources */,
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
@@ -1798,6 +1828,7 @@
 				2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */,
 				2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */,
 				2E5DF9662AEACD63005BE20D /* MapPitchControl.swift in Sources */,
+				2EE747302B78F7B600FAC8F7 /* DiscountStationView.swift in Sources */,
 				2E5DF9332AEACD63005BE20D /* Padding.swift in Sources */,
 				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
 				2E5DF9812AEACD64005BE20D /* Array+Extensions.swift in Sources */,

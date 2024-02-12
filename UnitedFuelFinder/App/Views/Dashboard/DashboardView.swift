@@ -66,26 +66,6 @@ struct DashboardView: View {
         .scrollable(showIndicators: false)
         .navigationTitle("Dahsboard")
         .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(action: {
-                    
-                }, label: {
-                    Image(systemName: "bell")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .foregroundStyle(Color.init(uiColor: .label))
-                })
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Image(profileImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 32, height: 32)
-                    .cornerRadius(20)
-            }
-        }
     }
     private var stationDetail: some View {
         ZStack {

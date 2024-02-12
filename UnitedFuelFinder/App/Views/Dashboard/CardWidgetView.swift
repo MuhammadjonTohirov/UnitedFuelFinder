@@ -27,7 +27,7 @@ struct CardWidgetView: View {
                 
                 Divider()
                     .frame(height: 1)
-                    .background(Color(hex: "#FFFFFF"))
+                    .background(.white)
                 
                 HStack {
                     Text(showBalance ? "$ \(balance)" : "******")
@@ -54,7 +54,7 @@ struct CardWidgetView: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 143)
-        .background(Color(hex: "#FCB527"))
+        .background(Color.accentColor)
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
     }

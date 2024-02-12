@@ -32,7 +32,8 @@ struct DiscountStationView: View {
                             Text(location)
                         }
                         .font(.system(size: 12))
-                        .foregroundStyle(Color(hex: "#4B4B4B"))
+                        .foregroundStyle(.gray)
+
                         Spacer()
                         
                         let discountedPrice = price - discount
@@ -46,11 +47,11 @@ struct DiscountStationView: View {
                     HStack {
                         VStack(alignment: .leading) {
                             Text("Save ")
-                            + Text("$\(String(format: "%g", discount)) ").foregroundColor(Color(hex: "#FCB527"))
+                            + Text("$\(String(format: "%g", discount)) ").foregroundColor(Color.accentColor)
                             + Text("per gallon")
                             
                             Text("Retail price ")
-                            + Text("$\(String(format: "%g", price))").foregroundColor(Color(hex: "#FCB527"))
+                            + Text("$\(String(format: "%g", price))").foregroundColor(Color.accentColor)
                         }
                         .font(.system(size: 12))
                         .fontWeight(.regular)
@@ -73,7 +74,7 @@ struct DiscountStationView: View {
                         })
                         .foregroundStyle(Color.white)
                         .frame(width: 73, height: 26)
-                        .background(Color(hex: "#FCB527"))
+                        .background(Color.accentColor)
                         .cornerRadius(4)
                     }
                     .padding(.horizontal)

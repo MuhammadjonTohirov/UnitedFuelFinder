@@ -4,7 +4,19 @@
     "" : {
 
     },
+    "($%@ saved)" : {
+
+    },
+    "($%@)" : {
+
+    },
     "(None)" : {
+
+    },
+    "******" : {
+
+    },
+    "#%lld" : {
 
     },
     "%@" : {
@@ -14,6 +26,28 @@
 
     },
     "%lld mi" : {
+
+    },
+    "$ %lld" : {
+
+    },
+    "$%@" : {
+
+    },
+    "$%@ " : {
+
+    },
+    "$%@/$%@" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "$%1$@/$%2$@"
+          }
+        }
+      }
+    },
+    "$%lld" : {
 
     },
     "address" : {
@@ -354,6 +388,9 @@
         }
       }
     },
+    "Company" : {
+
+    },
     "confirm_otp" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -515,6 +552,9 @@
         }
       }
     },
+    "Dahsboard" : {
+
+    },
     "dark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -539,6 +579,9 @@
       }
     },
     "Dashboard" : {
+
+    },
+    "Date" : {
 
     },
     "delete" : {
@@ -811,6 +854,9 @@
         }
       }
     },
+    "Driver" : {
+
+    },
     "edit_profile" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -949,6 +995,9 @@
         }
       }
     },
+    "Focus" : {
+
+    },
     "from" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1022,6 +1071,9 @@
       }
     },
     "Indigo" : {
+
+    },
+    "Information" : {
 
     },
     "insert_creds" : {
@@ -1912,7 +1964,7 @@
     "Page 2" : {
 
     },
-    "Page1" : {
+    "per gallon" : {
 
     },
     "personal_details" : {
@@ -1983,6 +2035,9 @@
           }
         }
       }
+    },
+    "Populated invoices" : {
+
     },
     "post_feedback" : {
       "extractionState" : "manual",
@@ -2200,6 +2255,9 @@
     "Regular" : {
 
     },
+    "Retail price " : {
+
+    },
     "Retail price %@" : {
       "localizations" : {
         "en" : {
@@ -2283,6 +2341,9 @@
           }
         }
       }
+    },
+    "Save " : {
+
     },
     "Save %@ per gallon " : {
       "localizations" : {
@@ -2604,6 +2665,9 @@
         }
       }
     },
+    "Transferring transactions" : {
+
+    },
     "ufc_client_service" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2626,6 +2690,9 @@
           }
         }
       }
+    },
+    "View all" : {
+
     },
     "view_all" : {
       "extractionState" : "manual",
