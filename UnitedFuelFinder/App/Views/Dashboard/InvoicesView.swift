@@ -50,6 +50,7 @@ struct InvoicesView: View {
                     Text(date)
                 }
             }
+            .foregroundColor(.black)
             .font(.system(size: 12))
             .fontWeight(.regular)
             .padding()

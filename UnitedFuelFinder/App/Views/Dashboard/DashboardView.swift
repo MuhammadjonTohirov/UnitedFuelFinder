@@ -13,7 +13,7 @@ struct DashboardView: View {
         (title: "Bar 2", value: 10),
         (title: "Bar 3", value: 11)
     ]
-    
+    @State var showAlltrans: Bool = false
     @State var profileImage: String = "station"
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -32,7 +32,7 @@ struct DashboardView: View {
                 Text("Transferring transactions")
                 Spacer()
                 Button(action: {
-                    
+                    showAlltrans.toggle()
                 }, label: {
                     Text("View all")
                 })
@@ -59,6 +59,9 @@ struct DashboardView: View {
 //            Text("")
 //                .frame(height: 50)
         }
+        .navigationDestination(isPresented: $showAlltrans, destination: {
+            AllTransactionsView()
+        })
         .padding(.horizontal)
         .font(.system(size: 14))
         .fontWeight(.semibold)

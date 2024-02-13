@@ -261,6 +261,7 @@
 		8422A6992B784B6200017681 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6982B784B6200017681 /* TransactionView.swift */; };
 		8422A69B2B785AFB00017681 /* InvoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A69A2B785AFB00017681 /* InvoicesView.swift */; };
 		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
+		849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */; };
 		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
 /* End PBXBuildFile section */
 
@@ -533,6 +534,7 @@
 		8422A6982B784B6200017681 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		8422A69A2B785AFB00017681 /* InvoicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicesView.swift; sourceTree = "<group>"; };
 		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
+		849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsView.swift; sourceTree = "<group>"; };
 		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1513,6 +1515,7 @@
 			isa = PBXGroup;
 			children = (
 				8422A6842B77996200017681 /* DashboardView.swift */,
+				849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */,
 				8422A6862B77B05000017681 /* CardWidgetView.swift */,
 				8422A6942B781B5400017681 /* PopularStationsView.swift */,
 				8422A6962B782BD600017681 /* DiscountStationView.swift */,
@@ -1657,6 +1660,7 @@
 				2E5DF9852AEACD64005BE20D /* URLSession+Extensions.swift in Sources */,
 				2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */,
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
+				849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */,
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
 				2EE7472F2B78F7B600FAC8F7 /* InvoicesView.swift in Sources */,

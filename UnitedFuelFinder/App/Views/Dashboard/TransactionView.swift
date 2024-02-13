@@ -83,6 +83,7 @@ struct TransactionView: View {
                     Text(date)
                 }
             }
+            .foregroundColor(.black)
             .font(.system(size: 12))
             .fontWeight(.regular)
             .padding(.horizontal)
