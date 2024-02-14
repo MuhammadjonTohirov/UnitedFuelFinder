@@ -17,12 +17,13 @@ struct TransactionView: View {
     @State var driver: String
     @State var cardNumber: String
     @State var date: String
+    
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Color.white)
+                .fill(.appSecondaryBackground)
                 .cornerRadius(12)
-                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                
             VStack(spacing: 10) {
                 HStack {
                     Text(title)

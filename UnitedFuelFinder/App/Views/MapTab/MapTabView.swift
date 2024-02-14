@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import GoogleMaps
-import SwiftUITooltip
 
 struct MapTabView: View {
     @State private var bottomSheetFrame: CGRect = .zero

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E00707C2B7D268700A39E6D /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E00707B2B7D268700A39E6D /* DonutChart.swift */; };
 		2E01E5DD2B52FAB000F6231D /* SettingsProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DC2B52FAB000F6231D /* SettingsProfile.swift */; };
 		2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DE2B53908100F6231D /* NetResDelete.swift */; };
 		2E01E5E12B53918C00F6231D /* NetReqDeleteConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */; };
@@ -59,6 +60,9 @@
 		2E3F17C92AD9126300F4DC52 /* GoogleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */; };
 		2E3F17CA2AD9126300F4DC52 /* GoogleMapsCore.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E3F17C72AD9126300F4DC52 /* GoogleMapsCore.xcframework */; };
 		2E3F17CC2AD914F500F4DC52 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2E3F17CB2AD914F400F4DC52 /* GoogleMaps.bundle */; };
+		2E43D9FF2B7B886C00716DB0 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = 2E43D9FE2B7B886C00716DB0 /* SwiftUITooltip */; };
+		2E43DA032B7B8BE600716DB0 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E43DA022B7B8BE600716DB0 /* DashboardView.swift */; };
+		2E43DA082B7B9C4200716DB0 /* SpendingsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E43DA072B7B9C4200716DB0 /* SpendingsWidgetView.swift */; };
 		2E502D052B272CA8002CE669 /* SettingsAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D042B272CA8002CE669 /* SettingsAppearance.swift */; };
 		2E502D072B272CBA002CE669 /* SettingsSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D062B272CBA002CE669 /* SettingsSecurity.swift */; };
 		2E502D092B272D39002CE669 /* SettingsViewUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E502D082B272D39002CE669 /* SettingsViewUtils.swift */; };
@@ -205,7 +209,6 @@
 		2EAFDF582B34E1090058EED3 /* NetResSearchAddressItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */; };
 		2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FA2AEFF43200BCFBE3 /* AllStationsView.swift */; };
 		2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB189FC2AEFF81800BCFBE3 /* GasStationItemView.swift */; };
-		2EB599672B09CE350038F5F0 /* SwiftUITooltip in Frameworks */ = {isa = PBXBuildFile; productRef = 2EB599662B09CE350038F5F0 /* SwiftUITooltip */; };
 		2EB599692B09DB6A0038F5F0 /* RegularButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB599682B09DB6A0038F5F0 /* RegularButton.swift */; };
 		2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996A2B09E39A0038F5F0 /* StationTipInfoView.swift */; };
 		2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB5996D2B09E5F90038F5F0 /* NotificationsView.swift */; };
@@ -238,12 +241,6 @@
 		2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */; };
 		2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */; };
 		2EDF8C962AD474AA003D64FC /* MapTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C952AD474AA003D64FC /* MapTabView.swift */; };
-		2EE7472D2B78F7B600FAC8F7 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE747272B78F7B600FAC8F7 /* DashboardView.swift */; };
-		2EE7472E2B78F7B600FAC8F7 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE747282B78F7B600FAC8F7 /* TransactionView.swift */; };
-		2EE7472F2B78F7B600FAC8F7 /* InvoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE747292B78F7B600FAC8F7 /* InvoicesView.swift */; };
-		2EE747302B78F7B600FAC8F7 /* DiscountStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7472A2B78F7B600FAC8F7 /* DiscountStationView.swift */; };
-		2EE747312B78F7B600FAC8F7 /* PopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7472B2B78F7B600FAC8F7 /* PopularStationsView.swift */; };
-		2EE747322B78F7B600FAC8F7 /* CardWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE7472C2B78F7B600FAC8F7 /* CardWidgetView.swift */; };
 		2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1D92ADD88F900CA8DE2 /* City.swift */; };
 		2EF3A1E62ADD88F900CA8DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */; };
 		2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */; };
@@ -254,7 +251,6 @@
 		2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */; };
 		2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */; };
 		841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D81052AF75DBC00C5932C /* ProfileVIew.swift */; };
-		8422A6852B77996200017681 /* DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6842B77996200017681 /* DashboardView.swift */; };
 		8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6862B77B05000017681 /* CardWidgetView.swift */; };
 		8422A6952B781B5400017681 /* PopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6942B781B5400017681 /* PopularStationsView.swift */; };
 		8422A6972B782BD600017681 /* DiscountStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6962B782BD600017681 /* DiscountStationView.swift */; };
@@ -279,6 +275,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2E00707B2B7D268700A39E6D /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		2E01E5DC2B52FAB000F6231D /* SettingsProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfile.swift; sourceTree = "<group>"; };
 		2E01E5DE2B53908100F6231D /* NetResDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResDelete.swift; sourceTree = "<group>"; };
 		2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqDeleteConfirm.swift; sourceTree = "<group>"; };
@@ -332,6 +329,8 @@
 		2E3F17C62AD9126300F4DC52 /* GoogleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMaps.xcframework; sourceTree = "<group>"; };
 		2E3F17C72AD9126300F4DC52 /* GoogleMapsCore.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = GoogleMapsCore.xcframework; sourceTree = "<group>"; };
 		2E3F17CB2AD914F400F4DC52 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = GoogleMaps.bundle; sourceTree = "<group>"; };
+		2E43DA022B7B8BE600716DB0 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
+		2E43DA072B7B9C4200716DB0 /* SpendingsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendingsWidgetView.swift; sourceTree = "<group>"; };
 		2E502D042B272CA8002CE669 /* SettingsAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAppearance.swift; sourceTree = "<group>"; };
 		2E502D062B272CBA002CE669 /* SettingsSecurity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsSecurity.swift; sourceTree = "<group>"; };
 		2E502D082B272D39002CE669 /* SettingsViewUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewUtils.swift; sourceTree = "<group>"; };
@@ -507,12 +506,6 @@
 		2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
 		2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		2EDF8C952AD474AA003D64FC /* MapTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabView.swift; sourceTree = "<group>"; };
-		2EE747272B78F7B600FAC8F7 /* DashboardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
-		2EE747282B78F7B600FAC8F7 /* TransactionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
-		2EE747292B78F7B600FAC8F7 /* InvoicesView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvoicesView.swift; sourceTree = "<group>"; };
-		2EE7472A2B78F7B600FAC8F7 /* DiscountStationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscountStationView.swift; sourceTree = "<group>"; };
-		2EE7472B2B78F7B600FAC8F7 /* PopularStationsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopularStationsView.swift; sourceTree = "<group>"; };
-		2EE7472C2B78F7B600FAC8F7 /* CardWidgetView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardWidgetView.swift; sourceTree = "<group>"; };
 		2EF121B62AEAC1F600D76378 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EF3A1D92ADD88F900CA8DE2 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -527,7 +520,6 @@
 		2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Extensions.swift"; sourceTree = "<group>"; };
 		2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerViewsManager.swift; sourceTree = "<group>"; };
 		841D81052AF75DBC00C5932C /* ProfileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVIew.swift; sourceTree = "<group>"; };
-		8422A6842B77996200017681 /* DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardView.swift; sourceTree = "<group>"; };
 		8422A6862B77B05000017681 /* CardWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWidgetView.swift; sourceTree = "<group>"; };
 		8422A6942B781B5400017681 /* PopularStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularStationsView.swift; sourceTree = "<group>"; };
 		8422A6962B782BD600017681 /* DiscountStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStationView.swift; sourceTree = "<group>"; };
@@ -543,12 +535,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E43D9FF2B7B886C00716DB0 /* SwiftUITooltip in Frameworks */,
 				2E5DF9912AEACE11005BE20D /* Realm in Frameworks */,
 				2E0E4DE92AD915E800E846B6 /* UIKit.framework in Frameworks */,
 				2E0E4DE72AD915E000E846B6 /* SystemConfiguration.framework in Frameworks */,
 				2EF746A72B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework in Frameworks */,
 				2E0E4DE52AD915DB00E846B6 /* QuartzCore.framework in Frameworks */,
-				2EB599672B09CE350038F5F0 /* SwiftUITooltip in Frameworks */,
 				2E0E4DE32AD915D500E846B6 /* OpenGLES.framework in Frameworks */,
 				2E0E4DE12AD915CF00E846B6 /* Metal.framework in Frameworks */,
 				2E5DF9932AEACE11005BE20D /* RealmSwift in Frameworks */,
@@ -574,6 +566,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2E00707A2B7D267000A39E6D /* DonutChart */ = {
+			isa = PBXGroup;
+			children = (
+				2E00707B2B7D268700A39E6D /* DonutChart.swift */,
+			);
+			path = DonutChart;
+			sourceTree = "<group>";
+		};
 		2E01E5DB2B52FAA700F6231D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,6 +831,7 @@
 		2E5DF8B22AEACD63005BE20D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E00707A2B7D267000A39E6D /* DonutChart */,
 				2E6F3CBC2B3CA6210015C623 /* AppNavigator */,
 				2E36A7502AEFB8EE0033363E /* Images */,
 				2E5DF8B32AEACD63005BE20D /* Buttons */,
@@ -1429,19 +1430,6 @@
 			path = MapTab;
 			sourceTree = "<group>";
 		};
-		2EE747262B78F7B600FAC8F7 /* Dashboard */ = {
-			isa = PBXGroup;
-			children = (
-				2EE747272B78F7B600FAC8F7 /* DashboardView.swift */,
-				2EE747282B78F7B600FAC8F7 /* TransactionView.swift */,
-				2EE747292B78F7B600FAC8F7 /* InvoicesView.swift */,
-				2EE7472A2B78F7B600FAC8F7 /* DiscountStationView.swift */,
-				2EE7472B2B78F7B600FAC8F7 /* PopularStationsView.swift */,
-				2EE7472C2B78F7B600FAC8F7 /* CardWidgetView.swift */,
-			);
-			path = Dashboard;
-			sourceTree = "<group>";
-		};
 		2EE91D352AD07FC200A425B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1514,7 +1502,8 @@
 		8422A6662B7762B000017681 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				8422A6842B77996200017681 /* DashboardView.swift */,
+				2E43DA022B7B8BE600716DB0 /* DashboardView.swift */,
+				2E43DA072B7B9C4200716DB0 /* SpendingsWidgetView.swift */,
 				849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */,
 				8422A6862B77B05000017681 /* CardWidgetView.swift */,
 				8422A6942B781B5400017681 /* PopularStationsView.swift */,
@@ -1547,7 +1536,7 @@
 				2EDF8C282AD1F04A003D64FC /* SwiftKeychainWrapper */,
 				2E5DF9902AEACE11005BE20D /* Realm */,
 				2E5DF9922AEACE11005BE20D /* RealmSwift */,
-				2EB599662B09CE350038F5F0 /* SwiftUITooltip */,
+				2E43D9FE2B7B886C00716DB0 /* SwiftUITooltip */,
 			);
 			productName = UnitedFuelFinder;
 			productReference = 2E527A3D2ACC80C6005B8B95 /* UnitedFuelFinder.app */;
@@ -1583,7 +1572,7 @@
 				2EE91D2B2AD07E6400A425B5 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				2EE91D342AD07F8E00A425B5 /* XCRemoteSwiftPackageReference "SwiftKeychainWrapper" */,
 				2E5DF98F2AEACE11005BE20D /* XCRemoteSwiftPackageReference "realm-swift" */,
-				2EB599652B09CE350038F5F0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
+				2E43D9FD2B7B886C00716DB0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */,
 			);
 			productRefGroup = 2E527A3E2ACC80C6005B8B95 /* Products */;
 			projectDirPath = "";
@@ -1631,6 +1620,7 @@
 				2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */,
 				2EAFDF582B34E1090058EED3 /* NetResSearchAddressItem.swift in Sources */,
 				2E0F93D22B0134CF00660DEB /* NetResStationComment.swift in Sources */,
+				2E43DA032B7B8BE600716DB0 /* DashboardView.swift in Sources */,
 				2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */,
 				2E5DF9782AEACD64005BE20D /* CommonService.swift in Sources */,
 				2E5DF93D2AEACD63005BE20D /* RadioButton.swift in Sources */,
@@ -1663,8 +1653,8 @@
 				849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */,
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
-				2EE7472F2B78F7B600FAC8F7 /* InvoicesView.swift in Sources */,
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
+				2E00707C2B7D268700A39E6D /* DonutChart.swift in Sources */,
 				8422A69B2B785AFB00017681 /* InvoicesView.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
 				2EF746A52B1C4EB8009E2D8D /* MapTabRouter.swift in Sources */,
@@ -1682,7 +1672,6 @@
 				2E5DF9432AEACD63005BE20D /* YPhoneField.swift in Sources */,
 				2E36A74F2AEF9FDB0033363E /* UserInfo.swift in Sources */,
 				2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */,
-				2EE747322B78F7B600FAC8F7 /* CardWidgetView.swift in Sources */,
 				2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */,
 				2E5DF97B2AEACD64005BE20D /* CodableWrapper.swift in Sources */,
 				2E5DF92D2AEACD63005BE20D /* Extensions.swift in Sources */,
@@ -1705,7 +1694,6 @@
 				2E5DF9772AEACD64005BE20D /* AuthService.swift in Sources */,
 				2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */,
 				2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */,
-				2EE7472E2B78F7B600FAC8F7 /* TransactionView.swift in Sources */,
 				2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */,
 				8422A6992B784B6200017681 /* TransactionView.swift in Sources */,
 				2E5DF9822AEACD64005BE20D /* DispatchQueue+Extensions.swift in Sources */,
@@ -1748,7 +1736,7 @@
 				2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */,
 				2E5DF9362AEACD63005BE20D /* UIApp+Extension.swift in Sources */,
 				2E2D1EC32AEBE41500559A1D /* SelectCityView.swift in Sources */,
-				2EE747312B78F7B600FAC8F7 /* PopularStationsView.swift in Sources */,
+				2E43DA082B7B9C4200716DB0 /* SpendingsWidgetView.swift in Sources */,
 				2E5DF9882AEACD64005BE20D /* URL+Extensions.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
 				8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */,
@@ -1786,7 +1774,6 @@
 				2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */,
 				2E5DF9832AEACD64005BE20D /* String+Extensions.swift in Sources */,
 				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
-				8422A6852B77996200017681 /* DashboardView.swift in Sources */,
 				2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */,
 				2E5DF94E2AEACD63005BE20D /* MapMultiPolygon.swift in Sources */,
 				2E5DF97A2AEACD64005BE20D /* AuthNetworkRouter.swift in Sources */,
@@ -1816,7 +1803,6 @@
 				2E60B61B2AF8751500573049 /* ProfileViewModel.swift in Sources */,
 				2EB599692B09DB6A0038F5F0 /* RegularButton.swift in Sources */,
 				2E527A412ACC80C6005B8B95 /* UnitedFuelFinderApp.swift in Sources */,
-				2EE7472D2B78F7B600FAC8F7 /* DashboardView.swift in Sources */,
 				2E5DF9262AEACD63005BE20D /* ItemSelectionView.swift in Sources */,
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
@@ -1832,7 +1818,6 @@
 				2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */,
 				2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */,
 				2E5DF9662AEACD63005BE20D /* MapPitchControl.swift in Sources */,
-				2EE747302B78F7B600FAC8F7 /* DiscountStationView.swift in Sources */,
 				2E5DF9332AEACD63005BE20D /* Padding.swift in Sources */,
 				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
 				2E5DF9812AEACD64005BE20D /* Array+Extensions.swift in Sources */,
@@ -2069,20 +2054,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2E43D9FD2B7B886C00716DB0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/quassum/SwiftUI-Tooltip";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.2;
+			};
+		};
 		2E5DF98F2AEACE11005BE20D /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
 				branch = master;
 				kind = branch;
-			};
-		};
-		2EB599652B09CE350038F5F0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/quassum/SwiftUI-Tooltip";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.2;
 			};
 		};
 		2EE91D2B2AD07E6400A425B5 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
@@ -2104,6 +2089,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2E43D9FE2B7B886C00716DB0 /* SwiftUITooltip */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2E43D9FD2B7B886C00716DB0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
+			productName = SwiftUITooltip;
+		};
 		2E5DF9902AEACE11005BE20D /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2E5DF98F2AEACE11005BE20D /* XCRemoteSwiftPackageReference "realm-swift" */;
@@ -2113,11 +2103,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 2E5DF98F2AEACE11005BE20D /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
-		};
-		2EB599662B09CE350038F5F0 /* SwiftUITooltip */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 2EB599652B09CE350038F5F0 /* XCRemoteSwiftPackageReference "SwiftUI-Tooltip" */;
-			productName = SwiftUITooltip;
 		};
 		2EDF8C262AD1F04A003D64FC /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;

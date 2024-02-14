@@ -13,20 +13,24 @@ struct DashboardView: View {
         (title: "Bar 2", value: 10),
         (title: "Bar 3", value: 11)
     ]
+    
     @State var showAlltrans: Bool = false
     @State var profileImage: String = "station"
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             Text("")
             
             CardWidgetView(name: "John Doe", cardNummber: "•••• 8484", balance: 1500)
             
+            Text("total.spendings".localize)
+            SpendingsWidgetView()
+            
             Text("Most popular station".localize)
             PopularStationsView(data: barChartData)
             
             Text("Top discounted stations".localize)
             stationDetail
-                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
             
             HStack {
                 Text("Transferring transactions")
@@ -75,6 +79,10 @@ struct DashboardView: View {
             HStack{
                 ForEach(0..<3) {index in
                     DiscountStationView(title: "TA/Petrol", location: "23.37 ml • NEWARK NJ", price: 5.1, discount: 0.68)
+                        .background {
+                            RoundedRectangle(cornerRadius: 16)
+                                .foregroundStyle(.appSecondaryBackground)
+                        }
                 }
             }
             .scrollable(axis: .horizontal, showIndicators: false)
