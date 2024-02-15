@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "icon_man_placeholder.png",
+      "filename" : "icon_avatar.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "icon_man_placeholder@2x.png",
+      "filename" : "icon_avatar@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "icon_man_placeholder@3x.png",
+      "filename" : "icon_avatar@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

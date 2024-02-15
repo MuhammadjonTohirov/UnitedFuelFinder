@@ -15,9 +15,8 @@ struct PopularStationsView: View {
         GeometryReader {geo in
             ZStack {
                 Rectangle()
-                    .fill(Color.white)
+                    .foregroundStyle(.appSecondaryBackground)
                     .cornerRadius(12)
-                    .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
                 
                 VStack(alignment: .leading) {
                     ForEach(data.indices, id: \.self) { index in
@@ -42,7 +41,7 @@ struct PopularStationsView: View {
                                 .frame(width: CGFloat(item.value) * 10, height: 8)
                                 .cornerRadius(4)
                         }
-                        .foregroundColor(.black)
+                        .foregroundColor(.label)
                         .padding(.horizontal)
                     }
                 }

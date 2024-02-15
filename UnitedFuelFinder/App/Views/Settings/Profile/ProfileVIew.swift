@@ -6,24 +6,24 @@
 //
 
 import SwiftUI
-
-
+import PhotosUI
 
 struct ProfileVIew: View {
     @StateObject var viewModel = ProfileViewModel()
+    @State private var showPickerAlert = false
     
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
 
                 VStack(spacing: 8) {
-                    Image("icon_man_placeholder")
+                    Image(uiImage: viewModel.avatar)
                         .resizable()
                         .frame(width: 80, height: 80, alignment: .center)
                         .clipShape(Circle())
                     
                     Button(action: {
-                        
+                        showPickerAlert = true
                     }, label: {
                         Text("edit".localize)
                             .font(.system(size: 13, weight: .medium))
@@ -56,6 +56,28 @@ struct ProfileVIew: View {
                 .padding(.bottom, Padding.medium)
             }
             .ignoresSafeArea(.keyboard, edges: .all)
+        }
+        .fullScreenCover(isPresented: $viewModel.showImagePicker, content: {
+            ImagePicker(
+                sourceType: viewModel.sourceType,
+                selectedImage: $viewModel.avatar,
+                imageUrl: $viewModel.imageUrl)
+            .ignoresSafeArea()
+        })
+        .confirmationDialog("select_image".localize, isPresented: $showPickerAlert) {
+            Button("camera".localize) {
+                viewModel.sourceType = .camera
+                viewModel.showImagePicker = true
+            }
+            
+            Button("gallery".localize) {
+                viewModel.sourceType = .photoLibrary
+                viewModel.showImagePicker = true
+            }
+            
+            Button("cancel".localize, role: .cancel) {
+                viewModel.showImagePicker = false
+            }
         }
         .padding(.horizontal, Padding.default)
         .navigationTitle("edit_profile".localize)

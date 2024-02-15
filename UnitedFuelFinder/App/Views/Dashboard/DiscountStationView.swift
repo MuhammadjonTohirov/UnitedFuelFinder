@@ -16,7 +16,7 @@ struct DiscountStationView: View {
     var body: some View {
             ZStack {
                 Rectangle()
-                    .fill(Color.white)
+                    .foregroundStyle(.appSecondaryBackground)
                     .cornerRadius(12)
                     .shadow(color: Color.white.opacity(0.2), radius: 4, x: 0, y: 2)
                 

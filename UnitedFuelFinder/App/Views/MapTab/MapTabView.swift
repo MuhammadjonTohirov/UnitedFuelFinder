@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import GoogleMaps
-import SwiftUITooltip
 
 struct MapTabView: View {
     @State private var bottomSheetFrame: CGRect = .zero
@@ -33,19 +32,6 @@ struct MapTabView: View {
                     CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
                 })
                 .navigationBarTitleDisplayMode(.inline)
-//                .toolbar(content: {
-//                    ToolbarItem(placement: .topBarTrailing) {
-//                        Image("icon_filter_2")
-//                            .onTapGesture {
-//                                self.viewModel.route = .filter
-//                            }
-//                    }
-//                })
-//                .toolbar(content: {
-//                    ToolbarItem(placement: .principal) {
-//                        toggleView
-//                    }
-//                })
                 
             .onAppear {
                 viewModel.onAppear()
@@ -59,53 +45,14 @@ struct MapTabView: View {
     
     var innerBody: some View {
         ZStack {
-            
-//            GMapsViewWrapper(
-//                pickedLocation: $viewModel.pickedLocation,
-//                isDragging: $viewModel.isDragging,
-//                screenCenter: pointerFrame.center,
-//                markers: $viewModel.stationsMarkers
-//            )
-//            .set(currentLocation: viewModel.focusableLocation)
-//            .set(
-//                from: self.viewModel.fromLocation?.coordinate,
-//                to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
-//                onStartDrawing: {
-//                    Logging.l("Before start drawing")
-//                    viewModel.onStartDrawingRoute()
-//                },
-//                onEndDrawing: { isOK in
-//                    Logging.l("After end drawing")
-//                    viewModel.onEndDrawingRoute(isOK)
-//                }
-//            )
-//            .set(onClickMarker: { marker, point in
-//                if marker.hasStation {
-//                    self.selectedMarker = marker
-//                }
-//            })
-//            .ignoresSafeArea()
-//            .padding(.bottom, 8)
-//            .overlay {
-//                bodyOverlay
-//            }
-//            .ignoresSafeArea(.container, edges: .bottom)
-//            .padding(.bottom, -14)
-//            .onChange(of: $viewModel.pickedLocation, perform: { value in
-//                if viewModel.state == .routing {
-//                    return
-//                }
-//                
-//                self.viewModel.reloadAddress()
-//            })
+            innerBodyByState
             
             bottomContent
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
                 .environmentObject(mainModel)
-        })
-        
+        })        
         .sheet(item: $selectedMarker, content: { marker in
             if let st = selectedMarker?.station {
                 StationTipView(station: st, onClickShow: { station in
@@ -130,6 +77,53 @@ struct MapTabView: View {
                     screenFrame = geometry.frame(in: .global)
                 }
             })
+        }
+    }
+    
+    @ViewBuilder
+    private var innerBodyByState: some View {
+        switch self.viewModel.bodyState {
+        case .map:
+            GMapsViewWrapper(
+                pickedLocation: $viewModel.pickedLocation,
+                isDragging: $viewModel.isDragging,
+                screenCenter: pointerFrame.center,
+                markers: $viewModel.stationsMarkers
+            )
+            .set(currentLocation: viewModel.focusableLocation)
+            .set(
+                from: self.viewModel.fromLocation?.coordinate,
+                to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
+                onStartDrawing: {
+                    Logging.l("Before start drawing")
+                    viewModel.onStartDrawingRoute()
+                },
+                onEndDrawing: { isOK in
+                    Logging.l("After end drawing")
+                    viewModel.onEndDrawingRoute(isOK)
+                }
+            )
+            .set(onClickMarker: { marker, point in
+                if marker.hasStation {
+                    self.selectedMarker = marker
+                }
+            })
+            .ignoresSafeArea()
+            .padding(.bottom, 8)
+            .overlay {
+                bodyOverlay
+            }
+            .ignoresSafeArea(.container, edges: .bottom)
+            .padding(.bottom, -14)
+            .onChange(of: $viewModel.pickedLocation, perform: { value in
+                if viewModel.state == .routing {
+                    return
+                }
+                
+                self.viewModel.reloadAddress()
+            })
+        case .list:
+            Text("break")
         }
     }
     

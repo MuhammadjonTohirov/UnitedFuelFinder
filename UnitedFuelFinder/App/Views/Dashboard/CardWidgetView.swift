@@ -17,13 +17,12 @@ struct CardWidgetView: View {
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
                     Text("Enregy trucking".localize)
-                    
+                        .font(.system(size: 16, weight: .bold))
                     Spacer()
                     
                     Text(cardNummber)
+                        .font(.system(size: 14, weight: .semibold))
                 }
-                .font(.system(size: 20))
-                .fontWeight(.semibold)
                 
                 Divider()
                     .frame(height: 1)
@@ -31,20 +30,22 @@ struct CardWidgetView: View {
                 
                 HStack {
                     Text(showBalance ? "$ \(balance)" : "******")
+                        .font(.system(size: 32.f.sw()))
+                    
                     Spacer()
                     Button(action: {
                         showBalance.toggle()
                     }, label: {
-                        Image(systemName: showBalance ? "eye" : "eye.slash")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 20, height: 16)
+                        Rectangle()
+                            .frame(width: 32, height: 32)
+                            .opacity(0)
+                            .overlay(content: {
+                                Image(systemName: showBalance ? "eye" : "eye.slash")
+                            })
                     })
                     .buttonStyle(PlainButtonStyle())
                 }
-                .foregroundStyle(Color.white)
                 .fontWeight(.bold)
-                .font(.system(size: 32))
                 
                 Text(name)
                     .font(.system(size: 16))
@@ -54,6 +55,7 @@ struct CardWidgetView: View {
         }
         .frame(maxWidth: .infinity)
         .frame(height: 143)
+        .foregroundStyle(Color.white)
         .background(Color.accentColor)
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
