@@ -44,9 +44,9 @@ struct DonutChartView: View {
     
     private func calculateStartAngle(for index: Int) -> Angle {
         if index == 0 {
-            return Angle(degrees: 0)
+            return Angle(degrees: 1)
         } else {
-            var totalAngle = Angle(degrees: 0)
+            var totalAngle = Angle(degrees: 1)
             for i in 0..<index {
                 totalAngle += calculateAngle(for: i)
             }

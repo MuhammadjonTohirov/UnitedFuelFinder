@@ -35,6 +35,9 @@ struct MainTabView: View {
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24, height: 24)
                 .foregroundStyle(Color.init(uiColor: .label))
+                .onTapGesture {
+                    viewModel.dashboardViewModel.navigate(to: .notifications)
+                }
         default:
             EmptyView()
         }
@@ -77,6 +80,7 @@ struct MainTabView: View {
         TabView(selection: $selectedTag) {
             DashboardView()
                 .environmentObject(mainViewModel)
+                .environmentObject(viewModel.dashboardViewModel)
                 .tabItem {
                     Image("icon_pie")
                         .renderingMode(.template)

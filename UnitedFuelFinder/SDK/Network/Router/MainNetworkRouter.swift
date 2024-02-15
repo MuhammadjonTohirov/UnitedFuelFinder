@@ -30,6 +30,8 @@ enum MainNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "Customers")
         case .searchAddresses(let text):
             return URL.baseAPI.appendingPath("Driver", "SearchLocations").queries(.init(name: "term", value: text))
+        case .uploadAvatar:
+            return URL.baseAPI.appendingPath("Driver", "UploadAvatar")
         }
     }
     
@@ -39,6 +41,23 @@ enum MainNetworkRouter: URLRequestProtocol {
             return request.asData
         case .postFeedback(_, let request):
             return request.asData
+        case .uploadAvatar(let photoUrl):
+            return autoreleasepool {
+                guard let data = try? Data.init(contentsOf: photoUrl) else {
+                    return nil
+                }
+                let form = MultipartForm(
+                    parts: [
+                        .init(
+                            name: "File",
+                            data: data,
+                            filename: photoUrl.lastPathComponent,
+                            contentType: photoUrl.mimeType
+                        ),
+                    ],
+                    boundary: "Boundary-\(photoUrl.lastPathComponent)")
+                return form.bodyData
+            }
         default:
             return nil
         }
@@ -46,7 +65,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     var method: HTTPMethod {
         switch self {
-        case .filterStations, .postFeedback, .discountedStations:
+        case .filterStations, .postFeedback, .discountedStations, .uploadAvatar:
             return .post
         case .deleteFeedback:
             return .delete
@@ -56,6 +75,11 @@ enum MainNetworkRouter: URLRequestProtocol {
     }
     
     func request() -> URLRequest {
+        if case .uploadAvatar(let url) = self {
+            let request = URLRequest.fromDataRequest(url: url, boundary: "Boundary-\(url.lastPathComponent)")
+            
+            return request
+        }
         var request: URLRequest = URLRequest.new(url: url, withAuth: true)
         request.httpMethod = method.rawValue.uppercased()
         request.httpBody = self.body
@@ -72,4 +96,5 @@ enum MainNetworkRouter: URLRequestProtocol {
     case getAuditLogs
     case getCustomers
     case searchAddresses(text: String)
+    case uploadAvatar(imageUrl: URL)
 }

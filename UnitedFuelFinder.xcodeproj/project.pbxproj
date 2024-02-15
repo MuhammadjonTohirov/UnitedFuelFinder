@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E00707C2B7D268700A39E6D /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E00707B2B7D268700A39E6D /* DonutChart.swift */; };
+		2E00707E2B7D527900A39E6D /* MultipartForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E00707D2B7D527900A39E6D /* MultipartForm.swift */; };
+		2E0070812B7D542600A39E6D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0070802B7D542600A39E6D /* ImagePicker.swift */; };
 		2E01E5DD2B52FAB000F6231D /* SettingsProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DC2B52FAB000F6231D /* SettingsProfile.swift */; };
 		2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DE2B53908100F6231D /* NetResDelete.swift */; };
 		2E01E5E12B53918C00F6231D /* NetReqDeleteConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */; };
@@ -276,6 +278,8 @@
 
 /* Begin PBXFileReference section */
 		2E00707B2B7D268700A39E6D /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
+		2E00707D2B7D527900A39E6D /* MultipartForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipartForm.swift; sourceTree = "<group>"; };
+		2E0070802B7D542600A39E6D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		2E01E5DC2B52FAB000F6231D /* SettingsProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProfile.swift; sourceTree = "<group>"; };
 		2E01E5DE2B53908100F6231D /* NetResDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResDelete.swift; sourceTree = "<group>"; };
 		2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqDeleteConfirm.swift; sourceTree = "<group>"; };
@@ -574,6 +578,14 @@
 			path = DonutChart;
 			sourceTree = "<group>";
 		};
+		2E00707F2B7D542100A39E6D /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				2E0070802B7D542600A39E6D /* ImagePicker.swift */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
 		2E01E5DB2B52FAA700F6231D /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -831,6 +843,7 @@
 		2E5DF8B22AEACD63005BE20D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2E00707F2B7D542100A39E6D /* Picker */,
 				2E00707A2B7D267000A39E6D /* DonutChart */,
 				2E6F3CBC2B3CA6210015C623 /* AppNavigator */,
 				2E36A7502AEFB8EE0033363E /* Images */,
@@ -1149,6 +1162,7 @@
 				2E36A74E2AEF9FDB0033363E /* UserInfo.swift */,
 				2ED9B7562B11F3A800150F0D /* AuditLog.swift */,
 				2EB76B1B2B13B1B90055610A /* CustomerItem.swift */,
+				2E00707D2B7D527900A39E6D /* MultipartForm.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1648,6 +1662,7 @@
 				2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */,
 				2E36A7472AEECE2C0033363E /* NetResStationItem.swift in Sources */,
 				2E5DF9852AEACD64005BE20D /* URLSession+Extensions.swift in Sources */,
+				2E0070812B7D542600A39E6D /* ImagePicker.swift in Sources */,
 				2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */,
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
 				849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */,
@@ -1717,6 +1732,7 @@
 				2E5DF93C2AEACD63005BE20D /* SelectionButton.swift in Sources */,
 				2E5DF9322AEACD63005BE20D /* SoundEffect.swift in Sources */,
 				2E5DF9672AEACD63005BE20D /* MapUserTrackingButton.swift in Sources */,
+				2E00707E2B7D527900A39E6D /* MultipartForm.swift in Sources */,
 				8422A6972B782BD600017681 /* DiscountStationView.swift in Sources */,
 				2E5DF9312AEACD63005BE20D /* NoitificationContentView.swift in Sources */,
 				2E5DF9242AEACD63005BE20D /* YTextFieldCleanStyle.swift in Sources */,
@@ -1967,6 +1983,7 @@
 				INFOPLIST_FILE = UnitedFuelFinder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "United Fuel Driver";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_NSCameraUsageDescription = "App needs access to camera to take a picture";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow for FaceId inorder to login with face";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to find nearest discounted stations";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2006,6 +2023,7 @@
 				INFOPLIST_FILE = UnitedFuelFinder/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "United Fuel Driver";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.navigation";
+				INFOPLIST_KEY_NSCameraUsageDescription = "App needs access to camera to take a picture";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow for FaceId inorder to login with face";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs to know your location in order to find nearest discounted stations";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

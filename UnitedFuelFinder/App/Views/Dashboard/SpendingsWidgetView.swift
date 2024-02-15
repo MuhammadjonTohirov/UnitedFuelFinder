@@ -44,7 +44,7 @@ struct SpendingsWidgetView: View {
                 Text("week".localize)
                 Text("month".localize)
             }
-            .font(.system(size: 13, weight: .semibold))
+            .font(.system(size: 12, weight: .semibold))
             .padding(.bottom, Padding.default)
             
             companyInfo(color: .accentColor, name: "TA/Petro", value: "$150")
@@ -65,12 +65,12 @@ struct SpendingsWidgetView: View {
                 .frame(width: 8, height: 8, alignment: .center)
             
             Text(name)
-                .font(.system(size: 13))
+                .font(.system(size: 12))
             
             Spacer()
             
             Text(value)
-                .font(.system(size: 13))
+                .font(.system(size: 12))
         }
     }
 }

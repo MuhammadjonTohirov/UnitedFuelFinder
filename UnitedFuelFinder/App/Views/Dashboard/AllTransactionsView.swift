@@ -27,16 +27,7 @@ struct AllTransactionsView: View {
             .scrollable()
             .navigationTitle("Transferring transactions")
             .navigationBarTitleDisplayMode(.inline)
-            .navigationBarBackButtonHidden(true)
             .toolbar{
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        dismiss()
-                    }, label: {
-                        Image(systemName: "chevron.left")
-                            .foregroundColor(Color.init(uiColor: .label))
-                    })
-                }
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         

@@ -276,6 +276,9 @@
     "Blue" : {
 
     },
+    "break" : {
+
+    },
     "change_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -554,9 +557,6 @@
           }
         }
       }
-    },
-    "Dahsboard" : {
-
     },
     "dark" : {
       "extractionState" : "manual",

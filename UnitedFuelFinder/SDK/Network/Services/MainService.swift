@@ -85,4 +85,12 @@ struct MainService {
         let result: NetRes<[NetResSearchAddressItem]>? = await Network.send(request: MainNetworkRouter.searchAddresses(text: query))
         return result?.data ?? []
     }
+    
+    func uploadAvatar(_ image: URL, completion: @escaping (Bool) -> Void) {
+        Network.upload(
+            body: String.self,
+            request: MainNetworkRouter.uploadAvatar(imageUrl: image)) { result in
+                completion(result?.success ?? false)
+            }
+    }
 }

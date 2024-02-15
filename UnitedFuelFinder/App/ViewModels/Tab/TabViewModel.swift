@@ -9,5 +9,6 @@ import Foundation
 
 class TabViewModel: ObservableObject {
     @Published var mapViewModel: MapTabViewModel = .init()
+    var dashboardViewModel: DashboardViewModel = .init()
     var settingsViewModel: SettingsViewModel = .init()
 }
