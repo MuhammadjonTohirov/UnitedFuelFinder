@@ -85,7 +85,28 @@ struct Network {
                 completion(nil)
                 return
             }
+            
+            Logging.l("--- --- RESPONSE --- ---")
+            Logging.l(res.asString)
 
+            completion(res)
+        }.resume()
+    }
+    
+    static func upload<T: NetResBody>(body: T.Type, request: URLRequestProtocol, fileUrl: URL, completion: @escaping (NetRes<T>?) -> Void) {
+        Logging.l("--- --- REQUEST --- ---")
+        Logging.l(request.url.absoluteString)
+        
+        if let requestBody = request.request().httpBody, let json = try? JSONSerialization.jsonObject(with: requestBody, options: .fragmentsAllowed) as? [String: Any] {
+            Logging.l(json)
+        }
+        
+        URLSession.shared.uploadTask(with: request.request(), fromFile: fileUrl) { data, a, error in
+            guard let data = data, let res = try? JSONDecoder().decode(NetRes<T>.self, from: data) else {
+                Logging.l(error?.localizedDescription ?? "Unable to parse data")
+                completion(nil)
+                return
+            }
             
             Logging.l("--- --- RESPONSE --- ---")
             Logging.l(res.asString)

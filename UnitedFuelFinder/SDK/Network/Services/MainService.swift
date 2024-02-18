@@ -69,7 +69,6 @@ struct MainService {
     
     func getAuditLogs() async -> [AuditLog] {
         let result: NetRes<[NetResAuditLog]>? = await Network.send(request: MainNetworkRouter.getAuditLogs)
-        
         return ((result?.data) ?? []).compactMap({.init($0)})
     }
     

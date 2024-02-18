@@ -66,11 +66,23 @@ struct MainTabView: View {
                     self.viewModel.mapViewModel.route = .filter
                 }
         case .dashboard:
-            Image("icon_man_placeholder")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 32, height: 32)
-                .cornerRadius(20)
+            KF(
+                imageUrl: UserSettings.shared.userAvatarURL,
+                cacheKey: (UserSettings.shared.photoUpdateDate ?? Date()).toString(),
+                storageExpiration: .expired,
+                memoryExpiration: .expired,
+                placeholder: Image(uiImage: UIImage(named: "icon_man_placeholder")!)
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 32.f.sw(), height: 32.f.sw(), alignment: .center)
+                    .clipShape(Circle())
+                    .anyView
+            )
+            .frame(width: 32.f.sw(), height: 32.f.sw())
+            .background {
+                Circle()
+                    .foregroundColor(Color(uiColor: .secondarySystemBackground))
+            }
         default:
             Text("")
         }

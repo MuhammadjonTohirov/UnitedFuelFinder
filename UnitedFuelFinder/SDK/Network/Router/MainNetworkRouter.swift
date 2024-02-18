@@ -76,8 +76,8 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     func request() -> URLRequest {
         if case .uploadAvatar(let url) = self {
-            let request = URLRequest.fromDataRequest(url: url, boundary: "Boundary-\(url.lastPathComponent)")
-            
+            var request = URLRequest.fromDataRequest(url: self.url, boundary: "Boundary-\(url.lastPathComponent)")
+            request.httpMethod = method.rawValue.uppercased()
             return request
         }
         var request: URLRequest = URLRequest.new(url: url, withAuth: true)

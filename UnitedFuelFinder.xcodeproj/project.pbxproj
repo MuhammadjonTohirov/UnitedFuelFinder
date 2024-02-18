@@ -40,6 +40,9 @@
 		2E1E92052B77B8C300AF1D7C /* MapTabToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E92042B77B8C300AF1D7C /* MapTabToggleView.swift */; };
 		2E1E92082B77D9CF00AF1D7C /* MapFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */; };
 		2E1E920B2B77EC3A00AF1D7C /* TabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E920A2B77EC3A00AF1D7C /* TabViewModel.swift */; };
+		2E2420692B82AB80003DE3E5 /* TransactionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2420682B82AB80003DE3E5 /* TransactionItem.swift */; };
+		2E24206C2B82AC52003DE3E5 /* DashboardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E24206B2B82AC52003DE3E5 /* DashboardViewModel.swift */; };
+		2E24206E2B82AC85003DE3E5 /* DashboardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E24206D2B82AC85003DE3E5 /* DashboardInteractor.swift */; };
 		2E243DA62AE02D01008C3E8C /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA52AE02D01008C3E8C /* HomeBottomSheetView.swift */; };
 		2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA72AE067FB008C3E8C /* PinPointerView.swift */; };
 		2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */; };
@@ -221,9 +224,12 @@
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* MapTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */; };
+		2EC47CA12B7F151E007A14CB /* CoverNavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */; };
 		2ED9A3202B164E1D009ADCE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */; };
 		2ED9B7552B11F38800150F0D /* NetResAuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */; };
 		2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7562B11F3A800150F0D /* AuditLog.swift */; };
+		2ED9FB0B2B7E494400EEDDFB /* KF+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9FB0A2B7E494400EEDDFB /* KF+Extensions.swift */; };
+		2ED9FB0D2B7E7BD100EEDDFB /* NetResTransactions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9FB0C2B7E7BD100EEDDFB /* NetResTransactions.swift */; };
 		2EDBE0372B0F359700123CE0 /* NetResSessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */; };
 		2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE0382B0F35B800123CE0 /* SessionItem.swift */; };
 		2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDBE03A2B0F364700123CE0 /* SessionsView.swift */; };
@@ -311,6 +317,9 @@
 		2E1E92042B77B8C300AF1D7C /* MapTabToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabToggleView.swift; sourceTree = "<group>"; };
 		2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterView.swift; sourceTree = "<group>"; };
 		2E1E920A2B77EC3A00AF1D7C /* TabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewModel.swift; sourceTree = "<group>"; };
+		2E2420682B82AB80003DE3E5 /* TransactionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionItem.swift; sourceTree = "<group>"; };
+		2E24206B2B82AC52003DE3E5 /* DashboardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardViewModel.swift; sourceTree = "<group>"; };
+		2E24206D2B82AC85003DE3E5 /* DashboardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DashboardInteractor.swift; sourceTree = "<group>"; };
 		2E243DA52AE02D01008C3E8C /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2E243DA72AE067FB008C3E8C /* PinPointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointerView.swift; sourceTree = "<group>"; };
 		2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyles.swift; sourceTree = "<group>"; };
@@ -490,9 +499,12 @@
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewModel.swift; sourceTree = "<group>"; };
+		2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverNavigationBarModifier.swift; sourceTree = "<group>"; };
 		2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResAuditLog.swift; sourceTree = "<group>"; };
 		2ED9B7562B11F3A800150F0D /* AuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditLog.swift; sourceTree = "<group>"; };
+		2ED9FB0A2B7E494400EEDDFB /* KF+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KF+Extensions.swift"; sourceTree = "<group>"; };
+		2ED9FB0C2B7E7BD100EEDDFB /* NetResTransactions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResTransactions.swift; sourceTree = "<group>"; };
 		2EDBE0362B0F359700123CE0 /* NetResSessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResSessionItem.swift; sourceTree = "<group>"; };
 		2EDBE0382B0F35B800123CE0 /* SessionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionItem.swift; sourceTree = "<group>"; };
 		2EDBE03A2B0F364700123CE0 /* SessionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionsView.swift; sourceTree = "<group>"; };
@@ -649,6 +661,23 @@
 			path = Tab;
 			sourceTree = "<group>";
 		};
+		2E2420672B82AB77003DE3E5 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				2E2420682B82AB80003DE3E5 /* TransactionItem.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		2E24206A2B82AC4B003DE3E5 /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				2E24206B2B82AC52003DE3E5 /* DashboardViewModel.swift */,
+				2E24206D2B82AC85003DE3E5 /* DashboardInteractor.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
 		2E243DB12AE163F1008C3E8C /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,6 +755,7 @@
 		2E527A732ACC83A3005B8B95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2E2420672B82AB77003DE3E5 /* Dashboard */,
 				2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */,
 				2E0F93CB2B012FC300660DEB /* StationDetails */,
 			);
@@ -765,6 +795,7 @@
 				2E5DF8942AEACD63005BE20D /* RectModifer.swift */,
 				2E5DF8952AEACD63005BE20D /* YTextFieldCleanStyle.swift */,
 				2E5DF8962AEACD63005BE20D /* TopLeftDismissModifier.swift */,
+				2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -836,6 +867,7 @@
 				2E5DF8AE2AEACD63005BE20D /* UIApp+Extension.swift */,
 				2E5DF8AF2AEACD63005BE20D /* YTextField+Extension.swift */,
 				2E5DF8B02AEACD63005BE20D /* CGRect+Extension.swift */,
+				2ED9FB0A2B7E494400EEDDFB /* KF+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1063,6 +1095,7 @@
 				2EB76B192B13B1870055610A /* NetResCustomer.swift */,
 				2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */,
 				2E01E5DE2B53908100F6231D /* NetResDelete.swift */,
+				2ED9FB0C2B7E7BD100EEDDFB /* NetResTransactions.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1319,6 +1352,7 @@
 		2EDF8C4B2AD309EC003D64FC /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				2E24206A2B82AC4B003DE3E5 /* Dashboard */,
 				2E1E92092B77EC3200AF1D7C /* Tab */,
 				2E60B6192AF8750F00573049 /* Settings */,
 				2EBFB99D2ADFA052007FA786 /* Home */,
@@ -1716,6 +1750,7 @@
 				2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */,
 				2EDF8C662AD4428E003D64FC /* KeyboardView.swift in Sources */,
 				2E5DF98D2AEACD64005BE20D /* Objectify.swift in Sources */,
+				2ED9FB0B2B7E494400EEDDFB /* KF+Extensions.swift in Sources */,
 				2E29B8E52AEB7B93001EC1BE /* SelectStateView.swift in Sources */,
 				2E5DF96E2AEACD64005BE20D /* NetResAddres.swift in Sources */,
 				2E5DF9542AEACD63005BE20D /* NativeHostingController.swift in Sources */,
@@ -1741,6 +1776,7 @@
 				2E5DF98B2AEACD64005BE20D /* CGFloat+Extension.swift in Sources */,
 				2E5DF92B2AEACD63005BE20D /* PreviewHelpers.swift in Sources */,
 				2E5DF9472AEACD63005BE20D /* MapCameraZoomRange.swift in Sources */,
+				2E24206E2B82AC85003DE3E5 /* DashboardInteractor.swift in Sources */,
 				2E5DF9742AEACD64005BE20D /* NetReqLogin.swift in Sources */,
 				2E5DF98A2AEACD64005BE20D /* Realm+Extensions.swift in Sources */,
 				2E243DAE2AE163E8008C3E8C /* FromPointButton.swift in Sources */,
@@ -1753,6 +1789,7 @@
 				2E5DF9362AEACD63005BE20D /* UIApp+Extension.swift in Sources */,
 				2E2D1EC32AEBE41500559A1D /* SelectCityView.swift in Sources */,
 				2E43DA082B7B9C4200716DB0 /* SpendingsWidgetView.swift in Sources */,
+				2E24206C2B82AC52003DE3E5 /* DashboardViewModel.swift in Sources */,
 				2E5DF9882AEACD64005BE20D /* URL+Extensions.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
 				8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */,
@@ -1805,6 +1842,7 @@
 				2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */,
 				2E01E5DD2B52FAB000F6231D /* SettingsProfile.swift in Sources */,
 				2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */,
+				2EC47CA12B7F151E007A14CB /* CoverNavigationBarModifier.swift in Sources */,
 				2EDBE03B2B0F364700123CE0 /* SessionsView.swift in Sources */,
 				2E502D092B272D39002CE669 /* SettingsViewUtils.swift in Sources */,
 				2E5DF97C2AEACD64005BE20D /* AnyWrapper.swift in Sources */,
@@ -1824,6 +1862,7 @@
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
 				2E6F3CBB2B3C9FA80015C623 /* TestUI.swift in Sources */,
 				2E5DF9712AEACD64005BE20D /* Network.swift in Sources */,
+				2E2420692B82AB80003DE3E5 /* TransactionItem.swift in Sources */,
 				2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */,
 				2EDF8C4E2AD309F9003D64FC /* LoadingViewModel.swift in Sources */,
 				2E5DF92C2AEACD63005BE20D /* Backports.swift in Sources */,
@@ -1835,6 +1874,7 @@
 				2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */,
 				2E5DF9662AEACD63005BE20D /* MapPitchControl.swift in Sources */,
 				2E5DF9332AEACD63005BE20D /* Padding.swift in Sources */,
+				2ED9FB0D2B7E7BD100EEDDFB /* NetResTransactions.swift in Sources */,
 				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
 				2E5DF9812AEACD64005BE20D /* Array+Extensions.swift in Sources */,
 				2E5DF9342AEACD63005BE20D /* Color+Extension.swift in Sources */,

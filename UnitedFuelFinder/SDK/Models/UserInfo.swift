@@ -23,10 +23,11 @@ public struct UserInfo: Codable {
     let cityId: Int?
     let cityName: String?
     let state: String?
+    let stateId: String?
     let confirmed: Bool?
     let deleted: Bool?
     
-    init(id: String?, fullName: String, email: String, phone: String, cardNumber: String, companyId: Int?, companyName: String?, address: String?, cityId: Int?, cityName: String?, state: String?, confirmed: Bool?, deleted: Bool?) {
+    init(id: String?, fullName: String, email: String, phone: String, cardNumber: String, companyId: Int?, companyName: String?, address: String?, cityId: Int?, cityName: String?, state: String?, stateId: String?, confirmed: Bool?, deleted: Bool?) {
         self.id = id
         self.fullName = fullName
         self.email = email
@@ -40,6 +41,7 @@ public struct UserInfo: Codable {
         self.state = state
         self.confirmed = confirmed
         self.deleted = deleted
+        self.stateId = stateId
     }
     
     init(res: NetResUserInfo) {
@@ -58,5 +60,6 @@ public struct UserInfo: Codable {
         self.deleted = res.deleted
         self.firstName = res.firstName
         self.lastName = res.lastName
+        self.stateId = res.stateId
     }
 }

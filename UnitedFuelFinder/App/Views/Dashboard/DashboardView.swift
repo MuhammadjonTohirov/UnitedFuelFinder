@@ -7,44 +7,6 @@
 
 import SwiftUI
 
-enum DashboardRoute: ScreenRoute {
-    var id: String {
-        switch self {
-        case .transferringStations:
-            return "transferringStations"
-        case .notifications:
-            return "notifications"
-        }
-    }
-    
-    case transferringStations
-    case notifications
-    
-    @ViewBuilder
-    var screen: some View {
-        switch self {
-        case .transferringStations:
-            AllTransactionsView()
-        case .notifications:
-            NotificationsView()
-        }
-    }
-}
-
-class DashboardViewModel: ObservableObject {
-    @Published var push: Bool = false
-
-    var route: DashboardRoute? {
-        didSet {
-            push = route != nil
-        }
-    }
-    
-    func navigate(to page: DashboardRoute) {
-        self.route = page
-    }
-}
-
 struct DashboardView: View {
     let barChartData = [
         (title: "Bar 1", value: 30),
@@ -57,8 +19,34 @@ struct DashboardView: View {
     @State var profileImage: String = "station"
     
     var body: some View {
+        ZStack {
+            innerBody
+                .background {
+                    Rectangle()
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                }
+            
+            GeometryReader(content: { geometry in
+                VStack(spacing: 0) {
+                    Rectangle()
+                        .frame(height: geometry.safeAreaInsets.top)
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .ignoresSafeArea()
+
+                    
+                    Spacer()
+                    
+                    Rectangle()
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .ignoresSafeArea(.container, edges: .bottom)
+                        .frame(height: 0)
+                }
+            })
+        }
+    }
+    
+    var innerBody: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("")
             
             CardWidgetView(name: "John Doe", cardNummber: "•••• 8484", balance: 1500)
             
@@ -125,6 +113,25 @@ struct DashboardView: View {
 #Preview {
     NavigationStack {
         DashboardView()
+            .navigationBarTitleDisplayMode(.inline)
             .environmentObject(DashboardViewModel())
+            .navigationTitle("Dashboard")
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithTransparentBackground()
+                
+                let back = UIBarButtonItemAppearance(style: .done)
+                back.normal.backgroundImage = UIImage()
+                
+                back.normal.titlePositionAdjustment = .init(horizontal: -1000, vertical: 0)
+                
+                appearance.backButtonAppearance = back
+                appearance.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
+                appearance.shadowImage = UIImage()
+                appearance.shadowColor = .clear
+                
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().compactAppearance = appearance
+            }
     }
 }
