@@ -279,6 +279,52 @@
     "break" : {
 
     },
+    "camera" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Камера."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kamera"
+          }
+        }
+      }
+    },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назад"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ortga"
+          }
+        }
+      }
+    },
     "change_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -843,15 +889,9 @@
     "download" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download"
-          }
-        },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Загрузите"
           }
         }
@@ -859,6 +899,29 @@
     },
     "Driver" : {
 
+    },
+    "edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tahrirlash"
+          }
+        }
+      }
     },
     "edit_profile" : {
       "extractionState" : "manual",
@@ -905,6 +968,9 @@
           }
         }
       }
+    },
+    "English" : {
+
     },
     "enter_pin" : {
       "extractionState" : "manual",
@@ -1043,6 +1109,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Automobile raqami"
+          }
+        }
+      }
+    },
+    "gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gallery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Галерея"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rasmlar"
           }
         }
       }
@@ -1883,6 +1972,9 @@
         }
       }
     },
+    "O'zbekcha" : {
+
+    },
     "ok" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2544,6 +2636,9 @@
         }
       }
     },
+    "Show" : {
+
+    },
     "Sorted by" : {
 
     },
@@ -2624,6 +2719,9 @@
           }
         }
       }
+    },
+    "Text" : {
+
     },
     "theme" : {
       "extractionState" : "manual",
@@ -2819,6 +2917,9 @@
       }
     },
     "Yellow" : {
+
+    },
+    "Русский" : {
 
     }
   },

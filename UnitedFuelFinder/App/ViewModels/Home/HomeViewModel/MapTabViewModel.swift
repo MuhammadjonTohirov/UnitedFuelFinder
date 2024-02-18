@@ -108,13 +108,12 @@ final class MapTabViewModel: ObservableObject {
     private let locationManager: GLocationManager = .shared
     
     func onAppear() {
+        
         didDisappear = false
         //Always be exectued
         guard !didAppear else {
             return
         }
-        
-        appDelegate?.defaultNavigationSetup()
         
         didAppear = true
         

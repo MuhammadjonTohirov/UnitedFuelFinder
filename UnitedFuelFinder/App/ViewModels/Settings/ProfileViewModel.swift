@@ -72,7 +72,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
             phoneNumber = user.phone
             address = user.address ?? ""
             
-            if let _stateKey = user.state, let _state = DState.item(id: _stateKey) {
+            if let _stateKey = user.stateId, let _state = DState.item(id: _stateKey) {
                 self.state = _state
             }
             
@@ -89,7 +89,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                 }
                 
                 if DCity.item(id: user.cityId ?? Int(user.cityName ?? "-1") ?? -1) == nil {
-                    await CommonService.shared.syncCities(forState: user.state ?? "")
+                    await CommonService.shared.syncCities(forState: user.stateId ?? "")
                 }
                 
                 await MainActor.run {
@@ -105,6 +105,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
         guard let stateId = state?.id, let cityId = city?.id else {
             return
         }
+        
         self.isLoading = true
         
         uploadAvatar { [weak self] isOK in
@@ -112,8 +113,6 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                 return
             }
             Task {
-                
-                
                 if await AuthService.shared.editUserInfo(
                     firstName: self.firstName,
                     lastName: self.lastName,
@@ -137,8 +136,14 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     func uploadAvatar(completion: @escaping (Bool) -> Void) {
         if let url = imageUrl {
             MainService.shared.uploadAvatar(url) { isOK in
+                if isOK {
+                    UserSettings.shared.photoUpdateDate = Date()
+                }
                 completion(isOK)
             }
-        }
+            return
+        } 
+        
+        completion(true)
     }
 }

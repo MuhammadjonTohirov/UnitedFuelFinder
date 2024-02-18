@@ -7,6 +7,7 @@
 
 import SwiftUI
 import PhotosUI
+import Kingfisher
 
 struct ProfileVIew: View {
     @StateObject var viewModel = ProfileViewModel()
@@ -17,11 +18,33 @@ struct ProfileVIew: View {
             VStack(alignment: .leading, spacing: 28) {
 
                 VStack(spacing: 8) {
-                    Image(uiImage: viewModel.avatar)
-                        .resizable()
-                        .frame(width: 80, height: 80, alignment: .center)
-                        .clipShape(Circle())
-                    
+                    if viewModel.imageUrl == nil {
+                        KF(
+                            imageUrl: UserSettings.shared.userAvatarURL,
+                            cacheKey: (UserSettings.shared.photoUpdateDate ?? Date()).toString(),
+                            storageExpiration: .expired,
+                            memoryExpiration: .expired,
+                            placeholder: Image(uiImage: viewModel.avatar)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 80.f.sw(), height: 80.f.sw(), alignment: .center)
+                                .clipShape(Circle())
+                                .anyView
+                        )
+                        .frame(width: 80.f.sw(), height: 80.f.sw())
+                        .background {
+                            Circle()
+                                .foregroundColor(Color(uiColor: .secondarySystemBackground))
+                        }
+                    } else {
+                        Image(uiImage: viewModel.avatar)
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 80.f.sw(), height: 80.f.sw(), alignment: .center)
+                            .clipShape(Circle())
+                            .anyView
+                    }
+                        
                     Button(action: {
                         showPickerAlert = true
                     }, label: {
@@ -135,7 +158,8 @@ struct ProfileVIew: View {
 
 
 #Preview {
-    NavigationView {
+    UserSettings.shared.accessToken = UserSettings.testAccessToken
+    return NavigationView {
         ProfileVIew()
     }
 }

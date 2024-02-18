@@ -11,8 +11,6 @@ public struct CommonService {
     public static let shared = CommonService()
     
     public func syncStates() async {
-//        DState.clear()
-        
         let result: NetRes<[NetResState]>? = await Network.send(request: CommonNetworkRouter.states)
         
         let items = (result?.data ?? []).map({StateItem.init(res: $0)})
@@ -20,8 +18,6 @@ public struct CommonService {
     }
     
     public func syncCities(forState stateId: String) async {
-//        DCity.clear()
-        
         let result: NetRes<[NetResCity]>? = await Network.send(request: CommonNetworkRouter.cities(id: stateId))
         
         let items = (result?.data ?? []).map({CityItem(res: $0)})
@@ -38,5 +34,10 @@ public struct CommonService {
     public func getVersion() async -> ServerVersion? {
         let result: NetRes<ServerVersion>? = await Network.send(request: CommonNetworkRouter.version)
         return result?.data
+    }
+    
+    public func fetchTransactions(fromDate: String, to: String) async -> [NetResTransactions] {
+        let result: NetRes<[NetResTransactions]>? = await Network.send(request: CommonNetworkRouter.filterTransactions(fromDate: fromDate, to: to))
+        return result?.data ?? []
     }
 }

@@ -38,6 +38,7 @@ struct NotificationsView: View {
                 ProgressView()
             }
         }
+        .coverNavigationBar()
     }
 }
 

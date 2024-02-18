@@ -127,12 +127,23 @@ struct SettingsView: View {
     }
     
     private var userAvatar: some View {
-        Image("icon_man_placeholder")
-            .resizable()
-            .renderingMode(.template)
-            .foregroundStyle(Color.label)
-            .frame(width: 24, height: 24)
-            .clipShape(Circle())
+        KF(
+            imageUrl: UserSettings.shared.userAvatarURL,
+            cacheKey: (UserSettings.shared.photoUpdateDate ?? Date()).toString(),
+            storageExpiration: .expired,
+            memoryExpiration: .expired,
+            placeholder: Image(uiImage: UIImage(named: "icon_man_placeholder")!)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 24.f.sw(), height: 24.f.sw(), alignment: .center)
+                .clipShape(Circle())
+                .anyView
+        )
+        .frame(width: 24.f.sw(), height: 24.f.sw())
+        .background {
+            Circle()
+                .foregroundColor(Color(uiColor: .secondarySystemBackground))
+        }
     }
     
     private func onClickLogout() {

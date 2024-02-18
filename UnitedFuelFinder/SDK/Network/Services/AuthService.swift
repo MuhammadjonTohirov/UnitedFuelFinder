@@ -114,7 +114,7 @@ public struct AuthService {
                           phone: user.phone,
                           cardNumber: user.cardNumber,
                           companyId: user.companyId, companyName: user.companyName,
-                          address: address, cityId: city, cityName: _city.name, state: state, confirmed: true, deleted: false)
+                          address: address, cityId: city, cityName: _city.name, state: state, stateId: state, confirmed: true, deleted: false)
             UserSettings.shared.userInfo = _user
         }
         

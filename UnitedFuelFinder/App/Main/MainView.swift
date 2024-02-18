@@ -14,8 +14,9 @@ struct MainView: View {
         viewModel.route.screen
             .environmentObject(viewModel)
             .onAppear {
+                viewModel.transparentNavigationSetup()
+                
                 UserSettings.shared.setInterfaceStyle(style: .light)
-                appDelegate?.defaultNavigationSetup()
                 
                 let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
                 
