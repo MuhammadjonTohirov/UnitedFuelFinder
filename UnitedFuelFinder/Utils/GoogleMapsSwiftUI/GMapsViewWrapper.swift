@@ -95,11 +95,16 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         
         let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
         
-        let bottom = 158 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
+        let bottom = 115 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
         
-        mapController.set(padding: .init(
-            top: 0, left: 0,
-            bottom: bottom, right: 0))
+        mapController.set(
+            padding: .init(
+                top: 0, 
+                left: 0,
+                bottom: bottom, 
+                right: 0
+            )
+        )
         
         return mapController
     }
@@ -108,10 +113,8 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         Logging.l("MapView update ui called")
         if let location {
             let position = GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
-            
             uiViewController.map.animate(to: position)
         }
-        
         
 //       MARK: markers drawing
         if context.coordinator.clusterManager == nil {
@@ -203,7 +206,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
             debugPrint("didTapAt coordinate \(coordinate)")
-            
         }
         
         func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
@@ -211,7 +213,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
-            
             debugPrint("Did end dragging")
         }
         
@@ -394,7 +395,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         }
         
         func drawCircleByRadius(on mapView: GMSMapView, location: CLLocationCoordinate2D, radius: CLLocationDistance) {
-            
             if circle != nil {
                 // update circle
                 circle?.radius = radius.f.asMeters

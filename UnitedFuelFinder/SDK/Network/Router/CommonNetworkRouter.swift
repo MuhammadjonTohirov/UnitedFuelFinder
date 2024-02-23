@@ -23,6 +23,21 @@ enum CommonNetworkRouter: URLRequestProtocol {
                 .init(name: "fromDate", value: fromDate),
                 .init(name: "toDate", value: to)
             )
+        case let .filterInvoices(fromDate, to):
+            return URL.baseAPI.appendingPath("Driver", "FilterInvoices").queries(
+                .init(name: "fromDate", value: fromDate),
+                .init(name: "toDate", value: to)
+            )
+        case let .totalSpendings(type):
+            return URL.baseAPI.appendingPath("Driver", "TotalSpends").queries(
+                .init(name: "type", value: "\(type)")
+            )
+        case .cardInfo:
+            return URL.baseAPI.appendingPath("Driver", "MainCard")
+        case .popularStations(let size):
+            return URL.baseAPI.appendingPath("Driver", "PopularStations").queries(
+                .init(name: "size", value: "\(size)")
+            )
         }
     }
     
@@ -40,7 +55,7 @@ enum CommonNetworkRouter: URLRequestProtocol {
         switch self {
         case .states, .cities, .companies, .version:
             request = URLRequest.new(url: url, withAuth: false)
-        case .filterTransactions:
+        case .filterTransactions, .filterInvoices, .totalSpendings, .cardInfo, .popularStations:
             request = URLRequest.new(url: url)
         }
         
@@ -54,4 +69,11 @@ enum CommonNetworkRouter: URLRequestProtocol {
     case companies
     case version
     case filterTransactions(fromDate: String, to: String)
+    case filterInvoices(fromDate: String, to: String)
+    
+    /// 0: Today, 1: Week, 2: Month
+    case totalSpendings(type: Int)
+    
+    case cardInfo
+    case popularStations(amount: Int)
 }

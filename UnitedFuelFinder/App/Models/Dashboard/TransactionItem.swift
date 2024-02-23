@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct TransactionItem {
-    let id: Int
+struct TransactionItem: Identifiable {
+    var id: Int
     let cardNumber: String
     let transactionDate: String
     let invoiceNumber: String?

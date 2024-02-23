@@ -7,16 +7,28 @@
 
 import SwiftUI
 
+private class CardWidgetModel {
+    @codableWrapper(key: "showBalance", false)
+    var showCardBalance: Bool?
+}
+
 struct CardWidgetView: View {
-    @State var name: String
-    @State var cardNummber: String
-    @State var balance: Int
-    @State var showBalance: Bool = true
+    @State private var name: String = ""
+    @State private var cardNummber: String = ""
+    @State private var balance: Double = 0
+    private var model: CardWidgetModel = .init()
+    @State private var showBalance: Bool = true {
+        didSet {
+            self.model.showCardBalance = showBalance
+        }
+    }
+    @State private var companyName: String = ""
+    
     var body: some View {
         GeometryReader {geo in
             VStack(alignment: .leading, spacing: 10) {
                 HStack {
-                    Text("Enregy trucking".localize)
+                    Text(companyName)
                         .font(.system(size: 16, weight: .bold))
                     Spacer()
                     
@@ -29,7 +41,7 @@ struct CardWidgetView: View {
                     .background(.white)
                 
                 HStack {
-                    Text(showBalance ? "$ \(balance)" : "******")
+                    Text(showBalance ? "\(balance.asFloat.asMoney)" : "******")
                         .font(.system(size: 32.f.sw()))
                     
                     Spacer()
@@ -59,9 +71,20 @@ struct CardWidgetView: View {
         .background(Color.accentColor)
         .cornerRadius(16)
         .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+        .onAppear { 
+            // load card details
+            Task {
+                let info = await CommonService.shared.fetchCardInfo()
+                
+                await MainActor.run {
+                    self.cardNummber = (UserSettings.shared.userInfo?.cardNumber ?? "0").maskAsMiniCardNumber
+                    self.balance = info?.totalBalance ?? 0
+                    self.name = info?.accountName ?? ""
+                    self.companyName = info?.companyName ?? ""
+                }
+            }
+            
+            self.showBalance = self.model.showCardBalance ?? false
+        }
     }
-}
-
-#Preview {
-    CardWidgetView(name: "John Doe", cardNummber: "•••• 8484", balance: 1500)
 }

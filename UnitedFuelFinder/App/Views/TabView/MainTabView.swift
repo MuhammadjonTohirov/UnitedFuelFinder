@@ -17,20 +17,22 @@ enum MainTabs: Int {
 struct MainTabView: View {
     @ObservedObject var viewModel: TabViewModel = .init()
     @EnvironmentObject var mainViewModel: MainViewModel
-    @State private var selectedTag: MainTabs = .dashboard
     
     var body: some View {
         NavigationStack {
             tabView
                 .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    viewModel.onAppear()
+                }
         }
     }
     
     @ViewBuilder
     private var leadingTopBar: some View {
-        switch selectedTag {
+        switch viewModel.selectedTag {
         case .dashboard:
-            Image(systemName: "bell")
+            Image("icon_bell_active")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(width: 24, height: 24)
@@ -45,7 +47,7 @@ struct MainTabView: View {
     
     @ViewBuilder
     private var centerTopBar: some View {
-        switch selectedTag {
+        switch viewModel.selectedTag {
         case .dashboard:
             Text("Dashboard")
                 .font(.system(size: 16, weight: .bold))
@@ -59,11 +61,16 @@ struct MainTabView: View {
     
     @ViewBuilder
     private var trailingTopBar: some View {
-        switch selectedTag {
+        switch viewModel.selectedTag {
         case .map:
             Image("icon_filter_2")
                 .onTapGesture {
-                    self.viewModel.mapViewModel.route = .filter
+                    if let filter = self.viewModel.mapViewModel.filter {
+                        self.viewModel.mapViewModel.route = .filter(filter, { newFilter in
+                            self.viewModel.mapViewModel.set(filter: newFilter)
+                            self.viewModel.mapViewModel.route = nil
+                        })
+                    }
                 }
         case .dashboard:
             KF(
@@ -83,13 +90,16 @@ struct MainTabView: View {
                 Circle()
                     .foregroundColor(Color(uiColor: .secondarySystemBackground))
             }
+            .onTapGesture {
+                viewModel.dashboardViewModel.navigate(to: .profile)
+            }
         default:
             Text("")
         }
     }
     
     private var tabView: some View {
-        TabView(selection: $selectedTag) {
+        TabView(selection: $viewModel.selectedTag) {
             DashboardView()
                 .environmentObject(mainViewModel)
                 .environmentObject(viewModel.dashboardViewModel)
@@ -99,6 +109,7 @@ struct MainTabView: View {
                     Text("home".localize)
                 }
                 .tag(MainTabs.dashboard)
+                .anyView
             
             MapTabView()
                 .environmentObject(mainViewModel)
@@ -109,6 +120,7 @@ struct MainTabView: View {
                     Text("map".localize)
                 }
                 .tag(MainTabs.map)
+                .anyView
             
             SettingsView()
                 .environmentObject(mainViewModel)
@@ -132,6 +144,17 @@ struct MainTabView: View {
         .toolbar(content: {
             ToolbarItem(placement: .principal) {
                 centerTopBar
+            }
+        })
+        .onChange(of: viewModel.selectedTag, perform: { value in
+            switch value {
+            case .dashboard:
+                debugPrint("On select dashboard")
+            case .map:
+                debugPrint("On select map")
+                viewModel.onSelectMapTab()
+            case .settings:
+                debugPrint("On select settings")
             }
         })
         .accentColor(.accent)

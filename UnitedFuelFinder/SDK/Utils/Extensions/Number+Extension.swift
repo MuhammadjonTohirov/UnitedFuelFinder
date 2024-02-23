@@ -26,6 +26,10 @@ public extension Double {
     var f: CGFloat {
         CGFloat(self)
     }
+    
+    var asFloat: Float {
+        Float(self)
+    }
 }
 
 public extension Int {
@@ -63,5 +67,11 @@ public extension CGFloat {
     
     func limitBottom(_ n: CGFloat) -> CGFloat {
         return (self < n) ? n : self
+    }
+}
+
+extension Float {
+    var asDouble: Double {
+        Double(self)
     }
 }

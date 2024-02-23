@@ -177,7 +177,6 @@ struct RegisterProfileView: View {
     }
 }
 
-
 #Preview {
     NavigationView(content: {
         RegisterProfileView { _ in

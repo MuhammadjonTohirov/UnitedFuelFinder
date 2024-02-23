@@ -43,48 +43,31 @@ struct DashboardView: View {
                 }
             })
         }
+        .onAppear {
+            self.viewModel.onAppear()
+        }
+        .coveredLoading(isLoading: $viewModel.isLoading)
     }
     
     var innerBody: some View {
         VStack(alignment: .leading, spacing: 20) {
-            
-            CardWidgetView(name: "John Doe", cardNummber: "•••• 8484", balance: 1500)
+            CardWidgetView()
             
             Text("total.spendings".localize)
             SpendingsWidgetView()
             
-            Text("Most popular station".localize)
+            Text("popular.stations".localize)
             PopularStationsView(data: barChartData)
             
-            Text("Top discounted stations".localize)
+            Text("discounted.stations".localize)
             stationDetail
             
-            HStack {
-                Text("Transferring transactions")
-                Spacer()
-                Button(action: {
-                    viewModel.navigate(to: .transferringStations)
-                }, label: {
-                    Text("View all")
-                })
-            }
-            ForEach(0..<2) {_ in 
-                TransactionView(title: "TRN12938", location: "PILOT BURBANK 287", gallon: 73.02, totalSum: 300, savedAmount: 34.21, price: 4.11, driver: "Aliev Vali", cardNumber: "•••• 1232", date: "12:00 10.11.2023")
+            if (UserSettings.shared.userInfo?.canViewTransactions ?? false) {
+                transactionsView
             }
             
-            HStack {
-                Text("Populated invoices")
-                Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    Text("View all")
-                })
-            }
-            
-            ForEach(0..<2) {_ in
-                InvoicesView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
-                    .padding(.bottom)
+            if (UserSettings.shared.userInfo?.canViewInvoices ?? false) {
+                invoicesView
             }
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
@@ -96,22 +79,85 @@ struct DashboardView: View {
         .frame(maxWidth: .infinity)
         .scrollable(showIndicators: false)
     }
-    private var stationDetail: some View {
-        HStack{
-            ForEach(0..<3) {index in
-                DiscountStationView(title: "TA/Petrol", location: "23.37 ml • NEWARK NJ", price: 5.1, discount: 0.68)
-                    .background {
-                        RoundedRectangle(cornerRadius: 16)
-                            .foregroundStyle(.appSecondaryBackground)
-                    }
+    
+    private var transactionsView: some View {
+        LazyVStack {
+            HStack {
+                Text("transf.transactions".localize) // Transferring transactions
+                Spacer()
+                Button(action: {
+                    viewModel.navigate(to: .transferringStations)
+                }, label: {
+                    Text("view.all".localize)
+                })
+            }
+            
+            ForEach(viewModel.transactions[0..<3.limitTop(viewModel.transactions.count)]) { tran in
+                TransactionView(item: tran)
             }
         }
-        .scrollable(axis: .horizontal, showIndicators: false)
+    }
+    
+    private var invoicesView: some View {
+        LazyVStack {
+            HStack {
+                Text("popul.invoices".localize)
+                Spacer()
+                Button(action: {
+                    viewModel.navigate(to: .invoices)
+                }, label: {
+                    Text("view.all".localize)
+                })
+            }
+            
+            ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
+                InvoicesView(
+                    invoice: invo.invoiceNumber ?? "",
+                    amount: Float(invo.totalAmount),
+                    secoundAmount: Float(invo.totalDiscount ?? 0),
+                    companyName: invo.companyAccount?.organization.name ?? "",
+                    date: invo.beatufiedDate
+                )
+              }
+        }
+    }
+    
+    private var stationDetail: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .frame(height: 120.f.sh())
+                .foregroundStyle(Color.secondaryBackground)
+                .overlay {
+                    Text("no.stations.around".localize)
+                        .font(.system(size: 13, weight: .medium))
+                }
+                .opacity(viewModel.discountedStations.isEmpty ? 1 : 0)
+            
+            HStack{
+                ForEach(viewModel.discountedStations) { station in
+                    GasStationItemView(station: station)
+                        .set(navigate: { station in
+                            viewModel.openStation(station)
+                        })
+                        .frame(height: 120.f.sh())
+                        .background {
+                            RoundedRectangle(cornerRadius: 16)
+                                .foregroundStyle(.appSecondaryBackground)
+                        }
+                }
+            }
+            .frame(height: 120.f.sh())
+            .scrollable(
+                axis: .horizontal,
+                showIndicators: false
+            )
+        }
     }
 }
 
 #Preview {
-    NavigationStack {
+    UserSettings.shared.accessToken = UserSettings.testAccessToken
+    return NavigationStack {
         DashboardView()
             .navigationBarTitleDisplayMode(.inline)
             .environmentObject(DashboardViewModel())

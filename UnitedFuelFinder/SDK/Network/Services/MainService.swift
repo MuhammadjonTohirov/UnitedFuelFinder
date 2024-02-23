@@ -29,12 +29,22 @@ struct MainService {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations(
             request: .init(
                 from: .init(lat: location.lat, lng: location.lng),
-                to: .init(lat: toLocation.lat, lng: toLocation.lng), distance: distance))
+                to: .init(lat: toLocation.lat, lng: toLocation.lng), 
+                distance: distance
+            ))
+        )
+        
+        let items: [StationItem] = ((result?.data) ?? []).compactMap({.init(res: $0)})
+        return items
+    }
+
+    func filterStations(req: NetReqFilterStations) async -> [StationItem] {
+        let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations(request: req)
         )
         
         return ((result?.data) ?? []).compactMap({.init(res: $0)})
     }
-    
+
     func discountedStations(atLocation location: (lat: Double, lng: Double), in distance: Int, limit: Int = 8) async -> [StationItem] {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.discountedStations(
             request: .init(current: .init(lat: location.lat, lng: location.lng), distance: Double(distance)), limit: limit)

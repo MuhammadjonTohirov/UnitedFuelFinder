@@ -30,7 +30,7 @@ enum MapTabRouter: ScreenRoute {
     case settings
     case stationDetails(station: StationItem)
     case notifications
-    case filter
+    case filter(_ input: MapFilterInput, _ completion: (MapFilterInput) -> Void)
     
     @ViewBuilder
     var screen: some View {
@@ -41,8 +41,8 @@ enum MapTabRouter: ScreenRoute {
             StationDetailsView(station: station)
         case .notifications:
             NotificationsView()
-        case .filter:
-            MapFilterView()
+        case let .filter(input, completion):
+            MapFilterView(input: input, completion: completion)
         }
     }
     

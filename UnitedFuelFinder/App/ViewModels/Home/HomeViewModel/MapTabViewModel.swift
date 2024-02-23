@@ -19,9 +19,19 @@ enum HomeBodyState: Int {
     case list
 }
 
-final class MapTabViewModel: ObservableObject {
+protocol MapTabViewModelProtocl: ObservableObject {
+    var bodyState: HomeBodyState {get set}
+    var route: MapTabRouter? {get set}
+    var filter: MapFilterInput? {get}
+    
+    func set(currentLocation location: CLLocation?)
+    func set(filter: MapFilterInput)
+}
+
+final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     @Published var focusableLocation: CLLocation?
-    @Published var bodyState: HomeBodyState = .map
+    @Published var bodyState: HomeBodyState = .map 
+    @Published var filter: MapFilterInput? = .init(sortType: .discount, from: 0, to: 100, radius: 10, selectedStations: [1,2,3,4,5,6,7,8])
     var fromAddress: String = ""
     var toAddress: String = ""
     
@@ -56,9 +66,6 @@ final class MapTabViewModel: ObservableObject {
     @Published var isDetectingAddressFrom: Bool = false
     @Published var isDetectingAddressTo: Bool = false
     
-    @Published var radius: CLLocationDistance = 2
-    @Published var radiusValue: CGFloat = 2
-    
     private(set) var loadingMessage: String = ""
     private(set) var customers: [CustomerItem] = []
     
@@ -84,10 +91,13 @@ final class MapTabViewModel: ObservableObject {
             }
         }
     }
+    
     var toLocationCandidate: CLLocation?
 
     @Published var stations: [StationItem] = []
-    @Published var discountedStations: [StationItem] = []
+    
+    var stationsList: [StationItem] = []
+
     @Published var stationsMarkers: [GMSMarker] = []
     
     private var loadStationsTask: DispatchWorkItem?
@@ -117,49 +127,48 @@ final class MapTabViewModel: ObservableObject {
         
         didAppear = true
         
-        locationManager.locationUpdateHandler = { [weak self] location in
-            guard let self = self else {
-                return
-            }
-            
-            if self.lastCurrentLocation == nil {
-                self.lastCurrentLocation = location
-            }
-        }
-        
-        //Will be executed if the screen is presented for the first time
-        locationManager.requestLocationPermission()
-        
-        locationManager.startUpdatingLocation()
-        
         if UserSettings.shared.destination == nil || UserSettings.shared.fromLocation == nil {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 self.focusToCurrentLocation()
             }
         }
         
-        loadCustomers()
-        
-        restoreSavedRoute()
-        
-        setupSyncVersion()
+        Task {
+            await loadCustomers()
+
+            await MainActor.run {
+                filter = .init(
+                    sortType: .discount,
+                    from: 0,
+                    to: 1000,
+                    radius: 10,
+                    selectedStations: Set(DCustomer.all?.compactMap({$0.id}) ?? [])
+                )
+                restoreSavedRoute()
+            }
+        }
     }
     
-    private func setupSyncVersion() {
-        Task {
-            await AuthService.shared.syncUserInfo()
+    func set(currentLocation location: CLLocation?) {
+        if self.lastCurrentLocation == nil {
+            self.lastCurrentLocation = location
+            self.focusToCurrentLocation()
+        }
+    }
+    
+    func set(filter: MapFilterInput) {
+        self.filter = filter
+        
+        if !stationsList.isEmpty {
             
-            try await Task.sleep(for: .seconds(1))
-            if let serverVersion = await CommonService.shared.getVersion() {
-//                
-//                await MainActor.run {
-//                    if let version = UserSettings.shared.currentAPIVersion {
-//                        self.hasNewVersion = version.isNewVersion(serverVersion)
-//                    }
-//                }
-                
-                UserSettings.shared.currentAPIVersion = serverVersion
+            self.stationsMarkers.removeAll { mr in
+                mr.map = nil
+                return true
             }
+
+            self.stations = stationsList.applyFilter(filter)
+            
+            self.stationsMarkers.append(contentsOf: self.stations.map({$0.asMarker}))
         }
     }
     
@@ -177,19 +186,6 @@ final class MapTabViewModel: ObservableObject {
                 self.toAddress = address
             }
         }
-    }
-    
-    func startRegularFetchingNearStations() {
-        appDelegate?.timer?.invalidate()
-        
-        appDelegate?.timer = .scheduledTimer(withTimeInterval: 5, repeats: true, block: { _ in
-            self.startFilterStations()
-        })
-    }
-    
-    func stopRegularFetchingNearStations() {
-        appDelegate?.timer?.invalidate()
-        appDelegate?.timer = nil
     }
     
     func focusToCurrentLocation() {
@@ -246,6 +242,10 @@ final class MapTabViewModel: ObservableObject {
         if state == .routing {
             filterStationsByRoute()
         }
+        
+        if state != .routing {
+            filterStationsByDefault()
+        }
     }
     
     func startFilterStations() {
@@ -253,7 +253,6 @@ final class MapTabViewModel: ObservableObject {
             return
         }
         
-        self.radius = self.radiusValue
         self.filterStationsByDefault()
     }
     
@@ -330,14 +329,26 @@ final class MapTabViewModel: ObservableObject {
         self.onClickDrawRoute()
     }
     
-    func loadCustomers() {
-        Task {
-            let _customers = await MainService.shared.getCustomers()
-            
-            await MainActor.run {
-                self.customers = _customers
-            }
+    func loadCustomers() async {
+        let _customers = await MainService.shared.getCustomers()
+        
+        await MainActor.run {
+            self.customers = _customers
         }
     }
+    
+    func onSelectMap() {
+        guard self.fromLocation == nil || self.toLocation == nil else {
+            return
+        }
+        if let loc = self.pickedLocation {
+            self.focusToLocation(loc)
+        } else {
+            self.focusToCurrentLocation()
+        }
+    }
+    
+    func onSelectList() {
+        
+    }
 }
-

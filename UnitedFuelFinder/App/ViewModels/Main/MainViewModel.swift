@@ -68,6 +68,7 @@ var appDelegate: AppDelegate? = routerObject.delegate
 
 final class MainViewModel: ObservableObject {
     @Published var route: AppDestination = .loading
+    
     @Published var language: Language = UserSettings.shared.language ?? .english {
         didSet {
             UserSettings.shared.language = language

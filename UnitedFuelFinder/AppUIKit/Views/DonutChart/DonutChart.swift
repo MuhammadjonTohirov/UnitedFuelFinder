@@ -15,7 +15,7 @@ struct DonutChartSlice: Identifiable {
 }
 
 struct DonutChartView: View {
-    @State var slices: [DonutChartSlice]
+    var slices: [DonutChartSlice]
     let holeSize: CGFloat
     
     init(slices: [DonutChartSlice], holeSize: CGFloat = 0.5) {
@@ -25,15 +25,15 @@ struct DonutChartView: View {
     
     var body: some View {
         ZStack {
+            
+            DonutSlice(
+                startAngle: .radians(0),
+                endAngle: .radians(2 * .pi)
+            )
+            .fill(Color.init(uiColor: .systemGray5))
+            
             ForEach(slices.indices, id: \.f) { index in
-                let startAngle = index == 0 ? Angle(degrees: 0) : self.calculateStartAngle(for: index)
-                let endAngle = startAngle + self.calculateAngle(for: index)
-                
-                DonutSlice(
-                    startAngle: startAngle,
-                    endAngle: endAngle
-                )
-                .fill(self.slices[index].color)
+                slice(atIndex: index)
             }
             Circle()
                 .foregroundStyle(.appSecondaryBackground)
@@ -42,11 +42,24 @@ struct DonutChartView: View {
         .aspectRatio(1, contentMode: .fit)
     }
     
+    private func slice(atIndex index: Int) -> some View {
+        let startAngle = index == 0 ? Angle(degrees: 0) : self.calculateStartAngle(for: index)
+        let endAngle = startAngle + self.calculateAngle(for: index)
+        
+        return ZStack {
+            DonutSlice(
+                startAngle: startAngle,
+                endAngle: endAngle
+            )
+            .fill(self.slices[index].color)
+        }
+    }
+    
     private func calculateStartAngle(for index: Int) -> Angle {
         if index == 0 {
             return Angle(degrees: 1)
         } else {
-            var totalAngle = Angle(degrees: 1)
+            var totalAngle = Angle(degrees: 0)
             for i in 0..<index {
                 totalAngle += calculateAngle(for: i)
             }

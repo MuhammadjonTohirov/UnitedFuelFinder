@@ -109,13 +109,14 @@ public struct AuthService {
         
         if isOK, let user = UserSettings.shared.userInfo, let _city = DCity.item(id: city) {
             
-            let _user = UserInfo.init(id: user.id, fullName: [firstName, lastName].joined(separator: " "),
-                          email: user.email,
-                          phone: user.phone,
-                          cardNumber: user.cardNumber,
-                          companyId: user.companyId, companyName: user.companyName,
-                          address: address, cityId: city, cityName: _city.name, state: state, stateId: state, confirmed: true, deleted: false)
-            UserSettings.shared.userInfo = _user
+            var info = UserSettings.shared.userInfo
+            info?.firstName = firstName
+            info?.lastName = lastName
+            info?.phone = phone
+            info?.stateId = state
+            info?.cityId = city
+            info?.address = address
+            UserSettings.shared.userInfo = info
         }
         
         return isOK

@@ -24,7 +24,14 @@ struct NetResUserInfo: NetResBody {
     let cityName: String?
     let state: String?
     let stateId: String?
+    let stateName: String?
     let confirmed: Bool?
     let deleted: Bool?
+    var permissionList: [String]?
+    let registerTime: String?
+    let driverUnit: String?
+    let accountId: Int?
+    let accountName: String?
+    
 }
 
