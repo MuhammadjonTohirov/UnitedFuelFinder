@@ -24,7 +24,7 @@ protocol AppDelegate {
 extension AppDelegate {
     func defaultNavigationSetup() {
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
+        appearance.configureWithTransparentBackground()
         
         let back = UIBarButtonItemAppearance(style: .done)
         back.normal.backgroundImage = UIImage()
@@ -38,6 +38,10 @@ extension AppDelegate {
         
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().compactAppearance = appearance
+        
+        let tabAppearance = UITabBarAppearance()
+        tabAppearance.configureWithTransparentBackground()
+        UITabBar.appearance().standardAppearance = tabAppearance
     }
     
     func transparentNavigationSetup() {
@@ -64,6 +68,7 @@ var appDelegate: AppDelegate? = routerObject.delegate
 
 final class MainViewModel: ObservableObject {
     @Published var route: AppDestination = .loading
+    
     @Published var language: Language = UserSettings.shared.language ?? .english {
         didSet {
             UserSettings.shared.language = language
@@ -76,6 +81,7 @@ final class MainViewModel: ObservableObject {
         self.route = route
         appDelegate = self
         UserSettings.shared.lastActiveDate = Date()
+        UserSettings.shared.photoUpdateDate = Date()
         GMSServices.provideAPIKey(URL.googleMapsApiKey)
         Logging.l("GMaps \(GMSServices.sdkVersion())")
     }

@@ -44,6 +44,7 @@ class NotificationsViewModel: ObservableObject {
         
         Task {
             let logs = await MainService.shared.getAuditLogs()
+            
             await MainActor.run {
                 self.notifications = logs.map { NotificationModel.create(with: $0) }.sorted(by: {$0.id > $1.id})
                 self.isLoading = false

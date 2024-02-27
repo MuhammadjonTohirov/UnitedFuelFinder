@@ -14,93 +14,170 @@ struct DashboardView: View {
         (title: "Bar 3", value: 11)
     ]
     
+    @EnvironmentObject var viewModel: DashboardViewModel
+    
     @State var profileImage: String = "station"
+    
     var body: some View {
+        ZStack {
+            innerBody
+                .background {
+                    Rectangle()
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                }
+            
+            GeometryReader(content: { geometry in
+                VStack(spacing: 0) {
+                    Rectangle()
+                        .frame(height: geometry.safeAreaInsets.top)
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .ignoresSafeArea()
+
+                    
+                    Spacer()
+                    
+                    Rectangle()
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .ignoresSafeArea(.container, edges: .bottom)
+                        .frame(height: 0)
+                }
+            })
+        }
+        .onAppear {
+            self.viewModel.onAppear()
+        }
+        .coveredLoading(isLoading: $viewModel.isLoading)
+    }
+    
+    var innerBody: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text("")
+            CardWidgetView()
             
-            CardWidgetView(name: "John Doe", cardNummber: "•••• 8484", balance: 1500)
+            Text("total.spendings".localize)
+            SpendingsWidgetView()
             
-            Text("Most popular station".localize)
+            Text("popular.stations".localize)
             PopularStationsView(data: barChartData)
             
-            Text("Top discounted stations".localize)
+            Text("discounted.stations".localize)
             stationDetail
-                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
             
-            HStack {
-                Text("Transferring transactions")
-                Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    Text("View all")
-                })
-            }
-            ForEach(0..<2) {_ in 
-                TransactionView(title: "TRN12938", location: "PILOT BURBANK 287", gallon: 73.02, totalSum: 300, savedAmount: 34.21, price: 4.11, driver: "Aliev Vali", cardNumber: "•••• 1232", date: "12:00 10.11.2023")
+            if (UserSettings.shared.userInfo?.canViewTransactions ?? false) {
+                transactionsView
             }
             
-            HStack {
-                Text("Populated invoices")
-                Spacer()
-                Button(action: {
-                    
-                }, label: {
-                    Text("View all")
-                })
+            if (UserSettings.shared.userInfo?.canViewInvoices ?? false) {
+                invoicesView
             }
-            
-            ForEach(0..<2) {_ in
-                InvoicesView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
-                    .padding(.bottom)
-            }
-            
-//            Text("")
-//                .frame(height: 50)
         }
+        .navigationDestination(isPresented: $viewModel.push, destination: {
+            viewModel.route?.screen
+        })
         .padding(.horizontal)
         .font(.system(size: 14))
         .fontWeight(.semibold)
         .frame(maxWidth: .infinity)
         .scrollable(showIndicators: false)
-        .navigationTitle("Dahsboard")
-        .navigationBarTitleDisplayMode(.inline)
-        .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
+    }
+    
+    private var transactionsView: some View {
+        LazyVStack {
+            HStack {
+                Text("transf.transactions".localize) // Transferring transactions
+                Spacer()
                 Button(action: {
-                    
+                    viewModel.navigate(to: .transferringStations)
                 }, label: {
-                    Image(systemName: "bell")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 24, height: 24)
-                        .foregroundStyle(Color.init(uiColor: .label))
+                    Text("view.all".localize)
                 })
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                Image(profileImage)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 32, height: 32)
-                    .cornerRadius(20)
+            
+            ForEach(viewModel.transactions[0..<3.limitTop(viewModel.transactions.count)]) { tran in
+                TransactionView(item: tran)
             }
         }
     }
+    
+    private var invoicesView: some View {
+        LazyVStack {
+            HStack {
+                Text("popul.invoices".localize)
+                Spacer()
+                Button(action: {
+                    viewModel.navigate(to: .invoices)
+                }, label: {
+                    Text("view.all".localize)
+                })
+            }
+            
+            ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
+                InvoicesView(
+                    invoice: invo.invoiceNumber ?? "",
+                    amount: Float(invo.totalAmount),
+                    secoundAmount: Float(invo.totalDiscount ?? 0),
+                    companyName: invo.companyAccount?.organization.name ?? "",
+                    date: invo.beatufiedDate
+                )
+              }
+        }
+    }
+    
     private var stationDetail: some View {
         ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .frame(height: 120.f.sh())
+                .foregroundStyle(Color.secondaryBackground)
+                .overlay {
+                    Text("no.stations.around".localize)
+                        .font(.system(size: 13, weight: .medium))
+                }
+                .opacity(viewModel.discountedStations.isEmpty ? 1 : 0)
+            
             HStack{
-                ForEach(0..<3) {index in
-                    DiscountStationView(title: "TA/Petrol", location: "23.37 ml • NEWARK NJ", price: 5.1, discount: 0.68)
+                ForEach(viewModel.discountedStations) { station in
+                    GasStationItemView(station: station)
+                        .set(navigate: { station in
+                            viewModel.openStation(station)
+                        })
+                        .frame(height: 120.f.sh())
+                        .background {
+                            RoundedRectangle(cornerRadius: 16)
+                                .foregroundStyle(.appSecondaryBackground)
+                        }
                 }
             }
-            .scrollable(axis: .horizontal, showIndicators: false)
+            .frame(height: 120.f.sh())
+            .scrollable(
+                axis: .horizontal,
+                showIndicators: false
+            )
         }
     }
 }
 
 #Preview {
-    NavigationStack {
+    UserSettings.shared.accessToken = UserSettings.testAccessToken
+    return NavigationStack {
         DashboardView()
+            .navigationBarTitleDisplayMode(.inline)
+            .environmentObject(DashboardViewModel())
+            .navigationTitle("Dashboard")
+            .onAppear {
+                let appearance = UINavigationBarAppearance()
+                appearance.configureWithTransparentBackground()
+                
+                let back = UIBarButtonItemAppearance(style: .done)
+                back.normal.backgroundImage = UIImage()
+                
+                back.normal.titlePositionAdjustment = .init(horizontal: -1000, vertical: 0)
+                
+                appearance.backButtonAppearance = back
+                appearance.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
+                appearance.shadowImage = UIImage()
+                appearance.shadowColor = .clear
+                
+                UINavigationBar.appearance().standardAppearance = appearance
+                UINavigationBar.appearance().compactAppearance = appearance
+            }
     }
 }

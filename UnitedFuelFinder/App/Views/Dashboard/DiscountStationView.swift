@@ -16,7 +16,7 @@ struct DiscountStationView: View {
     var body: some View {
             ZStack {
                 Rectangle()
-                    .fill(Color.white)
+                    .foregroundStyle(.appSecondaryBackground)
                     .cornerRadius(12)
                     .shadow(color: Color.white.opacity(0.2), radius: 4, x: 0, y: 2)
                 
@@ -33,6 +33,7 @@ struct DiscountStationView: View {
                         }
                         .font(.system(size: 12))
                         .foregroundStyle(.gray)
+
                         Spacer()
                         
                         let discountedPrice = price - discount
@@ -78,6 +79,7 @@ struct DiscountStationView: View {
                     }
                     .padding(.horizontal)
                 }
+                .foregroundColor(.black)
             }
             .frame(width: 325, height: 120)
             .edgesIgnoringSafeArea(.vertical)

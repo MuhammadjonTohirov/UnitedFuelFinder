@@ -19,8 +19,14 @@ struct MainService {
     
     func filterStations(atLocation location: (lat: Double, lng: Double), in distance: Int) async -> [StationItem] {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations(
-            request: .init(current: .init(lat: location.lat, lng: location.lng), distance: Double(distance)))
-        )
+            request: .init(
+                current: .init(
+                    lat: location.lat,
+                    lng: location.lng
+                ),
+                distance: Double(distance)
+            )
+        ))
         
         return ((result?.data) ?? []).compactMap({.init(res: $0)})
     }
@@ -29,12 +35,29 @@ struct MainService {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations(
             request: .init(
                 from: .init(lat: location.lat, lng: location.lng),
-                to: .init(lat: toLocation.lat, lng: toLocation.lng), distance: distance))
+                to: .init(lat: toLocation.lat, lng: toLocation.lng), 
+                distance: distance
+            ))
+        )
+        
+        let items: [StationItem] = ((result?.data) ?? []).compactMap({.init(res: $0)})
+        return items
+    }
+    
+    func filterStations(req: NetReqFilterStations) async -> [StationItem] {
+        let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations(request: req))
+        
+        let items: [StationItem] = ((result?.data) ?? []).compactMap({.init(res: $0)})
+        return items
+    }
+
+    func filterStations2(req: NetReqFilterStations) async -> [StationItem] {
+        let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations2(request: req)
         )
         
         return ((result?.data) ?? []).compactMap({.init(res: $0)})
     }
-    
+
     func discountedStations(atLocation location: (lat: Double, lng: Double), in distance: Int, limit: Int = 8) async -> [StationItem] {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.discountedStations(
             request: .init(current: .init(lat: location.lat, lng: location.lng), distance: Double(distance)), limit: limit)
@@ -69,7 +92,6 @@ struct MainService {
     
     func getAuditLogs() async -> [AuditLog] {
         let result: NetRes<[NetResAuditLog]>? = await Network.send(request: MainNetworkRouter.getAuditLogs)
-        
         return ((result?.data) ?? []).compactMap({.init($0)})
     }
     
@@ -84,5 +106,13 @@ struct MainService {
     func searchAddresses(_ query: String) async -> [NetResSearchAddressItem] {
         let result: NetRes<[NetResSearchAddressItem]>? = await Network.send(request: MainNetworkRouter.searchAddresses(text: query))
         return result?.data ?? []
+    }
+    
+    func uploadAvatar(_ image: URL, completion: @escaping (Bool) -> Void) {
+        Network.upload(
+            body: String.self,
+            request: MainNetworkRouter.uploadAvatar(imageUrl: image)) { result in
+                completion(result?.success ?? false)
+            }
     }
 }

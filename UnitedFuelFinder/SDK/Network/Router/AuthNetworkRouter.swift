@@ -25,7 +25,7 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .deleteProfile:
             return URL.baseAPI.appendingPath("Driver", "DeleteAccount")
         case .confirmDeleteProfile:
-            return URL.baseAPI.appendingPath("Driver", "ConfirmDelete")
+            return URL.baseAPI.appendingPath("Driver", "ConfirmDelete") // http://15.235.212.129:5000/api/Driver/ConfirmDelete
         }
     }
     

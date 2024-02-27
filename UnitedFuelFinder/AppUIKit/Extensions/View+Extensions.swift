@@ -24,8 +24,18 @@ public extension View {
         }
     }
     
-    func scrollable(axis: Axis.Set = .vertical, showIndicators: Bool = false) -> some View {
-        self.modifier(ScrollableModifier(axis: axis, indicators: showIndicators))
+    func scrollable(
+        axis: Axis.Set = .vertical,
+        showIndicators: Bool = false,
+        scrollable: Bool = true
+    ) -> AnyView {
+        if scrollable {
+            return self
+                .modifier(ScrollableModifier(axis: axis, indicators: showIndicators))
+                .anyView
+        }
+        
+        return self.anyView
     }
     
     func horizontal(alignment: Alignment) -> some View {

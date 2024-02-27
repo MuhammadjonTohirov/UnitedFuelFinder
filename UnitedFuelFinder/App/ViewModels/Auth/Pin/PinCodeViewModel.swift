@@ -125,4 +125,12 @@ class PinCodeViewModel: ObservableObject {
             onResult?(isOK)
         }
     }
+    
+    func onAppear() {
+#if DEBUG
+        if reason == .login {
+            appDelegate?.navigate(to: .mainTab)
+        }
+#endif
+    }
 }

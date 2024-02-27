@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ProfileViewModel: NSObject, ObservableObject, Alertable {
     var alert: AlertToast = .init(displayMode: .alert, type: .regular)
@@ -18,6 +19,13 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     @Published var screenRect: CGRect = .zero
     @Published var address: String = ""
     
+    @Published var showImagePicker = false
+    
+    @Published var imageUrl: URL?
+    @Published var avatar: UIImage = #imageLiteral(resourceName: "icon_man_placeholder")
+
+    var sourceType: UIImagePickerController.SourceType = UIImagePickerController.SourceType.camera
+
     @Published var state: DState? {
         didSet {
             if oldValue != state {
@@ -64,7 +72,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
             phoneNumber = user.phone
             address = user.address ?? ""
             
-            if let _stateKey = user.state, let _state = DState.item(id: _stateKey) {
+            if let _stateKey = user.stateId, let _state = DState.item(id: _stateKey) {
                 self.state = _state
             }
             
@@ -81,7 +89,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                 }
                 
                 if DCity.item(id: user.cityId ?? Int(user.cityName ?? "-1") ?? -1) == nil {
-                    await CommonService.shared.syncCities(forState: user.state ?? "")
+                    await CommonService.shared.syncCities(forState: user.stateId ?? "")
                 }
                 
                 await MainActor.run {
@@ -97,22 +105,45 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
         guard let stateId = state?.id, let cityId = city?.id else {
             return
         }
+        
         self.isLoading = true
-        Task {
-            if await AuthService.shared.editUserInfo(
-                firstName: firstName,
-                lastName: lastName, phone: phoneNumber, state: stateId,
-                city: cityId, address: address) {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.showAlert(message: "profile_updated".localize)
-                }
-            } else {
-                DispatchQueue.main.async {
-                    self.isLoading = false
-                    self.showError(message: "profile_updated_failed".localize)
+        
+        uploadAvatar { [weak self] isOK in
+            guard let self, isOK else {
+                return
+            }
+            Task {
+                if await AuthService.shared.editUserInfo(
+                    firstName: self.firstName,
+                    lastName: self.lastName,
+                    phone: self.phoneNumber, state: stateId,
+                    city: cityId,
+                    address: self.address) {
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        self.showAlert(message: "profile_updated".localize)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.isLoading = false
+                        self.showError(message: "profile_updated_failed".localize)
+                    }
                 }
             }
         }
+    }
+    
+    func uploadAvatar(completion: @escaping (Bool) -> Void) {
+        if let url = imageUrl {
+            MainService.shared.uploadAvatar(url) { isOK in
+                if isOK {
+                    UserSettings.shared.photoUpdateDate = Date()
+                }
+                completion(isOK)
+            }
+            return
+        } 
+        
+        completion(true)
     }
 }

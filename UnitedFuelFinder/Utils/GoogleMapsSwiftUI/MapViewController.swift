@@ -55,7 +55,7 @@ class MapViewController: UIViewController {
         map.preferredFrameRate = .maximum
         
         changeMapStyle(by: traitCollection.userInterfaceStyle)
-
+        
         map.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         map.isBuildingsEnabled = false
         map.isMyLocationEnabled = true
@@ -63,6 +63,13 @@ class MapViewController: UIViewController {
     
     func set(padding: UIEdgeInsets) {
         self.map.padding = padding
+    }
+    
+    func set(circleAt position: CLLocationCoordinate2D, radius: CGFloat, color: UIColor) {
+        let circle = GMSCircle(position: position, radius: radius)
+        circle.fillColor = color
+        circle.strokeColor = color
+        circle.map = map
     }
     
     override func viewDidLayoutSubviews() {

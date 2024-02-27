@@ -4,14 +4,60 @@
     "" : {
 
     },
-    "($%@ saved)" : {
+    " ($%@)" : {
 
     },
-    "($%@)" : {
+    "(%@)" : {
 
+    },
+    "($%@ saved)" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(%@ saved)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(%@ сэкономлены)"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "(%@ tejaldi)"
+          }
+        }
+      }
     },
     "(None)" : {
 
+    },
+    "@saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ saved"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ сэкономлены"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ tejaldi"
+          }
+        }
+      }
     },
     "******" : {
 
@@ -26,9 +72,6 @@
 
     },
     "%lld mi" : {
-
-    },
-    "$ %lld" : {
 
     },
     "$%@" : {
@@ -46,9 +89,6 @@
           }
         }
       }
-    },
-    "$%lld" : {
-
     },
     "address" : {
       "extractionState" : "manual",
@@ -132,6 +172,29 @@
         }
       }
     },
+    "amount.saved" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ (%@ saved)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ (%@ сэкономлены)"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ (%@ tejaldi)"
+          }
+        }
+      }
+    },
     "app_version" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -174,6 +237,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ko'rinish"
+          }
+        }
+      }
+    },
+    "apply" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Применить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qo'llash"
           }
         }
       }
@@ -270,8 +356,74 @@
         }
       }
     },
-    "Blue" : {
-
+    "camera" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camera"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Камера."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kamera"
+          }
+        }
+      }
+    },
+    "cancel" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Назад"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ortga"
+          }
+        }
+      }
+    },
+    "card" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Card"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карта"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta"
+          }
+        }
+      }
     },
     "change_pin" : {
       "extractionState" : "manual",
@@ -552,9 +704,6 @@
         }
       }
     },
-    "Dahsboard" : {
-
-    },
     "dark" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -791,6 +940,29 @@
         }
       }
     },
+    "discounted.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discounted stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Скидочные станции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chegirma stantsiyalar"
+          }
+        }
+      }
+    },
     "distance" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -840,22 +1012,59 @@
     "download" : {
       "extractionState" : "manual",
       "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Download"
-          }
-        },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "Загрузите"
           }
         }
       }
     },
-    "Driver" : {
-
+    "driver" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Driver"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Водитель"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haydovchi"
+          }
+        }
+      }
+    },
+    "edit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tahrirlash"
+          }
+        }
+      }
     },
     "edit_profile" : {
       "extractionState" : "manual",
@@ -903,6 +1112,9 @@
         }
       }
     },
+    "English" : {
+
+    },
     "enter_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -945,6 +1157,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chiqish"
+          }
+        }
+      }
+    },
+    "filter.price.range.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This range will be applied to discounted price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот диапазон будет применен к скидочной цене"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ushbu oraliq chegirma narxiga qo'llaniladi"
+          }
+        }
+      }
+    },
+    "filter.sort.by.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can be sorted by cheapest price or highest discount"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Можно сортировать по самой низкой цене или самой большой скидке"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eng arzon narx yoki eng yuqori chegirma bo'yicha tartiblash mumkin"
           }
         }
       }
@@ -1044,8 +1302,28 @@
         }
       }
     },
-    "Green" : {
-
+    "gallery" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gallery"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Галерея"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rasmlar"
+          }
+        }
+      }
     },
     "help_desk" : {
       "extractionState" : "manual",
@@ -1070,11 +1348,28 @@
         }
       }
     },
-    "Indigo" : {
-
-    },
-    "Information" : {
-
+    "information" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Information"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Информация"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ma'lumot"
+          }
+        }
+      }
     },
     "insert_creds" : {
       "extractionState" : "manual",
@@ -1437,6 +1732,52 @@
         }
       }
     },
+    "loading.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка АЗС"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaxobchalarni yuklash"
+          }
+        }
+      }
+    },
+    "location" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Location"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Местоположение"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil"
+          }
+        }
+      }
+    },
     "login" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1598,6 +1939,29 @@
         }
       }
     },
+    "month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Month"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Месяц"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oylik"
+          }
+        }
+      }
+    },
     "more_comments" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1620,12 +1984,6 @@
           }
         }
       }
-    },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
     },
     "navigate" : {
       "extractionState" : "manual",
@@ -1834,6 +2192,52 @@
         }
       }
     },
+    "no.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет АЗС"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaxobchalar yo'q"
+          }
+        }
+      }
+    },
+    "no.stations.around" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No stations around"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет АЗС поблизости"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaxobchalar topilmadi"
+          }
+        }
+      }
+    },
     "not_confirmed_by_admin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1880,6 +2284,9 @@
         }
       }
     },
+    "O'zbekcha" : {
+
+    },
     "ok" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1902,15 +2309,6 @@
           }
         }
       }
-    },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
-    "Orange" : {
-
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -1957,15 +2355,6 @@
           }
         }
       }
-    },
-    "page 1" : {
-
-    },
-    "Page 2" : {
-
-    },
-    "Page1" : {
-
     },
     "per gallon" : {
 
@@ -2039,8 +2428,51 @@
         }
       }
     },
-    "Populated invoices" : {
-
+    "popul.invoices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invoices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счета"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invoicelar"
+          }
+        }
+      }
+    },
+    "popular.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most popular stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Самые популярные станции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eng mashhur stantsiyalar"
+          }
+        }
+      }
     },
     "post_feedback" : {
       "extractionState" : "manual",
@@ -2084,6 +2516,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Narx"
+          }
+        }
+      }
+    },
+    "price.range" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price range"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Диапазон цен"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narx oraliqi"
           }
         }
       }
@@ -2180,11 +2635,51 @@
         }
       }
     },
-    "Radius (in miles)" : {
-
+    "radius.mile" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radius (in miles)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Радиус (в милях)"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Radius (milada)"
+          }
+        }
+      }
     },
-    "Red" : {
-
+    "region" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Region"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Регион"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Region"
+          }
+        }
+      }
     },
     "register_warning" : {
       "extractionState" : "manual",
@@ -2255,13 +2750,11 @@
         }
       }
     },
-    "Regular" : {
-
-    },
     "Retail price " : {
 
     },
     "Retail price %@" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2302,6 +2795,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chakana narxi"
+          }
+        }
+      }
+    },
+    "retail.price.n" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retail price %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Розничная цена %@"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Do'kon narxi %@"
           }
         }
       }
@@ -2349,6 +2865,7 @@
 
     },
     "Save %@ per gallon " : {
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -2360,6 +2877,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Har galondan %@ tejang"
+          }
+        }
+      }
+    },
+    "save.n.galon" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save %@ per gallon"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сэкономьте %@ за галлон"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Galloniga %@ tejash"
           }
         }
       }
@@ -2406,6 +2946,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AYOQSH qidirlmoqda"
+          }
+        }
+      }
+    },
+    "searching.route" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching route"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск маршрута"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yo'lni qidirish"
           }
         }
       }
@@ -2544,8 +3107,31 @@
         }
       }
     },
-    "Sorted by" : {
+    "Show" : {
 
+    },
+    "sorted.by" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sorted by"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сортировать по"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tartiblangan"
+          }
+        }
+      }
     },
     "state" : {
       "extractionState" : "manual",
@@ -2570,8 +3156,28 @@
         }
       }
     },
-    "Stations" : {
-
+    "stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Станции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stantsiyalar"
+          }
+        }
+      }
     },
     "stations_at_radius" : {
       "extractionState" : "manual",
@@ -2596,7 +3202,7 @@
         }
       }
     },
-    "SwiftUI" : {
+    "Submit" : {
 
     },
     "system" : {
@@ -2621,6 +3227,12 @@
           }
         }
       }
+    },
+    "TEST" : {
+
+    },
+    "Text" : {
+
     },
     "theme" : {
       "extractionState" : "manual",
@@ -2668,8 +3280,74 @@
         }
       }
     },
-    "Transferring transactions" : {
-
+    "today" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сегодня"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bugun"
+          }
+        }
+      }
+    },
+    "total.spendings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total spendings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всего расходов"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jami xarajatlar"
+          }
+        }
+      }
+    },
+    "transf.transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transferred transactions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Переведенные транзакции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O'tkazilgan tranzaksiyalar"
+          }
+        }
+      }
     },
     "ufc_client_service" : {
       "extractionState" : "manual",
@@ -2693,9 +3371,6 @@
           }
         }
       }
-    },
-    "View all" : {
-
     },
     "view_all" : {
       "extractionState" : "manual",
@@ -2743,8 +3418,28 @@
         }
       }
     },
-    "Violet" : {
-
+    "view.all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View all"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bсе"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barchasi"
+          }
+        }
+      }
     },
     "warning" : {
       "extractionState" : "manual",
@@ -2765,6 +3460,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Diqqat"
+          }
+        }
+      }
+    },
+    "week" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Week"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неделя"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hafta"
           }
         }
       }
@@ -2815,7 +3533,7 @@
         }
       }
     },
-    "Yellow" : {
+    "Русский" : {
 
     }
   },

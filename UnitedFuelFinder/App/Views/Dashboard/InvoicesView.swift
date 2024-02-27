@@ -16,9 +16,9 @@ struct InvoicesView: View {
     var body: some View {
         ZStack {
             Rectangle()
-                .fill(Color.white)
+                .fill(.appSecondaryBackground)
                 .cornerRadius(12)
-                .shadow(color: Color.black.opacity(0.2), radius: 4, x: 0, y: 2)
+                
             VStack(spacing: 10) {
                 HStack {
                     Text(invoice)
@@ -50,12 +50,12 @@ struct InvoicesView: View {
                     Text(date)
                 }
             }
+            .foregroundColor(.black)
             .font(.system(size: 12))
             .fontWeight(.regular)
             .padding()
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 96)
     }
 }
 

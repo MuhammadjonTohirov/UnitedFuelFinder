@@ -132,6 +132,7 @@ public extension String {
         return text.format(with: "XXXX XXXX XXXX XXXX")
     }
     
+    /// •••• xxxx
     var maskAsMiniCardNumber: String {
         var text = self.replacingOccurrences(of: " ", with: "")
         if text.count < 9 {
