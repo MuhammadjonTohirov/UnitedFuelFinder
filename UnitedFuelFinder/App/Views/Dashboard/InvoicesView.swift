@@ -56,7 +56,6 @@ struct InvoicesView: View {
             .padding()
         }
         .frame(maxWidth: .infinity)
-        .frame(height: 96)
     }
 }
 

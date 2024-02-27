@@ -34,11 +34,8 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     var screenCenter: CGPoint
     @Binding var markers: [GMSMarker]
 
-    fileprivate var onStartDrawing: (() -> Void)?
-    fileprivate var onEndDrawing: ((Bool) -> Void)?
     fileprivate var onClickMarker: ((_ marker: GMSMarker, _ frame: CGPoint) -> Void)?
-    fileprivate var routeFrom: CLLocationCoordinate2D?
-    fileprivate var routeTo: CLLocationCoordinate2D?
+    fileprivate var route: [CLLocationCoordinate2D] = []
     fileprivate var didRadiusChanged: Bool = true
 
     fileprivate var radius: CLLocationDistance = .zero
@@ -72,19 +69,12 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         return v
     }
     
-    func set(from: CLLocationCoordinate2D?, to: CLLocationCoordinate2D?, onStartDrawing: @escaping () -> Void, onEndDrawing: @escaping (Bool) -> Void) -> Self {
+    func set(route: [CLLocationCoordinate2D]) -> Self {
         var v = self
         
-        if v.routeFrom != from {
-            v.routeFrom = from
+        if v.route.first != route.first && v.route.last != route.last {
+            v.route = route
         }
-        
-        if v.routeTo != to {
-            v.routeTo = to
-        }
-        
-        v.onStartDrawing = onStartDrawing
-        v.onEndDrawing = onEndDrawing
         
         return v
     }
@@ -95,23 +85,26 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         
         let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
         
-        let bottom = 158 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
+        let bottom = 115 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
         
-        mapController.set(padding: .init(
-            top: 0, left: 0,
-            bottom: bottom, right: 0))
+        mapController.set(
+            padding: .init(
+                top: 0, 
+                left: 0,
+                bottom: bottom, 
+                right: 0
+            )
+        )
         
         return mapController
     }
     
     func updateUIViewController(_ uiViewController: MapViewController, context: Context) {
-        Logging.l("MapView update ui called")
+        
         if let location {
             let position = GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
-            
             uiViewController.map.animate(to: position)
         }
-        
         
 //       MARK: markers drawing
         if context.coordinator.clusterManager == nil {
@@ -123,8 +116,8 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             context.coordinator.updateCluster(withMarkers: self.markers)
         }
         
-        if let from = self.routeFrom, let to = self.routeTo {
-            context.coordinator.setMapMarkersRoute(vLoc: from, toLoc: to, on: uiViewController.map)
+        if !self.route.isEmpty {
+            context.coordinator.setMapMarkersRoute(route: route, on: uiViewController.map)
         } else {
             context.coordinator.clearRoute(onMap: uiViewController.map)
             context.coordinator.endDrawing()
@@ -203,7 +196,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTapAt coordinate: CLLocationCoordinate2D) {
             debugPrint("didTapAt coordinate \(coordinate)")
-            
         }
         
         func mapView(_ mapView: GMSMapView, didBeginDragging marker: GMSMarker) {
@@ -211,7 +203,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         }
         
         func mapView(_ mapView: GMSMapView, didEndDragging marker: GMSMarker) {
-            
             debugPrint("Did end dragging")
         }
         
@@ -262,10 +253,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         }
         
         func clearRoute(onMap map: GMSMapView) {
-            guard currentRoutePolyline != nil else {
-                return
-            }
-            
             self.currentRoutePolyline?.map = nil
             self.currentRoutePolyline = nil
                         
@@ -289,48 +276,18 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             self.isRouting = false
         }
         
-        func getRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, on mapView: GMSMapView) {
-            Logging.l("Start routing \(isRouting) \nfrom: \(from) \nto: \(to)")
-            let origin = "\(from.latitude),\(from.longitude)"
-            let destination = "\(to.latitude),\(to.longitude)"
-                        
-            if let url = URL.googleRoutingAPI(from: origin, to: destination) {
-                URLSession.shared.dataTask(with: url) { data, response, error in
-                    guard let data = data, error == nil else {
-                        debugPrint("Error fetching directions: \(error?.localizedDescription ?? "Unknown error")")
-                        return
-                    }
-                    
-                    do {
-                        let json = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                        if let routes = json?["routes"] as? [[String: Any]], let route = routes.first, let polyline = route["overview_polyline"] as? [String: Any], let points = polyline["points"] as? String {
-                            // Decode the polyline and draw it on the map
-                            DispatchQueue.main.async {
-                                let path = GMSPath(fromEncodedPath: points)
-                                let polyline = GMSPolyline(path: path)
-                                polyline.strokeColor = .systemGray
-                                polyline.strokeWidth = 4
-                                polyline.map = mapView
-
-                                self.currentRoutePolyline = polyline
-                                self.parent.onEndDrawing?(true)
-                                self.hasDrawen = true
-                                self.isRouting = false
-                            }
-                        } else {
-                            debugPrint("No routes found")
-                            self.parent.onEndDrawing?(false)
-                            self.hasDrawen = false
-                            self.isRouting = false
-                        }
-                    } catch let error {
-                        debugPrint("Error decoding directions: \(error.localizedDescription)")
-                    }
-                }.resume()
-            }
+        private func draw(route: [CLLocationCoordinate2D], on mapView: GMSMapView) {
+            let path = GMSMutablePath()
+            route.forEach { path.add($0) }
+            self.currentRoutePolyline = GMSPolyline(path: path)
+            self.currentRoutePolyline?.strokeColor = .systemGray
+            self.currentRoutePolyline?.strokeWidth = 5
+            self.currentRoutePolyline?.map = mapView
+            self.hasDrawen = true
+            self.isRouting = false
         }
         
-        func setMapMarkersRoute(vLoc: CLLocationCoordinate2D, toLoc: CLLocationCoordinate2D, on mapView: GMSMapView) {
+        func setMapMarkersRoute(route: [CLLocationCoordinate2D], on mapView: GMSMapView) {
             guard !isRouting else {
                 Logging.l("Cannot draw because It is already drawing the route \(isRouting)")
                 return
@@ -340,20 +297,27 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
                 Logging.l("Cannot draw because It is already drawen the route \(hasDrawen)")
                 return
             }
-
-            self.parent.onStartDrawing?()
-
+            
             self.isRouting = true
             
             DispatchQueue.main.async {
-                self.clearRoute(onMap: mapView)
+                let isDifferentA = self.markerA?.position != route.first
+                let isDifferentB = self.markerB?.position != route.last
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-                    //add the markers for the 2 locations
+                if isDifferentA || isDifferentB {
+                    self.clearRoute(onMap: mapView)
                     self.markerB?.map = nil
                     self.markerB = nil
                     self.markerA?.map = nil
                     self.markerA = nil
+                }
+                
+                guard let toLoc = route.last, let vLoc = route.first else {
+                    return
+                }
+                
+                mainIfNeeded {
+                    //add the markers for the 2 locations
                     
                     self.markerB = GMSMarker.init(position: toLoc)
                     self.markerB!.map = mapView
@@ -372,7 +336,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
                     mapView.moveCamera(GMSCameraUpdate.fit(bounds))
                     
                     //finally get the route
-                    self.getRoute(from: vLoc, to: toLoc, on: mapView)
+                    self.draw(route: route, on: mapView)
                 }
             }
         }
@@ -394,11 +358,9 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         }
         
         func drawCircleByRadius(on mapView: GMSMapView, location: CLLocationCoordinate2D, radius: CLLocationDistance) {
-            
             if circle != nil {
                 // update circle
                 circle?.radius = radius.f.asMeters
-                Logging.l(tag: "GMapsView", "Update circle by \(radius)")
                 circle?.map = mapView
                 circle?.position = location
                 return

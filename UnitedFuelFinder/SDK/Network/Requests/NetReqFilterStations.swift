@@ -7,11 +7,43 @@
 
 import Foundation
 
+//{
+//  "from": {
+//    "lat": 0,
+//    "lng": 0
+//  },
+//  "to": {
+//    "lat": 0,
+//    "lng": 0
+//  },
+//  "distance": 1,
+//  "sortBy": "string",
+//  "fromPrice": 0,
+//  "toPrice": 0,
+//  "stations": [
+//    0
+//  ],
+//  "stateId": "string",
+//  "cityId": 0
+//}
+
+public enum NetReqFilterSortType: String, Codable {
+    case price
+    case discount
+}
+
 public struct NetReqFilterStations: Codable {
     public var current: NetReqLocation?
     public var from: NetReqLocation?
     public var to: NetReqLocation?
     public var distance: Double
+    public var sortedBy: NetReqFilterSortType?
+    public var fromPrice: Int?
+    public var toPrice: Int?
+    public var stations: [Int]?
+    public var stateId: String?
+    public var cityId: Int?
+    
     
     public init(current: NetReqLocation, distance: Double) {
         self.current = current
@@ -22,6 +54,26 @@ public struct NetReqFilterStations: Codable {
         self.from = from
         self.to = to
         self.distance = distance
+    }
+    
+    init(
+        current: NetReqLocation? = nil,
+        distance: Double = 10,
+        sortedBy: NetReqFilterSortType? = nil,
+        fromPrice: Int? = nil,
+        toPrice: Int? = nil,
+        stations: [Int]? = nil,
+        stateId: String? = nil,
+        cityId: Int? = nil)
+    {
+        self.current = current
+        self.distance = distance
+        self.sortedBy = sortedBy
+        self.fromPrice = fromPrice
+        self.toPrice = toPrice
+        self.stations = stations
+        self.stateId = stateId
+        self.cityId = cityId
     }
 }
 

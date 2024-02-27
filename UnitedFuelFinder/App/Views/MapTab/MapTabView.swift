@@ -15,6 +15,7 @@ struct MapTabView: View {
     
     @EnvironmentObject var viewModel: MapTabViewModel
     @EnvironmentObject var mainModel: MainViewModel
+    
     @State private var pointerFrame: CGRect = .zero
     @State private var selectedMarker: GMSMarker?
     
@@ -32,15 +33,14 @@ struct MapTabView: View {
                     CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
                 })
                 .navigationBarTitleDisplayMode(.inline)
-                
-            .onAppear {
-                viewModel.onAppear()
-                viewModel.startRegularFetchingNearStations()
-            }
-            .onDisappear {
-                viewModel.stopRegularFetchingNearStations()
-            }
+                .onAppear {
+                    viewModel.onAppear()
+                }
+                .onChange(of: viewModel.bodyState, perform: { value in
+                    (value == .map) ? viewModel.onSelectMap() : viewModel.onSelectList()
+                })
         }
+        .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
     }
     
     var innerBody: some View {
@@ -48,6 +48,7 @@ struct MapTabView: View {
             innerBodyByState
             
             bottomContent
+                .opacity(viewModel.bodyState == .map ? 1 : 0)
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
@@ -84,37 +85,7 @@ struct MapTabView: View {
     private var innerBodyByState: some View {
         switch self.viewModel.bodyState {
         case .map:
-            GMapsViewWrapper(
-                pickedLocation: $viewModel.pickedLocation,
-                isDragging: $viewModel.isDragging,
-                screenCenter: pointerFrame.center,
-                markers: $viewModel.stationsMarkers
-            )
-            .set(currentLocation: viewModel.focusableLocation)
-            .set(
-                from: self.viewModel.fromLocation?.coordinate,
-                to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
-                onStartDrawing: {
-                    Logging.l("Before start drawing")
-                    viewModel.onStartDrawingRoute()
-                },
-                onEndDrawing: { isOK in
-                    Logging.l("After end drawing")
-                    viewModel.onEndDrawingRoute(isOK)
-                }
-            )
-            .set(onClickMarker: { marker, point in
-                if marker.hasStation {
-                    self.selectedMarker = marker
-                }
-            })
-            .ignoresSafeArea()
-            .padding(.bottom, 8)
-            .overlay {
-                bodyOverlay
-            }
-            .ignoresSafeArea(.container, edges: .bottom)
-            .padding(.bottom, -14)
+            mapView
             .onChange(of: $viewModel.pickedLocation, perform: { value in
                 if viewModel.state == .routing {
                     return
@@ -123,8 +94,36 @@ struct MapTabView: View {
                 self.viewModel.reloadAddress()
             })
         case .list:
-            Text("break")
+            MapTabListView(
+                stations: self.viewModel.stations
+            )
         }
+    }
+    
+    private var mapView: some View {
+        GMapsViewWrapper(
+            pickedLocation: $viewModel.pickedLocation,
+            isDragging: $viewModel.isDragging,
+            screenCenter: pointerFrame.center,
+            markers: $viewModel.stationsMarkers
+        )
+        .set(currentLocation: viewModel.focusableLocation)
+        .set(
+            radius: viewModel.state == .routing ? 0 : CLLocationDistance(viewModel.filter?.radius ?? 0)
+        )
+        .set(route: viewModel.mapRoute)
+        .set(onClickMarker: { marker, point in
+            if marker.hasStation {
+                self.selectedMarker = marker
+            }
+        })
+        .ignoresSafeArea()
+        .padding(.bottom, 8)
+        .overlay {
+            bodyOverlay
+        }
+        .ignoresSafeArea(.container, edges: .bottom)
+        .padding(.bottom, -14)
     }
     
     private var bodyOverlay: some View {
@@ -135,14 +134,8 @@ struct MapTabView: View {
                 isActive: viewModel.isDragging,
                 type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
             .frame(height: pointerHeight)
-            .readRect(rect: $pointerFrame)
             .offset(.init(width: 0, height: -(pointerHeight / 2)))
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
-            
-            VerticalValueAdjuster(currentValue: $viewModel.radiusValue) { value, percentage in
-                viewModel.startFilterStations()
-            }
-            .position(x: 27, y: 24 + UIApplication.shared.safeArea.top)
         }
     }
     
@@ -198,8 +191,8 @@ struct MapTabView: View {
                     distance: viewModel.distance
                 ),
                 stations: [], //Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
-                hasMoreButton: self.viewModel.discountedStations.count > 6,
-                isSearching: self.viewModel.isLoading,
+                hasMoreButton: self.viewModel.stations.count > 6,
+                isSearching: self.viewModel.isLoadingAddress,
                 onClickMoreButton: {
                     viewModel.onClickViewAllStations()
                 }, onClickNavigate: { station in
@@ -334,23 +327,6 @@ struct MapTabView: View {
                         endPoint: .bottom
                     )
                 )
-                .overlay {
-                    VStack {
-                        Text("address".localize)
-                            .font(.system(size: 13))
-                            .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.6)))
-                        
-                        Text("\(viewModel.fromAddress)")
-                            .font(.system(size: 13, weight: .medium))
-                            .multilineTextAlignment(.center)
-                            .foregroundStyle(Color.init(uiColor: .label.withAlphaComponent(0.8)))
-                        Spacer()
-                    }
-                    .frame(maxWidth: UIApplication.shared.screenFrame.width * 2 / 3 )
-                    .opacity(viewModel.isDragging ? 1 : 0)
-                    .padding(.top, UIApplication.shared.safeArea.top)
-                    .ignoresSafeArea()
-                }
             Spacer()
         }.allowsHitTesting(false)
     }
@@ -361,5 +337,5 @@ struct MapTabView: View {
     UserSettings.shared.refreshToken = UserSettings.testRefreshToken
     UserSettings.shared.userEmail = UserSettings.testEmail
     UserSettings.shared.appPin = "0000"
-    return MapTabView()
+    return MainView()
 }

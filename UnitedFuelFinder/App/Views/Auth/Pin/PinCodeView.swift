@@ -64,9 +64,13 @@ struct PinCodeView: View {
             dest.screen
         }
         .onAppear {
+            #if DEBUG
+            viewModel.onAppear()
+            #else
             if viewModel.reason == .login {
                 authenticate()
             }
+            #endif
         }
     }
     

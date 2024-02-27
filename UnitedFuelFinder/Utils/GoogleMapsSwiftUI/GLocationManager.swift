@@ -8,6 +8,7 @@
 import Foundation
 import CoreLocation
 import GoogleMaps
+import MapKit
 
 class GLocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = GLocationManager()
@@ -26,9 +27,14 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
     func requestLocationPermission() {
         locationManager.requestWhenInUseAuthorization()
         locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = true
     }
     
     func startUpdatingLocation() {
+        if let loc = self.locationManager.location {
+            self.locationUpdateHandler?(loc)
+        }
+        
         DispatchQueue.global(qos: .utility).async {
             if CLLocationManager.locationServicesEnabled() {
                 self.locationManager.startUpdatingLocation()
@@ -165,6 +171,19 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
         }
         
         task.resume()
+    }
+    
+    func openLocationOnMap(_ coordinate: CLLocationCoordinate2D, name: String) {
+        let regionDistance: CLLocationDistance = 10000
+        let regionSpan = MKCoordinateRegion(center: coordinate, latitudinalMeters: regionDistance, longitudinalMeters: regionDistance)
+        let options = [
+            MKLaunchOptionsMapCenterKey: NSValue(mkCoordinate: regionSpan.center),
+            MKLaunchOptionsMapSpanKey: NSValue(mkCoordinateSpan: regionSpan.span)
+        ]
+        let placemark = MKPlacemark(coordinate: coordinate, addressDictionary: nil)
+        let mapItem = MKMapItem(placemark: placemark)
+        mapItem.name = name
+        mapItem.openInMaps(launchOptions: options)
     }
 }
 

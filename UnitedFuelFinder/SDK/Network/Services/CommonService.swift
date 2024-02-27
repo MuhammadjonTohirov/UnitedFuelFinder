@@ -40,4 +40,24 @@ public struct CommonService {
         let result: NetRes<[NetResTransactions]>? = await Network.send(request: CommonNetworkRouter.filterTransactions(fromDate: fromDate, to: to))
         return result?.data ?? []
     }
+
+    public func fetchInvoices(fromDate: String, to: String) async -> [NetResInvoiceItem] {
+        let result: NetRes<[NetResInvoiceItem]>? = await Network.send(request: CommonNetworkRouter.filterInvoices(fromDate: fromDate, to: to))
+        return result?.data ?? []
+    }
+    
+    public func fetchTotalSpending(type: Int) async -> NetResTotalSpending {
+        let result: NetRes<NetResTotalSpending>? = await Network.send(request: CommonNetworkRouter.totalSpendings(type: type))
+        return result?.data ?? NetResTotalSpending(total: 0, records: [:])
+    }
+    
+    public func fetchCardInfo() async -> NetResCard? {
+        let result: NetRes<NetResCard>? = await Network.send(request: CommonNetworkRouter.cardInfo)
+        return result?.data
+    }
+    
+    public func fetchPopularStations(size: Int = 3) async -> NetResPopularStations? {
+        let result: NetRes<NetResPopularStations>? = await Network.send(request: CommonNetworkRouter.popularStations(amount: size))
+        return result?.data
+    }
 }

@@ -9,34 +9,37 @@ import SwiftUI
 
 struct AllTransactionsView: View {
     @Environment (\.dismiss) var dismiss
-    @State private var date1: Date = Date()
+    @State private var date1: Date = Date().before(monthes: 1)
     @State private var date2: Date = Date()
     @State private var datePresented: Bool = false
     @State private var tempDate = Date()
     @State private var buttonNumber = 0
+    @State private var isLoading = false
+    @ObservedObject var viewModel = AllTranInvoViewModel()
+    
     var body: some View {
         VStack {
             datePicker
                 .padding(.top, 20)
             LazyVStack {
-                ForEach(0..<6) {index in
-                    TransactionView(title: "TRN12938", location: "PILOT BURBANK 287", gallon: 73.02, totalSum: 300, savedAmount: 34.21, price: 4.11, driver: "Aliev Vali", cardNumber: "•••• 1232", date: "12:00 10.11.2023")
+                ForEach(viewModel.transactions) { item in
+                    TransactionView(item: item)
                 }
                 .padding(.horizontal)
             }
             .scrollable()
-            .navigationTitle("Transferring transactions")
+            .navigationTitle("transf.transactions".localize)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        
-                    }, label: {
-                        Image(systemName: "square.and.arrow.down")
-                            .foregroundColor(Color.init(uiColor: .label))
-                    })
-                }
-            }
+            
+            .onChange(of: date1, perform: { value in
+                self.date1 = min(value, date2.before(days: 1))
+                self.reloadData()
+            })
+            .onChange(of: date2, perform: { value in
+                self.date2 = max(value, date1)
+                self.reloadData()
+            })
+            .coveredLoading(isLoading: $isLoading)
             .sheet(isPresented: $datePresented, content: {
                 VStack {
                     DatePicker("", selection: $tempDate, displayedComponents: .date)
@@ -52,7 +55,10 @@ struct AllTransactionsView: View {
                         datePresented.toggle()
                     }
                 }
-        })
+            })
+            .onAppear {
+                reloadData()
+            }
         }
     }
     
@@ -106,10 +112,20 @@ struct AllTransactionsView: View {
         }
     }
     
-    func formattedDate(_ date: Date) -> String {
+    private func formattedDate(_ date: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy"
         return dateFormatter.string(from: date)
+    }
+    
+    private func reloadData() {
+        isLoading = true
+        Task {
+            await viewModel.loadTransactions(from: self.date1, to: self.date2)
+            await MainActor.run {
+                isLoading = false
+            }
+        }
     }
 }
 

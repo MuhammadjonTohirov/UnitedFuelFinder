@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import SwiftfulLoadingIndicators
 
 public struct CoveredLoadingView: View {
     @Binding public var isLoading: Bool
@@ -23,7 +24,9 @@ public struct CoveredLoadingView: View {
             .foregroundStyle(Color.background.opacity(0.6))
             .ignoresSafeArea()
             .overlay {
-                ProgressView {
+                VStack {
+                    LoadingIndicator(animation: .circleTrim, color: .label, size: .medium, speed: .normal)
+                    
                     Text(message)
                         .background {
                             Capsule()
@@ -32,5 +35,23 @@ public struct CoveredLoadingView: View {
                         }
                 }
             }.opacity(isLoading ? 1 : 0)
+    }
+}
+
+struct CoveredLoadingModifier: ViewModifier {
+    @Binding var isLoading: Bool
+    var message: String
+    
+    func body(content: Content) -> some View {
+        ZStack {
+            content
+            CoveredLoadingView(isLoading: $isLoading, message: message)
+        }
+    }
+}
+
+extension View {
+    public func coveredLoading(isLoading: Binding<Bool>, message: String = "") -> some View {
+        self.modifier(CoveredLoadingModifier(isLoading: isLoading, message: message))
     }
 }

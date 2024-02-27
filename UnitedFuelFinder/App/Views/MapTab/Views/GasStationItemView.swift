@@ -15,7 +15,7 @@ struct GasStationItemView: View {
     
     var onClickNavigate: ((StationItem) -> Void)?
     
-    init(station: StationItem, stationItemHeight: CGFloat = 110) {
+    init(station: StationItem, stationItemHeight: CGFloat = 120) {
         self.station = station
         self.stationItemHeight = stationItemHeight
     }
@@ -23,31 +23,10 @@ struct GasStationItemView: View {
     var body: some View {
         VStack(spacing: 16) {
             HStack {
-                KFImage(.init(string: station.customer?.iconUrl ?? ""))
-                    .placeholder {
-                        Image("image_placeholder")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(height: 32)
-                    }
-                    .setProcessor(
-                        ResizingImageProcessor(referenceSize: CGSize(width: 32, height: 32))
-                    )
-                    .cacheMemoryOnly()
-                    .fade(duration: 0.25)
-                    .frame(height: 32)
-                    .aspectRatio(contentMode: .fit)
-                    .clipShape(Circle())
-                    .overlay(
-                        Circle().stroke(Color.secondaryBackground, lineWidth: 1)
-                    )
+                logo
                     .padding(.trailing, 8)
                 
-                VStack(alignment: .leading) {
-                    Text(station.name)
-                    Text([station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate), station.state?.id ?? ""].compactMap({$0.nilIfEmpty}).joined(separator: " • "))
-                }
-                .font(.system(size: 12))
+                info
                 
                 Spacer()
                 
@@ -60,23 +39,60 @@ struct GasStationItemView: View {
             
             HStack {
                 VStack(alignment: .leading) {
-                    Text("Save \(station.discountInfo) per gallon ")
-                    Text("Retail price \(station.retailPriceInfo)")
+                    Text("save.n.galon".localize(arguments: station.discountInfo))
+                        .font(.system(size: 12))
+
+                    Text("retail.price.n".localize(arguments: station.retailPriceInfo))
+                        .font(.system(size: 12))
                 }
-                .font(.system(size: 12))
+                .opacity(0.85)
                 
                 Spacer()
                 
                 navigateButton
+                    .opacity(onClickNavigate == nil ? 0 : 1)
             }
         }
         .padding(Padding.medium)
-        .frame(height: stationItemHeight)
+        .frame(height: stationItemHeight.sh())
+        .frame(minWidth: 325.f.sw())
         .background {
             RoundedRectangle(cornerRadius: 8)
-                .foregroundStyle(Color.secondaryBackground)
+                .foregroundStyle(Color.appSecondaryBackground)
         }
-        .frame(minWidth: UIApplication.shared.screenFrame.width * 0.8)
+    }
+    
+    private var info: some View {
+        VStack(alignment: .leading) {
+            Text(station.name)
+            Text([
+                station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate),
+                station.address ?? ""
+            ].compactMap({$0.nilIfEmpty}).joined(separator: " • "))
+            .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+        }
+        .font(.system(size: 12))
+    }
+    
+    private var logo: some View {
+        KFImage(.init(string: station.customer?.iconUrl ?? ""))
+            .placeholder {
+                Image("image_placeholder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 32)
+            }
+            .setProcessor(
+                ResizingImageProcessor(referenceSize: CGSize(width: 32, height: 32))
+            )
+            .cacheMemoryOnly()
+            .fade(duration: 0.25)
+            .frame(height: 32)
+            .aspectRatio(contentMode: .fit)
+            .clipShape(Circle())
+            .overlay(
+                Circle().stroke(Color.appSecondaryBackground, lineWidth: 1)
+            )
     }
     
     private var navigateButton: some View {

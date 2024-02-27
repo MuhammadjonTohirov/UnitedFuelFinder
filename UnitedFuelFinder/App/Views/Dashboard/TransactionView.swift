@@ -8,89 +8,119 @@
 import SwiftUI
 
 struct TransactionView: View {
-    @State var title: String
-    @State var location: String
-    @State var gallon: Float
-    @State var totalSum: Int
-    @State var savedAmount: Float
-    @State var price: Float
-    @State var driver: String
-    @State var cardNumber: String
-    @State var date: String
+    var item: TransactionItem
+    
+    private var totalSum: Double {
+        item.amount ?? 0
+    }
+    
+    private var totalDiscount: Double {
+        item.discAmount ?? 0
+    }
+    
+    private var quantity: Double {
+        item.quantity ?? 0
+    }
+    
+    private var pricePerUnit: Double {
+        item.discPpu ?? 0
+    }
+    
+    private var date: String {
+        Date.from(string: item.transactionDate, format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "HH:mm dd/MM/yyyy") ?? "-"
+    }
+    
+    private var savedAmount: String {
+        "@saved".localize(arguments: String(format: "$%2.f", totalDiscount))
+    }
     
     var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(.appSecondaryBackground)
-                .cornerRadius(12)
-                
-            VStack(spacing: 10) {
-                HStack {
-                    Text(title)
-                    Spacer()
-                    Text("$\(totalSum)")
-                    + Text("($\(String(format: "%g", savedAmount)) saved)")
-                        .foregroundColor(.green)
-                }
-                .font(.system(size: 12))
-                .fontWeight(.bold)
-                
-                Line()
-                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                    .frame(height: 1)
-                    .foregroundColor(.gray)
-                
-                HStack {
-                    Text("Location".localize)
-                    Spacer()
-                    Text(location)
-                        .font(.system(size: 12))
-                        .fontWeight(.bold)
-                }
-                
-                Line()
-                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                    .frame(height: 1)
-                    .foregroundColor(.gray)
-                
-                HStack {
-                    Text("Information")
-                    Spacer()
-                    Text("\(String(format: "%g", gallon))")
-                        .fontWeight(.bold)
-                    + Text("($\(String(format: "%g", price)))")
-                        .foregroundColor(.green)
-                        .fontWeight(.bold)
-                }
-                
-                Line()
-                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                    .frame(height: 1)
-                    .foregroundColor(.gray)
-                
-                HStack {
-                    Text("Driver")
-                    Spacer()
-                    Text(cardNumber)
-                }
-                
-                Line()
-                    .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
-                    .frame(height: 1)
-                    .foregroundColor(.gray)
-                
-                HStack {
-                    Spacer()
-                    Text(date)
+        VStack(spacing: 10) {
+            HStack {
+                Text(item.invoiceNumber ?? "-")
+                Spacer()
+                HStack(spacing: 2) {
+                    Text(String.init(format: "$%2.f", totalSum))
+                    
+                    if totalDiscount != 0 {
+                        Text("(\(savedAmount))")
+                            .foregroundStyle(Color.init(uiColor: .systemGreen))
+                    }
                 }
             }
-            .foregroundColor(.black)
             .font(.system(size: 12))
-            .fontWeight(.regular)
-            .padding(.horizontal)
+            .fontWeight(.bold)
+            .padding(.top, Padding.medium)
+            
+            Line()
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .frame(height: 1)
+                .foregroundColor(.gray)
+            
+            HStack {
+                Text("location".localize)
+                Spacer()
+                Text(item.locationName ?? "-")
+                    .font(.system(size: 12))
+                    .fontWeight(.bold)
+            }
+            
+            Line()
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .frame(height: 1)
+                .foregroundColor(.gray)
+            
+            HStack {
+                Text("information".localize)
+                Spacer()
+                Text("\(String(format: "%g", quantity))")
+                    .fontWeight(.bold)
+                + Text(" ($\(String(format: "%g", pricePerUnit)))")
+                    .foregroundColor(.green)
+                    .fontWeight(.bold)
+            }
+            
+            Line()
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .frame(height: 1)
+                .foregroundColor(.gray)
+            
+            HStack {
+                Text("driver".localize)
+                Spacer()
+                Text(item.driverName ?? "")
+            }
+            
+            Line()
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .frame(height: 1)
+                .foregroundColor(.gray)
+            
+            HStack {
+                Text("card".localize)
+                Spacer()
+                Text(item.cardNumber.maskAsMiniCardNumber)
+            }
+            
+            Line()
+                .stroke(style: StrokeStyle(lineWidth: 1, dash: [5]))
+                .frame(height: 1)
+                .foregroundColor(.gray)
+            
+            HStack {
+                Spacer()
+                Text(self.date)
+            }
+            .padding(.bottom, Padding.medium)
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 184)
+        .foregroundColor(.black)
+        .font(.system(size: 12))
+        .fontWeight(.regular)
+        .padding(.horizontal)
+        .background {
+            RoundedRectangle(cornerRadius: 10)
+                .foregroundStyle(Color.appSecondaryBackground)
+        }
     }
 }
 
@@ -110,8 +140,4 @@ struct Line: Shape {
         }
         return path
     }
-}
-
-#Preview {
-    TransactionView(title: "TRN12938", location: "PILOT BURBANK 287", gallon: 73.02, totalSum: 300, savedAmount: 34.21, price: 4.11, driver: "Aliev Vali", cardNumber: "•••• 1232", date: "12:00 10.11.2023")
 }

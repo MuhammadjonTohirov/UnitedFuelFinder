@@ -109,6 +109,10 @@ extension StationItem {
         return Double(GMSGeometryDistance(self.coordinate, coordinate).f.asMile)
     }
     
+    var distanceFromCurrentLocationInfo: String {
+        distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate)
+    }
+    
     var coordinate: CLLocationCoordinate2D {
         .init(latitude: self.lat, longitude: self.lng)
     }
