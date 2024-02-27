@@ -19,7 +19,7 @@ enum MapTabRouter: ScreenRoute {
         case .settings:
             return "settings"
         case .stationDetails:
-            return "stationDetailsmghv bn "
+            return "stationDetails"
         case .notifications:
             return "notifications"
         case .filter:

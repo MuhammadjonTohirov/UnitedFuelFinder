@@ -213,6 +213,7 @@
 		2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */; };
 		2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */; };
 		2E870A202B86E2D600C37675 /* Array+StationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */; };
+		2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AED052B8E3B3E00701590 /* Network+Google.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91A8352B8643B10045D8FE /* MapTabListView.swift */; };
 		2EA5C22B2B833DE500DFB989 /* NetResTotalSpending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */; };
@@ -500,6 +501,7 @@
 		2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqEditProfile.swift; sourceTree = "<group>"; };
 		2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRecentSearchedAddress.swift; sourceTree = "<group>"; };
 		2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+StationItem+Extension.swift"; sourceTree = "<group>"; };
+		2E8AED052B8E3B3E00701590 /* Network+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Google.swift"; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2E91A8352B8643B10045D8FE /* MapTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabListView.swift; sourceTree = "<group>"; };
 		2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResTotalSpending.swift; sourceTree = "<group>"; };
@@ -1099,6 +1101,7 @@
 			children = (
 				2E5DF9002AEACD63005BE20D /* Protocols */,
 				2E5DF8FB2AEACD63005BE20D /* Network.swift */,
+				2E8AED052B8E3B3E00701590 /* Network+Google.swift */,
 				2E5DF8F62AEACD63005BE20D /* Response */,
 				2E5DF8FC2AEACD63005BE20D /* Requests */,
 				2E5DF9032AEACD63005BE20D /* Services */,
@@ -1881,6 +1884,7 @@
 				2E5DF9952AEACEC9005BE20D /* SearchField.swift in Sources */,
 				2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */,
 				2E5DF9832AEACD64005BE20D /* String+Extensions.swift in Sources */,
+				2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */,
 				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
 				2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */,
 				2E5DF94E2AEACD63005BE20D /* MapMultiPolygon.swift in Sources */,
@@ -2071,7 +2075,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -2111,7 +2115,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

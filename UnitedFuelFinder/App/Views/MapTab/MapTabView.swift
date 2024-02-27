@@ -33,14 +33,14 @@ struct MapTabView: View {
                     CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
                 })
                 .navigationBarTitleDisplayMode(.inline)
-                
-            .onAppear {
-                viewModel.onAppear()
-            }
-            .onChange(of: viewModel.bodyState, perform: { value in
-                (value == .map) ? viewModel.onSelectMap() : viewModel.onSelectList()
-            })
+                .onAppear {
+                    viewModel.onAppear()
+                }
+                .onChange(of: viewModel.bodyState, perform: { value in
+                    (value == .map) ? viewModel.onSelectMap() : viewModel.onSelectList()
+                })
         }
+        .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
     }
     
     var innerBody: some View {
@@ -108,19 +108,10 @@ struct MapTabView: View {
             markers: $viewModel.stationsMarkers
         )
         .set(currentLocation: viewModel.focusableLocation)
-        .set(radius: viewModel.state == .routing ? 0 : CLLocationDistance(viewModel.filter?.radius ?? 0))
         .set(
-            from: self.viewModel.fromLocation?.coordinate,
-            to: viewModel.state == .routing ? self.viewModel.toLocation?.coordinate : nil,
-            onStartDrawing: {
-                Logging.l("Before start drawing")
-                viewModel.onStartDrawingRoute()
-            },
-            onEndDrawing: { isOK in
-                Logging.l("After end drawing")
-                viewModel.onEndDrawingRoute(isOK)
-            }
+            radius: viewModel.state == .routing ? 0 : CLLocationDistance(viewModel.filter?.radius ?? 0)
         )
+        .set(route: viewModel.mapRoute)
         .set(onClickMarker: { marker, point in
             if marker.hasStation {
                 self.selectedMarker = marker
@@ -201,7 +192,7 @@ struct MapTabView: View {
                 ),
                 stations: [], //Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
                 hasMoreButton: self.viewModel.stations.count > 6,
-                isSearching: self.viewModel.isLoading,
+                isSearching: self.viewModel.isLoadingAddress,
                 onClickMoreButton: {
                     viewModel.onClickViewAllStations()
                 }, onClickNavigate: { station in

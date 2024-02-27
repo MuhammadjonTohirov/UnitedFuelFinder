@@ -38,9 +38,9 @@ public struct NetReqFilterStations: Codable {
     public var to: NetReqLocation?
     public var distance: Double
     public var sortedBy: NetReqFilterSortType?
-    public var fromPrice: Int = 0
-    public var toPrice: Int = 1000
-    public var stations: [Int] = []
+    public var fromPrice: Int?
+    public var toPrice: Int?
+    public var stations: [Int]?
     public var stateId: String?
     public var cityId: Int?
     
@@ -57,12 +57,12 @@ public struct NetReqFilterStations: Codable {
     }
     
     init(
-        current: NetReqLocation,
-        distance: Double,
-        sortedBy: NetReqFilterSortType?,
-        fromPrice: Int = 0,
-        toPrice: Int = 1000,
-        stations: [Int] = [],
+        current: NetReqLocation? = nil,
+        distance: Double = 10,
+        sortedBy: NetReqFilterSortType? = nil,
+        fromPrice: Int? = nil,
+        toPrice: Int? = nil,
+        stations: [Int]? = nil,
         stateId: String? = nil,
         cityId: Int? = nil)
     {

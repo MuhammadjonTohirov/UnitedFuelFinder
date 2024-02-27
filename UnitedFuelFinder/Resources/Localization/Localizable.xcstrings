@@ -264,76 +264,6 @@
         }
       }
     },
-    "discount" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Discount"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Скидка"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Chegirma"
-          }
-        }
-      }
-    },
-    
-    "filter.sort.by.info" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Can be sorted by cheapest price or highest discount"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Можно сортировать по самой низкой цене или самой большой скидке"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Eng arzon narx yoki eng yuqori chegirma bo'yicha tartiblash mumkin"
-          }
-        }
-      }
-    },
-    "filter.price.range.info" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "This range will be applied to discounted price"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Этот диапазон будет применен к скидочной цене"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Ushbu oraliq chegirma narxiga qo'llaniladi"
-          }
-        }
-      }
-    },
     "auth_agree_offer" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -425,9 +355,6 @@
           }
         }
       }
-    },
-    "Blue" : {
-
     },
     "camera" : {
       "extractionState" : "manual",
@@ -1234,6 +1161,52 @@
         }
       }
     },
+    "filter.price.range.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This range will be applied to discounted price"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Этот диапазон будет применен к скидочной цене"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ushbu oraliq chegirma narxiga qo'llaniladi"
+          }
+        }
+      }
+    },
+    "filter.sort.by.info" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Can be sorted by cheapest price or highest discount"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Можно сортировать по самой низкой цене или самой большой скидке"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Eng arzon narx yoki eng yuqori chegirma bo'yicha tartiblash mumkin"
+          }
+        }
+      }
+    },
     "finding_route" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1352,9 +1325,6 @@
         }
       }
     },
-    "Green" : {
-
-    },
     "help_desk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1377,9 +1347,6 @@
           }
         }
       }
-    },
-    "Indigo" : {
-
     },
     "information" : {
       "extractionState" : "manual",
@@ -1765,6 +1732,29 @@
         }
       }
     },
+    "loading.stations" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading stations"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка АЗС"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Shaxobchalarni yuklash"
+          }
+        }
+      }
+    },
     "location" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1994,12 +1984,6 @@
           }
         }
       }
-    },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
     },
     "navigate" : {
       "extractionState" : "manual",
@@ -2325,15 +2309,6 @@
           }
         }
       }
-    },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
-    "Orange" : {
-
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -2683,9 +2658,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "region" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2777,9 +2749,6 @@
           }
         }
       }
-    },
-    "Regular" : {
-
     },
     "Retail price " : {
 
@@ -2977,6 +2946,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AYOQSH qidirlmoqda"
+          }
+        }
+      }
+    },
+    "searching.route" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Searching route"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск маршрута"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yo'lni qidirish"
           }
         }
       }
@@ -3211,9 +3203,6 @@
       }
     },
     "Submit" : {
-
-    },
-    "SwiftUI" : {
 
     },
     "system" : {
@@ -3452,9 +3441,6 @@
         }
       }
     },
-    "Violet" : {
-
-    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3546,9 +3532,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     },
     "Русский" : {
 

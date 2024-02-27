@@ -118,8 +118,24 @@ extension MapTabViewModel: HomeViewModelProtocol {
     }
     
     func onClickDrawRoute() {
-        withAnimation {
-            self.state = .routing
+        if let _from = self.fromLocation, let _to = self.toLocation {
+            self.showLoader(message: "searching.route".localize)
+            GoogleNetwork.getRoute(
+                from: _from.coordinate,
+                to: _to.coordinate) { route in
+                    DispatchQueue.main.async {
+                        self.mapRoute = route
+                        
+                        self.hideLoader()
+                        
+                        withAnimation {
+                            self.state = .routing
+                        }
+                        
+                        self.filterStationsByRoute()
+                    }
+                }
+            return
         }
     }
     
@@ -156,36 +172,51 @@ extension MapTabViewModel {
     func filterStationsByRoute() {
         DispatchQueue.main.async {
             self.stations = []
-            self.stationsList = []
+            self.showLoader(message: "loading.stations".localize)
         }
         
         Task {
             guard state == .routing, let toLocation, let fromLocation else {
                 return
             }
-            let f = (fromLocation.coordinate.latitude, fromLocation.coordinate.longitude)
-            let t = (toLocation.coordinate.latitude, toLocation.coordinate.longitude)
             
-            let _stations = await MainService.shared.filterStations(
-                from: f,
-                to: t,
-                in: Double(self.filter?.radius ?? 10)
+            let radius = Double(self.filter?.radius ?? 10).limitTop(1)
+            
+            let f: NetReqLocation = .init(lat: fromLocation.coordinate.latitude, lng: fromLocation.coordinate.longitude)
+            let t: NetReqLocation = .init(lat: toLocation.coordinate.latitude, lng: toLocation.coordinate.longitude)
+            
+            var _request: NetReqFilterStations = .init(
+                distance: radius,
+                sortedBy: .init(rawValue: filter?.sortType.rawValue ?? ""),
+                fromPrice: filter?.from ?? 0,
+                toPrice: filter?.to ?? 1000,
+                stations: Array(filter?.selectedStations ?? []),
+                stateId: filter?.stateId,
+                cityId: filter?.cityId
             )
+            
+            guard state == .routing else {
+                return
+            }
+            
+            _request.from = f
+            _request.to = t
+            
+            let _stations = await MainService.shared.filterStations2(req: _request)
                 .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
             
             Logging.l(tag: "MapTabViewModel", "Number of new stations \(_stations.count)")
             
             await MainActor.run {
-                self.stations = _stations.applyFilter(filter!)
-                self.stationsList = _stations
+                self.stations = _stations
                 self.stationsMarkers = self.stations.map({$0.asMarker})
+                self.hideLoader()
             }
         }
     }
     
     func filterStationsByDefault() {
         Task {
-            self.showLoader(message: "loading_stations".localize)
             
             // force to get stations from pinned location
             UserSettings.shared.mapCenterType = .pin
@@ -198,10 +229,6 @@ extension MapTabViewModel {
                 return
             }
             
-            guard let filter else {
-                return
-            }
-
             let _stations = await MainService.shared.discountedStations(
                 atLocation: (c.latitude, c.longitude),
                 in: radius, limit: -1
@@ -216,8 +243,7 @@ extension MapTabViewModel {
                 }
                 
                 withAnimation {
-                    self.stations = _stations.applyFilter(filter)
-                    self.stationsList = _stations
+                    self.stations = _stations
                     
                     self.stationsMarkers.append(contentsOf: self.stations.map({$0.asMarker}))
                 }

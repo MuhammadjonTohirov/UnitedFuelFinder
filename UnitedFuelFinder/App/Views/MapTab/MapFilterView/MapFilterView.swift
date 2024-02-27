@@ -9,7 +9,7 @@ import Foundation
 import RealmSwift
 import SwiftUI
 
-enum SortType {
+enum SortType: String, Codable {
     case discount
     case price
 }
@@ -208,8 +208,8 @@ struct MapFilterView: View {
             
             YRoundedTextField {
                 YTextField(text: $radius, placeholder: "radius".localize, onEditingChanged: { _ in
-                    if (Int(radius) ?? 0) > 10 {
-                        radius = "10"
+                    if (Int(radius) ?? 0) > UserSettings.shared.maxRadius {
+                        radius = UserSettings.shared.maxRadius.asString
                     }
                 })
                 .keyboardType(.numberPad)

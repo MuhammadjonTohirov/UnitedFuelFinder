@@ -61,8 +61,10 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     @Published var pickedLocation: CLLocation?
 
     @Published var isLoading: Bool = false
+    @Published var isLoadingAddress: Bool = false
     @Published var isDragging: Bool = false
     @Published var isDrawing: Bool = false
+    @Published var mapRoute: [CLLocationCoordinate2D] = []
     @Published var isDetectingAddressFrom: Bool = false
     @Published var isDetectingAddressTo: Bool = false
     
@@ -96,8 +98,6 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
 
     @Published var stations: [StationItem] = []
     
-    var stationsList: [StationItem] = []
-
     @Published var stationsMarkers: [GMSMarker] = []
     
     private var loadStationsTask: DispatchWorkItem?
@@ -158,18 +158,25 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     
     func set(filter: MapFilterInput) {
         self.filter = filter
-        
-        if !stationsList.isEmpty {
-            
-            self.stationsMarkers.removeAll { mr in
-                mr.map = nil
-                return true
-            }
-
-            self.stations = stationsList.applyFilter(filter)
-            
-            self.stationsMarkers.append(contentsOf: self.stations.map({$0.asMarker}))
+        switch state {
+        case .routing:
+            filterStationsByRoute()
+        case .selectFrom:
+            filterStationsByDefault()
+        default:
+            break
         }
+//        if !stationsList.isEmpty {
+//            
+//            self.stationsMarkers.removeAll { mr in
+//                mr.map = nil
+//                return true
+//            }
+//
+//            self.stations = stationsList.applyFilter(filter)
+//            
+//            self.stationsMarkers.append(contentsOf: self.stations.map({$0.asMarker}))
+//        }
     }
     
     func onDisappear() {
@@ -238,10 +245,6 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
                 self.isDetectingAddressFrom = false
             }
         }
-
-        if state == .routing {
-            filterStationsByRoute()
-        }
         
         if state != .routing {
             filterStationsByDefault()
@@ -260,6 +263,7 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         mainIfNeeded {
             self.hasDrawen = false
             self.toAddress = ""
+            self.mapRoute = []
             self.toLocation = nil
             UserSettings.shared.destination = nil
             UserSettings.shared.fromLocation = nil
@@ -319,6 +323,13 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     func setupFromAddress(with res: SearchAddressViewModel.SearchAddressResult) {
         self.fromLocation = .init(latitude: res.lat, longitude: res.lng)
         self.fromAddress = res.address
+        
+        if self.state == .routing {
+            mapRoute = []
+            onClickDrawRoute()
+            return
+        }
+        
         self.focusToLocation(self.fromLocation!)
     }
     
@@ -338,6 +349,11 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     }
     
     func onSelectMap() {
+        if state == .routing && !mapRoute.isEmpty {
+            
+            return
+        }
+        
         guard self.fromLocation == nil || self.toLocation == nil else {
             return
         }

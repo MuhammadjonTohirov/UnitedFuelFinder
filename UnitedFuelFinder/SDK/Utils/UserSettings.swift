@@ -31,6 +31,10 @@ final public class UserSettings {
             UserDefaults.standard.synchronize()
         }
     }
+    
+    // map radiusis
+    @codableWrapper(key: "map_max_radius", 100)
+    public var maxRadius: Int!
 
     @codableWrapper(key: "userEmail")
     public var userEmail: String?

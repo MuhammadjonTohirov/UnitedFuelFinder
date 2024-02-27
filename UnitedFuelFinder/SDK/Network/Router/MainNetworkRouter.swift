@@ -14,6 +14,8 @@ enum MainNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "Stations", cityId)
         case .filterStations:
             return URL.baseAPI.appendingPath("Driver", "FilterStations")
+        case .filterStations2:
+            return URL.baseAPI.appendingPath("Driver", "FilterStationsV2")
         case .feedbacksFor(let stationId):
             return URL.baseAPI.appendingPath("Driver", "StationFeedbacks", stationId)
         case .postFeedback(let stationId, _):
@@ -37,7 +39,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     var body: Data? {
         switch self {
-        case .filterStations(let request), .discountedStations(let request, _):
+        case .filterStations(let request), .discountedStations(let request, _), .filterStations2(let request):
             return request.asData
         case .postFeedback(_, let request):
             return request.asData
@@ -65,7 +67,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     var method: HTTPMethod {
         switch self {
-        case .filterStations, .postFeedback, .discountedStations, .uploadAvatar:
+        case .filterStations, .filterStations2, .postFeedback, .discountedStations, .uploadAvatar:
             return .post
         case .deleteFeedback:
             return .delete
@@ -88,6 +90,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     
     case stationsInCity(_ cityId: String)
     case filterStations(request: NetReqFilterStations)
+    case filterStations2(request: NetReqFilterStations)
     case discountedStations(request: NetReqFilterStations, limit: Int)
     case feedbacksFor(station: Int)
     case postFeedback(station: Int, request: NetReqStationFeedback)
