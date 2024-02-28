@@ -70,7 +70,22 @@ public struct AuthService {
         return (result?.success ?? false, result?.error?.nilIfEmpty == nil ? nil : .custom(result?.error ?? "") )
     }
     
+    func refreshTokenIfRequired() async -> Bool {
+        if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 60 {
+            return await refreshToken()
+        } else {
+            // no need for refresh token
+            return true
+        }
+    }
+    
     func refreshToken() async -> Bool {
+        let isRefreshExpired = (UserSettings.shared.refreshTokenExpireDate?.timeIntervalSinceNow ?? 0) < 10
+        
+        guard isRefreshExpired else {
+            return false
+        }
+        
         guard let token = UserSettings.shared.refreshToken else {
             return false
         }
@@ -81,6 +96,7 @@ public struct AuthService {
             UserSettings.shared.accessToken = data.accessToken
             UserSettings.shared.refreshToken = data.refreshToken
             UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
+            UserSettings.shared.refreshTokenExpireDate = .init(timeIntervalSinceNow: data.refreshExpiresIn)
             return true
         }
         
