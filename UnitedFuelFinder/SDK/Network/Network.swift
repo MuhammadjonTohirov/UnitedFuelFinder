@@ -23,6 +23,10 @@ struct Network {
             Logging.l("--- --- REQUEST --- ---")
             Logging.l(request.url.absoluteString)
             
+            guard await AuthService.shared.refreshTokenIfRequired() else {
+                return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
+            }
+            
             if let requestBody = request.request().httpBody, let json = try JSONSerialization.jsonObject(with: requestBody, options: .fragmentsAllowed) as? [String: Any] {
                 Logging.l(json)
             }

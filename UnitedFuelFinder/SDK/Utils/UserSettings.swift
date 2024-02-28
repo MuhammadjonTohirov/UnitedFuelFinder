@@ -51,6 +51,9 @@ final public class UserSettings {
     @codableWrapper(key: "tokenExpireDate")
     public var tokenExpireDate: Date?
     
+    @codableWrapper(key: "refreshTokenExpireDate")
+    public var refreshTokenExpireDate: Date?
+    
     @codableWrapper(key: "lastActiveDate")
     public var lastActiveDate: Date?
     

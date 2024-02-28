@@ -11,6 +11,7 @@ struct NetResRefreshToken: NetResBody {
     let accessToken: String
     let expiresIn: Double
     let refreshToken: String
+    let refreshExpiresIn: Double
     let tokenType: String
     let notBeforePolicy: Int
     let sessionState: String
@@ -23,6 +24,7 @@ struct NetResRefreshToken: NetResBody {
         case tokenType = "token_type"
         case notBeforePolicy = "not-before-policy"
         case sessionState = "session_state"
+        case refreshExpiresIn = "refresh_expires_in"
         case scope
     }
 }
