@@ -92,8 +92,19 @@ struct DashboardView: View {
                 })
             }
             
-            ForEach(viewModel.transactions[0..<3.limitTop(viewModel.transactions.count)]) { tran in
-                TransactionView(item: tran)
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(height: 120.f.sh())
+                    .foregroundStyle(Color.secondaryBackground)
+                    .overlay {
+                        Text("no.transactions.around".localize)
+                            .font(.system(size: 13, weight: .medium))
+                    }
+                    .opacity(viewModel.transactions.isEmpty ? 1 : 0)
+                
+                ForEach(viewModel.transactions[0..<3.limitTop(viewModel.transactions.count)]) { tran in
+                    TransactionView(item: tran)
+                }
             }
         }
     }
@@ -109,16 +120,26 @@ struct DashboardView: View {
                     Text("view.all".localize)
                 })
             }
-            
-            ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
-                InvoicesView(
-                    invoice: invo.invoiceNumber ?? "",
-                    amount: Float(invo.totalAmount),
-                    secoundAmount: Float(invo.totalDiscount ?? 0),
-                    companyName: invo.companyAccount?.organization.name ?? "",
-                    date: invo.beatufiedDate
-                )
-              }
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(height: 120.f.sh())
+                    .foregroundStyle(Color.secondaryBackground)
+                    .overlay {
+                        Text("no.invoices.around".localize)
+                            .font(.system(size: 13, weight: .medium))
+                    }
+                    .opacity(viewModel.invoices.isEmpty ? 1 : 0)
+                
+                ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
+                    InvoicesView(
+                        invoice: invo.invoiceNumber ?? "",
+                        amount: Float(invo.totalAmount),
+                        secoundAmount: Float(invo.totalDiscount ?? 0),
+                        companyName: invo.companyAccount?.organization.name ?? "",
+                        date: invo.beatufiedDate
+                    )
+                }
+            }
         }
     }
     
