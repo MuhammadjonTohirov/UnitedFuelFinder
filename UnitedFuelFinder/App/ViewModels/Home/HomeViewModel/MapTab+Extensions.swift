@@ -120,7 +120,7 @@ extension MapTabViewModel: HomeViewModelProtocol {
     func onClickDrawRoute() {
         if let _from = self.fromLocation, let _to = self.toLocation {
             self.showLoader(message: "searching.route".localize)
-            GoogleNetwork.getRoute(
+            interactor.searchRoute(
                 from: _from.coordinate,
                 to: _to.coordinate) { route in
                     DispatchQueue.main.async {

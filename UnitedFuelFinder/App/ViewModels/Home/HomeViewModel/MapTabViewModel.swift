@@ -32,6 +32,9 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     @Published var focusableLocation: CLLocation?
     @Published var bodyState: HomeBodyState = .map 
     @Published var filter: MapFilterInput? = .init(sortType: .discount, from: 0, to: 100, radius: 10, selectedStations: [1,2,3,4,5,6,7,8])
+    
+    private(set) var interactor: any MapTabInteractorProtocol = MapTabInteractor(routeSearcher: ServerRouteSearcher())
+    
     var fromAddress: String = ""
     var toAddress: String = ""
     
