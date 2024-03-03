@@ -79,12 +79,14 @@ struct PopularStationsView: View {
         .onAppear {
             isLoading = true
             self.data = []
+            
             Task {
                 guard let result = await CommonService.shared.fetchPopularStations(size: 3) else {
                     return
                 }
                 
                 await MainActor.run {
+                    self.data = []
                     self.popularStations = PopularStations(
                         total: result.total,
                         rows: result.rows.map({

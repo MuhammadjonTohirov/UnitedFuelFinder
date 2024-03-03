@@ -38,15 +38,27 @@ enum CommonNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Driver", "PopularStations").queries(
                 .init(name: "size", value: "\(size)")
             )
+        case .findRoute:
+            return URL.baseAPI.appendingPath("Driver", "DrawRoutes")
         }
     }
     
     var body: Data? {
-        nil
+        switch self {
+        case .findRoute(let req):
+            return req.asData
+        default:
+            return nil
+        }
     }
     
     var method: HTTPMethod {
-        .get
+        switch self {
+        case .findRoute:
+            return .post
+        default:
+            return .get
+        }
     }
     
     func request() -> URLRequest {
@@ -55,12 +67,12 @@ enum CommonNetworkRouter: URLRequestProtocol {
         switch self {
         case .states, .cities, .companies, .version:
             request = URLRequest.new(url: url, withAuth: false)
-        case .filterTransactions, .filterInvoices, .totalSpendings, .cardInfo, .popularStations:
+        case .filterTransactions, .filterInvoices, .totalSpendings, .cardInfo, .popularStations, .findRoute:
             request = URLRequest.new(url: url)
         }
         
         request?.httpMethod = method.rawValue.uppercased()
-        
+        request?.httpBody = body
         return request!
     }
     
@@ -70,7 +82,7 @@ enum CommonNetworkRouter: URLRequestProtocol {
     case version
     case filterTransactions(fromDate: String, to: String)
     case filterInvoices(fromDate: String, to: String)
-    
+    case findRoute(req: NetReqDrawRoute)
     /// 0: Today, 1: Week, 2: Month
     case totalSpendings(type: Int)
     
