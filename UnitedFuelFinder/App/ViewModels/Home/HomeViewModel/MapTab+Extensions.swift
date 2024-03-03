@@ -175,15 +175,19 @@ extension MapTabViewModel {
             self.showLoader(message: "loading.stations".localize)
         }
         
+        guard state == .routing, let toLocation, let fromLocation else {
+            return
+        }
+        
+        let radius = Double(self.filter?.radius ?? 10).limitTop(1)
+        
+        let f: NetReqLocation = .init(lat: fromLocation.coordinate.latitude, lng: fromLocation.coordinate.longitude)
+        let t: NetReqLocation = .init(lat: toLocation.coordinate.latitude, lng: toLocation.coordinate.longitude)
+        
         Task {
-            guard state == .routing, let toLocation, let fromLocation else {
+            guard state == .routing else {
                 return
             }
-            
-            let radius = Double(self.filter?.radius ?? 10).limitTop(1)
-            
-            let f: NetReqLocation = .init(lat: fromLocation.coordinate.latitude, lng: fromLocation.coordinate.longitude)
-            let t: NetReqLocation = .init(lat: toLocation.coordinate.latitude, lng: toLocation.coordinate.longitude)
             
             var _request: NetReqFilterStations = .init(
                 distance: radius,
@@ -191,13 +195,9 @@ extension MapTabViewModel {
                 fromPrice: filter?.from ?? 0,
                 toPrice: filter?.to ?? 1000,
                 stations: Array(filter?.selectedStations ?? []),
-                stateId: filter?.stateId,
-                cityId: filter?.cityId
+                stateId: filter?.stateId ?? "",
+                cityId: filter?.cityId ?? 0
             )
-            
-            guard state == .routing else {
-                return
-            }
             
             _request.from = f
             _request.to = t
@@ -229,10 +229,17 @@ extension MapTabViewModel {
                 return
             }
             
-            let _stations = await MainService.shared.discountedStations(
-                atLocation: (c.latitude, c.longitude),
-                in: radius, limit: -1
+            var _request: NetReqFilterStations = .init(
+                distance: Double(radius),
+                stations: Array(filter?.selectedStations ?? [])
             )
+            
+            _request.current = .init(
+                lat: c.latitude,
+                lng: c.longitude
+            )
+            
+            let _stations = await MainService.shared.filterStations2(req: _request)
             
             Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radius) is \(stations.count)")
                     

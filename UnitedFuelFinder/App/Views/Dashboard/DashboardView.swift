@@ -59,7 +59,7 @@ struct DashboardView: View {
             Text("popular.stations".localize)
             PopularStationsView(data: barChartData)
             
-            Text("discounted.stations".localize)
+            Text("discounted.stations.nearby".localize)
             stationDetail
             
             if (UserSettings.shared.userInfo?.canViewTransactions ?? false) {
@@ -90,10 +90,22 @@ struct DashboardView: View {
                 }, label: {
                     Text("view.all".localize)
                 })
+                .opacity(viewModel.transactions.isEmpty ? 0 : 1)
             }
             
-            ForEach(viewModel.transactions[0..<3.limitTop(viewModel.transactions.count)]) { tran in
-                TransactionView(item: tran)
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(height: 120.f.sh())
+                    .foregroundStyle(Color.secondaryBackground)
+                    .overlay {
+                        Text("no.transactions".localize)
+                            .font(.system(size: 13, weight: .medium))
+                    }
+                    .opacity(viewModel.transactions.isEmpty ? 1 : 0)
+                
+                ForEach(viewModel.transactions[0..<3.limitTop(viewModel.transactions.count)]) { tran in
+                    TransactionView(item: tran)
+                }
             }
         }
     }
@@ -108,17 +120,28 @@ struct DashboardView: View {
                 }, label: {
                     Text("view.all".localize)
                 })
+                .opacity(viewModel.invoices.isEmpty ? 0 : 1)
             }
-            
-            ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
-                InvoicesView(
-                    invoice: invo.invoiceNumber ?? "",
-                    amount: Float(invo.totalAmount),
-                    secoundAmount: Float(invo.totalDiscount ?? 0),
-                    companyName: invo.companyAccount?.organization.name ?? "",
-                    date: invo.beatufiedDate
-                )
-              }
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .frame(height: 120.f.sh())
+                    .foregroundStyle(Color.secondaryBackground)
+                    .overlay {
+                        Text("no.invoices".localize)
+                            .font(.system(size: 13, weight: .medium))
+                    }
+                    .opacity(viewModel.invoices.isEmpty ? 1 : 0)
+                
+                ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
+                    InvoicesView(
+                        invoice: invo.invoiceNumber ?? "",
+                        amount: Float(invo.totalAmount),
+                        secoundAmount: Float(invo.totalDiscount ?? 0),
+                        companyName: invo.companyAccount?.organization.name ?? "",
+                        date: invo.beatufiedDate
+                    )
+                }
+            }
         }
     }
     
@@ -128,7 +151,7 @@ struct DashboardView: View {
                 .frame(height: 120.f.sh())
                 .foregroundStyle(Color.secondaryBackground)
                 .overlay {
-                    Text("no.stations.around".localize)
+                    Text("no.stations".localize)
                         .font(.system(size: 13, weight: .medium))
                 }
                 .opacity(viewModel.discountedStations.isEmpty ? 1 : 0)

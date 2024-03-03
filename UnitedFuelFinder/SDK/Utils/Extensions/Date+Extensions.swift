@@ -9,6 +9,7 @@ import Foundation
 
 public extension Date {
     static let serverFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+    
     static func formattedSeconds(_ dur: Double, _ shouldIncludeHours: Bool = true) -> String {
         let format = shouldIncludeHours ? "HH:mm:ss" : "mm:ss"
         return Date.init(timeIntervalSince1970: dur - 6 * 3600).toString(format: format)
@@ -64,6 +65,18 @@ public extension Date {
     
     func before(years: Int) -> Date {
         after(years: -years)
+    }
+    
+    var firstDayOfMonth: Date {
+        let components = Calendar.current.dateComponents([.year, .month], from: self)
+        return Calendar.current.date(from: components) ?? self
+    }
+    
+    var lastDayOfMonth: Date {
+        var components = Calendar.current.dateComponents([.year, .month], from: self)
+        components.month = components.month! + 1
+        components.day = 0
+        return Calendar.current.date(from: components) ?? self
     }
     
     /// Returns date object from string

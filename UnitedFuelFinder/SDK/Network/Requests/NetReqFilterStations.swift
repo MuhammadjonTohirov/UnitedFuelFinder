@@ -7,43 +7,23 @@
 
 import Foundation
 
-//{
-//  "from": {
-//    "lat": 0,
-//    "lng": 0
-//  },
-//  "to": {
-//    "lat": 0,
-//    "lng": 0
-//  },
-//  "distance": 1,
-//  "sortBy": "string",
-//  "fromPrice": 0,
-//  "toPrice": 0,
-//  "stations": [
-//    0
-//  ],
-//  "stateId": "string",
-//  "cityId": 0
-//}
-
 public enum NetReqFilterSortType: String, Codable {
     case price
     case discount
+    case distance
 }
 
 public struct NetReqFilterStations: Codable {
-    public var current: NetReqLocation?
-    public var from: NetReqLocation?
-    public var to: NetReqLocation?
-    public var distance: Double
-    public var sortedBy: NetReqFilterSortType?
-    public var fromPrice: Int?
-    public var toPrice: Int?
-    public var stations: [Int]?
-    public var stateId: String?
-    public var cityId: Int?
-    
+    public var current: NetReqLocation = .init()
+    public var from: NetReqLocation = .init()
+    public var to: NetReqLocation = .init()
+    public var distance: Double = 10
+    public var sortedBy: String = ""
+    public var fromPrice: Int = 0
+    public var toPrice: Int = 0
+    public var stations: [Int] = []
+    public var stateId: String = ""
+    public var cityId: Int = 0
     
     public init(current: NetReqLocation, distance: Double) {
         self.current = current
@@ -57,23 +37,36 @@ public struct NetReqFilterStations: Codable {
     }
     
     init(
-        current: NetReqLocation? = nil,
+        current: NetReqLocation = .init(),
         distance: Double = 10,
         sortedBy: NetReqFilterSortType? = nil,
-        fromPrice: Int? = nil,
-        toPrice: Int? = nil,
-        stations: [Int]? = nil,
-        stateId: String? = nil,
-        cityId: Int? = nil)
+        fromPrice: Int = 0,
+        toPrice: Int = 0,
+        stations: [Int] = [],
+        stateId: String = "",
+        cityId: Int = 0)
     {
         self.current = current
         self.distance = distance
-        self.sortedBy = sortedBy
+        self.sortedBy = sortedBy?.rawValue ?? ""
         self.fromPrice = fromPrice
         self.toPrice = toPrice
         self.stations = stations
         self.stateId = stateId
         self.cityId = cityId
+    }
+    
+    enum CodingKeys: CodingKey {
+        case current
+        case from
+        case to
+        case distance
+        case sortedBy
+        case fromPrice
+        case toPrice
+        case stations
+        case stateId
+        case cityId
     }
 }
 
@@ -81,7 +74,7 @@ public struct NetReqLocation: Codable {
     public var lat: Double
     public var lng: Double
     
-    public init(lat: Double, lng: Double) {
+    public init(lat: Double = 0, lng: Double = 0) {
         self.lat = lat
         self.lng = lng
     }

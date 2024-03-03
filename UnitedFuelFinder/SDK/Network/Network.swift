@@ -18,10 +18,17 @@ public func setNetworkDelegate(_ delegate: NetworkDelegate?) {
 struct Network {
     static var delegate: NetworkDelegate?
     
-    static func send<T: NetResBody>(request: URLRequestProtocol) async -> NetRes<T>? {
+    static func send<T: NetResBody>(request: URLRequestProtocol, refreshTokenIfNeeded: Bool = true) async -> NetRes<T>? {
         do {
             Logging.l("--- --- REQUEST --- ---")
             Logging.l(request.url.absoluteString)
+            
+            if refreshTokenIfNeeded {
+                guard await AuthService.shared.refreshTokenIfRequired() else {
+                    Logging.l("do refresh token failed")
+                    return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
+                }
+            }
             
             if let requestBody = request.request().httpBody, let json = try JSONSerialization.jsonObject(with: requestBody, options: .fragmentsAllowed) as? [String: Any] {
                 Logging.l(json)

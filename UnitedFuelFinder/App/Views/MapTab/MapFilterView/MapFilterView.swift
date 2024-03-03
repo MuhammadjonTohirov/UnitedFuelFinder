@@ -9,9 +9,10 @@ import Foundation
 import RealmSwift
 import SwiftUI
 
-enum SortType: String, Codable {
+enum SortType: String, Codable, CaseIterable {
     case discount
     case price
+    case distance
 }
 
 struct FilterPriceRange {
@@ -92,17 +93,7 @@ struct MapFilterView: View {
                 Spacer()
                 
                 SubmitButton {
-                    let result: MapFilterInput = .init(
-                        sortType: sortType,
-                        from: Int(fromPriceRange) ?? 0,
-                        to: Int(toPriceRange) ?? 0,
-                        radius: Int(radius) ?? 0,
-                        selectedStations: selectedStations,
-                        stateId: selectedState?.id,
-                        cityId: selectedCity?.id
-                    )
-                    
-                    self.onApply(result)
+                    onSubmit()
                 } label: {
                     Text("apply".localize.capitalized)
                 }
@@ -110,9 +101,22 @@ struct MapFilterView: View {
                 .padding(.bottom, Padding.default)
             }
         }
+        .keyboardDismissable()
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    resetFilter()
+                } label: {
+                    Image("icon_reset_filter")
+                }
+            }
+        })
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationTitle("filter".localize)
         .navigationDestination(isPresented: $showState, destination: {
             SelectStateView(state: $selectedState)
         })
+        .coverNavigationBar()
         .navigationDestination(isPresented: $showCity, destination: {
             SelectCityView(city: $selectedCity, stateId: selectedState?.id ?? "")
         })
@@ -143,15 +147,12 @@ struct MapFilterView: View {
                 .foregroundStyle(Color.label)
             
             HStack {
-                selectionButton(title: "price".localize, isSelected: sortType == .price)
-                    .onTapGesture {
-                        sortType = .price
-                    }
-                
-                selectionButton(title: "discount".localize, isSelected: sortType == .discount)
-                    .onTapGesture {
-                        sortType = .discount
-                    }
+                ForEach(SortType.allCases, id: \.rawValue) { _case in
+                    selectionButton(title: _case.rawValue.localize, isSelected: sortType == _case)
+                        .onTapGesture {
+                            sortType = _case
+                        }
+                }
             }
             
             Text("filter.sort.by.info".localize)//Can be sorted by cheapest price or highest discount
@@ -159,6 +160,8 @@ struct MapFilterView: View {
                 .foregroundStyle(Color(uiColor: .secondaryLabel))
         }
         .padding(.horizontal, Padding.default)
+        .onAppear {
+        }
     }
     
     private var priceRange: some View {
@@ -284,6 +287,35 @@ struct MapFilterView: View {
             }
         }
     }
+    
+    private func resetFilter() {
+        let _stations = DCompany.allCompanies().compactMap { $0.id }
+        let result: MapFilterInput = .init(
+            sortType: .discount,
+            from: 0,
+            to: 1000,
+            radius: 10,
+            selectedStations: Set(_stations),
+            stateId: nil,
+            cityId: nil
+        )
+        
+        self.onApply(result)
+    }
+    
+    private func onSubmit() {
+        let result: MapFilterInput = .init(
+            sortType: sortType,
+            from: Int(fromPriceRange) ?? 0,
+            to: Int(toPriceRange) ?? 0,
+            radius: Int(radius) ?? 0,
+            selectedStations: selectedStations,
+            stateId: selectedState?.id,
+            cityId: selectedCity?.id
+        )
+        
+        self.onApply(result)
+    }
 }
 
 #Preview {
@@ -291,10 +323,10 @@ struct MapFilterView: View {
         MapFilterView(input: .init(sortType: .price, from: 0, to: 20, radius: 10, selectedStations: []), completion: { _ in
            
        })
-       .onAppear {
-           Task {
-               let _ = await MainService.shared.getCustomers()
-           }
-       }
+    }
+    .onAppear {
+        Task {
+            let _ = await MainService.shared.getCustomers()
+        }
     }
 }

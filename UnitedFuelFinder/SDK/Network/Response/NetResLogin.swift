@@ -7,21 +7,11 @@
 
 import Foundation
 
-//{
-//    "access_token": "string",
-//    "expires_in": 0,
-//    "refresh_expires_in": 0,
-//    "refresh_token": "string",
-//    "token_type": "string",
-//    "not-before-policy": 0,
-//    "session_state": "string",
-//    "scope": "string"
-//  }
-
 public struct NetResLogin: NetResBody {
     public let accessToken: String
     public let expiresIn: Double
     public let refreshToken: String
+    public let refreshExpiresIn: Double
     public let tokenType: String
     public let notBeforePolicy: Int
     public let sessionState: String
@@ -34,6 +24,7 @@ public struct NetResLogin: NetResBody {
         case tokenType = "token_type"
         case notBeforePolicy = "not-before-policy"
         case sessionState = "session_state"
+        case refreshExpiresIn = "refresh_expires_in"
         case scope
     }
 }

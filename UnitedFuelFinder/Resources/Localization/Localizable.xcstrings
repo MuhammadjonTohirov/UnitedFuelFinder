@@ -356,6 +356,9 @@
         }
       }
     },
+    "Blue" : {
+
+    },
     "camera" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -940,25 +943,25 @@
         }
       }
     },
-    "discounted.stations" : {
+    "discounted.stations.nearby" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Discounted stations"
+            "value" : "Nearby stations"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Скидочные станции"
+            "value" : "Станции рядом"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Chegirma stantsiyalar"
+            "value" : "Atrofdagi stansiyalar"
           }
         }
       }
@@ -1325,6 +1328,9 @@
         }
       }
     },
+    "Green" : {
+
+    },
     "help_desk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1347,6 +1353,9 @@
           }
         }
       }
+    },
+    "Indigo" : {
+
     },
     "information" : {
       "extractionState" : "manual",
@@ -1985,6 +1994,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2192,6 +2207,29 @@
         }
       }
     },
+    "no.invoices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No invoices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет счетов"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fakturalar yo'q"
+          }
+        }
+      }
+    },
     "no.stations" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2234,6 +2272,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Shaxobchalar topilmadi"
+          }
+        }
+      }
+    },
+    "no.transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No transactions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет транзакций"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "O'tkazmalar yo'q"
           }
         }
       }
@@ -2309,6 +2370,15 @@
           }
         }
       }
+    },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -2434,19 +2504,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Invoices"
+            "value" : "Latest invoices"
           }
         },
         "ru" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Счета"
+            "state" : "needs_review",
+            "value" : "Последние счета"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invoicelar"
+            "state" : "needs_review",
+            "value" : "So'nggi to'lovlar"
           }
         }
       }
@@ -2457,19 +2527,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Most popular stations"
+            "value" : "Popular stations"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Самые популярные станции"
+            "value" : "Популярные станции"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Eng mashhur stantsiyalar"
+            "value" : "Mashhur stantsiyalar"
           }
         }
       }
@@ -2635,28 +2705,54 @@
         }
       }
     },
+    "quant.best" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quantity (Best price)"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Количество (Лучшая цена)"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miqdor (Eng yaxshi narx)"
+          }
+        }
+      }
+    },
     "radius.mile" : {
       "extractionState" : "manual",
       "localizations" : {
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Radius (in miles)"
+            "value" : "Distance (in miles)"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Радиус (в милях)"
+            "value" : "Расстояние (в милях)"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Radius (milada)"
+            "value" : "Masofa (milada)"
           }
         }
       }
+    },
+    "Red" : {
+
     },
     "region" : {
       "extractionState" : "manual",
@@ -2749,6 +2845,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "Retail price " : {
 
@@ -3205,6 +3304,9 @@
     "Submit" : {
 
     },
+    "SwiftUI" : {
+
+    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3441,6 +3543,9 @@
         }
       }
     },
+    "Violet" : {
+
+    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3532,6 +3637,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     },
     "Русский" : {
 

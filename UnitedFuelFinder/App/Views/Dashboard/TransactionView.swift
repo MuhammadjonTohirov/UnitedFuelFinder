@@ -27,11 +27,11 @@ struct TransactionView: View {
     }
     
     private var date: String {
-        Date.from(string: item.transactionDate, format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "HH:mm dd/MM/yyyy") ?? "-"
+        Date.from(string: item.transactionDate, format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
     }
     
     private var savedAmount: String {
-        "@saved".localize(arguments: String(format: "$%2.f", totalDiscount))
+        "@saved".localize(arguments: String(format: "$%.2f", totalDiscount))
     }
     
     var body: some View {
@@ -40,7 +40,7 @@ struct TransactionView: View {
                 Text(item.invoiceNumber ?? "-")
                 Spacer()
                 HStack(spacing: 2) {
-                    Text(String.init(format: "$%2.f", totalSum))
+                    Text(String.init(format: "$%.2f", totalSum))
                     
                     if totalDiscount != 0 {
                         Text("(\(savedAmount))")
@@ -71,7 +71,7 @@ struct TransactionView: View {
                 .foregroundColor(.gray)
             
             HStack {
-                Text("information".localize)
+                Text("quant.best".localize)
                 Spacer()
                 Text("\(String(format: "%g", quantity))")
                     .fontWeight(.bold)

@@ -79,7 +79,7 @@ struct CardWidgetView: View {
                 await MainActor.run {
                     self.cardNummber = (UserSettings.shared.userInfo?.cardNumber ?? "0").maskAsMiniCardNumber
                     self.balance = info?.totalBalance ?? 0
-                    self.name = info?.accountName ?? ""
+                    self.name = info?.accountName.nilIfEmpty ?? UserSettings.shared.userInfo?.fullName ?? ""
                     self.companyName = info?.companyName ?? ""
                 }
             }

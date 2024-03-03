@@ -125,6 +125,8 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             return
         }
         
+        UserSettings.shared.maxRadius = 10
+        
         didAppear = true
         
         if UserSettings.shared.destination == nil || UserSettings.shared.fromLocation == nil {
@@ -144,6 +146,7 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
                     radius: 10,
                     selectedStations: Set(DCustomer.all?.compactMap({$0.id}) ?? [])
                 )
+                
                 restoreSavedRoute()
             }
         }
@@ -166,17 +169,6 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         default:
             break
         }
-//        if !stationsList.isEmpty {
-//            
-//            self.stationsMarkers.removeAll { mr in
-//                mr.map = nil
-//                return true
-//            }
-//
-//            self.stations = stationsList.applyFilter(filter)
-//            
-//            self.stationsMarkers.append(contentsOf: self.stations.map({$0.asMarker}))
-//        }
     }
     
     func onDisappear() {
@@ -188,9 +180,19 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             self.fromLocation = from.location
             self.toLocation = des.location
             self.onClickDrawRoute()
+            
+            GLocationManager.shared.getAddressFromLatLon(
+                latitude: from.latitude,
+                longitude: from.longitude) 
+            { [weak self] address in
+                self?.fromAddress = address
+            }
 
-            GLocationManager.shared.getAddressFromLatLon(latitude: des.latitude, longitude: des.longitude) { address in
-                self.toAddress = address
+            GLocationManager.shared.getAddressFromLatLon(
+                latitude: des.latitude,
+                longitude: des.longitude
+            ) { [weak self] address in
+                self?.toAddress = address
             }
         }
     }
@@ -224,7 +226,10 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             if UserSettings.shared.destination == nil {
                 self.fromLocation = pickedLocation
                 self.isDetectingAddressFrom = true
-                UserSettings.shared.fromLocation = .init(latitude: loc.latitude, longitude: loc.longitude)
+                UserSettings.shared.fromLocation = .init(
+                    latitude: loc.latitude,
+                    longitude: loc.longitude
+                )
             }
         case .selectTo:
             self.toLocation = pickedLocation
@@ -233,10 +238,13 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             break
         }
         
-        locationManager.getAddressFromLatLon(latitude: loc.latitude, longitude: loc.longitude) { address in
+        locationManager.getAddressFromLatLon(
+            latitude: loc.latitude,
+            longitude: loc.longitude
+        ) { address in
             if self.state == .selectFrom {
                 self.fromAddress = address
-            } else {
+            } else if self.state == .selectTo {
                 self.toAddress = address
             }
             
