@@ -109,8 +109,12 @@ struct SpendingsWidgetView: View {
         guard let result else {
             return ("", 0)
         }
-     
         let keys = result.records.keys
+        
+        if keys.isEmpty {
+            return ("", 0)
+        }
+        
         let key = Array(keys)[index]
         return (key, Float(result.records[key] ?? 0))
     }

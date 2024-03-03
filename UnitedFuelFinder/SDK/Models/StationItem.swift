@@ -124,7 +124,7 @@ extension StationItem {
         
         let distance = distance(from: c)
         let isMore1000 = Int(distance) / 1000 > 0
-        let unit = isMore1000 ? "km" : "m"
+        let unit = isMore1000 ? "km" : "mi"
         
         return String(format: "%.1f \(unit)",  isMore1000 ? distance / 1000 : distance)
     }

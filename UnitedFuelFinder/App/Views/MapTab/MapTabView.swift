@@ -95,7 +95,8 @@ struct MapTabView: View {
             })
         case .list:
             MapTabListView(
-                stations: self.viewModel.stations
+                stations: self.viewModel.stations,
+                fromPoint: self.viewModel.fromLocation?.coordinate
             )
         }
     }

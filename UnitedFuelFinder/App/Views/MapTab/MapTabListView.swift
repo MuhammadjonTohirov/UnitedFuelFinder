@@ -7,14 +7,15 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct MapTabListView: View {
     var stations: [StationItem]
-    
+    var fromPoint: CLLocationCoordinate2D?
     var body: some View {
         ZStack {
             ForEach(stations) { station in
-                 GasStationItemView(station: station)
+                GasStationItemView(station: station, fromPoint: fromPoint)
                     .set(navigate: { stationItem in
                         GLocationManager.shared.openLocationOnMap(stationItem.coordinate, name: stationItem.name)
                     })
