@@ -31,7 +31,10 @@ public struct AuthService {
     public static let shared = AuthService()
     
     public func verifyAccount(_ username: String) async -> ((exist: Bool, code: String, session: String)?, error: String?) {
-        let result: NetRes<NetResVerifyAccount>? = await Network.send(request: UserNetworkRouter.verifyAccount(request: .init(email: username)))
+        let result: NetRes<NetResVerifyAccount>? = await Network.send(
+            request: UserNetworkRouter.verifyAccount(request: .init(email: username)),
+            refreshTokenIfNeeded: false
+        )
         
         if let data = result?.data {
             UserSettings.shared.session = data.session
@@ -44,7 +47,10 @@ public struct AuthService {
     }
     
     func login(session: String, code: String, username: String) async -> (Bool, AuthNetworkErrorReason?) {
-        guard let result: NetRes<NetResLogin> = await Network.send(request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session)))) else {
+        guard let result: NetRes<NetResLogin> = await Network.send(
+            request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session))),
+            refreshTokenIfNeeded: false
+        ) else {
             return (false, .unknown)
         }
         
@@ -64,8 +70,10 @@ public struct AuthService {
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {
-        let result: NetRes<String>? = await Network.send(request: UserNetworkRouter.register(request: request))
-        
+        let result: NetRes<String>? = await Network.send(
+            request: UserNetworkRouter.register(request: request),
+            refreshTokenIfNeeded: false
+        )
         
         return (result?.success ?? false, result?.error?.nilIfEmpty == nil ? nil : .custom(result?.error ?? "") )
     }
@@ -90,7 +98,7 @@ public struct AuthService {
             return false
         }
         
-        let result: NetRes<NetResRefreshToken>? = await Network.send(request: UserNetworkRouter.refresh(refreshToken: token))
+        let result: NetRes<NetResRefreshToken>? = await Network.send(request: UserNetworkRouter.refresh(refreshToken: token), refreshTokenIfNeeded: false)
         
         if let data = result?.data {
             UserSettings.shared.accessToken = data.accessToken

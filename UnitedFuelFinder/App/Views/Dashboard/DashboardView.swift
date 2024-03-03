@@ -59,7 +59,7 @@ struct DashboardView: View {
             Text("popular.stations".localize)
             PopularStationsView(data: barChartData)
             
-            Text("discounted.stations".localize)
+            Text("discounted.stations.nearby".localize)
             stationDetail
             
             if (UserSettings.shared.userInfo?.canViewTransactions ?? false) {
@@ -90,6 +90,7 @@ struct DashboardView: View {
                 }, label: {
                     Text("view.all".localize)
                 })
+                .opacity(viewModel.transactions.isEmpty ? 0 : 1)
             }
             
             ZStack {
@@ -97,7 +98,7 @@ struct DashboardView: View {
                     .frame(height: 120.f.sh())
                     .foregroundStyle(Color.secondaryBackground)
                     .overlay {
-                        Text("no.transactions.around".localize)
+                        Text("no.transactions".localize)
                             .font(.system(size: 13, weight: .medium))
                     }
                     .opacity(viewModel.transactions.isEmpty ? 1 : 0)
@@ -119,13 +120,14 @@ struct DashboardView: View {
                 }, label: {
                     Text("view.all".localize)
                 })
+                .opacity(viewModel.invoices.isEmpty ? 0 : 1)
             }
             ZStack {
                 RoundedRectangle(cornerRadius: 16)
                     .frame(height: 120.f.sh())
                     .foregroundStyle(Color.secondaryBackground)
                     .overlay {
-                        Text("no.invoices.around".localize)
+                        Text("no.invoices".localize)
                             .font(.system(size: 13, weight: .medium))
                     }
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
@@ -149,7 +151,7 @@ struct DashboardView: View {
                 .frame(height: 120.f.sh())
                 .foregroundStyle(Color.secondaryBackground)
                 .overlay {
-                    Text("no.stations.around".localize)
+                    Text("no.stations".localize)
                         .font(.system(size: 13, weight: .medium))
                 }
                 .opacity(viewModel.discountedStations.isEmpty ? 1 : 0)

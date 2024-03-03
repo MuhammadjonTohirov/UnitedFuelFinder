@@ -101,7 +101,7 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
         }
     }
     
-    func editProfile() {
+    func editProfile(completion: @escaping () -> Void) {
         guard let stateId = state?.id, let cityId = city?.id else {
             return
         }
@@ -122,6 +122,9 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.showAlert(message: "profile_updated".localize)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                            completion()
+                        }
                     }
                 } else {
                     DispatchQueue.main.async {

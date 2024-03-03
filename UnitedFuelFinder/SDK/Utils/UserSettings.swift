@@ -33,7 +33,7 @@ final public class UserSettings {
     }
     
     // map radiusis
-    @codableWrapper(key: "map_max_radius", 100)
+    @codableWrapper(key: "map_max_radius", 10)
     public var maxRadius: Int!
 
     @codableWrapper(key: "userEmail")

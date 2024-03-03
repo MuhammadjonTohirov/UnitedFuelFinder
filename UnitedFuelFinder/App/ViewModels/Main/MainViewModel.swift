@@ -84,6 +84,8 @@ final class MainViewModel: ObservableObject {
         UserSettings.shared.photoUpdateDate = Date()
         GMSServices.provideAPIKey(URL.googleMapsApiKey)
         Logging.l("GMaps \(GMSServices.sdkVersion())")
+        
+        Logging.l("Access token: \(UserSettings.shared.accessToken ?? "-")")
     }
     
     @available(*, deprecated, message: "Not used for now")

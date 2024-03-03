@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AllTransactionsView: View {
     @Environment (\.dismiss) var dismiss
-    @State private var date1: Date = Date().before(monthes: 1)
-    @State private var date2: Date = Date()
+    @State private var date1: Date = Date().firstDayOfMonth
+    @State private var date2: Date = Date().lastDayOfMonth
     @State private var datePresented: Bool = false
     @State private var tempDate = Date()
     @State private var buttonNumber = 0

@@ -12,7 +12,7 @@ import Kingfisher
 struct ProfileVIew: View {
     @StateObject var viewModel = ProfileViewModel()
     @State private var showPickerAlert = false
-    
+    @Environment(\.dismiss) var dismiss
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
@@ -70,7 +70,9 @@ struct ProfileVIew: View {
                 Spacer()
                 
                 SubmitButton {
-                    viewModel.editProfile()
+                    viewModel.editProfile {
+                        dismiss()
+                    }
                 } label: {
                     Text("Save")
                 }

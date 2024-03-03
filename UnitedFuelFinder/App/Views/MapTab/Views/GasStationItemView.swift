@@ -8,16 +8,19 @@
 import Foundation
 import SwiftUI
 import Kingfisher
+import CoreLocation
 
 struct GasStationItemView: View {
     var station: StationItem
     var stationItemHeight: CGFloat = 120
+    var fromPoint: CLLocationCoordinate2D? = nil
     
     var onClickNavigate: ((StationItem) -> Void)?
     
-    init(station: StationItem, stationItemHeight: CGFloat = 120) {
+    init(station: StationItem, stationItemHeight: CGFloat = 120, fromPoint: CLLocationCoordinate2D? = nil) {
         self.station = station
         self.stationItemHeight = stationItemHeight
+        self.fromPoint = fromPoint
     }
     
     var body: some View {
@@ -66,7 +69,7 @@ struct GasStationItemView: View {
         VStack(alignment: .leading) {
             Text(station.name)
             Text([
-                station.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate),
+                station.distanceInfo(from: fromPoint ?? GLocationManager.shared.currentLocation?.coordinate),
                 station.address ?? ""
             ].compactMap({$0.nilIfEmpty}).joined(separator: " • "))
             .foregroundStyle(Color.init(uiColor: .secondaryLabel))
