@@ -23,6 +23,8 @@ protocol MapTabViewModelProtocl: ObservableObject {
     var bodyState: HomeBodyState {get set}
     var route: MapTabRouter? {get set}
     var filter: MapFilterInput? {get}
+    var isFilteringStations: Bool {get set}
+    var isLoading: Bool {get set}
     
     func set(currentLocation location: CLLocation?)
     func set(filter: MapFilterInput)
@@ -31,7 +33,9 @@ protocol MapTabViewModelProtocl: ObservableObject {
 final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     @Published var focusableLocation: CLLocation?
     @Published var bodyState: HomeBodyState = .map 
-    @Published var filter: MapFilterInput? = .init(sortType: .discount, from: 0, to: 100, radius: 10, selectedStations: [1,2,3,4,5,6,7,8])
+    @Published var filter: MapFilterInput? = .init(sortType: .discount, from: 0, to: 100, radius: 300, selectedStations: [1,2,3,4,5,6,7,8])
+    
+    var isMapReady: Bool = false
     
     private(set) var interactor: any MapTabInteractorProtocol = MapTabInteractor(routeSearcher: ServerRouteSearcher())
     
@@ -55,7 +59,8 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     }
     
     private var didAppear: Bool = false
-    private var didDisappear: Bool = false
+    
+    var didDisappear: Bool = false
     
     @Published var push: Bool = false
     
@@ -65,6 +70,9 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
 
     @Published var isLoading: Bool = false
     @Published var isLoadingAddress: Bool = false
+    
+    @Published var isFilteringStations: Bool = false
+    
     @Published var isDragging: Bool = false
     @Published var isDrawing: Bool = false
     @Published var mapRoute: [CLLocationCoordinate2D] = []
@@ -73,6 +81,8 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     
     private(set) var loadingMessage: String = ""
     private(set) var customers: [CustomerItem] = []
+    
+    var screenVisibleArea: CGFloat = 5
     
     @Published var state: HomeViewState = .selectFrom {
         didSet {
@@ -113,9 +123,7 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         }
         
         let distance = locationManager.distance(from: from.coordinate, to: to.coordinate)
-        let isMore1000 = Int(distance) / 1000 > 0
-        let unit = isMore1000 ? "km" : "m"
-        return String(format: "%.1f \(unit)",  isMore1000 ? distance / 1000 : distance)
+        return String(format: "%.1f ml",  distance)
     }
     
     private let locationManager: GLocationManager = .shared
@@ -124,11 +132,11 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         
         didDisappear = false
         //Always be exectued
+        
         guard !didAppear else {
+            onReappear()
             return
         }
-        
-        UserSettings.shared.maxRadius = 10
         
         didAppear = true
         
@@ -138,20 +146,49 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             }
         }
         
-        Task {
-            await loadCustomers()
-
-            await MainActor.run {
-                filter = .init(
-                    sortType: .discount,
-                    from: 0,
-                    to: 1000,
-                    radius: 10,
-                    selectedStations: Set(DCustomer.all?.compactMap({$0.id}) ?? [])
-                )
+        loadCustomers()
+        
+        self.focusToCurrentLocation()
+        DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 2) {
+            Task {
+                await MainActor.run {
+                    self.focusToCurrentLocation()
+                }
                 
-                restoreSavedRoute()
+                await MainActor.run {
+                    self.filter = .init(
+                        sortType: .distance,
+                        from: 0,
+                        to: 1000,
+                        radius: UserSettings.shared.maxRadius,
+                        selectedStations: Set(DCustomer.all?.compactMap({$0.id}) ?? [])
+                    )
+                    
+                    self.restoreSavedRoute()
+                }
             }
+        }
+    }
+    
+    private func onReappear() {
+        switch state {
+        case .selectFrom:
+            if self.stations.isEmpty {
+                self.filterStationsByDefault()
+            }
+            
+            if self.stationsMarkers.isEmpty && !self.stations.isEmpty {
+                self.setupMarkers()
+            }
+            
+        case .routing:
+            if self.stations.isEmpty {
+                self.onClickDrawRoute()
+            } else {
+                self.setupMarkers()
+            }
+        default:
+            break
         }
     }
     
@@ -163,26 +200,30 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     }
     
     func set(filter: MapFilterInput) {
-        self.filter = filter
-        switch state {
-        case .routing:
-            filterStationsByRoute()
-        case .selectFrom:
-            filterStationsByDefault()
-        default:
-            break
+        mainIfNeeded {
+            self.filter = filter
+            self.removeMarkers()
+            self.removeStations()
+            switch self.state {
+            case .routing:
+                self.filterStationsByRoute()
+            case .selectFrom:
+                self.filterStationsByDefault()
+            default:
+                break
+            }
         }
     }
     
     func onDisappear() {
         didDisappear = true
+        removeMarkers()
     }
     
     private func restoreSavedRoute() {
         if let des = UserSettings.shared.destination, let from = UserSettings.shared.fromLocation {
             self.fromLocation = from.location
             self.toLocation = des.location
-            self.onClickDrawRoute()
             
             GLocationManager.shared.getAddressFromLatLon(
                 latitude: from.latitude,
@@ -196,6 +237,8 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
                 longitude: des.longitude
             ) { [weak self] address in
                 self?.toAddress = address
+                
+                self?.onClickDrawRoute()
             }
         }
     }
@@ -206,6 +249,7 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         }
         
         self.lastCurrentLocation = location
+        
         Logging.l("Current location \(location.coordinate)")
         
         focusToLocation(location)
@@ -226,14 +270,8 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         
         switch self.state {
         case .selectFrom:
-            if UserSettings.shared.destination == nil {
-                self.fromLocation = pickedLocation
-                self.isDetectingAddressFrom = true
-                UserSettings.shared.fromLocation = .init(
-                    latitude: loc.latitude,
-                    longitude: loc.longitude
-                )
-            }
+            self.fromLocation = pickedLocation
+            self.isDetectingAddressFrom = true
         case .selectTo:
             self.toLocation = pickedLocation
             self.isDetectingAddressTo = true
@@ -255,10 +293,6 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
                 self.isDetectingAddressTo = false
                 self.isDetectingAddressFrom = false
             }
-        }
-        
-        if state != .routing {
-            filterStationsByDefault()
         }
     }
     
@@ -351,23 +385,21 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         self.onClickDrawRoute()
     }
     
-    func loadCustomers() async {
-        let _customers = await MainService.shared.getCustomers()
-        
-        await MainActor.run {
-            self.customers = _customers
-        }
+    func loadCustomers() {
+        self.customers = DCustomer.all?.compactMap({$0.asModel}) ?? []
     }
     
     func onSelectMap() {
+        self.setupMarkers()
+        
         if state == .routing && !mapRoute.isEmpty {
-            
             return
         }
         
         guard self.fromLocation == nil || self.toLocation == nil else {
             return
         }
+        
         if let loc = self.pickedLocation {
             self.focusToLocation(loc)
         } else {
@@ -376,6 +408,6 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     }
     
     func onSelectList() {
-        
+        self.removeMarkers()
     }
 }

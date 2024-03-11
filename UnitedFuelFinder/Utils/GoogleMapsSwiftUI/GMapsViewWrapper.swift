@@ -40,6 +40,8 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
 
     fileprivate var radius: CLLocationDistance = .zero
     
+    fileprivate var onChangeVisibleArea: ((_ radius: CGFloat) -> Void)?
+    
     init(pickedLocation: Binding<CLLocation?>, isDragging: Binding<Bool>, screenCenter: CGPoint, markers: Binding<[GMSMarker]>) {
         self._isDragging = isDragging
         self._pickedLocation = pickedLocation
@@ -60,6 +62,12 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     func set(onClickMarker: @escaping (_ marker: GMSMarker, _ frame: CGPoint) -> Void) -> Self {
         var v = self
         v.onClickMarker = onClickMarker
+        return v
+    }
+    
+    func set(onChangeVisibleArea: @escaping (_ radius: CGFloat) -> Void) -> Self {
+        var v = self
+        v.onChangeVisibleArea = onChangeVisibleArea
         return v
     }
     
@@ -102,7 +110,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     func updateUIViewController(_ uiViewController: MapViewController, context: Context) {
         
         if let location {
-            let position = GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 15)
+            let position = GMSCameraPosition(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 5.3)
             uiViewController.map.animate(to: position)
         }
         
@@ -126,7 +134,11 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
 //       MARK: Radius change
         if didRadiusChanged, let coordinate = self.pickedLocation?.coordinate {
             if radius > 0 {
-                context.coordinator.drawCircleByRadius(on: uiViewController.map, location: coordinate, radius: radius)
+                context.coordinator.drawCircleByRadius(
+                    on: uiViewController.map,
+                    location: coordinate, 
+                    radius: radius
+                )
             } else {
                 context.coordinator.removeCircle()
             }
@@ -171,9 +183,9 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         
         func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
             let isCluster = marker.userData is GMUCluster
-            mapView.animate(toLocation: marker.position)
 
             if isCluster {
+                mapView.animate(toLocation: marker.position)
                 mapView.animate(toZoom: mapView.camera.zoom + 1)
                 return true
             } else {
@@ -185,12 +197,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             let p = CLLocationCoordinate2D(latitude: marker.layer.latitude, longitude: marker.layer.longitude).toScreenPoint(on: mapView)
             let bottom: CGFloat = 158 - UIApplication.shared.safeArea.bottom// + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
             parent.onClickMarker?(marker, .init(x: p.x, y: p.y - bottom))
-            
-            if mapView.selectedMarker == nil {
-                mapView.selectedMarker = marker
-            } else {
-                mapView.selectedMarker = nil
-            }
             return true
         }
         
@@ -225,14 +231,35 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             }
             
             readScreenCenterCoordinate(on: mapView)
-            if let l = self.parent.pickedLocation?.coordinate {
-                drawCircleByRadius(on: mapView, location: l, radius: parent.radius)
-            }
+            
+//            if let l = self.parent.pickedLocation?.coordinate, !hasDrawen {
+//                drawCircleByRadius(on: mapView, location: l, radius: parent.radius)
+//            }
             
             let lat = position.target.latitude
             let lng = position.target.longitude
             
             parent.camera = GMSCameraPosition(latitude: lat, longitude: lng, zoom: position.zoom, bearing: 0, viewingAngle: 45)
+            
+            let _radius = generateRadius(mapView)
+            
+            parent.onChangeVisibleArea?(_radius)
+        }
+        
+        func generateRadius(_ mapView:GMSMapView) -> CGFloat {
+            let centerPoint = mapView.center
+            let centerCoordinate = mapView.projection.coordinate(for: centerPoint)
+            let visibleRegion = mapView.projection.visibleRegion()
+            
+            let topLeftCoordinate = visibleRegion.nearLeft
+            let topLeftLocation = CLLocation(latitude: topLeftCoordinate.latitude, longitude: topLeftCoordinate.longitude)
+            
+            let centerLocation = CLLocation(latitude: centerCoordinate.latitude, longitude: centerCoordinate.longitude)
+            
+            let distanceInMeters = centerLocation.distance(from: topLeftLocation)
+            let inMiles = distanceInMeters.f.asMile
+            
+            return inMiles
         }
         
         func didTapMyLocationButton(for mapView: GMSMapView) -> Bool {

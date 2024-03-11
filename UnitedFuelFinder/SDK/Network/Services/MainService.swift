@@ -31,7 +31,7 @@ struct MainService {
         return ((result?.data) ?? []).compactMap({.init(res: $0)})
     }
     
-    func filterStations(from location: (lat: Double, lng: Double), to toLocation: (lat: Double, lng: Double), in distance: Double = 10) async -> [StationItem] {
+    func filterStations(from location: (lat: Double, lng: Double), to toLocation: (lat: Double, lng: Double), in distance: Double = 300) async -> [StationItem] {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations(
             request: .init(
                 from: .init(lat: location.lat, lng: location.lng),
@@ -51,11 +51,11 @@ struct MainService {
         return items
     }
 
-    func filterStations2(req: NetReqFilterStations) async -> [StationItem] {
-        let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations2(request: req)
-        )
-        
-        return ((result?.data) ?? []).compactMap({.init(res: $0)})
+    func filterStations2(req: NetReqFilterStations, session: URLSession = URLSession.filter) async -> ([StationItem], Error?) {
+        let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.filterStations2(request: req), session: session)
+        let hasData = result?.data != nil
+        let list: [StationItem] = ((result?.data) ?? []).compactMap({.init(res: $0)})
+        return (list, hasData ? nil : NSError(domain: "No stations", code: -1))
     }
 
     func discountedStations(atLocation location: (lat: Double, lng: Double), in distance: Int, limit: Int = 8) async -> [StationItem] {
@@ -95,9 +95,11 @@ struct MainService {
         return ((result?.data) ?? []).compactMap({.init($0)})
     }
     
+    @discardableResult
     func getCustomers() async -> [CustomerItem] {
         let result: NetRes<[NetResCustomerItem]>? = await Network.send(request: MainNetworkRouter.getCustomers)
         let customers = ((result?.data)?.map({CustomerItem.create(from: $0)})) ?? []
+        DCustomer.deleteAll()
         DCustomer.addAll(customers)
         try? await Task.sleep(for: .seconds(1))
         return customers

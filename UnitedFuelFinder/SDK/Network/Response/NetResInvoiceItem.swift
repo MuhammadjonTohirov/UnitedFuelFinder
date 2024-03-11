@@ -35,9 +35,7 @@ public struct NetResInvoiceItem: NetResBody {
 
 public struct NetResCompanyAccount: Codable {
     let id: Int
-    let accountName: String?
-    let name: String
-    let organization: NetResOrganization
+    let name: String?
 }
 
 public struct NetResOrganization: Codable {

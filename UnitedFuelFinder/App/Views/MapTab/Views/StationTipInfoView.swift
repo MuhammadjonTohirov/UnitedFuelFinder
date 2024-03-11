@@ -41,7 +41,7 @@ struct StationTipView: View {
             HStack {
                 Text("address".localize)
                 Spacer()
-                Text(station.address ?? "")
+                Text(station.fullAddress)
             }
             
             

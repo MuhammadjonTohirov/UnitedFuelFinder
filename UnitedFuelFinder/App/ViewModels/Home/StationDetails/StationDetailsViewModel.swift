@@ -29,7 +29,7 @@ class StationDetailsViewModel: NSObject, ObservableObject, Alertable {
     }
     
     var address: String? {
-        station?.address ?? ""
+        station?.fullAddress
     }
     
     func onAppear() {

@@ -28,6 +28,9 @@ public struct StationItem: Identifiable {
     public var note: String?
     public var number: String?
     public var priceUpdated: String?
+    public var distance: Float?
+    public var cityName: String?
+    public var stateName: String?
     
     public var actualPriceInfo: String {
         return actualPrice.asMoney
@@ -45,7 +48,7 @@ public struct StationItem: Identifiable {
         (discountPrice ?? 0).asMoney
     }
     
-    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil, priceUpdated: String?, note: String?) {
+    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil, priceUpdated: String?, note: String?, distance: Float? = 0) {
         self.id = id
         self.name = name
         self.lat = lat
@@ -60,6 +63,7 @@ public struct StationItem: Identifiable {
         self.retailPrice = retailPrice
         self.priceUpdated = priceUpdated
         self.note = note
+        self.distance = distance
     }
     
     init(res item: NetResStationItem) {
@@ -79,6 +83,9 @@ public struct StationItem: Identifiable {
         self.priceUpdated = item.priceUpdated
         self.note = item.note
         self.number = item.number
+        self.distance = item.distance
+        self.cityName = item.cityName
+        self.stateName = item.stateName
     }
 }
 
@@ -100,37 +107,40 @@ extension StationItem {
         return Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)
     }
     
-    func distance(from coordinate: CLLocationCoordinate2D) -> Double {
-        Double(GMSGeometryDistance(self.asMarker.position, coordinate).f.asMile)
+    private func _distance(from coordinate: CLLocationCoordinate2D) -> Double {
+        Double(GMSGeometryDistance(self.asMarker.position, coordinate))
     }
     
     var distanceFromCurrentLocation: Double {
         let coordinate = GLocationManager.shared.currentLocation?.coordinate ?? .init(latitude: 0, longitude: 0)
-        return Double(GMSGeometryDistance(self.coordinate, coordinate).f.asMile)
+        return Double(GMSGeometryDistance(self.coordinate, coordinate))
     }
     
     var distanceFromCurrentLocationInfo: String {
-        distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate)
+        guard let distance else {
+            let coordinate = GLocationManager.shared.currentLocation?.coordinate ?? .init(latitude: 0, longitude: 0)
+            return distanceInfo(_distance(from: coordinate).asFloat)
+        }
+        
+        return distanceInfo(distance)
     }
     
     var coordinate: CLLocationCoordinate2D {
         .init(latitude: self.lat, longitude: self.lng)
     }
     
-    func distanceInfo(from coordinate: CLLocationCoordinate2D?) -> String {
-        guard let c = coordinate else {
-            return ""
-        }
-        
-        let distance = distance(from: c)
-        let isMore1000 = Int(distance) / 1000 > 0
-        let unit = isMore1000 ? "km" : "mi"
-        
-        return String(format: "%.1f \(unit)",  isMore1000 ? distance / 1000 : distance)
+    private func distanceInfo(_ dist: Float) -> String {
+        return String(format: "%.1f ml",  dist / 1000)
     }
     
     var displayName: String {
         let n = self.customer?.name ?? ""
         return "\(n) \(number ?? "")"
+    }
+    
+    var fullAddress: String {
+        let city = self.city?.name ?? ""
+        let state = self.state?.name ?? ""
+        return [address ?? "", cityName ?? "", stateName ?? ""].compactMap({$0.nilIfEmpty}).joined(separator: ", ")
     }
 }

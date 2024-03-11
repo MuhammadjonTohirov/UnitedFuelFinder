@@ -12,7 +12,11 @@ import MapKit
 
 class GLocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = GLocationManager()
-    private var locationManager = CLLocationManager()
+    
+    private lazy var locationManager = {
+        CLLocationManager()
+    }()
+    
     var locationUpdateHandler: ((CLLocation) -> Void)?
     
     var currentLocation: CLLocation? {
@@ -25,9 +29,11 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func requestLocationPermission() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = true
+        mainIfNeeded {
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.allowsBackgroundLocationUpdates = true
+            self.locationManager.pausesLocationUpdatesAutomatically = true
+        }
     }
     
     func startUpdatingLocation() {
@@ -41,10 +47,6 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
             } else {
                 print("Location services are not enabled.")
                 // Handle the case where location services are not enabled.
-            }
-            
-            if let lastLocation = self.locationManager.location {
-                self.locationUpdateHandler?(lastLocation)
             }
         }
     }

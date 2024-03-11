@@ -15,16 +15,40 @@ enum MainTabs: Int {
 }
 
 struct MainTabView: View {
-    @ObservedObject var viewModel: TabViewModel = .init()
+    @ObservedObject var viewModel: MainTabViewModel = .init()
     @EnvironmentObject var mainViewModel: MainViewModel
+    @State private var didAppear = false
+    @State private var mapBodyState: HomeBodyState = .map
+    @State private var imagePlaceholder: Image?
     
     var body: some View {
-        NavigationStack {
-            tabView
-                .navigationBarTitleDisplayMode(.inline)
-                .onAppear {
-                    viewModel.onAppear()
-                }
+        ZStack {
+            NavigationStack {
+                tabView
+                    .alert(isPresented: $viewModel.showWarningAlert) {
+                        Alert(
+                            title: Text("disclamer.title".localize),
+                            message: Text("disclamer.desc".localize),
+                            dismissButton: .default(
+                                Text("ok".localize)
+                            )
+                        )
+                    }
+                    .navigationBarTitleDisplayMode(.inline)
+                    .onAppear {
+                        viewModel.onAppear()
+                    }
+                    .onAppear {
+                        if didAppear {
+                            return
+                        }
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                            viewModel.alertWarning()
+                            self.didAppear = true
+                        }
+                    }
+            }
         }
     }
     
@@ -52,7 +76,7 @@ struct MainTabView: View {
             Text("Dashboard")
                 .font(.system(size: 16, weight: .bold))
         case .map:
-            MapTabToggleView(selectedIndex: $viewModel.mapViewModel.bodyState)
+            MapTabToggleView(selectedIndex: $mapBodyState)
         case .settings:
             Text("Settings")
                 .font(.system(size: 16, weight: .bold))
@@ -78,12 +102,12 @@ struct MainTabView: View {
                 cacheKey: (UserSettings.shared.photoUpdateDate ?? Date()).toString(),
                 storageExpiration: .expired,
                 memoryExpiration: .expired,
-                placeholder: Image(uiImage: UIImage(named: "icon_man_placeholder")!)
+                placeholder: imagePlaceholder?
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(width: 32.f.sw(), height: 32.f.sw(), alignment: .center)
                     .clipShape(Circle())
-                    .anyView
+                    .anyView ?? EmptyView().anyView
             )
             .frame(width: 32.f.sw(), height: 32.f.sw())
             .background {
@@ -93,6 +117,11 @@ struct MainTabView: View {
             .onTapGesture {
                 viewModel.dashboardViewModel.navigate(to: .profile)
             }
+            .onAppear {
+                if let img = UIImage(named: "icon_man_placeholder") {
+                    self.imagePlaceholder = Image(uiImage: img)
+                }
+            }
         default:
             Text("")
         }
@@ -100,28 +129,24 @@ struct MainTabView: View {
     
     private var tabView: some View {
         TabView(selection: $viewModel.selectedTag) {
-            DashboardView()
+            DashboardView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
                 .environmentObject(mainViewModel)
-                .environmentObject(viewModel.dashboardViewModel)
                 .tabItem {
                     Image("icon_pie")
                         .renderingMode(.template)
-                    Text("home".localize)
+                    Text("dashboard".localize)
                 }
                 .tag(MainTabs.dashboard)
-                .anyView
-            
-            MapTabView()
+
+            MapTabView(viewModel: viewModel.mapViewModel as! MapTabViewModel)
                 .environmentObject(mainViewModel)
-                .environmentObject(viewModel.mapViewModel)
                 .tabItem {
                     Image("icon_map_2")
                         .renderingMode(.template)
                     Text("map".localize)
                 }
                 .tag(MainTabs.map)
-                .anyView
-            
+
             SettingsView()
                 .environmentObject(mainViewModel)
                 .tabItem {
@@ -131,6 +156,9 @@ struct MainTabView: View {
                 }
                 .tag(MainTabs.settings)
         }
+        .onChange(of: mapBodyState, perform: { value in
+            viewModel.mapViewModel.bodyState = value
+        })
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
                 leadingTopBar
@@ -165,6 +193,7 @@ struct MainTabView: View {
     UserSettings.shared.accessToken = UserSettings.testAccessToken
     UserSettings.shared.refreshToken = UserSettings.testRefreshToken
     UserSettings.shared.userEmail = UserSettings.testEmail
+    UserSettings.shared.tokenExpireDate = Date().after(days: 2)
     UserSettings.shared.appPin = "0000"
     
     return MainView()

@@ -18,7 +18,11 @@ public func setNetworkDelegate(_ delegate: NetworkDelegate?) {
 struct Network {
     static var delegate: NetworkDelegate?
     
-    static func send<T: NetResBody>(request: URLRequestProtocol, refreshTokenIfNeeded: Bool = true) async -> NetRes<T>? {
+    static func send<T: NetResBody>(
+        request: URLRequestProtocol,
+        session: URLSession = URLSession.shared,
+        refreshTokenIfNeeded: Bool = true
+    ) async -> NetRes<T>? {
         do {
             Logging.l("--- --- REQUEST --- ---")
             Logging.l(request.url.absoluteString)
@@ -30,17 +34,21 @@ struct Network {
                 }
             }
             
-            if let requestBody = request.request().httpBody, let json = try JSONSerialization.jsonObject(with: requestBody, options: .fragmentsAllowed) as? [String: Any] {
+            if let requestBody = request.request().httpBody,
+               let json = try JSONSerialization.jsonObject(with: requestBody, options: .fragmentsAllowed) as? [String: Any]
+            {
                 Logging.l(json)
             }
             
-            let result = try await URLSession.shared.data(for: request.request())
+            let result = try await session.data(
+                for: request.request()
+            )
             
             let data = result.0
-
+            
             let code = (result.1 as! HTTPURLResponse).statusCode
-
-            guard await onReceive(code: code) else {
+            
+            guard await onReceive(code: code, session: session) else {
                 return nil
             }
             
@@ -48,23 +56,25 @@ struct Network {
             
             let res = try JSONDecoder().decode(NetRes<T>.self, from: data)
             
-            Logging.l(res.asString)
+            if (res.asData?.count ?? 0) < 1000 {
+                Logging.l(res.asString)
+            }
             
-            guard await onReceive(code: res.code ?? code) else {
+            guard await onReceive(code: res.code ?? code, session: session) else {
                 return nil
             }
             
             return res
-
+            
         } catch let error {
-            Logging.l("Error: \(error.localizedDescription)")
+            Logging.l("Error: \(error)")
             return nil
         }
     }
     
-    private static func onReceive(code: Int) async -> Bool {
+    private static func onReceive(code: Int, session: URLSession) async -> Bool {
         if code == 401 {
-            await URLSession.shared.cancelAllTasks()
+            await session.cancelAllTasks()
             UserSettings.shared.clear()
             delegate?.onAuthRequired()
             return false

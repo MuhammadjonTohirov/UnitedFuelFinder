@@ -12,10 +12,11 @@ struct AllTransactionsView: View {
     @State private var date1: Date = Date().firstDayOfMonth
     @State private var date2: Date = Date().lastDayOfMonth
     @State private var datePresented: Bool = false
-    @State private var tempDate = Date()
     @State private var buttonNumber = 0
     @State private var isLoading = false
     @ObservedObject var viewModel = AllTranInvoViewModel()
+    @Environment(\.scenePhase)
+    private var scenePhase
     
     var body: some View {
         VStack {
@@ -30,7 +31,6 @@ struct AllTransactionsView: View {
             .scrollable()
             .navigationTitle("transf.transactions".localize)
             .navigationBarTitleDisplayMode(.inline)
-            
             .onChange(of: date1, perform: { value in
                 self.date1 = min(value, date2.before(days: 1))
                 self.reloadData()
@@ -42,22 +42,27 @@ struct AllTransactionsView: View {
             .coveredLoading(isLoading: $isLoading)
             .sheet(isPresented: $datePresented, content: {
                 VStack {
-                    DatePicker("", selection: $tempDate, displayedComponents: .date)
+                    DatePicker("", selection: buttonNumber == 1 ? $date1 : $date2, displayedComponents: .date)
                         .datePickerStyle(.graphical)
                         .presentationDetents([.height(400)])
                     
                     Button("Submit") {
-                        if buttonNumber == 1 {
-                            date1 = tempDate
-                        } else {
-                            date2 = tempDate
-                        }
                         datePresented.toggle()
                     }
                 }
             })
             .onAppear {
                 reloadData()
+            }
+        }
+        .onChange(of: scenePhase) { newValue in
+            switch newValue {
+            case .active:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    reloadData()
+                }
+            default:
+                break
             }
         }
     }

@@ -16,6 +16,8 @@ protocol MapTabInteractorProtocol {
     init(routeSearcher: any SearchRouteProtocol)
     
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void)
+    
+    func filterStationsByDefault(_ filter: MapFilterInput) async -> [StationItem]
 }
 
 struct GoogleRouteSearcher: SearchRouteProtocol {
@@ -45,14 +47,22 @@ struct ServerRouteSearcher: SearchRouteProtocol {
     }
 }
 
-struct MapTabInteractor: MapTabInteractorProtocol {
+class MapTabInteractor: MapTabInteractorProtocol {
     var routeSearcher: any SearchRouteProtocol
     
-    init(routeSearcher: any SearchRouteProtocol) {
+    private var filterRequestDate: Date?
+    
+    required init(routeSearcher: any SearchRouteProtocol) {
         self.routeSearcher = routeSearcher
     }
     
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void) {
         routeSearcher.searchRoute(from: from, to: to, completion: completion)
+    }
+    
+    func filterStationsByDefault(_ filter: MapFilterInput) async -> [StationItem] {
+        filterRequestDate = Date()
+        
+        return []
     }
 }

@@ -730,8 +730,38 @@
         }
       }
     },
+    "dashboard" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Главная"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Asosiy"
+          }
+        }
+      }
+    },
     "Dashboard" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        }
+      }
     },
     "Date" : {
 
@@ -870,6 +900,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Qurilmalar"
+          }
+        }
+      }
+    },
+    "disclamer.desc" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thank you for utilizing our application. United Fuel Driver is a tool which helps you to find the cheapest price but should not be considered a guaranteed, real-time reflection of the truck stop fuel price.Our application reflects pricing provided directly to us by truck stop network members and other third parties; pricing may have changed since the last update received."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "United Fuel Driver - это инструмент, который помогает вам найти самую дешевую цену, но не следует рассматривать как гарантированное, в реальном времени отражение цены на топливо на автозаправочной станции. Наше приложение отражает ценообразование, предоставленное нам непосредственно членами сети автозаправочных станций и другими третьими лицами; ценообразование может измениться с момента последнего обновления."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "United Fuel Driver - bu eng arzon narxni topishga yordam beradigan vosita, ammo avtomobil yo'lovchilari stantsiyalarida benzin narxlarini amalga oshirishda ishlatilmasligi kerak. Bizning ilovamiz, avtomobil yo'lovchilari stantsiyalar tarmog'i a'zolari va boshqa uchunchi tomonlar tomonidan bizga to'lovlar haqida berilgan narxlarni ko'rsatadi; narxlar oxirgi yangilanishdan keyin o'zgarish mumkin."
+          }
+        }
+      }
+    },
+    "disclamer.title" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "United Fuel Driver Disclaimer"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "United Fuel Driver Дисклеймер"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "United Fuel Driver Izohi"
           }
         }
       }
@@ -1160,6 +1236,17 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Chiqish"
+          }
+        }
+      }
+    },
+    "filter" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
           }
         }
       }
@@ -2429,6 +2516,29 @@
     "per gallon" : {
 
     },
+    "per.gallon" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "per gallon"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "за галлон"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "har galonidan"
+          }
+        }
+      }
+    },
     "personal_details" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2940,6 +3050,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Takror"
+          }
+        }
+      }
+    },
+    "save" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранять"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foyda"
           }
         }
       }

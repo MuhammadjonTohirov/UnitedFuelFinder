@@ -115,7 +115,7 @@ struct StationDetailsView: View {
             [
                 row(
                     title: "distance".localize,
-                    detail: Text(viewModel.station?.distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate) ?? "")
+                    detail: Text(viewModel.station?.distanceFromCurrentLocationInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
                 ),
                 

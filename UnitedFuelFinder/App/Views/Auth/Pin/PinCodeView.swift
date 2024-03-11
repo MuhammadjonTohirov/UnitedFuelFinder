@@ -64,13 +64,16 @@ struct PinCodeView: View {
             dest.screen
         }
         .onAppear {
-            #if DEBUG
-            viewModel.onAppear()
-            #else
             if viewModel.reason == .login {
                 authenticate()
             }
-            #endif
+//            #if DEBUG
+//            viewModel.onAppear()
+//            #else
+//            if viewModel.reason == .login {
+//                authenticate()
+//            }
+//            #endif
         }
     }
     
@@ -90,24 +93,26 @@ struct PinCodeView: View {
     }
     
     private func authenticate() {
-        let context = LAContext()
-        var error: NSError?
+        mainIfNeeded {
+            let context = LAContext()
+            var error: NSError?
 
-        // check whether biometric authentication is possible
-        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            // it's possible, so go ahead and use it
-            let reason = "login_with_biometric_id".localize
+            // check whether biometric authentication is possible
+            if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+                // it's possible, so go ahead and use it
+                let reason = "login_with_biometric_id".localize
 
-            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
-                // authentication has now completed
-                if success {
-                    viewModel.onSuccessLogin()
-                } else {
-                    // there was a problem
+                context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                    // authentication has now completed
+                    if success {
+                        viewModel.onSuccessLogin()
+                    } else {
+                        // there was a problem
+                    }
                 }
+            } else {
+                // no biometrics
             }
-        } else {
-            // no biometrics
         }
     }
 }

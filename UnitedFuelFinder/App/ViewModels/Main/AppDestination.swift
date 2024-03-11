@@ -65,7 +65,7 @@ enum AppDestination: Hashable, ScreenRoute {
         case .auth:
             AuthView()
         case .main:
-            MapTabView()
+            MapTabView(viewModel: .init())
         case .test:
             Text("TEST")
         case .mainTab:

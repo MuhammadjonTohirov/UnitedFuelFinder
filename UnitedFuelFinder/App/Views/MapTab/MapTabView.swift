@@ -13,14 +13,26 @@ struct MapTabView: View {
     @State private var bottomSheetFrame: CGRect = .zero
     @State private var screenFrame: CGRect = .zero
     
-    @EnvironmentObject var viewModel: MapTabViewModel
+    @ObservedObject var viewModel: MapTabViewModel
     @EnvironmentObject var mainModel: MainViewModel
+    
+    init(viewModel: MapTabViewModel) {
+        self.viewModel = viewModel
+    }
     
     @State private var pointerFrame: CGRect = .zero
     @State private var selectedMarker: GMSMarker?
     
     private let pointerHeight: CGFloat = 158
     private let locationManager = CLLocationManager()
+    
+    private var hasSafeArea: Bool {
+        UIApplication.shared.safeArea.bottom != 0
+    }
+    
+    private var bottomSafeArea: CGFloat {
+        hasSafeArea ? UIApplication.shared.safeArea.bottom : 20
+    }
     
     private var bottomSheetBottomPadding: CGFloat {
         0
@@ -39,6 +51,21 @@ struct MapTabView: View {
                 .onChange(of: viewModel.bodyState, perform: { value in
                     (value == .map) ? viewModel.onSelectMap() : viewModel.onSelectList()
                 })
+                .onDisappear {
+                    viewModel.onDisappear()
+                }
+            // cover tabbar
+            GeometryReader(content: { geometry in
+                VStack(spacing: 0) {
+                    
+                    Spacer()
+                    
+                    Rectangle()
+                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .ignoresSafeArea(.container, edges: .bottom)
+                        .frame(height: 0)
+                }
+            })
         }
         .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
     }
@@ -93,11 +120,20 @@ struct MapTabView: View {
                 
                 self.viewModel.reloadAddress()
             })
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    viewModel.isMapReady = true
+                    if viewModel.state != .routing {
+                        viewModel.filterStationsByDefault()
+                    }
+                }
+            }
         case .list:
             MapTabListView(
                 stations: self.viewModel.stations,
                 fromPoint: self.viewModel.fromLocation?.coordinate
             )
+            .environmentObject(self.viewModel)
         }
     }
     
@@ -110,12 +146,30 @@ struct MapTabView: View {
         )
         .set(currentLocation: viewModel.focusableLocation)
         .set(
-            radius: viewModel.state == .routing ? 0 : CLLocationDistance(viewModel.filter?.radius ?? 0)
+            radius: viewModel.state != .selectFrom ? 0 : CLLocationDistance(viewModel.filter?.radius ?? 0)
         )
         .set(route: viewModel.mapRoute)
         .set(onClickMarker: { marker, point in
             if marker.hasStation {
                 self.selectedMarker = marker
+            }
+        })
+        .set(onChangeVisibleArea: { radius in
+            guard viewModel.isMapReady else {
+                return
+            }
+            
+            Logging.l(tag: "MapTabView", "Change visible area \(radius)")
+
+            viewModel.screenVisibleArea = radius
+            
+            if viewModel.state != .routing {
+                viewModel.filterStationsByDefault()
+            }
+        })
+        .onChange(of: viewModel.isDragging, perform: { value in
+            if value {
+                self.viewModel.onDraggingMap()
             }
         })
         .ignoresSafeArea()
@@ -135,7 +189,7 @@ struct MapTabView: View {
                 isActive: viewModel.isDragging,
                 type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
             .frame(height: pointerHeight)
-            .offset(.init(width: 0, height: -(pointerHeight / 2)))
+            .offset(.init(width: 0, height: -(115 / 2) - bottomSafeArea))
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
         }
     }
@@ -183,7 +237,6 @@ struct MapTabView: View {
                             self.viewModel.onClickSelectToPointOnMap()
                         }
                     ),
-                    
                     state: viewModel.state != .selectTo ? .mainView : .destinationView,
                     onClickReady: {
                         // draw route

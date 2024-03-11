@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-class TabViewModel: ObservableObject {
+class MainTabViewModel: ObservableObject {
     @Published var selectedTag: MainTabs = .dashboard
     
     @Published var dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
@@ -16,6 +16,7 @@ class TabViewModel: ObservableObject {
     @Published var settingsViewModel: SettingsViewModel = .init()
     
     @Published var discountedStations: [StationItem] = []
+    @Published var showWarningAlert: Bool = false
     private var lastLocationUpdate: Date = .now.before(days: 1)
     
     func onAppear() {
@@ -60,7 +61,10 @@ class TabViewModel: ObservableObject {
         Task {
             await loadDiscountedStations(location)
         }
-
+    }
+    
+    func alertWarning() {
+        showWarningAlert = true
     }
     
     func loadDiscountedStations(_ currentLocation: CLLocation?) async {
@@ -68,11 +72,9 @@ class TabViewModel: ObservableObject {
             return
         }
         
-        let _stations = await MainService.shared.discountedStations(
-            atLocation: (c.latitude, c.longitude),
-            in: 10,
-            limit: 10
-        ).sorted(
+        let (_stations) = await MainService.shared.filterStations2(
+            req: .init(current: .init(lat: c.latitude, lng: c.longitude), distance: 10)
+        ).0.sorted(
             by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation}
         )
         
@@ -96,6 +98,7 @@ class TabViewModel: ObservableObject {
             await AuthService.shared.syncUserInfo()
             
             try await Task.sleep(for: .seconds(1))
+            
             if let serverVersion = await CommonService.shared.getVersion() {
                 UserSettings.shared.currentAPIVersion = serverVersion
             }

@@ -55,6 +55,16 @@ public extension View {
             }
         }
     }
+    
+    func set(isVisible: Bool) -> some View {
+        if isVisible {
+            return AnyView(self)
+        }
+        
+        return AnyView(
+            EmptyView().frame(width: 0, height: 0)
+        )
+    }
 }
 
 extension View {

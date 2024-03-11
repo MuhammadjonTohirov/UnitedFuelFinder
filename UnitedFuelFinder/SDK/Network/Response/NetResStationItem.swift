@@ -14,16 +14,19 @@ struct NetResStationItem: NetResBody {
     var lng: Double
     var isDeleted: Bool?
     var cityId: Int?
+    var cityName: String?
     var customerId: Int
     var address: String?
     var phone: String?
     var stateId: String?
+    var stateName: String?
     var discountPrice: Float?
     var priceUpdated: String
     var retailPrice: Float?
     var number: String?
     var logoUrl: String?
     var note: String?
+    var distance: Float?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -42,5 +45,8 @@ struct NetResStationItem: NetResBody {
         case number
         case note
         case logoUrl = "logoUrl"
+        case distance
+        case cityName
+        case stateName
     }
 }

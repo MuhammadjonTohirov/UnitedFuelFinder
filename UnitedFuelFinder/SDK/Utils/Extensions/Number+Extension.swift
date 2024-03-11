@@ -75,3 +75,15 @@ extension Float {
         Double(self)
     }
 }
+
+extension Int {
+    var asDouble: Double {
+        Double(self)
+    }
+}
+
+extension Double {
+    var asInt: Int {
+        Int(self)
+    }
+}

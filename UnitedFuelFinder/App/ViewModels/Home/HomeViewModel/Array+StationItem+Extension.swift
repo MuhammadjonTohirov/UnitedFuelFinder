@@ -32,4 +32,17 @@ extension Array where Element == StationItem {
             }
         })
     }
+    
+    func applySort(_ filter: MapFilterInput) -> [Element] {
+        self.sorted(by: { a, b in
+            switch filter.sortType {
+            case .discount:
+                return (a.discountPrice ?? 0) > (b.discountPrice ?? 0)
+            case .distance:
+                return (a.distance ?? 0) < (b.distance ?? 0)
+            case .price:
+                return (a.retailPrice ?? 0) < (b.retailPrice ?? 0)
+            }
+        })
+    }
 }

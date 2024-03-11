@@ -10,9 +10,20 @@ import RealmSwift
 import SwiftUI
 
 enum SortType: String, Codable, CaseIterable {
+    case distance
     case discount
     case price
-    case distance
+    
+    var title: String {
+        switch self {
+        case .distance:
+            return "distance".localize
+        case .discount:
+            return "discounted_price".localize
+        case .price:
+            return "retail_price".localize
+        }
+    }
 }
 
 struct FilterPriceRange {
@@ -49,7 +60,7 @@ struct MapFilterInput {
 }
 
 struct MapFilterView: View {
-    @State var sortType: SortType = .discount
+    @State var sortType: SortType = .distance
     
     @State private var fromPriceRange: String = "0"
     @State private var toPriceRange: String = "100"
@@ -148,12 +159,17 @@ struct MapFilterView: View {
             
             HStack {
                 ForEach(SortType.allCases, id: \.rawValue) { _case in
-                    selectionButton(title: _case.rawValue.localize, isSelected: sortType == _case)
-                        .onTapGesture {
-                            sortType = _case
-                        }
+                    selectionButton(
+                        title: _case.title,
+                        isSelected: sortType == _case
+                    )
+                    .onTapGesture {
+                        sortType = _case
+                    }
                 }
             }
+            .padding(2)
+            .scrollable(axis: .horizontal)
             
             Text("filter.sort.by.info".localize)//Can be sorted by cheapest price or highest discount
                 .font(.system(size: 10, weight: .regular))

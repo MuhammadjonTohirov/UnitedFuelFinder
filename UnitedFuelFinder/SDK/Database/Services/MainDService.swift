@@ -30,10 +30,12 @@ public class MainDService {
             })
         }
     }
-    
+    // deletes and inserts new companies
     public func addCompanies(_ companies: [CompanyItem]) {
         DataBase.writeThread.async {
             Realm.new?.trySafeWrite({ realm in
+                realm.delete(realm.objects(DCompany.self))
+                
                 companies.map({$0.asObject}).forEach { city in
                     realm.add(city, update: .modified)
                 }
