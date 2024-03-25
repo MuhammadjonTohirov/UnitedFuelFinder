@@ -92,24 +92,42 @@ public class StationItem: Identifiable {
         let customerName = self.name.replacingOccurrences(of: self.number ?? "-1", with: "")
         self.displayName = (customerName + " " + (self.number ?? "")).nilIfEmpty ?? self.name
     }
+    
+    private var _city: CityItem?
+    private var _state: StateItem?
+    private var _customer: CustomerItem?
 }
 
 extension StationItem {
     var customer: CustomerItem? {
-        return DCustomer.all?.filter("id = %d", customerId).first?.asModel
+        if let _customer {
+            return _customer
+        }
+        
+        _customer = DCustomer.all?.filter("id = %d", customerId).first?.asModel
+        return _customer
     }
     
-    
-    var city: DCity? {
-        Realm.new?.object(ofType: DCity.self, forPrimaryKey: self.cityId)
+    var city: CityItem? {
+        if let _city {
+            return _city
+        }
+        
+        _city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: self.cityId)?.asModel
+        return _city
     }
     
-    var state: DState? {
+    var state: StateItem? {
         guard let stateId = self.stateId else {
             return nil
         }
         
-        return Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)
+        if let _state {
+            return _state
+        }
+        
+        _state = Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)?.asModel
+        return _state
     }
     
     /// finds distance as mile
