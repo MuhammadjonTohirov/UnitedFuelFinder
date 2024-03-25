@@ -1240,6 +1240,52 @@
         }
       }
     },
+    "feedback.post.fail" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to post feedback"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось отправить отзыв"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fikrni yuborish muvaffaqiyatsiz tugadi"
+          }
+        }
+      }
+    },
+    "feedback.post.success" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "We appreciate your feedback to this station"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Мы благодарим вас за ваш отзыв о этой станции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biz ushbu stantsiyaga tegishli fikringiz uchun minnatdormiz"
+          }
+        }
+      }
+    },
     "filter" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3286,6 +3332,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tanlangan"
+          }
+        }
+      }
+    },
+    "set.rating" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Select rating"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Выберите рейтинг"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reytingni tanlang"
           }
         }
       }

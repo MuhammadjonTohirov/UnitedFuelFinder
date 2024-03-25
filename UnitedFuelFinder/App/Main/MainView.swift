@@ -16,8 +16,6 @@ struct MainView: View {
             .onAppear {
                 viewModel.transparentNavigationSetup()
                 
-                UserSettings.shared.setInterfaceStyle(style: .light)
-                
                 let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
                 
                 if version != UserSettings.shared.currentVersion {
@@ -25,6 +23,9 @@ struct MainView: View {
                 }
                 
                 UserSettings.shared.currentVersion = version
+                
+                let theme = UserSettings.shared.theme ?? .light
+                UserSettings.shared.setInterfaceStyle(style: theme.style)
             }
     }
 }

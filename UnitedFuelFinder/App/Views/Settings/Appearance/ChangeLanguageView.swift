@@ -56,18 +56,20 @@ struct ChangeLanguageView: View {
     }
     
     private func selectLanguage(_ lang: Language) {
-        
         mainViewModel.set(language: lang)
     }
     
     private func onClickContinue() {
         UserSettings.shared.isLanguageSelected = true
-        appDelegate?.navigate(to: .auth)
+        Task {
+            await appDelegate?.navigate(to: .auth)
+        }
     }
     
     private func showMain() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-            appDelegate?.navigate(to: .loading)
+        Task {
+            try? await Task.sleep(nanoseconds: 200)
+            await appDelegate?.navigate(to: .loading)
         }
     }
 }

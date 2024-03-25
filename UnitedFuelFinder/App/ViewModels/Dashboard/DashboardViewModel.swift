@@ -11,6 +11,14 @@ import CoreLocation
 import MapKit
 
 enum DashboardRoute: ScreenRoute {
+    static func == (lhs: DashboardRoute, rhs: DashboardRoute) -> Bool {
+        lhs.id == rhs.id
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(id)
+    }
+    
     var id: String {
         switch self {
         case .transferringStations:
@@ -21,6 +29,8 @@ enum DashboardRoute: ScreenRoute {
             return "invoices"
         case .profile:
             return "profile"
+        case .stationInfo:
+            return "station"
         }
     }
     
@@ -28,6 +38,8 @@ enum DashboardRoute: ScreenRoute {
     case invoices
     case notifications
     case profile
+    case stationInfo(_ station: StationItem)
+    
     @ViewBuilder
     var screen: some View {
         switch self {
@@ -39,6 +51,8 @@ enum DashboardRoute: ScreenRoute {
             AllInvoicesView()
         case .profile:
             ProfileVIew()
+        case .stationInfo(let sta):
+            StationDetailsView(station: sta)
         }
     }
 }

@@ -64,6 +64,7 @@ struct RegisterProfileView: View {
             isPresented: $viewModel.showRegisterWarning) {
                 dismissView()
             }
+        .background(.appBackground)
     }
     
     private func onClickRegister() {

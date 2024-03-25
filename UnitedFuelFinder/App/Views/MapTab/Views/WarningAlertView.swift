@@ -30,7 +30,7 @@ struct WarningAlertView: View {
             })
         }
         .padding(24)
-        .background(Color.init(uiColor: .systemBackground))
+        .background(Color.background)
         .cornerRadius(16)
         .shadow(color: Color.init(uiColor: .black).opacity(0.2), radius: 8, x: 0, y: 4)
     }

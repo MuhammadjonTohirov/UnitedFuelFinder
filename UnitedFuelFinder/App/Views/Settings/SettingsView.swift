@@ -25,6 +25,7 @@ struct SettingsView: View {
                     Text("")
                 }
             })
+            .background(Color.background)
     }
     
     var innerBody: some View {
@@ -92,7 +93,7 @@ struct SettingsView: View {
                 Text("app_version".localize + ":")
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.init(uiColor: .systemRed))
-                Text(UserSettings.shared.currentAPIVersion ?? "")
+                Text(UserSettings.shared.currentAPIVersion?.nilIfEmpty ?? Bundle.main.appVersion)
                     .foregroundStyle(Color.label)
                 
                 Spacer()
@@ -123,6 +124,7 @@ struct SettingsView: View {
             viewModel.route?.screen
                 .environmentObject(self.mainModel)
                 .environmentObject(self.viewModel)
+                .background(Color.background)
         }
     }
     
@@ -155,8 +157,8 @@ struct SettingsView: View {
         UserSettings.shared.language = .english
         appDelegate?.timer?.invalidate()
         appDelegate?.timer = nil
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            appDelegate?.navigate(to: .loading)
+        Task {
+            await appDelegate?.navigate(to: .loading)
         }
     }
 }

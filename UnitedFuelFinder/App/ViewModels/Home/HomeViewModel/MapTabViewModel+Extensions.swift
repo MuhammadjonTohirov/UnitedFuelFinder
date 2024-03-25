@@ -43,7 +43,7 @@ protocol HomeViewModelProtocol: ObservableObject {
     
     var stations: [StationItem] {get set}
     
-    var stationsMarkers: [GMSMarker] {get set}
+    var stationsMarkers: Set<GMSMarker> {get set}
     
     var distance: String {get}
     
@@ -88,7 +88,8 @@ extension HomeViewModelProtocol {
 // MARK: - ClickActions
 extension MapTabViewModel: HomeViewModelProtocol {
     func onClickSelectToPointOnMap() {
-        
+        self.removeMarkers()
+        self.removeStations()
         withAnimation {
             self.state = .selectTo
             if let toLocation {
@@ -120,8 +121,8 @@ extension MapTabViewModel: HomeViewModelProtocol {
     func onClickBack() {
         withAnimation {
             self.state = .selectFrom
-            self.setupMarkers()
             self.focusToCurrentLocation()
+            self.filterStationsByDefault()
         }
     }
     
@@ -185,7 +186,11 @@ extension MapTabViewModel: HomeViewModelProtocol {
 extension MapTabViewModel {
     
     func setupMarkers() {
-        self.stationsMarkers = self.stations.map({$0.asMarker})
+        DispatchQueue.main.async {
+            self.stations.map({$0.asMarker}).forEach { marker in
+                self.stationsMarkers.insert(marker)
+            }
+        }
     }
     
     func removeStations() {
@@ -193,10 +198,33 @@ extension MapTabViewModel {
     }
     
     func removeMarkers() {
-        self.stationsMarkers.removeAll { mr in
-            mr.map = nil
-            return true
+        stationsMarkers.forEach { marker in
+            marker.map = nil
         }
+        stationsMarkers.removeAll()
+//        self.stationsMarkers.forEach { mr in
+//            if let pl = self.pickedLocation?.coordinate {
+//                let distance = pl.distance(to: mr.position).f.asMile
+//                // remove not in distance
+//                if distance > CGFloat(self.filter?.radius ?? 10) {
+//                    mr.map = nil
+//                    self.stationsMarkers.remove(mr)
+//                }
+//            }
+//        }
+//        self.stationsMarkers.removeAll { mr in
+//            // remove mr not in radius
+//            if let pl = self.pickedLocation?.coordinate {
+//                let distance = pl.distance(to: mr.position).f.asMile
+//                // remove not in distance
+//                if distance > CGFloat(self.filter?.radius ?? 10) {
+//                    mr.map = nil
+//                    return true
+//                }
+//            }
+//            
+//            return false
+//        }
     }
 }
 

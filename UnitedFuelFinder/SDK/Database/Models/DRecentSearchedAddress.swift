@@ -57,11 +57,9 @@ extension DRecentSearchedAddress {
             return
         }
         
-        DataBase.writeThread.async {
-            Realm.new?.trySafeWrite({ realm in
-                realm.add(item.asObject, update: .modified)
-            })
-        }
+        Realm.new?.trySafeWrite({ realm in
+            realm.add(item.asObject, update: .modified)
+        })
     }
 
     //    sorted by inserted date

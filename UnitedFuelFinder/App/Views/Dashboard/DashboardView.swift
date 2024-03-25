@@ -30,21 +30,21 @@ struct DashboardView: View {
             innerBody
                 .background {
                     Rectangle()
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                 }
             
             GeometryReader(content: { geometry in
                 VStack(spacing: 0) {
                     Rectangle()
                         .frame(height: geometry.safeAreaInsets.top)
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                         .ignoresSafeArea()
 
                     
                     Spacer()
                     
                     Rectangle()
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                         .ignoresSafeArea(.container, edges: .bottom)
                         .frame(height: 0)
                 }
@@ -142,12 +142,12 @@ struct DashboardView: View {
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
                 
                 ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
-                    InvoicesView(
+                    InvoiceView(
                         invoice: invo.invoiceNumber ?? "",
                         amount: Float(invo.totalAmount),
                         secoundAmount: Float(invo.totalDiscount ?? 0),
                         companyName: invo.companyAccount?.name ?? "",
-                        date: invo.beatufiedDate
+                        date: invo.fromToDate
                     )
                 }
             }
@@ -174,6 +174,9 @@ struct DashboardView: View {
                         .background {
                             RoundedRectangle(cornerRadius: 16)
                                 .foregroundStyle(.appSecondaryBackground)
+                        }
+                        .onTapGesture {
+                            viewModel.navigate(to: .stationInfo(station))
                         }
                 }
             }

@@ -14,7 +14,8 @@ struct AllTransactionsView: View {
     @State private var datePresented: Bool = false
     @State private var buttonNumber = 0
     @State private var isLoading = false
-    @ObservedObject var viewModel = AllTranInvoViewModel()
+    @State private var transactions: [TransactionItem] = []
+    
     @Environment(\.scenePhase)
     private var scenePhase
     
@@ -23,7 +24,7 @@ struct AllTransactionsView: View {
             datePicker
                 .padding(.top, 20)
             LazyVStack {
-                ForEach(viewModel.transactions) { item in
+                ForEach(transactions) { item in
                     TransactionView(item: item)
                 }
                 .padding(.horizontal)
@@ -52,14 +53,17 @@ struct AllTransactionsView: View {
                 }
             })
             .onAppear {
-                reloadData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.reloadData()
+                }
             }
         }
+        .background(.appBackground)
         .onChange(of: scenePhase) { newValue in
             switch newValue {
             case .active:
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    reloadData()
+                    self.reloadData()
                 }
             default:
                 break
@@ -124,12 +128,28 @@ struct AllTransactionsView: View {
     }
     
     private func reloadData() {
-        isLoading = true
+        self.isLoading = true
         Task {
-            await viewModel.loadTransactions(from: self.date1, to: self.date2)
+            await loadTransactions(from: self.date1, to: self.date2)
             await MainActor.run {
-                isLoading = false
+                self.isLoading = false
             }
+        }
+    }
+    
+    private func loadTransactions(from: Date, to: Date) async {
+        let _from = from.toString(format: "ddMMyyyy")
+        let _to = to.toString(format: "ddMMyyyy")
+        
+        let _transactions = (await CommonService.shared.fetchTransactions(
+            fromDate: _from,
+            to: _to
+        )).compactMap {
+            TransactionItem(from: $0)
+        }
+
+        await MainActor.run {
+            self.transactions = _transactions
         }
     }
 }

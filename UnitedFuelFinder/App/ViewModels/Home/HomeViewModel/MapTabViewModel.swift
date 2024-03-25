@@ -33,7 +33,7 @@ protocol MapTabViewModelProtocl: ObservableObject {
 final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     @Published var focusableLocation: CLLocation?
     @Published var bodyState: HomeBodyState = .map 
-    @Published var filter: MapFilterInput? = .init(sortType: .discount, from: 0, to: 100, radius: 300, selectedStations: [1,2,3,4,5,6,7,8])
+    @Published var filter: MapFilterInput?
     
     var isMapReady: Bool = false
     
@@ -111,7 +111,7 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
 
     @Published var stations: [StationItem] = []
     
-    @Published var stationsMarkers: [GMSMarker] = []
+    @Published var stationsMarkers: Set<GMSMarker> = []
     
     private var loadStationsTask: DispatchWorkItem?
     
@@ -122,16 +122,27 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             return ""
         }
         
-        let distance = locationManager.distance(from: from.coordinate, to: to.coordinate)
+        let distance = locationManager.distance(from: from.coordinate, to: to.coordinate).f.asMile
         return String(format: "%.1f ml",  distance)
     }
     
     private let locationManager: GLocationManager = .shared
     
     func onAppear() {
+        if filter == nil {
+            self.filter = .init(
+                sortType: .distance,
+                from: 0,
+                to: 1000,
+                radius: UserSettings.shared.maxRadius,
+                selectedStations: Set(DCustomer.all?.compactMap({$0.id}) ?? [])
+            )
+        }
         
         didDisappear = false
         //Always be exectued
+        
+        self.loadCustomers()
         
         guard !didAppear else {
             onReappear()
@@ -139,31 +150,16 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         }
         
         didAppear = true
-        
-        if UserSettings.shared.destination == nil || UserSettings.shared.fromLocation == nil {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.focusToCurrentLocation()
-            }
-        }
-        
-        loadCustomers()
-        
+                
         self.focusToCurrentLocation()
-        DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 2) {
+        
+        DispatchQueue.global(qos: .utility).asyncAfter(deadline: .now() + 0.5) {
             Task {
                 await MainActor.run {
                     self.focusToCurrentLocation()
                 }
                 
                 await MainActor.run {
-                    self.filter = .init(
-                        sortType: .distance,
-                        from: 0,
-                        to: 1000,
-                        radius: UserSettings.shared.maxRadius,
-                        selectedStations: Set(DCustomer.all?.compactMap({$0.id}) ?? [])
-                    )
-                    
                     self.restoreSavedRoute()
                 }
             }
@@ -256,10 +252,12 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     }
     
     func focusToLocation(_ location: CLLocation) {
-        self.focusableLocation = location
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            self.focusableLocation = nil
+        mainIfNeeded {
+            self.focusableLocation = location
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                self.focusableLocation = nil
+            }
         }
     }
     
@@ -387,6 +385,27 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     
     func loadCustomers() {
         self.customers = DCustomer.all?.compactMap({$0.asModel}) ?? []
+//        func loadIfNeeded() -> Bool {
+//            if DCustomer.all?.isEmpty ?? false {
+//                Task(priority: .background) {
+//                    await MainService.shared.getCustomers()
+//                    
+//                    await MainActor.run {
+//                        self.customers = DCustomer.all?.compactMap({$0.asModel}) ?? []
+//                        self.hideLoader()
+//                    }
+//                }
+//                
+//                return false
+//            }
+//            
+//            return true
+//        }
+//        self.showLoader(message: "")
+//        
+//        if loadIfNeeded() {
+//
+//        }
     }
     
     func onSelectMap() {

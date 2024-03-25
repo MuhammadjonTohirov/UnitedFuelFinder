@@ -46,6 +46,13 @@ struct GasStationItemView: View {
             }
             
             HStack {
+                Text(station.fullAddress.nilIfEmpty ?? "no.address".localize)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Color.label)
+                Spacer()
+            }
+            
+            HStack {
                 VStack(alignment: .leading) {
                     discountInfoView
                     retailPriceView
@@ -57,20 +64,6 @@ struct GasStationItemView: View {
                 navigateButton
                     .opacity(onClickNavigate == nil ? 0 : 1)
             }
-            
-            RoundedRectangle(cornerRadius: 4)
-                .stroke(lineWidth: 1)
-                .foregroundStyle(Color.init(uiColor: .separator))
-                .frame(height: 24.f.sh())
-                .overlay {
-                    HStack {
-                        Text(station.fullAddress.nilIfEmpty ?? "no.address".localize)
-                            .font(.system(size: 11))
-                            .foregroundStyle(Color.label)
-                        Spacer()
-                    }
-                    .padding(.horizontal, Padding.small)
-                }
             
         }
         .padding(.horizontal, Padding.medium)
@@ -181,6 +174,11 @@ struct GasStationItemView: View {
                 }
             )
             .foregroundStyle(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .background(content: {
+                RoundedRectangle(cornerRadius: 6)
+            })
             .font(.system(size: 12))
             .padding(.vertical, 6)
         })
@@ -196,4 +194,7 @@ struct GasStationItemView: View {
 
 #Preview {
     GasStationItemView(station: .init(id: 0, name: "Name", lat: 0, lng: 0, isDeleted: false, cityId: 0, customerId: 0, stateId: "Fergana", priceUpdated: "100", note: "Note"), fromPoint: nil)
+        .set { _ in
+            debugPrint("GO")
+        }
 }

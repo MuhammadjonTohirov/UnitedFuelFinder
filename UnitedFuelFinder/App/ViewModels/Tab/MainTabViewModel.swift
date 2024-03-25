@@ -15,12 +15,28 @@ class MainTabViewModel: ObservableObject {
     @Published var mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
     @Published var settingsViewModel: SettingsViewModel = .init()
     
+    @Published var isLoading: Bool = false
     @Published var discountedStations: [StationItem] = []
     @Published var showWarningAlert: Bool = false
     private var lastLocationUpdate: Date = .now.before(days: 1)
-    
+    private var didAppear: Bool = false
     func onAppear() {
+        if didAppear {
+            return
+        }
+        
         setupLocation()
+        
+        isLoading = true
+        
+        didAppear = true
+        Task {
+            await MainService.shared.syncAllStations()
+            
+            await MainActor.run {
+                isLoading = false
+            }
+        }
     }
     
     private func setupLocation() {
@@ -44,7 +60,7 @@ class MainTabViewModel: ObservableObject {
     }
     
     func onSelectMapTab() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        mainIfNeeded {
             self.mapViewModel.set(currentLocation: GLocationManager.shared.currentLocation)
         }
     }
@@ -68,7 +84,7 @@ class MainTabViewModel: ObservableObject {
     }
     
     func loadDiscountedStations(_ currentLocation: CLLocation?) async {
-        guard let c = currentLocation?.coordinate else {
+        guard let c = currentLocation?.coordinate, selectedTag == .dashboard else {
             return
         }
         
@@ -96,8 +112,6 @@ class MainTabViewModel: ObservableObject {
     private func setupSyncVersion() {
         Task {
             await AuthService.shared.syncUserInfo()
-            
-            try await Task.sleep(for: .seconds(1))
             
             if let serverVersion = await CommonService.shared.getVersion() {
                 UserSettings.shared.currentAPIVersion = serverVersion

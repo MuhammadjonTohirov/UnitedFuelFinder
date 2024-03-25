@@ -80,10 +80,7 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
         // Calculate distance using Haversine formula
         let distanceInMeters = sourceLocation.distance(from: destinationLocation)
         
-        // Convert distance from meters to kilometers
-        let distanceInKilometers = distanceInMeters
-        
-        return distanceInKilometers
+        return distanceInMeters
     }
 
     func fetchPlaces(forInput input: String, completion: @escaping (Result<[String], Error>) -> Void) {

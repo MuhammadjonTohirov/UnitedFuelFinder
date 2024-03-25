@@ -65,16 +65,17 @@ class StationDetailsViewModel: NSObject, ObservableObject, Alertable {
         }
         
         Task {
-            guard !comment.isEmpty && rating != 0 else {
+            guard rating != 0 else {
+                showError(message: "set.rating".localize)
                 return
             }
             
             self.showLoader()
             
             if await MainService.shared.postFeedbackFor(station: station.id, rate: rating, comment: comment) {
-                showAlert(message: "Feedback posted successfully")
+                showAlert(message: "feedback.post.success".localize) // We appreciate your feedback to this station
             } else {
-                showError(message: "Feedback post failed")
+                showError(message: "feedback.post.fail".localize)
             }
             
             self.hideLoader()

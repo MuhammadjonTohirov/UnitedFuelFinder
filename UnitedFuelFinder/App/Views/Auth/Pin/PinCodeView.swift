@@ -17,6 +17,7 @@ struct PinCodeView: View {
     @ViewBuilder var body: some View {
         innerBody
             .set(hasDismiss: viewModel.reason.id == PinViewReason.confirm(pin: "").id)
+            .background(.appBackground)
     }
         
     var innerBody: some View {
@@ -41,7 +42,9 @@ struct PinCodeView: View {
             KeyboardView(text: $viewModel.pin, viewModel: viewModel.keyboardModel) {
                 if viewModel.reason == .login {
                     UserSettings.shared.appPin = nil
-                    appDelegate?.navigate(to: .auth)
+                    Task {
+                        await appDelegate?.navigate(to: .auth)
+                    }
                 }
             }
             .onChange(of: viewModel.pin) { newValue in

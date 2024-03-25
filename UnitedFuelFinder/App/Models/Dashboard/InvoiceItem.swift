@@ -83,4 +83,16 @@ extension InvoiceItem {
     var beatufiedDate: String {
         Date.from(string: self.invoiceDate ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
     }
+    
+    var fromDate: String {
+        Date.from(string: self.startPeriod ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
+    }
+    
+    var toDate: String {
+        Date.from(string: self.endPeriod ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
+    }
+    
+    var fromToDate: String {
+        "\(fromDate) - \(toDate)"
+    }
 }

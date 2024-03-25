@@ -49,4 +49,12 @@ extension CGFloat {
     var asMeters: CGFloat {
         self * 1609.344
     }
+    
+    var kmToMile: CGFloat {
+        self * 0.621371
+    }
+    
+    var mileToKm: CGFloat {
+        self * 1.60934
+    }
 }

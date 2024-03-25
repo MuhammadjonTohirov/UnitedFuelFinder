@@ -50,17 +50,16 @@ struct MainTabView: View {
                     }
             }
         }
+        .overlay {
+            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+        }
     }
     
     @ViewBuilder
     private var leadingTopBar: some View {
         switch viewModel.selectedTag {
         case .dashboard:
-            Image("icon_bell_active")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 24, height: 24)
-                .foregroundStyle(Color.init(uiColor: .label))
+            Icon(name: "icon_bell_active")
                 .onTapGesture {
                     viewModel.dashboardViewModel.navigate(to: .notifications)
                 }
@@ -87,7 +86,7 @@ struct MainTabView: View {
     private var trailingTopBar: some View {
         switch viewModel.selectedTag {
         case .map:
-            Image("icon_filter_2")
+            Icon(name: "icon_filter_2")
                 .onTapGesture {
                     if let filter = self.viewModel.mapViewModel.filter {
                         self.viewModel.mapViewModel.route = .filter(filter, { newFilter in

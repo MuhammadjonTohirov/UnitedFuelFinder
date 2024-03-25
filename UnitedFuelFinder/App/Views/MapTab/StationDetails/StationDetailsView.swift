@@ -28,6 +28,7 @@ struct StationDetailsView: View {
             
             CoveredLoadingView(isLoading: $viewModel.isLoading, message: "please_wait".localize)
         }
+        .background(.appBackground)
         .onAppear {
             self.viewModel.station = station
             viewModel.onAppear()
@@ -120,17 +121,24 @@ struct StationDetailsView: View {
                 ),
                 
                 row(
-                    title: "price".localize,
+                    title: "discounted_price".localize,
                     detail: Text(viewModel.station?.actualPriceInfo ?? "")
-                        .font(.system(size: 12, weight: .semibold))
+                        .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(Color.init(uiColor: .systemGreen))
+
                 ),
                 
                 row(
                     title: "discount".localize,
                     detail: Text(viewModel.station?.discountInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
-                )
+                ),
+                
+                row(
+                    title: "retail_price".localize,
+                    detail: Text(viewModel.station?.retailPriceInfo ?? "")
+                        .font(.system(size: 12, weight: .medium))
+                ),
             ].vstack(spacing: Padding.small)
                 .padding(.horizontal, Padding.medium)
         }

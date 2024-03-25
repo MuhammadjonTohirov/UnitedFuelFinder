@@ -13,6 +13,7 @@ extension MapTabViewModel {
     func filterStationsByRoute() {
         DispatchQueue.main.async {
             self.removeStations()
+            self.removeMarkers()
             self.showLoader(message: "loading.stations".localize)
         }
         
@@ -27,7 +28,15 @@ extension MapTabViewModel {
         let coordinate = GLocationManager.shared.currentLocation?.coordinate
         let c: NetReqLocation = .init(lat: coordinate?.latitude ?? 0, lng: coordinate?.longitude ?? 0)
         
-        Task(priority: .utility) {
+        @Sendable func onLoadStations(_ _stations: [StationItem]) async {
+            await MainActor.run {
+                self.stations = _stations.applyFilter(self.filter!)
+                self.stationsMarkers = Set(self.stations.map({$0.asMarker}))
+                self.hideLoader()
+            }
+        }
+        
+        Task {
             guard state == .routing else {
                 return
             }
@@ -53,99 +62,31 @@ extension MapTabViewModel {
                 .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
 
             Logging.l(tag: "MapTabViewModel", "Number of new stations \(_stations.count)")
-            
-            await MainActor.run {
-                self.stations = _stations.applySort(self.filter!)
-                self.stationsMarkers = self.stations.map({$0.asMarker})
-                self.hideLoader()
-            }
+            await onLoadStations(_stations)
         }
     }
     
     func filterStationsByDefault() {
-        func _startFilter() {
-            Task(priority: .medium) {
-                guard state == .selectFrom, !isFilteringStations else {
+        guard let filter, let pickedLocation, state == .selectFrom else {
+            return
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            self.interactor.filterStationsByDefaultFromDatabase(filter, location: pickedLocation) { [weak self] stations in
+                guard let self else {
                     return
                 }
                 
-                // force to get stations from pinned location
-                UserSettings.shared.mapCenterType = .pin
-                
-                // cancel all active tasks
-                await URLSession.filter.cancelAllTasks()
-                
-                Logging.l(tag: "HomeViewModel", "Start loading stations")
-                
-                let maxRadius = self.filter?.radius ?? 300
-                let minRadius = Int(Double(maxRadius) * 0.4).limitBottom(1)
-
-                let radius = (Int(screenVisibleArea).limitTop(maxRadius).asDouble * 0.6).asInt.limitBottom(minRadius)
-                
-                guard let c = UserSettings.shared.mapCenterType == .currentLocation ? lastCurrentLocation?.coordinate : self.pickedLocation?.coordinate else {
-                    return
-                }
-                
-                var _request: NetReqFilterStations = .init(
-                    distance: Double(radius),
-                    stations: Array(filter?.selectedStations ?? [])
-                )
-                
-                _request.current = .init(
-                    lat: c.latitude,
-                    lng: c.longitude
-                )
-                
-                await MainActor.run {
-                    self.isFilteringStations = true
-                }
-                
-                let (_stations, error) = await MainService.shared.filterStations2(req: _request)
-                
-                Logging.l(tag: "HomeViewModel", "Finish loading stations, has error \(error != nil)")
-
-                await MainActor.run {
-                    self.isFilteringStations = false
-                }
-                
-                if error != nil || state != .selectFrom {
-                    return
-                }
-                
-                Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radius) is \(_stations.count)")
-                        
-                await MainActor.run {
+                DispatchQueue.main.async {
                     self.removeMarkers()
-                    self.removeStations()
-
-                    self.stations = _stations.applySort(self.filter!)
-                    
-                    if !self.didDisappear {
-                        self.setupMarkers()
-                    }
-                    
-                    self.hideLoader()
+                    self.stations = stations
+                    self.setupMarkers()
                 }
             }
         }
-        
-        _startFilter()
     }
     
     func onDraggingMap() {
         // TODO: Handle dragging change
-        
-        if screenVisibleArea > 200 {
-            if self.state == .selectFrom {
-                Task {
-                    await URLSession.filter.cancelAllTasks()
-                    
-                    DispatchQueue.main.async {
-                        self.removeMarkers()
-                        self.removeStations()
-                    }
-                }
-            }
-        }
-    }
+    } 
 }

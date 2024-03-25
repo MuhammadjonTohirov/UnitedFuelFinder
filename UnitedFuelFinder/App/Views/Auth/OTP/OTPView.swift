@@ -26,6 +26,7 @@ struct OTPView: View {
             .ignoresSafeArea(.keyboard, edges: .all)
             
         }
+        .background(.appBackground)
         .overlay {
             GeometryReader(content: { geometry in
                 Color.clear.onAppear(perform: {
@@ -42,6 +43,7 @@ struct OTPView: View {
                 }
                 .opacity(self.viewModel.loading ? 1 : 0)
         }
+        
     }
     
     var innerBody: some View {

@@ -68,6 +68,8 @@ struct Network {
             
         } catch let error {
             Logging.l("Error: \(error)")
+            Logging.l(request.url.relativePath)
+            Logging.l("Error: endline")
             return nil
         }
     }

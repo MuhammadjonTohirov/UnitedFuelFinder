@@ -83,6 +83,7 @@ struct SettingsAppearance: View {
         .padding(.top, Padding.medium)
         .navigationDestination(isPresented: $viewModel.pushRoute) {
             viewModel.route?.screen
+                .background(Color.background)
         }
     }
     
@@ -91,6 +92,6 @@ struct SettingsAppearance: View {
     }
     
     private func onClickChangeTheme() {
-        viewModel.showAlert(message: "coming_soon".localize)
+        viewModel.route = .theme
     }
 }

@@ -33,7 +33,7 @@ final public class UserSettings {
     }
     
     // map radiusis
-    public let maxRadius: Int = 300
+    public let maxRadius: Int = 50
 
     @codableWrapper(key: "userEmail")
     public var userEmail: String?
@@ -87,7 +87,7 @@ final public class UserSettings {
     @codableWrapper(key: "nearestItemsLogic", .currentLocation)
     public var mapCenterType: MapCenterType?
     
-    @codableWrapper(key: "theme", .system)
+    @codableWrapper(key: "theme", nil)
     public var theme: Theme?
     
     func clear() {
@@ -105,10 +105,19 @@ final public class UserSettings {
         currentVersion = nil
         destination = nil
         fromLocation = nil
+        theme = .light
     }
     
     func setInterfaceStyle(style: UIUserInterfaceStyle) {
         (UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first!.overrideUserInterfaceStyle = style
+        switch style {
+        case .light:
+            self.theme = .light
+        case .dark:
+            self.theme = .dark
+        default:
+            self.theme = .system
+        }
     }
 }
 
@@ -125,6 +134,17 @@ public enum Theme: Codable {
             return "light".localize
         case .dark:
             return "dark".localize
+        }
+    }
+    
+    var style: UIUserInterfaceStyle {
+        switch self {
+        case .system:
+            return .unspecified
+        case .light:
+            return .light
+        case .dark:
+            return .dark
         }
     }
 }

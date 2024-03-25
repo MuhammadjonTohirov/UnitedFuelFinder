@@ -61,13 +61,14 @@ struct MapTabView: View {
                     Spacer()
                     
                     Rectangle()
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                         .ignoresSafeArea(.container, edges: .bottom)
                         .frame(height: 0)
                 }
             })
         }
         .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
+        .background(.appBackground)
     }
     
     var innerBody: some View {
@@ -146,7 +147,9 @@ struct MapTabView: View {
         )
         .set(currentLocation: viewModel.focusableLocation)
         .set(
-            radius: viewModel.state != .selectFrom ? 0 : CLLocationDistance(viewModel.filter?.radius ?? 0)
+            radius: viewModel.state != .selectFrom 
+            ? 0
+            : CLLocationDistance(((viewModel.filter?.radius ?? 0) + 4).f.asMeters)
         )
         .set(route: viewModel.mapRoute)
         .set(onClickMarker: { marker, point in
@@ -281,7 +284,7 @@ struct MapTabView: View {
         } label: {
             Circle()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .foregroundStyle(Color.background)
                 .overlay {
                     Image(systemName: "bell")
                         .resizable()
@@ -299,7 +302,7 @@ struct MapTabView: View {
         } label: {
             Circle()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .foregroundStyle(Color.background)
                 .overlay {
                     Image("icon_navigation")
                         .renderingMode(.template)
@@ -316,7 +319,7 @@ struct MapTabView: View {
         } label: {
             Circle()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .foregroundStyle(Color.background)
                 .overlay {
                     Image("icon_filter")
                         .resizable()
@@ -335,7 +338,7 @@ struct MapTabView: View {
         }, label: {
             Circle()
                 .frame(width: 40, height: 40)
-                .foregroundStyle(Color.init(uiColor: .systemBackground))
+                .foregroundStyle(Color.background)
                 .overlay {
                     Image(systemName: "arrow.clockwise")
                         .resizable()

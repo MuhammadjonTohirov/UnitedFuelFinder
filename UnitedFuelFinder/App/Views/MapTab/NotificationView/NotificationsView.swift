@@ -29,6 +29,7 @@ struct NotificationsView: View {
                     }.scrollable()
                 }
             }
+            .padding(.top, Padding.default)
             .navigationBarTitle("notifications".localize)
             .navigationBarTitleDisplayMode(.inline)
             .onAppear {

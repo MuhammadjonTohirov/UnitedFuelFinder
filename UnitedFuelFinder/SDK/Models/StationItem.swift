@@ -11,7 +11,7 @@ import GoogleMaps
 import CoreLocation
 import SwiftUI
 
-public struct StationItem: Identifiable {
+public class StationItem: Identifiable {
     public var id: Int
     public var name: String
     public var lat: Double
@@ -31,6 +31,8 @@ public struct StationItem: Identifiable {
     public var distance: Float?
     public var cityName: String?
     public var stateName: String?
+    
+    public var displayName: String?
     
     public var actualPriceInfo: String {
         return actualPrice.asMoney
@@ -86,6 +88,9 @@ public struct StationItem: Identifiable {
         self.distance = item.distance
         self.cityName = item.cityName
         self.stateName = item.stateName
+        
+        let customerName = self.name.replacingOccurrences(of: self.number ?? "-1", with: "")
+        self.displayName = (customerName + " " + (self.number ?? "")).nilIfEmpty ?? self.name
     }
 }
 
@@ -107,8 +112,9 @@ extension StationItem {
         return Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)
     }
     
+    /// finds distance as mile
     private func _distance(from coordinate: CLLocationCoordinate2D) -> Double {
-        Double(GMSGeometryDistance(self.asMarker.position, coordinate))
+        Double(GMSGeometryDistance(self.asMarker.position, coordinate).f.asMile)
     }
     
     var distanceFromCurrentLocation: Double {
@@ -117,12 +123,12 @@ extension StationItem {
     }
     
     var distanceFromCurrentLocationInfo: String {
-        guard let distance else {
+        guard let distance, distance != 0 else {
             let coordinate = GLocationManager.shared.currentLocation?.coordinate ?? .init(latitude: 0, longitude: 0)
             return distanceInfo(_distance(from: coordinate).asFloat)
         }
         
-        return distanceInfo(distance)
+        return distanceInfo(Float(CGFloat(distance)))
     }
     
     var coordinate: CLLocationCoordinate2D {
@@ -130,17 +136,10 @@ extension StationItem {
     }
     
     private func distanceInfo(_ dist: Float) -> String {
-        return String(format: "%.1f ml",  dist / 1000)
-    }
-    
-    var displayName: String {
-        let n = self.customer?.name ?? ""
-        return "\(n) \(number ?? "")"
+        return String(format: "%.1f ml",  dist)
     }
     
     var fullAddress: String {
-        let city = self.city?.name ?? ""
-        let state = self.state?.name ?? ""
         return [address ?? "", cityName ?? "", stateName ?? ""].compactMap({$0.nilIfEmpty}).joined(separator: ", ")
     }
 }

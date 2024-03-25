@@ -8,46 +8,52 @@
 import Foundation
 import RealmSwift
 
-public class MainDService {
+actor MainDService {
     public static let shared = MainDService()
     
     public func addState(_ states: [StateItem]) {
-        DataBase.writeThread.async {
-            Realm.new?.trySafeWrite({ realm in
-                states.map({$0.asObject}).forEach { state in
-                    realm.add(state, update: .modified)
-                }
-            })
-        }
+        Realm.new?.trySafeWrite({ realm in
+            states.map({$0.asObject}).forEach { state in
+                realm.add(state, update: .modified)
+            }
+        })
     }
     
     public func addCity(_ cities: [CityItem]) {
-        DataBase.writeThread.async {
-            Realm.new?.trySafeWrite({ realm in
-                cities.map({$0.asObject}).forEach { city in
-                    realm.add(city, update: .modified)
-                }
-            })
-        }
+        Realm.new?.trySafeWrite({ realm in
+            cities.map({$0.asObject}).forEach { city in
+                realm.add(city, update: .modified)
+            }
+        })
     }
     // deletes and inserts new companies
     public func addCompanies(_ companies: [CompanyItem]) {
-        DataBase.writeThread.async {
-            Realm.new?.trySafeWrite({ realm in
-                realm.delete(realm.objects(DCompany.self))
-                
-                companies.map({$0.asObject}).forEach { city in
-                    realm.add(city, update: .modified)
-                }
-            })
-        }
+        Realm.new?.trySafeWrite({ realm in
+            realm.delete(realm.objects(DCompany.self))
+            
+            companies.map({$0.asObject}).forEach { city in
+                realm.add(city, update: .modified)
+            }
+        })
     }
     
     public func addSearchAddress(_ address: SearchedAddress) {
-        DataBase.writeThread.async {
-            Realm.new?.trySafeWrite({ realm in
-                realm.add(address.asObject, update: .modified)
-            })
-        }
+        Realm.new?.trySafeWrite({ realm in
+            realm.add(address.asObject, update: .modified)
+        })
+    }
+    
+    public func addStations(_ stations: [StationItem]) {
+        Realm.new?.trySafeWrite({ realm in
+            realm.add(stations.map({DStationItem.create($0)}), update: .modified)
+        })
+    }
+    
+    public func removeAllCustomers() {
+        DCustomer.deleteAll()
+    }
+    
+    public func addCustomers(_ customers: [CustomerItem]) {
+        DCustomer.addAll(customers)
     }
 }

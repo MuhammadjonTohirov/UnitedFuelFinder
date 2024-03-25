@@ -134,13 +134,13 @@ class SettingsViewModel: NSObject, ObservableObject, SettingsProfileModelProtoco
         DispatchQueue.main.async {
             self.otpShow = false
             self.otpModel = nil
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            Task {
                 UserSettings.shared.clear()
-                appDelegate?.navigate(to: .loading)
+                await appDelegate?.navigate(to: .loading)
             }
         }
     }
-}
+ }
 
 extension SettingsViewModel: OtpModelDelegate {
     func otp(model: OtpViewModel, isSuccess: Bool) {

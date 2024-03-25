@@ -52,7 +52,11 @@ final class OtpViewModel: ObservableObject {
         isValidForm = otp.count == 6
         
         if isValidForm {
-            onClickConfirm()
+            UIApplication.shared.dismissKeyboard()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.onClickConfirm()
+            }
         }
     }
     

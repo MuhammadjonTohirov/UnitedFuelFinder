@@ -138,12 +138,15 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     
     func uploadAvatar(completion: @escaping (Bool) -> Void) {
         if let url = imageUrl {
-            MainService.shared.uploadAvatar(url) { isOK in
-                if isOK {
-                    UserSettings.shared.photoUpdateDate = Date()
+            Network.upload(
+                body: String.self,
+                request: MainNetworkRouter.uploadAvatar(imageUrl: url)) { result in
+                    let isOK = result?.success ?? false
+                    if isOK {
+                        UserSettings.shared.photoUpdateDate = Date()
+                    }
+                    completion(isOK)
                 }
-                completion(isOK)
-            }
             return
         } 
         
