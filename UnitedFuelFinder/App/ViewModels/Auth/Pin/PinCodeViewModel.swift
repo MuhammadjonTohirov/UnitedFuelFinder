@@ -97,15 +97,17 @@ class PinCodeViewModel: ObservableObject {
     }
     
     func onSuccessLogin() {
-        DispatchQueue.main.async {
-            appDelegate?.navigate(to: .mainTab)
+        Task {
+            await appDelegate?.navigate(to: .mainTab)
         }
     }
     
     func onClickNext() {
         switch reason {
         case .login:
-            appDelegate?.navigate(to: .mainTab)
+            Task {
+                await appDelegate?.navigate(to: .mainTab)
+            }
         case .setup:
             route = .confirmWith(code: pin, completion: { [weak self] isOK in
                 guard let self else {
@@ -129,7 +131,9 @@ class PinCodeViewModel: ObservableObject {
     func onAppear() {
 #if DEBUG
         if reason == .login {
-            appDelegate?.navigate(to: .mainTab)
+            Task {
+                await appDelegate?.navigate(to: .mainTab)
+            }
         }
 #endif
     }

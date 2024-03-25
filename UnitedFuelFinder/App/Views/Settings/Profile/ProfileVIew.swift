@@ -114,8 +114,8 @@ struct ProfileVIew: View {
         .onAppear {
             viewModel.onAppear()
         }
+        .background(Color.background)
     }
-    
     
     private var personalDetails: some View {
         VStack(alignment: .leading, spacing: 16) {

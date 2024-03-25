@@ -7,32 +7,33 @@
 
 import Foundation
 
-public struct CommonService {
+public actor CommonService {
     public static let shared = CommonService()
     
     public func syncStates() async {
-        let result: NetRes<[NetResState]>? = await Network.send(request: CommonNetworkRouter.states)
+        let result: NetRes<[NetResState]>? = await Network.send(request: CommonNetworkRouter.states, refreshTokenIfNeeded: false)
         
         let items = (result?.data ?? []).map({StateItem.init(res: $0)})
-        MainDService.shared.addState(items)
+        await MainDService.shared.addState(items)
     }
     
     public func syncCities(forState stateId: String) async {
-        let result: NetRes<[NetResCity]>? = await Network.send(request: CommonNetworkRouter.cities(id: stateId))
+        let result: NetRes<[NetResCity]>? = await Network.send(request: CommonNetworkRouter.cities(id: stateId), refreshTokenIfNeeded: false)
         
         let items = (result?.data ?? []).map({CityItem(res: $0)})
-        MainDService.shared.addCity(items)
+        
+        await MainDService.shared.addCity(items)
     }
     
     public func syncCompanies() async {
-        let result: NetRes<[NetResCompany]>? = await Network.send(request: CommonNetworkRouter.companies)
+        let result: NetRes<[NetResCompany]>? = await Network.send(request: CommonNetworkRouter.companies, refreshTokenIfNeeded: false)
         let items = (result?.data ?? []).map({CompanyItem(res: $0)})
         
-        MainDService.shared.addCompanies(items)
+        await MainDService.shared.addCompanies(items)
     }
     
     public func getVersion() async -> ServerVersion? {
-        let result: NetRes<ServerVersion>? = await Network.send(request: CommonNetworkRouter.version)
+        let result: NetRes<ServerVersion>? = await Network.send(request: CommonNetworkRouter.version, refreshTokenIfNeeded: false)
         return result?.data
     }
     

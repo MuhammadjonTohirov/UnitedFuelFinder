@@ -15,7 +15,7 @@ public extension Color {
     }
     
     static var background: Color {
-        .init(uiColor: .systemBackground)
+        .init(uiColor: .appBackground)
     }
     
     static var secondaryBackground: Color {
@@ -26,7 +26,7 @@ public extension Color {
         .init(uiColor: .tertiarySystemBackground)
     }
 }
-
+    
 extension UIColor {
     convenience init(hexString: String) {
         let hexString = hexString.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -52,6 +52,10 @@ extension UIColor {
         let blue = CGFloat(b) / 255
         
         self.init(red: red, green: green, blue: blue, alpha: 1)
+    }
+    
+    static var iconColor: UIColor {
+        UIColor(hexString: "#8E8E93")
     }
 }
 

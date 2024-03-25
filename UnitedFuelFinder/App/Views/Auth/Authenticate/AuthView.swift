@@ -32,7 +32,9 @@ struct AuthView: View {
                 })
                 .navigationDestination(isPresented: $viewModel.present) {
                     viewModel.route?.screen
+                        .background(.appBackground)
                 }
+                .background(.appBackground)
         }
         .ignoresSafeArea(.keyboard, edges: .all)
     }

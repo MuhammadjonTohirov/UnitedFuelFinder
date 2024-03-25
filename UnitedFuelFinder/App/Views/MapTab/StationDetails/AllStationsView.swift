@@ -7,7 +7,8 @@
 
 import Foundation
 import SwiftUI
-import MapKit
+import CoreLocation
+
 struct AllStationsView: View {
     var from: String?
     var to: String?

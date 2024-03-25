@@ -9,26 +9,49 @@ import Foundation
 
 extension Array where Element == StationItem {
     func applyFilter(_ filter: MapFilterInput) -> [Element] {
-        self.filter { item in
-            let price = item.retailPrice ?? 0
-            let from = Float(filter.from)
-            let to = Float(filter.to)
+        var filteredStations = self
+        .filter { station in
+            if let stateId = filter.stateId?.nilIfEmpty {
+                return station.stateId == stateId
+            }
             
-            let isValidPrice = price >= from && price <= to
-            let isValidStation = filter.selectedStations.contains(item.customerId)
+            if let cityId = filter.cityId {
+                return station.cityId == cityId
+            }
             
-            let isValidState = filter.stateId == nil ? true : item.stateId == filter.stateId
-            let isValidCity = filter.cityId == nil ? true : item.cityId == filter.cityId
-            
-            return isValidPrice && isValidStation && isValidCity && isValidState
+            return true
         }
-        .sorted(by: { a, b in
-            if filter.sortType == .discount {
-                return a.distanceFromCurrentLocation < b.distanceFromCurrentLocation
-            } else if filter.sortType == .price {
+        .filter { station in
+            let retailPrice = station.retailPrice ?? 0
+            let discount = station.discountPrice ?? 0
+            let actualPrice = retailPrice - discount
+
+            return actualPrice > filter.from && actualPrice < filter.to
+        }
+        
+        filteredStations = filteredStations.sorted(by: { st1, st2 in
+            switch filter.sortType {
+            case .distance:
+                return (st1.distance ?? 0) < (st2.distance ?? 0)
+            case .price:
+                return (st1.retailPrice ?? 0) < (st2.retailPrice ?? 0)
+            case .discount:
+                return st1.actualPrice < st2.actualPrice
+            }
+        })
+        
+        return filteredStations
+    }
+    
+    func applySort(_ filter: MapFilterInput) -> [Element] {
+        self.sorted(by: { a, b in
+            switch filter.sortType {
+            case .discount:
+                return (a.discountPrice ?? 0) > (b.discountPrice ?? 0)
+            case .distance:
+                return (a.distance ?? 0) < (b.distance ?? 0)
+            case .price:
                 return (a.retailPrice ?? 0) < (b.retailPrice ?? 0)
-            } else {
-                return true
             }
         })
     }

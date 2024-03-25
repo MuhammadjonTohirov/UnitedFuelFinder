@@ -10,9 +10,20 @@ import RealmSwift
 import SwiftUI
 
 enum SortType: String, Codable, CaseIterable {
+    case distance
     case discount
     case price
-    case distance
+    
+    var title: String {
+        switch self {
+        case .distance:
+            return "distance".localize
+        case .discount:
+            return "discounted_price".localize
+        case .price:
+            return "retail_price".localize
+        }
+    }
 }
 
 struct FilterPriceRange {
@@ -22,8 +33,8 @@ struct FilterPriceRange {
 
 struct MapFilterInput {
     var sortType: SortType
-    var from: Int
-    var to: Int
+    var from: Float
+    var to: Float
     var radius: Int
     var selectedStations: Set<Int>
     var stateId: String?
@@ -31,8 +42,8 @@ struct MapFilterInput {
     
     init(
         sortType: SortType,
-        from: Int,
-        to: Int,
+        from: Float,
+        to: Float,
         radius: Int,
         selectedStations: Set<Int>,
         stateId: String? = nil,
@@ -49,7 +60,7 @@ struct MapFilterInput {
 }
 
 struct MapFilterView: View {
-    @State var sortType: SortType = .discount
+    @State var sortType: SortType = .distance
     
     @State private var fromPriceRange: String = "0"
     @State private var toPriceRange: String = "100"
@@ -77,6 +88,7 @@ struct MapFilterView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 16) {
                 sortedByRow
+                    .padding(.top, Padding.small)
                 Divider()
                 priceRange
                 radiusView
@@ -107,7 +119,8 @@ struct MapFilterView: View {
                 Button {
                     resetFilter()
                 } label: {
-                    Image("icon_reset_filter")
+                    Icon(name: "icon_reset_filter")
+                        .foregroundStyle(Color.appIcon)
                 }
             }
         })
@@ -138,6 +151,7 @@ struct MapFilterView: View {
                 self.selectedCity = DCity.allCities(byStateId: id).first(where: {$0.id == input.cityId})
             }
         }
+        .background(.appBackground)
     }
     
     private var sortedByRow: some View {
@@ -148,12 +162,17 @@ struct MapFilterView: View {
             
             HStack {
                 ForEach(SortType.allCases, id: \.rawValue) { _case in
-                    selectionButton(title: _case.rawValue.localize, isSelected: sortType == _case)
-                        .onTapGesture {
-                            sortType = _case
-                        }
+                    selectionButton(
+                        title: _case.title,
+                        isSelected: sortType == _case
+                    )
+                    .onTapGesture {
+                        sortType = _case
+                    }
                 }
             }
+            .padding(2)
+            .scrollable(axis: .horizontal)
             
             Text("filter.sort.by.info".localize)//Can be sorted by cheapest price or highest discount
                 .font(.system(size: 10, weight: .regular))
@@ -173,24 +192,18 @@ struct MapFilterView: View {
             HStack {
                 YRoundedTextField {
                     YTextField(text: $fromPriceRange, placeholder: "from".localize, onEditingChanged: { _ in
-                        let fprice = Int(fromPriceRange) ?? 0
-                        let tprice = Int(toPriceRange) ?? 0
                         
-                        fromPriceRange = min(fprice, tprice).asString
                     })
                     .set(haveTitle: true)
-                    .keyboardType(.numberPad)
+                    .keyboardType(.decimalPad)
                 }
                 
                 YRoundedTextField {
                     YTextField(text: $toPriceRange, placeholder: "to".localize, onEditingChanged: { _ in
-                        let fprice = Int(fromPriceRange) ?? 0
-                        let tprice = Int(toPriceRange) ?? 0
                         
-                        toPriceRange = max(fprice, tprice).asString
                     })
                     .set(haveTitle: true)
-                    .keyboardType(.numberPad)
+                    .keyboardType(.decimalPad)
                 }
             }
             
@@ -254,7 +267,7 @@ struct MapFilterView: View {
             .frame(height: 22)
             .padding(.horizontal, 16)
             .padding(.vertical, 5)
-            .foregroundStyle(isSelected ? .white : .black)
+            .foregroundStyle(isSelected ? .white : .label)
             .background {
                 RoundedRectangle(cornerRadius: 6)
                     .frame(height: 32)
@@ -289,12 +302,12 @@ struct MapFilterView: View {
     }
     
     private func resetFilter() {
-        let _stations = DCompany.allCompanies().compactMap { $0.id }
+        let _stations = DCustomer.all?.compactMap { $0.id } ?? []
         let result: MapFilterInput = .init(
             sortType: .discount,
             from: 0,
             to: 1000,
-            radius: 10,
+            radius: UserSettings.shared.maxRadius,
             selectedStations: Set(_stations),
             stateId: nil,
             cityId: nil
@@ -306,8 +319,8 @@ struct MapFilterView: View {
     private func onSubmit() {
         let result: MapFilterInput = .init(
             sortType: sortType,
-            from: Int(fromPriceRange) ?? 0,
-            to: Int(toPriceRange) ?? 0,
+            from: Float(fromPriceRange.numberFormatted) ?? 0,
+            to: Float(toPriceRange.numberFormatted) ?? 0,
             radius: Int(radius) ?? 0,
             selectedStations: selectedStations,
             stateId: selectedState?.id,

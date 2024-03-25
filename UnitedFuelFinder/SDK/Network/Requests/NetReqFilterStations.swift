@@ -17,10 +17,10 @@ public struct NetReqFilterStations: Codable {
     public var current: NetReqLocation = .init()
     public var from: NetReqLocation = .init()
     public var to: NetReqLocation = .init()
-    public var distance: Double = 10
+    public var distance: Double = 300
     public var sortedBy: String = ""
-    public var fromPrice: Int = 0
-    public var toPrice: Int = 0
+    public var fromPrice: Float = 0
+    public var toPrice: Float = 0
     public var stations: [Int] = []
     public var stateId: String = ""
     public var cityId: Int = 0
@@ -38,10 +38,10 @@ public struct NetReqFilterStations: Codable {
     
     init(
         current: NetReqLocation = .init(),
-        distance: Double = 10,
+        distance: Double = 300,
         sortedBy: NetReqFilterSortType? = nil,
-        fromPrice: Int = 0,
-        toPrice: Int = 0,
+        fromPrice: Float = 0,
+        toPrice: Float = 0,
         stations: [Int] = [],
         stateId: String = "",
         cityId: Int = 0)

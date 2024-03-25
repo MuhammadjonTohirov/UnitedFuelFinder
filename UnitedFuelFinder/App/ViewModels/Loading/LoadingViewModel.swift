@@ -22,19 +22,26 @@ final class LoadingViewModel: LoadingViewModelProtocol {
             if UserSettings.shared.hasValidToken {
                 if await AuthService.shared.refreshTokenIfRequired(), await AuthService.shared.syncUserInfo() {
                     if UserSettings.shared.appPin == nil {
-                        appDelegate?.navigate(to: .auth)
-                    } else {                        
-                        appDelegate?.navigate(to: .pin)
+                        await showAuth()
+                    } else {
+                        await showMain()
                     }
                 } else {
-                    appDelegate?.navigate(to: .auth)
+                    await showAuth()
                 }
                 return
             }
             
-            appDelegate?.navigate(to: .auth)
-
+            await showAuth()
         }
+    }
+    
+    private func showMain() async {
+        await appDelegate?.navigate(to: .pin)
+    }
+    
+    private func showAuth() async {
+        await appDelegate?.navigate(to: .auth)
     }
     
     static func createModel() -> LoadingViewModelProtocol {

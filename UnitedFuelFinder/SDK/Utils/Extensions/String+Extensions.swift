@@ -59,6 +59,24 @@ public extension String {
         Int(self) != nil
     }
     
+    var numberFormatted: String {
+        var str = self.replacingOccurrences(of: ",", with: ".")
+        
+        if str.last == "." && str.count > 1 {
+            let newString = str.dropLast()
+            return String(newString).numberFormatted
+        }
+        
+        let hasMultipleDots = str.filter { $0 == "." }.count > 1
+        
+        if hasMultipleDots {
+            let lastDotIndex = str.lastIndex(of: ".") ?? str.startIndex
+            str = String(str.prefix(upTo: lastDotIndex))
+        }
+        
+        return str
+    }
+    
     func localize(language: Language) -> String {
         let path = Bundle.main.path(forResource: language.code, ofType: "lproj")
         let bundle = Bundle(path: path!)

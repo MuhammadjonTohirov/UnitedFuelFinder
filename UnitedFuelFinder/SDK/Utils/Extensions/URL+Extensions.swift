@@ -97,3 +97,7 @@ extension Language {
         }
     }
 }
+
+extension URLSession {
+    static var filter: URLSession = URLSession.init(configuration: .default)
+}

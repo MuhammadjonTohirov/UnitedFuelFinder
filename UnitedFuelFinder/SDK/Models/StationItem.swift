@@ -11,7 +11,7 @@ import GoogleMaps
 import CoreLocation
 import SwiftUI
 
-public struct StationItem: Identifiable {
+public class StationItem: Identifiable {
     public var id: Int
     public var name: String
     public var lat: Double
@@ -28,6 +28,11 @@ public struct StationItem: Identifiable {
     public var note: String?
     public var number: String?
     public var priceUpdated: String?
+    public var distance: Float?
+    public var cityName: String?
+    public var stateName: String?
+    
+    public var displayName: String?
     
     public var actualPriceInfo: String {
         return actualPrice.asMoney
@@ -45,7 +50,7 @@ public struct StationItem: Identifiable {
         (discountPrice ?? 0).asMoney
     }
     
-    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil, priceUpdated: String?, note: String?) {
+    public init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool, cityId: Int, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String?, discountPrice: Float? = nil, retailPrice: Float? = nil, priceUpdated: String?, note: String?, distance: Float? = 0) {
         self.id = id
         self.name = name
         self.lat = lat
@@ -60,6 +65,7 @@ public struct StationItem: Identifiable {
         self.retailPrice = retailPrice
         self.priceUpdated = priceUpdated
         self.note = note
+        self.distance = distance
     }
     
     init(res item: NetResStationItem) {
@@ -79,58 +85,79 @@ public struct StationItem: Identifiable {
         self.priceUpdated = item.priceUpdated
         self.note = item.note
         self.number = item.number
+        self.distance = item.distance
+        self.cityName = item.cityName
+        self.stateName = item.stateName
+        
+        let customerName = self.name.replacingOccurrences(of: self.number ?? "-1", with: "")
+        self.displayName = (customerName + " " + (self.number ?? "")).nilIfEmpty ?? self.name
     }
+    
+    private var _city: CityItem?
+    private var _state: StateItem?
+    private var _customer: CustomerItem?
 }
 
 extension StationItem {
     var customer: CustomerItem? {
-        return DCustomer.all?.filter("id = %d", customerId).first?.asModel
+        if let _customer {
+            return _customer
+        }
+        
+        _customer = DCustomer.all?.filter("id = %d", customerId).first?.asModel
+        return _customer
     }
     
-    
-    var city: DCity? {
-        Realm.new?.object(ofType: DCity.self, forPrimaryKey: self.cityId)
+    var city: CityItem? {
+        if let _city {
+            return _city
+        }
+        
+        _city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: self.cityId)?.asModel
+        return _city
     }
     
-    var state: DState? {
+    var state: StateItem? {
         guard let stateId = self.stateId else {
             return nil
         }
         
-        return Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)
+        if let _state {
+            return _state
+        }
+        
+        _state = Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)?.asModel
+        return _state
     }
     
-    func distance(from coordinate: CLLocationCoordinate2D) -> Double {
+    /// finds distance as mile
+    private func _distance(from coordinate: CLLocationCoordinate2D) -> Double {
         Double(GMSGeometryDistance(self.asMarker.position, coordinate).f.asMile)
     }
     
     var distanceFromCurrentLocation: Double {
         let coordinate = GLocationManager.shared.currentLocation?.coordinate ?? .init(latitude: 0, longitude: 0)
-        return Double(GMSGeometryDistance(self.coordinate, coordinate).f.asMile)
+        return Double(GMSGeometryDistance(self.coordinate, coordinate))
     }
     
     var distanceFromCurrentLocationInfo: String {
-        distanceInfo(from: GLocationManager.shared.currentLocation?.coordinate)
+        guard let distance, distance != 0 else {
+            let coordinate = GLocationManager.shared.currentLocation?.coordinate ?? .init(latitude: 0, longitude: 0)
+            return distanceInfo(_distance(from: coordinate).asFloat)
+        }
+        
+        return distanceInfo(Float(CGFloat(distance)))
     }
     
     var coordinate: CLLocationCoordinate2D {
         .init(latitude: self.lat, longitude: self.lng)
     }
     
-    func distanceInfo(from coordinate: CLLocationCoordinate2D?) -> String {
-        guard let c = coordinate else {
-            return ""
-        }
-        
-        let distance = distance(from: c)
-        let isMore1000 = Int(distance) / 1000 > 0
-        let unit = isMore1000 ? "km" : "mi"
-        
-        return String(format: "%.1f \(unit)",  isMore1000 ? distance / 1000 : distance)
+    private func distanceInfo(_ dist: Float) -> String {
+        return String(format: "%.1f ml",  dist)
     }
     
-    var displayName: String {
-        let n = self.customer?.name ?? ""
-        return "\(n) \(number ?? "")"
+    var fullAddress: String {
+        return [address ?? "", cityName ?? "", stateName ?? ""].compactMap({$0.nilIfEmpty}).joined(separator: ", ")
     }
 }

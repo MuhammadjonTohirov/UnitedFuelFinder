@@ -144,7 +144,9 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     }
     
     private func showMain() {
-        appDelegate?.navigate(to: .mainTab)
+        Task {
+            await appDelegate?.navigate(to: .mainTab)
+        }
     }
     
     private func showPinSetup() {

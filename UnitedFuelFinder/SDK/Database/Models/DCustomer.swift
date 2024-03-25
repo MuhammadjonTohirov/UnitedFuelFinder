@@ -77,6 +77,12 @@ extension DCustomer {
         })
     }
     
+    static func deleteAll() {
+        Realm.new?.trySafeWrite { realm in
+            realm.delete(realm.objects(DCustomer.self))
+        }
+    }
+    
     static func update(_ customer: CustomerItem) {
         Realm.new?.trySafeWrite({ realm in
             if let item = realm.object(ofType: DCustomer.self, forPrimaryKey: customer.id) {

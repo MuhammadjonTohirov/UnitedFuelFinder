@@ -61,15 +61,11 @@ struct InvoiceItem: Identifiable {
 
 struct CompanyAccount {
     let id: Int
-    let accountName: String?
     let name: String
-    let organization: OrganizationItem
     
     init(from: NetResCompanyAccount) {
         self.id = from.id
-        self.accountName = from.accountName
-        self.name = from.name
-        self.organization = .init(from: from.organization)
+        self.name = from.name ?? ""
     }
 }
 
@@ -86,5 +82,17 @@ struct OrganizationItem {
 extension InvoiceItem {
     var beatufiedDate: String {
         Date.from(string: self.invoiceDate ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
+    }
+    
+    var fromDate: String {
+        Date.from(string: self.startPeriod ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
+    }
+    
+    var toDate: String {
+        Date.from(string: self.endPeriod ?? "", format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
+    }
+    
+    var fromToDate: String {
+        "\(fromDate) - \(toDate)"
     }
 }

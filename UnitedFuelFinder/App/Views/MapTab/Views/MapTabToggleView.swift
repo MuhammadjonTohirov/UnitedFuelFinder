@@ -38,7 +38,7 @@ struct MapTabToggleView: View {
         Text(text)
             .font(.system(size: 12, weight: .medium))
             .frame(width: 74.f.sw(), height: 40.f.sh())
-            .foregroundStyle(selected ? .white : .black)
+            .foregroundStyle(selected ? .white : .label)
             .background {
                 Capsule()
                     .foregroundStyle(selected ? .accent : .tertiaryBackground)

@@ -11,6 +11,8 @@ protocol DashboardInteractorProtocol {
     func getTransactions(from: Date, to: Date) async -> [TransactionItem]
     
     func getInvoices(from: Date, to: Date) async -> [InvoiceItem]
+    
+    func loadCustomers() async
 }
 
 class DashboardInteractor: DashboardInteractorProtocol {
@@ -33,6 +35,9 @@ class DashboardInteractor: DashboardInteractorProtocol {
         )).compactMap({InvoiceItem(from: $0)})
     }
     
+    func loadCustomers() async {
+        _ = await MainService.shared.getCustomers()
+    }
 }
 
 class DashboardTestInteractor: DashboardInteractorProtocol {
@@ -42,5 +47,9 @@ class DashboardTestInteractor: DashboardInteractorProtocol {
     
     func getInvoices(from: Date, to: Date) async -> [InvoiceItem] {
         []
+    }
+    
+    func loadCustomers() async {
+        
     }
 }

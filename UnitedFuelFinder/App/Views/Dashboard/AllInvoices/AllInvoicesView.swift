@@ -11,26 +11,29 @@ import SwiftUI
 
 struct AllInvoicesView: View {
     @Environment (\.dismiss) var dismiss
-    @State private var date1: Date = Date().before(monthes: 1)
-    @State private var date2: Date = Date()
+    @State private var date1: Date = Date().firstDayOfMonth
+    @State private var date2: Date = Date().lastDayOfMonth
+    
     @State private var datePresented: Bool = false
-    @State private var tempDate = Date()
     @State private var buttonNumber = 0
     @State private var isLoading = false
-    @ObservedObject var viewModel = AllTranInvoViewModel()
+    @State private var invoices: [InvoiceItem] = []
+    
+    @Environment(\.scenePhase)
+    private var scenePhase
     
     var body: some View {
         VStack {
             datePicker
                 .padding(.top, 20)
             LazyVStack {
-                ForEach(viewModel.invoices) { invo in
-                    InvoicesView(
+                ForEach(invoices) { invo in
+                    InvoiceView(
                         invoice: invo.invoiceNumber ?? "",
                         amount: Float(invo.totalAmount),
                         secoundAmount: Float(invo.totalDiscount ?? 0),
-                        companyName: invo.companyAccount?.organization.name ?? "",
-                        date: invo.beatufiedDate
+                        companyName: invo.companyAccount?.name ?? "",
+                        date: invo.fromToDate
                     )    
                 }
                 .padding(.horizontal)
@@ -50,16 +53,11 @@ struct AllInvoicesView: View {
             .coveredLoading(isLoading: $isLoading)
             .sheet(isPresented: $datePresented, content: {
                 VStack {
-                    DatePicker("", selection: $tempDate, displayedComponents: .date)
+                    DatePicker("", selection: buttonNumber == 1 ? $date1 : $date2, displayedComponents: .date)
                         .datePickerStyle(.graphical)
                         .presentationDetents([.height(400)])
                     
                     Button("Submit") {
-                        if buttonNumber == 1 {
-                            date1 = tempDate
-                        } else {
-                            date2 = tempDate
-                        }
                         datePresented.toggle()
                     }
                 }
@@ -67,7 +65,14 @@ struct AllInvoicesView: View {
             .onAppear {
                 reloadData()
             }
+            
+            .onChange(of: scenePhase, perform: { newValue in
+                if newValue == .active {
+                    reloadData()
+                }
+            })
         }
+        .background(.appBackground)
     }
     
     private var datePicker: some View {
@@ -129,10 +134,26 @@ struct AllInvoicesView: View {
     private func reloadData() {
         isLoading = true
         Task {
-            await viewModel.loadInvoices(from: self.date1, to: self.date2)
+            await loadInvoices(from: self.date1, to: self.date2)
             await MainActor.run {
                 isLoading = false
             }
+        }
+    }
+    
+    private func loadInvoices(from: Date, to: Date) async {
+        let _from = from.toString(format: "ddMMyyyy")
+        let _to = to.toString(format: "ddMMyyyy")
+        
+        let _invoices = (await CommonService.shared.fetchInvoices(
+            fromDate: _from,
+            to: _to
+        )).compactMap {
+            InvoiceItem(from: $0)
+        }
+
+        await MainActor.run {
+            self.invoices = _invoices
         }
     }
 }

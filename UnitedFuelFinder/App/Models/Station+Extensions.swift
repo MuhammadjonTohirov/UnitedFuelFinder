@@ -18,7 +18,7 @@ extension StationItem {
         let color = UIColor.init(hexString: customer?.markerColor ?? "#ffffff")
         if let _imageView = MarkerViewManager.shared.stationImage(withIdentifier: "station_\(self.number ?? "")") {
             _imageView.set(price: self.actualPriceInfo)
-            _imageView.set(name: "№" + (self.number ?? ""))
+            _imageView.set(name: "№" + (self.number ?? "-"))
             _imageView.set(
                 url: .init(string: self.customer?.iconUrl ?? ""),
                 placeholder: UIImage(named: "icon_gas_station"), backgroundColor: color

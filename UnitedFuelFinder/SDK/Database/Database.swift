@@ -8,5 +8,5 @@
 import Foundation
 
 public class DataBase {
-    public static let writeThread = DispatchQueue(label: "databaseWrite", qos: .utility)
+    public static let writeThread = DispatchQueue.global(qos: .background)
 }

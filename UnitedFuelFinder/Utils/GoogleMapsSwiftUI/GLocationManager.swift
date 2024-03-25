@@ -12,7 +12,11 @@ import MapKit
 
 class GLocationManager: NSObject, CLLocationManagerDelegate {
     static let shared = GLocationManager()
-    private var locationManager = CLLocationManager()
+    
+    private lazy var locationManager = {
+        CLLocationManager()
+    }()
+    
     var locationUpdateHandler: ((CLLocation) -> Void)?
     
     var currentLocation: CLLocation? {
@@ -25,9 +29,11 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func requestLocationPermission() {
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.allowsBackgroundLocationUpdates = true
-        locationManager.pausesLocationUpdatesAutomatically = true
+        mainIfNeeded {
+            self.locationManager.requestWhenInUseAuthorization()
+            self.locationManager.allowsBackgroundLocationUpdates = true
+            self.locationManager.pausesLocationUpdatesAutomatically = true
+        }
     }
     
     func startUpdatingLocation() {
@@ -41,10 +47,6 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
             } else {
                 print("Location services are not enabled.")
                 // Handle the case where location services are not enabled.
-            }
-            
-            if let lastLocation = self.locationManager.location {
-                self.locationUpdateHandler?(lastLocation)
             }
         }
     }
@@ -78,10 +80,7 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
         // Calculate distance using Haversine formula
         let distanceInMeters = sourceLocation.distance(from: destinationLocation)
         
-        // Convert distance from meters to kilometers
-        let distanceInKilometers = distanceInMeters
-        
-        return distanceInKilometers
+        return distanceInMeters
     }
 
     func fetchPlaces(forInput input: String, completion: @escaping (Result<[String], Error>) -> Void) {

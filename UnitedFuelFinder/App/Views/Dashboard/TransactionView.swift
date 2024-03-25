@@ -113,7 +113,7 @@ struct TransactionView: View {
             }
             .padding(.bottom, Padding.medium)
         }
-        .foregroundColor(.black)
+        .foregroundColor(.label)
         .font(.system(size: 12))
         .fontWeight(.regular)
         .padding(.horizontal)

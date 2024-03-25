@@ -104,3 +104,17 @@ extension UIApplication {
         activeView.endEditing(true)
     }
 }
+
+extension Bundle {
+    var appName: String {
+        return infoDictionary?["CFBundleName"] as? String ?? ""
+    }
+    
+    var appVersion: String {
+        return infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+    }
+    
+    var appBuild: String {
+        return infoDictionary?["CFBundleVersion"] as? String ?? ""
+    }
+}

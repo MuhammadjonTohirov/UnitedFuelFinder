@@ -13,7 +13,7 @@ import GoogleMaps
 protocol HomeViewModelProtocol: ObservableObject {
     var isDragging: Bool {get set}
     var state: HomeViewState {get set}
-    
+    var filterUrlSession: URLSession {get}
     var focusableLocation: CLLocation? {get set}
     
     var fromAddress: String {get set}
@@ -43,7 +43,7 @@ protocol HomeViewModelProtocol: ObservableObject {
     
     var stations: [StationItem] {get set}
     
-    var stationsMarkers: [GMSMarker] {get set}
+    var stationsMarkers: Set<GMSMarker> {get set}
     
     var distance: String {get}
     
@@ -69,6 +69,10 @@ protocol HomeViewModelProtocol: ObservableObject {
 }
 
 extension HomeViewModelProtocol {
+    var filterUrlSession: URLSession {
+        .filter
+    }
+    
     func onClickSelectToPointOnMap() {}
     func onClickSettings() {}
     func onClickNotification() {}
@@ -84,12 +88,16 @@ extension HomeViewModelProtocol {
 // MARK: - ClickActions
 extension MapTabViewModel: HomeViewModelProtocol {
     func onClickSelectToPointOnMap() {
+        self.removeMarkers()
+        self.removeStations()
         withAnimation {
             self.state = .selectTo
             if let toLocation {
                 focusToLocation(toLocation)
             }
         }
+        
+        removeMarkers()
     }
     
     func onClickSettings() {
@@ -114,25 +122,32 @@ extension MapTabViewModel: HomeViewModelProtocol {
         withAnimation {
             self.state = .selectFrom
             self.focusToCurrentLocation()
+            self.filterStationsByDefault()
         }
     }
     
     func onClickDrawRoute() {
+        self.mapRoute = []
+        
         if let _from = self.fromLocation, let _to = self.toLocation {
+            UserSettings.shared.fromLocation = .init(latitude: _from.coordinate.latitude, longitude: _from.coordinate.longitude)
             self.showLoader(message: "searching.route".localize)
             interactor.searchRoute(
                 from: _from.coordinate,
                 to: _to.coordinate) { route in
                     DispatchQueue.main.async {
+                        self.hideLoader()
                         self.mapRoute = route
                         
-                        self.hideLoader()
-                        
-                        withAnimation {
+                        if route.isEmpty {
+                            self.state = .selectFrom
+                            self.filterStationsByDefault()
+                            UserSettings.shared.fromLocation = nil
+                            UserSettings.shared.destination = nil
+                        } else {
                             self.state = .routing
+                            self.filterStationsByRoute()
                         }
-                        
-                        self.filterStationsByRoute()
                     }
                 }
             return
@@ -169,95 +184,47 @@ extension MapTabViewModel: HomeViewModelProtocol {
 
 // MARK: - Filter methods
 extension MapTabViewModel {
-    func filterStationsByRoute() {
+    
+    func setupMarkers() {
         DispatchQueue.main.async {
-            self.stations = []
-            self.showLoader(message: "loading.stations".localize)
-        }
-        
-        guard state == .routing, let toLocation, let fromLocation else {
-            return
-        }
-        
-        let radius = Double(self.filter?.radius ?? 10).limitTop(1)
-        
-        let f: NetReqLocation = .init(lat: fromLocation.coordinate.latitude, lng: fromLocation.coordinate.longitude)
-        let t: NetReqLocation = .init(lat: toLocation.coordinate.latitude, lng: toLocation.coordinate.longitude)
-        
-        Task {
-            guard state == .routing else {
-                return
-            }
-            
-            var _request: NetReqFilterStations = .init(
-                distance: radius,
-                sortedBy: .init(rawValue: filter?.sortType.rawValue ?? ""),
-                fromPrice: filter?.from ?? 0,
-                toPrice: filter?.to ?? 1000,
-                stations: Array(filter?.selectedStations ?? []),
-                stateId: filter?.stateId ?? "",
-                cityId: filter?.cityId ?? 0
-            )
-            
-            _request.from = f
-            _request.to = t
-            
-            let _stations = await MainService.shared.filterStations2(req: _request)
-                .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
-            
-            Logging.l(tag: "MapTabViewModel", "Number of new stations \(_stations.count)")
-            
-            await MainActor.run {
-                self.stations = _stations
-                self.stationsMarkers = self.stations.map({$0.asMarker})
-                self.hideLoader()
+            self.stations.map({$0.asMarker}).forEach { marker in
+                self.stationsMarkers.insert(marker)
             }
         }
     }
     
-    func filterStationsByDefault() {
-        Task {
-            
-            // force to get stations from pinned location
-            UserSettings.shared.mapCenterType = .pin
-            
-            Logging.l(tag: "HomeViewModel", "Start loading stations")
-            
-            let radius = filter?.radius ?? 10
-            
-            guard let c = UserSettings.shared.mapCenterType == .currentLocation ? lastCurrentLocation?.coordinate : self.pickedLocation?.coordinate else {
-                return
-            }
-            
-            var _request: NetReqFilterStations = .init(
-                distance: Double(radius),
-                stations: Array(filter?.selectedStations ?? [])
-            )
-            
-            _request.current = .init(
-                lat: c.latitude,
-                lng: c.longitude
-            )
-            
-            let _stations = await MainService.shared.filterStations2(req: _request)
-            
-            Logging.l(tag: "HomeViewModel", "Number of stations at \(c) in radius \(radius) is \(stations.count)")
-                    
-            await MainActor.run {
-                self.stationsMarkers.removeAll { mr in
-                    mr.map = nil
-                    return true
-                }
-                
-                withAnimation {
-                    self.stations = _stations
-                    
-                    self.stationsMarkers.append(contentsOf: self.stations.map({$0.asMarker}))
-                }
-            }
-            
-            self.hideLoader()
+    func removeStations() {
+        self.stations = []
+    }
+    
+    func removeMarkers() {
+        stationsMarkers.forEach { marker in
+            marker.map = nil
         }
+        stationsMarkers.removeAll()
+//        self.stationsMarkers.forEach { mr in
+//            if let pl = self.pickedLocation?.coordinate {
+//                let distance = pl.distance(to: mr.position).f.asMile
+//                // remove not in distance
+//                if distance > CGFloat(self.filter?.radius ?? 10) {
+//                    mr.map = nil
+//                    self.stationsMarkers.remove(mr)
+//                }
+//            }
+//        }
+//        self.stationsMarkers.removeAll { mr in
+//            // remove mr not in radius
+//            if let pl = self.pickedLocation?.coordinate {
+//                let distance = pl.distance(to: mr.position).f.asMile
+//                // remove not in distance
+//                if distance > CGFloat(self.filter?.radius ?? 10) {
+//                    mr.map = nil
+//                    return true
+//                }
+//            }
+//            
+//            return false
+//        }
     }
 }
 

@@ -14,7 +14,14 @@ struct DashboardView: View {
         (title: "Bar 3", value: 11)
     ]
     
-    @EnvironmentObject var viewModel: DashboardViewModel
+    @ObservedObject var viewModel: DashboardViewModel
+    
+    init(viewModel: DashboardViewModel) {
+        self.viewModel = viewModel
+    }
+    
+    @State private var showTransitions = false
+    @State private var showInvoices = false
     
     @State var profileImage: String = "station"
     
@@ -23,21 +30,21 @@ struct DashboardView: View {
             innerBody
                 .background {
                     Rectangle()
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                 }
             
             GeometryReader(content: { geometry in
                 VStack(spacing: 0) {
                     Rectangle()
                         .frame(height: geometry.safeAreaInsets.top)
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                         .ignoresSafeArea()
 
                     
                     Spacer()
                     
                     Rectangle()
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                         .ignoresSafeArea(.container, edges: .bottom)
                         .frame(height: 0)
                 }
@@ -62,13 +69,9 @@ struct DashboardView: View {
             Text("discounted.stations.nearby".localize)
             stationDetail
             
-            if (UserSettings.shared.userInfo?.canViewTransactions ?? false) {
-                transactionsView
-            }
-            
-            if (UserSettings.shared.userInfo?.canViewInvoices ?? false) {
-                invoicesView
-            }
+            transactionsView.set(isVisible: showTransitions)
+
+            invoicesView.set(isVisible: showInvoices)
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
@@ -78,6 +81,12 @@ struct DashboardView: View {
         .fontWeight(.semibold)
         .frame(maxWidth: .infinity)
         .scrollable(showIndicators: false)
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showTransitions = UserSettings.shared.userInfo?.canViewTransactions ?? false
+                self.showInvoices = UserSettings.shared.userInfo?.canViewInvoices ?? false
+            }
+        }
     }
     
     private var transactionsView: some View {
@@ -133,12 +142,12 @@ struct DashboardView: View {
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
                 
                 ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
-                    InvoicesView(
+                    InvoiceView(
                         invoice: invo.invoiceNumber ?? "",
                         amount: Float(invo.totalAmount),
                         secoundAmount: Float(invo.totalDiscount ?? 0),
-                        companyName: invo.companyAccount?.organization.name ?? "",
-                        date: invo.beatufiedDate
+                        companyName: invo.companyAccount?.name ?? "",
+                        date: invo.fromToDate
                     )
                 }
             }
@@ -162,14 +171,15 @@ struct DashboardView: View {
                         .set(navigate: { station in
                             viewModel.openStation(station)
                         })
-                        .frame(height: 120.f.sh())
                         .background {
                             RoundedRectangle(cornerRadius: 16)
                                 .foregroundStyle(.appSecondaryBackground)
                         }
+                        .onTapGesture {
+                            viewModel.navigate(to: .stationInfo(station))
+                        }
                 }
             }
-            .frame(height: 120.f.sh())
             .scrollable(
                 axis: .horizontal,
                 showIndicators: false
@@ -181,7 +191,7 @@ struct DashboardView: View {
 #Preview {
     UserSettings.shared.accessToken = UserSettings.testAccessToken
     return NavigationStack {
-        DashboardView()
+        DashboardView(viewModel: .init())
             .navigationBarTitleDisplayMode(.inline)
             .environmentObject(DashboardViewModel())
             .navigationTitle("Dashboard")

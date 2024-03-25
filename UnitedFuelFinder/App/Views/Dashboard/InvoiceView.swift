@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct InvoicesView: View {
+struct InvoiceView: View {
     @State var invoice: String = "INV-37869"
     @State var amount: Float = 500.2
     @State var secoundAmount: Float = 124
@@ -50,7 +50,7 @@ struct InvoicesView: View {
                     Text(date)
                 }
             }
-            .foregroundColor(.black)
+            .foregroundColor(.label)
             .font(.system(size: 12))
             .fontWeight(.regular)
             .padding()
@@ -60,5 +60,5 @@ struct InvoicesView: View {
 }
 
 #Preview {
-    InvoicesView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
+    InvoiceView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
 }

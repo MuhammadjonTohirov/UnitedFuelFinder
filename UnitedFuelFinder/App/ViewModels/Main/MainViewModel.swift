@@ -14,7 +14,7 @@ class MainViewRouter {
 
 protocol AppDelegate {
     var timer: Timer? {get set}
-    func navigate(to destination: AppDestination)
+    func navigate(to destination: AppDestination) async
     func showAppOnAppstore()
     
     func defaultNavigationSetup()
@@ -103,8 +103,8 @@ final class MainViewModel: ObservableObject {
 }
 
 extension MainViewModel: AppDelegate {
-    func navigate(to destination: AppDestination) {
-        DispatchQueue.main.async {
+    func navigate(to destination: AppDestination) async {
+        await MainActor.run {
             self.route = destination
         }
     }

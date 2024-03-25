@@ -12,17 +12,19 @@ struct AllTransactionsView: View {
     @State private var date1: Date = Date().firstDayOfMonth
     @State private var date2: Date = Date().lastDayOfMonth
     @State private var datePresented: Bool = false
-    @State private var tempDate = Date()
     @State private var buttonNumber = 0
     @State private var isLoading = false
-    @ObservedObject var viewModel = AllTranInvoViewModel()
+    @State private var transactions: [TransactionItem] = []
+    
+    @Environment(\.scenePhase)
+    private var scenePhase
     
     var body: some View {
         VStack {
             datePicker
                 .padding(.top, 20)
             LazyVStack {
-                ForEach(viewModel.transactions) { item in
+                ForEach(transactions) { item in
                     TransactionView(item: item)
                 }
                 .padding(.horizontal)
@@ -30,7 +32,6 @@ struct AllTransactionsView: View {
             .scrollable()
             .navigationTitle("transf.transactions".localize)
             .navigationBarTitleDisplayMode(.inline)
-            
             .onChange(of: date1, perform: { value in
                 self.date1 = min(value, date2.before(days: 1))
                 self.reloadData()
@@ -42,22 +43,30 @@ struct AllTransactionsView: View {
             .coveredLoading(isLoading: $isLoading)
             .sheet(isPresented: $datePresented, content: {
                 VStack {
-                    DatePicker("", selection: $tempDate, displayedComponents: .date)
+                    DatePicker("", selection: buttonNumber == 1 ? $date1 : $date2, displayedComponents: .date)
                         .datePickerStyle(.graphical)
                         .presentationDetents([.height(400)])
                     
                     Button("Submit") {
-                        if buttonNumber == 1 {
-                            date1 = tempDate
-                        } else {
-                            date2 = tempDate
-                        }
                         datePresented.toggle()
                     }
                 }
             })
             .onAppear {
-                reloadData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.reloadData()
+                }
+            }
+        }
+        .background(.appBackground)
+        .onChange(of: scenePhase) { newValue in
+            switch newValue {
+            case .active:
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.reloadData()
+                }
+            default:
+                break
             }
         }
     }
@@ -119,12 +128,28 @@ struct AllTransactionsView: View {
     }
     
     private func reloadData() {
-        isLoading = true
+        self.isLoading = true
         Task {
-            await viewModel.loadTransactions(from: self.date1, to: self.date2)
+            await loadTransactions(from: self.date1, to: self.date2)
             await MainActor.run {
-                isLoading = false
+                self.isLoading = false
             }
+        }
+    }
+    
+    private func loadTransactions(from: Date, to: Date) async {
+        let _from = from.toString(format: "ddMMyyyy")
+        let _to = to.toString(format: "ddMMyyyy")
+        
+        let _transactions = (await CommonService.shared.fetchTransactions(
+            fromDate: _from,
+            to: _to
+        )).compactMap {
+            TransactionItem(from: $0)
+        }
+
+        await MainActor.run {
+            self.transactions = _transactions
         }
     }
 }

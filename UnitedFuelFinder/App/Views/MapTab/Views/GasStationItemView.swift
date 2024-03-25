@@ -12,19 +12,24 @@ import CoreLocation
 
 struct GasStationItemView: View {
     var station: StationItem
-    var stationItemHeight: CGFloat = 120
     var fromPoint: CLLocationCoordinate2D? = nil
     
     var onClickNavigate: ((StationItem) -> Void)?
     
-    init(station: StationItem, stationItemHeight: CGFloat = 120, fromPoint: CLLocationCoordinate2D? = nil) {
+    // deprecated
+    @available(*, deprecated, message: "Use init(station: StationItem, fromPoint: CLLocationCoordinate2D?) instead")
+    init(station: StationItem, stationItemHeight: CGFloat, fromPoint: CLLocationCoordinate2D? = nil) {
         self.station = station
-        self.stationItemHeight = stationItemHeight
+        self.fromPoint = fromPoint
+    }
+    
+    init(station: StationItem, fromPoint: CLLocationCoordinate2D? = nil) {
+        self.station = station
         self.fromPoint = fromPoint
     }
     
     var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: Padding.small) {
             HStack {
                 logo
                     .padding(.trailing, 8)
@@ -35,18 +40,22 @@ struct GasStationItemView: View {
                 
                 Text(station.actualPriceInfo)
                     .foregroundStyle(Color.label)
-                    .font(.system(size: 12))
+                    .font(.system(size: 12, weight: .semibold))
                     .padding(.vertical, 4)
                     .padding(.horizontal, 4)
             }
             
             HStack {
+                Text(station.fullAddress.nilIfEmpty ?? "no.address".localize)
+                    .font(.system(size: 11))
+                    .foregroundStyle(Color.label)
+                Spacer()
+            }
+            
+            HStack {
                 VStack(alignment: .leading) {
-                    Text("save.n.galon".localize(arguments: station.discountInfo))
-                        .font(.system(size: 12))
-
-                    Text("retail.price.n".localize(arguments: station.retailPriceInfo))
-                        .font(.system(size: 12))
+                    discountInfoView
+                    retailPriceView
                 }
                 .opacity(0.85)
                 
@@ -55,9 +64,10 @@ struct GasStationItemView: View {
                 navigateButton
                     .opacity(onClickNavigate == nil ? 0 : 1)
             }
+            
         }
-        .padding(Padding.medium)
-        .frame(height: stationItemHeight.sh())
+        .padding(.horizontal, Padding.medium)
+        .padding(.vertical, Padding.medium - 4)
         .frame(minWidth: 325.f.sw())
         .background {
             RoundedRectangle(cornerRadius: 8)
@@ -65,13 +75,56 @@ struct GasStationItemView: View {
         }
     }
     
+    private var discountInfoView: some View {
+        Text(
+            AttributedString(
+                "save".localize,
+                attributes: .init([
+                    NSAttributedString.Key.foregroundColor: UIColor.label,
+                ])
+            ) + " " +
+            AttributedString(
+                station.discountInfo,
+                attributes: .init([
+                    NSAttributedString.Key.foregroundColor: UIColor.label,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .semibold),
+                ])
+            ) +
+            AttributedString(
+                " " + "per.gallon".localize,
+                attributes: .init([
+                    NSAttributedString.Key.foregroundColor: UIColor.label,
+                ])
+            )
+        )
+        .font(.system(size: 12))
+    }
+    
+    private var retailPriceView: some View {
+        Text(
+            AttributedString(
+                "retail_price".localize,
+                attributes: .init([
+                    NSAttributedString.Key.foregroundColor: UIColor.label,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12),
+                ])
+            )
+            + " " +
+            AttributedString(
+                station.retailPriceInfo,
+                attributes: .init([
+                    NSAttributedString.Key.foregroundColor: UIColor.label,
+                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12, weight: .semibold),
+                ])
+            )
+        )
+        .font(.system(size: 12))
+    }
+    
     private var info: some View {
         VStack(alignment: .leading) {
             Text(station.name)
-            Text([
-                station.distanceInfo(from: fromPoint ?? GLocationManager.shared.currentLocation?.coordinate),
-                station.address ?? ""
-            ].compactMap({$0.nilIfEmpty}).joined(separator: " • "))
+            Text(station.distanceFromCurrentLocationInfo)
             .foregroundStyle(Color.init(uiColor: .secondaryLabel))
         }
         .font(.system(size: 12))
@@ -121,16 +174,13 @@ struct GasStationItemView: View {
                 }
             )
             .foregroundStyle(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .background(content: {
+                RoundedRectangle(cornerRadius: 6)
+            })
             .font(.system(size: 12))
             .padding(.vertical, 6)
-            .padding(.horizontal, 8)
-            .background {
-                RoundedRectangle(
-                    cornerRadius: 6
-                ).foregroundStyle(
-                    Color.accentColor
-                )
-            }
         })
     }
     
@@ -140,4 +190,11 @@ struct GasStationItemView: View {
         
         return v
     }
+}
+
+#Preview {
+    GasStationItemView(station: .init(id: 0, name: "Name", lat: 0, lng: 0, isDeleted: false, cityId: 0, customerId: 0, stateId: "Fergana", priceUpdated: "100", note: "Note"), fromPoint: nil)
+        .set { _ in
+            debugPrint("GO")
+        }
 }

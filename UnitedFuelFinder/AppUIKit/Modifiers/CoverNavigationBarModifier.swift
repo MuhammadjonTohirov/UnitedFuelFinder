@@ -17,7 +17,7 @@ struct CoverNavigationBarModifier: ViewModifier {
                 VStack(spacing: 0) {
                     Rectangle()
                         .frame(height: geometry.safeAreaInsets.top)
-                        .foregroundStyle(Color.init(uiColor: .systemBackground))
+                        .foregroundStyle(Color.background)
                         .ignoresSafeArea()
 
                     
