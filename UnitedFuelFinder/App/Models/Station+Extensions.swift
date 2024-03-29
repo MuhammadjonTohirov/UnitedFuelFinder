@@ -24,7 +24,7 @@ extension StationItem {
                 placeholder: UIImage(named: "icon_gas_station"), backgroundColor: color
             )
             marker.iconView = _imageView
-            marker.iconView?.frame.size = .init(width: 64, height: 48)
+            marker.iconView?.frame.size = .init(width: 56, height: 64)
         }
         
         marker.station = self

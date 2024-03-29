@@ -93,3 +93,25 @@ extension View {
         }
     }
 }
+
+
+private struct ViewRepresented<T: UIView>: UIViewRepresentable {
+    private(set) var view: T
+
+    init(_ view: T) {
+        self.view = view
+    }
+
+    func makeUIView(context: Context) -> some UIView {
+        view
+    }
+
+    func updateUIView(_ uiView: UIViewType, context: Context) {
+    }
+}
+
+public extension UIView {
+    var asSwiftUI: some View {
+        ViewRepresented(self)
+    }
+}
