@@ -58,27 +58,7 @@ struct AuthView: View {
                 .padding(.horizontal, Padding.medium)
                 
                 VStack(alignment: .leading) {
-                    YRoundedTextField {
-                        YTextField(
-                            text: $viewModel.username,
-                            placeholder: "sample@domain.com",
-                            contentType: UITextContentType.emailAddress,
-                            autoCapitalization: .never,
-                            left: {
-                                Image(systemName: "person.fill")
-                                    .padding(.trailing, Padding.small)
-                            }, onCommit: {
-                                viewModel.verifyEmail()
-                            }
-                        )
-                        .keyboardType(
-                            .emailAddress
-                        )
-                    }
-                    .set(error: viewModel.emailError ?? "")
-                    .padding(
-                        .horizontal, Padding.medium
-                    )
+                    form
                     
                     CheckButton(
                         isSelected: $viewModel.isOfferAccepted,
@@ -109,6 +89,54 @@ struct AuthView: View {
             }
             .ignoresSafeArea(.keyboard, edges: .all)
         }
+    }
+    
+    @ViewBuilder
+    private var form: some View {
+        YRoundedTextField {
+            YTextField(
+                text: $viewModel.username,
+                placeholder: "sample@domain.com",
+                contentType: UITextContentType.emailAddress,
+                autoCapitalization: .never,
+                left: {
+                    Image(systemName: "person.fill")
+                        .padding(.trailing, Padding.small)
+                }, onCommit: {
+                    viewModel.verifyEmail()
+                }
+            )
+            .keyboardType(
+                .emailAddress
+            )
+        }
+        .set(error: viewModel.emailError ?? "")
+        .padding(
+            .horizontal, Padding.medium
+        )
+        
+        YRoundedTextField {
+            YTextField(
+                text: $viewModel.username,
+                placeholder: "••••••••",
+                contentType: UITextContentType.emailAddress,
+                autoCapitalization: .never,
+                left: {
+                    Image("jcon_key")
+                        .renderingMode(.template)
+                        .padding(.trailing, Padding.small)
+                }, onCommit: {
+                    viewModel.verifyEmail()
+                }
+            )
+            .keyboardType(
+                .emailAddress
+            )
+        }
+        .set(error: viewModel.emailError ?? "")
+        .padding(
+            .horizontal, Padding.medium
+        )
     }
 }
 

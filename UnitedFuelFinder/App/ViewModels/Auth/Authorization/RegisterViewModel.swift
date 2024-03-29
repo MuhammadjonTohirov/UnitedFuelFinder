@@ -60,11 +60,19 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     
     @Published var showScreen: Bool = false
     @Published var isOfferAccepted: Bool = false
+
+    @Published var email: String = ""
+    @Published var password1: String = ""
+    @Published var password2: String = ""
+
+    
     @Published var firstName: String = ""
     @Published var lastName: String = ""
+
     @Published var phoneNumber: String = ""
     @Published var companyName: String = ""
     @Published var fuelCardNumber: String = ""
+
     @Published var screenRect: CGRect = .zero
     @Published var address: String = ""
 
@@ -81,6 +89,10 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
         !phoneNumber.isEmpty &&
         !fuelCardNumber.isEmpty &&
         !address.isEmpty &&
+        !email.isEmpty &&
+        !password1.isEmpty &&
+        !password2.isEmpty &&
+        password1 == password2 &&
         state != nil &&
         city != nil && !companyName.isEmpty && isOfferAccepted
     }

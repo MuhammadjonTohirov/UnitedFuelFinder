@@ -73,17 +73,56 @@ struct RegisterProfileView: View {
         }
     }
     
+    @ViewBuilder
+    private var credentials: some View {
+        YRoundedTextField {
+            YTextField(
+                text: $viewModel.email,
+                placeholder: "email".localize,
+                contentType: .emailAddress,
+                autoCapitalization: .never,
+                left: {
+                    Image(systemName: "person.fill")
+                        .padding(.trailing, Padding.small)
+                }
+            )
+        }
+        
+        YRoundedTextField {
+            YTextField(
+                text: $viewModel.password1,
+                placeholder: "new.password".localize,
+                contentType: .newPassword,
+                autoCapitalization: .never,
+                left: {
+                    Image("jcon_key")
+                        .padding(.trailing, Padding.small)
+                }
+            )
+        }
+        
+        YRoundedTextField {
+            YTextField(
+                text: $viewModel.password2, 
+                placeholder: "confirm.password".localize,
+                contentType: .newPassword,
+                autoCapitalization: .never,
+                left: {
+                    Image("jcon_key")
+                        .padding(.trailing, Padding.small)
+                }
+            )
+        }
+    }
+    
     private var topHeading: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 16) {
             Text(
                 "lets_create_account".localize
             )
             .font(.system(size: 24, weight: .semibold))
             
-            Text(
-                "insert_creds".localize
-            )
-            .font(.system(size: 14, weight: .semibold))
+            credentials
         }
     }
     
