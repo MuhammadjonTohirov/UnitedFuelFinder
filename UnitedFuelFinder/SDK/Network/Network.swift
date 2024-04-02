@@ -56,7 +56,7 @@ struct Network {
             
             let res = try JSONDecoder().decode(NetRes<T>.self, from: data)
             
-            if (res.asData?.count ?? 0) < 1000 {
+            if (res.asData?.count ?? 0) < 10000 {
                 Logging.l(res.asString)
             }
             

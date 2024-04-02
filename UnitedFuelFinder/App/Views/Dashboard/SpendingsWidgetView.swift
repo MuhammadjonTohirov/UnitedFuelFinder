@@ -15,7 +15,11 @@ struct SpendingsWidgetView: View {
     private var colors: [Color] = [
         .accentColor,
         .init(uiColor: .systemBlue),
-        .init(uiColor: .systemGreen)
+        .init(uiColor: .systemGreen),
+        .init(uiColor: .systemYellow),
+        .init(uiColor: .systemOrange),
+        .init(uiColor: .systemMint),
+        .init(uiColor: .systemBrown)
     ]
     
     @State private var isLoading: Bool = false
@@ -46,7 +50,6 @@ struct SpendingsWidgetView: View {
                 }
         }
         .padding(Padding.medium)
-        .frame(height: 147)
         .frame(maxWidth: .infinity)
         .background {
             RoundedRectangle(cornerRadius: 16)

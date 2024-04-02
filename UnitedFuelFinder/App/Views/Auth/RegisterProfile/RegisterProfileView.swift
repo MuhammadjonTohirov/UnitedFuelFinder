@@ -24,7 +24,7 @@ struct RegisterProfileView: View {
                 
                 organizationRequisites
                 
-                addressInfo
+//                addressInfo
                 
                 offerView
                 
@@ -83,7 +83,8 @@ struct RegisterProfileView: View {
                 autoCapitalization: .never,
                 left: {
                     Image(systemName: "person.fill")
-                        .padding(.trailing, Padding.small)
+                        .frame(width: 24)
+                        .padding(.horizontal, Padding.small)
                 }
             )
         }
@@ -92,24 +93,30 @@ struct RegisterProfileView: View {
             YTextField(
                 text: $viewModel.password1,
                 placeholder: "new.password".localize,
+                isSecure: true,
                 contentType: .newPassword,
                 autoCapitalization: .never,
                 left: {
                     Image("jcon_key")
-                        .padding(.trailing, Padding.small)
+                        .renderingMode(.template)
+                        .frame(width: 24)
+                        .padding(.horizontal, Padding.small)
                 }
             )
         }
         
         YRoundedTextField {
             YTextField(
-                text: $viewModel.password2, 
+                text: $viewModel.password2,
                 placeholder: "confirm.password".localize,
+                isSecure: true,
                 contentType: .newPassword,
                 autoCapitalization: .never,
                 left: {
                     Image("jcon_key")
-                        .padding(.trailing, Padding.small)
+                        .renderingMode(.template)
+                        .frame(width: 24)
+                        .padding(.horizontal, Padding.small)
                 }
             )
         }
@@ -189,7 +196,7 @@ struct RegisterProfileView: View {
     
     private var offerView: some View {
         VStack(alignment: .leading, spacing: 4) {
-            Text("offer".localize)
+            Text("auth_offer".localize)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
@@ -205,7 +212,8 @@ struct RegisterProfileView: View {
                     color: .accent
                 ).toSwiftUI
             ) {
-                debugPrint("Show offer")
+                // open URL.publicOffer in browser
+                openPdfUrl(URL.publicOffer)
             }
             .padding(.top, Padding.small)
             .padding(.bottom, Padding.large)
@@ -214,6 +222,10 @@ struct RegisterProfileView: View {
     
     private func dismissView() {
         dismiss.callAsFunction()
+    }
+    
+    private func openPdfUrl(_ url: URL) {
+        UIApplication.shared.open(url)
     }
 }
 

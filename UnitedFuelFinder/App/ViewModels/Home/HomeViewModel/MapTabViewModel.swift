@@ -385,27 +385,6 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     
     func loadCustomers() {
         self.customers = DCustomer.all?.compactMap({$0.asModel}) ?? []
-//        func loadIfNeeded() -> Bool {
-//            if DCustomer.all?.isEmpty ?? false {
-//                Task(priority: .background) {
-//                    await MainService.shared.getCustomers()
-//                    
-//                    await MainActor.run {
-//                        self.customers = DCustomer.all?.compactMap({$0.asModel}) ?? []
-//                        self.hideLoader()
-//                    }
-//                }
-//                
-//                return false
-//            }
-//            
-//            return true
-//        }
-//        self.showLoader(message: "")
-//        
-//        if loadIfNeeded() {
-//
-//        }
     }
     
     func onSelectMap() {

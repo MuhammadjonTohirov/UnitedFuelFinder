@@ -18,6 +18,8 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     @Published var phoneNumber: String = ""
     @Published var screenRect: CGRect = .zero
     @Published var address: String = ""
+    @Published var companyName: String = ""
+    @Published var fuelCardNumber: String = ""
     
     @Published var showImagePicker = false
     
@@ -49,10 +51,10 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     var isValidForm: Bool {
         !firstName.isEmpty &&
         !lastName.isEmpty &&
-        !phoneNumber.isEmpty &&
-        !address.isEmpty &&
-        state != nil &&
-        city != nil
+        !phoneNumber.isEmpty
+//        !address.isEmpty &&
+//        state != nil &&
+//        city != nil
     }
     
     func onAppear() {
@@ -71,6 +73,8 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
             lastName = user.lastName ?? nameComponents.joined(separator: " ")
             phoneNumber = user.phone
             address = user.address ?? ""
+            companyName = user.companyName ?? ""
+            fuelCardNumber = user.cardNumber
             
             if let _stateKey = user.stateId, let _state = DState.item(id: _stateKey) {
                 self.state = _state
@@ -102,23 +106,24 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
     }
     
     func editProfile(completion: @escaping () -> Void) {
-        guard let stateId = state?.id, let cityId = city?.id else {
-            return
-        }
-        
         self.isLoading = true
         
         uploadAvatar { [weak self] isOK in
             guard let self, isOK else {
                 return
             }
+            let stateId = self.state?.id
+            let cityId = self.city?.id
+            
             Task {
                 if await AuthService.shared.editUserInfo(
                     firstName: self.firstName,
                     lastName: self.lastName,
-                    phone: self.phoneNumber, state: stateId,
+                    phone: self.phoneNumber,
+                    state: stateId,
                     city: cityId,
-                    address: self.address) {
+                    address: self.address.nilIfEmpty
+                ) {
                     DispatchQueue.main.async {
                         self.isLoading = false
                         self.showAlert(message: "profile_updated".localize)

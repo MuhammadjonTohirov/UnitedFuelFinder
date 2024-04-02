@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 struct AuthView: View {
     @StateObject var viewModel: AuthorizationViewModel = .init()
     @State var showAlert: Bool = false
@@ -57,28 +56,24 @@ struct AuthView: View {
                 .font(.system(size: 14, weight: .semibold))
                 .padding(.horizontal, Padding.medium)
                 
-                VStack(alignment: .leading) {
+                VStack(spacing: 10) {
                     form
-                    
-                    CheckButton(
-                        isSelected: $viewModel.isOfferAccepted,
-                        text: "auth_agree_offer".localize.highlight(
-                            text: "auth_offer".localize,
-                            color: .accent
-                        ).toSwiftUI
-                    ) {
-                        debugPrint("Show offer")
-                    }
-                    .padding(.horizontal, Padding.medium)
-                    .padding(.top, Padding.small / 2)
-                    .padding(.bottom, Padding.large)
                 }
+                .padding(.bottom, Padding.large.sh())
             }
             
             VStack {
                 Spacer()
+                SubmitButton(action: {
+                    viewModel.onClickRegister()
+                }, label: {
+                    Text("no.account".localize)
+                        .foregroundStyle(Color.accentColor)
+                }, backgroundColor: .clear)
+                .padding(.horizontal, Padding.default)
+
                 SubmitButton {
-                    viewModel.onClickVerifyUsername()
+                    viewModel.onClickAuthenticate()
                 } label: {
                     Text("authenticate".localize)
                 }
@@ -101,14 +96,11 @@ struct AuthView: View {
                 autoCapitalization: .never,
                 left: {
                     Image(systemName: "person.fill")
-                        .padding(.trailing, Padding.small)
-                }, onCommit: {
-                    viewModel.verifyEmail()
+                        .frame(width: 24)
+                        .padding(.horizontal, Padding.small)
                 }
             )
-            .keyboardType(
-                .emailAddress
-            )
+            .keyboardType(.emailAddress)
         }
         .set(error: viewModel.emailError ?? "")
         .padding(
@@ -117,26 +109,36 @@ struct AuthView: View {
         
         YRoundedTextField {
             YTextField(
-                text: $viewModel.username,
+                text: $viewModel.password,
                 placeholder: "••••••••",
-                contentType: UITextContentType.emailAddress,
+                isSecure: true,
+                contentType: UITextContentType.password,
                 autoCapitalization: .never,
                 left: {
                     Image("jcon_key")
                         .renderingMode(.template)
-                        .padding(.trailing, Padding.small)
-                }, onCommit: {
-                    viewModel.verifyEmail()
+                        .frame(width: 24)
+                        .padding(.horizontal, Padding.small)
                 }
             )
-            .keyboardType(
-                .emailAddress
-            )
+            .keyboardType(.default)
         }
-        .set(error: viewModel.emailError ?? "")
         .padding(
             .horizontal, Padding.medium
         )
+        
+        HStack {
+            Spacer()
+            
+            Button(action: {
+                viewModel.route = .forgotpassword
+            }, label: {
+                Text("forgot.password".localize)
+                    .font(.system(size: 13, weight: .medium))
+            })
+            .padding(.horizontal, Padding.default)
+            .padding(.top, Padding.small)
+        }
     }
 }
 

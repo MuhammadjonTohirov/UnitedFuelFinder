@@ -15,7 +15,11 @@ struct PopularStationsView: View {
     let defaultColors: [Color] = [
         .accentColor,
         .init(uiColor: .systemBlue),
-        .init(uiColor: .systemGreen)
+        .init(uiColor: .systemGreen),
+        .init(uiColor: .systemYellow),
+        .init(uiColor: .systemOrange),
+        .init(uiColor: .systemMint),
+        .init(uiColor: .systemBrown)
     ]
     
     @State private var popularStations: PopularStations?

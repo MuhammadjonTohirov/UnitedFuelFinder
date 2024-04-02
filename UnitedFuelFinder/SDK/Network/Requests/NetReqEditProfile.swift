@@ -11,11 +11,11 @@ struct NetReqEditProfile: Encodable {
     var firstName: String
     var lastName: String
     var phone: String
-    var state: String
-    var city: Int
-    var address: String
+    var state: String?
+    var city: Int?
+    var address: String?
     
-    init(firstName: String, lastName: String, phone: String, state: String, city: Int, address: String) {
+    init(firstName: String, lastName: String, phone: String, state: String?, city: Int?, address: String?) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone

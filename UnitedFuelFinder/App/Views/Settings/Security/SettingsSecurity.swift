@@ -41,6 +41,18 @@ struct SettingsSecurity: View {
                 viewModel.navigate(to: .sessions)
             }
             
+            Divider()
+            
+            SettingsViewUtils.row(image: Image("icon_reset_password")
+                .resizable()
+                .renderingMode(.template)
+                .fixedSize()
+                .foregroundStyle(Color.label)
+                .frame(width: 24, height: 24),
+                title: "change.password".localize
+            ) {
+                viewModel.navigate(to: .changePassword)
+            }
             Spacer()
         }
         .navigationTitle("security".localize)

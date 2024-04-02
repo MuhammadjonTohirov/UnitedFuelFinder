@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import RealmSwift
 
 enum SettingsRoute: ScreenRoute {
     var id: String {
@@ -30,6 +30,8 @@ enum SettingsRoute: ScreenRoute {
             return "security"
         case .mapSettings:
             return "mapSettings"
+        case .changePassword:
+            return "changePassword"
         }
     }
     
@@ -50,6 +52,7 @@ enum SettingsRoute: ScreenRoute {
     case security
     case mapSettings
     case profile
+    case changePassword
     
     @ViewBuilder
     var screen: some View {
@@ -74,6 +77,8 @@ enum SettingsRoute: ScreenRoute {
             SettingsSecurity()
         case .mapSettings:
             SettingsMap()
+        case .changePassword:
+            ChangePasswordView()
         }
     }
 }
@@ -138,6 +143,12 @@ class SettingsViewModel: NSObject, ObservableObject, SettingsProfileModelProtoco
                 UserSettings.shared.clear()
                 await appDelegate?.navigate(to: .loading)
             }
+        }
+    }
+    
+    func clearCache() {
+        Realm.new?.trySafeWrite { realm in
+            realm.deleteAll()
         }
     }
  }
