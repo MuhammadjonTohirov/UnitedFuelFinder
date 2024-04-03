@@ -22,18 +22,41 @@ struct MainTabView: View {
     @State private var imagePlaceholder: Image?
     
     var body: some View {
+        innerBody
+            .richAlert(
+                type: .custom(
+                    image: Image(systemName: "exclamationmark.triangle")
+                        .resizable()
+                        .foregroundStyle(.accent)
+                        .frame(width: 56, height: 56, alignment: .center)
+                        .anyView
+                ),
+                title: "attention".localize,
+                message: Text(
+                    "disclamer.desc".localize,
+                    configure: { attr in
+                        if let range = attr.range(of: "disclamer.desc.bold1".localize) {
+                            attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                        }
+                        
+                        if let range = attr.range(of: "disclamer.desc.bold2".localize) {
+                            attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                        }
+                        
+                        if let range = attr.range(of: "disclamer.desc.bold3".localize) {
+                            attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                        }
+                    }
+                ).anyView,
+                isPresented: $viewModel.showWarningAlert
+            ) {
+                
+            }
+    }
+    var innerBody: some View {
         ZStack {
             NavigationStack {
                 tabView
-                    .alert(isPresented: $viewModel.showWarningAlert) {
-                        Alert(
-                            title: Text("disclamer.title".localize),
-                            message: Text("disclamer.desc".localize),
-                            dismissButton: .default(
-                                Text("ok".localize)
-                            )
-                        )
-                    }
                     .navigationBarTitleDisplayMode(.inline)
                     .onAppear {
                         viewModel.onAppear()
@@ -189,11 +212,42 @@ struct MainTabView: View {
 }
 
 #Preview {
-    UserSettings.shared.accessToken = UserSettings.testAccessToken
-    UserSettings.shared.refreshToken = UserSettings.testRefreshToken
-    UserSettings.shared.userEmail = UserSettings.testEmail
-    UserSettings.shared.tokenExpireDate = Date().after(days: 2)
-    UserSettings.shared.appPin = "0000"
-    
-    return MainView()
+//    UserSettings.shared.accessToken = UserSettings.testAccessToken
+//    UserSettings.shared.refreshToken = UserSettings.testRefreshToken
+//    UserSettings.shared.userEmail = UserSettings.testEmail
+//    UserSettings.shared.tokenExpireDate = Date().after(days: 2)
+//    UserSettings.shared.appPin = "0000"
+//    
+//    return MainView()
+    UserSettings.shared.language = .uzbek
+    @State var showRegisterWarning = true
+    return Text("Go")
+    .richAlert(
+        type: .custom(
+            image: Image(systemName: "exclamationmark.triangle")
+                .resizable()
+                .foregroundStyle(.accent)
+                .frame(width: 56, height: 56, alignment: .center)
+                .anyView
+        ),
+        title: "attention".localize,
+        message: Text(
+            "disclamer.desc".localize,
+            configure: { attr in
+                if let range = attr.range(of: "disclamer.desc.bold1".localize) {
+                    attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                }
+                
+                if let range = attr.range(of: "disclamer.desc.bold2".localize) {
+                    attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                }
+                
+                if let range = attr.range(of: "disclamer.desc.bold3".localize) {
+                    attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                }
+            }
+        ).anyView,
+        isPresented: $showRegisterWarning) {
+            
+        }
 }

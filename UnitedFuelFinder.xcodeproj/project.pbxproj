@@ -255,6 +255,7 @@
 		2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */; };
 		2ED38FEE2BBC7751008400CF /* NetReqChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */; };
 		2ED38FF12BBC7DA3008400CF /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FF02BBC7DA3008400CF /* ChangePasswordView.swift */; };
+		2ED38FF32BBD18E4008400CF /* ShortStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FF22BBD18E4008400CF /* ShortStorage.swift */; };
 		2ED9A3202B164E1D009ADCE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */; };
 		2ED9B7552B11F38800150F0D /* NetResAuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */; };
 		2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7562B11F3A800150F0D /* AuditLog.swift */; };
@@ -559,6 +560,7 @@
 		2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqForgotPassword.swift; sourceTree = "<group>"; };
 		2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqChangePassword.swift; sourceTree = "<group>"; };
 		2ED38FF02BBC7DA3008400CF /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		2ED38FF22BBD18E4008400CF /* ShortStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortStorage.swift; sourceTree = "<group>"; };
 		2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResAuditLog.swift; sourceTree = "<group>"; };
 		2ED9B7562B11F3A800150F0D /* AuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditLog.swift; sourceTree = "<group>"; };
@@ -1242,6 +1244,7 @@
 				2E5DF9102AEACD63005BE20D /* DatabaseConfig.swift */,
 				2E5DF9112AEACD63005BE20D /* Extensions */,
 				2E5DF91D2AEACD63005BE20D /* UserSettings.swift */,
+				2ED38FF22BBD18E4008400CF /* ShortStorage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1908,6 +1911,7 @@
 				2E5DF9312AEACD63005BE20D /* NoitificationContentView.swift in Sources */,
 				2E5DF9242AEACD63005BE20D /* YTextFieldCleanStyle.swift in Sources */,
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
+				2ED38FF32BBD18E4008400CF /* ShortStorage.swift in Sources */,
 				2E5DF9732AEACD64005BE20D /* NetReqVerifyAccount.swift in Sources */,
 				2E5DF98B2AEACD64005BE20D /* CGFloat+Extension.swift in Sources */,
 				2E5DF92B2AEACD63005BE20D /* PreviewHelpers.swift in Sources */,
@@ -2167,7 +2171,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -2208,7 +2212,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

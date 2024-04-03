@@ -287,6 +287,29 @@
         }
       }
     },
+    "attention" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attention"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внимание"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diqqat"
+          }
+        }
+      }
+    },
     "auth_agree_offer" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -474,6 +497,75 @@
         }
       }
     },
+    "change.pass.fail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password change failed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбой смены пароля"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parol o'zgartirishda xatolik"
+          }
+        }
+      }
+    },
+    "change.pass.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password changed successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль успешно изменен"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parol muvaffaqiyatli o'zgartirildi"
+          }
+        }
+      }
+    },
+    "change.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni o'zgartirish"
+          }
+        }
+      }
+    },
     "city" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -592,122 +684,6 @@
         }
       }
     },
-    "change.pass.success" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Password changed successfully"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Пароль успешно изменен"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parol muvaffaqiyatli o'zgartirildi"
-          }
-        }
-      }
-    },
-    "change.pass.fail" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Password change failed"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Сбой смены пароля"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parol o'zgartirishda xatolik"
-          }
-        }
-      }
-    },
-    "reset.pass.success" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New password sent to the email"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Новый пароль отправлен на почту"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yangi parol elektron pochtaga yuborildi"
-          }
-        }
-      }
-    },
-    "reset.pass.failed" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Failed to reset password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Не удалось сбросить пароль"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parolni tiklashda xatolik"
-          }
-        }
-      }
-    },
-    
-    "invalid.form" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Invalid form"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Неверная форма"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Noto'g'ri forma"
-          }
-        }
-      }
-    },
     "confirm_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -727,76 +703,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "PIN-kodni tasdiqlang"
-          }
-        }
-      }
-    },
-    
-    "change.password" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Change password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Изменить пароль"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Parolni o'zgartirish"
-          }
-        }
-      }
-    },
-    "old.password" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Current password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Текущий пароль"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Hozirgi parol"
-          }
-        }
-      }
-    },
-    "new.password" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "New password"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Новый пароль"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yangi parol"
           }
         }
       }
@@ -1148,13 +1054,82 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "United Fuel Driver - это инструмент, который помогает вам найти самую дешевую цену, но не следует рассматривать как гарантированное, в реальном времени отражение цены на топливо на автозаправочной станции. Наше приложение отражает ценообразование, предоставленное нам непосредственно членами сети автозаправочных станций и другими третьими лицами; ценообразование может измениться с момента последнего обновления."
+            "value" : "Благодарим вас за использование нашего приложения. United Fuel Driver — это инструмент, который помогает вам найти самую дешевую цену, но его не следует рассматривать как гарантированное отражение цен на топливо на остановках для грузовиков в режиме реального времени. Наше приложение отражает цены, предоставленные непосредственно нам участниками сети стоянок для грузовиков и другими третьими лицами. ; цены могли измениться с момента получения последнего обновления."
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "United Fuel Driver - bu eng arzon narxni topishga yordam beradigan vosita, ammo avtomobil yo'lovchilari stantsiyalarida benzin narxlarini amalga oshirishda ishlatilmasligi kerak. Bizning ilovamiz, avtomobil yo'lovchilari stantsiyalar tarmog'i a'zolari va boshqa uchunchi tomonlar tomonidan bizga to'lovlar haqida berilgan narxlarni ko'rsatadi; narxlar oxirgi yangilanishdan keyin o'zgarish mumkin."
+            "value" : "Ilovamizdan foydalanganingiz uchun tashakkur. United Fuel Driver - bu eng arzon narxni topishga yordam beradigan vosita, ammo real vaqtda yuk mashinalari to'xtash vaqtida yoqilg'i narxlarining kafolatlangan aksi sifatida qaralmasligi kerak. Bizning ilovamiz yuk mashinalarini to'xtatish tarmog'i a'zolari va boshqa uchinchi tomonlar tomonidan bizga to'g'ridan-to'g'ri taqdim etilgan narxlarni aks ettiradi. ; narxlar oxirgi yangilanishdan keyin o'zgargan bo'lishi mumkin."
+          }
+        }
+      }
+    },
+    "disclamer.desc.bold1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "should not"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "но его не следует рассматривать как гарантированное отражение цен"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kafolatlangan aksi sifatida qaralmasligi kerak"
+          }
+        }
+      }
+    },
+    "disclamer.desc.bold2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "guaranteed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "disclamer.desc.bold3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pricing may have changed since the last update received."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "цены могли измениться с момента получения последнего обновления."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "narxlar oxirgi yangilanishdan keyin o'zgargan bo'lishi mumkin."
           }
         }
       }
@@ -1739,6 +1714,9 @@
         }
       }
     },
+    "Go" : {
+
+    },
     "Green" : {
 
     },
@@ -1872,6 +1850,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hato OTP "
+          }
+        }
+      }
+    },
+    "invalid.form" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid form"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверная форма"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noto'g'ri forma"
           }
         }
       }
@@ -2489,19 +2490,19 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Password"
+            "value" : "New password"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Пароль"
+            "value" : "Новый пароль"
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Parol"
+            "value" : "Yangi parol"
           }
         }
       }
@@ -2827,6 +2828,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "OK"
+          }
+        }
+      }
+    },
+    "old.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текущий пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hozirgi parol"
           }
         }
       }
@@ -3331,6 +3355,52 @@
     },
     "Regular" : {
 
+    },
+    "reset.pass.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to reset password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось сбросить пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni tiklashda xatolik"
+          }
+        }
+      }
+    },
+    "reset.pass.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New password sent to the email"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый пароль отправлен на почту"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangi parol elektron pochtaga yuborildi"
+          }
+        }
+      }
     },
     "Retail price " : {
 

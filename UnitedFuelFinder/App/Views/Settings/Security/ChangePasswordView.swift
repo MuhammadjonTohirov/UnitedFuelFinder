@@ -69,7 +69,7 @@ struct ChangePasswordView: View {
             
             YRoundedTextField {
                 YTextField(
-                    text: $oldPassword,
+                    text: $newPassword,
                     placeholder: "new.password".localize,
                     isSecure: true,
                     contentType: UITextContentType.password,
@@ -86,7 +86,7 @@ struct ChangePasswordView: View {
             
             YRoundedTextField {
                 YTextField(
-                    text: $oldPassword,
+                    text: $confirmPassword,
                     placeholder: "confirm.password".localize,
                     isSecure: true,
                     contentType: UITextContentType.password,

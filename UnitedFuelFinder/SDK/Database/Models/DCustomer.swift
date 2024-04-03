@@ -39,7 +39,9 @@ class DCustomer: Object, Identifiable {
     override init() {
         super.init()
     }
-    
+}
+
+extension DCustomer {
     func toNetResCustomerItem() -> NetResCustomerItem {
         return NetResCustomerItem(id: self.id, name: self.name, email: self.email, phone: self.phone, cityId: self.cityId, stateId: self.stateId, address: self.address, isDeleted: self.isDeleted, iconUrl: self.iconUrl, logoUrl: self.logoUrl, markerColor: self.markerColor)
     }
@@ -98,6 +100,18 @@ extension DCustomer {
 
 extension DCustomer {
     var asModel: CustomerItem {
-        return CustomerItem(id: self.id, name: self.name, email: self.email, phone: self.phone, cityId: self.cityId, stateId: self.stateId, address: self.address, isDeleted: self.isDeleted, iconUrl: self.iconUrl, logoUrl: self.logoUrl, markerColor: self.markerColor)
+        return CustomerItem(
+            id: self.id,
+            name: self.name,
+            email: self.email,
+            phone: self.phone,
+            cityId: self.cityId,
+            stateId: self.stateId,
+            address: self.address,
+            isDeleted: self.isDeleted,
+            iconUrl: self.iconUrl,
+            logoUrl: self.logoUrl,
+            markerColor: self.markerColor
+        )
     }
 }

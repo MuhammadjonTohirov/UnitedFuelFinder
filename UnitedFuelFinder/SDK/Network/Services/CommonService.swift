@@ -49,7 +49,7 @@ public actor CommonService {
     
     public func fetchTotalSpending(type: Int) async -> NetResTotalSpending {
         let result: NetRes<NetResTotalSpending>? = await Network.send(request: CommonNetworkRouter.totalSpendings(type: type))
-        return result?.data ?? NetResTotalSpending(total: 0, records: [:])
+        return result?.data ?? NetResTotalSpending(total: 0, records: [])
     }
     
     public func fetchCardInfo() async -> NetResCard? {

@@ -31,11 +31,12 @@ actor MainService {
     }
     
     @discardableResult
-    func getCustomers() async -> [CustomerItem] {
+    func syncCustomers() async -> [CustomerItem] {
         let result: NetRes<[NetResCustomerItem]>? = await Network.send(request: MainNetworkRouter.getCustomers)
         let customers = ((result?.data)?.map({CustomerItem.create(from: $0)})) ?? []
         await MainDService.shared.removeAllCustomers()
         await MainDService.shared.addCustomers(customers)
+        ShortStorage.default.customers = result?.data
         return customers
     }
     

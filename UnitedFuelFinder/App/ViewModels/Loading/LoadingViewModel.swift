@@ -24,7 +24,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
                     if UserSettings.shared.appPin == nil {
                         await showAuth()
                     } else {
-                        await MainService.shared.getCustomers()
+                        await MainService.shared.syncCustomers()
                         await showMain()
                     }
                 } else {

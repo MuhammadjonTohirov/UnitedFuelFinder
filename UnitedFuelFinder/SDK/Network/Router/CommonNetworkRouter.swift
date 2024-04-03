@@ -29,7 +29,7 @@ enum CommonNetworkRouter: URLRequestProtocol {
                 .init(name: "toDate", value: to)
             )
         case let .totalSpendings(type):
-            return URL.baseAPI.appendingPath("Driver", "TotalSpends").queries(
+            return URL.baseAPI.appendingPath("Driver", "TotalSpendsV2").queries(
                 .init(name: "type", value: "\(type)")
             )
         case .cardInfo:
