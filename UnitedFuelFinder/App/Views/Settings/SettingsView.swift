@@ -93,6 +93,11 @@ struct SettingsView: View {
                 Text("app_version".localize + ":")
                     .fontWeight(.semibold)
                     .foregroundStyle(Color.init(uiColor: .systemRed))
+                    .onTapGesture {
+                        #if DEBUG
+                        viewModel.clearCache()
+                        #endif
+                    }
                 Text(UserSettings.shared.currentAPIVersion?.nilIfEmpty ?? Bundle.main.appVersion)
                     .foregroundStyle(Color.label)
                 

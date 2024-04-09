@@ -60,11 +60,19 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
     
     @Published var showScreen: Bool = false
     @Published var isOfferAccepted: Bool = false
+
+    @Published var email: String = ""
+    @Published var password1: String = ""
+    @Published var password2: String = ""
+
+    
     @Published var firstName: String = ""
     @Published var lastName: String = ""
+
     @Published var phoneNumber: String = ""
     @Published var companyName: String = ""
     @Published var fuelCardNumber: String = ""
+
     @Published var screenRect: CGRect = .zero
     @Published var address: String = ""
 
@@ -80,22 +88,23 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
         !lastName.isEmpty &&
         !phoneNumber.isEmpty &&
         !fuelCardNumber.isEmpty &&
-        !address.isEmpty &&
-        state != nil &&
-        city != nil && !companyName.isEmpty && isOfferAccepted
+//        !address.isEmpty &&
+        !email.isEmpty &&
+        !password1.isEmpty &&
+        !password2.isEmpty &&
+        password1 == password2 &&
+//        state != nil &&
+//        city != nil && 
+        !companyName.isEmpty &&
+        isOfferAccepted
     }
  
     func doRegister(completion: @escaping (Bool) -> Void) {
-        guard let stateModel = self.state?.asModel,
-              let cityModel = self.city?.asModel else {
-            return
-        }
+        let stateModel = self.state?.asModel
+        let cityModel = self.city?.asModel
         
         Task {
-            guard let email = UserSettings.shared.userEmail,
-                  let code = UserSettings.shared.lastOTP,
-                  let session = UserSettings.shared.session,
-                  isValidForm else {
+            guard isValidForm else {
                 return
             }
             
@@ -103,10 +112,13 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
                 self.isLoading = true
             }
             
-            let req: NetReqRegister = .init(firstName: firstName, lastName: lastName,
-                                            phone: phoneNumber, email: email, cardNumber: fuelCardNumber,
-                                            state: stateModel.id, city: cityModel.id, address: address, companyName: companyName,
-                                            confirm: .init(code: code, session: session))
+            let req: NetReqRegister = .init(
+                firstName: firstName, lastName: lastName,
+                phone: phoneNumber, email: email, password: password1,
+                cardNumber: fuelCardNumber,
+                state: stateModel?.id, city: cityModel?.id, address: address.nilIfEmpty, 
+                companyName: companyName
+            )
             
             let result = await AuthService.shared.register(with: req)
             

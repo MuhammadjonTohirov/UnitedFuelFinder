@@ -14,7 +14,7 @@ extension URLRequest {
         var req = URLRequest(url: url, cachePolicy: policy, timeoutInterval: interval)
         req.addValue(URL.keyHeader.value, forHTTPHeaderField: URL.keyHeader.key)
         req.addValue(URL.langHeader.value, forHTTPHeaderField: URL.langHeader.key)
-        req.addValue("IOS", forHTTPHeaderField: "X-DEVICE-TYPE")
+        req.addValue("IOS", forHTTPHeaderField: "X-DEVICE-TYPE")   
         req.addValue("application/json", forHTTPHeaderField: "Content-Type")
         req.addValue("application/json", forHTTPHeaderField: "accept")
         

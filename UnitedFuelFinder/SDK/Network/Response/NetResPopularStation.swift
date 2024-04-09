@@ -11,6 +11,7 @@ public struct NetResPopularStationItem: NetResBody {
     let customer: String
     let station: String
     let value: Int
+    let id: Int
 }
 
 public struct NetResPopularStations: NetResBody {

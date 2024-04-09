@@ -172,6 +172,29 @@
         }
       }
     },
+    "already.exists" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Already exists"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Уже существует"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mavjud bo'lgan"
+          }
+        }
+      }
+    },
     "amount.saved" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -260,6 +283,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Qo'llash"
+          }
+        }
+      }
+    },
+    "attention" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Attention"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Внимание"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diqqat"
           }
         }
       }
@@ -356,9 +402,6 @@
         }
       }
     },
-    "Blue" : {
-
-    },
     "camera" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -447,6 +490,75 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "PIN kod"
+          }
+        }
+      }
+    },
+    "change.pass.fail" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password change failed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбой смены пароля"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parol o'zgartirishda xatolik"
+          }
+        }
+      }
+    },
+    "change.pass.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Password changed successfully"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пароль успешно изменен"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parol muvaffaqiyatli o'zgartirildi"
+          }
+        }
+      }
+    },
+    "change.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni o'zgartirish"
           }
         }
       }
@@ -588,6 +700,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "PIN-kodni tasdiqlang"
+          }
+        }
+      }
+    },
+    "confirm.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirm password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердите пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni tasdiqlang"
           }
         }
       }
@@ -916,13 +1051,82 @@
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "United Fuel Driver - это инструмент, который помогает вам найти самую дешевую цену, но не следует рассматривать как гарантированное, в реальном времени отражение цены на топливо на автозаправочной станции. Наше приложение отражает ценообразование, предоставленное нам непосредственно членами сети автозаправочных станций и другими третьими лицами; ценообразование может измениться с момента последнего обновления."
+            "value" : "Благодарим вас за использование нашего приложения. United Fuel Driver — это инструмент, который помогает вам найти самую дешевую цену, но его не следует рассматривать как гарантированное отражение цен на топливо на остановках для грузовиков в режиме реального времени. Наше приложение отражает цены, предоставленные непосредственно нам участниками сети стоянок для грузовиков и другими третьими лицами. ; цены могли измениться с момента получения последнего обновления."
           }
         },
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "United Fuel Driver - bu eng arzon narxni topishga yordam beradigan vosita, ammo avtomobil yo'lovchilari stantsiyalarida benzin narxlarini amalga oshirishda ishlatilmasligi kerak. Bizning ilovamiz, avtomobil yo'lovchilari stantsiyalar tarmog'i a'zolari va boshqa uchunchi tomonlar tomonidan bizga to'lovlar haqida berilgan narxlarni ko'rsatadi; narxlar oxirgi yangilanishdan keyin o'zgarish mumkin."
+            "value" : "Ilovamizdan foydalanganingiz uchun tashakkur. United Fuel Driver - bu eng arzon narxni topishga yordam beradigan vosita, ammo real vaqtda yuk mashinalari to'xtash vaqtida yoqilg'i narxlarining kafolatlangan aksi sifatida qaralmasligi kerak. Bizning ilovamiz yuk mashinalarini to'xtatish tarmog'i a'zolari va boshqa uchinchi tomonlar tomonidan bizga to'g'ridan-to'g'ri taqdim etilgan narxlarni aks ettiradi. ; narxlar oxirgi yangilanishdan keyin o'zgargan bo'lishi mumkin."
+          }
+        }
+      }
+    },
+    "disclamer.desc.bold1" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "should not"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "но его не следует рассматривать как гарантированное отражение цен"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "kafolatlangan aksi sifatida qaralmasligi kerak"
+          }
+        }
+      }
+    },
+    "disclamer.desc.bold2" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "guaranteed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : ""
+          }
+        }
+      }
+    },
+    "disclamer.desc.bold3" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "pricing may have changed since the last update received."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "цены могли измениться с момента получения последнего обновления."
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "narxlar oxirgi yangilanishdan keyin o'zgargan bo'lishi mumkin."
           }
         }
       }
@@ -1217,6 +1421,29 @@
         }
       }
     },
+    "enter.email.to.reset.pass" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enter email to reset password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Введите email для сброса пароля"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni tiklash uchun emailni kiriting"
+          }
+        }
+      }
+    },
     "exit" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1392,6 +1619,29 @@
     "Focus" : {
 
     },
+    "forgot.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Forgot password?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Забыли пароль?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni unutdingizmi?"
+          }
+        }
+      }
+    },
     "from" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1461,7 +1711,7 @@
         }
       }
     },
-    "Green" : {
+    "Go" : {
 
     },
     "help_desk" : {
@@ -1486,9 +1736,6 @@
           }
         }
       }
-    },
-    "Indigo" : {
-
     },
     "information" : {
       "extractionState" : "manual",
@@ -1597,6 +1844,32 @@
           }
         }
       }
+    },
+    "invalid.form" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invalid form"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неверная форма"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noto'g'ri forma"
+          }
+        }
+      }
+    },
+    "Key" : {
+      "extractionState" : "manual"
     },
     "language" : {
       "extractionState" : "manual",
@@ -2127,12 +2400,6 @@
         }
       }
     },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
-    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2198,6 +2465,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Iltimos, ilovani yangilang."
+          }
+        }
+      }
+    },
+    "new.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangi parol"
           }
         }
       }
@@ -2336,6 +2626,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "AYOQSH topilmadi"
+          }
+        }
+      }
+    },
+    "no.account" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Don't have an account?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет аккаунта?"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hisobingiz yo'qmi?"
           }
         }
       }
@@ -2504,14 +2817,28 @@
         }
       }
     },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
-    "Orange" : {
-
+    "old.password" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Текущий пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hozirgi parol"
+          }
+        }
+      }
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -2907,9 +3234,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "region" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3002,8 +3326,51 @@
         }
       }
     },
-    "Regular" : {
-
+    "reset.pass.failed" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed to reset password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось сбросить пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Parolni tiklashda xatolik"
+          }
+        }
+      }
+    },
+    "reset.pass.success" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New password sent to the email"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Новый пароль отправлен на почту"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yangi parol elektron pochtaga yuborildi"
+          }
+        }
+      }
     },
     "Retail price " : {
 
@@ -3336,6 +3703,29 @@
         }
       }
     },
+    "send.request" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send request"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Отправить запрос"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So'rov yuborish"
+          }
+        }
+      }
+    },
     "set.rating" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -3506,9 +3896,6 @@
     "Submit" : {
 
     },
-    "SwiftUI" : {
-
-    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3676,6 +4063,29 @@
         }
       }
     },
+    "unknown.error" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown error"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Неизвестная ошибка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Noma'lum xatolik"
+          }
+        }
+      }
+    },
     "view_all" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3744,9 +4154,6 @@
           }
         }
       }
-    },
-    "Violet" : {
-
     },
     "warning" : {
       "extractionState" : "manual",
@@ -3839,9 +4246,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     },
     "Русский" : {
 

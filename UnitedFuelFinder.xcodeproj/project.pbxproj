@@ -251,6 +251,11 @@
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* MapTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */; };
 		2EC47CA12B7F151E007A14CB /* CoverNavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */; };
+		2ED38FEA2BBC73C0008400CF /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FE92BBC73C0008400CF /* ForgotPasswordView.swift */; };
+		2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */; };
+		2ED38FEE2BBC7751008400CF /* NetReqChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */; };
+		2ED38FF12BBC7DA3008400CF /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FF02BBC7DA3008400CF /* ChangePasswordView.swift */; };
+		2ED38FF32BBD18E4008400CF /* ShortStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FF22BBD18E4008400CF /* ShortStorage.swift */; };
 		2ED9A3202B164E1D009ADCE9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */; };
 		2ED9B7552B11F38800150F0D /* NetResAuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */; };
 		2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED9B7562B11F3A800150F0D /* AuditLog.swift */; };
@@ -551,6 +556,11 @@
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewModel.swift; sourceTree = "<group>"; };
 		2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverNavigationBarModifier.swift; sourceTree = "<group>"; };
+		2ED38FE92BBC73C0008400CF /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqForgotPassword.swift; sourceTree = "<group>"; };
+		2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqChangePassword.swift; sourceTree = "<group>"; };
+		2ED38FF02BBC7DA3008400CF /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		2ED38FF22BBD18E4008400CF /* ShortStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortStorage.swift; sourceTree = "<group>"; };
 		2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2ED9B7542B11F38800150F0D /* NetResAuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResAuditLog.swift; sourceTree = "<group>"; };
 		2ED9B7562B11F3A800150F0D /* AuditLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuditLog.swift; sourceTree = "<group>"; };
@@ -1187,6 +1197,8 @@
 				2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */,
 				2E0F93D32B01361400660DEB /* NetReqStationFeedback.swift */,
 				2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */,
+				2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */,
+				2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1232,6 +1244,7 @@
 				2E5DF9102AEACD63005BE20D /* DatabaseConfig.swift */,
 				2E5DF9112AEACD63005BE20D /* Extensions */,
 				2E5DF91D2AEACD63005BE20D /* UserSettings.swift */,
+				2ED38FF22BBD18E4008400CF /* ShortStorage.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1401,6 +1414,23 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
+		2ED38FE82BBC73AB008400CF /* ForgotPassword */ = {
+			isa = PBXGroup;
+			children = (
+				2ED38FE92BBC73C0008400CF /* ForgotPasswordView.swift */,
+			);
+			path = ForgotPassword;
+			sourceTree = "<group>";
+		};
+		2ED38FEF2BBC7D9B008400CF /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				2E502D062B272CBA002CE669 /* SettingsSecurity.swift */,
+				2ED38FF02BBC7DA3008400CF /* ChangePasswordView.swift */,
+			);
+			path = Security;
+			sourceTree = "<group>";
+		};
 		2EDF8C3A2AD2CCD2003D64FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1517,6 +1547,7 @@
 		2EDF8C812AD452D6003D64FC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				2ED38FE82BBC73AB008400CF /* ForgotPassword */,
 				2EDF8C832AD452F1003D64FC /* Authenticate */,
 				2EDF8C822AD452E9003D64FC /* RegisterProfile */,
 				2EDF8C752AD44560003D64FC /* OTP */,
@@ -1618,12 +1649,12 @@
 		2EF3A1FE2ADD91FF00CA8DE2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				2ED38FEF2BBC7D9B008400CF /* Security */,
 				2E01E5DB2B52FAA700F6231D /* Profile */,
 				2E739C202B3DB1CA000350EA /* Appearance */,
 				2EF3A1FF2ADD920500CA8DE2 /* SettingsView.swift */,
 				2EF3A2012ADD950E00CA8DE2 /* ContactUsView.swift */,
 				2EDBE03A2B0F364700123CE0 /* SessionsView.swift */,
-				2E502D062B272CBA002CE669 /* SettingsSecurity.swift */,
 				2E502D082B272D39002CE669 /* SettingsViewUtils.swift */,
 				2E502D0C2B2759DE002CE669 /* SettingsMap.swift */,
 			);
@@ -1747,6 +1778,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2EA5C22D2B833E9E00DFB989 /* TotalSpendings.swift in Sources */,
+				2ED38FF12BBC7DA3008400CF /* ChangePasswordView.swift in Sources */,
 				2EB76B1E2B13B1C20055610A /* DCustomer.swift in Sources */,
 				2E1E92052B77B8C300AF1D7C /* MapTabToggleView.swift in Sources */,
 				2E5DF94A2AEACD63005BE20D /* UserTrackingMode.swift in Sources */,
@@ -1827,6 +1859,7 @@
 				2E36A74F2AEF9FDB0033363E /* UserInfo.swift in Sources */,
 				2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */,
 				2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */,
+				2ED38FEE2BBC7751008400CF /* NetReqChangePassword.swift in Sources */,
 				2E5DF97B2AEACD64005BE20D /* CodableWrapper.swift in Sources */,
 				2E5DF92D2AEACD63005BE20D /* Extensions.swift in Sources */,
 				2EDF8C632AD44251003D64FC /* PinCodeView.swift in Sources */,
@@ -1878,6 +1911,7 @@
 				2E5DF9312AEACD63005BE20D /* NoitificationContentView.swift in Sources */,
 				2E5DF9242AEACD63005BE20D /* YTextFieldCleanStyle.swift in Sources */,
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
+				2ED38FF32BBD18E4008400CF /* ShortStorage.swift in Sources */,
 				2E5DF9732AEACD64005BE20D /* NetReqVerifyAccount.swift in Sources */,
 				2E5DF98B2AEACD64005BE20D /* CGFloat+Extension.swift in Sources */,
 				2E5DF92B2AEACD63005BE20D /* PreviewHelpers.swift in Sources */,
@@ -1956,7 +1990,9 @@
 				2E5DF9452AEACD63005BE20D /* AlertToast.swift in Sources */,
 				2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */,
 				2EA5C2362B836B5A00DFB989 /* PopularStations.swift in Sources */,
+				2ED38FEA2BBC73C0008400CF /* ForgotPasswordView.swift in Sources */,
 				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
+				2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */,
 				2E5DF9842AEACD64005BE20D /* NSMutableData+Extensions.swift in Sources */,
 				2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */,
 				2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */,
@@ -2156,7 +2192,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.2;
+				MARKETING_VERSION = 1.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
@@ -2197,7 +2233,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.7.2;
+				MARKETING_VERSION = 1.8.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";

@@ -7,17 +7,18 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 import Kingfisher
 
 public class MarkerImageView: UIView, Identifiable {
     public var id: String
     
-    private(set) var imageView: UIImageView = .init()
-    
+    private(set) lazy var imageView: UIImageView = .init()
     private(set) var url: URL?
     private(set) var placeholder: UIImage?
-    private(set) var nameLabel: UILabel = .init()
-    private(set) var label: UILabel = .init()
+    private(set) lazy var nameLabel: UILabel = .init()
+    private(set) lazy var label: UILabel = .init()
+    private(set) lazy var backgroundImageView = UIImageView()
     
     init(id: String, url: URL? = nil, placeholder: UIImage?) {
         self.id = id
@@ -32,7 +33,6 @@ public class MarkerImageView: UIView, Identifiable {
     
     public override func didMoveToWindow() {
         super.didMoveToWindow()
-        
         setupView()
         setupImage()
     }
@@ -40,39 +40,39 @@ public class MarkerImageView: UIView, Identifiable {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
+        backgroundImageView.frame = self.bounds
     }
     
     private func setupView() {
-
+        self.addSubview(backgroundImageView)
         self.addSubview(nameLabel)
         self.addSubview(imageView)
         self.addSubview(label)
         
-        self.label.font = .systemFont(ofSize: 11, weight: .semibold)
+        self.label.font = .systemFont(ofSize: 11, weight: .bold)
         self.label.textAlignment = .center
         self.label.numberOfLines = 1
         
-        self.nameLabel.font = .systemFont(ofSize: 11, weight: .semibold)
+        self.nameLabel.font = .systemFont(ofSize: 11, weight: .medium)
         self.nameLabel.textAlignment = .center
         self.nameLabel.numberOfLines = 1
 
         self.nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor).isActive = true
+        self.nameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 4).isActive = true
         self.nameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.nameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.nameLabel.heightAnchor.constraint(equalToConstant: 12).isActive = true
-
+        
         self.imageView.translatesAutoresizingMaskIntoConstraints = false
-        self.imageView.topAnchor.constraint(equalTo: self.nameLabel.bottomAnchor).isActive = true
+        
+        self.imageView.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: -8).isActive = true
         self.imageView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-        self.imageView.heightAnchor.constraint(equalToConstant: 24).isActive = true
-        self.imageView.widthAnchor.constraint(equalToConstant: 24).isActive = true
+        self.imageView.heightAnchor.constraint(equalTo: self.heightAnchor, multiplier: 0.3).isActive = true
         
         self.label.translatesAutoresizingMaskIntoConstraints = false
         self.label.leadingAnchor.constraint(equalTo: self.leadingAnchor).isActive = true
         self.label.trailingAnchor.constraint(equalTo: self.trailingAnchor).isActive = true
-        self.label.topAnchor.constraint(equalTo: self.imageView.bottomAnchor).isActive = true
-        self.label.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        
+        self.label.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -18).isActive = true
         
         self.imageView.contentMode = .scaleAspectFit
         self.imageView.clipsToBounds = true
@@ -85,19 +85,37 @@ public class MarkerImageView: UIView, Identifiable {
         setupImage()
     }
     
-    func set(price: String) {
+    @discardableResult
+    func set(price: String) -> Self {
         self.label.text = price
+        return self
     }
     
-    func set(name: String) {
+    @discardableResult
+    func set(name: String) -> Self {
         self.nameLabel.text = name
+        return self
     }
     
     private func setupImage() {
+        backgroundImageView.image = UIImage(named: "icon_station_pin_2")
+        imageView.contentMode = .scaleAspectFit
+        backgroundImageView.contentMode = .scaleAspectFit
         imageView.kf.setImage(with: url, placeholder: placeholder, options: [.transition(.fade(0.2)), .scaleFactor(0.1)])
     }
     
     static func create(url: URL? = nil, placeholder: UIImage? = nil) -> MarkerImageView {
         return MarkerImageView(id: "marker_item", url: url, placeholder: placeholder)
     }
+}
+
+#Preview {
+    MarkerImageView(
+        id: "0012",
+        placeholder: UIImage(named: "image_ta")
+    )
+    .set(name: "№281")
+    .set(price: "$3.2")
+    .asSwiftUI
+    .frame(width: 56, height: 80)
 }

@@ -154,7 +154,7 @@ extension StationItem {
     }
     
     private func distanceInfo(_ dist: Float) -> String {
-        return String(format: "%.1f ml",  dist)
+        return String(format: "%.2f", dist) + " ml"
     }
     
     var fullAddress: String {

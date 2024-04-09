@@ -9,12 +9,5 @@ import Foundation
 
 struct NetReqLogin: Codable {
     let email: String
-    let confirm: NetReqLoginConfirm
+    let password: String
 }
-
-struct NetReqLoginConfirm: Codable {
-    let code: String // code coming from OTP
-    let session: String // session key coming from verify account
-}
-
-

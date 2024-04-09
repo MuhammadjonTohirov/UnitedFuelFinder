@@ -8,14 +8,8 @@
 import SwiftUI
 
 struct PopularStationsView: View {
-    @State private var data: [(title: String, value: Int)] = [
+    @State private var data: [(title: String, value: Int, color: Color)] = [
         
-    ]
-    
-    let defaultColors: [Color] = [
-        .accentColor,
-        .init(uiColor: .systemBlue),
-        .init(uiColor: .systemGreen)
     ]
     
     @State private var popularStations: PopularStations?
@@ -32,7 +26,7 @@ struct PopularStationsView: View {
                 VStack(alignment: .leading) {
                     ForEach(data.indices, id: \.self) { index in
                         let item = data[index]
-                        let color = defaultColors[index % defaultColors.count]
+                        let color = data[index].color
                         VStack(alignment: .leading) {
                             HStack {
                                 Text(item.title)
@@ -91,7 +85,8 @@ struct PopularStationsView: View {
                         total: result.total,
                         rows: result.rows.map({
                             PopularStationItem(
-                                customer: $0.customer,
+                                id: $0.id,
+                                customerName: $0.customer,
                                 station: $0.station,
                                 value: $0.value
                             )
@@ -100,7 +95,11 @@ struct PopularStationsView: View {
                     
                     self.popularStations?.rows.forEach { item in
                         self.data.append(
-                            ("\(item.customer) \(item.station)", item.value)
+                            (
+                                "\(item.customerName) \(item.station)",
+                                item.value,
+                                .init(uiColor: item.customer?.colorCode ?? .label)
+                            )
                         )
                     }
                     
@@ -110,16 +109,16 @@ struct PopularStationsView: View {
         }
     }
     
-    init(data: [(title: String, value: Int)]) {
+    init(data: [(title: String, value: Int, color: Color)]) {
         self.data = data
     }
 }
 
 struct ContentView: View {
     let barChartData = [
-        (title: "Bar 1", value: 30),
-        (title: "Bar 2", value: 10),
-        (title: "Bar 3", value: 11)
+        (title: "Bar 1", value: 30, color: Color.red),
+        (title: "Bar 2", value: 10, color: .red),
+        (title: "Bar 3", value: 11, color: .red)
     ]
     
     var body: some View {

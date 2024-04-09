@@ -8,7 +8,8 @@
 import Foundation
 
 public struct PopularStationItem: NetResBody {
-    let customer: String
+    let id: Int
+    let customerName: String
     let station: String
     let value: Int
 }
@@ -18,3 +19,12 @@ public struct PopularStations: NetResBody {
     var rows: [PopularStationItem]
 }
 
+extension PopularStationItem {
+    var customer: CustomerItem? {
+        if let r = ShortStorage.default.customers?.first(where: {$0.id == id}) {
+            return .create(from: r)
+        }
+        
+        return nil
+    }
+}

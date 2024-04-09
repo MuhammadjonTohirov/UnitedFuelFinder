@@ -13,9 +13,9 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .verifyAccount:
             return URL.baseAPI.appendingPath("Account", "DriverVerify")
         case .login:
-            return URL.baseAPI.appendingPath("Account", "DriverLogin")
+            return URL.baseAPI.appendingPath("Account", "ClientLogin")
         case .register:
-            return URL.baseAPI.appendingPath("Account", "DriverRegister")
+            return URL.baseAPI.appendingPath("Account", "ClientRegister")
         case .refresh(let refreshToken):
             return URL.baseAPI.appendingPath("Account", "RefreshToken").queries(.init(name: "token", value: refreshToken))
         case .userInfo:
@@ -25,7 +25,11 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .deleteProfile:
             return URL.baseAPI.appendingPath("Driver", "DeleteAccount")
         case .confirmDeleteProfile:
-            return URL.baseAPI.appendingPath("Driver", "ConfirmDelete") // http://15.235.212.129:5000/api/Driver/ConfirmDelete
+            return URL.baseAPI.appendingPath("Driver", "ConfirmDelete")
+        case .forgotPassword:
+            return URL.baseAPI.appendingPath("Account", "ResetPassword")
+        case .changePassword:
+            return URL.baseAPI.appendingPath("Driver", "ChangePassword")
         }
     }
     
@@ -40,6 +44,10 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .editUserInfo(let request):
             return request.asData
         case .confirmDeleteProfile(let request):
+            return request.asData
+        case .changePassword(let request):
+            return request.asData
+        case .forgotPassword(let request):
             return request.asData
         default:
             return nil
@@ -80,6 +88,8 @@ enum UserNetworkRouter: URLRequestProtocol {
     case login(request: NetReqLogin)
     case register(request: NetReqRegister)
     case refresh(refreshToken: String)
+    case forgotPassword(request: NetReqForgotPassword)
+    case changePassword(request: NetReqChangePassword)
     case userInfo
     case editUserInfo(request: NetReqEditProfile)
     case deleteProfile

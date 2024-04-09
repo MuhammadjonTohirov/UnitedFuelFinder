@@ -16,7 +16,6 @@ struct ProfileVIew: View {
     var body: some View {
         ZStack {
             VStack(alignment: .leading, spacing: 28) {
-
                 VStack(spacing: 8) {
                     if viewModel.imageUrl == nil {
                         KF(
@@ -57,7 +56,9 @@ struct ProfileVIew: View {
                 
                 personalDetails
                 
-                addressInfo
+                Divider()
+                
+                organizationRequisites
                 
                 Text("")
                     .frame(height: 100)
@@ -125,15 +126,16 @@ struct ProfileVIew: View {
             
             YRoundedTextField {
                 YTextField(text: $viewModel.lastName, placeholder: "last_name".localize, contentType: .familyName)
+                
             }
             
             YRoundedTextField {
                 YTextField(text: $viewModel.phoneNumber, placeholder: "phone_number".localize, contentType: .telephoneNumber)
                     .keyboardType(.decimalPad)
+                    .set(haveTitle: true)
             }
         }
     }
-    
     
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -154,6 +156,25 @@ struct ProfileVIew: View {
             }
             
             YTextView(text: $viewModel.address, placeholder: "address".localize.capitalized)
+        }
+    }
+    
+    private var organizationRequisites: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            Text("organization_reqs".localize)
+                .font(.system(size: 16, weight: .medium))
+                .foregroundColor(.init(.label))
+            
+            YRoundedTextField {
+                YTextField(text: $viewModel.companyName, placeholder: "Company name")
+                    
+            }
+            
+            YRoundedTextField {
+                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 5284 9871 1243".localize)
+                    .keyboardType(.decimalPad)
+                    .set(format: "XXXX XXXX XXXX XXXX")
+            }
         }
     }
 }

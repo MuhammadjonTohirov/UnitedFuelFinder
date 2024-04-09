@@ -21,7 +21,7 @@ public extension URL {
     }
     
     static var keyHeader: (key: String, value: String) {
-        ("X-APP-SERIAL", "f27b97551c2a585fcea2e8395ebe8facff1e4a7981dba6d381b2c50066a8e3b9")
+        ("X-APP-SERIAL", "99fdd3c020b83f43550cea92b00325b080b06d9f69ad6e3cbfc2113feb7b636e")
     }
     
     static var langHeader: (key: String, value: String) {
@@ -41,6 +41,10 @@ public extension URL {
         }
         
         return url
+    }
+    
+    static var publicOffer: URL {
+        base.appendingPath("TermsConditions.pdf")
     }
     
     static func googleRoutingAPI(from: String, to: String) -> URL? {

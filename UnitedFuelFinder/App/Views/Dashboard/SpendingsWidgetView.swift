@@ -15,7 +15,11 @@ struct SpendingsWidgetView: View {
     private var colors: [Color] = [
         .accentColor,
         .init(uiColor: .systemBlue),
-        .init(uiColor: .systemGreen)
+        .init(uiColor: .systemGreen),
+        .init(uiColor: .systemYellow),
+        .init(uiColor: .systemOrange),
+        .init(uiColor: .systemMint),
+        .init(uiColor: .systemBrown)
     ]
     
     @State private var isLoading: Bool = false
@@ -23,30 +27,38 @@ struct SpendingsWidgetView: View {
     @State private var result: TotalSpendings?
     
     var body: some View {
-        HStack {
-            DonutChartView(slices: slices, holeSize: 0.4)
-                .frame(width: 113, height: 113)
-                .overlay {
-                    Text(result?.total.asFloat.asMoney ?? "$0")
-                        .lineLimit(2)
-                        .multilineTextAlignment(.center)
-                        .font(.system(size: 15, weight: .medium))
-                        .frame(width: 65, height: 65, alignment: .center)
-                }
-                .overlay {
-                    ProgressView()
-                        .opacity(isLoading ? 1 : 0)
-                }
-            
-            rightBody
-                .padding(.leading, 40.f.sw())
-                .overlay {
-                    ProgressView()
-                        .opacity(isLoading ? 1 : 0)
-                }
+        ZStack {
+            VStack {
+                filterView
+                Spacer()
+            }
+                
+            HStack {
+                DonutChartView(slices: slices, holeSize: 0.4)
+                    .frame(width: 113, height: 113)
+                    .overlay {
+                        Text(result?.total.asFloat.asMoney ?? "$0")
+                            .lineLimit(2)
+                            .multilineTextAlignment(.center)
+                            .font(.system(size: 15, weight: .medium))
+                            .frame(width: 65, height: 65, alignment: .center)
+                    }
+                    .overlay {
+                        ProgressView()
+                            .opacity(isLoading ? 1 : 0)
+                    }
+                
+                Spacer()
+                
+                rightBody
+                    .padding(.leading, 40.f.sw())
+                    .overlay {
+                        ProgressView()
+                            .opacity(isLoading ? 1 : 0)
+                    }
+            }
         }
         .padding(Padding.medium)
-        .frame(height: 147)
         .frame(maxWidth: .infinity)
         .background {
             RoundedRectangle(cornerRadius: 16)
@@ -57,42 +69,42 @@ struct SpendingsWidgetView: View {
         }
     }
     
-    private var rightBody: some View {
-        VStack(alignment: .trailing, spacing: 0) {
-            HStack {
-                Spacer()
-                
-                Text("today".localize)
-                    .foregroundStyle(color(forType: .today))
-                    .onTapGesture {
-                        onSelect(type: .today)
-                    }
-                
-                Text("week".localize)
-                    .foregroundStyle(color(forType: .week))
-                    .onTapGesture {
-                        onSelect(type: .week)
-                    }
-                
-                Text("month".localize)
-                    .foregroundStyle(color(forType: .month))
-                    .onTapGesture {
-                        onSelect(type: .month)
-                    }
-            }
-            .font(.system(size: 12, weight: .semibold))
-            .padding(.bottom, Padding.default)
-            
-            ForEach(0..<(result?.records.count ?? 0), id: \.self) { i in
-                companyInfo(
-                    color: colors[i],
-                    name: info(at: i).title,
-                    value: info(at: i).value.asMoney
-                )
-                .padding(.bottom, Padding.small)
-            }
-            
+    private var filterView: some View {
+        HStack {
             Spacer()
+            
+            Text("today".localize)
+                .foregroundStyle(color(forType: .today))
+                .onTapGesture {
+                    onSelect(type: .today)
+                }
+            
+            Text("week".localize)
+                .foregroundStyle(color(forType: .week))
+                .onTapGesture {
+                    onSelect(type: .week)
+                }
+            
+            Text("month".localize)
+                .foregroundStyle(color(forType: .month))
+                .onTapGesture {
+                    onSelect(type: .month)
+                }
+        }
+        .font(.system(size: 12, weight: .semibold))
+        .padding(.bottom, Padding.default)
+    }
+    
+    private var rightBody: some View {
+        VStack(alignment: .trailing, spacing: Padding.small) {
+            ForEach(0..<(result?.records.count ?? 0), id: \.self) { i in
+                let _info = self.info(at: i)
+                companyInfo(
+                    color: .init(uiColor: _info.color),
+                    name: _info.name,
+                    value: _info.value.asFloat.asMoney
+                )
+            }
         }
     }
     
@@ -105,18 +117,10 @@ struct SpendingsWidgetView: View {
         self.loadTotalSpendings(type: type)
     }
     
-    private func info(at index: Int) -> (title: String, value: Float) {
-        guard let result else {
-            return ("", 0)
-        }
-        let keys = result.records.keys
+    private func info(at index: Int) -> TotalSpendings.Record {
+        let record = result?.records.item(at: index)
         
-        if keys.isEmpty {
-            return ("", 0)
-        }
-        
-        let key = Array(keys)[index]
-        return (key, Float(result.records[key] ?? 0))
+        return record ?? .init(id: 0, name: "", value: 0)
     }
     
     private func color(forType type: TotalSpendingFilterType) -> Color {
@@ -145,20 +149,20 @@ struct SpendingsWidgetView: View {
             let res = await CommonService.shared.fetchTotalSpending(type: type.rawValue)
             
             await MainActor.run {
-                self.result = TotalSpendings(
-                    type: self.selectyionType,
-                    total: res.total,
-                    records: res.records
-                )
+                self.result = .from(res: res, type: type)
                 
-                slices = [
-                    .init(value: info(at: 0).value.asDouble, color: colors[0]),
-                    .init(value: info(at: 1).value.asDouble, color: colors[1]),
-                    .init(value: info(at: 2).value.asDouble, color: colors[2])
-                ]
+                slices = self.result?.records.map { record in
+                        .init(value: record.value, color: .init(uiColor: record.color))
+                } ?? []
                 
                 isLoading = false
             }
         }
     }
+}
+
+#Preview {
+    UserSettings.shared.language = .russian
+    return SpendingsWidgetView()
+        .padding(.horizontal, Padding.large)
 }

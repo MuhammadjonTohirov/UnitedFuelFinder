@@ -21,6 +21,7 @@ enum AuthRoute: ScreenRoute {
     case otp(OtpViewModel)
     case register(_ completion: (Bool) -> Void)
     case pin(PinCodeViewModel)
+    case forgotpassword
     
     var id: String {
         return "\(self)"
@@ -36,6 +37,8 @@ enum AuthRoute: ScreenRoute {
             RegisterProfileView(onRegisterResult: completion)
         case .pin(let vm):
             PinCodeView(viewModel: vm)
+        case .forgotpassword:
+            ForgotPasswordView()
         }
     }
 }
@@ -46,10 +49,13 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     @Published var shouldShowAlert: Bool = false
     
     @Published var username: String = ""
+    @Published var password: String = ""
     @Published var isOfferAccepted: Bool = false
     
     var isValidForm: Bool {
-        isOfferAccepted && username.isValidEmail
+//        isOfferAccepted && 
+        username.isValidEmail &&
+        !password.isEmpty
     }
     
     @Published var emailError: String?
@@ -68,6 +74,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     
     var otpViewModel: OtpViewModel?
     
+    @available(*, deprecated, message: "Not used anymore")
     func showOtp() {
         otpViewModel = .init(title: "confirm_otp".localize, username: username)
         otpViewModel?.confirmOTP = { [weak self] otp in
@@ -121,6 +128,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         }
     }
     
+    @available(*, deprecated, message: "Not used anymore")
     private func showFillProfile() {
         DispatchQueue.main.async {
             self.route = .register({ isRegistered in
@@ -166,6 +174,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         emailError = nil
     }
     
+    @available(*, deprecated, message: "Not used anymore")
     func onClickVerifyUsername() {
         showLoading()
         
@@ -197,14 +206,37 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         }
     }
     
-    private func getAccessToken() async -> AuthNetworkErrorReason? {
-        guard let session = UserSettings.shared.session, let code = UserSettings.shared.lastOTP else {
-            return .custom("No session")
+    func onClickAuthenticate() {
+        Task {
+            let error = await getAccessToken()
+            
+            mainIfNeeded {
+                switch error {
+                case .notConfirmedByAdmin:
+                    self.showAlert(message: "not_confirmed_by_admin".localize)
+                case .userAlreadyExists:
+                    self.showAlert(message: "already.exists".localize)
+                case .unknown:
+                    self.showAlert(message: "unknown.error".localize)
+                case .custom(let string):
+                    self.showAlert(message: string)
+                case nil:
+                    self.showPinSetup()
+                }
+            }
         }
-        
+    }
+    
+    func onClickRegister() {
+        route = .register { isOK in
+            
+        }
+    }
+    
+    private func getAccessToken() async -> AuthNetworkErrorReason? {
         showLoading()
         
-        let (isOK, error) = await AuthService.shared.login(session: session, code: code, username: self.username)
+        let (isOK, error) = await AuthService.shared.login(username: self.username, password: password)
         
         hideLoading()
         

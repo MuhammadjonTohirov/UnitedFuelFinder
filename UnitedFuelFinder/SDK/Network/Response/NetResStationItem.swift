@@ -93,10 +93,6 @@ struct NetResStationItem: NetResBody {
         logoUrl = try? container.decodeIfPresent(String.self, forKey: .logoUrl)
         note = try? container.decodeIfPresent(String.self, forKey: .note)
         distance = try? container.decodeIfPresent(Float.self, forKey: .distance)
-        
-        if let distance = distance {
-            self.distance = distance / 1609.344
-        }
     }
     
     func encode(to encoder: Encoder) throws {

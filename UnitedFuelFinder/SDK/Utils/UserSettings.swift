@@ -66,7 +66,7 @@ final public class UserSettings {
     public var appPin: String?
     
     public var hasValidToken: Bool {
-        return accessToken?.nilIfEmpty != nil && userEmail?.nilIfEmpty != nil
+        return accessToken?.nilIfEmpty != nil && refreshToken?.nilIfEmpty != nil
     }
     
     @codableWrapper(key: "isLanguageSelected", false)

@@ -151,7 +151,7 @@ public struct YTextField: View, TextFieldProtocol {
             Button(action: {
                 self.passwordVisible.toggle()
             }, label: {
-                Image(passwordVisible ? "icon_open_eye" : "icon_close_eye")
+                Image(systemName: passwordVisible ? "eye" : "eye.slash")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)
@@ -159,6 +159,7 @@ public struct YTextField: View, TextFieldProtocol {
                     .background {
                         RoundedRectangle(cornerRadius: 8)
                             .foregroundColor(Color.init(uiColor: .secondaryLabel))
+                            .opacity(0.1)
                     }
                     .padding(Padding.small / 2)
             })

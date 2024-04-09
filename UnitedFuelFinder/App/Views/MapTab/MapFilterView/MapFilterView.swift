@@ -339,7 +339,7 @@ struct MapFilterView: View {
     }
     .onAppear {
         Task {
-            let _ = await MainService.shared.getCustomers()
+            let _ = await MainService.shared.syncCustomers()
         }
     }
 }

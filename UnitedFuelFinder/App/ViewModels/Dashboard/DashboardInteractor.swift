@@ -36,7 +36,7 @@ class DashboardInteractor: DashboardInteractorProtocol {
     }
     
     func loadCustomers() async {
-        _ = await MainService.shared.getCustomers()
+        _ = await MainService.shared.syncCustomers()
     }
 }
 

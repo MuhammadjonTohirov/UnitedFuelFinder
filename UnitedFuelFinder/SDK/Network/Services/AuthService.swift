@@ -46,9 +46,14 @@ public struct AuthService {
         return (nil, "Unknown error".localize)
     }
     
-    func login(session: String, code: String, username: String) async -> (Bool, AuthNetworkErrorReason?) {
+    func login(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
         guard let result: NetRes<NetResLogin> = await Network.send(
-            request: UserNetworkRouter.login(request: .init(email: username, confirm: .init(code: code, session: session))),
+            request: UserNetworkRouter.login(
+                request: .init(
+                    email: username,
+                    password: password
+                )
+            ),
             refreshTokenIfNeeded: false
         ) else {
             return (false, .unknown)
@@ -65,6 +70,9 @@ public struct AuthService {
         UserSettings.shared.accessToken = data.accessToken
         UserSettings.shared.refreshToken = data.refreshToken
         UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
+        UserSettings.shared.refreshTokenExpireDate = .init(timeIntervalSinceNow: data.refreshExpiresIn)
+        UserSettings.shared.userEmail = username
+        
         let isOK = result.data != nil
         return (isOK, isOK ? nil : (result.code == 400 ? .notConfirmedByAdmin : .unknown))
     }
@@ -126,13 +134,22 @@ public struct AuthService {
         return response?.data != nil
     }
     
-    func editUserInfo(firstName: String, lastName: String, phone: String, state: String, city: Int, address: String) async -> Bool {
-        let req = NetReqEditProfile.init(firstName: firstName, lastName: lastName, phone: phone, state: state, city: city, address: address)
+    func editUserInfo(firstName: String, lastName: String, phone: String, state: String? = nil, city: Int? = nil, address: String? = nil, company: String, cardNumber: String) async -> Bool {
+        let req = NetReqEditProfile(
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            state: state,
+            city: city,
+            address: address,
+            cardNumber: cardNumber,
+            companyName: company
+        )
+        
         let result: NetRes<String>? = await Network.send(request: UserNetworkRouter.editUserInfo(request: req))
         let isOK = result?.success ?? false
         
-        if isOK, let user = UserSettings.shared.userInfo, let _city = DCity.item(id: city) {
-            
+        if isOK {
             var info = UserSettings.shared.userInfo
             info?.firstName = firstName
             info?.lastName = lastName
@@ -159,6 +176,29 @@ public struct AuthService {
     
     func confirmDeleteProfile(session: String, code: String) async -> Bool {
         let response: NetRes<String>? = await Network.send(request: UserNetworkRouter.confirmDeleteProfile(request: .init(code: code, session: session)))
+        return response?.success ?? false
+    }
+    
+    func forgotPassword(email: String) async -> Bool {
+        let request = NetReqForgotPassword(email: email)
+        
+        let response: NetRes<String>? = await Network.send(
+            request: UserNetworkRouter.forgotPassword(request: request),
+            refreshTokenIfNeeded: false
+        )
+        return response?.success ?? false
+    }
+    
+    func changePassword(confirmPassword: String, oldPassword: String, newPassword: String) async -> Bool {
+        let request = NetReqChangePassword(
+            oldPassword: oldPassword,
+            newPassword: newPassword,
+            confirmPassword: confirmPassword
+        )
+        
+        let response: NetRes<String>? = await Network.send(
+            request: UserNetworkRouter.changePassword(request: request)
+        )
         return response?.success ?? false
     }
 }

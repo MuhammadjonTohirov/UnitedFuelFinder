@@ -102,7 +102,6 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
             startLoading()
             await loadTransactions()
             await loadInvoices()
-            await interactor.loadCustomers()
             stopLoading()
         }
     }

@@ -6,20 +6,6 @@
 //
 
 import Foundation
-//
-//{
-//      "id": 0,
-//      "name": "string",
-//      "email": "string",
-//      "phone": "string",
-//      "cityId": 0,
-//      "stateId": "string",
-//      "address": "string",
-//      "isDeleted": true,
-//      "iconUrl": "string",
-//      "logoUrl": "string",
-//      "markerColor": "string"
-//    }
 
 struct NetResCustomerItem: NetResBody {
     let id: Int

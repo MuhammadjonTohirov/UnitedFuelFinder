@@ -35,7 +35,8 @@ enum RichAlertType {
 struct RichAlertView: View {
     var type: RichAlertType
     var title: String
-    var message: String?
+    var message: AnyView?
+    
     @Binding var presented: Bool
     var onDismiss: () -> Void
     @State private var bodySize: CGRect = .zero
@@ -56,8 +57,7 @@ struct RichAlertView: View {
                         .font(.system(size: 24, weight: .semibold, design: .rounded))
                     
                     if let message = message {
-                        Text(message)
-                            .font(.system(size: 14, weight: .medium, design: .rounded))
+                        message
                             .multilineTextAlignment(.center)
                     }
                     
@@ -117,7 +117,7 @@ struct RichAlertView: View {
 struct RichAlertViewModifier: ViewModifier {
     var type: RichAlertType
     var title: String
-    var message: String?
+    var message: AnyView?
     
     @Binding
     var isPresented: Bool
@@ -126,7 +126,13 @@ struct RichAlertViewModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
-            RichAlertView(type: type, title: title, message: message, presented: $isPresented, onDismiss: onDismiss)
+            RichAlertView(
+                type: type,
+                title: title,
+                message: message,
+                presented: $isPresented,
+                onDismiss: onDismiss
+            )
             .ignoresSafeArea()
             .allowsHitTesting(isPresented)
         }
@@ -146,8 +152,26 @@ extension View {
             RichAlertViewModifier(
                 type: type,
                 title: title,
+                message: message != nil ? Text(message!).font(.system(size: 14, weight: .medium, design: .rounded)).anyView : nil,
+                isPresented: isPresented.animation(.easeInOut(duration: 0.2)),
+                onDismiss: onDismiss
+            )
+        )
+    }
+    
+    func richAlert(
+        type: RichAlertType,
+        title: String,
+        message: AnyView,
+        isPresented: Binding<Bool>,
+        onDismiss: @escaping () -> Void
+    ) -> some View {
+        self.modifier(
+            RichAlertViewModifier(
+                type: type,
+                title: title,
                 message: message,
-                isPresented: isPresented.animation(.easeInOut(duration: 0.2)), 
+                isPresented: isPresented.animation(.easeInOut(duration: 0.2)),
                 onDismiss: onDismiss
             )
         )
