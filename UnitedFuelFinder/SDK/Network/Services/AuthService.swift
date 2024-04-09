@@ -134,14 +134,16 @@ public struct AuthService {
         return response?.data != nil
     }
     
-    func editUserInfo(firstName: String, lastName: String, phone: String, state: String?, city: Int?, address: String?) async -> Bool {
+    func editUserInfo(firstName: String, lastName: String, phone: String, state: String? = nil, city: Int? = nil, address: String? = nil, company: String, cardNumber: String) async -> Bool {
         let req = NetReqEditProfile(
             firstName: firstName,
             lastName: lastName,
             phone: phone,
             state: state,
             city: city,
-            address: address
+            address: address,
+            cardNumber: cardNumber,
+            companyName: company
         )
         
         let result: NetRes<String>? = await Network.send(request: UserNetworkRouter.editUserInfo(request: req))

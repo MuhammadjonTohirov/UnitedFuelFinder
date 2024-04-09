@@ -8,11 +8,6 @@
 import SwiftUI
 
 struct DashboardView: View {
-    let barChartData = [
-        (title: "Bar 1", value: 30),
-        (title: "Bar 2", value: 10),
-        (title: "Bar 3", value: 11)
-    ]
     
     @ObservedObject var viewModel: DashboardViewModel
     
@@ -64,7 +59,7 @@ struct DashboardView: View {
             SpendingsWidgetView()
             
             Text("popular.stations".localize)
-            PopularStationsView(data: barChartData)
+            PopularStationsView(data: [])
             
             Text("discounted.stations.nearby".localize)
             stationDetail

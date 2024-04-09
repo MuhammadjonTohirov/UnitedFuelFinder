@@ -103,6 +103,8 @@ struct ChangePasswordView: View {
     }
     
     private func changePassword() {
+        UIApplication.shared.dismissKeyboard()
+
         guard confirmPassword == newPassword && !newPassword.isEmpty && !oldPassword.isEmpty else {
             
             showError("invalid.form".localize)

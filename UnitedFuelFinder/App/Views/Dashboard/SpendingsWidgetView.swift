@@ -96,7 +96,7 @@ struct SpendingsWidgetView: View {
     }
     
     private var rightBody: some View {
-        VStack(alignment: .trailing, spacing: 0) {
+        VStack(alignment: .trailing, spacing: Padding.small) {
             ForEach(0..<(result?.records.count ?? 0), id: \.self) { i in
                 let _info = self.info(at: i)
                 companyInfo(
@@ -104,10 +104,7 @@ struct SpendingsWidgetView: View {
                     name: _info.name,
                     value: _info.value.asFloat.asMoney
                 )
-                .padding(.bottom, Padding.small)
             }
-            
-            Spacer()
         }
     }
     

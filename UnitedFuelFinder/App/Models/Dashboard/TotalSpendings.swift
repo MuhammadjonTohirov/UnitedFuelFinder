@@ -44,7 +44,7 @@ extension TotalSpendings {
 extension TotalSpendings.Record {
     var customer: CustomerItem? {
         // TODO: filter by id
-        if let r = ShortStorage.default.customers?.first {
+        if let r = ShortStorage.default.customers?.first(where: {$0.id == id}) {
             return .create(from: r)
         }
         

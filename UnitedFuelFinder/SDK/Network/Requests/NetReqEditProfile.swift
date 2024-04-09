@@ -14,13 +14,17 @@ struct NetReqEditProfile: Encodable {
     var state: String?
     var city: Int?
     var address: String?
+    var cardNumber: String
+    var companyName: String
     
-    init(firstName: String, lastName: String, phone: String, state: String?, city: Int?, address: String?) {
+    init(firstName: String, lastName: String, phone: String, state: String?, city: Int?, address: String?, cardNumber: String, companyName: String) {
         self.firstName = firstName
         self.lastName = lastName
         self.phone = phone
         self.state = state
         self.city = city
         self.address = address
+        self.cardNumber = cardNumber
+        self.companyName = companyName
     }
 }

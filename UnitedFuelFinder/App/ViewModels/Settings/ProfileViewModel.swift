@@ -122,7 +122,9 @@ class ProfileViewModel: NSObject, ObservableObject, Alertable {
                     phone: self.phoneNumber,
                     state: stateId,
                     city: cityId,
-                    address: self.address.nilIfEmpty
+                    address: self.address.nilIfEmpty,
+                    company: self.companyName,
+                    cardNumber: self.fuelCardNumber
                 ) {
                     DispatchQueue.main.async {
                         self.isLoading = false
