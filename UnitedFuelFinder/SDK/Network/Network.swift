@@ -107,7 +107,7 @@ struct Network {
             
             Logging.l("--- --- RESPONSE --- ---")
             Logging.l(res.asString)
-
+            
             completion(res)
         }.resume()
     }
@@ -129,7 +129,7 @@ struct Network {
             
             Logging.l("--- --- RESPONSE --- ---")
             Logging.l(res.asString)
-
+            
             completion(res)
         }.resume()
     }

@@ -44,12 +44,13 @@ struct TransactionView: View {
                     
                     if totalDiscount != 0 {
                         Text("(\(savedAmount))")
-                            .foregroundStyle(Color.init(uiColor: .systemGreen))
+                            //.foregroundStyle(Color.init(uiColor: .systemGreen))
+                            //.foregroundStyle(Color.init(uiColor: .systemGreen))
                     }
                 }
             }
             .font(.system(size: 12))
-            .fontWeight(.bold)
+            //.fontWeight(.bold)
             .padding(.top, Padding.medium)
             
             Line()

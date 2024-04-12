@@ -27,7 +27,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
     var onSearching: (C, String) -> Bool
     var onSelectChange: (Set<C>) -> Void
     
-    @Environment (\.dismiss) var dismiss
+    //@Environment (\.dismiss) var dismiss
     
     public var body: some View {
         LazyVStack(content: {
@@ -63,7 +63,8 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    dismiss.callAsFunction()
+                    //dismiss.callAsFunction()
+                    
                 }, label: {
                     Text("done".localize)
                 })
@@ -85,7 +86,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         viewModel.selectedObjectsIds.insert(item.id)
         
         if !multiSelect {
-            dismiss.callAsFunction()
+            //dismiss.callAsFunction()
         }
     }
 }

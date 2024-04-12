@@ -64,7 +64,8 @@ public struct AuthService {
         }
         
         guard let data = result.data else {
-            return (false, .notConfirmedByAdmin)
+            //return (false, .notConfirmedByAdmin)
+            return (false, .custom(result.error ?? "Unknown error"))
         }
         
         UserSettings.shared.accessToken = data.accessToken

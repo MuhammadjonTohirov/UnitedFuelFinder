@@ -219,7 +219,7 @@ struct MainTabView: View {
 //    UserSettings.shared.appPin = "0000"
 //    
 //    return MainView()
-    UserSettings.shared.language = .uzbek
+    UserSettings.shared.language = .english
     @State var showRegisterWarning = true
     return Text("Go")
     .richAlert(

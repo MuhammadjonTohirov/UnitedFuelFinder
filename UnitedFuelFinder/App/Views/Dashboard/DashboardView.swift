@@ -55,14 +55,14 @@ struct DashboardView: View {
         VStack(alignment: .leading, spacing: 20) {
             CardWidgetView()
             
-            Text("total.spendings".localize)
-            SpendingsWidgetView()
+//            Text("total.spendings".localize)
+//            SpendingsWidgetView()
             
-            Text("popular.stations".localize)
-            PopularStationsView(data: [])
+//            Text("popular.stations".localize)
+//            PopularStationsView(data: [])
             
-            Text("discounted.stations.nearby".localize)
-            stationDetail
+//            Text("discounted.stations.nearby".localize)
+//            stationDetail
             
             transactionsView.set(isVisible: showTransitions)
 

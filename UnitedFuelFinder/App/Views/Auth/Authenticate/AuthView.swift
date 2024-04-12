@@ -127,18 +127,18 @@ struct AuthView: View {
             .horizontal, Padding.medium
         )
         
-        HStack {
-            Spacer()
-            
-            Button(action: {
-                viewModel.route = .forgotpassword
-            }, label: {
-                Text("forgot.password".localize)
-                    .font(.system(size: 13, weight: .medium))
-            })
-            .padding(.horizontal, Padding.default)
-            .padding(.top, Padding.small)
-        }
+//        HStack {
+//            Spacer()
+//            
+//            Button(action: {
+//                viewModel.route = .forgotpassword
+//            }, label: {
+//                Text("forgot.password".localize)
+//                    .font(.system(size: 13, weight: .medium))
+//            })
+//            .padding(.horizontal, Padding.default)
+//            .padding(.top, Padding.small)
+//        }
     }
 }
 
