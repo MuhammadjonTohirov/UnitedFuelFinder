@@ -53,7 +53,9 @@ struct StationDetailsView: View {
                 .padding(.bottom, 50)
         }
         .scrollable(showIndicators: false)
-        .ignoresSafeArea(.container)
+        //.ignoresSafeArea(.container)
+        .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+            
         .keyboardDismissable()
         .navigationDestination(isPresented: $commentsPresented, destination: {
             CommentsView()
@@ -77,7 +79,8 @@ struct StationDetailsView: View {
         })
         .zIndex(0)
         .frame(height: UIApplication.shared.screenFrame.height * 0.45)
-        .ignoresSafeArea()
+        .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+        //.ignoresSafeArea()
     }
     
     private var details: some View {
