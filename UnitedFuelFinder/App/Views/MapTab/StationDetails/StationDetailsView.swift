@@ -8,7 +8,7 @@
 import SwiftUI
 import RealmSwift
 import Kingfisher
-
+ 
 struct StationDetailsView: View {
     
     @Environment (\.dismiss) var dismiss
@@ -16,7 +16,7 @@ struct StationDetailsView: View {
     @StateObject var viewModel: StationDetailsViewModel = .init()
     private var station: StationItem
     
-    init(station: StationItem) {
+    init(station: StationItem){
         self.station = station
     }
     
@@ -46,19 +46,59 @@ struct StationDetailsView: View {
                         .foregroundStyle(.background)
                 }
                 .zIndex(1)
-            postFeedbacks
-        
-            comments
-                .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
-                .padding(.bottom, 50)
+            HStack{
+                Spacer()
+                navigateButton
+            }
+            .padding(.trailing, Padding.medium)
+            
+            //postFeedbacks
+            //comments
+              //  .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
+               // .padding(.bottom, 50)
         }
         .scrollable(showIndicators: false)
         //.ignoresSafeArea(.container)
         .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
-            
+        
         .keyboardDismissable()
         .navigationDestination(isPresented: $commentsPresented, destination: {
             CommentsView()
+        })
+    }
+    func openStation(_ stationItem: StationItem) {
+        GLocationManager.shared.openLocationOnMap(stationItem.coordinate, name: stationItem.name)
+    }
+    private var navigateButton: some View {
+        Button(action: {
+            self.openStation(station)
+        }, label: {
+            Label(
+                title: {
+                    Text("navigate".localize)
+                        .font(.system(size: 12, weight: .medium))
+                },
+                icon: {
+                    Image(
+                        "icon_navigation_point"
+                    ).renderingMode(
+                        .template
+                    )
+                    .resizable()
+                    .frame(width: 18, height: 18)
+                    .foregroundStyle(
+                        Color.white
+                    )
+                }
+            )
+            .foregroundStyle(.white)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .background(content: {
+                RoundedRectangle(cornerRadius: 6)
+            })
+            .font(.system(size: 12))
+            .padding(.vertical, 6)
         })
     }
     
@@ -78,9 +118,9 @@ struct StationDetailsView: View {
                 .stretchable(in: geometry)
         })
         .zIndex(0)
-        .frame(height: UIApplication.shared.screenFrame.height * 0.45)
-        .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
-        //.ignoresSafeArea()
+        .frame(height: UIApplication.shared.screenFrame.height * 0.55)
+        //.ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+        .ignoresSafeArea()
     }
     
     private var details: some View {

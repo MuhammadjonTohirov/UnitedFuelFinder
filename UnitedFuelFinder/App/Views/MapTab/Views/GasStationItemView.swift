@@ -125,7 +125,7 @@ struct GasStationItemView: View {
         VStack(alignment: .leading) {
             Text(station.name)
             Text(station.distanceFromCurrentLocationInfo)
-            .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                .foregroundStyle(Color.init(uiColor: .secondaryLabel))
         }
         .font(.system(size: 12))
     }
@@ -151,7 +151,7 @@ struct GasStationItemView: View {
             )
     }
     
-    private var navigateButton: some View {
+    var navigateButton: some View {
         Button(action: {
             self.onClickNavigate?(station)
         }, label: {

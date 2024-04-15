@@ -171,7 +171,7 @@ struct DashboardView: View {
                                 .foregroundStyle(.appSecondaryBackground)
                         }
                         .onTapGesture {
-                            viewModel.navigate(to: .stationInfo(station))
+                            viewModel.navigate(to: .stationInfo(station))                            
                         }
                 }
             }
