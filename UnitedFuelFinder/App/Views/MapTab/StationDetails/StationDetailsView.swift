@@ -108,7 +108,7 @@ struct StationDetailsView: View {
                 .placeholder {
                     Image("image_placeholder")
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
+                        .aspectRatio(contentMode: .fill)
                         .clipped()
                         
                 }
@@ -118,8 +118,7 @@ struct StationDetailsView: View {
                 .stretchable(in: geometry)
         })
         .zIndex(0)
-        .frame(height: UIApplication.shared.screenFrame.height * 0.55)
-        //.ignoresSafeArea(.container, edges: [.bottom, .horizontal])
+        .frame(height: UIApplication.shared.screenFrame.height * 0.45)
         .ignoresSafeArea()
     }
     

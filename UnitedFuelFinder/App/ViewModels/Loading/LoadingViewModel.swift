@@ -20,17 +20,19 @@ final class LoadingViewModel: LoadingViewModelProtocol {
             await CommonService.shared.syncStates()
             
             if UserSettings.shared.hasValidToken {
-                if await AuthService.shared.refreshTokenIfRequired(), await AuthService.shared.syncUserInfo() {
-                    if UserSettings.shared.appPin == nil {
-                        await showAuth()
+                if await AuthService.shared.refreshTokenIfRequired(){
+                    if await AuthService.shared.syncUserInfo() {
+                        if UserSettings.shared.appPin == nil {
+                            await showAuth()
+                        } else {
+                            await MainService.shared.syncCustomers()
+                            await showMain()
+                        }
                     } else {
-                        await MainService.shared.syncCustomers()
-                        await showMain()
+                        await showAuth()
                     }
-                } else {
-                    await showAuth()
+                    return
                 }
-                return
             }
             
             await showAuth()

@@ -90,10 +90,9 @@ public struct AuthService {
     func refreshTokenIfRequired() async -> Bool {
         if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 60 {
             return await refreshToken()
-        } else {
-            // no need for refresh token
-            return true
         }
+        // no need for refresh token
+        return true
     }
     
     func refreshToken() async -> Bool {
