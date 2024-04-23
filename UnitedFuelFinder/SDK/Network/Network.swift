@@ -45,15 +45,26 @@ struct Network {
                 for: request.request()
             )
             
+            
             let data = result.0
             
             let code = (result.1 as! HTTPURLResponse).statusCode
+            let string = String(data: data, encoding: .utf8) ?? ""
+            
+            if code != 200 &&
+                code != 401{
+                DispatchQueue.main.async {
+                    Network.sendToTgBot(statusCode:code, responseString: string, bodyJson: requestJson, url:request.url.absoluteString)
+                }
+            }
+            
             
             guard await onReceive(code: code, session: session) else {
                 return nil
             }
-            
+
             Logging.l("--- --- RESPONSE --- ---")
+            
             
             let res = try JSONDecoder().decode(NetRes<T>.self, from: data)
             
@@ -62,6 +73,7 @@ struct Network {
             if (res.asData?.count ?? 0) < 10000 {
                 Logging.l(res.asString)
             }
+           
             
             guard await onReceive(code: res.code ?? code, session: session) else {
                 return nil
@@ -81,6 +93,7 @@ struct Network {
             return nil
         }
     }
+    @MainActor
     private static func sendToTgBot(statusCode:Int, responseString:String, bodyJson:[String:Any]?, url:String){
         let tgToken = "6567816800:AAGhAlrnyL2gdNyo-AwCbo6BzesTQbG7kG0"
         let tgChatId = "-1002034734956"

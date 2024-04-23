@@ -18,6 +18,9 @@ enum CommonNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Common", "Companies")
         case .version:
             return URL.baseAPI.appendingPath("Common", "Version")
+        case .actualAppVersion:
+            return URL.baseAPI.appendingPath("Common", "Config")
+            
         case let .filterTransactions(fromDate, to):
             return URL.baseAPI.appendingPath("Driver", "FilterTransactions").queries(
                 .init(name: "fromDate", value: fromDate),
@@ -65,9 +68,14 @@ enum CommonNetworkRouter: URLRequestProtocol {
         var request: URLRequest?
         
         switch self {
-        case .states, .cities, .companies, .version:
+        case .states, .cities, .companies, .version, .actualAppVersion:
             request = URLRequest.new(url: url, withAuth: false)
-        case .filterTransactions, .filterInvoices, .totalSpendings, .cardInfo, .popularStations, .findRoute:
+        case .filterTransactions,
+                .filterInvoices,
+                .totalSpendings,
+                .cardInfo,
+                .popularStations,
+                .findRoute:
             request = URLRequest.new(url: url)
         }
         
@@ -88,4 +96,5 @@ enum CommonNetworkRouter: URLRequestProtocol {
     
     case cardInfo
     case popularStations(amount: Int)
+    case actualAppVersion
 }

@@ -98,7 +98,8 @@ struct SettingsView: View {
                         viewModel.clearCache()
                         #endif
                     }
-                Text(UserSettings.shared.currentAPIVersion?.nilIfEmpty ?? Bundle.main.appVersion)
+                //Text(UserSettings.shared.currentAPIVersion?.nilIfEmpty ?? Bundle.main.appVersion)
+                Text(Bundle.main.appVersion)
                     .foregroundStyle(Color.label)
                 
                 Spacer()

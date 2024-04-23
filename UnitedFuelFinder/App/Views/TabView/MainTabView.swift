@@ -18,6 +18,7 @@ struct MainTabView: View {
     @ObservedObject var viewModel: MainTabViewModel = .init()
     @EnvironmentObject var mainViewModel: MainViewModel
     @State private var didAppear = false
+        
     @State private var mapBodyState: HomeBodyState = .map
     @State private var imagePlaceholder: Image?
     
@@ -48,10 +49,29 @@ struct MainTabView: View {
                         }
                     }
                 ).anyView,
-                isPresented: $viewModel.showWarningAlert
-            ) {
-                
-            }
+                isPresented: $viewModel.showWarningAlert, onDismiss: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        viewModel.checkActualVersion()
+                    }
+                }
+            )
+            .warningAlert(type: .custom(
+                image: Image(systemName: "exclamationmark.triangle")
+                    .resizable()
+                    .foregroundStyle(.accent)
+                    .frame(width: 56, height: 56, alignment: .center)
+                    .anyView
+            ),
+                          title: "attention".localize,
+                          message: Text(
+                            "New version is available".localize
+                          ).anyView,
+                          btnTitle: "Update".localize,
+                          isPresented: $viewModel.showVersionWarningAlert,
+                          onDismiss: {
+                viewModel.showAppOnAppstore()
+            })
+
     }
     var innerBody: some View {
         ZStack {
@@ -77,6 +97,7 @@ struct MainTabView: View {
             CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
         }
     }
+    
     
     @ViewBuilder
     private var leadingTopBar: some View {
@@ -200,6 +221,7 @@ struct MainTabView: View {
             switch value {
             case .dashboard:
                 debugPrint("On select dashboard")
+                viewModel.checkActualVersion()
             case .map:
                 debugPrint("On select map")
                 viewModel.onSelectMapTab()
@@ -247,7 +269,8 @@ struct MainTabView: View {
                 }
             }
         ).anyView,
-        isPresented: $showRegisterWarning) {
-            
-        }
+        isPresented: $showRegisterWarning, onDismiss: {
+
+        })
+        
 }

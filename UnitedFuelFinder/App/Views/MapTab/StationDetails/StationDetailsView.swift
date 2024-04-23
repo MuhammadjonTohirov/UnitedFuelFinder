@@ -52,10 +52,10 @@ struct StationDetailsView: View {
             }
             .padding(.trailing, Padding.medium)
             
-            //postFeedbacks
-            //comments
-              //  .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
-               // .padding(.bottom, 50)
+            postFeedbacks
+            comments
+                .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
+                .padding(.bottom, 50)
         }
         .scrollable(showIndicators: false)
         //.ignoresSafeArea(.container)

@@ -31,4 +31,15 @@ extension DashboardViewModel {
             self.invoices = _invoices
         }
     }
+    func loadVersion() async {
+        let _invoices = await interactor.getInvoices(
+            from: Date().before(monthes: 3),
+            to: Date()
+        )
+     
+        
+        await MainActor.run {
+            self.invoices = _invoices
+        }
+    }
 }

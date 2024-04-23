@@ -55,8 +55,8 @@ struct DashboardView: View {
         VStack(alignment: .leading, spacing: 20) {
             CardWidgetView()
             
-//            Text("total.spendings".localize)
-//            SpendingsWidgetView()
+            Text("total.spendings".localize)
+            SpendingsWidgetView()
             
 //            Text("popular.stations".localize)
 //            PopularStationsView(data: [])

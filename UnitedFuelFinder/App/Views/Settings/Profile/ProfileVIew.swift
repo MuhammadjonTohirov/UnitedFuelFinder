@@ -170,11 +170,11 @@ struct ProfileVIew: View {
                     
             }
             
-            YRoundedTextField {
-                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 5284 9871 1243".localize)
-                    .keyboardType(.decimalPad)
-                    .set(format: "XXXX XXXX XXXX XXXX")
-            }
+//            YRoundedTextField {
+//                YTextField(text: $viewModel.fuelCardNumber, placeholder: "Card Number: Ex-1254 5284 9871 1243".localize)
+//                    .keyboardType(.decimalPad)
+//                    .set(format: "XXXX XXXX XXXX XXXX")
+//            }
         }
     }
 }

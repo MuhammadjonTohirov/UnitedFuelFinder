@@ -8,19 +8,22 @@
 import Foundation
 
 enum AuthNetworkErrorReason: Error {
-    case notConfirmedByAdmin
-    case userAlreadyExists
+    //case notConfirmedByAdmin
+    //case userAlreadyExists
     case unknown
     case custom(String)
     
     var localizedDescription: String {
         switch self {
-        case .notConfirmedByAdmin:
-            return "not_confirmed_by_admin".localize
-        case .userAlreadyExists:
-            return "user_already_exists".localize
+            //        case .notConfirmedByAdmin:
+            //            return "not_confirmed_by_admin".localize
+            //        case .userAlreadyExists:
+            //            return "user_already_exists".localize
+            //        case .unknown:
+            //            return "Unknown error".localize
         case .unknown:
-            return "Unknown error".localize
+            return "unknown_address".localize
+            
         case .custom(let message):
             return message
         }
@@ -56,7 +59,7 @@ public struct AuthService {
             ),
             refreshTokenIfNeeded: false
         ) else {
-            return (false, .unknown)
+            return (false, .custom("Unknown error"))
         }
         
         if !result.success && result.error?.contains("expire") ?? false {
@@ -75,7 +78,9 @@ public struct AuthService {
         UserSettings.shared.userEmail = username
         
         let isOK = result.data != nil
-        return (isOK, isOK ? nil : (result.code == 400 ? .notConfirmedByAdmin : .unknown))
+        return (isOK, isOK ? nil : .custom("Unknown error"))
+        
+        //return (isOK, isOK ? nil : (result.code == 400 ? .notConfirmedByAdmin : .unknown))
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {

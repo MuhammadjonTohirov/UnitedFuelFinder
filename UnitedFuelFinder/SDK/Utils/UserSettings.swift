@@ -24,6 +24,9 @@ final public class UserSettings {
     @codableWrapper(key: "currentAppVersion")
     public var currentVersion: String?
     
+    @codableWrapper(key: "actualAppVersion")
+    public var actualAppVersion: String?
+    
     @codableWrapper(key: "language", Language.english)
     public var language: Language? {
         didSet {
@@ -61,6 +64,9 @@ final public class UserSettings {
     
     @codableWrapper(key: "currentAPIVersion")
     public var currentAPIVersion: ServerVersion?
+    
+//    @codableWrapper(key: "appVersion")
+//    public var appVersion: ServerVersion?
     
     @codableWrapper(key: "appPin")
     public var appPin: String?

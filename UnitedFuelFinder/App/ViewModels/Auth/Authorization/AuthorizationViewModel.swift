@@ -211,18 +211,23 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
             let error = await getAccessToken()
             
             mainIfNeeded {
-                switch error {
-                case .notConfirmedByAdmin:
-                    self.showAlert(message: "not_confirmed_by_admin".localize)
-                case .userAlreadyExists:
-                    self.showAlert(message: "already.exists".localize)
-                case .unknown:
-                    self.showAlert(message: "unknown.error".localize)
-                case .custom(let string):
-                    self.showAlert(message: string)
-                case nil:
+                if let obj = error{
+                    self.showAlert(message: obj.localizedDescription)
+                } else{
                     self.showPinSetup()
                 }
+//                switch error {
+//                case .notConfirmedByAdmin:
+//                    self.showAlert(message: "not_confirmed_by_admin".localize)
+//                case .userAlreadyExists:
+//                    self.showAlert(message: "already.exists".localize)
+//                case .unknown:
+//                    
+//                case .custom(let string):
+//                    self.showAlert(message: string)
+//                case nil:
+//                    
+//                }
             }
         }
     }
@@ -244,17 +249,18 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     }
     
     private func showOnError(_ error: AuthNetworkErrorReason) {
-        switch error {
-        case .userAlreadyExists:
-            self.showError(message: "user_already_exists".localize)
-        case .notConfirmedByAdmin:
-            self.showError(message: "not_confirmed_by_admin".localize)
-        case .unknown:
-            self.showError(message: "undefined_error".localize)
-        case .custom(let error):
-            self.showError(message: error.nilIfEmpty ?? "undefined_error".localize)
+        self.showError(message: error.localizedDescription)
+//        switch error {
+//        case .userAlreadyExists:
+//            self.showError(message: "user_already_exists".localize)
+//        case .notConfirmedByAdmin:
+//            self.showError(message: "not_confirmed_by_admin".localize)
+//        case .unknown:
+//            self.showError(message: "undefined_error".localize)
+//        case .custom(let error):
+//            self.showError(message: error.nilIfEmpty ?? "undefined_error".localize)
 //        default:
 //            break
-        }
+//        }
     }
 }

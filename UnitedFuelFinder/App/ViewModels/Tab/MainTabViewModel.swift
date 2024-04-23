@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import UIKit
 
 class MainTabViewModel: ObservableObject {
     @Published var selectedTag: MainTabs = .dashboard
@@ -18,6 +19,7 @@ class MainTabViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var discountedStations: [StationItem] = []
     @Published var showWarningAlert: Bool = false
+    @Published var showVersionWarningAlert: Bool = false
     private var lastLocationUpdate: Date = .now.before(days: 1)
     private var didAppear: Bool = false
     func onAppear() {
@@ -30,15 +32,17 @@ class MainTabViewModel: ObservableObject {
         isLoading = true
         
         didAppear = true
+        
+        
         Task {
             await MainService.shared.syncAllStations()
-            
+            await getActualVersion()
             await MainActor.run {
                 isLoading = false
             }
         }
     }
-    
+   
     private func setupLocation() {
         guard GLocationManager.shared.locationUpdateHandler == nil else {
             return
@@ -82,6 +86,23 @@ class MainTabViewModel: ObservableObject {
     func alertWarning() {
         showWarningAlert = true
     }
+    func checkActualVersion() {
+        if showWarningAlert{
+            return
+        }
+        let version = Bundle.main.appVersion
+        let actualVersion = UserSettings.shared.actualAppVersion
+        if actualVersion != nil {
+            if actualVersion != version{
+                showVersionWarningAlert = true
+            }
+        }
+    }
+    func showAppOnAppstore() {        
+        let url = "https://itunes.apple.com/app/id\(URL.appstoreID)"
+        guard let url = URL(string: url) else { return }
+        UIApplication.shared.open(url)
+    }
     
     func loadDiscountedStations(_ currentLocation: CLLocation?) async {
         guard let c = currentLocation?.coordinate, selectedTag == .dashboard else {
@@ -113,8 +134,16 @@ class MainTabViewModel: ObservableObject {
         Task {
             await AuthService.shared.syncUserInfo()
             
-            if let serverVersion = await CommonService.shared.getVersion() {
-                UserSettings.shared.currentAPIVersion = serverVersion
+//            if let serverVersion = await CommonService.shared.getVersion() {
+//                UserSettings.shared.currentAPIVersion = serverVersion
+//            }
+        }
+    }
+    private func getActualVersion() async{
+        Task {
+            if let version = await CommonService.shared.getActualVersion(){
+                UserSettings.shared.actualAppVersion = version
+                checkActualVersion()
             }
         }
     }
