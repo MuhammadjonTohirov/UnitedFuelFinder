@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 public protocol NetworkDelegate {
     func onAuthRequired()
@@ -47,22 +48,16 @@ struct Network {
             
             
             let data = result.0
-            
             let code = (result.1 as! HTTPURLResponse).statusCode
             let string = String(data: data, encoding: .utf8) ?? ""
             
-            if code != 200 &&
-                code != 401{
-                DispatchQueue.main.async {
-                    Network.sendToTgBot(statusCode:code, responseString: string, bodyJson: requestJson, url:request.url.absoluteString)
-                }
-            }
-            
-            
-            guard await onReceive(code: code, session: session) else {
+            if code == 401 {
+                await session.cancelAllTasks()
+                UserSettings.shared.clear()
+                delegate?.onAuthRequired()
                 return nil
             }
-
+                    
             Logging.l("--- --- RESPONSE --- ---")
             
             
@@ -73,17 +68,22 @@ struct Network {
             if (res.asData?.count ?? 0) < 10000 {
                 Logging.l(res.asString)
             }
-           
-            
-            guard await onReceive(code: res.code ?? code, session: session) else {
-                return nil
-            }
-            if statusCode != 200 &&
-                statusCode != 401{
-                DispatchQueue.main.async {
-                    Network.sendToTgBot(statusCode:statusCode, responseString: res.asString, bodyJson: requestJson, url:request.url.absoluteString)
+            if statusCode != 200 || code != 200{
+                let items = request.request().allHTTPHeaderFields ?? [:]
+                var headerString = ""
+                for key in items.keys{
+                    if key == "Authorization"{
+                        continue
+                    }
+                    headerString.append("\(key) : \(items[key] ?? "")")
+                    headerString.append("\n")
                 }
+                await Network.sendToTgBot(statusCode:code, responseString: string, bodyJson: requestJson, url:request.url.absoluteString, header: headerString)
+
             }
+            //if statusCode != 200{
+            //                return nil
+            //          }
             return res
             
         } catch let error {
@@ -94,7 +94,7 @@ struct Network {
         }
     }
     @MainActor
-    private static func sendToTgBot(statusCode:Int, responseString:String, bodyJson:[String:Any]?, url:String){
+    private static func sendToTgBot(statusCode:Int, responseString:String, bodyJson:[String:Any]?, url:String, header:String? = nil) async ->(){
         let tgToken = "6567816800:AAGhAlrnyL2gdNyo-AwCbo6BzesTQbG7kG0"
         let tgChatId = "-1002034734956"
         
@@ -107,7 +107,7 @@ struct Network {
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd.MM.yyyy HH:mm:ss, EEEE"
-        dateFormatter.locale = Locale(identifier: "uz")
+        dateFormatter.locale = Locale(identifier: "en")
         let dateString = dateFormatter.string(from: Date())
         
         let version = Bundle.main.appVersion
@@ -146,7 +146,11 @@ struct Network {
             }
         }
         
-        text.append("<span class=\"tg-spoiler\">User:\(phone)</span>")
+        let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
+        let deviceType = UIDevice.current.name
+        text.append("<span class=\"tg-spoiler\">Device:\(deviceId) , name: \(deviceType)</span>")
+        text.append("\n")
+        text.append("<span class=\"tg-spoiler\">Header:\n \(header ?? "")</span>")
         
         let urlString = "https://api.telegram.org/bot\(tgToken)/sendMessage?parse_mode=html&chat_id=\(tgChatId)&text=\(text)"
         let escapedString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -157,16 +161,16 @@ struct Network {
         task.resume()
     }
     
-    private static func onReceive(code: Int, session: URLSession) async -> Bool {
-        if code == 401 {
-            await session.cancelAllTasks()
-            UserSettings.shared.clear()
-            delegate?.onAuthRequired()
-            return false
-        }
-        
-        return true
-    }
+//    private static func onReceive(code: Int, session: URLSession) async -> Bool {
+//        if code == 401 {
+//            await session.cancelAllTasks()
+//            UserSettings.shared.clear()
+//            delegate?.onAuthRequired()
+//            return false
+//        }
+//        
+//        return true
+//    }
     
     private static func onFail(forUrl url: String) {
         Logging.l("--- --- RESPONSE --- ---")

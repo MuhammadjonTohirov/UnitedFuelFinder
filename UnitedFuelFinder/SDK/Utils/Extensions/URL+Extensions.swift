@@ -28,7 +28,10 @@ public extension URL {
         ("X-LANG-CODE", (UserSettings.shared.language ?? .russian).smallCode)
     }
     
-    static let googleMapsApiKey = "AIzaSyBFH2jjU7u1bSJA2ELl50rhCzLATJ4JoMo"
+    static let googleMapsApiKey = "AIzaSyC_dHd88uaz8yUlmxKbvXo7n-a7mPhgaWI"
+    //"AIzaSyAOVYRIgupAurZup5y1PRh8Ismb1A3lLao"
+    //"AIzaSyBJ_XlxltqRMHEaqUxKak6LkIb0jt4qRWM"
+    //"AIzaSyBFH2jjU7u1bSJA2ELl50rhCzLATJ4JoMo"
     
     func appendingPath(_ pathList: Any...) -> URL {
         var url = self
