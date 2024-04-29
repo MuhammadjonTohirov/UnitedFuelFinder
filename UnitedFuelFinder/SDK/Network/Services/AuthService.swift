@@ -34,6 +34,7 @@ public struct AuthService {
     public static let shared = AuthService()
     
     public func verifyAccount(_ username: String) async -> ((exist: Bool, code: String, session: String)?, error: String?) {
+        
         let result: NetRes<NetResVerifyAccount>? = await Network.send(
             request: UserNetworkRouter.verifyAccount(request: .init(email: username)),
             refreshTokenIfNeeded: false
@@ -93,7 +94,7 @@ public struct AuthService {
     }
     
     func refreshTokenIfRequired() async -> Bool {
-        if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 60 {
+        if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 10 {
             return await refreshToken()
         }
         // no need for refresh token
@@ -101,16 +102,13 @@ public struct AuthService {
     }
     
     func refreshToken() async -> Bool {
-        let isRefreshExpired = (UserSettings.shared.refreshTokenExpireDate?.timeIntervalSinceNow ?? 0) < 10
-        
-        guard isRefreshExpired else {
-            return false
-        }
-        
         guard let token = UserSettings.shared.refreshToken else {
             return false
         }
-        
+        let isRefreshExpired = (UserSettings.shared.refreshTokenExpireDate?.timeIntervalSinceNow ?? 0) < 10
+        if isRefreshExpired{
+            return false
+        }
         let result: NetRes<NetResRefreshToken>? = await Network.send(request: UserNetworkRouter.refresh(refreshToken: token), refreshTokenIfNeeded: false)
         
         if let data = result?.data {

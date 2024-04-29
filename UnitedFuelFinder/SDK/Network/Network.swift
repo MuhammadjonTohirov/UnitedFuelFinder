@@ -29,10 +29,16 @@ struct Network {
             Logging.l(request.url.absoluteString)
             
             if refreshTokenIfNeeded {
-                guard await AuthService.shared.refreshTokenIfRequired() else {
-                    Logging.l("do refresh token failed")
-                    return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
+                if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 3600 {
+                    let result = await AuthService.shared.refreshToken()
+                    if !result {
+                        return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
+                    }
                 }
+//                guard await AuthService.shared.refreshTokenIfRequired() else {
+//                    Logging.l("do refresh token failed")
+//                    return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
+//                }
             }
             var requestJson:[String : Any]? = nil
             if let requestBody = request.request().httpBody,
@@ -148,7 +154,7 @@ struct Network {
         
         let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
         let deviceType = UIDevice.current.name
-        text.append("<span class=\"tg-spoiler\">Device:\(deviceId) , name: \(deviceType)</span>")
+        //text.append("<span class=\"tg-spoiler\">Device:\(deviceId) , name: \(deviceType)</span>")
         text.append("\n")
         text.append("<span class=\"tg-spoiler\">Header:\n \(header ?? "")</span>")
         

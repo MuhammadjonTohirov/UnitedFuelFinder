@@ -14,7 +14,7 @@ extension URLRequest {
     static func new(url: URL, policy: CachePolicy = .useProtocolCachePolicy, withAuth: Bool = true, interval: TimeInterval = 60.0) -> URLRequest {
         let deviceId = UIDevice.current.identifierForVendor?.uuidString ?? ""
         let deviceName = UIDevice.current.name
-        let system = UIDevice.current.systemName
+        let system = UIDevice.current.systemVersion
         
         var req = URLRequest(url: url, cachePolicy: policy, timeoutInterval: interval)
         req.addValue(URL.keyHeader.value, forHTTPHeaderField: URL.keyHeader.key)
