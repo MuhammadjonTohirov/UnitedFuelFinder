@@ -35,10 +35,6 @@ struct Network {
                         return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
                     }
                 }
-//                guard await AuthService.shared.refreshTokenIfRequired() else {
-//                    Logging.l("do refresh token failed")
-//                    return NetRes(success: false, data: nil, error: "cannot_do_refresh_token", code: -1)
-//                }
             }
             var requestJson:[String : Any]? = nil
             if let requestBody = request.request().httpBody,

@@ -402,6 +402,9 @@
         }
       }
     },
+    "Blue" : {
+
+    },
     "camera" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1714,6 +1717,9 @@
     "Go" : {
 
     },
+    "Green" : {
+
+    },
     "help_desk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1736,6 +1742,9 @@
           }
         }
       }
+    },
+    "Indigo" : {
+
     },
     "information" : {
       "extractionState" : "manual",
@@ -2400,6 +2409,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2840,6 +2855,15 @@
         }
       }
     },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
+    },
     "organization_reqs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3234,6 +3258,9 @@
         }
       }
     },
+    "Red" : {
+
+    },
     "region" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3325,6 +3352,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "reset.pass.failed" : {
       "extractionState" : "manual",
@@ -3896,6 +3926,9 @@
     "Submit" : {
 
     },
+    "SwiftUI" : {
+
+    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4155,6 +4188,9 @@
         }
       }
     },
+    "Violet" : {
+
+    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4246,6 +4282,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     },
     "Русский" : {
 
