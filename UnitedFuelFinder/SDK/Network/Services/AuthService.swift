@@ -79,9 +79,7 @@ public struct AuthService {
         UserSettings.shared.userEmail = username
         
         let isOK = result.data != nil
-        return (isOK, isOK ? nil : .custom("Unknown error"))
-        
-        //return (isOK, isOK ? nil : (result.code == 400 ? .notConfirmedByAdmin : .unknown))
+        return (isOK, isOK ? nil : .custom(result.error ?? "Unknown error"))
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {
