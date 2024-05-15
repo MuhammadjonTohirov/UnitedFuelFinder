@@ -1,0 +1,28 @@
+{
+  "iOS" : [
+    {
+      "name" : "TrimbleMapsAccounts",
+      "identifier" : "ios-arm64",
+      "hash" : "023528fdb0245cd988a6b2db9c5af35c475193125861f4e80fefa554f1bee03e",
+      "swiftToolchainVersion" : "5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)",
+      "container" : "TrimbleMapsAccounts.xcframework"
+    },
+    {
+      "container" : "TrimbleMapsAccounts.xcframework",
+      "swiftToolchainVersion" : "5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)",
+      "name" : "TrimbleMapsAccounts",
+      "hash" : "d7401d6b51d227eac9b5b6c849d9953ee6a85913f9ff964b83ea782ec7b99993",
+      "identifier" : "ios-arm64_x86_64-simulator"
+    }
+  ],
+  "commitish" : "1.0.1",
+  "Mac" : [
+
+  ],
+  "watchOS" : [
+
+  ],
+  "tvOS" : [
+
+  ]
+}

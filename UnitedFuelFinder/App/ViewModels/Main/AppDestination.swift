@@ -67,7 +67,7 @@ enum AppDestination: Hashable, ScreenRoute {
         case .main:
             MapTabView(viewModel: .init())
         case .test:
-            Text("TEST")
+            TMapsViewWrapper()
         case .mainTab:
             MainTabView()
         default:

@@ -30,7 +30,9 @@ class MapViewModel {
 
 class MapViewController: UIViewController {
     
-    lazy var map = {GMSMapView(frame: .zero)}()
+    lazy var map = {
+        GMSMapView(frame: .zero)
+    }()
 
     var isAnimating: Bool = false
     

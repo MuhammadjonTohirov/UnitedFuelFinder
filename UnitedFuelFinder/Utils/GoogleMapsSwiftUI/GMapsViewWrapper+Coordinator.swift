@@ -77,10 +77,6 @@ extension GMapsViewWrapper {
             
             readScreenCenterCoordinate(on: mapView)
             
-//            if let l = self.parent.pickedLocation?.coordinate, !hasDrawen {
-//                drawCircleByRadius(on: mapView, location: l, radius: parent.radius)
-//            }
-            
             let lat = position.target.latitude
             let lng = position.target.longitude
             

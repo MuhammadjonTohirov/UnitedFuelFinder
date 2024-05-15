@@ -1,0 +1,6 @@
+framework module TrimbleMapsMobileEvents {
+  umbrella header "TrimbleMapsMobileEvents.h"
+
+  export *
+  module * { export * }
+}

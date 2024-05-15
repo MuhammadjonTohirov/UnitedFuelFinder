@@ -227,6 +227,16 @@
 		2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */; };
 		2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */; };
 		2E870A202B86E2D600C37675 /* Array+StationItem+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */; };
+		2E89DD182BF459E800CC7EBF /* TrimbleAccountDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD172BF459E800CC7EBF /* TrimbleAccountDelegate.swift */; };
+		2E89DD1B2BF4709D00CC7EBF /* TrimbleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD1A2BF4709D00CC7EBF /* TrimbleViewController.swift */; };
+		2E89DD1D2BF4716200CC7EBF /* ViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD1C2BF4716200CC7EBF /* ViewController+Extensions.swift */; };
+		2E89DD1F2BF472CF00CC7EBF /* TMapsViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD1E2BF472CE00CC7EBF /* TMapsViewWrapper.swift */; };
+		2E89DD202BF4737700CC7EBF /* TrimbleMaps.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E89DD102BF4585E00CC7EBF /* TrimbleMaps.xcframework */; };
+		2E89DD212BF4737700CC7EBF /* TrimbleMaps.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E89DD102BF4585E00CC7EBF /* TrimbleMaps.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E89DD222BF4737900CC7EBF /* TrimbleMapsAccounts.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E89DD0F2BF4585E00CC7EBF /* TrimbleMapsAccounts.xcframework */; };
+		2E89DD232BF4737900CC7EBF /* TrimbleMapsAccounts.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E89DD0F2BF4585E00CC7EBF /* TrimbleMapsAccounts.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		2E89DD242BF4737A00CC7EBF /* TrimbleMapsMobileEvents.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E89DD0E2BF4585E00CC7EBF /* TrimbleMapsMobileEvents.xcframework */; };
+		2E89DD252BF4737A00CC7EBF /* TrimbleMapsMobileEvents.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 2E89DD0E2BF4585E00CC7EBF /* TrimbleMapsMobileEvents.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AED052B8E3B3E00701590 /* Network+Google.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91A8352B8643B10045D8FE /* MapTabListView.swift */; };
@@ -307,6 +317,9 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				2E89DD232BF4737900CC7EBF /* TrimbleMapsAccounts.xcframework in Embed Frameworks */,
+				2E89DD212BF4737700CC7EBF /* TrimbleMaps.xcframework in Embed Frameworks */,
+				2E89DD252BF4737A00CC7EBF /* TrimbleMapsMobileEvents.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -533,6 +546,13 @@
 		2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqEditProfile.swift; sourceTree = "<group>"; };
 		2E7D8DAF2AFAEB650074AB7E /* DRecentSearchedAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DRecentSearchedAddress.swift; sourceTree = "<group>"; };
 		2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+StationItem+Extension.swift"; sourceTree = "<group>"; };
+		2E89DD0E2BF4585E00CC7EBF /* TrimbleMapsMobileEvents.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = TrimbleMapsMobileEvents.xcframework; sourceTree = "<group>"; };
+		2E89DD0F2BF4585E00CC7EBF /* TrimbleMapsAccounts.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = TrimbleMapsAccounts.xcframework; sourceTree = "<group>"; };
+		2E89DD102BF4585E00CC7EBF /* TrimbleMaps.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = TrimbleMaps.xcframework; sourceTree = "<group>"; };
+		2E89DD172BF459E800CC7EBF /* TrimbleAccountDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimbleAccountDelegate.swift; sourceTree = "<group>"; };
+		2E89DD1A2BF4709D00CC7EBF /* TrimbleViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrimbleViewController.swift; sourceTree = "<group>"; };
+		2E89DD1C2BF4716200CC7EBF /* ViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extensions.swift"; sourceTree = "<group>"; };
+		2E89DD1E2BF472CE00CC7EBF /* TMapsViewWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TMapsViewWrapper.swift; sourceTree = "<group>"; };
 		2E8AED052B8E3B3E00701590 /* Network+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Google.swift"; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2E91A8352B8643B10045D8FE /* MapTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabListView.swift; sourceTree = "<group>"; };
@@ -617,12 +637,14 @@
 				2E5DF9912AEACE11005BE20D /* Realm in Frameworks */,
 				2E0E4DE92AD915E800E846B6 /* UIKit.framework in Frameworks */,
 				2E0E4DE72AD915E000E846B6 /* SystemConfiguration.framework in Frameworks */,
+				2E89DD202BF4737700CC7EBF /* TrimbleMaps.xcframework in Frameworks */,
 				2EF746A72B1CD8FA009E2D8D /* GoogleMapsUtils.xcframework in Frameworks */,
 				2E0E4DE52AD915DB00E846B6 /* QuartzCore.framework in Frameworks */,
 				2E0E4DE32AD915D500E846B6 /* OpenGLES.framework in Frameworks */,
 				2E0E4DE12AD915CF00E846B6 /* Metal.framework in Frameworks */,
 				2E5DF9932AEACE11005BE20D /* RealmSwift in Frameworks */,
 				2E0E4DDF2AD915C600E846B6 /* libz.tbd in Frameworks */,
+				2E89DD242BF4737A00CC7EBF /* TrimbleMapsMobileEvents.xcframework in Frameworks */,
 				2E0E4DDD2AD915BD00E846B6 /* libc++.tbd in Frameworks */,
 				2E0E4DDB2AD915B000E846B6 /* ImageIO.framework in Frameworks */,
 				2E0E4DD92AD915A900E846B6 /* GLKit.framework in Frameworks */,
@@ -637,6 +659,7 @@
 				2E3F17CA2AD9126300F4DC52 /* GoogleMapsCore.xcframework in Frameworks */,
 				2E3F17C82AD9126300F4DC52 /* GoogleMapsBase.xcframework in Frameworks */,
 				2EDF8C292AD1F04A003D64FC /* SwiftKeychainWrapper in Frameworks */,
+				2E89DD222BF4737900CC7EBF /* TrimbleMapsAccounts.xcframework in Frameworks */,
 				2EDF8C272AD1F04A003D64FC /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -778,10 +801,9 @@
 		2E527A342ACC80C6005B8B95 = {
 			isa = PBXGroup;
 			children = (
-				2EF746A32B1C4E28009E2D8D /* Pitsburg-Kansas.gpx */,
-				2EF746A22B1C4DBD009E2D8D /* Pitsburg.gpx */,
-				2EF746A12B1C4D3C009E2D8D /* gpxgenerator_path.gpx */,
+				2E89DD0D2BF4583800CC7EBF /* Locations */,
 				2E0E4DEB2AD9182600E846B6 /* GoogleMaps */,
+				2E89DD0C2BF4583000CC7EBF /* Trimble */,
 				2E527A3F2ACC80C6005B8B95 /* UnitedFuelFinder */,
 				2E527A3E2ACC80C6005B8B95 /* Products */,
 				2EE91D352AD07FC200A425B5 /* Frameworks */,
@@ -948,6 +970,7 @@
 				2E5DF8AF2AEACD63005BE20D /* YTextField+Extension.swift */,
 				2E5DF8B02AEACD63005BE20D /* CGRect+Extension.swift */,
 				2ED9FB0A2B7E494400EEDDFB /* KF+Extensions.swift */,
+				2E89DD1C2BF4716200CC7EBF /* ViewController+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1344,6 +1367,35 @@
 			path = TabView;
 			sourceTree = "<group>";
 		};
+		2E89DD0C2BF4583000CC7EBF /* Trimble */ = {
+			isa = PBXGroup;
+			children = (
+				2E89DD102BF4585E00CC7EBF /* TrimbleMaps.xcframework */,
+				2E89DD0F2BF4585E00CC7EBF /* TrimbleMapsAccounts.xcframework */,
+				2E89DD0E2BF4585E00CC7EBF /* TrimbleMapsMobileEvents.xcframework */,
+			);
+			path = Trimble;
+			sourceTree = "<group>";
+		};
+		2E89DD0D2BF4583800CC7EBF /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+				2EF746A32B1C4E28009E2D8D /* Pitsburg-Kansas.gpx */,
+				2EF746A22B1C4DBD009E2D8D /* Pitsburg.gpx */,
+				2EF746A12B1C4D3C009E2D8D /* gpxgenerator_path.gpx */,
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		2E89DD192BF4709300CC7EBF /* TrimbleSwiftUI */ = {
+			isa = PBXGroup;
+			children = (
+				2E89DD1A2BF4709D00CC7EBF /* TrimbleViewController.swift */,
+				2E89DD1E2BF472CE00CC7EBF /* TMapsViewWrapper.swift */,
+			);
+			path = TrimbleSwiftUI;
+			sourceTree = "<group>";
+		};
 		2EB189F92AEFF42600BCFBE3 /* StationDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1495,6 +1547,7 @@
 			children = (
 				2EDF8C402AD2D865003D64FC /* AppDestination.swift */,
 				2EDF8C432AD2DCB8003D64FC /* MainViewModel.swift */,
+				2E89DD172BF459E800CC7EBF /* TrimbleAccountDelegate.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -1626,6 +1679,7 @@
 		2EE91D4F2AD10C9800A425B5 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2E89DD192BF4709300CC7EBF /* TrimbleSwiftUI */,
 				2EF3A1D82ADD88F900CA8DE2 /* GoogleMapsSwiftUI */,
 			);
 			path = Utils;
@@ -1842,6 +1896,7 @@
 				2E00707C2B7D268700A39E6D /* DonutChart.swift in Sources */,
 				8422A69B2B785AFB00017681 /* InvoiceView.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
+				2E89DD1B2BF4709D00CC7EBF /* TrimbleViewController.swift in Sources */,
 				2EF746A52B1C4EB8009E2D8D /* MapTabRouter.swift in Sources */,
 				2E0F93CD2B012FCE00660DEB /* StationCommentItem.swift in Sources */,
 				2E5DF9652AEACD63005BE20D /* MapZoomControl.swift in Sources */,
@@ -1866,6 +1921,7 @@
 				2E5DF9222AEACD63005BE20D /* CloseKeyboardModifier.swift in Sources */,
 				2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */,
 				2EDF8C722AD44407003D64FC /* KeyboardViewModel.swift in Sources */,
+				2E89DD1F2BF472CF00CC7EBF /* TMapsViewWrapper.swift in Sources */,
 				2E5DF9702AEACD64005BE20D /* NetResLogin.swift in Sources */,
 				2E01E5E12B53918C00F6231D /* NetReqDeleteConfirm.swift in Sources */,
 				2EBF9DAF2B85226800374613 /* AllInvoicesView.swift in Sources */,
@@ -1891,6 +1947,7 @@
 				2E5DF98D2AEACD64005BE20D /* Objectify.swift in Sources */,
 				2ED9FB0B2B7E494400EEDDFB /* KF+Extensions.swift in Sources */,
 				2E29B8E52AEB7B93001EC1BE /* SelectStateView.swift in Sources */,
+				2E89DD1D2BF4716200CC7EBF /* ViewController+Extensions.swift in Sources */,
 				2E5DF96E2AEACD64005BE20D /* NetResAddres.swift in Sources */,
 				2E5DF9542AEACD63005BE20D /* NativeHostingController.swift in Sources */,
 				2E5DF9762AEACD64005BE20D /* NetResProtocol.swift in Sources */,
@@ -1960,6 +2017,7 @@
 				2E5DF9872AEACD64005BE20D /* Number+Extension.swift in Sources */,
 				2E5DF93E2AEACD63005BE20D /* BouncingLoadingView.swift in Sources */,
 				2E5DF9462AEACD63005BE20D /* SingleValueBuilder.swift in Sources */,
+				2E89DD182BF459E800CC7EBF /* TrimbleAccountDelegate.swift in Sources */,
 				2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */,
 				2E36A7522AEFB8F50033363E /* MarkerImageView.swift in Sources */,
 				2EF3A1E62ADD88F900CA8DE2 /* MapViewController.swift in Sources */,
@@ -2167,7 +2225,6 @@
 		2E527A4C2ACC80C8005B8B95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -2211,7 +2268,6 @@
 		2E527A4D2ACC80C8005B8B95 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    @ObservedObject var viewModel = MainViewModel(route: .loading)
+    @ObservedObject var viewModel = MainViewModel(route: .test)
     
     var body: some View {
         viewModel.route.screen
