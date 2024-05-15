@@ -10,6 +10,7 @@ import SwiftUI
 
 public struct YRoundedTextField<Content: TextFieldProtocol>: View {
     @FocusState var isFocused: Bool
+    var radius: CGFloat = 8
     var textField: () -> Content
     var onFocusChanged: ((Bool) -> Void)?
     private var errorText: String = ""
@@ -28,9 +29,11 @@ public struct YRoundedTextField<Content: TextFieldProtocol>: View {
     
     public init(
         focused: Bool = false,
+        radius: CGFloat = 8,
         textField: @escaping () -> Content
     ) {
         self.textField = textField
+        self.radius = radius
         self.isFocused = focused
     }
     
@@ -42,7 +45,7 @@ public struct YRoundedTextField<Content: TextFieldProtocol>: View {
                     isFocused = true
                 }
                 .modifier(
-                    YTextFieldBorderStyle()
+                    RoundedTextFieldStyle(radius: radius)
                         .set(borderColor: borderColor)
                 )
                 .focused($isFocused)

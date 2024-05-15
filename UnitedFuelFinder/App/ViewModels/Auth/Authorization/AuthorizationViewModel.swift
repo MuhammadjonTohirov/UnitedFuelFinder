@@ -52,8 +52,15 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     @Published var password: String = ""
     @Published var isOfferAccepted: Bool = false
     
+    var isDriver: Bool {
+        UserSettings.shared.userType == .driver
+    }
+    
+    var pageTitle: String {
+        isDriver ? "driver".localize : "company".localize
+    }
+    
     var isValidForm: Bool {
-//        isOfferAccepted && 
         username.isValidEmail &&
         !password.isEmpty
     }
