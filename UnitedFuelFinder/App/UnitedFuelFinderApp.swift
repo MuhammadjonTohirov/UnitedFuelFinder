@@ -10,8 +10,6 @@ import RealmSwift
 
 @main
 struct UnitedFuelFinderApp: SwiftUI.App {
-//    @State private var overlayWindow: PassThroughWindow?
-    
     var body: some Scene {
         WindowGroup {
             MainView()

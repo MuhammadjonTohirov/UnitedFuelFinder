@@ -1,0 +1,205 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.124.2 clang-1403.0.22.11.100)
+// swift-module-flags: -target arm64-apple-ios12.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name TrimbleMapsAccounts
+// swift-module-flags-ignorable: -enable-bare-slash-regex
+import Foundation
+import Swift
+@_exported import TrimbleMapsAccounts
+import _Concurrency
+import _StringProcessing
+public enum JWTError : Foundation.LocalizedError {
+  case network(Foundation.URLError)
+  case failedToLogin
+  case invalidResponse(Foundation.URLResponse?)
+  case noData
+  case unknown
+}
+@objc(TMAccount) public class Account : ObjectiveC.NSObject {
+  final public let apiKey: Swift.String
+  final public let region: TrimbleMapsAccounts.Region
+  final public let apiEnvironment: TrimbleMapsAccounts.APIEnvironment
+  final public let assetId: Swift.String?
+  final public let companyId: Swift.String?
+  final public let externalAccountId: Swift.String?
+  final public let partnerId: Swift.String?
+  final public let vehicleId: Swift.String?
+  final public let driverId: Swift.String?
+  final public let deviceId: Swift.String?
+  @objc public init(apiKey: Swift.String, region: TrimbleMapsAccounts.Region = .northAmerica, apiEnvironment: TrimbleMapsAccounts.APIEnvironment = .production, assetId: Swift.String? = nil, companyId: Swift.String? = nil, externalAccountId: Swift.String? = nil, partnerId: Swift.String? = nil, vehicleId: Swift.String? = nil, driverId: Swift.String? = nil, deviceId: Swift.String? = nil)
+  @objc convenience public init(apiKey: Swift.String)
+  @objc convenience public init(apiKey: Swift.String, region: TrimbleMapsAccounts.Region)
+  convenience public init(apiKey: Swift.String, region: TrimbleMapsAccounts.Region? = nil, apiEnvironment: TrimbleMapsAccounts.APIEnvironment? = nil)
+  @objc deinit
+}
+extension TrimbleMapsAccounts.Account {
+  convenience public init?(bundle: Foundation.Bundle)
+}
+extension TrimbleMapsAccounts.Account {
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+}
+@objc(TMAuthenticationRequirement) public class AuthenticationRequirement : ObjectiveC.NSObject {
+  @objc public init(type: TrimbleMapsAccounts.AuthenticationType, format: Swift.String)
+  @objc public static let apiKey: TrimbleMapsAccounts.AuthenticationRequirement
+  @objc public static let authToken: TrimbleMapsAccounts.AuthenticationRequirement
+  @objc public static let jwt: TrimbleMapsAccounts.AuthenticationRequirement
+  @objc deinit
+}
+@objc(TMAPIEnvironment) public enum APIEnvironment : Swift.Int, Swift.CaseIterable {
+  case production
+  case preprod
+  case qa
+  case development
+  public init?(rawValue: Swift.Int?)
+  public init?(string: Swift.String?)
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [TrimbleMapsAccounts.APIEnvironment]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [TrimbleMapsAccounts.APIEnvironment] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum LicenseError : Foundation.LocalizedError {
+  case network(Foundation.URLError)
+  case failedToLogin
+  case invalidResponse(Foundation.URLResponse?)
+  case noActiveLicenses(errorCode: Swift.Int?)
+  case noAssetId
+  case noData
+  case unknown
+}
+public enum NgnAuthError : Foundation.LocalizedError {
+  case network(Foundation.URLError)
+  case failedToLogin
+  case invalidResponse(Foundation.URLResponse?)
+  case noAssetId
+  case noData
+  case unknown
+}
+@objc(TMAccountManagerDelegate) public protocol AccountManagerDelegate {
+  @objc func stateChanged(newStatus: TrimbleMapsAccounts.AccountManagerState)
+}
+public let TMPingHomeErrorDomain: Swift.String
+@_hasMissingDesignatedInitializers @objc(TMAccountManager) public class AccountManager : ObjectiveC.NSObject {
+  @objc public var state: TrimbleMapsAccounts.AccountManagerState {
+    @objc get
+  }
+  @objc public var account: TrimbleMapsAccounts.Account! {
+    @objc get
+    @objc set
+  }
+  @objc weak public var delegate: (any TrimbleMapsAccounts.AccountManagerDelegate)?
+  @objc public static var `default`: TrimbleMapsAccounts.AccountManager {
+    get
+  }
+  @objc convenience public init(account: TrimbleMapsAccounts.Account? = nil)
+  @objc public func waitForInitialization()
+  @objc public func waitForInitialization(timeout: Swift.Int64)
+  @objc public func isLicensed(licensedFeature: TrimbleMapsAccounts.LicensedFeature) -> Swift.Bool
+  @objc public func validateLicense(licensedFeature: TrimbleMapsAccounts.LicensedFeature)
+  @objc public func pingHomeIfNeeded(licensedFeature: TrimbleMapsAccounts.LicensedFeature, deviceId: Swift.String)
+  @objc public var region: TrimbleMapsAccounts.Region {
+    @objc get
+  }
+  @objc public var apiEnvironment: TrimbleMapsAccounts.APIEnvironment {
+    @objc get
+  }
+  @objc public func authString(forRequirement requirement: TrimbleMapsAccounts.AuthenticationRequirement) -> Swift.String?
+  @objc public func authString(forRequirements requirements: [TrimbleMapsAccounts.AuthenticationRequirement]) -> Swift.String?
+  @objc public func getAuth(authType: TrimbleMapsAccounts.AuthenticationType) -> Swift.String?
+  @objc public var shouldUserSelectRoutingProfiles: Swift.Bool {
+    @objc get
+  }
+  @objc deinit
+}
+extension TrimbleMapsAccounts.AccountManager {
+  public static func == (lhs: TrimbleMapsAccounts.AccountManager, rhs: TrimbleMapsAccounts.AccountManager) -> Swift.Bool
+}
+extension TrimbleMapsAccounts.AccountManager {
+  @objc override dynamic public var description: Swift.String {
+    @objc get
+  }
+  @objc override dynamic public var debugDescription: Swift.String {
+    @objc get
+  }
+}
+@objc(TMAccountManagerState) public enum AccountManagerState : Swift.Int {
+  case uninitialized
+  case loading
+  case loaded
+  case error
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(TMLicensedFeature) public enum LicensedFeature : Swift.Int {
+  case mapsSdk
+  case navigationSdk
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+@objc(TMAuthenticationType) public enum AuthenticationType : Swift.Int {
+  case apiKey
+  case authToken
+  case jwt
+  case fleetsToken
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+public enum FleetsConfigurationProfilesError : Foundation.LocalizedError {
+  case network(Foundation.URLError)
+  case invalidResponse(Foundation.URLResponse?)
+  case failedToFetch
+  case noData
+  case error(_: Swift.Int, _: Swift.String?)
+  case unknown
+}
+@objc(TMRegion) public enum Region : Swift.Int, Swift.CaseIterable {
+  case northAmerica
+  case europe
+  case worldwide
+  public var queryValue: Swift.String {
+    get
+  }
+  public init?(rawValue: Swift.Int?)
+  public init?(string: Swift.String?)
+  public init?(rawValue: Swift.Int)
+  public typealias AllCases = [TrimbleMapsAccounts.Region]
+  public typealias RawValue = Swift.Int
+  public static var allCases: [TrimbleMapsAccounts.Region] {
+    get
+  }
+  public var rawValue: Swift.Int {
+    get
+  }
+}
+extension TrimbleMapsAccounts.APIEnvironment : Swift.Equatable {}
+extension TrimbleMapsAccounts.APIEnvironment : Swift.Hashable {}
+extension TrimbleMapsAccounts.APIEnvironment : Swift.RawRepresentable {}
+extension TrimbleMapsAccounts.AccountManagerState : Swift.Equatable {}
+extension TrimbleMapsAccounts.AccountManagerState : Swift.Hashable {}
+extension TrimbleMapsAccounts.AccountManagerState : Swift.RawRepresentable {}
+extension TrimbleMapsAccounts.LicensedFeature : Swift.Equatable {}
+extension TrimbleMapsAccounts.LicensedFeature : Swift.Hashable {}
+extension TrimbleMapsAccounts.LicensedFeature : Swift.RawRepresentable {}
+extension TrimbleMapsAccounts.AuthenticationType : Swift.Equatable {}
+extension TrimbleMapsAccounts.AuthenticationType : Swift.Hashable {}
+extension TrimbleMapsAccounts.AuthenticationType : Swift.RawRepresentable {}
+extension TrimbleMapsAccounts.Region : Swift.Equatable {}
+extension TrimbleMapsAccounts.Region : Swift.Hashable {}
+extension TrimbleMapsAccounts.Region : Swift.RawRepresentable {}
