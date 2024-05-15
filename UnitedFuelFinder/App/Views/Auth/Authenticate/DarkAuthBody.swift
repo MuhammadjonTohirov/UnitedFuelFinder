@@ -36,11 +36,10 @@ struct DarkAuthBody: View {
                 .padding(.bottom, Padding.default.sh() * 2)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
-                VStack(spacing: Padding.medium.sh()) {
-                    form
-                }
-                .padding(.bottom, Padding.large.sh())
-                
+                form
+                    .padding(.bottom, Padding.large.sh())
+                    .ignoresSafeArea(.keyboard, edges: .bottom)
+
                 SubmitButton {
                     viewModel.onClickAuthenticate()
                 } label: {
@@ -59,68 +58,77 @@ struct DarkAuthBody: View {
                 }, backgroundColor: .clear)
                 .padding(.horizontal, Padding.default.sh())
                 .padding(.bottom, Padding.small.sh())
+                .ignoresSafeArea()
                 
                 AppleButton()
                     .padding(.bottom, Padding.medium.sh())
+                    .ignoresSafeArea()
             }
-            .ignoresSafeArea(.keyboard)
         }
+        .ignoresSafeArea(.keyboard)
         .foregroundStyle(.white)
         .background(Color.appDarkGray)
     }
     
-    @ViewBuilder
     private var form: some View {
-        YRoundedTextField(radius: 32) {
-            YTextField(
-                text: $viewModel.username,
-                placeholder: "sample@domain.com",
-                placeholderColor: .white.opacity(0.5),
-                contentType: UITextContentType.emailAddress,
-                autoCapitalization: .never,
-                left: {
-                    Image(systemName: "person.fill")
-                        .frame(width: 24)
-                        .padding(.horizontal, Padding.small.sh())
-                }
+        VStack(spacing: 10.f.sh()) {
+            YRoundedTextField(radius: 32) {
+                YTextField(
+                    text: $viewModel.username,
+                    placeholder: "sample@domain.com",
+                    placeholderColor: .white.opacity(0.5),
+                    autoCapitalization: .never,
+                    left: {
+                        Image(systemName: "person.fill")
+                            .frame(width: 24)
+                            .padding(.horizontal, Padding.small.sh())
+                    }
+                )
+                .keyboardType(.emailAddress)
+            }
+            .set(error: viewModel.emailError ?? "")
+            .background(
+                // rounded view with black background
+                RoundedRectangle(cornerRadius: 32)
+                    .fill(Color.appBlack)
             )
-            .keyboardType(.emailAddress)
-        }
-        .set(error: viewModel.emailError ?? "")
-        .background(
-            // rounded view with black background
-            RoundedRectangle(cornerRadius: 32)
-                .fill(Color.appBlack)
-        )
-        .padding(
-            .horizontal, Padding.medium.sh()
-        )
-        
-        YRoundedTextField(radius: 32) {
-            YTextField(
-                text: $viewModel.password,
-                placeholder: "••••••••",
-                placeholderColor: .white.opacity(0.5),
-                isSecure: true,
-                contentType: UITextContentType.password,
-                autoCapitalization: .never,
-                left: {
-                    Image("jcon_key")
-                        .renderingMode(.template)
-                        .frame(width: 24)
-                        .padding(.horizontal, Padding.small.sh())
-                }
+            .padding(
+                .horizontal, Padding.medium.sh()
             )
-            .keyboardType(.default)
+            .padding(.bottom, 8)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+
+            YRoundedTextField(radius: 32) {
+                YTextField(
+                    text: $viewModel.password,
+                    placeholder: "••••••••",
+                    placeholderColor: .white.opacity(0.5),
+                    isSecure: true,
+                    contentType: UITextContentType.password,
+                    autoCapitalization: .never,
+                    left: {
+                        Image("jcon_key")
+                            .renderingMode(.template)
+                            .frame(width: 24)
+                            .padding(.horizontal, Padding.small.sh())
+                    }
+                )
+                .keyboardType(.default)
+            }
+            .background(
+                // rounded view with black background
+                RoundedRectangle(cornerRadius: 32)
+                    .fill(Color.appBlack)
+            )
+
+            .padding(
+                .horizontal, Padding.medium.sh()
+            )
+            .padding(.bottom, 8)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
+
         }
-        .background(
-            // rounded view with black background
-            RoundedRectangle(cornerRadius: 32)
-                .fill(Color.appBlack)
-        )
-        .padding(
-            .horizontal, Padding.medium.sh()
-        )
+        .frame(height: 152)
     }
     
     private var headerImage: some View {
