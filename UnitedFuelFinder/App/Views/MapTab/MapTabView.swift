@@ -30,6 +30,8 @@ struct MapTabView: View {
         UIApplication.shared.safeArea.bottom != 0
     }
     
+    @State private var stationInfoRect: CGRect = .zero
+    
     private var bottomSafeArea: CGFloat {
         hasSafeArea ? UIApplication.shared.safeArea.bottom : 20
     }
@@ -42,7 +44,10 @@ struct MapTabView: View {
         ZStack {
             innerBody
                 .overlay(content: {
-                    CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
+                    CoveredLoadingView(
+                        isLoading: $viewModel.isDrawing,
+                        message: "Drawing route".localize
+                    )
                 })
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
@@ -67,7 +72,10 @@ struct MapTabView: View {
                 }
             })
         }
-        .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
+        .coveredLoading(
+            isLoading: $viewModel.isLoading,
+            message: viewModel.loadingMessage
+        )
         .background(.appBackground)
     }
     
@@ -89,7 +97,8 @@ struct MapTabView: View {
                         self.viewModel.route = .stationDetails(station: station)
                     }
                 })
-                .presentationDetents([.height(200)])
+                .readRect(rect: $stationInfoRect)
+                .presentationDetents([.height(stationInfoRect.height)])
             }
         })
         .fullScreenCover(isPresented: $viewModel.present, content: {
@@ -114,6 +123,18 @@ struct MapTabView: View {
         switch self.viewModel.bodyState {
         case .map:
             mapView
+            .onChange(of: viewModel.isDragging, perform: { value in
+                if value {
+                    self.viewModel.onDraggingMap()
+                }
+            })
+            .ignoresSafeArea()
+            .padding(.bottom, 8)
+            .overlay {
+                bodyOverlay
+            }
+            .ignoresSafeArea(.container, edges: .bottom)
+            .padding(.bottom, -14)
             .onChange(of: $viewModel.pickedLocation, perform: { value in
                 if viewModel.state == .routing {
                     return
@@ -170,18 +191,6 @@ struct MapTabView: View {
                 viewModel.filterStationsByDefault()
             }
         })
-        .onChange(of: viewModel.isDragging, perform: { value in
-            if value {
-                self.viewModel.onDraggingMap()
-            }
-        })
-        .ignoresSafeArea()
-        .padding(.bottom, 8)
-        .overlay {
-            bodyOverlay
-        }
-        .ignoresSafeArea(.container, edges: .bottom)
-        .padding(.bottom, -14)
     }
     
     private var bodyOverlay: some View {
@@ -190,7 +199,8 @@ struct MapTabView: View {
             
             PinPointerView(
                 isActive: viewModel.isDragging,
-                type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
+                type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB
+            )
             .frame(height: pointerHeight)
             .offset(.init(width: 0, height: -(115 / 2) - bottomSafeArea))
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
@@ -247,7 +257,7 @@ struct MapTabView: View {
                     },
                     distance: viewModel.distance
                 ),
-                stations: [], //Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
+                stations: [],
                 hasMoreButton: self.viewModel.stations.count > 6,
                 isSearching: self.viewModel.isLoadingAddress,
                 onClickMoreButton: {
@@ -392,6 +402,7 @@ struct MapTabView: View {
 #Preview {
     UserSettings.shared.accessToken = UserSettings.testAccessToken
     UserSettings.shared.refreshToken = UserSettings.testRefreshToken
+    UserSettings.shared.tokenExpireDate = Date().after(days: 2)
     UserSettings.shared.userEmail = UserSettings.testEmail
     UserSettings.shared.appPin = "0000"
     return MainView()

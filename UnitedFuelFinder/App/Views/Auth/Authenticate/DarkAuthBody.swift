@@ -37,8 +37,10 @@ struct DarkAuthBody: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 form
-                    .padding(.bottom, Padding.large.sh())
+                    .scrollable(axis: .vertical)
+                    .frame(height: 152)
                     .ignoresSafeArea(.keyboard, edges: .bottom)
+                    .padding(.bottom, Padding.large.sh())
 
                 SubmitButton {
                     viewModel.onClickAuthenticate()
@@ -128,7 +130,6 @@ struct DarkAuthBody: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
 
         }
-        .frame(height: 152)
     }
     
     private var headerImage: some View {

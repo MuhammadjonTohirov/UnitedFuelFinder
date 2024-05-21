@@ -90,6 +90,12 @@
         }
       }
     },
+    "6 hours ego" : {
+
+    },
+    "A" : {
+
+    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -401,6 +407,9 @@
           }
         }
       }
+    },
+    "B" : {
+
     },
     "Blue" : {
 
@@ -1716,9 +1725,6 @@
           }
         }
       }
-    },
-    "Go" : {
-
     },
     "Green" : {
 
@@ -3096,6 +3102,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Narx"
+          }
+        }
+      }
+    },
+    "price_update" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price update"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновление цены"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narx yangilash"
+          }
+        }
+      }
+    },
+    "price.change.warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Due to market volatility price may have changed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменение цены может произойти из-за волатильности рынка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bozordagi o'zgaruvchanlik tufayli narx o'zgarishi mumkin"
           }
         }
       }

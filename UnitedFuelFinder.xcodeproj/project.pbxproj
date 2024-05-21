@@ -266,6 +266,7 @@
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* MapTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */; };
 		2EC47CA12B7F151E007A14CB /* CoverNavigationBarModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */; };
+		2ED207382BFA3B0E008B6B8D /* TotalCostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED207372BFA3B0E008B6B8D /* TotalCostView.swift */; };
 		2ED38FEA2BBC73C0008400CF /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FE92BBC73C0008400CF /* ForgotPasswordView.swift */; };
 		2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */; };
 		2ED38FEE2BBC7751008400CF /* NetReqChangePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */; };
@@ -586,6 +587,7 @@
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewModel.swift; sourceTree = "<group>"; };
 		2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverNavigationBarModifier.swift; sourceTree = "<group>"; };
+		2ED207372BFA3B0E008B6B8D /* TotalCostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalCostView.swift; sourceTree = "<group>"; };
 		2ED38FE92BBC73C0008400CF /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
 		2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqForgotPassword.swift; sourceTree = "<group>"; };
 		2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqChangePassword.swift; sourceTree = "<group>"; };
@@ -1372,6 +1374,7 @@
 		2E7739FD2B6AA4C1007A65BF /* TabView */ = {
 			isa = PBXGroup;
 			children = (
+				2ED207362BFA3B04008B6B8D /* Views */,
 				2E7739FE2B6AA4D1007A65BF /* MainTabView.swift */,
 			);
 			path = TabView;
@@ -1499,6 +1502,14 @@
 				2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */,
 			);
 			path = Home;
+			sourceTree = "<group>";
+		};
+		2ED207362BFA3B04008B6B8D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2ED207372BFA3B0E008B6B8D /* TotalCostView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		2ED38FE82BBC73AB008400CF /* ForgotPassword */ = {
@@ -2096,6 +2107,7 @@
 				2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */,
 				2E5DF9842AEACD64005BE20D /* NSMutableData+Extensions.swift in Sources */,
 				2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */,
+				2ED207382BFA3B0E008B6B8D /* TotalCostView.swift in Sources */,
 				2EB5996E2B09E5F90038F5F0 /* NotificationsView.swift in Sources */,
 				2E01E5DD2B52FAB000F6231D /* SettingsProfile.swift in Sources */,
 				2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */,

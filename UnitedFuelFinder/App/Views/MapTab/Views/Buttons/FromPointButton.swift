@@ -17,12 +17,9 @@ struct FromPointButton: View {
         fromPointView
     }
     
-    var fromPointView: some View {
+    private var fromPointView: some View {
         HStack {
-            Image("icon_point_circle")
-                .renderingMode(.template)
-                .foregroundStyle(Color.label)
-                .foregroundStyle(Color.green)
+            leftView
             
             if isLoading {
                 HStack {
@@ -38,14 +35,6 @@ struct FromPointButton: View {
             }
             
             Spacer()
-            Divider()
-                .padding(6)
-            Circle()
-                .frame(width: 32, height: 32, alignment: .center)
-                .foregroundStyle(Color.clear)
-                .overlay {
-                    Image(systemName: "arrow.forward")
-                }
         }
         .padding(.horizontal, 10)
         .frame(height: 40)
@@ -55,6 +44,22 @@ struct FromPointButton: View {
                 .onTapGesture(perform: onClickBody)
         }
         .onTapGesture(perform: onClickBody)
+    }
+    
+    private var leftView: some View {
+        Circle()
+            .frame(width: 19.f.sw(), height: 19.f.sw())
+            .overlay {
+                Text("A")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(.white)
+            }
+    }
+}
+
+#Preview {
+    FromPointButton(text: "", isLoading: false) {
+        
     }
 }
 

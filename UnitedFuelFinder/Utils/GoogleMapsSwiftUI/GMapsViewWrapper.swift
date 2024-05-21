@@ -91,19 +91,6 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         let mapController = MapViewController()
         mapController.delegate = context.coordinator
         
-        let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
-        
-        let bottom = 115 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
-        
-        mapController.set(
-            padding: .init(
-                top: 0, 
-                left: 0,
-                bottom: bottom, 
-                right: 0
-            )
-        )
-        
         return mapController
     }
     
@@ -123,6 +110,21 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
 //        } else {
 //            context.coordinator.updateCluster(withMarkers: self.markers)
 //        }
+        
+        if uiViewController.map.padding == .zero {
+            let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
+            
+            let bottom = 115 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
+            
+            uiViewController.set(
+                padding: .init(
+                    top: 0,
+                    left: 0,
+                    bottom: bottom,
+                    right: 0
+                )
+            )
+        }
         
         context.coordinator.setupMarkers(onMap: uiViewController.map, withMarkers: self.markers)
         

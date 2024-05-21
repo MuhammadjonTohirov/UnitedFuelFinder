@@ -21,10 +21,7 @@ struct ToPointButton: View {
                 .onTapGesture(perform: onClickBody)
                 .overlay {
                     HStack {
-                        Image("icon_pin_search")
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.label)
-                            .foregroundStyle(Color.init(uiColor: .systemRed))
+                        leftView
                         
                         if isLoading {
                             HStack {
@@ -38,14 +35,6 @@ struct ToPointButton: View {
                         }
                         
                         Spacer()
-                        Divider()
-                            .padding(6)
-                        Circle()
-                            .frame(width: 32, height: 32, alignment: .center)
-                            .foregroundStyle(Color.clear)
-                            .overlay {
-                                Image(systemName: "arrow.forward")
-                            }
                     }
                     .padding(.horizontal, 10)
                 }
@@ -54,12 +43,24 @@ struct ToPointButton: View {
             Button(action: {onClickMap()}, label: {
                 RoundedRectangle(cornerRadius: 8)
                     .frame(width: 51, height: 40)
-                    .foregroundStyle(Color.secondaryBackground)
+                    .foregroundStyle(Color.appIcon)
                     .overlay {
                         Image(systemName: "map.fill")
+                            .renderingMode(.template)
+                            .foregroundStyle(Color.background)
                     }
                     
             })
         }
+    }
+    
+    private var leftView: some View {
+        Circle()
+            .frame(width: 19.f.sw(), height: 19.f.sw())
+            .overlay {
+                Text("B")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(.white)
+            }
     }
 }
