@@ -74,27 +74,31 @@ struct MainTabView: View {
 
     }
     var innerBody: some View {
-        ZStack {
-            NavigationStack {
-                tabView
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        viewModel.onAppear()
+        NavigationStack {
+            tabView
+                .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    viewModel.onAppear()
+                }
+                .onAppear {
+                    if didAppear {
+                        return
                     }
-                    .onAppear {
-                        if didAppear {
-                            return
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                            viewModel.alertWarning()
-                            self.didAppear = true
-                        }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        viewModel.alertWarning()
+                        self.didAppear = true
                     }
-            }
-        }
-        .overlay {
-            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+                }
+                .overlay {
+                    if viewModel.isLoading {
+                        Rectangle()
+                            .foregroundStyle(.appBackground.opacity(0.5))
+                    } else {
+                        EmptyView()
+                            .opacity(0)
+                    }
+                }
         }
     }
     
