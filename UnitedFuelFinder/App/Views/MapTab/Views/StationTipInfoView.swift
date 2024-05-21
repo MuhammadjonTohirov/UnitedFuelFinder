@@ -54,7 +54,6 @@ struct StationTipView: View {
                 Text(station.fullAddress)
             }
             
-            
             HStack {
                 RegularButton(action: {
                     dismiss.callAsFunction()
