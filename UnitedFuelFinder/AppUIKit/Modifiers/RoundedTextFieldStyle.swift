@@ -7,11 +7,13 @@
 
 import SwiftUI
 
-public struct YTextFieldBorderStyle: ViewModifier {
+public struct RoundedTextFieldStyle: ViewModifier {
     var padding: CGFloat = 0
+    var radius: CGFloat = 8
     var borderColor: Color = .init(uiColor: .placeholderText)
-    public init(padding: CGFloat = 0) {
+    public init(padding: CGFloat = 0, radius: CGFloat = 8) {
         self.padding = padding
+        self.radius = radius
     }
     
     public func body(content: Content) -> some View {
@@ -19,7 +21,7 @@ public struct YTextFieldBorderStyle: ViewModifier {
             .padding(.leading, padding)
             .background(
                 RoundedRectangle(
-                    cornerRadius: 8
+                    cornerRadius: radius
                 )
                 .stroke(lineWidth: 1).foregroundStyle(
                     borderColor

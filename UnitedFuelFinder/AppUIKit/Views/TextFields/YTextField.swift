@@ -51,6 +51,7 @@ public struct YTextField: View, TextFieldProtocol {
     
     private var placeholderAlignment: Alignment = .leading
     private var topupHintColor: Color = Color(.secondaryLabel)
+    private var smallHintColor: Color = Color(uiColor: .placeholderText)
     private var placeholderColor: Color = Color(uiColor: .placeholderText)
     private(set) public var left: () -> any View
     private(set) public var right: () -> any View
@@ -58,6 +59,7 @@ public struct YTextField: View, TextFieldProtocol {
     public init(
         text: Binding<String>,
         placeholder: String,
+        placeholderColor: Color = Color(.secondaryLabel),
         isSecure: Bool = false,
         contentType: UITextContentType = .nickname,
         autoCapitalization: TextInputAutocapitalization = .sentences,
@@ -67,8 +69,9 @@ public struct YTextField: View, TextFieldProtocol {
         onCommit: (() -> Void)? = nil
     ) {
         self._text = text
- 
+
         self.placeholder = placeholder
+        self.placeholderColor = placeholderColor
         
         self.left = left ?? {
             EmptyView()
@@ -106,7 +109,12 @@ public struct YTextField: View, TextFieldProtocol {
                     .zIndex(0)
                 
                 textField
-                    .placeholder(placeholder, when: text.isEmpty, alignment: placeholderAlignment, color: .secondary)
+                    .placeholder(
+                        placeholder,
+                        when: text.isEmpty,
+                        alignment: placeholderAlignment,
+                        color: placeholderColor
+                    )
                     .keyboardType(keyboardType)
                     .textContentType(contentType)
                     .frame(height: height)
@@ -201,7 +209,7 @@ public struct YTextField: View, TextFieldProtocol {
             } else {
                 zStackAlignment = .leading
                 hintFontSize = 16
-                hintColor = placeholderColor
+                hintColor = smallHintColor
                 hintOpacity = 0
             }
         }
