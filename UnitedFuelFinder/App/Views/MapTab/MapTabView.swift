@@ -67,6 +67,10 @@ struct MapTabView: View {
                 }
             })
         }
+        .navigationDestination(isPresented: $viewModel.push, destination: {
+            viewModel.route?.screen
+                .environmentObject(mainModel)
+        })
         .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
         .background(.appBackground)
     }
@@ -78,10 +82,6 @@ struct MapTabView: View {
             bottomContent
                 .opacity(viewModel.bodyState == .map ? 1 : 0)
         }
-        .navigationDestination(isPresented: $viewModel.push, destination: {
-            viewModel.route?.screen
-                .environmentObject(mainModel)
-        })        
         .sheet(item: $selectedMarker, content: { marker in
             if let st = selectedMarker?.station {
                 StationTipView(station: st, onClickShow: { station in
