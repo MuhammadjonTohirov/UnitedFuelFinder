@@ -15,6 +15,7 @@ struct MapTabView: View {
     
     @ObservedObject var viewModel: MapTabViewModel
     @EnvironmentObject var mainModel: MainViewModel
+    @EnvironmentObject var tabModel: MainTabViewModel
     
     init(viewModel: MapTabViewModel) {
         self.viewModel = viewModel
@@ -53,7 +54,7 @@ struct MapTabView: View {
                 .onAppear {
                     viewModel.onAppear()
                 }
-                .onChange(of: viewModel.bodyState, perform: { value in
+                .onChange(of: tabModel.mapBodyState, perform: { value in
                     (value == .map) ? viewModel.onSelectMap() : viewModel.onSelectList()
                 })
                 .onDisappear {
@@ -72,10 +73,17 @@ struct MapTabView: View {
                 }
             })
         }
+        .navigationDestination(isPresented: $viewModel.push, destination: {
+            viewModel.route?.screen
+                .environmentObject(mainModel)
+        })
         .coveredLoading(
             isLoading: $viewModel.isLoading,
             message: viewModel.loadingMessage
         )
+        .onChange(of: viewModel.state, perform: { value in
+            tabModel.leadningNavigationOpacity = value == .selectTo ? 0 : 1
+        })
         .background(.appBackground)
     }
     
@@ -84,12 +92,8 @@ struct MapTabView: View {
             innerBodyByState
             
             bottomContent
-                .opacity(viewModel.bodyState == .map ? 1 : 0)
+                .opacity(tabModel.mapBodyState == .map ? 1 : 0)
         }
-        .navigationDestination(isPresented: $viewModel.push, destination: {
-            viewModel.route?.screen
-                .environmentObject(mainModel)
-        })        
         .sheet(item: $selectedMarker, content: { marker in
             if let st = selectedMarker?.station {
                 StationTipView(station: st, onClickShow: { station in
@@ -120,7 +124,7 @@ struct MapTabView: View {
     
     @ViewBuilder
     private var innerBodyByState: some View {
-        switch self.viewModel.bodyState {
+        switch self.tabModel.mapBodyState {
         case .map:
             mapView
             .onChange(of: viewModel.isDragging, perform: { value in

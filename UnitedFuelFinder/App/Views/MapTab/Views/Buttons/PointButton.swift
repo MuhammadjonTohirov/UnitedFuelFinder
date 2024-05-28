@@ -8,9 +8,10 @@
 import Foundation
 import SwiftUI
 
-struct ToPointButton: View {
+struct PointButton: View {
     var text: String
     var isLoading: Bool
+    var label: String = "B"
     var onClickMap: () -> Void
     var onClickBody: () -> Void
     var body: some View {
@@ -58,9 +59,17 @@ struct ToPointButton: View {
         Circle()
             .frame(width: 19.f.sw(), height: 19.f.sw())
             .overlay {
-                Text("B")
+                Text(label)
                     .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.background)
             }
+    }
+}
+
+#Preview {
+    PointButton(text: "", isLoading: false, label: "C") {
+        
+    } onClickBody: {
+        
     }
 }

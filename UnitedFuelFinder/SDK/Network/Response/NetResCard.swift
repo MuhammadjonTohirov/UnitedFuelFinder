@@ -14,7 +14,6 @@ public struct NetResCard: NetResBody {
     let totalBalance: Double
 }
 
-
 public struct NetResActualVersion: NetResBody {
     let version: String?
     let baseUrl: String?

@@ -26,10 +26,18 @@ struct SpendingsWidgetView: View {
     @State private var selectyionType: TotalSpendingFilterType = .today
     @State private var result: TotalSpendings?
     
+    @State private var donutRect: CGRect = .zero
     var body: some View {
         ZStack {
             VStack {
                 filterView
+                
+                rightBody
+                    .padding(.leading, donutRect.maxX + 24.f.sw())
+                    .overlay {
+                        ProgressView()
+                            .opacity(isLoading ? 1 : 0)
+                    }
                 Spacer()
             }
                 
@@ -47,15 +55,8 @@ struct SpendingsWidgetView: View {
                         ProgressView()
                             .opacity(isLoading ? 1 : 0)
                     }
-                
+                    .readRect(rect: $donutRect)
                 Spacer()
-                
-                rightBody
-                    .padding(.leading, 40.f.sw())
-                    .overlay {
-                        ProgressView()
-                            .opacity(isLoading ? 1 : 0)
-                    }
             }
         }
         .padding(Padding.medium)

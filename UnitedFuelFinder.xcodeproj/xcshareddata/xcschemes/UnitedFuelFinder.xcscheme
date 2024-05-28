@@ -70,7 +70,7 @@
          </EnvironmentVariable>
       </EnvironmentVariables>
       <LocationScenarioReference
-         identifier = "../../Pitsburg.gpx"
+         identifier = "../../Locations/Pitsburg-Kansas.gpx"
          referenceType = "0">
       </LocationScenarioReference>
    </LaunchAction>

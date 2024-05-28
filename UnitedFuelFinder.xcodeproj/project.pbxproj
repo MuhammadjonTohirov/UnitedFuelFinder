@@ -38,6 +38,8 @@
 		2E0F93D72B013C4900660DEB /* CoveredLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D62B013C4900660DEB /* CoveredLoadingView.swift */; };
 		2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */; };
 		2E0FBEFD2B1307C400A39EBA /* MapTabViewModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */; };
+		2E13A3692BFE519D00A33606 /* FilteringStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E13A3682BFE519D00A33606 /* FilteringStationView.swift */; };
+		2E13A36B2BFE5A8200A33606 /* StationDetailsWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */; };
 		2E1E92052B77B8C300AF1D7C /* MapTabToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E92042B77B8C300AF1D7C /* MapTabToggleView.swift */; };
 		2E1E92082B77D9CF00AF1D7C /* MapFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */; };
 		2E1E920B2B77EC3A00AF1D7C /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E920A2B77EC3A00AF1D7C /* MainTabViewModel.swift */; };
@@ -51,7 +53,7 @@
 		2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA72AE067FB008C3E8C /* PinPointerView.swift */; };
 		2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */; };
 		2E243DAE2AE163E8008C3E8C /* FromPointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */; };
-		2E243DB02AE163EE008C3E8C /* ToPointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAF2AE163EE008C3E8C /* ToPointButton.swift */; };
+		2E243DB02AE163EE008C3E8C /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAF2AE163EE008C3E8C /* PointButton.swift */; };
 		2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */; };
 		2E29B8E52AEB7B93001EC1BE /* SelectStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */; };
 		2E2D1EC12AEBD96300559A1D /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */; };
@@ -365,6 +367,8 @@
 		2E0F93D62B013C4900660DEB /* CoveredLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoveredLoadingView.swift; sourceTree = "<group>"; };
 		2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalValueAdjuster.swift; sourceTree = "<group>"; };
 		2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+Extensions.swift"; sourceTree = "<group>"; };
+		2E13A3682BFE519D00A33606 /* FilteringStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringStationView.swift; sourceTree = "<group>"; };
+		2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsWarning.swift; sourceTree = "<group>"; };
 		2E1E92042B77B8C300AF1D7C /* MapTabToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabToggleView.swift; sourceTree = "<group>"; };
 		2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterView.swift; sourceTree = "<group>"; };
 		2E1E920A2B77EC3A00AF1D7C /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
@@ -378,7 +382,7 @@
 		2E243DA72AE067FB008C3E8C /* PinPointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointerView.swift; sourceTree = "<group>"; };
 		2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyles.swift; sourceTree = "<group>"; };
 		2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromPointButton.swift; sourceTree = "<group>"; };
-		2E243DAF2AE163EE008C3E8C /* ToPointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToPointButton.swift; sourceTree = "<group>"; };
+		2E243DAF2AE163EE008C3E8C /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
 		2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetInput.swift; sourceTree = "<group>"; };
 		2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateView.swift; sourceTree = "<group>"; };
 		2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
@@ -749,6 +753,7 @@
 			isa = PBXGroup;
 			children = (
 				2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */,
+				2E13A3682BFE519D00A33606 /* FilteringStationView.swift */,
 			);
 			path = MapFilterView;
 			sourceTree = "<group>";
@@ -785,7 +790,7 @@
 		2E243DB12AE163F1008C3E8C /* Buttons */ = {
 			isa = PBXGroup;
 			children = (
-				2E243DAF2AE163EE008C3E8C /* ToPointButton.swift */,
+				2E243DAF2AE163EE008C3E8C /* PointButton.swift */,
 				2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */,
 			);
 			path = Buttons;
@@ -1441,6 +1446,7 @@
 				84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */,
 				846A291C2AFAB355008A8E0B /* CommentsView.swift */,
 				2E0F93C92B012BCC00660DEB /* StationCommentItemView.swift */,
+				2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */,
 			);
 			path = StationDetails;
 			sourceTree = "<group>";
@@ -1892,6 +1898,7 @@
 				2E36A74D2AEF9D930033363E /* NetResUserInfo.swift in Sources */,
 				2E5DF9252AEACD63005BE20D /* TopLeftDismissModifier.swift in Sources */,
 				2E2420732B832271003DE3E5 /* NetResInvoiceItem.swift in Sources */,
+				2E13A3692BFE519D00A33606 /* FilteringStationView.swift in Sources */,
 				2E5DF9292AEACD63005BE20D /* MultiPicker.swift in Sources */,
 				2EA5C2322B83657F00DFB989 /* NetResCard.swift in Sources */,
 				2E5DF97E2AEACD64005BE20D /* Language.swift in Sources */,
@@ -2028,6 +2035,7 @@
 				2E5DF92B2AEACD63005BE20D /* PreviewHelpers.swift in Sources */,
 				2E5DF9472AEACD63005BE20D /* MapCameraZoomRange.swift in Sources */,
 				2E24206E2B82AC85003DE3E5 /* DashboardInteractor.swift in Sources */,
+				2E13A36B2BFE5A8200A33606 /* StationDetailsWarning.swift in Sources */,
 				2E5DF9742AEACD64005BE20D /* NetReqLogin.swift in Sources */,
 				2E5DF98A2AEACD64005BE20D /* Realm+Extensions.swift in Sources */,
 				2E243DAE2AE163E8008C3E8C /* FromPointButton.swift in Sources */,
@@ -2096,7 +2104,7 @@
 				2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */,
 				2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */,
 				2E723B132BA5B304007DFE49 /* GMapsViewCoordinator+Cluster.swift in Sources */,
-				2E243DB02AE163EE008C3E8C /* ToPointButton.swift in Sources */,
+				2E243DB02AE163EE008C3E8C /* PointButton.swift in Sources */,
 				2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */,
 				2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */,
 				2E5DF9452AEACD63005BE20D /* AlertToast.swift in Sources */,
@@ -2209,7 +2217,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -2267,7 +2275,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -2302,7 +2310,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2346,7 +2354,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

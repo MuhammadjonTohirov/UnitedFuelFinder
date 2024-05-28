@@ -182,6 +182,7 @@ struct GasStationItemView: View {
             .font(.system(size: 12))
             .padding(.vertical, 6)
         })
+        .foregroundStyle(.appBlack)
     }
     
     func set(navigate: @escaping (StationItem) -> Void) -> Self {

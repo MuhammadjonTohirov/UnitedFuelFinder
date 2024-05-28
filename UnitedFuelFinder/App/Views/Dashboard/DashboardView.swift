@@ -45,6 +45,9 @@ struct DashboardView: View {
                 }
             })
         }
+        .navigationDestination(isPresented: $viewModel.push, destination: {
+            viewModel.route?.screen
+        })
         .onAppear {
             self.viewModel.onAppear()
         }
@@ -58,19 +61,10 @@ struct DashboardView: View {
             Text("total.spendings".localize)
             SpendingsWidgetView()
             
-//            Text("popular.stations".localize)
-//            PopularStationsView(data: [])
-            
-//            Text("discounted.stations.nearby".localize)
-//            stationDetail
-            
             transactionsView.set(isVisible: showTransitions)
 
             invoicesView.set(isVisible: showInvoices)
         }
-        .navigationDestination(isPresented: $viewModel.push, destination: {
-            viewModel.route?.screen
-        })
         .padding(.horizontal)
         .font(.system(size: 14))
         .fontWeight(.semibold)

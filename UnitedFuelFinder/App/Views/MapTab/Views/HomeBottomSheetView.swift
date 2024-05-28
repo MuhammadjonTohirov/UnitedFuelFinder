@@ -88,7 +88,7 @@ struct HomeBottomSheetView: View {
             FromPointButton(text: input.from.title, isLoading: input.from.isLoading, onClickBody: input.from.onClickBody)
                 .padding(.top, Padding.small / 2)
             
-            ToPointButton(text: input.to.title, isLoading: input.to.isLoading, onClickMap: input.to.onClickMap, onClickBody: input.to.onClickBody)
+            PointButton(text: input.to.title, isLoading: input.to.isLoading, onClickMap: input.to.onClickMap, onClickBody: input.to.onClickBody)
             
             if !stations.isEmpty {
                 LazyHStack {

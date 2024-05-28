@@ -39,7 +39,7 @@ struct StationDetailsView: View {
     var innerBody: some View {
         VStack {
             headerView
-            
+                        
             details
                 .background {
                     Rectangle()
@@ -51,11 +51,6 @@ struct StationDetailsView: View {
                 navigateButton
             }
             .padding(.trailing, Padding.medium)
-            
-            postFeedbacks
-            comments
-                .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
-                .padding(.bottom, 50)
         }
         .scrollable(showIndicators: false)
         //.ignoresSafeArea(.container)
@@ -86,12 +81,9 @@ struct StationDetailsView: View {
                     )
                     .resizable()
                     .frame(width: 18, height: 18)
-                    .foregroundStyle(
-                        Color.white
-                    )
                 }
             )
-            .foregroundStyle(.white)
+            .foregroundStyle(.black)
             .padding(.horizontal, 8)
             .padding(.vertical, 5)
             .background(content: {
@@ -153,8 +145,10 @@ struct StationDetailsView: View {
                         .font(.system(size: 12))
                 }
             }
-            .padding(.leading)            
-            
+            .padding(.leading)
+            StationDetailsWarning()
+                .frame(maxWidth: .infinity)
+
             [
                 row(
                     title: "distance".localize,
@@ -197,75 +191,6 @@ struct StationDetailsView: View {
             }
             
             Divider()
-        }
-    }
-    private var postFeedbacks: some View {
-        VStack(alignment: .leading) {
-            Text("post_feedback".localize)
-                .padding(.top)
-                .padding(.horizontal)
-                .font(.system(size: 14, weight: .medium))
-            
-            YTextView(
-                text: $viewModel.comment,
-                placeholder: "write_comment".localize
-            )
-            .padding(.horizontal, Padding.medium)
-            
-            starRating
-        }
-    }
-    
-    private var starRating: some View {
-        HStack(spacing: 5) {
-            RateView(starsCount: 5, rate: 0)
-                .set(onRateChange: { rate in
-                    Logging.l(tag: "StationDetails", "Rate \(rate)")
-                    viewModel.rating = rate
-                })
-                .frame(width: 100, height: 20)
-                .padding(.leading, Padding.small / 2)
-            Spacer()
-            
-            Button(action: {
-                viewModel.postFeedback()
-            }, label: {
-                Text("post".localize.capitalized)
-                    .font(.system(size: 13, weight: .semibold))
-            })
-            .frame(width: 99, height: 40)
-            .foregroundStyle(Color.label)
-            .background(Color.init(uiColor: .secondarySystemBackground))
-            .cornerRadius(6)
-        }
-        .padding(.horizontal, Padding.medium)
-        .padding(.bottom)
-    }
-    
-    private var comments: some View {
-        VStack(alignment: .leading) {
-            Divider()
-                .padding(.bottom)
-
-            Text("latest_comments".localize)
-                .fontWeight(.semibold)
-                .padding(.leading)
-            
-            ForEach(viewModel.commentList, id: \.id) { comment in
-                comment.view
-                    .set(onClickDelete: {
-                        viewModel.deleteFeedback(id: comment.id.asInt)
-                    })
-                    .padding(.horizontal, Padding.medium)
-                    .padding(.vertical, Padding.small / 2)
-            }
-            
-            SubmitButton {
-                self.commentsPresented = true
-            } label: {
-                Text("more_comments".localize)
-            }
-            .padding(Padding.medium)
         }
     }
 }

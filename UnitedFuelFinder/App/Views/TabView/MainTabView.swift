@@ -19,8 +19,16 @@ struct MainTabView: View {
     @EnvironmentObject var mainViewModel: MainViewModel
     @State private var didAppear = false
         
-    @State private var mapBodyState: HomeBodyState = .map
     @State private var imagePlaceholder: Image?
+    
+    private var navigationOpacity: CGFloat {
+        switch viewModel.selectedTag {
+        case .map:
+            return viewModel.leadningNavigationOpacity
+        default:
+            return 1
+        }
+    }
     
     var body: some View {
         innerBody
@@ -74,30 +82,33 @@ struct MainTabView: View {
 
     }
     var innerBody: some View {
-        ZStack {
-            NavigationStack {
-                tabView
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        viewModel.onAppear()
+        NavigationStack {
+            tabView
+                .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    viewModel.onAppear()
+                }
+                .onAppear {
+                    if didAppear {
+                        return
                     }
-                    .onAppear {
-                        if didAppear {
-                            return
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                            viewModel.alertWarning()
-                            self.didAppear = true
-                        }
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        viewModel.alertWarning()
+                        self.didAppear = true
                     }
-            }
-        }
-        .overlay {
-            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
+                }
+                .overlay {
+                    if viewModel.isLoading {
+                        Rectangle()
+                            .foregroundStyle(.appBackground.opacity(0.5))
+                    } else {
+                        EmptyView()
+                            .opacity(0)
+                    }
+                }
         }
     }
-    
     
     @ViewBuilder
     private var leadingTopBar: some View {
@@ -121,7 +132,7 @@ struct MainTabView: View {
             Text("Dashboard")
                 .font(.system(size: 16, weight: .bold))
         case .map:
-            MapTabToggleView(selectedIndex: $mapBodyState)
+            MapTabToggleView(selectedIndex: $viewModel.mapBodyState)
         case .settings:
             Text("Settings")
                 .font(.system(size: 16, weight: .bold))
@@ -185,6 +196,7 @@ struct MainTabView: View {
 
             MapTabView(viewModel: viewModel.mapViewModel as! MapTabViewModel)
                 .environmentObject(mainViewModel)
+                .environmentObject(viewModel)
                 .tabItem {
                     Image("icon_map_2")
                         .renderingMode(.template)
@@ -201,22 +213,23 @@ struct MainTabView: View {
                 }
                 .tag(MainTabs.settings)
         }
-        .onChange(of: mapBodyState, perform: { value in
-            viewModel.mapViewModel.bodyState = value
-        })
+        
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
                 leadingTopBar
+                    .opacity(navigationOpacity)
             }
         })
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 trailingTopBar
+                    .opacity(navigationOpacity)
             }
         })
         .toolbar(content: {
             ToolbarItem(placement: .principal) {
                 centerTopBar
+                    .opacity(navigationOpacity)
             }
         })
         .onChange(of: viewModel.selectedTag, perform: { value in
@@ -236,11 +249,7 @@ struct MainTabView: View {
 }
 
 #Preview {
-    UserSettings.shared.accessToken = UserSettings.testAccessToken
-    UserSettings.shared.refreshToken = UserSettings.testRefreshToken
-    UserSettings.shared.userEmail = UserSettings.testEmail
-    UserSettings.shared.tokenExpireDate = Date().after(days: 2)
-    UserSettings.shared.appPin = "0000"
+    UserSettings.shared.setupForTest()
     
     return MainView()
 }

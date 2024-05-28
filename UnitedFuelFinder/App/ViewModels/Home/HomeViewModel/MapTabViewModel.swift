@@ -10,7 +10,7 @@ import GoogleMaps
 
 enum HomeViewState {
     case selectFrom // or we can say default state
-    case selectTo   
+    case selectTo
     case routing
 }
 
@@ -20,7 +20,6 @@ enum HomeBodyState: Int {
 }
 
 protocol MapTabViewModelProtocl: ObservableObject {
-    var bodyState: HomeBodyState {get set}
     var route: MapTabRouter? {get set}
     var filter: MapFilterInput? {get}
     var isFilteringStations: Bool {get set}
@@ -32,7 +31,6 @@ protocol MapTabViewModelProtocl: ObservableObject {
 
 final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
     @Published var focusableLocation: CLLocation?
-    @Published var bodyState: HomeBodyState = .map 
     @Published var filter: MapFilterInput?
     
     var isMapReady: Bool = false

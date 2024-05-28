@@ -38,6 +38,7 @@ struct DarkAuthBody: View {
                 
                 form
                     .scrollable(axis: .vertical)
+                    .scrollBounceBehavior(.basedOnSize)
                     .frame(height: 152)
                     .ignoresSafeArea(.keyboard, edges: .bottom)
                     .padding(.bottom, Padding.large.sh())

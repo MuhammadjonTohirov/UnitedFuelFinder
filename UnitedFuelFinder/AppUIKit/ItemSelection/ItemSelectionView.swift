@@ -167,30 +167,6 @@ class LabelView: UIView {
     }
 }
 
-class TestViewController: UIViewController {
-    // put lableview at center
-    var labelView: LabelView = LabelView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.addSubview(labelView)
-        
-        labelView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            labelView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            labelView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
-        
-        labelView.setIcon(UIImage(systemName: "mic.slash"))
-        labelView.setText("You are muted")
-        labelView.setIconColor(.white)
-        labelView.setTextColor(.white)
-        labelView.setBackgroudColor(.black.withAlphaComponent(0.5))
-    }
-    
-}
-
 struct TestWrapper: View {
     @State var alert = true
     var body: some View {

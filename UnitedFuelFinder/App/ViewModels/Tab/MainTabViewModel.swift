@@ -12,14 +12,17 @@ import UIKit
 class MainTabViewModel: ObservableObject {
     @Published var selectedTag: MainTabs = .dashboard
     
-    @Published var dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
-    @Published var mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
-    @Published var settingsViewModel: SettingsViewModel = .init()
+    let dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
+    let mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
+    let settingsViewModel: SettingsViewModel = .init()
     
     @Published var isLoading: Bool = false
     @Published var discountedStations: [StationItem] = []
     @Published var showWarningAlert: Bool = false
     @Published var showVersionWarningAlert: Bool = false
+    @Published var leadningNavigationOpacity: CGFloat = 1
+    @Published var mapBodyState: HomeBodyState = .map
+    
     private var lastLocationUpdate: Date = .now.before(days: 1)
     private var didAppear: Bool = false
     func onAppear() {
