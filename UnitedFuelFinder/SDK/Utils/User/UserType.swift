@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum UserType: Codable {
+public enum UserType: Codable {
     case company
     case driver
 }
