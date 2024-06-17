@@ -27,6 +27,11 @@ struct NetResStationItem: NetResBody {
     var logoUrl: String?
     var note: String?
     var distance: Float?
+    var identifier: String?
+    var isEmpty: Bool?
+    var isOpen: Bool?
+    var bestPrice: Float?
+    var customerName: String?
     
     enum CodingKeys: String, CodingKey {
         case id
@@ -48,6 +53,12 @@ struct NetResStationItem: NetResBody {
         case distance
         case cityName
         case stateName
+        
+        case identifier
+        case isEmpty
+        case isOpen
+        case bestPrice
+        case customerName
     }
     
     init(id: Int, name: String, lat: Double, lng: Double, isDeleted: Bool? = nil, cityId: Int? = nil, cityName: String? = nil, customerId: Int, address: String? = nil, phone: String? = nil, stateId: String? = nil, stateName: String? = nil, discountPrice: Float? = nil, priceUpdated: String, retailPrice: Float? = nil, number: String? = nil, logoUrl: String? = nil, note: String? = nil, distance: Float? = nil) {
@@ -70,6 +81,8 @@ struct NetResStationItem: NetResBody {
         self.logoUrl = logoUrl
         self.note = note
         self.distance = distance
+        self.identifier = nil
+        
     }
     
     init(from decoder: Decoder) throws {
@@ -93,6 +106,11 @@ struct NetResStationItem: NetResBody {
         logoUrl = try? container.decodeIfPresent(String.self, forKey: .logoUrl)
         note = try? container.decodeIfPresent(String.self, forKey: .note)
         distance = try? container.decodeIfPresent(Float.self, forKey: .distance)
+        identifier = try? container.decodeIfPresent(String.self, forKey: .identifier)
+        isEmpty = try? container.decodeIfPresent(Bool.self, forKey: .isEmpty)
+        isOpen = try? container.decodeIfPresent(Bool.self, forKey: .isOpen)
+        bestPrice = try? container.decodeIfPresent(Float.self, forKey: .bestPrice)
+        customerName = try? container.decodeIfPresent(String.self, forKey: .customerName)
     }
     
     func encode(to encoder: Encoder) throws {
@@ -116,5 +134,10 @@ struct NetResStationItem: NetResBody {
         try container.encodeIfPresent(logoUrl, forKey: .logoUrl)
         try container.encodeIfPresent(note, forKey: .note)
         try container.encodeIfPresent(distance, forKey: .distance)
+        try container.encodeIfPresent(identifier, forKey: .identifier)
+        try container.encodeIfPresent(isEmpty, forKey: .isEmpty)
+        try container.encodeIfPresent(isOpen, forKey: .isOpen)
+        try container.encodeIfPresent(bestPrice, forKey: .bestPrice)
+        try container.encodeIfPresent(customerName, forKey: .customerName)
     }
 }

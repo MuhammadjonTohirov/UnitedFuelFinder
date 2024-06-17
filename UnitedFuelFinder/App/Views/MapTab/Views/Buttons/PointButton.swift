@@ -12,12 +12,14 @@ struct PointButton: View {
     var text: String
     var isLoading: Bool
     var label: String = "B"
-    var onClickMap: () -> Void
+    var labelColor: Color = .label
+    var onClickMap: (() -> Void)? = nil
     var onClickBody: () -> Void
+    
     var body: some View {
         HStack {
             RoundedRectangle(cornerRadius: 8)
-                .frame(height: 40)
+                .frame(height: 50)
                 .foregroundStyle(Color.secondaryBackground)
                 .onTapGesture(perform: onClickBody)
                 .overlay {
@@ -41,22 +43,25 @@ struct PointButton: View {
                 }
                 .onTapGesture(perform: onClickBody)
             
-            Button(action: {onClickMap()}, label: {
-                RoundedRectangle(cornerRadius: 8)
-                    .frame(width: 51, height: 40)
-                    .foregroundStyle(Color.appIcon)
-                    .overlay {
-                        Image(systemName: "map.fill")
-                            .renderingMode(.template)
-                            .foregroundStyle(Color.background)
-                    }
-                    
-            })
+            if let onClickMap {
+                Button(action: {onClickMap()}, label: {
+                    RoundedRectangle(cornerRadius: 8)
+                        .frame(width: 50, height: 50)
+                        .foregroundStyle(Color.appIcon)
+                        .overlay {
+                            Image(systemName: "map.fill")
+                                .renderingMode(.template)
+                                .foregroundStyle(Color.background)
+                        }
+                        
+                })
+            }
         }
     }
     
     private var leftView: some View {
         Circle()
+            .foregroundStyle(labelColor)
             .frame(width: 19.f.sw(), height: 19.f.sw())
             .overlay {
                 Text(label)

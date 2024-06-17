@@ -75,7 +75,7 @@ struct ProfileVIew: View {
                         dismiss()
                     }
                 } label: {
-                    Text("Save")
+                    Text("save".localize)
                 }
                 .set(isLoading: viewModel.isLoading)
                 .set(isEnabled: viewModel.isValidForm)

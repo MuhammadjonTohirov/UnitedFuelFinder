@@ -36,6 +36,7 @@ public actor CommonService {
         let result: NetRes<ServerVersion>? = await Network.send(request: CommonNetworkRouter.version, refreshTokenIfNeeded: false)
         return result?.data
     }
+    
     public func getActualVersion() async -> ServerVersion? {
         let result: NetRes<NetResActualVersion>? = await Network.send(request: CommonNetworkRouter.actualAppVersion, refreshTokenIfNeeded: false)
         return result?.data?.ios

@@ -92,12 +92,6 @@ final public class UserSettings {
     @codableWrapper(key: "session", nil)
     public var session: String?
     
-    @codableWrapper(key: "lastFromLocation", nil)
-    public var fromLocation: Destination?
-    
-    @codableWrapper(key: "lastDestination", nil)
-    public var destination: Destination?
-    
     @codableWrapper(key: "nearestItemsLogic", .currentLocation)
     public var mapCenterType: MapCenterType?
     
@@ -118,9 +112,8 @@ final public class UserSettings {
         userEmail = nil
         language = .english
         currentVersion = nil
-        destination = nil
-        fromLocation = nil
         theme = .light
+        clearUserDefaults()
     }
     
     func setInterfaceStyle(style: UIUserInterfaceStyle) {
@@ -132,6 +125,15 @@ final public class UserSettings {
             self.theme = .dark
         default:
             self.theme = .system
+        }
+    }
+    
+    
+    private func clearUserDefaults() {
+        let storage: UserDefaults = UserDefaults(suiteName: "uz.xcoder.YuzPay") ?? .standard
+        
+        for key in storage.dictionaryRepresentation().keys {
+            storage.removeObject(forKey: key)
         }
     }
 }

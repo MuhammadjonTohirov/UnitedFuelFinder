@@ -11,6 +11,7 @@ enum MainNetworkRouter: URLRequestProtocol {
     case stationsInCity(_ cityId: String)
     case filterStations(request: NetReqFilterStations)
     case filterStations2(request: NetReqFilterStations)
+    case filterStations3(request: NetReqFilterStationsMultipleStops)
     case discountedStations(request: NetReqFilterStations, limit: Int)
     case feedbacksFor(station: Int)
     case postFeedback(station: Int, request: NetReqStationFeedback)

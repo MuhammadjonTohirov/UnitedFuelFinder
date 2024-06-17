@@ -52,13 +52,18 @@
 		2E243DA62AE02D01008C3E8C /* HomeBottomSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA52AE02D01008C3E8C /* HomeBottomSheetView.swift */; };
 		2E243DA82AE067FB008C3E8C /* PinPointerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA72AE067FB008C3E8C /* PinPointerView.swift */; };
 		2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */; };
-		2E243DAE2AE163E8008C3E8C /* FromPointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */; };
 		2E243DB02AE163EE008C3E8C /* PointButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DAF2AE163EE008C3E8C /* PointButton.swift */; };
 		2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */; };
+		2E29670B2C1852B7002050FC /* NetReqDrawMultipleRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29670A2C1852B7002050FC /* NetReqDrawMultipleRoute.swift */; };
+		2E29670D2C1852DF002050FC /* NetResDrawMultipleRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29670C2C1852DF002050FC /* NetResDrawMultipleRoute.swift */; };
+		2E2967102C1854A8002050FC /* MultipleRouteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29670F2C1854A8002050FC /* MultipleRouteModel.swift */; };
 		2E29B8E52AEB7B93001EC1BE /* SelectStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */; };
 		2E2D1EC12AEBD96300559A1D /* RegisterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */; };
 		2E2D1EC32AEBE41500559A1D /* SelectCityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC22AEBE41500559A1D /* SelectCityView.swift */; };
 		2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2D1EC52AEBF96200559A1D /* Alertable.swift */; };
+		2E2F3D802C10872600369DED /* MapTabViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E2F3D7F2C10872600369DED /* MapTabViewModelProtocol.swift */; };
+		2E345AA02C14712200CE6287 /* DestinationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E345A9F2C14712200CE6287 /* DestinationsView.swift */; };
+		2E345AA22C16D0D400CE6287 /* DestinationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E345AA12C16D0D400CE6287 /* DestinationsViewModel.swift */; };
 		2E36A7432AEECD380033363E /* MainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E36A7422AEECD380033363E /* MainService.swift */; };
 		2E36A7452AEECDD00033363E /* NetReqFilterStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E36A7442AEECDD00033363E /* NetReqFilterStations.swift */; };
 		2E36A7472AEECE2C0033363E /* NetResStationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E36A7462AEECE2C0033363E /* NetResStationItem.swift */; };
@@ -222,6 +227,7 @@
 		2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7266EB2AFD193B008099D0 /* RateView.swift */; };
 		2E739C222B3DB1DB000350EA /* ChangeThemeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */; };
 		2E7739FF2B6AA4D1007A65BF /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7739FE2B6AA4D1007A65BF /* MainTabView.swift */; };
+		2E78EA2A2C1B8865003F8DDA /* MapTabUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E78EA292C1B8865003F8DDA /* MapTabUtils.swift */; };
 		2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */; };
 		2E7BC70B2AF3F0DC003A1CE5 /* CompanyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */; };
 		2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */; };
@@ -244,6 +250,8 @@
 		2E89DD2F2BF4B9EC00CC7EBF /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD2E2BF4B9EC00CC7EBF /* AppleButton.swift */; };
 		2E89DD322BF4C39200CC7EBF /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD312BF4C39200CC7EBF /* IntroView.swift */; };
 		2E89DD352BF5318D00CC7EBF /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD342BF5318D00CC7EBF /* UserType.swift */; };
+		2E8A49DE2C0CFA4D00169F5B /* MapTabViewModel+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */; };
+		2E8A49E02C0CFA7700169F5B /* MapDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */; };
 		2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AED052B8E3B3E00701590 /* Network+Google.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91A8352B8643B10045D8FE /* MapTabListView.swift */; };
@@ -263,7 +271,11 @@
 		2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B192B13B1870055610A /* NetResCustomer.swift */; };
 		2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B1B2B13B1B90055610A /* CustomerItem.swift */; };
 		2EB76B1E2B13B1C20055610A /* DCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B1D2B13B1C20055610A /* DCustomer.swift */; };
+		2EB81D892C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB81D882C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift */; };
+		2EB9A1F12C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9A1F02C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift */; };
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
+		2EBD45F22C19611100285895 /* NetResFilterMultipleStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */; };
+		2EBD45F52C198D6300285895 /* DestinationMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD45F42C198D6300285895 /* DestinationMarkerView.swift */; };
 		2EBF9DAF2B85226800374613 /* AllInvoicesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBF9DAE2B85226800374613 /* AllInvoicesView.swift */; };
 		2EBFB99B2ADF9F77007FA786 /* GLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */; };
 		2EBFB99F2ADFA058007FA786 /* MapTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */; };
@@ -381,13 +393,18 @@
 		2E243DA52AE02D01008C3E8C /* HomeBottomSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetView.swift; sourceTree = "<group>"; };
 		2E243DA72AE067FB008C3E8C /* PinPointerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinPointerView.swift; sourceTree = "<group>"; };
 		2E243DA92AE0D8ED008C3E8C /* MapStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapStyles.swift; sourceTree = "<group>"; };
-		2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FromPointButton.swift; sourceTree = "<group>"; };
 		2E243DAF2AE163EE008C3E8C /* PointButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PointButton.swift; sourceTree = "<group>"; };
 		2E243DB22AE16D83008C3E8C /* HomeBottomSheetInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeBottomSheetInput.swift; sourceTree = "<group>"; };
+		2E29670A2C1852B7002050FC /* NetReqDrawMultipleRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqDrawMultipleRoute.swift; sourceTree = "<group>"; };
+		2E29670C2C1852DF002050FC /* NetResDrawMultipleRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResDrawMultipleRoute.swift; sourceTree = "<group>"; };
+		2E29670F2C1854A8002050FC /* MultipleRouteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleRouteModel.swift; sourceTree = "<group>"; };
 		2E29B8E42AEB7B93001EC1BE /* SelectStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectStateView.swift; sourceTree = "<group>"; };
 		2E2D1EC02AEBD96300559A1D /* RegisterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewModel.swift; sourceTree = "<group>"; };
 		2E2D1EC22AEBE41500559A1D /* SelectCityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectCityView.swift; sourceTree = "<group>"; };
 		2E2D1EC52AEBF96200559A1D /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		2E2F3D7F2C10872600369DED /* MapTabViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewModelProtocol.swift; sourceTree = "<group>"; };
+		2E345A9F2C14712200CE6287 /* DestinationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsView.swift; sourceTree = "<group>"; };
+		2E345AA12C16D0D400CE6287 /* DestinationsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationsViewModel.swift; sourceTree = "<group>"; };
 		2E36A7422AEECD380033363E /* MainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainService.swift; sourceTree = "<group>"; };
 		2E36A7442AEECDD00033363E /* NetReqFilterStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqFilterStations.swift; sourceTree = "<group>"; };
 		2E36A7462AEECE2C0033363E /* NetResStationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResStationItem.swift; sourceTree = "<group>"; };
@@ -549,6 +566,7 @@
 		2E7266EB2AFD193B008099D0 /* RateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RateView.swift; sourceTree = "<group>"; };
 		2E739C212B3DB1DB000350EA /* ChangeThemeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeThemeView.swift; sourceTree = "<group>"; };
 		2E7739FE2B6AA4D1007A65BF /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		2E78EA292C1B8865003F8DDA /* MapTabUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabUtils.swift; sourceTree = "<group>"; };
 		2E7BC7082AF3F0D4003A1CE5 /* DCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCompany.swift; sourceTree = "<group>"; };
 		2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompanyItem.swift; sourceTree = "<group>"; };
 		2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResCompany.swift; sourceTree = "<group>"; };
@@ -568,6 +586,8 @@
 		2E89DD2E2BF4B9EC00CC7EBF /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
 		2E89DD312BF4C39200CC7EBF /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		2E89DD342BF5318D00CC7EBF /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
+		2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+Map.swift"; sourceTree = "<group>"; };
+		2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDestination.swift; sourceTree = "<group>"; };
 		2E8AED052B8E3B3E00701590 /* Network+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Google.swift"; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2E91A8352B8643B10045D8FE /* MapTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabListView.swift; sourceTree = "<group>"; };
@@ -586,7 +606,11 @@
 		2EB76B192B13B1870055610A /* NetResCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResCustomer.swift; sourceTree = "<group>"; };
 		2EB76B1B2B13B1B90055610A /* CustomerItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerItem.swift; sourceTree = "<group>"; };
 		2EB76B1D2B13B1C20055610A /* DCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCustomer.swift; sourceTree = "<group>"; };
+		2EB81D882C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqFilterStationsMultipleStops.swift; sourceTree = "<group>"; };
+		2EB9A1F02C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+SearchAddress.swift"; sourceTree = "<group>"; };
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
+		2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResFilterMultipleStations.swift; sourceTree = "<group>"; };
+		2EBD45F42C198D6300285895 /* DestinationMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationMarkerView.swift; sourceTree = "<group>"; };
 		2EBF9DAE2B85226800374613 /* AllInvoicesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllInvoicesView.swift; sourceTree = "<group>"; };
 		2EBFB99A2ADF9F77007FA786 /* GLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GLocationManager.swift; sourceTree = "<group>"; };
 		2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabViewModel.swift; sourceTree = "<group>"; };
@@ -739,12 +763,17 @@
 		2E0FBEFB2B1307B800A39EBA /* HomeViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				2E2F3D7F2C10872600369DED /* MapTabViewModelProtocol.swift */,
 				2EBFB99E2ADFA058007FA786 /* MapTabViewModel.swift */,
 				2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */,
 				2E454EF22B9F720400998EC6 /* MapTabViewModel+Filter.swift */,
+				2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */,
+				2EB9A1F02C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift */,
 				2E48ECBB2B945245002B369C /* MapTabInteractor.swift */,
 				2EF746A42B1C4EB8009E2D8D /* MapTabRouter.swift */,
 				2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */,
+				2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */,
+				2E78EA292C1B8865003F8DDA /* MapTabUtils.swift */,
 			);
 			path = HomeViewModel;
 			sourceTree = "<group>";
@@ -791,9 +820,25 @@
 			isa = PBXGroup;
 			children = (
 				2E243DAF2AE163EE008C3E8C /* PointButton.swift */,
-				2E243DAD2AE163E8008C3E8C /* FromPointButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		2E29670E2C18549D002050FC /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				2E29670F2C1854A8002050FC /* MultipleRouteModel.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		2E345A9E2C14711A00CE6287 /* Destinations */ = {
+			isa = PBXGroup;
+			children = (
+				2E345A9F2C14712200CE6287 /* DestinationsView.swift */,
+				2E345AA12C16D0D400CE6287 /* DestinationsViewModel.swift */,
+			);
+			path = Destinations;
 			sourceTree = "<group>";
 		};
 		2E36A7502AEFB8EE0033363E /* Images */ = {
@@ -874,6 +919,7 @@
 		2E527A732ACC83A3005B8B95 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2E29670E2C18549D002050FC /* Map */,
 				2E2420672B82AB77003DE3E5 /* Dashboard */,
 				2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */,
 				2E0F93CB2B012FC300660DEB /* StationDetails */,
@@ -1223,6 +1269,8 @@
 				2EA5C2312B83657F00DFB989 /* NetResCard.swift */,
 				2EA5C2332B836AC300DFB989 /* NetResPopularStation.swift */,
 				2E48ECBD2B945393002B369C /* NetResDrawRoute.swift */,
+				2E29670C2C1852DF002050FC /* NetResDrawMultipleRoute.swift */,
+				2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1234,11 +1282,13 @@
 				2E5DF8FE2AEACD63005BE20D /* NetReqVerifyAccount.swift */,
 				2E5DF8FF2AEACD63005BE20D /* NetReqLogin.swift */,
 				2E36A7442AEECDD00033363E /* NetReqFilterStations.swift */,
+				2EB81D882C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift */,
 				2E7D8DAD2AFADE980074AB7E /* NetReqEditProfile.swift */,
 				2E0F93D32B01361400660DEB /* NetReqStationFeedback.swift */,
 				2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */,
 				2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */,
 				2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */,
+				2E29670A2C1852B7002050FC /* NetReqDrawMultipleRoute.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1466,6 +1516,14 @@
 				2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		2EBD45F32C198D4F00285895 /* DestinationMarkerView */ = {
+			isa = PBXGroup;
+			children = (
+				2EBD45F42C198D6300285895 /* DestinationMarkerView.swift */,
+			);
+			path = DestinationMarkerView;
 			sourceTree = "<group>";
 		};
 		2EBF9DAA2B851F7000374613 /* AllTransactions */ = {
@@ -1696,6 +1754,7 @@
 		2EDF8C942AD474A6003D64FC /* MapTab */ = {
 			isa = PBXGroup;
 			children = (
+				2E345A9E2C14711A00CE6287 /* Destinations */,
 				2E1E92062B77D9BC00AF1D7C /* MapFilterView */,
 				2EF746AE2B1CE964009E2D8D /* Marker */,
 				2EB5996C2B09E5F10038F5F0 /* NotificationView */,
@@ -1744,6 +1803,7 @@
 		2EF3A1D82ADD88F900CA8DE2 /* GoogleMapsSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				2EBD45F32C198D4F00285895 /* DestinationMarkerView */,
 				2EBD43C62AE510220033401A /* Extensions */,
 				2EF3A1D92ADD88F900CA8DE2 /* City.swift */,
 				2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */,
@@ -1914,6 +1974,7 @@
 				2E454F2F2BA0CC4200998EC6 /* MainService+Station+Details.swift in Sources */,
 				2E43DA032B7B8BE600716DB0 /* DashboardView.swift in Sources */,
 				2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */,
+				2E29670D2C1852DF002050FC /* NetResDrawMultipleRoute.swift in Sources */,
 				2E5DF9782AEACD64005BE20D /* CommonService.swift in Sources */,
 				2E5DF93D2AEACD63005BE20D /* RadioButton.swift in Sources */,
 				2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */,
@@ -1928,11 +1989,13 @@
 				2E5DF9422AEACD63005BE20D /* YRoundedTextField.swift in Sources */,
 				2E243DA62AE02D01008C3E8C /* HomeBottomSheetView.swift in Sources */,
 				2E454F332BA0CC8E00998EC6 /* MainNetworkRouter+Data.swift in Sources */,
+				2EBD45F52C198D6300285895 /* DestinationMarkerView.swift in Sources */,
 				2E5DF92A2AEACD63005BE20D /* SupportingTypes.swift in Sources */,
 				2E5DF9352AEACD63005BE20D /* View+Extensions.swift in Sources */,
 				2E5DF9512AEACD63005BE20D /* MapPolygon.swift in Sources */,
 				2E5DF95B2AEACD63005BE20D /* ViewMapAnnotation.swift in Sources */,
 				2E527A432ACC80C6005B8B95 /* MainView.swift in Sources */,
+				2E8A49DE2C0CFA4D00169F5B /* MapTabViewModel+Map.swift in Sources */,
 				2E5DF9752AEACD64005BE20D /* URLRequestProtocol.swift in Sources */,
 				2E454F2D2BA0CC0B00998EC6 /* MainService+Filter.swift in Sources */,
 				2E5DF9562AEACD63005BE20D /* Identifiable.swift in Sources */,
@@ -1940,6 +2003,7 @@
 				2E5DF9442AEACD63005BE20D /* BlurView.swift in Sources */,
 				2E36A7492AEED00E0033363E /* MainNetworkRouter.swift in Sources */,
 				2E2D1EC12AEBD96300559A1D /* RegisterViewModel.swift in Sources */,
+				2EB9A1F12C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift in Sources */,
 				2E7BC7092AF3F0D4003A1CE5 /* DCompany.swift in Sources */,
 				2E36A7472AEECE2C0033363E /* NetResStationItem.swift in Sources */,
 				2EA5C2342B836AC300DFB989 /* NetResPopularStation.swift in Sources */,
@@ -1953,6 +2017,7 @@
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
 				2E00707C2B7D268700A39E6D /* DonutChart.swift in Sources */,
 				8422A69B2B785AFB00017681 /* InvoiceView.swift in Sources */,
+				2E29670B2C1852B7002050FC /* NetReqDrawMultipleRoute.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
 				2E89DD1B2BF4709D00CC7EBF /* TrimbleViewController.swift in Sources */,
 				2EF746A52B1C4EB8009E2D8D /* MapTabRouter.swift in Sources */,
@@ -1994,9 +2059,11 @@
 				2E5DF98C2AEACD64005BE20D /* UserSettings.swift in Sources */,
 				2E5DF9482AEACD63005BE20D /* MapInteractionModes.swift in Sources */,
 				2E5DF9772AEACD64005BE20D /* AuthService.swift in Sources */,
+				2EBD45F22C19611100285895 /* NetResFilterMultipleStations.swift in Sources */,
 				2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */,
 				2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */,
 				2E2D1EC62AEBF96200559A1D /* Alertable.swift in Sources */,
+				2E2F3D802C10872600369DED /* MapTabViewModelProtocol.swift in Sources */,
 				8422A6992B784B6200017681 /* TransactionView.swift in Sources */,
 				2E5DF9822AEACD64005BE20D /* DispatchQueue+Extensions.swift in Sources */,
 				2E5DF9272AEACD63005BE20D /* PreviewSupport.swift in Sources */,
@@ -2038,7 +2105,6 @@
 				2E13A36B2BFE5A8200A33606 /* StationDetailsWarning.swift in Sources */,
 				2E5DF9742AEACD64005BE20D /* NetReqLogin.swift in Sources */,
 				2E5DF98A2AEACD64005BE20D /* Realm+Extensions.swift in Sources */,
-				2E243DAE2AE163E8008C3E8C /* FromPointButton.swift in Sources */,
 				2E2420702B831398003DE3E5 /* DashboardViewModel+Interactor.swift in Sources */,
 				2E5DF9392AEACD63005BE20D /* AppWindowGroup.swift in Sources */,
 				2E5DF9212AEACD63005BE20D /* ScrollableModifier.swift in Sources */,
@@ -2074,10 +2140,13 @@
 				2E502D0B2B2750D0002CE669 /* SettingsViewModel.swift in Sources */,
 				2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */,
 				2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */,
+				2E2967102C1854A8002050FC /* MultipleRouteModel.swift in Sources */,
 				2E5DF96B2AEACD63005BE20D /* Database.swift in Sources */,
 				2E5DF9792AEACD64005BE20D /* CommonNetworkRouter.swift in Sources */,
 				2E5DF9872AEACD64005BE20D /* Number+Extension.swift in Sources */,
 				2E5DF93E2AEACD63005BE20D /* BouncingLoadingView.swift in Sources */,
+				2E78EA2A2C1B8865003F8DDA /* MapTabUtils.swift in Sources */,
+				2E345AA02C14712200CE6287 /* DestinationsView.swift in Sources */,
 				2E5DF9462AEACD63005BE20D /* SingleValueBuilder.swift in Sources */,
 				2E89DD182BF459E800CC7EBF /* TrimbleAccountDelegate.swift in Sources */,
 				2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */,
@@ -2102,6 +2171,7 @@
 				2E48ECBE2B945393002B369C /* NetResDrawRoute.swift in Sources */,
 				2E5DF97A2AEACD64005BE20D /* AuthNetworkRouter.swift in Sources */,
 				2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */,
+				2E345AA22C16D0D400CE6287 /* DestinationsViewModel.swift in Sources */,
 				2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */,
 				2E723B132BA5B304007DFE49 /* GMapsViewCoordinator+Cluster.swift in Sources */,
 				2E243DB02AE163EE008C3E8C /* PointButton.swift in Sources */,
@@ -2110,6 +2180,7 @@
 				2E5DF9452AEACD63005BE20D /* AlertToast.swift in Sources */,
 				2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */,
 				2EA5C2362B836B5A00DFB989 /* PopularStations.swift in Sources */,
+				2E8A49E02C0CFA7700169F5B /* MapDestination.swift in Sources */,
 				2ED38FEA2BBC73C0008400CF /* ForgotPasswordView.swift in Sources */,
 				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
 				2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */,
@@ -2147,6 +2218,7 @@
 				2E0F93D42B01361400660DEB /* NetReqStationFeedback.swift in Sources */,
 				2E5DF9302AEACD63005BE20D /* Backport.swift in Sources */,
 				2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */,
+				2EB81D892C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift in Sources */,
 				2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */,
 				2E89DD322BF4C39200CC7EBF /* IntroView.swift in Sources */,
 				2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */,
@@ -2293,7 +2365,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -2315,7 +2387,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2334,12 +2406,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 11;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 98RHHYF7KQ;
+				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = UnitedFuelFinder/Info.plist;
@@ -2359,11 +2430,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.11;
+				MARKETING_VERSION = 1.13;
 				PRODUCT_BUNDLE_IDENTIFIER = com.united.fuel.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = DriverDist;
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

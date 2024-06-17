@@ -10,7 +10,7 @@ import Foundation
 extension MainNetworkRouter {
     var method: HTTPMethod {
         switch self {
-        case .filterStations, .filterStations2, .postFeedback, .discountedStations, .uploadAvatar:
+        case .filterStations, .filterStations2, .filterStations3, .postFeedback, .discountedStations, .uploadAvatar:
             return .post
         case .deleteFeedback:
             return .delete

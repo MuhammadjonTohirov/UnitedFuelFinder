@@ -132,4 +132,12 @@ extension View {
                     .stroke(color, lineWidth: width)
             )
     }
+    
+    func onClick(_ action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            self
+        }
+    }
 }

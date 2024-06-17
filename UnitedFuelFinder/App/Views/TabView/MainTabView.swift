@@ -29,7 +29,7 @@ struct MainTabView: View {
             return 1
         }
     }
-    
+
     var body: some View {
         innerBody
             .richAlert(
@@ -119,7 +119,11 @@ struct MainTabView: View {
                     viewModel.dashboardViewModel.navigate(to: .notifications)
                 }
         case .map:
-            TotalCostView(value: "$120")
+            if let tollCost = viewModel.mapDetails {
+                TotalCostView(value: "$\(tollCost.tollCost)")
+            } else {
+                EmptyView()
+            }
         default:
             EmptyView()
         }
@@ -147,8 +151,8 @@ struct MainTabView: View {
                 .onTapGesture {
                     if let filter = self.viewModel.mapViewModel.filter {
                         self.viewModel.mapViewModel.route = .filter(filter, { newFilter in
-                            self.viewModel.mapViewModel.set(filter: newFilter)
                             self.viewModel.mapViewModel.route = nil
+                            self.viewModel.mapViewModel.set(filter: newFilter)
                         })
                     }
                 }

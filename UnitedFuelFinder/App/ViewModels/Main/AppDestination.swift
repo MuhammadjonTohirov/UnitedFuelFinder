@@ -30,6 +30,8 @@ enum AppDestination: Hashable, ScreenRoute {
             return "main"
         case .mainTab:
             return "mainTab"
+        case .map:
+            return "map"
         case .loading:
             return "loading"
         case .language:
@@ -53,6 +55,7 @@ enum AppDestination: Hashable, ScreenRoute {
     case loading
     case pin
     case test
+    case map
     
     @ViewBuilder var screen: some View {
         switch self {
@@ -70,6 +73,10 @@ enum AppDestination: Hashable, ScreenRoute {
             TMapsViewWrapper()
         case .mainTab:
             MainTabView()
+        case .map:
+            MapTabView(viewModel: MapTabViewModel())
+                .environmentObject(MainTabViewModel())
+                .environmentObject(MainViewModel())
         default:
             EmptyView()
         }

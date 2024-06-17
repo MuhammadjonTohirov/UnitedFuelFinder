@@ -40,7 +40,7 @@ final class LoadingViewModel: LoadingViewModelProtocol {
     }
     
     private func showMain() async {
-        await appDelegate?.navigate(to: .pin)
+        await appDelegate?.navigate(to: .mainTab)
     }
     
     private func showAuth() async {

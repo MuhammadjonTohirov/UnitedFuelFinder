@@ -9,8 +9,12 @@ import Foundation
 import CoreLocation
 import UIKit
 
+struct MapTabDetail {
+    var tollCost: Float
+}
+
 class MainTabViewModel: ObservableObject {
-    @Published var selectedTag: MainTabs = .dashboard
+    @Published var selectedTag: MainTabs = .map
     
     let dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
     let mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
@@ -22,6 +26,7 @@ class MainTabViewModel: ObservableObject {
     @Published var showVersionWarningAlert: Bool = false
     @Published var leadningNavigationOpacity: CGFloat = 1
     @Published var mapBodyState: HomeBodyState = .map
+    @Published var mapDetails: MapTabDetail?
     
     private var lastLocationUpdate: Date = .now.before(days: 1)
     private var didAppear: Bool = false
@@ -30,16 +35,18 @@ class MainTabViewModel: ObservableObject {
             return
         }
         
+        mapViewModel.delegate = self
+
         setupLocation()
         
         isLoading = true
         
         didAppear = true
         
-        
         Task {
             await MainService.shared.syncAllStations()
-            await getActualVersion()
+//            No need for getActualVersion
+//            await getActualVersion()
             await MainActor.run {
                 isLoading = false
             }
@@ -142,12 +149,23 @@ class MainTabViewModel: ObservableObject {
 //            }
         }
     }
-    private func getActualVersion() async{
-        Task {
-            if let version = await CommonService.shared.getActualVersion(){
-                UserSettings.shared.actualAppVersion = version
-                checkActualVersion()
-            }
-        }
+    private func getActualVersion() async {
+        fatalError("Do not use this method")
+//        Task {
+//            if let version = await CommonService.shared.getActualVersion(){
+//                UserSettings.shared.actualAppVersion = version
+//                checkActualVersion()
+//            }
+//        }
+    }
+}
+
+extension MainTabViewModel: MapTabViewModelDelegate {
+    func onLoadTollCost(viewModel: MapTabViewModel, _ toll: Float) {
+        self.mapDetails = .init(tollCost: toll)
+    }
+    
+    func onResetMap(viewModel: MapTabViewModel) {
+        self.mapDetails = nil
     }
 }

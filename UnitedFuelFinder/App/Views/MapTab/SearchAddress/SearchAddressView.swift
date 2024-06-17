@@ -11,18 +11,15 @@ import GoogleMaps
 import Combine
 
 struct SearchAddressView: View {
-    @StateObject var viewModel = SearchAddressViewModel()
+    @EnvironmentObject var viewModel: SearchAddressViewModel
     @Environment(\.dismiss) var dismiss
     @State private var searchCancellables = Set<AnyCancellable>()
+    
     private var text: String
     var title: String = "search_address".localize
     
-    var onResult: ((SearchAddressViewModel.SearchAddressResult) -> Void)?
-    
-    init(title: String = "search_address".localize, text: String = "", onResult: ((SearchAddressViewModel.SearchAddressResult) -> Void)? = nil) {
-        self.title = title
-        self.onResult = onResult
-        self.text = text
+    init() {
+        self.text = ""
     }
     
     var body: some View {
@@ -36,14 +33,13 @@ struct SearchAddressView: View {
                 Button {
                     dismiss.callAsFunction()
                 } label: {
-                    Text("done".localize)
+                    Text("cancel".localize)
                 }
 
             }
         })
         .navigationTitle(title)
         .onAppear {
-            viewModel.addressText = text
             viewModel.onAppear()
         }
         .onDisappear {
@@ -53,11 +49,30 @@ struct SearchAddressView: View {
     
     private var innerBody: some View {
         VStack(alignment: .leading) {
+            HStack {
+                YRoundedTextField(
+                    focused: true,
+                    radius: 8
+                ) {
+                    YTextField(
+                        text: $viewModel.addressText,
+                        placeholder: "search".localize
+                    )
+                }
+                
+                Image(systemName: "map.fill")
+                    .padding(.leading, 6)
+                    .onClick {
+                        viewModel.onClickMap()
+                    }
+            }
+            
             if viewModel.addressList.isEmpty && viewModel.addressHistoryList.isEmpty {
                 Text("no_results".localize)
                     .font(.system(size: 14, weight: .semibold))
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                     .padding(Padding.large)
+                    .horizontal(alignment: .center)
             } else {
                 if viewModel.addressList.isEmpty {
                     ForEach(viewModel.addressHistoryList, id: \.id) { address in
@@ -72,19 +87,12 @@ struct SearchAddressView: View {
         }
         .padding(.horizontal, 16)
         .scrollable(showIndicators: false)
-        .searchable(text: $viewModel.addressText)
     }
     
     private func addressView(_ address: SearchAddressItem) -> some View {
         VStack {
             Button {
-                viewModel.onClickAddress(address) { res in
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                        if let res {
-                            onSuccessResult(res)
-                        }
-                    }
-                }
+                viewModel.onClickAddress(address)
             } label: {
                 HStack(alignment: .center) {
                     address
@@ -108,19 +116,15 @@ struct SearchAddressView: View {
             Divider()
         }
     }
-    
-    private func onSuccessResult(_ res: SearchAddressViewModel.SearchAddressResult) {
-        onResult?(res)
-        mainIfNeeded {
-            self.dismiss.callAsFunction()
-        }
-    }
 }
 
 #Preview {
-    return NavigationView {
-        SearchAddressView(title: "search_address".localize) { res in
-            print(res.address, res.lat, res.lng)
+    UserSettings.shared.setupForTest()
+    return NavigationStack {
+        if #available(iOS 17.0, *) {
+            SearchAddressView()
+            .environmentObject(SearchAddressViewModel())
+            .toolbarTitleDisplayMode(.inline)
         }
     }
 }

@@ -28,6 +28,11 @@ class DStationItem: Object, Identifiable {
     @Persisted public var distance: Float?
     @Persisted public var cityName: String?
     @Persisted public var stateName: String?
+    @Persisted public var identifier: String?
+    @Persisted public var isEmpty: Bool?
+    @Persisted public var isOpen: Bool?
+    @Persisted public var bestPrice: Float?
+    @Persisted public var customerName: String?
 }
 
 extension DStationItem {
@@ -54,6 +59,10 @@ extension DStationItem {
         st.cityName = self.cityName
         let customerName = self.name.replacingOccurrences(of: self.number ?? "-1", with: "")
         st.displayName = (customerName + " " + (st.number ?? "")).nilIfEmpty ?? self.name
+        st.identifier = self.identifier
+        st.isEmpty = self.isEmpty
+        st.isOpen = self.isOpen
+        st.bestPrice = self.bestPrice
         return st
     }
     
@@ -81,6 +90,11 @@ extension DStationItem {
         dStationItem.logoUrl = item.logoUrl
         dStationItem.note = item.note
         dStationItem.distance = item.distance
+        dStationItem.identifier = item.identifier
+        dStationItem.isEmpty = item.isEmpty
+        dStationItem.isOpen = item.isOpen
+        dStationItem.bestPrice = item.bestPrice
+        dStationItem.customerName = item.customerName
         return dStationItem
     }
     
@@ -105,6 +119,11 @@ extension DStationItem {
         dStationItem.distance = item.distance
         dStationItem.cityName = item.cityName
         dStationItem.stateName = item.stateName
+        dStationItem.identifier = item.identifier
+        dStationItem.isEmpty = item.isEmpty
+        dStationItem.isOpen = item.isOpen
+        dStationItem.bestPrice = item.bestPrice
+        dStationItem.customerName = item.customerName
         return dStationItem
     }
     

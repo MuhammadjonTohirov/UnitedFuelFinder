@@ -12,6 +12,8 @@ struct StationTipView: View {
     
     let station: StationItem
     let onClickShow: (StationItem) -> Void
+    let onClickNavigate: (StationItem) -> Void
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -101,7 +103,7 @@ struct StationTipView: View {
             
             SubmitButton(action: {
                 dismiss.callAsFunction()
-                onClickShow(station)
+                onClickNavigate(station)
             }, label: {
                 Text("navigate".localize)
                     .font(.system(size: 12, weight: .medium))
@@ -127,6 +129,7 @@ struct StationTipView: View {
         ),
         onClickShow: { station in
             
+        }) { station in
+            
         }
-    )
 }

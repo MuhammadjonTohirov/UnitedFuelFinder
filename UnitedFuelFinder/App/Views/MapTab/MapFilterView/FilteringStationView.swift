@@ -12,6 +12,7 @@ struct FilteringStationView: View {
     var logo: String
     var title: String
     var isSelected: Bool
+    
     @State
     private var bigRect: CGRect = .zero
     var body: some View {

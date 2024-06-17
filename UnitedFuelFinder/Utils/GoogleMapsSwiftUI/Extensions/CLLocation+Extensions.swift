@@ -21,4 +21,29 @@ extension CLLocationCoordinate2D: Equatable {
     func toScreenPoint(on map: GMSMapView) -> CGPoint {
         map.projection.point(for: self)
     }
+    
+    var asLocation: CLLocation {
+        return CLLocation(latitude: self.latitude, longitude: self.longitude)
+    }
+}
+
+extension Array where Element == CLLocationCoordinate2D {
+    var extremePoints: (left: CLLocationCoordinate2D?, right: CLLocationCoordinate2D?) {
+        let points = self
+        guard !points.isEmpty else { return (nil, nil) }
+        
+        var mostLeft = points[0]
+        var mostRight = points[0]
+        
+        for point in points {
+            if point.longitude < mostLeft.longitude {
+                mostLeft = point
+            }
+            if point.longitude > mostRight.longitude {
+                mostRight = point
+            }
+        }
+        
+        return (mostLeft, mostRight)
+    }
 }

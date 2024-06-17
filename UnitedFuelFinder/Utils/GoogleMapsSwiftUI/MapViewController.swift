@@ -100,3 +100,8 @@ class MapViewController: UIViewController {
         }
     }
 }
+
+#Preview {
+    GMSServices.provideAPIKey(URL.googleMapsApiKey)
+    return MapViewController().asSwiftUI
+}

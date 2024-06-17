@@ -12,6 +12,8 @@ extension MainNetworkRouter {
         switch self {
         case .filterStations(let request), .discountedStations(let request, _), .filterStations2(let request):
             return request.asData
+        case .filterStations3(let request):
+            return request.asData
         case .postFeedback(_, let request):
             return request.asData
         case .uploadAvatar(let photoUrl):

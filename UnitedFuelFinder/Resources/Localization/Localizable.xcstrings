@@ -93,9 +93,6 @@
     "6 hours ego" : {
 
     },
-    "A" : {
-
-    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -109,6 +106,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil"
           }
         }
       }
@@ -174,6 +177,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barcha shaxobchalar"
+          }
+        }
+      }
+    },
+    "all.directions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All directions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все направления"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha yo'nalishlar"
           }
         }
       }
@@ -288,7 +314,7 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Qo'llash"
+            "value" : "Qabul qilish"
           }
         }
       }
@@ -407,9 +433,6 @@
           }
         }
       }
-    },
-    "Blue" : {
-
     },
     "camera" : {
       "extractionState" : "manual",
@@ -1723,9 +1746,6 @@
         }
       }
     },
-    "Green" : {
-
-    },
     "help_desk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1748,9 +1768,6 @@
           }
         }
       }
-    },
-    "Indigo" : {
-
     },
     "information" : {
       "extractionState" : "manual",
@@ -2415,12 +2432,6 @@
         }
       }
     },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
-    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2860,15 +2871,6 @@
           }
         }
       }
-    },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
-    },
-    "Orange" : {
-
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -3310,9 +3312,6 @@
         }
       }
     },
-    "Red" : {
-
-    },
     "region" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3404,9 +3403,6 @@
           }
         }
       }
-    },
-    "Regular" : {
-
     },
     "reset.pass.failed" : {
       "extractionState" : "manual",
@@ -3568,22 +3564,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Foyda"
-          }
-        }
-      }
-    },
-    "Save" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Сохранять"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saqlash"
           }
         }
       }
@@ -3981,9 +3961,6 @@
     "Submit" : {
 
     },
-    "SwiftUI" : {
-
-    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4075,6 +4052,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bugun"
+          }
+        }
+      }
+    },
+    "toll.cost" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toll.cost"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тариф"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarif"
           }
         }
       }
@@ -4240,9 +4240,6 @@
         }
       }
     },
-    "Violet" : {
-
-    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4334,9 +4331,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     },
     "Русский" : {
 
