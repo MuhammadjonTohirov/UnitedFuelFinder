@@ -21,16 +21,20 @@ struct FilteringStationView: View {
             .overlay {
                 ZStack {
                     RoundedRectangle(cornerRadius: 6)
-                        .foregroundStyle(isSelected ? .black : .clear)
-                        .border(.black, width: 1, cornerRadius: 6)
+                        .foregroundStyle(
+                            isSelected ? .appCardBackground : .clear
+                        )
+                        .border(.appDarkGray2, width: 1, cornerRadius: 6)
                         .padding(.bottom, 8)
                         .readRect(rect: $bigRect)
                         .overlay(content: {content})
                     
                     RoundedRectangle(cornerRadius: 1)
                         .frame(width: 13, height: 13)
-                        .foregroundStyle(Color.white)
-                        .border(.black, width: 1.3, cornerRadius: 1)
+                        .foregroundStyle(Color.appCardBackground)
+                        .border(
+                            .appDarkGray2, width: 1.3, cornerRadius: 1
+                        )
                         .overlay {
                             Image("icon_check")
                                 .resizable()
@@ -56,7 +60,7 @@ struct FilteringStationView: View {
             }
             .frame(width: 38, height: 44)
             Text(title)
-                .foregroundStyle(isSelected ? Color.accent : .black)
+                .foregroundStyle(isSelected ? Color.accent : .label)
                 .font(.system(size: 12, weight: .medium))
         }
     }

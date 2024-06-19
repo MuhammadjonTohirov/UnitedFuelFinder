@@ -19,7 +19,7 @@ class MainTabViewModel: ObservableObject {
     let dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
     let mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
     let settingsViewModel: SettingsViewModel = .init()
-    
+
     @Published var isLoading: Bool = false
     @Published var discountedStations: [StationItem] = []
     @Published var showWarningAlert: Bool = false

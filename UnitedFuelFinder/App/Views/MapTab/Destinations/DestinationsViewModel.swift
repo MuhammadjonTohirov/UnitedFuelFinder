@@ -11,6 +11,7 @@ import SwiftUI
 protocol DestinationsDelegate: AnyObject {
     func commitChanges(model: DestinationsViewModel, destinations: [MapDestination])
     func editDestination(model: DestinationsViewModel, destination: MapDestination)
+    func addDestination(model: DestinationsViewModel, destinations: [MapDestination])
 }
 
 final class DestinationsViewModel: ObservableObject {
@@ -26,6 +27,10 @@ final class DestinationsViewModel: ObservableObject {
             model: self,
             destinations: destinations
         )
+    }
+    
+    func onClickAddNew() {
+        self.delegate?.addDestination(model: self, destinations: destinations)
     }
 }
 

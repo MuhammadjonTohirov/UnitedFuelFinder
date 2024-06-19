@@ -170,7 +170,7 @@ struct MapFilterView: View {
                         .overlay {
                             Text(_case.title)
                                 .foregroundStyle(
-                                    .black
+                                    self.sortType == _case ? .black : Color.label
                                 )
                                 .font(.system(size: 11.5, weight: .medium))
                         }

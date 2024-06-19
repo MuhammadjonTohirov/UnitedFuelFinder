@@ -15,37 +15,27 @@ struct DestinationsView: View {
     
     var body: some View {
         ZStack {
-            ForEach(
-                Array(viewModel.destinations.enumerated()),
-                id: \.offset
-            ) { item in
-                row(
-                    destination: item,
-                    rightView: Image(
-                        systemName: "trash"
-                    )
-                    .onTapGesture {
-                        viewModel.delete(at: item.offset)
-                    }
-                    .anyView
-                )
-                .onDrag({
-                    draggedItem = item.element
-                    return NSItemProvider(
-                        object: String(item.offset) as NSString
-                    )
-                })
-                .onDrop(
-                    of: [.plainText],
-                    delegate: DestinationsViewModel.DropHandler(
-                        destination: item.element,
-                        items: $viewModel.destinations,
-                        draggedItem: $draggedItem
-                    )
-                )
+            ForEach(0..<viewModel.destinations.count + 1, id: \.self) { index in
+                if index == viewModel.destinations.count {
+                    Circle()
+                        .frame(width: 30, height: 30)
+                        .foregroundStyle(.clear)
+                        .overlay {
+                            Image(systemName: "plus.circle.fill")
+                                .resizable()
+                                .frame(width: 24, height: 24)
+                        }
+                        .onTapGesture {
+                            viewModel.onClickAddNew()
+                        }
+                        .horizontal(alignment: .leading)
+                } else {
+                    destinationItem(index)
+                }
             }
             .vertical(alignment: .top)
             .scrollable()
+            
             SubmitButton {
                 viewModel.commitChanges()
             } label: {
@@ -56,12 +46,17 @@ struct DestinationsView: View {
         }
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
-                Text("close".localize)
+                Button {
+                    dismiss.callAsFunction()
+                } label: {
+                    Text("close".localize)
+                }
+
             }
         })
         .padding(.top, Padding.default)
         .navigationTitle(
-            "all.destinations".localize
+            "all.directions".localize
         )
         .navigationBarTitleDisplayMode(.inline)
         .scrollBounceBehavior(
@@ -69,6 +64,33 @@ struct DestinationsView: View {
             axes: .vertical
         )
         .padding(.horizontal, Padding.default)
+    }
+    
+    private func destinationItem(_ index: Int) -> some View {
+        row(
+            destination: (offset: index, element: viewModel.destinations[index]),
+            rightView: Image(
+                systemName: "trash"
+            )
+            .onTapGesture {
+                viewModel.delete(at: index)
+            }
+            .anyView
+        )
+        .onDrag({
+            draggedItem = viewModel.destinations[index]
+            return NSItemProvider(
+                object: String(index) as NSString
+            )
+        })
+        .onDrop(
+            of: [.plainText],
+            delegate: DestinationsViewModel.DropHandler(
+                destination: viewModel.destinations[index],
+                items: $viewModel.destinations,
+                draggedItem: $draggedItem
+            )
+        )
     }
     
     private func row(

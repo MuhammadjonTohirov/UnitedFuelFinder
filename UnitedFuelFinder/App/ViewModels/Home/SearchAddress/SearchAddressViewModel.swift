@@ -117,6 +117,7 @@ final class SearchAddressViewModel: ObservableObject {
         isLoading = false
         addressList = []
         addressText = ""
+        didAppear = false
         searchCancellables.removeAll()
     }
     

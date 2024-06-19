@@ -120,9 +120,6 @@ extension MapTabViewModel: SearchAddressProtocol {
     
     func addDestination(_ destination: MapDestination) {
         Logging.l(tag: "Destination", "Insert \(destination.id) | \(destination.location)")
-        guard state != .routing else {
-            return
-        }
         
         self.destinations.append(destination)
         
@@ -162,6 +159,18 @@ extension MapTabViewModel: DestinationsDelegate {
         self.searchAddressViewModel.dispose()
         self.searchAddressViewModel.set(input: destination)
         self.searchAddressViewModel.delegate = self
+        self.route = nil
+        self.presentableRoute = nil
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            self.presentableRoute = .searchAddress(viewModel: self.searchAddressViewModel)
+        }
+    }
+    
+    func addDestination(model: DestinationsViewModel, destinations: [MapDestination]) {
+        self.searchAddressViewModel.dispose()
+        self.searchAddressViewModel.delegate = self
+        
         self.route = nil
         self.presentableRoute = nil
         
