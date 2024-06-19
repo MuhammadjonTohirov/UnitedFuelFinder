@@ -39,13 +39,10 @@ struct StationDetailsView: View {
     var innerBody: some View {
         VStack {
             headerView
-                        
+                .clipped()
+            
             details
-                .background {
-                    Rectangle()
-                        .foregroundStyle(.background)
-                }
-                .zIndex(1)
+
             HStack{
                 Spacer()
                 navigateButton
@@ -54,8 +51,7 @@ struct StationDetailsView: View {
         }
         .scrollable(showIndicators: false)
         //.ignoresSafeArea(.container)
-        .ignoresSafeArea(.container, edges: [.bottom, .horizontal])
-        
+        .ignoresSafeArea(.container, edges: [.bottom, .top, .horizontal])
         .keyboardDismissable()
         .navigationDestination(isPresented: $commentsPresented, destination: {
             CommentsView()
@@ -95,23 +91,25 @@ struct StationDetailsView: View {
     }
     
     private var headerView: some View {
-        GeometryReader(content: { geometry in
-            KFImage(URL(string: viewModel.station?.customer?.logoUrl ?? ""))
-                .placeholder {
-                    Image("image_placeholder")
-                        .resizable()
-                        .aspectRatio(contentMode: .fill)
-                        .clipped()
-                        
-                }
-                .cacheMemoryOnly()
-                .fade(duration: 0.25)
-                .aspectRatio(contentMode: .fill)
-                .stretchable(in: geometry)
-        })
-        .zIndex(0)
-        .frame(height: UIApplication.shared.screenFrame.height * 0.45)
-        .ignoresSafeArea()
+        KFImage(URL(string: viewModel.station?.customer?.logoUrl ?? ""))
+            .placeholder {
+                Image("image_placeholder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+            }
+            .cacheMemoryOnly()
+            .fade(duration: 0.25)
+            .aspectRatio(contentMode: .fill)
+            .background {
+                Rectangle()
+                    .foregroundStyle(.white)
+            }
+            .zIndex(0)
+            .frame(
+                width: UIApplication.shared.screenFrame.width,
+                height: UIApplication.shared.screenFrame.height * 0.45
+            )
     }
     
     private var details: some View {
@@ -175,7 +173,8 @@ struct StationDetailsView: View {
                     detail: Text(viewModel.station?.retailPriceInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
                 ),
-            ].vstack(spacing: Padding.small)
+            ]
+                .vstack(spacing: Padding.small)
                 .padding(.horizontal, Padding.medium)
         }
         .padding(.top)

@@ -31,7 +31,7 @@ struct FilteringStationView: View {
                     
                     RoundedRectangle(cornerRadius: 1)
                         .frame(width: 13, height: 13)
-                        .foregroundStyle(Color.appCardBackground)
+                        .foregroundStyle(isSelected ? .appCardBackground : .clear)
                         .border(
                             .appDarkGray2, width: 1.3, cornerRadius: 1
                         )

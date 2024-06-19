@@ -121,10 +121,7 @@ struct SearchAddressView: View {
 #Preview {
     UserSettings.shared.setupForTest()
     return NavigationStack {
-        if #available(iOS 17.0, *) {
-            SearchAddressView()
-            .environmentObject(SearchAddressViewModel())
-            .toolbarTitleDisplayMode(.inline)
-        }
+        SearchAddressView()
+        .environmentObject(SearchAddressViewModel())
     }
 }
