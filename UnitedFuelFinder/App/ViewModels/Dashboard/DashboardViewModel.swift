@@ -78,6 +78,10 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
     
     init(interactor: any DashboardInteractorProtocol = DashboardInteractor()) {
         self.interactor = interactor
+        self.chartData = [
+            (2.0, Color.yellow),
+            (6.0, Color.green)
+        ]
     }
     
     var route: DashboardRoute? {

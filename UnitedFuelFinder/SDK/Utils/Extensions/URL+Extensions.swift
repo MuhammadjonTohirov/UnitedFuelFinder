@@ -16,6 +16,10 @@ public extension URL {
         .init(string: "http://15.235.212.129:5000/")!
     }
     
+    static var baseExtra: URL {
+        .init(string: "http://15.235.212.129:50000/")!
+    }
+    
     static var baseAPI: URL {
         base.appendingPath("api")
     }

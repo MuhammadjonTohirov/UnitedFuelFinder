@@ -44,6 +44,7 @@ class MainTabViewModel: ObservableObject {
         didAppear = true
         
         Task.detached(priority: .high) { [weak self] in
+            await MainService.shared.syncCustomers()
             await MainService.shared.syncAllStations()
 //            No need for getActualVersion
 //            await getActualVersion()
