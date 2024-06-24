@@ -87,8 +87,8 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
         !firstName.isEmpty &&
         !lastName.isEmpty &&
         !phoneNumber.isEmpty &&
-        !fuelCardNumber.isEmpty &&
-//        !address.isEmpty &&
+        //!fuelCardNumber.isEmpty &&
+        //!address.isEmpty &&
         !email.isEmpty &&
         !password1.isEmpty &&
         !password2.isEmpty &&
@@ -121,8 +121,13 @@ class RegisterViewModel: NSObject, ObservableObject, Alertable {
             )
             
             let result = await AuthService.shared.register(with: req)
-            
-            result.0 ? self.showAlert(message: "registration_success".localize) : self.showError(message: "registration_failure".localize)
+            if result.0{
+                self.showAlert(message: "registration_success".localize)
+            } else{
+                let message = result.1?.localizedDescription ?? "registration_failure".localize
+                self.showError(message: message)
+            }
+            //result.0 ? self.showAlert(message: "registration_success".localize) : self.showError(message: "registration_failure".localize)
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.isLoading = false

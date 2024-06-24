@@ -9,47 +9,21 @@ import SwiftUI
 
 struct TransactionView: View {
     var item: TransactionItem
-    
-    private var totalSum: Double {
-        item.amount ?? 0
-    }
-    
-    private var totalDiscount: Double {
-        item.discAmount ?? 0
-    }
-    
-    private var quantity: Double {
-        item.quantity ?? 0
-    }
-    
-    private var pricePerUnit: Double {
-        item.discPpu ?? 0
-    }
-    
-    private var date: String {
-        Date.from(string: item.transactionDate, format: "yyyy-MM-dd'T'HH:mm:ss")?.toString(format: "dd/MM/yyyy") ?? "-"
-    }
-    
-    private var savedAmount: String {
-        "@saved".localize(arguments: String(format: "$%.2f", totalDiscount))
-    }
-    
+
     var body: some View {
         VStack(spacing: 10) {
             HStack {
                 Text(item.invoiceNumber ?? "-")
                 Spacer()
                 HStack(spacing: 2) {
-                    Text(String.init(format: "$%.2f", totalSum))
-                    
-                    if totalDiscount != 0 {
-                        Text("(\(savedAmount))")
+                    Text(item.totalSumString)
+                    if item.discAmount ?? 0 != 0 {
+                        Text("(\(item.savedAmountString))")
                             .foregroundStyle(Color.init(uiColor: .systemGreen))
                     }
                 }
             }
-            .font(.system(size: 12))
-            .fontWeight(.bold)
+            .font(.bold(size: 12))
             .padding(.top, Padding.medium)
             
             Line()
@@ -73,9 +47,9 @@ struct TransactionView: View {
             HStack {
                 Text("quant.best".localize)
                 Spacer()
-                Text("\(String(format: "%g", quantity))")
+                Text("\(item.quantityString)")
                     .fontWeight(.bold)
-                + Text(" ($\(String(format: "%g", pricePerUnit)))")
+                + Text(" ($\(item.pricePerUnitString))")
                     .foregroundColor(.green)
                     .fontWeight(.bold)
             }
@@ -109,13 +83,14 @@ struct TransactionView: View {
             
             HStack {
                 Spacer()
-                Text(self.date)
+                Text(item.transactionDateString)
             }
             .padding(.bottom, Padding.medium)
         }
         .foregroundColor(.label)
-        .font(.system(size: 12))
-        .fontWeight(.regular)
+        .font(.regular(size: 12))
+        //.font(.system(size: 12))
+        //.fontWeight(.regular)
         .padding(.horizontal)
         .background {
             RoundedRectangle(cornerRadius: 10)

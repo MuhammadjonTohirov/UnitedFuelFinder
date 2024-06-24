@@ -18,11 +18,20 @@ struct MainTabView: View {
     @ObservedObject var viewModel: MainTabViewModel = .init()
     @EnvironmentObject var mainViewModel: MainViewModel
     @State private var didAppear = false
-    @State private var mapBodyState: HomeBodyState = .map
+        
     @State private var imagePlaceholder: Image?
     
+    private var navigationOpacity: CGFloat {
+        switch viewModel.selectedTag {
+        case .map:
+            return viewModel.leadningNavigationOpacity
+        default:
+            return 1
+        }
+    }
+
     var body: some View {
-        innerBody
+        tabBarViewBody
             .richAlert(
                 type: .custom(
                     image: Image(systemName: "exclamationmark.triangle")
@@ -48,34 +57,56 @@ struct MainTabView: View {
                         }
                     }
                 ).anyView,
-                isPresented: $viewModel.showWarningAlert
-            ) {
-                
-            }
+                isPresented: $viewModel.showWarningAlert, onDismiss: {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                        viewModel.checkActualVersion()
+                    }
+                }
+            )
+            .warningAlert(type: .custom(
+                image: Image(systemName: "exclamationmark.triangle")
+                    .resizable()
+                    .foregroundStyle(.accent)
+                    .frame(width: 56, height: 56, alignment: .center)
+                    .anyView
+            ),
+                          title: "attention".localize,
+                          message: Text(
+                            "New version is available".localize
+                          ).anyView,
+                          btnTitle: "Update".localize,
+                          isPresented: $viewModel.showVersionWarningAlert,
+                          onDismiss: {
+                viewModel.showAppOnAppstore()
+            })
+
     }
-    var innerBody: some View {
-        ZStack {
-            NavigationStack {
-                tabView
-                    .navigationBarTitleDisplayMode(.inline)
-                    .onAppear {
-                        viewModel.onAppear()
+    var tabBarViewBody: some View {
+        NavigationStack {
+            tabView
+                .navigationBarTitleDisplayMode(.inline)
+                .onAppear {
+                    viewModel.onAppear()
+                }
+                .onAppear {
+                    if didAppear {
+                        return
                     }
-                    .onAppear {
-                        if didAppear {
-                            return
-                        }
-                        
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                            viewModel.alertWarning()
-                            self.didAppear = true
-                        }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                        viewModel.alertWarning()
+                        self.didAppear = true
                     }
+                }
             }
-        }
-        .overlay {
-            CoveredLoadingView(isLoading: $viewModel.isLoading, message: "")
-        }
+            .overlay {
+                if viewModel.isLoading {
+                    Rectangle()
+                        .foregroundStyle(.appBackground.opacity(0.5))
+                } else {
+                    EmptyView()
+                        .opacity(0)
+                }
+            }
     }
     
     @ViewBuilder
@@ -86,6 +117,12 @@ struct MainTabView: View {
                 .onTapGesture {
                     viewModel.dashboardViewModel.navigate(to: .notifications)
                 }
+        case .map:
+            if let tollCost = viewModel.mapDetails {
+                TotalCostView(value: "$\(tollCost.tollCost)")
+            } else {
+                EmptyView()
+            }
         default:
             EmptyView()
         }
@@ -98,7 +135,7 @@ struct MainTabView: View {
             Text("Dashboard")
                 .font(.system(size: 16, weight: .bold))
         case .map:
-            MapTabToggleView(selectedIndex: $mapBodyState)
+            MapTabToggleView(selectedIndex: $viewModel.mapBodyState)
         case .settings:
             Text("Settings")
                 .font(.system(size: 16, weight: .bold))
@@ -113,8 +150,8 @@ struct MainTabView: View {
                 .onTapGesture {
                     if let filter = self.viewModel.mapViewModel.filter {
                         self.viewModel.mapViewModel.route = .filter(filter, { newFilter in
-                            self.viewModel.mapViewModel.set(filter: newFilter)
                             self.viewModel.mapViewModel.route = nil
+                            self.viewModel.mapViewModel.set(filter: newFilter)
                         })
                     }
                 }
@@ -152,6 +189,7 @@ struct MainTabView: View {
     private var tabView: some View {
         TabView(selection: $viewModel.selectedTag) {
             DashboardView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
+            HomeContainerView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
                 .environmentObject(mainViewModel)
                 .tabItem {
                     Image("icon_pie")
@@ -162,6 +200,7 @@ struct MainTabView: View {
 
             MapTabView(viewModel: viewModel.mapViewModel as! MapTabViewModel)
                 .environmentObject(mainViewModel)
+                .environmentObject(viewModel)
                 .tabItem {
                     Image("icon_map_2")
                         .renderingMode(.template)
@@ -178,28 +217,30 @@ struct MainTabView: View {
                 }
                 .tag(MainTabs.settings)
         }
-        .onChange(of: mapBodyState, perform: { value in
-            viewModel.mapViewModel.bodyState = value
-        })
+        
         .toolbar(content: {
             ToolbarItem(placement: .topBarLeading) {
                 leadingTopBar
+                    .opacity(navigationOpacity)
             }
         })
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 trailingTopBar
+                    .opacity(navigationOpacity)
             }
         })
         .toolbar(content: {
             ToolbarItem(placement: .principal) {
                 centerTopBar
+                    .opacity(navigationOpacity)
             }
         })
         .onChange(of: viewModel.selectedTag, perform: { value in
             switch value {
             case .dashboard:
                 debugPrint("On select dashboard")
+                viewModel.checkActualVersion()
             case .map:
                 debugPrint("On select map")
                 viewModel.onSelectMapTab()
@@ -212,42 +253,7 @@ struct MainTabView: View {
 }
 
 #Preview {
-//    UserSettings.shared.accessToken = UserSettings.testAccessToken
-//    UserSettings.shared.refreshToken = UserSettings.testRefreshToken
-//    UserSettings.shared.userEmail = UserSettings.testEmail
-//    UserSettings.shared.tokenExpireDate = Date().after(days: 2)
-//    UserSettings.shared.appPin = "0000"
-//    
-//    return MainView()
-    UserSettings.shared.language = .uzbek
-    @State var showRegisterWarning = true
-    return Text("Go")
-    .richAlert(
-        type: .custom(
-            image: Image(systemName: "exclamationmark.triangle")
-                .resizable()
-                .foregroundStyle(.accent)
-                .frame(width: 56, height: 56, alignment: .center)
-                .anyView
-        ),
-        title: "attention".localize,
-        message: Text(
-            "disclamer.desc".localize,
-            configure: { attr in
-                if let range = attr.range(of: "disclamer.desc.bold1".localize) {
-                    attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                }
-                
-                if let range = attr.range(of: "disclamer.desc.bold2".localize) {
-                    attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                }
-                
-                if let range = attr.range(of: "disclamer.desc.bold3".localize) {
-                    attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-                }
-            }
-        ).anyView,
-        isPresented: $showRegisterWarning) {
-            
-        }
+    UserSettings.shared.setupForTest()
+    
+    return MainView()
 }

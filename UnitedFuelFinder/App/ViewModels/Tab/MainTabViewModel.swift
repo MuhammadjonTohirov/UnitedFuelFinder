@@ -7,17 +7,27 @@
 
 import Foundation
 import CoreLocation
+import UIKit
+
+struct MapTabDetail {
+    var tollCost: Float
+}
 
 class MainTabViewModel: ObservableObject {
-    @Published var selectedTag: MainTabs = .dashboard
+    @Published var selectedTag: MainTabs = .map
     
-    @Published var dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
-    @Published var mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
-    @Published var settingsViewModel: SettingsViewModel = .init()
-    
+    let dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
+    let mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
+    let settingsViewModel: SettingsViewModel = .init()
+
     @Published var isLoading: Bool = false
     @Published var discountedStations: [StationItem] = []
     @Published var showWarningAlert: Bool = false
+    @Published var showVersionWarningAlert: Bool = false
+    @Published var leadningNavigationOpacity: CGFloat = 1
+    @Published var mapBodyState: HomeBodyState = .map
+    @Published var mapDetails: MapTabDetail?
+    
     private var lastLocationUpdate: Date = .now.before(days: 1)
     private var didAppear: Bool = false
     func onAppear() {
@@ -25,20 +35,24 @@ class MainTabViewModel: ObservableObject {
             return
         }
         
+        mapViewModel.delegate = self
+
         setupLocation()
         
         isLoading = true
         
         didAppear = true
-        Task {
+        
+        Task.detached(priority: .high) { [weak self] in
             await MainService.shared.syncAllStations()
-            
-            await MainActor.run {
-                isLoading = false
+//            No need for getActualVersion
+//            await getActualVersion()
+            await MainActor.run { [weak self] in
+                self?.isLoading = false
             }
         }
     }
-    
+   
     private func setupLocation() {
         guard GLocationManager.shared.locationUpdateHandler == nil else {
             return
@@ -82,6 +96,23 @@ class MainTabViewModel: ObservableObject {
     func alertWarning() {
         showWarningAlert = true
     }
+    func checkActualVersion() {
+        if showWarningAlert{
+            return
+        }
+        let version = Bundle.main.appVersion
+        let actualVersion = UserSettings.shared.actualAppVersion
+        if actualVersion != nil {
+            if actualVersion != version{
+                showVersionWarningAlert = true
+            }
+        }
+    }
+    func showAppOnAppstore() {        
+        let url = "https://itunes.apple.com/app/id\(URL.appstoreID)"
+        guard let url = URL(string: url) else { return }
+        UIApplication.shared.open(url)
+    }
     
     func loadDiscountedStations(_ currentLocation: CLLocation?) async {
         guard let c = currentLocation?.coordinate, selectedTag == .dashboard else {
@@ -113,9 +144,28 @@ class MainTabViewModel: ObservableObject {
         Task {
             await AuthService.shared.syncUserInfo()
             
-            if let serverVersion = await CommonService.shared.getVersion() {
-                UserSettings.shared.currentAPIVersion = serverVersion
-            }
+//            if let serverVersion = await CommonService.shared.getVersion() {
+//                UserSettings.shared.currentAPIVersion = serverVersion
+//            }
         }
+    }
+    private func getActualVersion() async {
+        fatalError("Do not use this method")
+//        Task {
+//            if let version = await CommonService.shared.getActualVersion(){
+//                UserSettings.shared.actualAppVersion = version
+//                checkActualVersion()
+//            }
+//        }
+    }
+}
+
+extension MainTabViewModel: MapTabViewModelDelegate {
+    func onLoadTollCost(viewModel: MapTabViewModel, _ toll: Float) {
+        self.mapDetails = .init(tollCost: toll)
+    }
+    
+    func onResetMap(viewModel: MapTabViewModel) {
+        self.mapDetails = nil
     }
 }

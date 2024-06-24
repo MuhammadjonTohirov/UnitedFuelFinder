@@ -1,0 +1,12 @@
+framework module TrimbleMapsAccounts {
+  umbrella header "TrimbleMapsAccounts.h"
+
+  export *
+  module * { export * }
+
+}
+
+module TrimbleMapsAccounts.Swift {
+  header "TrimbleMapsAccounts-Swift.h"
+  requires objc
+}

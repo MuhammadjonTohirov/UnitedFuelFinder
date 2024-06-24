@@ -37,6 +37,11 @@ public actor CommonService {
         return result?.data
     }
     
+    public func getActualVersion() async -> ServerVersion? {
+        let result: NetRes<NetResActualVersion>? = await Network.send(request: CommonNetworkRouter.actualAppVersion, refreshTokenIfNeeded: false)
+        return result?.data?.ios
+    }
+    
     public func fetchTransactions(fromDate: String, to: String) async -> [NetResTransactions] {
         let result: NetRes<[NetResTransactions]>? = await Network.send(request: CommonNetworkRouter.filterTransactions(fromDate: fromDate, to: to))
         return result?.data ?? []

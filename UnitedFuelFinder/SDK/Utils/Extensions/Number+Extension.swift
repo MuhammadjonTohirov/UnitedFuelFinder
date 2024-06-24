@@ -87,3 +87,9 @@ extension Double {
         Int(self)
     }
 }
+
+extension Int {
+    var label: Character {
+        return Character(UnicodeScalar("A".unicodeScalars.first!.value + UInt32(self))!)
+    }
+}

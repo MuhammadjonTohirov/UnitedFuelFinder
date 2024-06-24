@@ -90,6 +90,9 @@
         }
       }
     },
+    "6 hours ego" : {
+
+    },
     "address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -103,6 +106,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Адрес"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manzil"
           }
         }
       }
@@ -168,6 +177,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barcha shaxobchalar"
+          }
+        }
+      }
+    },
+    "all.directions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All directions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все направления"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha yo'nalishlar"
           }
         }
       }
@@ -282,7 +314,7 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Qo'llash"
+            "value" : "Qabul qilish"
           }
         }
       }
@@ -401,6 +433,9 @@
           }
         }
       }
+    },
+    "Blue" : {
+
     },
     "camera" : {
       "extractionState" : "manual",
@@ -651,6 +686,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ishlab chiqilmoqda"
+          }
+        }
+      }
+    },
+    "commit" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Commit"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Подтвердить"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Qabul qilish"
           }
         }
       }
@@ -1467,6 +1525,9 @@
         }
       }
     },
+    "Explore\nFuel on\nYour way" : {
+
+    },
     "feedback.post.fail" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -1711,7 +1772,7 @@
         }
       }
     },
-    "Go" : {
+    "Green" : {
 
     },
     "help_desk" : {
@@ -1736,6 +1797,9 @@
           }
         }
       }
+    },
+    "Indigo" : {
+
     },
     "information" : {
       "extractionState" : "manual",
@@ -2400,6 +2464,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2840,6 +2910,15 @@
         }
       }
     },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
+    },
+    "Orange" : {
+
+    },
     "organization_reqs" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2987,7 +3066,7 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Latest invoices"
+            "value" : "Recent invoices"
           }
         },
         "ru" : {
@@ -3069,6 +3148,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Narx"
+          }
+        }
+      }
+    },
+    "price_update" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Price update"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновление цены"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Narx yangilash"
+          }
+        }
+      }
+    },
+    "price.change.warning" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Due to market volatility price may have changed"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменение цены может произойти из-за волатильности рынка"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bozordagi o'zgaruvchanlik tufayli narx o'zgarishi mumkin"
           }
         }
       }
@@ -3234,6 +3359,9 @@
         }
       }
     },
+    "Red" : {
+
+    },
     "region" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3325,6 +3453,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "reset.pass.failed" : {
       "extractionState" : "manual",
@@ -3490,22 +3621,6 @@
         }
       }
     },
-    "Save" : {
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Сохранять"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Saqlash"
-          }
-        }
-      }
-    },
     "Save " : {
 
     },
@@ -3548,6 +3663,9 @@
           }
         }
       }
+    },
+    "Savings" : {
+
     },
     "search_address" : {
       "extractionState" : "manual",
@@ -3801,6 +3919,9 @@
     "Show" : {
 
     },
+    "Sign in with Apple" : {
+
+    },
     "sorted.by" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3823,6 +3944,9 @@
           }
         }
       }
+    },
+    "Spendings" : {
+
     },
     "state" : {
       "extractionState" : "manual",
@@ -3896,6 +4020,9 @@
     "Submit" : {
 
     },
+    "SwiftUI" : {
+
+    },
     "system" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3918,9 +4045,6 @@
           }
         }
       }
-    },
-    "TEST" : {
-
     },
     "Text" : {
 
@@ -3994,6 +4118,29 @@
         }
       }
     },
+    "toll.cost" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toll.cost"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Тариф"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarif"
+          }
+        }
+      }
+    },
     "total.spendings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4023,18 +4170,18 @@
         "en" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Transferred transactions"
+            "value" : "Recent transactions"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Переведенные транзакции"
+            "value" : "Последние транзакции"
           }
         },
         "uz" : {
           "stringUnit" : {
-            "state" : "translated",
+            "state" : "needs_review",
             "value" : "O'tkazilgan tranzaksiyalar"
           }
         }
@@ -4155,6 +4302,9 @@
         }
       }
     },
+    "Violet" : {
+
+    },
     "warning" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4246,6 +4396,9 @@
           }
         }
       }
+    },
+    "Yellow" : {
+
     },
     "Русский" : {
 

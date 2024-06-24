@@ -62,15 +62,25 @@ class GLocationManager: NSObject, CLLocationManagerDelegate {
     }
     
     func getAddressFromLatLon(latitude: Double, longitude: Double, completion: @escaping (String) -> Void) {
-        let location = CLLocation(latitude: latitude, longitude: longitude)
-        GMSGeocoder().reverseGeocodeCoordinate(location.coordinate) { response, error in
-            guard let address = response?.firstResult(), let lines = address.lines else {
-                return
+        mainIfNeeded {
+            let location = CLLocation(latitude: latitude, longitude: longitude)
+            GMSGeocoder().reverseGeocodeCoordinate(location.coordinate) { response, error in
+                guard let address = response?.firstResult(), let lines = address.lines else {
+                    return
+                }
+                
+                let fullAddress = lines.joined(separator: ", ")
+                completion(fullAddress)
             }
-            
-            let fullAddress = lines.joined(separator: ", ")
-            completion(fullAddress)
         }
+    }
+    
+    func asyncAddress(latitude: Double, longitude: Double) async -> String {
+        return (try? await withCheckedThrowingContinuation { continuation in
+            getAddressFromLatLon(latitude: latitude, longitude: longitude) { address in
+                continuation.resume(returning: address)
+            }
+        }) ?? ""
     }
     
     func distance(from source: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> Double {

@@ -40,7 +40,7 @@ public struct SubmitButton<Content: View>: View {
             }
         )
         .overlay(content: {
-            Rectangle()
+            RoundedRectangle(cornerRadius: 8, style: .continuous)
                 .foregroundStyle(
                     Color.white.opacity((isLoading || !isEnabled) ? 0.4 : 0)
                 )
@@ -56,7 +56,7 @@ public struct SubmitButton<Content: View>: View {
                 }
         })
         .font(.system(size: 14, weight: .semibold))
-        .foregroundStyle(Color.white)
+        .foregroundStyle(Color.black)
         .frame(height: height, alignment: .center)
         .frame(maxWidth: .infinity)
     }

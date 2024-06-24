@@ -29,7 +29,7 @@ public struct NetReqRegister: Codable {
     let phone: String
     let email: String
     let password: String
-    let cardNumber: String
+    //let cardNumber: String
     let state: String?
     let city: Int?
     let companyName: String
@@ -40,7 +40,7 @@ public struct NetReqRegister: Codable {
         self.lastName = lastName
         self.phone = phone
         self.email = email
-        self.cardNumber = cardNumber
+        //self.cardNumber = cardNumber
         self.state = state
         self.city = city
         self.address = address

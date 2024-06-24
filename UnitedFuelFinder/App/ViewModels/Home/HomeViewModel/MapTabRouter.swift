@@ -24,6 +24,8 @@ enum MapTabRouter: ScreenRoute {
             return "notifications"
         case .filter:
             return "filter"
+        case .destinations:
+            return "destinations"
         }
     }
     
@@ -31,6 +33,7 @@ enum MapTabRouter: ScreenRoute {
     case stationDetails(station: StationItem)
     case notifications
     case filter(_ input: MapFilterInput, _ completion: (MapFilterInput) -> Void)
+    case destinations(viewModel: DestinationsViewModel)
     
     @ViewBuilder
     var screen: some View {
@@ -43,6 +46,9 @@ enum MapTabRouter: ScreenRoute {
             NotificationsView()
         case let .filter(input, completion):
             MapFilterView(input: input, completion: completion)
+        case .destinations(let viewModel):
+            DestinationsView()
+                .environmentObject(viewModel)
         }
     }
     
@@ -62,23 +68,19 @@ enum HomePresentableSheets: ScreenRoute {
     
     var id: String {
         switch self {
-        case .allStations:
-            return "all_stations"
         case .searchAddress:
             return "search_address"
         }
     }
     
-    case allStations(stations: [StationItem], from: String?, to: String?, radius: Int?, location: CLLocationCoordinate2D?, onNavigation: ((StationItem) -> Void)?, onClickItem: ((StationItem) -> Void)?)
-    case searchAddress(text: String, _ completion: (SearchAddressViewModel.SearchAddressResult) -> Void)
+    case searchAddress(viewModel: SearchAddressViewModel)
     
     @ViewBuilder
     var screen: some View {
         switch self {
-        case .allStations(let stations, let from, let to, let radius, let location, let onNav, let onOpen):
-            AllStationsView(from: from, to: to, location: location, radius: radius, onClickNavigate: onNav, onClickOpen: onOpen, stations: stations)
-        case .searchAddress(let text, let completion):
-            SearchAddressView(text: text, onResult: completion)
+        case .searchAddress(let vm):
+            SearchAddressView()
+                .environmentObject(vm)
         }
     }
 }

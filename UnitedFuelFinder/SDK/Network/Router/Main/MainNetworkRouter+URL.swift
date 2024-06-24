@@ -16,6 +16,10 @@ extension MainNetworkRouter {
             return URL.baseAPI.appendingPath("Driver", "FilterStations")
         case .filterStations2:
             return URL.baseAPI.appendingPath("Driver", "FilterStationsV2")
+        case .filterStations3:
+            return URL.init(
+                string: "http://15.235.212.129:50000/api/Driver/MultipleStationsFilter"
+            )!
         case .feedbacksFor(let stationId):
             return URL.baseAPI.appendingPath("Driver", "StationFeedbacks", stationId)
         case .postFeedback(let stationId, _):

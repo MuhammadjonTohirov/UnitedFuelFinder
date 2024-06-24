@@ -87,15 +87,15 @@ extension MapPin: MapAnnotation {
 
     public static func registerView(on mapView: MKMapView) {
         mapView.register(
-            MKPinAnnotationView.self,
+            MKMarkerAnnotationView.self,
             forAnnotationViewWithReuseIdentifier: reuseIdentifier)
     }
 
     public func view(for mapView: MKMapView) -> MKAnnotationView? {
         let view = mapView.dequeueReusableAnnotationView(withIdentifier: Self.reuseIdentifier, for: annotation)
         view.annotation = annotation
-        if #available(iOS 14, macOS 11, tvOS 14, *), let tint = tint, let pin = view as? MKPinAnnotationView {
-            pin.pinTintColor = .init(tint)
+        if #available(iOS 14, macOS 11, tvOS 14, *), let tint = tint, let pin = view as? MKMarkerAnnotationView {
+            pin.tintColor = .init(tint)
         }
         return view
     }

@@ -28,6 +28,7 @@ extension StationItem {
         }
         
         marker.station = self
+        marker.zIndex = 10000 - Int32(actualPrice * 100)
         return marker
     }
 }

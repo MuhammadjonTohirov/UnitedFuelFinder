@@ -45,6 +45,9 @@ struct DashboardView: View {
                 }
             })
         }
+        .navigationDestination(isPresented: $viewModel.push, destination: {
+            viewModel.route?.screen
+        })
         .onAppear {
             self.viewModel.onAppear()
         }
@@ -58,19 +61,10 @@ struct DashboardView: View {
             Text("total.spendings".localize)
             SpendingsWidgetView()
             
-            Text("popular.stations".localize)
-            PopularStationsView(data: [])
-            
-            Text("discounted.stations.nearby".localize)
-            stationDetail
-            
             transactionsView.set(isVisible: showTransitions)
 
             invoicesView.set(isVisible: showInvoices)
         }
-        .navigationDestination(isPresented: $viewModel.push, destination: {
-            viewModel.route?.screen
-        })
         .padding(.horizontal)
         .font(.system(size: 14))
         .fontWeight(.semibold)
@@ -137,13 +131,7 @@ struct DashboardView: View {
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
                 
                 ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
-                    InvoiceView(
-                        invoice: invo.invoiceNumber ?? "",
-                        amount: Float(invo.totalAmount),
-                        secoundAmount: Float(invo.totalDiscount ?? 0),
-                        companyName: invo.companyAccount?.name ?? "",
-                        date: invo.fromToDate
-                    )
+                    InvoiceView(item: invo)
                 }
             }
         }
@@ -171,7 +159,7 @@ struct DashboardView: View {
                                 .foregroundStyle(.appSecondaryBackground)
                         }
                         .onTapGesture {
-                            viewModel.navigate(to: .stationInfo(station))
+                            viewModel.navigate(to: .stationInfo(station))                            
                         }
                 }
             }

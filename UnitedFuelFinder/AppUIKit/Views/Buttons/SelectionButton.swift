@@ -43,7 +43,7 @@ public struct SelectionButton: View {
         .frame(height: 50)
         .padding(.horizontal, Padding.medium)
         .modifier(
-            YTextFieldBorderStyle()
+            RoundedTextFieldStyle()
                 .set(borderColor: Color.init(uiColor: .placeholderText))
         )
     }

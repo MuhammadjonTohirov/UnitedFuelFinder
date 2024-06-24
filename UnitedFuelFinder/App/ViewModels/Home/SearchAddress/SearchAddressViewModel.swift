@@ -58,13 +58,29 @@ extension SearchAddressItem {
     }
 }
 
-final class SearchAddressViewModel: ObservableObject {
+protocol SearchAddressProtocol: AnyObject {
+    func searchAddress(viewModel: SearchAddressViewModel, result: SearchAddressViewModel.SearchAddressResult)
     
+    func searchAddress(viewModel: SearchAddressViewModel, edit: SearchAddressViewModel.SearchAddressResult?)
+    
+    func searchAddress(viewModel: SearchAddressViewModel, onCancel: SearchAddressViewModel.SearchAddressResult?)
+}
+
+final class SearchAddressViewModel: ObservableObject {
     struct SearchAddressResult {
+        var id: String?
         var address: String
         var lat: Double
         let lng: Double
+        
+        init(id: String? = nil, address: String, lat: Double, lng: Double) {
+            self.id = id
+            self.address = address
+            self.lat = lat
+            self.lng = lng
+        }
     }
+    private(set) var input: MapDestination?
     
     @Published public var addressHistoryList: [SearchAddressItem] = []
     @Published public var addressList: [SearchAddressItem] = []
@@ -72,9 +88,12 @@ final class SearchAddressViewModel: ObservableObject {
     @Published public var addressValue: String = ""
     @Published public var isLoading: Bool = false
     
+    weak var delegate: SearchAddressProtocol?
+    
     private var searchCancellables = Set<AnyCancellable>()
 
     private var didAppear: Bool = false
+    
     func onAppear() {
         if didAppear {
             return
@@ -88,15 +107,25 @@ final class SearchAddressViewModel: ObservableObject {
             })
             .store(in: &searchCancellables)
         
-        if !addressText.isEmpty {
-            searchPlaces(addressText)
+        if let input, let address = input.address?.nilIfEmpty {
+            addressText = address
+            searchPlaces(address.prefix(6).description)
         } else {
             fetchRecentAddresses()
         }
     }
     
     func dispose() {
+        isLoading = false
+        addressList = []
+        addressText = ""
+        didAppear = false
         searchCancellables.removeAll()
+    }
+    
+    func set(input: MapDestination) {
+        self.input = input
+        self.addressText = input.address ?? ""
     }
     
     private func searchPlaces(_ text: String) {
@@ -124,7 +153,22 @@ final class SearchAddressViewModel: ObservableObject {
         addressHistoryList = recentItems.map { .init(title: $0.title, type: .history, coordinate: .init(latitude: $0.lat, longitude: $0.lng), address: $0.address) }
     }
     
-    func onClickAddress(_ address: SearchAddressItem, completion: @escaping (SearchAddressResult?) -> Void) {
+    func onClickMap() {
+        var editingObj: SearchAddressResult?
+        
+        if let input {
+            editingObj = SearchAddressResult.init(
+                id: input.id,
+                address: input.address ?? "",
+                lat: input.location.latitude,
+                lng: input.location.longitude
+            )
+        }
+        
+        delegate?.searchAddress(viewModel: self, edit: editingObj)
+    }
+    
+    func onClickAddress(_ address: SearchAddressItem) {
         if address.type == .history {
             self.addressText = (address.address ?? "").nilIfEmpty ?? address.title
         }
@@ -137,9 +181,20 @@ final class SearchAddressViewModel: ObservableObject {
             title: self.addressText,
             date: Date(), 
             lat: _coor.latitude, lng: _coor.longitude,
-            address: address.address ?? address.title)
-        )
+            address: address.address ?? address.title
+        ))
         
-        completion(.init(address: address.address?.nilIfEmpty ?? address.title, lat: _coor.latitude, lng: _coor.longitude))
+        delegate?.searchAddress(
+            viewModel: self,
+            result: .init(
+                address: address.address?.nilIfEmpty ?? address.title,
+                lat: _coor.latitude,
+                lng: _coor.longitude
+            )
+        )
+    }
+    
+    func onClickCancel() {
+        self.delegate?.searchAddress(viewModel: self, onCancel: nil)
     }
 }

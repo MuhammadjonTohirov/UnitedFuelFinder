@@ -16,8 +16,16 @@ extension Realm {
     public static var new: Realm? {
         return try? Realm.init(configuration: config)
     }
+    
+    public static func asyncNew(actor: Actor? = nil) async -> Realm? {
+        guard let actor else {
+            return try? await Realm.init(configuration: config)
+        }
+        
+        return try? await Realm.init(configuration: config, actor: actor)
+    }
 
-    public static func asyncNew(_ completion: @escaping (Result<Realm, NSError>) -> Void) {
+    public static func _asyncNew(_ completion: @escaping (Result<Realm, NSError>) -> Void) {
         Realm.asyncOpen(configuration: config, callbackQueue: DataBase.writeThread) { result in
             switch result {
             case .success(let realm):
@@ -30,7 +38,7 @@ extension Realm {
     
     public static func asyncNewSafe(_ block: @escaping (Realm) -> Void) {
         DataBase.writeThread.async {
-            Realm.asyncNew { realmObject in
+            Realm._asyncNew { realmObject in
                 switch realmObject {
                 case .success(let realm):
                     block(realm)

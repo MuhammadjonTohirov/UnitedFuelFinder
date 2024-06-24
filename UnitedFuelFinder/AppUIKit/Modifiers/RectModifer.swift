@@ -17,14 +17,25 @@ struct RectModifer: ViewModifier {
             .background(
                 GeometryReader { proxy in
                     Color.clear
-                        .preference(key: SizePreferenceKey.self, value: proxy.frame(in: .global))
+//                        .preference(
+//                            key: SizePreferenceKey.self,
+//                            value: proxy.frame(in: .global)
+//                        )
                         .onAppear {
-                            rect = proxy.frame(in: .global)
+                            if rect == .zero {
+                                rect = proxy.frame(in: .global)
+                            }
                         }
                 }
             )
             .onPreferenceChange(SizePreferenceKey.self) { preferences in
-                rect = preferences
+                if rect == .zero {
+                    Logging.l(
+                        tag: "RectModifier",
+                        "On change preferneces \(preferences)"
+                    )
+                    rect = preferences
+                }
             }
     }
 }

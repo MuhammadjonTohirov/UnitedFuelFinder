@@ -8,7 +8,7 @@
 import SwiftUI
 import RealmSwift
 import Kingfisher
-
+ 
 struct StationDetailsView: View {
     
     @Environment (\.dismiss) var dismiss
@@ -16,7 +16,7 @@ struct StationDetailsView: View {
     @StateObject var viewModel: StationDetailsViewModel = .init()
     private var station: StationItem
     
-    init(station: StationItem) {
+    init(station: StationItem){
         self.station = station
     }
     
@@ -39,45 +39,77 @@ struct StationDetailsView: View {
     var innerBody: some View {
         VStack {
             headerView
+                .clipped()
             
             details
-                .background {
-                    Rectangle()
-                        .foregroundStyle(.background)
-                }
-                .zIndex(1)
-            postFeedbacks
-        
-            comments
-                .opacity(self.viewModel.commentList.isEmpty ? 0 : 1)
-                .padding(.bottom, 50)
+
+            HStack{
+                Spacer()
+                navigateButton
+            }
+            .padding(.trailing, Padding.medium)
         }
         .scrollable(showIndicators: false)
-        .ignoresSafeArea(.container)
+        //.ignoresSafeArea(.container)
+        .ignoresSafeArea(.container, edges: [.bottom, .top, .horizontal])
         .keyboardDismissable()
         .navigationDestination(isPresented: $commentsPresented, destination: {
             CommentsView()
         })
     }
+    func openStation(_ stationItem: StationItem) {
+        GLocationManager.shared.openLocationOnMap(stationItem.coordinate, name: stationItem.name)
+    }
+    private var navigateButton: some View {
+        Button(action: {
+            self.openStation(station)
+        }, label: {
+            Label(
+                title: {
+                    Text("navigate".localize)
+                        .font(.system(size: 12, weight: .medium))
+                },
+                icon: {
+                    Image(
+                        "icon_navigation_point"
+                    ).renderingMode(
+                        .template
+                    )
+                    .resizable()
+                    .frame(width: 18, height: 18)
+                }
+            )
+            .foregroundStyle(.black)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 5)
+            .background(content: {
+                RoundedRectangle(cornerRadius: 6)
+            })
+            .font(.system(size: 12))
+            .padding(.vertical, 6)
+        })
+    }
     
     private var headerView: some View {
-        GeometryReader(content: { geometry in
-            KFImage(URL(string: viewModel.station?.customer?.logoUrl ?? ""))
-                .placeholder {
-                    Image("image_placeholder")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipped()
-                        
-                }
-                .cacheMemoryOnly()
-                .fade(duration: 0.25)
-                .aspectRatio(contentMode: .fill)
-                .stretchable(in: geometry)
-        })
-        .zIndex(0)
-        .frame(height: UIApplication.shared.screenFrame.height * 0.45)
-        .ignoresSafeArea()
+        KFImage(URL(string: viewModel.station?.customer?.logoUrl ?? ""))
+            .placeholder {
+                Image("image_placeholder")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .clipped()
+            }
+            .cacheMemoryOnly()
+            .fade(duration: 0.25)
+            .aspectRatio(contentMode: .fill)
+            .background {
+                Rectangle()
+                    .foregroundStyle(.white)
+            }
+            .zIndex(0)
+            .frame(
+                width: UIApplication.shared.screenFrame.width,
+                height: UIApplication.shared.screenFrame.height * 0.45
+            )
     }
     
     private var details: some View {
@@ -111,8 +143,10 @@ struct StationDetailsView: View {
                         .font(.system(size: 12))
                 }
             }
-            .padding(.leading)            
-            
+            .padding(.leading)
+            StationDetailsWarning()
+                .frame(maxWidth: .infinity)
+
             [
                 row(
                     title: "distance".localize,
@@ -139,7 +173,8 @@ struct StationDetailsView: View {
                     detail: Text(viewModel.station?.retailPriceInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
                 ),
-            ].vstack(spacing: Padding.small)
+            ]
+                .vstack(spacing: Padding.small)
                 .padding(.horizontal, Padding.medium)
         }
         .padding(.top)
@@ -155,75 +190,6 @@ struct StationDetailsView: View {
             }
             
             Divider()
-        }
-    }
-    private var postFeedbacks: some View {
-        VStack(alignment: .leading) {
-            Text("post_feedback".localize)
-                .padding(.top)
-                .padding(.horizontal)
-                .font(.system(size: 14, weight: .medium))
-            
-            YTextView(
-                text: $viewModel.comment,
-                placeholder: "write_comment".localize
-            )
-            .padding(.horizontal, Padding.medium)
-            
-            starRating
-        }
-    }
-    
-    private var starRating: some View {
-        HStack(spacing: 5) {
-            RateView(starsCount: 5, rate: 0)
-                .set(onRateChange: { rate in
-                    Logging.l(tag: "StationDetails", "Rate \(rate)")
-                    viewModel.rating = rate
-                })
-                .frame(width: 100, height: 20)
-                .padding(.leading, Padding.small / 2)
-            Spacer()
-            
-            Button(action: {
-                viewModel.postFeedback()
-            }, label: {
-                Text("post".localize.capitalized)
-                    .font(.system(size: 13, weight: .semibold))
-            })
-            .frame(width: 99, height: 40)
-            .foregroundStyle(Color.label)
-            .background(Color.init(uiColor: .secondarySystemBackground))
-            .cornerRadius(6)
-        }
-        .padding(.horizontal, Padding.medium)
-        .padding(.bottom)
-    }
-    
-    private var comments: some View {
-        VStack(alignment: .leading) {
-            Divider()
-                .padding(.bottom)
-
-            Text("latest_comments".localize)
-                .fontWeight(.semibold)
-                .padding(.leading)
-            
-            ForEach(viewModel.commentList, id: \.id) { comment in
-                comment.view
-                    .set(onClickDelete: {
-                        viewModel.deleteFeedback(id: comment.id.asInt)
-                    })
-                    .padding(.horizontal, Padding.medium)
-                    .padding(.vertical, Padding.small / 2)
-            }
-            
-            SubmitButton {
-                self.commentsPresented = true
-            } label: {
-                Text("more_comments".localize)
-            }
-            .padding(Padding.medium)
         }
     }
 }

@@ -100,6 +100,7 @@ struct MapFilterView: View {
                     .padding(.bottom, 120)
             }
             .scrollable()
+            .scrollBounceBehavior(.basedOnSize)
             
             VStack {
                 Spacer()
@@ -160,27 +161,36 @@ struct MapFilterView: View {
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(Color.label)
             
-            HStack {
+            HStack(spacing: 0) {
                 ForEach(SortType.allCases, id: \.rawValue) { _case in
-                    selectionButton(
-                        title: _case.title,
-                        isSelected: sortType == _case
-                    )
-                    .onTapGesture {
-                        sortType = _case
-                    }
+                    RoundedRectangle(cornerRadius: 16)
+                        .foregroundStyle(Color.accentColor.opacity(
+                            self.sortType == _case ? 1 : 0
+                        ))
+                        .overlay {
+                            Text(_case.title)
+                                .foregroundStyle(
+                                    self.sortType == _case ? .black : Color.label
+                                )
+                                .font(.system(size: 11.5, weight: .medium))
+                        }
+                        .frame(height: 40)
+                        .onTapGesture {
+                            sortType = _case
+                        }
                 }
             }
-            .padding(2)
-            .scrollable(axis: .horizontal)
+            .padding(5)
+            .background {
+                RoundedRectangle(cornerRadius: 20)
+                    .foregroundStyle(.appSecondaryBackground)
+            }
             
             Text("filter.sort.by.info".localize)//Can be sorted by cheapest price or highest discount
                 .font(.system(size: 10, weight: .regular))
                 .foregroundStyle(Color(uiColor: .secondaryLabel))
         }
         .padding(.horizontal, Padding.default)
-        .onAppear {
-        }
     }
     
     private var priceRange: some View {
@@ -241,10 +251,11 @@ struct MapFilterView: View {
                 .font(.system(size: 16, weight: .semibold))
                 .foregroundStyle(Color.label)
             
-            HStack {
+            HStack(spacing: 14) {
                 ForEach(customers) { cust in
                     selectionButton(
                         title: cust.name,
+                        logo: cust.iconUrl ?? "",
                         isSelected: selectedStations.contains(cust.id)
                     )
                     .onTapGesture {
@@ -255,30 +266,18 @@ struct MapFilterView: View {
                         }
                     }
                 }
+                .frame(width: 100, height: 126)
+                .padding(2)
             }
+            .scrollable(axis: .horizontal)
+            .scrollBounceBehavior(.basedOnSize, axes: .horizontal)
         }
         .padding(.horizontal, Padding.default)
 
     }
     
-    func selectionButton(title: String, isSelected: Bool) -> some View {
-        Text(title)
-            .font(.system(size: 13, weight: .semibold))
-            .frame(height: 22)
-            .padding(.horizontal, 16)
-            .padding(.vertical, 5)
-            .foregroundStyle(isSelected ? .white : .label)
-            .background {
-                RoundedRectangle(cornerRadius: 6)
-                    .frame(height: 32)
-                    .foregroundStyle(isSelected ? Color.accent : .clear)
-            }
-            .background {
-                RoundedRectangle(cornerRadius: 6)
-                    .stroke(style: StrokeStyle(lineWidth: 1))
-                    .foregroundStyle(Color.accent)
-                    .opacity(isSelected ? 0 : 1)
-            }
+    func selectionButton(title: String, logo: String, isSelected: Bool) -> some View {
+        FilteringStationView(logo: logo, title: title, isSelected: isSelected)
     }
     
     private var addressInfo: some View {

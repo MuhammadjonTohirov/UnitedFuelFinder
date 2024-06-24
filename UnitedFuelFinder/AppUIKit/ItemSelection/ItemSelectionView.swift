@@ -27,7 +27,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
     var onSearching: (C, String) -> Bool
     var onSelectChange: (Set<C>) -> Void
     
-    @Environment (\.dismiss) var dismiss
+    //@Environment (\.dismiss) var dismiss
     
     public var body: some View {
         LazyVStack(content: {
@@ -63,7 +63,8 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         .toolbar(content: {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: {
-                    dismiss.callAsFunction()
+                    //dismiss.callAsFunction()
+                    
                 }, label: {
                     Text("done".localize)
                 })
@@ -85,7 +86,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
         viewModel.selectedObjectsIds.insert(item.id)
         
         if !multiSelect {
-            dismiss.callAsFunction()
+            //dismiss.callAsFunction()
         }
     }
 }
@@ -164,30 +165,6 @@ class LabelView: UIView {
         super.layoutSubviews()
         self.layer.cornerRadius = self.frame.height / 2
     }
-}
-
-class TestViewController: UIViewController {
-    // put lableview at center
-    var labelView: LabelView = LabelView()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.view.addSubview(labelView)
-        
-        labelView.translatesAutoresizingMaskIntoConstraints = false
-        
-        NSLayoutConstraint.activate([
-            labelView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            labelView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ])
-        
-        labelView.setIcon(UIImage(systemName: "mic.slash"))
-        labelView.setText("You are muted")
-        labelView.setIconColor(.white)
-        labelView.setTextColor(.white)
-        labelView.setBackgroudColor(.black.withAlphaComponent(0.5))
-    }
-    
 }
 
 struct TestWrapper: View {

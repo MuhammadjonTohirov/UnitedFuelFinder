@@ -8,19 +8,22 @@
 import Foundation
 
 enum AuthNetworkErrorReason: Error {
-    case notConfirmedByAdmin
-    case userAlreadyExists
+    //case notConfirmedByAdmin
+    //case userAlreadyExists
     case unknown
     case custom(String)
     
     var localizedDescription: String {
         switch self {
-        case .notConfirmedByAdmin:
-            return "not_confirmed_by_admin".localize
-        case .userAlreadyExists:
-            return "user_already_exists".localize
+            //        case .notConfirmedByAdmin:
+            //            return "not_confirmed_by_admin".localize
+            //        case .userAlreadyExists:
+            //            return "user_already_exists".localize
+            //        case .unknown:
+            //            return "Unknown error".localize
         case .unknown:
-            return "Unknown error".localize
+            return "unknown_address".localize
+            
         case .custom(let message):
             return message
         }
@@ -31,6 +34,7 @@ public struct AuthService {
     public static let shared = AuthService()
     
     public func verifyAccount(_ username: String) async -> ((exist: Bool, code: String, session: String)?, error: String?) {
+        
         let result: NetRes<NetResVerifyAccount>? = await Network.send(
             request: UserNetworkRouter.verifyAccount(request: .init(email: username)),
             refreshTokenIfNeeded: false
@@ -56,7 +60,7 @@ public struct AuthService {
             ),
             refreshTokenIfNeeded: false
         ) else {
-            return (false, .unknown)
+            return (false, .custom("Unknown error"))
         }
         
         if !result.success && result.error?.contains("expire") ?? false {
@@ -64,7 +68,8 @@ public struct AuthService {
         }
         
         guard let data = result.data else {
-            return (false, .notConfirmedByAdmin)
+            //return (false, .notConfirmedByAdmin)
+            return (false, .custom(result.error ?? "Unknown error"))
         }
         
         UserSettings.shared.accessToken = data.accessToken
@@ -74,7 +79,7 @@ public struct AuthService {
         UserSettings.shared.userEmail = username
         
         let isOK = result.data != nil
-        return (isOK, isOK ? nil : (result.code == 400 ? .notConfirmedByAdmin : .unknown))
+        return (isOK, isOK ? nil : .custom(result.error ?? "Unknown error"))
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {
@@ -87,25 +92,21 @@ public struct AuthService {
     }
     
     func refreshTokenIfRequired() async -> Bool {
-        if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 60 {
+        if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 10 {
             return await refreshToken()
-        } else {
-            // no need for refresh token
-            return true
         }
+        // no need for refresh token
+        return true
     }
     
     func refreshToken() async -> Bool {
-        let isRefreshExpired = (UserSettings.shared.refreshTokenExpireDate?.timeIntervalSinceNow ?? 0) < 10
-        
-        guard isRefreshExpired else {
-            return false
-        }
-        
         guard let token = UserSettings.shared.refreshToken else {
             return false
         }
-        
+        let isRefreshExpired = (UserSettings.shared.refreshTokenExpireDate?.timeIntervalSinceNow ?? 0) < 10
+        if isRefreshExpired{
+            return false
+        }
         let result: NetRes<NetResRefreshToken>? = await Network.send(request: UserNetworkRouter.refresh(refreshToken: token), refreshTokenIfNeeded: false)
         
         if let data = result?.data {

@@ -123,3 +123,21 @@ extension Text {
         self.init(attributedString)
     }
 }
+
+extension View {
+    func border(_ color: Color, width: CGFloat = 1, cornerRadius: CGFloat) -> some View {
+        self
+            .overlay(
+                RoundedRectangle(cornerRadius: cornerRadius)
+                    .stroke(color, lineWidth: width)
+            )
+    }
+    
+    func onClick(_ action: @escaping () -> Void) -> some View {
+        Button {
+            action()
+        } label: {
+            self
+        }
+    }
+}

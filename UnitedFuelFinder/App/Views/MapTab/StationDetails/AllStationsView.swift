@@ -43,7 +43,7 @@ struct AllStationsView: View {
                             })
                             .onTapGesture {
                                 presentationMode.wrappedValue.dismiss()
-                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                                     self.onClickOpen?(st)
                                 }
                             }

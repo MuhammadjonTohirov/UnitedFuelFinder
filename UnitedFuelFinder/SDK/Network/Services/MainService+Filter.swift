@@ -54,4 +54,18 @@ extension MainService {
         let list: [StationItem] = ((result?.data) ?? []).compactMap({.init(res: $0)})
         return (list, hasData ? nil : NSError(domain: "No stations", code: -1))
     }
+    
+    func filterStations3(
+        req: NetReqFilterStationsMultipleStops,
+        session: URLSession = URLSession.filter
+    ) async -> ([StationItem], Error?) {
+        let result: NetRes<NetResFilterMultipleStations>? = await Network.send(
+            request: MainNetworkRouter.filterStations3(request: req),
+            session: session
+        )
+
+        let hasData = result?.data != nil
+        let list: [StationItem] = ((result?.data?.stations) ?? []).compactMap({.init(res: $0)})
+        return (list, hasData ? nil : NSError(domain: "No stations", code: -1))
+    }
 }

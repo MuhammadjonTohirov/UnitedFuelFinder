@@ -10,94 +10,21 @@ import SwiftUI
 import CoreLocation
 import GoogleMaps
 
-protocol HomeViewModelProtocol: ObservableObject {
-    var isDragging: Bool {get set}
-    var state: HomeViewState {get set}
-    var filterUrlSession: URLSession {get}
-    var focusableLocation: CLLocation? {get set}
-    
-    var fromAddress: String {get set}
-    var toAddress: String {get set}
-    
-    var route: MapTabRouter? {get set}
-    
-    var presentableRoute: HomePresentableSheets? {get set}
-    
-    var push: Bool {get set}
-    
-    var present: Bool {get set}
-    
-    var pickedLocation: CLLocation? {get set}
-
-    var isLoading: Bool {get set}
-    var isDrawing: Bool {get set}
-    var isDetectingAddressFrom: Bool {get set}
-    var isDetectingAddressTo: Bool {get set}
-    
-    var loadingMessage: String {get}
-        
-    var hasDrawen: Bool {get}
-    var fromLocation: CLLocation? {get}
-    var toLocation: CLLocation? {get set}
-    var toLocationCandidate: CLLocation? {get set}
-    
-    var stations: [StationItem] {get set}
-    
-    var stationsMarkers: Set<GMSMarker> {get set}
-    
-    var distance: String {get}
-    
-    func startFilterStations()
-    func onAppear()
-    
-    func onClickSelectToPointOnMap()
-    func onClickSettings()
-    func onClickNotification()
-    func onClickViewAllStations()
-    func onClickBack()
-    func onClickDrawRoute()
-    func onClickSearchAddressFrom()
-    func onClickSearchAddressTo()
-    func onClickFromLocation()
-    func onClickToLocation()
-    func onStartDrawingRoute()
-    func reloadAddress()
-    func onEndDrawingRoute(_ isOK: Bool)
-    func focusToLocation(_ location: CLLocation)
-    func focusToCurrentLocation()
-    func clearDestination()
-}
-
-extension HomeViewModelProtocol {
-    var filterUrlSession: URLSession {
-        .filter
-    }
-    
-    func onClickSelectToPointOnMap() {}
-    func onClickSettings() {}
-    func onClickNotification() {}
-    func onClickViewAllStations() {}
-    func onClickBack() {}
-    func onClickDrawRoute() {}
-    func onClickSearchAddressFrom() {}
-    func onClickSearchAddressTo() {}
-    func onClickFromLocation() {}
-    func onClickToLocation() {}
-}
-
 // MARK: - ClickActions
-extension MapTabViewModel: HomeViewModelProtocol {
-    func onClickSelectToPointOnMap() {
+extension MapTabViewModel {
+    func onClickpickLocationPointOnMap() {
         self.removeMarkers()
-        self.removeStations()
-        withAnimation {
-            self.state = .selectTo
-            if let toLocation {
-                focusToLocation(toLocation)
-            }
+        
+        if let to = self.toLocation {
+            self.editingDestinationId = to.id
         }
         
-        removeMarkers()
+        withAnimation {
+            self.state = .pickLocation
+            if let toLocation {
+                focusToLocation(toLocation.location)
+            }
+        }
     }
     
     func onClickSettings() {
@@ -107,74 +34,105 @@ extension MapTabViewModel: HomeViewModelProtocol {
     func onClickNotification() {
         self.route = .notifications
     }
-        
-    func onClickViewAllStations() {
-        self.presentableRoute = .allStations(
-            stations: self.stations, from: nil, to: nil, radius: Int(filter?.radius ?? 10),
-            location: self.fromLocation?.coordinate, onNavigation: { sta in
-                self.focusToLocation(sta.clLocation)
-            }, onClickItem: { sta in
-                self.route = .stationDetails(station: sta)
-            })
-    }
     
     func onClickBack() {
-        withAnimation {
-            self.state = .selectFrom
-            self.focusToCurrentLocation()
-            self.filterStationsByDefault()
+        if self._lastState == .routing {
+            self.state = .routing
+            
+            if !self.tryResetMarkers() {
+                self.filterStationsByRoute()
+            }
+            
+            return
+        } else {
+            withAnimation {
+                self.state = .default
+
+                self.clearDestination()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.startFilterStations()
+                }
+            }
         }
     }
     
-    func onClickDrawRoute() {
-        self.mapRoute = []
+    func drawAndFilterStations() async {
+        await MainActor.run {
+            self.isDrawing = true
+        }
         
-        if let _from = self.fromLocation, let _to = self.toLocation {
-            UserSettings.shared.fromLocation = .init(latitude: _from.coordinate.latitude, longitude: _from.coordinate.longitude)
+        await drawRoute()
+        
+        await MainActor.run {
+            self.isDrawing = false
+        }
+        
+        await MainActor.run {
+            self.filterStationsByRoute()
+        }
+    }
+    
+    func drawRoute() async {
+        await MainActor.run {
+            self.mapRoute = []
+            
             self.showLoader(message: "searching.route".localize)
-            interactor.searchRoute(
-                from: _from.coordinate,
-                to: _to.coordinate) { route in
-                    DispatchQueue.main.async {
-                        self.hideLoader()
-                        self.mapRoute = route
-                        
-                        if route.isEmpty {
-                            self.state = .selectFrom
-                            self.filterStationsByDefault()
-                            UserSettings.shared.fromLocation = nil
-                            UserSettings.shared.destination = nil
-                        } else {
-                            self.state = .routing
-                            self.filterStationsByRoute()
-                        }
-                    }
-                }
+        }
+        
+        guard let result = await interactor.searchRoute(
+            addresses: destinations.map({$0.location})
+        ) else {
+            await MainActor.run {
+                self.hideLoader()
+            }
             return
+        }
+        
+        await MainActor.run {
+            self.mapRoute = result.locations.map(
+                {.init(latitude: $0.lat, longitude: $0.lng)}
+            )
+            
+            MapTabUtils.shared.mapPoints = self.destinations
+            
+            self.delegate?.onLoadTollCost(viewModel: self, result.toll)
+            self.hideLoader()
         }
     }
     
     func onClickSearchAddressFrom() {
-        self.presentableRoute = .searchAddress(text: self.fromAddress, { result in
-            self.setupFromAddress(with: result)
-        })
+        self.searchAddressViewModel.delegate = self
+        
+        if let loc = self.fromLocation {
+            self.editingDestinationId = loc.id
+            self.searchAddressViewModel.set(input: loc)
+        }
+        
+        self.presentableRoute = .searchAddress(viewModel: self.searchAddressViewModel)
     }
     
     func onClickSearchAddressTo() {
-        self.presentableRoute = .searchAddress(text: self.toAddress, { result in
-            self.setupToAddress(with: result)
-        })
+        self.searchAddressViewModel.delegate = self
+        
+        if let edit = self.toLocation {
+            self.editingDestinationId = edit.id
+            self.searchAddressViewModel.set(input: edit)
+        }
+        
+        self.presentableRoute = .searchAddress(viewModel: self.searchAddressViewModel)
     }
     
     func onClickFromLocation() {
-        guard let fromLocation = fromLocation else {
+        guard let fromLocation = fromLocation?.location else {
             return
         }
+        
         focusToLocation(fromLocation)
     }
     
     func onClickToLocation() {
-        guard let toLocation else {
+        guard let toLocation = toLocation?.location else {
             return
         }
         
@@ -186,54 +144,37 @@ extension MapTabViewModel: HomeViewModelProtocol {
 extension MapTabViewModel {
     
     func setupMarkers() {
+        guard !stations.isEmpty else {
+            return
+        }
+        
         DispatchQueue.main.async {
             self.stations.map({$0.asMarker}).forEach { marker in
                 self.stationsMarkers.insert(marker)
             }
         }
+        
+        Logging.l(tag: "MapTabViewModel", "Setup all markers")
     }
     
     func removeStations() {
-        self.stations = []
+        guard !stations.isEmpty else {
+            return
+        }
+        
+        self.stations.removeAll()
+        Logging.l(tag: "MapTabViewModel", "Remove all stations")
     }
     
     func removeMarkers() {
+        guard !stationsMarkers.isEmpty else {
+            return
+        }
+        
         stationsMarkers.forEach { marker in
             marker.map = nil
         }
         stationsMarkers.removeAll()
-//        self.stationsMarkers.forEach { mr in
-//            if let pl = self.pickedLocation?.coordinate {
-//                let distance = pl.distance(to: mr.position).f.asMile
-//                // remove not in distance
-//                if distance > CGFloat(self.filter?.radius ?? 10) {
-//                    mr.map = nil
-//                    self.stationsMarkers.remove(mr)
-//                }
-//            }
-//        }
-//        self.stationsMarkers.removeAll { mr in
-//            // remove mr not in radius
-//            if let pl = self.pickedLocation?.coordinate {
-//                let distance = pl.distance(to: mr.position).f.asMile
-//                // remove not in distance
-//                if distance > CGFloat(self.filter?.radius ?? 10) {
-//                    mr.map = nil
-//                    return true
-//                }
-//            }
-//            
-//            return false
-//        }
-    }
-}
-
-
-public struct Destination: Codable {
-    public var latitude: Double
-    public var longitude: Double
-    
-    public var location: CLLocation {
-        .init(latitude: latitude, longitude: longitude)
+        Logging.l(tag: "MapTabViewModel", "Remove all markers")
     }
 }

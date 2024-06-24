@@ -1,0 +1,3 @@
+binary "https://trimblemaps.jfrog.io/artifactory/carthage/TrimbleMaps.json" "1.0.1"
+binary "https://trimblemaps.jfrog.io/artifactory/carthage/TrimbleMapsAccounts.json" "1.0.1"
+binary "https://trimblemaps.jfrog.io/artifactory/carthage/TrimbleMapsMobileEvents.json" "1.0.0"

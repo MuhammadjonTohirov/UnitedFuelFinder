@@ -22,7 +22,7 @@ struct AllTransactionsView: View {
     var body: some View {
         VStack {
             datePicker
-                .padding(.top, 20)
+                .padding(.top, 0)
             LazyVStack {
                 ForEach(transactions) { item in
                     TransactionView(item: item)

@@ -30,7 +30,9 @@ class MapViewModel {
 
 class MapViewController: UIViewController {
     
-    lazy var map = {GMSMapView(frame: .zero)}()
+    lazy var map = {
+        GMSMapView(frame: .zero)
+    }()
 
     var isAnimating: Bool = false
     
@@ -97,4 +99,9 @@ class MapViewController: UIViewController {
             break
         }
     }
+}
+
+#Preview {
+    GMSServices.provideAPIKey(URL.googleMapsApiKey)
+    return MapViewController().asSwiftUI
 }

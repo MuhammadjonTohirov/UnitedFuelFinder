@@ -47,3 +47,16 @@ extension Binding {
         }
     }
 }
+
+extension Font{
+    public static func semibold(size:CGFloat)->Font?{
+        return Font.system(size: size, weight: .semibold)
+    }
+    public static func bold(size:CGFloat)->Font?{
+        return Font.system(size: size, weight: .bold)
+    }
+    public static func regular(size:CGFloat)->Font{
+        return Font.system(size: size, weight: .regular)
+    }
+    
+}

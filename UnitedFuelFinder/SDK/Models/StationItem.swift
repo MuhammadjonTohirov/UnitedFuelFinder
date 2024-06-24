@@ -34,6 +34,12 @@ public class StationItem: Identifiable {
     
     public var displayName: String?
     
+    public var identifier: String?
+    public var isEmpty: Bool?
+    public var isOpen: Bool?
+    public var bestPrice: Float?
+    public var customerName: String?
+    
     public var actualPriceInfo: String {
         return actualPrice.asMoney
     }
@@ -88,48 +94,22 @@ public class StationItem: Identifiable {
         self.distance = item.distance
         self.cityName = item.cityName
         self.stateName = item.stateName
+        self.identifier = item.identifier
+        self.isEmpty = item.isEmpty
+        self.isOpen = item.isOpen
+        self.bestPrice = item.bestPrice
+        self.customerName = item.customerName
         
         let customerName = self.name.replacingOccurrences(of: self.number ?? "-1", with: "")
         self.displayName = (customerName + " " + (self.number ?? "")).nilIfEmpty ?? self.name
     }
     
-    private var _city: CityItem?
-    private var _state: StateItem?
-    private var _customer: CustomerItem?
+    var customer: CustomerItem?
+    var city: CityItem?
+    var state: StateItem?
 }
 
 extension StationItem {
-    var customer: CustomerItem? {
-        if let _customer {
-            return _customer
-        }
-        
-        _customer = DCustomer.all?.filter("id = %d", customerId).first?.asModel
-        return _customer
-    }
-    
-    var city: CityItem? {
-        if let _city {
-            return _city
-        }
-        
-        _city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: self.cityId)?.asModel
-        return _city
-    }
-    
-    var state: StateItem? {
-        guard let stateId = self.stateId else {
-            return nil
-        }
-        
-        if let _state {
-            return _state
-        }
-        
-        _state = Realm.new?.object(ofType: DState.self, forPrimaryKey: stateId)?.asModel
-        return _state
-    }
-    
     /// finds distance as mile
     private func _distance(from coordinate: CLLocationCoordinate2D) -> Double {
         Double(GMSGeometryDistance(self.asMarker.position, coordinate).f.asMile)

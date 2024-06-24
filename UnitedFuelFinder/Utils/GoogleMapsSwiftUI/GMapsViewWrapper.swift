@@ -31,18 +31,25 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
     @Binding var pickedLocation: CLLocation?
     @Binding var isDragging: Bool
     @State var camera: GMSCameraPosition?
-    var screenCenter: CGPoint
     @Binding var markers: Set<GMSMarker>
-
+    
+    var screenCenter: CGPoint
     var onClickMarker: ((_ marker: GMSMarker, _ frame: CGPoint) -> Void)?
-    var route: [CLLocationCoordinate2D] = []
-    var didRadiusChanged: Bool = true
 
+    var route: [CLLocationCoordinate2D] = []
+    var destinations: [MapDestination] = []
+
+    var didRadiusChanged: Bool = true
     var radius: CLLocationDistance = .zero
     
     var onChangeVisibleArea: ((_ radius: CGFloat) -> Void)?
     
-    init(pickedLocation: Binding<CLLocation?>, isDragging: Binding<Bool>, screenCenter: CGPoint, markers: Binding<Set<GMSMarker>>) {
+    init(
+        pickedLocation: Binding<CLLocation?>,
+        isDragging: Binding<Bool>,
+        screenCenter: CGPoint,
+        markers: Binding<Set<GMSMarker>>
+    ) {
         self._isDragging = isDragging
         self._pickedLocation = pickedLocation
         self.screenCenter = screenCenter
@@ -87,22 +94,15 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
         return v
     }
     
+    func set(destinations: [MapDestination]) -> Self {
+        var v = self
+        v.destinations = destinations
+        return v
+    }
+    
     func makeUIViewController(context: Context) -> MapViewController {
         let mapController = MapViewController()
         mapController.delegate = context.coordinator
-        
-        let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
-        
-        let bottom = 115 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
-        
-        mapController.set(
-            padding: .init(
-                top: 0, 
-                left: 0,
-                bottom: bottom, 
-                right: 0
-            )
-        )
         
         return mapController
     }
@@ -114,20 +114,29 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             uiViewController.map.animate(to: position)
         }
         
-//       MARK: markers drawing
-//        if context.coordinator.clusterManager == nil {
-//            context.coordinator.setupCluster(
-//                mapView: uiViewController.map,
-//                withMarkers: self.markers
-//            )
-//        } else {
-//            context.coordinator.updateCluster(withMarkers: self.markers)
-//        }
+        if uiViewController.map.padding == .zero {
+            let hasSafeArea = UIApplication.shared.safeArea.bottom != .zero
+            
+            let bottom = 115 - UIApplication.shared.safeArea.bottom + (hasSafeArea ? UIApplication.shared.safeArea.bottom : 20)
+            
+            uiViewController.set(
+                padding: .init(
+                    top: 0,
+                    left: 0,
+                    bottom: bottom,
+                    right: 0
+                )
+            )
+        }
         
         context.coordinator.setupMarkers(onMap: uiViewController.map, withMarkers: self.markers)
         
         if !self.route.isEmpty {
-            context.coordinator.setMapMarkersRoute(route: route, on: uiViewController.map)
+            context.coordinator.setMapMarkersRoute(
+                route: route,
+                stops: destinations,
+                on: uiViewController.map
+            )
         } else {
             context.coordinator.clearRoute(onMap: uiViewController.map)
             context.coordinator.endDrawing()
@@ -138,7 +147,7 @@ struct GMapsViewWrapper: UIViewControllerRepresentable {
             if radius > 0 {
                 context.coordinator.drawCircleByRadius(
                     on: uiViewController.map,
-                    location: coordinate, 
+                    location: coordinate,
                     radius: radius
                 )
             } else {

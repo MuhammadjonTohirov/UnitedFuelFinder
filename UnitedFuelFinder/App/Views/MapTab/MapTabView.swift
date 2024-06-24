@@ -15,6 +15,7 @@ struct MapTabView: View {
     
     @ObservedObject var viewModel: MapTabViewModel
     @EnvironmentObject var mainModel: MainViewModel
+    @EnvironmentObject var tabModel: MainTabViewModel
     
     init(viewModel: MapTabViewModel) {
         self.viewModel = viewModel
@@ -30,6 +31,8 @@ struct MapTabView: View {
         UIApplication.shared.safeArea.bottom != 0
     }
     
+    @State private var stationInfoRect: CGRect = .zero
+    
     private var bottomSafeArea: CGFloat {
         hasSafeArea ? UIApplication.shared.safeArea.bottom : 20
     }
@@ -42,13 +45,16 @@ struct MapTabView: View {
         ZStack {
             innerBody
                 .overlay(content: {
-                    CoveredLoadingView(isLoading: $viewModel.isDrawing, message: "Drawing route".localize)
+                    CoveredLoadingView(
+                        isLoading: $viewModel.isDrawing,
+                        message: "Drawing route".localize
+                    )
                 })
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
                     viewModel.onAppear()
                 }
-                .onChange(of: viewModel.bodyState, perform: { value in
+                .onChange(of: tabModel.mapBodyState, perform: { value in
                     (value == .map) ? viewModel.onSelectMap() : viewModel.onSelectList()
                 })
                 .onDisappear {
@@ -67,7 +73,17 @@ struct MapTabView: View {
                 }
             })
         }
-        .coveredLoading(isLoading: $viewModel.isLoading, message: viewModel.loadingMessage)
+        .navigationDestination(isPresented: $viewModel.push, destination: {
+            viewModel.route?.screen
+                .environmentObject(mainModel)
+        })
+        .coveredLoading(
+            isLoading: $viewModel.isLoading,
+            message: viewModel.loadingMessage
+        )
+        .onChange(of: viewModel.state, perform: { value in
+            tabModel.leadningNavigationOpacity = value == .pickLocation ? 0 : 1
+        })
         .background(.appBackground)
     }
     
@@ -76,20 +92,19 @@ struct MapTabView: View {
             innerBodyByState
             
             bottomContent
-                .opacity(viewModel.bodyState == .map ? 1 : 0)
+                .opacity(tabModel.mapBodyState == .map ? 1 : 0)
         }
-        .navigationDestination(isPresented: $viewModel.push, destination: {
-            viewModel.route?.screen
-                .environmentObject(mainModel)
-        })        
         .sheet(item: $selectedMarker, content: { marker in
             if let st = selectedMarker?.station {
                 StationTipView(station: st, onClickShow: { station in
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                         self.viewModel.route = .stationDetails(station: station)
                     }
+                }, onClickNavigate: { station in
+                    self.viewModel.navigate(to: station)
                 })
-                .presentationDetents([.height(200)])
+                .readRect(rect: $stationInfoRect)
+                .presentationDetents([.height(stationInfoRect.height)])
             }
         })
         .fullScreenCover(isPresented: $viewModel.present, content: {
@@ -97,6 +112,7 @@ struct MapTabView: View {
                 viewModel.presentableRoute?.screen
                     .navigationBarTitleDisplayMode(.inline)
                     .environmentObject(mainModel)
+                    .environmentObject(viewModel)
             }
             .presentationDetents([.fraction(0.95)])
         })
@@ -111,28 +127,39 @@ struct MapTabView: View {
     
     @ViewBuilder
     private var innerBodyByState: some View {
-        switch self.viewModel.bodyState {
+        switch self.tabModel.mapBodyState {
         case .map:
             mapView
+            .onChange(of: viewModel.isDragging, perform: { value in
+                if value {
+                    self.viewModel.onDraggingMap()
+                }
+            })
+            .ignoresSafeArea()
+            .padding(.bottom, 8)
+            .overlay {
+                bodyOverlay
+            }
+            .ignoresSafeArea(.container, edges: .bottom)
+            .padding(.bottom, -14)
             .onChange(of: $viewModel.pickedLocation, perform: { value in
                 if viewModel.state == .routing {
                     return
                 }
                 
-                self.viewModel.reloadAddress()
-            })
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    viewModel.isMapReady = true
-                    if viewModel.state != .routing {
-                        viewModel.filterStationsByDefault()
-                    }
+                if !viewModel.isMapReady {
+                    return
                 }
-            }
+                
+                self.viewModel.removeMarkers()
+                self.viewModel.removeStations()
+                self.viewModel.reloadAddress()
+                self.viewModel.startFilterStations()
+            })
         case .list:
             MapTabListView(
                 stations: self.viewModel.stations,
-                fromPoint: self.viewModel.fromLocation?.coordinate
+                fromPoint: self.viewModel.fromLocation?.location
             )
             .environmentObject(self.viewModel)
         }
@@ -147,10 +174,11 @@ struct MapTabView: View {
         )
         .set(currentLocation: viewModel.focusableLocation)
         .set(
-            radius: viewModel.state != .selectFrom 
+            radius: viewModel.state != .default 
             ? 0
             : CLLocationDistance(((viewModel.filter?.radius ?? 0) + 4).f.asMeters)
         )
+        .set(destinations: viewModel.destinations)
         .set(route: viewModel.mapRoute)
         .set(onClickMarker: { marker, point in
             if marker.hasStation {
@@ -165,23 +193,7 @@ struct MapTabView: View {
             Logging.l(tag: "MapTabView", "Change visible area \(radius)")
 
             viewModel.screenVisibleArea = radius
-            
-            if viewModel.state != .routing {
-                viewModel.filterStationsByDefault()
-            }
         })
-        .onChange(of: viewModel.isDragging, perform: { value in
-            if value {
-                self.viewModel.onDraggingMap()
-            }
-        })
-        .ignoresSafeArea()
-        .padding(.bottom, 8)
-        .overlay {
-            bodyOverlay
-        }
-        .ignoresSafeArea(.container, edges: .bottom)
-        .padding(.bottom, -14)
     }
     
     private var bodyOverlay: some View {
@@ -190,7 +202,8 @@ struct MapTabView: View {
             
             PinPointerView(
                 isActive: viewModel.isDragging,
-                type: viewModel.state == HomeViewState.selectFrom ? .pinA : .pinB)
+                type: viewModel.state == HomeViewState.default ? .pinA : .pinB
+            )
             .frame(height: pointerHeight)
             .offset(.init(width: 0, height: -(115 / 2) - bottomSafeArea))
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
@@ -201,7 +214,7 @@ struct MapTabView: View {
         VStack {
             Spacer()
             HStack(alignment: .bottom) {
-                if viewModel.state == .selectTo {
+                if viewModel.state == .pickLocation {
                     backButtonView
                         .padding(.leading, 8)
                 }
@@ -220,44 +233,33 @@ struct MapTabView: View {
             
             HomeBottomSheetView(
                 input: .init(
-                    from: .init(
-                        title: viewModel.fromAddress.nilIfEmpty ?? "no_address".localize,
-                        isLoading: viewModel.isDetectingAddressFrom || viewModel.isDragging,
-                        onClickBody: {
-                            self.viewModel.onClickSearchAddressFrom()
-                        }, onClickMap: {
-                            // skip this method
-                            debugPrint("OnClick map 1")
-                        }
-                    ),
-                    to: .init(
-                        title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
-                        isLoading: viewModel.state == .selectTo ? viewModel.isDetectingAddressTo : false,
-                        onClickBody: {
-                            self.viewModel.onClickSearchAddressTo()
-                        }, onClickMap: {
-                            debugPrint("OnClick map 2")
-                            self.viewModel.onClickSelectToPointOnMap()
-                        }
-                    ),
-                    state: viewModel.state != .selectTo ? .mainView : .destinationView,
+                    from: fromLocationInput,
+                    to: toLocationInput,
+                    pickedAddress: viewModel.pickedLocationAddress ?? "",
+                    state: viewModel.state != .pickLocation ? .mainView : .destinationView,
                     onClickReady: {
                         // draw route
-                        viewModel.onClickDrawRoute()
+                        viewModel.onClickDonePickAddress()
+                    },
+                    onClickAllDestinations: {
+                        viewModel.onClickAllDestinations()
+                    },
+                    onClickAddDestination: {
+                        viewModel.onClickAddDestination()
                     },
                     distance: viewModel.distance
                 ),
-                stations: [], //Array(self.viewModel.discountedStations[0..<min(viewModel.discountedStations.count, 6)]),
                 hasMoreButton: self.viewModel.stations.count > 6,
                 isSearching: self.viewModel.isLoadingAddress,
                 onClickMoreButton: {
                     viewModel.onClickViewAllStations()
                 }, onClickNavigate: { station in
-                    viewModel.focusToLocation(station.clLocation)
+                    viewModel.focusToLocation(station.clLocation.coordinate)
                 }, onClickOpen: { station in
                     viewModel.route = .stationDetails(station: station)
                 }
             )
+            .set(showAllButtons: viewModel.destinations.count > 1)
             .background {
                 GeometryReader(content: { geometry in
                     Color.clear.onAppear {
@@ -333,8 +335,7 @@ struct MapTabView: View {
     
     private var clearRouteButton: some View {
         Button(action: {
-            viewModel.onClickBack()
-            viewModel.clearDestination()
+            viewModel.onClickResetMap()
         }, label: {
             Circle()
                 .frame(width: 40, height: 40)
@@ -387,12 +388,45 @@ struct MapTabView: View {
             Spacer()
         }.allowsHitTesting(false)
     }
+    
+    private var fromLocationInput: HomeBottomSheetInput.ButtonInput {
+        .init(
+            title: viewModel.fromAddress.nilIfEmpty ?? "no_address".localize,
+            isLoading: (viewModel.state != .routing) && (viewModel.isDetectingAddressFrom || viewModel.isDragging),
+            label: 0.label.description,
+            labelColor: .red,
+            onClickBody: {
+                self.viewModel.onClickSearchAddressFrom()
+            }, onClickMap: {
+                // skip this method
+                debugPrint("OnClick map 1")
+            }
+        )
+    }
+    
+    private var toLocationInput: HomeBottomSheetInput.ButtonInput {
+        var label: String = "B"
+        
+        if viewModel.toLocation != nil {
+            label = (viewModel.destinations.count - 1).label.description
+        }
+        
+        return .init(
+           title: viewModel.toAddress.nilIfEmpty ?? "no_address".localize,
+           isLoading: viewModel.state == .pickLocation ? viewModel.isDetectingAddressTo : false,
+           label: label,
+           labelColor: .label,
+           onClickBody: {
+               self.viewModel.onClickSearchAddressTo()
+           }, onClickMap: {
+               debugPrint("OnClick map 2")
+               self.viewModel.onClickpickLocationPointOnMap()
+           }
+       )
+    }
 }
 
 #Preview {
-    UserSettings.shared.accessToken = UserSettings.testAccessToken
-    UserSettings.shared.refreshToken = UserSettings.testRefreshToken
-    UserSettings.shared.userEmail = UserSettings.testEmail
-    UserSettings.shared.appPin = "0000"
-    return MainView()
+    UserSettings.shared.setupForTest()
+    return MainTabView()
 }

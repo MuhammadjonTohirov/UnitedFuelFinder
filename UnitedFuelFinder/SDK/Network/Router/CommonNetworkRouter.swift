@@ -18,6 +18,9 @@ enum CommonNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Common", "Companies")
         case .version:
             return URL.baseAPI.appendingPath("Common", "Version")
+        case .actualAppVersion:
+            return URL.baseAPI.appendingPath("Common", "Config")
+            
         case let .filterTransactions(fromDate, to):
             return URL.baseAPI.appendingPath("Driver", "FilterTransactions").queries(
                 .init(name: "fromDate", value: fromDate),
@@ -40,12 +43,16 @@ enum CommonNetworkRouter: URLRequestProtocol {
             )
         case .findRoute:
             return URL.baseAPI.appendingPath("Driver", "DrawRoutes")
+        case .findMultipleRoute:
+            return URL.init(string: "http://15.235.212.129:50000/api/Driver/DrawMultipleRoutes")!
         }
     }
     
     var body: Data? {
         switch self {
         case .findRoute(let req):
+            return req.asData
+        case .findMultipleRoute(let req):
             return req.asData
         default:
             return nil
@@ -54,7 +61,7 @@ enum CommonNetworkRouter: URLRequestProtocol {
     
     var method: HTTPMethod {
         switch self {
-        case .findRoute:
+        case .findRoute, .findMultipleRoute:
             return .post
         default:
             return .get
@@ -65,9 +72,9 @@ enum CommonNetworkRouter: URLRequestProtocol {
         var request: URLRequest?
         
         switch self {
-        case .states, .cities, .companies, .version:
+        case .states, .cities, .companies, .version, .actualAppVersion:
             request = URLRequest.new(url: url, withAuth: false)
-        case .filterTransactions, .filterInvoices, .totalSpendings, .cardInfo, .popularStations, .findRoute:
+        default:
             request = URLRequest.new(url: url)
         }
         
@@ -88,4 +95,6 @@ enum CommonNetworkRouter: URLRequestProtocol {
     
     case cardInfo
     case popularStations(amount: Int)
+    case actualAppVersion
+    case findMultipleRoute(request: NetReqDrawMultipleRoute)
 }

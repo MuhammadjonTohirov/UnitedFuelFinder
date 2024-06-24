@@ -8,7 +8,7 @@
 import Foundation
 
 extension MainService {
-    func syncAllStations() async {
+    @Sendable func syncAllStations() async {
         let result: NetRes<[NetResStationItem]>? = await Network.send(request: MainNetworkRouter.allStations)
         
         result?.data?.forEach { item in
@@ -19,7 +19,9 @@ extension MainService {
             return DStationItem.create(resStation)
         } ?? []
         
+        try? await Task.sleep(for: .milliseconds(100))
         DStationItem.deleteAll()
+        try? await Task.sleep(for: .milliseconds(100))
         DStationItem.insertAll(stations)
     }
 }

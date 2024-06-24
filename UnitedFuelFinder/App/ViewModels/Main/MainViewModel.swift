@@ -74,31 +74,33 @@ final class MainViewModel: ObservableObject {
             UserSettings.shared.language = language
         }
     }
+    var trimbleDelegate: AccountDelegate = .init()
     
     var timer: Timer?
     
     init(route: AppDestination = .loading) {
         self.route = route
         appDelegate = self
-        UserSettings.shared.lastActiveDate = Date()
-        UserSettings.shared.photoUpdateDate = Date()
-        GMSServices.provideAPIKey(URL.googleMapsApiKey)
-        Logging.l("GMaps \(GMSServices.sdkVersion())")
         
+        setupUserSettings()
+        setupGoogleMaps()
+                
         Logging.l("Access token: \(UserSettings.shared.accessToken ?? "-")")
-    }
-    
-    @available(*, deprecated, message: "Not used for now")
-    private func initLocalize() {
-        if UserSettings.shared.language?.code !=  (Locale.current.language.languageCode?.identifier ?? "en") {
-            UserSettings.shared.language = Language.language(Locale.current.language.languageCode?.identifier ?? "en")
-            language = UserSettings.shared.language!
-        }
     }
     
     func set(language: Language) {
         UserSettings.shared.language = language
         self.language = language
+    }
+    
+    private func setupUserSettings() {
+        UserSettings.shared.lastActiveDate = Date()
+        UserSettings.shared.photoUpdateDate = Date()
+    }
+    
+    private func setupGoogleMaps() {
+        GMSServices.provideAPIKey(URL.googleMapsApiKey)
+        Logging.l("GMaps \(GMSServices.sdkVersion())")
     }
 }
 

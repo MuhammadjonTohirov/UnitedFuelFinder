@@ -12,17 +12,24 @@ struct StationTipView: View {
     
     let station: StationItem
     let onClickShow: (StationItem) -> Void
+    let onClickNavigate: (StationItem) -> Void
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
-            Text(station.displayName ?? "")
+        VStack(alignment: .center, spacing: 4) {
+            Text(station.displayName ?? station.name)
                 .font(.system(size: 16, weight: .semibold))
+                .horizontal(alignment: .leading)
             
             Divider()
             
-            Text("prices".localize.capitalized)
-                .font(.system(size: 14, weight: .medium))
+            HStack {
+                Text("price_update".localize)
+                    .font(.system(size: 13, weight: .regular))
+                Spacer()
+                Text("6 hours ego")
+            }
             
             HStack {
                 Text("discounted_price".localize)
@@ -54,33 +61,75 @@ struct StationTipView: View {
                 Text(station.fullAddress)
             }
             
-            
             HStack {
-                RegularButton(action: {
-                    dismiss.callAsFunction()
-                }, label: {
-                    Text("close".localize.capitalized)
-                        .foregroundStyle(Color.label)
-                        .font(.system(size: 12))
-                }, height: 40)
-                .frame(width: 100)
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .renderingMode(.template)
+                    .foregroundStyle(.accent)
                 
-                Spacer()
-                
-                SubmitButton(action: {
-                    dismiss.callAsFunction()
-                    onClickShow(station)
-                }, label: {
-                    Text("view_larger".localize)
-                        .font(.system(size: 12))
-                }, height: 40)
+                Text("price.change.warning".localize)
+                    .font(.system(size: 12, weight: .regular))
+                    .foregroundStyle(Color.secondary)
             }
-            .padding(.top, Padding.small)
+            .frame(height: 40.f.sh())
+            
+            actions
         }
         .font(.system(size: 13, weight: .regular))
         .padding()
-        .frame(height: 190)
-        
+    }
+    
+    private var actions: some View {
+        HStack {
+            RegularButton(action: {
+                dismiss.callAsFunction()
+            }, label: {
+                Text("close".localize.capitalized)
+                    .foregroundStyle(Color.label)
+                    .font(.system(size: 12, weight: .medium))
+            }, height: 40)
+            
+            Spacer()
+            
+            SubmitButton(action: {
+                dismiss.callAsFunction()
+                onClickShow(station)
+            }, label: {
+                Text("view_larger".localize)
+                    .font(.system(size: 12, weight: .medium))
+                    .foregroundStyle(Color.white)
+            }, backgroundColor: Color.init(uiColor: .systemGreen), height: 40)
+            
+            Spacer()
+            
+            SubmitButton(action: {
+                dismiss.callAsFunction()
+                onClickNavigate(station)
+            }, label: {
+                Text("navigate".localize)
+                    .font(.system(size: 12, weight: .medium))
+            }, height: 40)
+        }
+        .padding(.top, Padding.small)
     }
 }
 
+#Preview {
+    StationTipView(
+        station: StationItem.init(
+            id: 0,
+            name: "LOVES 347",
+            lat: 44.19283,
+            lng: 79.91823,
+            isDeleted: false,
+            cityId: 0,
+            customerId: 0,
+            stateId: "NY",
+            priceUpdated: "12.10.2024",
+            note: "No note"
+        ),
+        onClickShow: { station in
+            
+        }) { station in
+            
+        }
+}

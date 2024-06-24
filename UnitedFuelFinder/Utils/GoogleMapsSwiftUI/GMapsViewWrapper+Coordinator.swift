@@ -18,8 +18,9 @@ extension GMapsViewWrapper {
         
         var circle: GMSCircle?
         var currentRoutePolyline: GMSPolyline?
-        var markerA: GMSMarker?
-        var markerB: GMSMarker?
+        
+        var destinations: [(label: String, marker: GMSMarker)] = []
+        
         var clusterManager: GMUClusterManager?
         
         init(_ parent: GMapsViewWrapper) {
@@ -77,10 +78,6 @@ extension GMapsViewWrapper {
             
             readScreenCenterCoordinate(on: mapView)
             
-//            if let l = self.parent.pickedLocation?.coordinate, !hasDrawen {
-//                drawCircleByRadius(on: mapView, location: l, radius: parent.radius)
-//            }
-            
             let lat = position.target.latitude
             let lng = position.target.longitude
             
@@ -125,14 +122,14 @@ extension GMapsViewWrapper {
         }
         
         func clearRoute(onMap map: GMSMapView) {
+            self.destinations.forEach { (label, marker) in
+                marker.map = nil
+            }
+            
             self.currentRoutePolyline?.map = nil
             self.currentRoutePolyline = nil
-                        
-            self.markerA?.map = nil
-            self.markerA = nil
             
-            self.markerB?.map = nil
-            self.markerB = nil
+            self.destinations.removeAll()
         }
         
         func clearMarkers(onMap map: GMSMapView) {
@@ -148,7 +145,10 @@ extension GMapsViewWrapper {
             self.isRouting = false
         }
         
-        private func draw(route: [CLLocationCoordinate2D], on mapView: GMSMapView) {
+        private func draw(
+            route: [CLLocationCoordinate2D],
+            on mapView: GMSMapView
+        ) {
             let path = GMSMutablePath()
             route.forEach { path.add($0) }
             self.currentRoutePolyline = GMSPolyline(path: path)
@@ -159,7 +159,11 @@ extension GMapsViewWrapper {
             self.isRouting = false
         }
         
-        func setMapMarkersRoute(route: [CLLocationCoordinate2D], on mapView: GMSMapView) {
+        func setMapMarkersRoute(
+            route: [CLLocationCoordinate2D],
+            stops: [MapDestination],
+            on mapView: GMSMapView
+        ) {
             guard !isRouting else {
                 Logging.l("Cannot draw because It is already drawing the route \(isRouting)")
                 return
@@ -173,43 +177,47 @@ extension GMapsViewWrapper {
             self.isRouting = true
             
             DispatchQueue.main.async {
-                let isDifferentA = self.markerA?.position != route.first
-                let isDifferentB = self.markerB?.position != route.last
-                
-                if isDifferentA || isDifferentB {
-                    self.clearRoute(onMap: mapView)
-                    self.markerB?.map = nil
-                    self.markerB = nil
-                    self.markerA?.map = nil
-                    self.markerA = nil
+                self.destinations = stops.enumerated().map { dest in
+                    (
+                        label: dest.offset.label.description,
+                        marker: .init(position: dest.element.location)
+                    )
                 }
                 
-                guard let toLoc = route.last, let vLoc = route.first else {
-                    return
+                self.destinations.enumerated().forEach { object in
+                    let (offset, (label, marker)) = object
+                    let lbl = DestinationMarkerView()
+                    lbl.set(label: label)
+                    
+                    var position: DestinationMarkerView.Position = .middle
+                    
+                    if offset == 0 {
+                        position = .start
+                    }
+                    
+                    if offset == stops.count - 1  {
+                        position = .end
+                    }
+                    
+                    lbl.set(position: position)
+                    
+                    marker.iconView = lbl
+                    marker.iconView?.frame.size = .init(width: 24, height: 24)
+                    marker.map = mapView
                 }
                 
-                mainIfNeeded {
-                    //add the markers for the 2 locations
-                    
-                    self.markerB = GMSMarker.init(position: toLoc)
-                    self.markerB!.map = mapView
-                    self.markerB!.iconView = UIImageView(image: UIImage(named: "icon_to_point"))
-                    self.markerB!.iconView?.frame.size = .init(width: 24, height: 24)
-                    
-                    self.markerA = GMSMarker.init(position: vLoc)
-                    self.markerA!.map = mapView
-                    self.markerA!.iconView = UIImageView(image: UIImage(named: "icon_from_point"))
-                    self.markerA!.iconView?.frame.size = .init(width: 24, height: 24)
+                var bounds = GMSCoordinateBounds()
+                let points = self.destinations.map({$0.marker.position}).extremePoints
+                if let fLoc = points.left {
+                    bounds = bounds.includingCoordinate(fLoc)
+                }
+                if let tLoc = points.right {
+                    bounds = bounds.includingCoordinate(tLoc)
+                }
+                
+                mapView.moveCamera(GMSCameraUpdate.fit(bounds))
 
-                    //zoom the map to show the desired area
-                    var bounds = GMSCoordinateBounds()
-                    bounds = bounds.includingCoordinate(vLoc)
-                    bounds = bounds.includingCoordinate(toLoc)
-                    mapView.moveCamera(GMSCameraUpdate.fit(bounds))
-                    
-                    //finally get the route
-                    self.draw(route: route, on: mapView)
-                }
+                self.draw(route: route, on: mapView)
             }
         }
         

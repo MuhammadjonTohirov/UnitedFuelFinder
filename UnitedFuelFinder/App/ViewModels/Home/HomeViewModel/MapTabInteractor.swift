@@ -7,15 +7,20 @@
 
 import Foundation
 import CoreLocation
+import RealmSwift
 
 protocol SearchRouteProtocol {
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void)
+    
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel?
 }
 
 protocol MapTabInteractorProtocol {
     init(routeSearcher: any SearchRouteProtocol)
     
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void)
+    
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel?
     
     func filterStationsByDefault(_ filter: MapFilterInput, location: CLLocation) async -> [StationItem]
     
@@ -29,6 +34,10 @@ struct GoogleRouteSearcher: SearchRouteProtocol {
             to: to) { route in
                 completion(route)
             }
+    }
+    
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel? {
+        return nil
     }
 }
 
@@ -47,11 +56,28 @@ struct ServerRouteSearcher: SearchRouteProtocol {
             completion(result?.data?.compactMap({CLLocationCoordinate2D(latitude: $0.lat, longitude: $0.lng)}) ?? [])
         }
     }
+    
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel? {
+        let result: NetRes<NetResDrawMultipleRoute>? = await Network.send(
+            request: CommonNetworkRouter.findMultipleRoute(
+                request: .init(
+                    addresses: addresses.map({.init(lat: $0.latitude, lng: $0.longitude)})
+                )
+            )
+        )
+        
+        guard let data = result?.data else {
+            return nil
+        }
+        
+        return .init(res: data)
+    }
 }
 
 class MapTabInteractor: MapTabInteractorProtocol {
     var routeSearcher: any SearchRouteProtocol
     private var isFiltering: Bool = false
+    private var searchDispatchWork: DispatchWorkItem?
     
     required init(routeSearcher: any SearchRouteProtocol) {
         self.routeSearcher = routeSearcher
@@ -59,6 +85,10 @@ class MapTabInteractor: MapTabInteractorProtocol {
     
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void) {
         routeSearcher.searchRoute(from: from, to: to, completion: completion)
+    }
+    
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel? {
+        await routeSearcher.searchRoute(addresses: addresses)
     }
     
     func filterStationsByDefault(_ filter: MapFilterInput, location: CLLocation) async -> [StationItem] {
@@ -76,17 +106,25 @@ class MapTabInteractor: MapTabInteractorProtocol {
         
         let (_stations, _) = await MainService.shared.filterStations2(req: _request)
         
+        _stations.forEach { station in
+            station.customer = DCustomer.all?.filter("id = %d", station.customerId).first?.asModel
+            station.state = Realm.new?.object(ofType: DState.self, forPrimaryKey: station.stateId)?.asModel
+            station.city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: station.cityId)?.asModel
+        }
+
         return _stations
     }
     
-    func filterStationsByDefaultFromDatabase(_ filter: MapFilterInput, location: CLLocation, completion: @escaping ([StationItem]) -> Void) {
-        if isFiltering {
-            return
-        }
+    func filterStationsByDefaultFromDatabase(
+        _ filter: MapFilterInput,
+        location: CLLocation,
+        completion: @escaping ([StationItem]) -> Void
+    ) {
+        searchDispatchWork?.cancel()
         
-        debugPrint("Filter stations in \(filter.radius) at \(location)")
-        DispatchQueue.global(qos: .background).async {
+        searchDispatchWork = .init(block: {
             self.isFiltering = true
+            
             var filteredStations = DStationItem.all?.filter
             { station in
                 let distance = location.distance(from: CLLocation(latitude: station.lat, longitude: station.lng)).f.asMile
@@ -107,13 +145,12 @@ class MapTabInteractor: MapTabInteractorProtocol {
                 let retailPrice = station.retailPrice ?? 0
                 let discount = station.discountPrice ?? 0
                 let actualPrice = retailPrice - discount
-
+                
                 return actualPrice > filter.from && actualPrice < filter.to
             }
-//            .filter { station in
-//                filter.selectedStations.contains(station.id)
-//            }
-            .map({$0.asModel}) ?? []
+            .map {
+                $0.asModel
+            } ?? []
             
             for i in 0..<filteredStations.count {
                 let item = filteredStations[i]
@@ -134,8 +171,24 @@ class MapTabInteractor: MapTabInteractorProtocol {
             
             debugPrint(filteredStations.compactMap({$0.distance}))
             
-            completion(filteredStations)
+            filteredStations.forEach { station in
+                station.customer = DCustomer.all?.filter("id = %d", station.customerId).first?.asModel
+                station.state = Realm.new?.object(ofType: DState.self, forPrimaryKey: station.stateId)?.asModel
+                station.city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: station.cityId)?.asModel
+            }
+
+            let isCancelled = self.searchDispatchWork?.isCancelled ?? false
+            
+            if !isCancelled {
+                debugPrint("Filter stations in \(filter.radius) at \(location.coordinate)")
+                completion(filteredStations)
+            }
+
             self.isFiltering = false
+        })
+
+        DispatchQueue.global(qos: .utility).async {
+            self.searchDispatchWork?.perform()
         }
     }
 }
