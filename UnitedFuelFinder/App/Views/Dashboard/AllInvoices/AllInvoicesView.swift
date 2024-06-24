@@ -28,13 +28,7 @@ struct AllInvoicesView: View {
                 .padding(.top, 20)
             LazyVStack {
                 ForEach(invoices) { invo in
-                    InvoiceView(
-                        invoice: invo.invoiceNumber ?? "",
-                        amount: Float(invo.totalAmount),
-                        secoundAmount: Float(invo.totalDiscount ?? 0),
-                        companyName: invo.companyAccount?.name ?? "",
-                        date: invo.fromToDate
-                    )    
+                    InvoiceView(item: invo)
                 }
                 .padding(.horizontal)
             }

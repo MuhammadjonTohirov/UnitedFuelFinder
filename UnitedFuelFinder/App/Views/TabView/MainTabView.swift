@@ -31,7 +31,7 @@ struct MainTabView: View {
     }
 
     var body: some View {
-        innerBody
+        tabBarViewBody
             .richAlert(
                 type: .custom(
                     image: Image(systemName: "exclamationmark.triangle")
@@ -81,7 +81,7 @@ struct MainTabView: View {
             })
 
     }
-    var innerBody: some View {
+    var tabBarViewBody: some View {
         NavigationStack {
             tabView
                 .navigationBarTitleDisplayMode(.inline)
@@ -92,22 +92,21 @@ struct MainTabView: View {
                     if didAppear {
                         return
                     }
-                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                         viewModel.alertWarning()
                         self.didAppear = true
                     }
                 }
-                .overlay {
-                    if viewModel.isLoading {
-                        Rectangle()
-                            .foregroundStyle(.appBackground.opacity(0.5))
-                    } else {
-                        EmptyView()
-                            .opacity(0)
-                    }
+            }
+            .overlay {
+                if viewModel.isLoading {
+                    Rectangle()
+                        .foregroundStyle(.appBackground.opacity(0.5))
+                } else {
+                    EmptyView()
+                        .opacity(0)
                 }
-        }
+            }
     }
     
     @ViewBuilder
@@ -190,6 +189,7 @@ struct MainTabView: View {
     private var tabView: some View {
         TabView(selection: $viewModel.selectedTag) {
             DashboardView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
+            HomeContainerView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
                 .environmentObject(mainViewModel)
                 .tabItem {
                     Image("icon_pie")

@@ -3664,6 +3664,9 @@
         }
       }
     },
+    "Savings" : {
+
+    },
     "search_address" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3941,6 +3944,9 @@
           }
         }
       }
+    },
+    "Spendings" : {
+
     },
     "state" : {
       "extractionState" : "manual",

@@ -131,13 +131,7 @@ struct DashboardView: View {
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
                 
                 ForEach(viewModel.invoices[0..<3.limitTop(viewModel.invoices.count)]) { invo in
-                    InvoiceView(
-                        invoice: invo.invoiceNumber ?? "",
-                        amount: Float(invo.totalAmount),
-                        secoundAmount: Float(invo.totalDiscount ?? 0),
-                        companyName: invo.companyAccount?.name ?? "",
-                        date: invo.fromToDate
-                    )
+                    InvoiceView(item: invo)
                 }
             }
         }
