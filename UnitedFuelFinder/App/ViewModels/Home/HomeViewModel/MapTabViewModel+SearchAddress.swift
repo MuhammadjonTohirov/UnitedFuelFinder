@@ -74,6 +74,14 @@ extension MapTabViewModel: SearchAddressProtocol {
         self.presentableRoute = nil
     }
     
+    func searchAddress(
+        viewModel: SearchAddressViewModel,
+        onCancel: SearchAddressViewModel.SearchAddressResult?
+    ) {
+        Logging.l(tag: "HomeViewModel", "On cancel search address")
+        self.presentableRoute = nil
+    }
+    
     func onClickDonePickAddress() {
         withAnimation {
             if editingDestinationId == nil, let location = self.pickedLocation, let address = self.pickedLocationAddress {
@@ -146,12 +154,8 @@ extension MapTabViewModel: DestinationsDelegate {
         
         self.destinations = destinations
         
-        Task {
-            await drawRoute()
-            
-            await MainActor.run {
-                self.startFilterStations()
-            }
+        Task.detached(priority: .high) { [weak self] in
+            await self?.drawAndFilterStations()
         }
     }
     

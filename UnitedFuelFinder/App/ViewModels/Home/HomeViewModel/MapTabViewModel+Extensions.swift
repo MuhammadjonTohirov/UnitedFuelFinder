@@ -57,6 +57,22 @@ extension MapTabViewModel {
         }
     }
     
+    func drawAndFilterStations() async {
+        await MainActor.run {
+            self.isDrawing = true
+        }
+        
+        await drawRoute()
+        
+        await MainActor.run {
+            self.isDrawing = false
+        }
+        
+        await MainActor.run {
+            self.filterStationsByRoute()
+        }
+    }
+    
     func drawRoute() async {
         await MainActor.run {
             self.mapRoute = []
@@ -86,10 +102,7 @@ extension MapTabViewModel {
     }
     
     func onClickSearchAddressFrom() {
-        self.removeMarkers()
-        self.removeStations()
-
-        searchAddressViewModel.delegate = self
+        self.searchAddressViewModel.delegate = self
         
         if let loc = self.fromLocation {
             self.editingDestinationId = loc.id
@@ -100,8 +113,6 @@ extension MapTabViewModel {
     }
     
     func onClickSearchAddressTo() {
-        self.removeMarkers()
-        self.removeStations()
         self.searchAddressViewModel.delegate = self
         
         if let edit = self.toLocation {
@@ -133,21 +144,37 @@ extension MapTabViewModel {
 extension MapTabViewModel {
     
     func setupMarkers() {
+        guard !stations.isEmpty else {
+            return
+        }
+        
         DispatchQueue.main.async {
             self.stations.map({$0.asMarker}).forEach { marker in
                 self.stationsMarkers.insert(marker)
             }
         }
+        
+        Logging.l(tag: "MapTabViewModel", "Setup all markers")
     }
     
     func removeStations() {
+        guard !stations.isEmpty else {
+            return
+        }
+        
         self.stations.removeAll()
+        Logging.l(tag: "MapTabViewModel", "Remove all stations")
     }
     
     func removeMarkers() {
+        guard !stationsMarkers.isEmpty else {
+            return
+        }
+        
         stationsMarkers.forEach { marker in
             marker.map = nil
         }
         stationsMarkers.removeAll()
+        Logging.l(tag: "MapTabViewModel", "Remove all markers")
     }
 }

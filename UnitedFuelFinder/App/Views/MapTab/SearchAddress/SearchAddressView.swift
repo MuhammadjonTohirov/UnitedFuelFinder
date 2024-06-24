@@ -12,7 +12,6 @@ import Combine
 
 struct SearchAddressView: View {
     @EnvironmentObject var viewModel: SearchAddressViewModel
-    @Environment(\.dismiss) var dismiss
     @State private var searchCancellables = Set<AnyCancellable>()
     
     private var text: String
@@ -31,7 +30,7 @@ struct SearchAddressView: View {
         .toolbar(content: {
             ToolbarItem(placement: .topBarTrailing) {
                 Button {
-                    dismiss.callAsFunction()
+                    viewModel.onClickCancel()
                 } label: {
                     Text("cancel".localize)
                 }

@@ -37,7 +37,7 @@ class DStationItem: Object, Identifiable {
 
 extension DStationItem {
     var asModel: StationItem {
-        var st: StationItem = .init(
+        let st: StationItem = .init(
             id: id,
             name: name,
             lat: lat,
@@ -149,6 +149,17 @@ extension DStationItem {
     
     static func deleteAll() {
         Realm.new?.trySafeWrite { realm in
+            realm.delete(realm.objects(DStationItem.self))
+        }
+    }
+    
+    static func deleteAllSync(actor: Actor?) async {
+        // not stable for now
+        guard let realm = (await Realm.asyncNew(actor: actor)) else {
+            return
+        }
+        
+        realm.writeAsync {
             realm.delete(realm.objects(DStationItem.self))
         }
     }

@@ -107,9 +107,7 @@ struct MapTabView: View {
                 .presentationDetents([.height(stationInfoRect.height)])
             }
         })
-        .fullScreenCover(isPresented: $viewModel.present, onDismiss: {
-            viewModel.filterStationsByDefault()
-        }, content: {
+        .fullScreenCover(isPresented: $viewModel.present, content: {
             NavigationView {
                 viewModel.presentableRoute?.screen
                     .navigationBarTitleDisplayMode(.inline)
@@ -148,18 +146,16 @@ struct MapTabView: View {
                 if viewModel.state == .routing {
                     return
                 }
+                
+                if !viewModel.isMapReady {
+                    return
+                }
+                
                 self.viewModel.removeMarkers()
+                self.viewModel.removeStations()
                 self.viewModel.reloadAddress()
                 self.viewModel.startFilterStations()
             })
-            .onAppear {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    viewModel.isMapReady = true
-                    if viewModel.state != .routing {
-                        viewModel.filterStationsByDefault()
-                    }
-                }
-            }
         case .list:
             MapTabListView(
                 stations: self.viewModel.stations,
@@ -197,10 +193,6 @@ struct MapTabView: View {
             Logging.l(tag: "MapTabView", "Change visible area \(radius)")
 
             viewModel.screenVisibleArea = radius
-            
-            if viewModel.state != .routing {
-                viewModel.filterStationsByDefault()
-            }
         })
     }
     
@@ -400,7 +392,7 @@ struct MapTabView: View {
     private var fromLocationInput: HomeBottomSheetInput.ButtonInput {
         .init(
             title: viewModel.fromAddress.nilIfEmpty ?? "no_address".localize,
-            isLoading: viewModel.isDetectingAddressFrom || viewModel.isDragging,
+            isLoading: (viewModel.state != .routing) && (viewModel.isDetectingAddressFrom || viewModel.isDragging),
             label: 0.label.description,
             labelColor: .red,
             onClickBody: {

@@ -62,6 +62,8 @@ protocol SearchAddressProtocol: AnyObject {
     func searchAddress(viewModel: SearchAddressViewModel, result: SearchAddressViewModel.SearchAddressResult)
     
     func searchAddress(viewModel: SearchAddressViewModel, edit: SearchAddressViewModel.SearchAddressResult?)
+    
+    func searchAddress(viewModel: SearchAddressViewModel, onCancel: SearchAddressViewModel.SearchAddressResult?)
 }
 
 final class SearchAddressViewModel: ObservableObject {
@@ -190,5 +192,9 @@ final class SearchAddressViewModel: ObservableObject {
                 lng: _coor.longitude
             )
         )
+    }
+    
+    func onClickCancel() {
+        self.delegate?.searchAddress(viewModel: self, onCancel: nil)
     }
 }

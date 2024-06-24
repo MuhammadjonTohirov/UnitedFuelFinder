@@ -43,12 +43,12 @@ class MainTabViewModel: ObservableObject {
         
         didAppear = true
         
-        Task {
+        Task.detached(priority: .high) { [weak self] in
             await MainService.shared.syncAllStations()
 //            No need for getActualVersion
 //            await getActualVersion()
-            await MainActor.run {
-                isLoading = false
+            await MainActor.run { [weak self] in
+                self?.isLoading = false
             }
         }
     }

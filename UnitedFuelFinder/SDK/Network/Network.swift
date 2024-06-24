@@ -54,6 +54,7 @@ struct Network {
             let string = String(data: data, encoding: .utf8) ?? ""
             
             if code == 401 {
+                debugPrint("Cancel all tasks where 401 code")
                 await session.cancelAllTasks()
                 UserSettings.shared.clear()
                 delegate?.onAuthRequired()

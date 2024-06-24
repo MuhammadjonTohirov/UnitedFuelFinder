@@ -44,7 +44,11 @@ extension MapTabViewModel {
         
         filterTask?.cancel()
         
-        filterTask = Task {
+        filterTask = Task.detached(priority: .high) { [weak self] in
+            guard let self else {
+                return
+            }
+            
             guard state == .routing else {
                 return
             }
@@ -67,7 +71,7 @@ extension MapTabViewModel {
                 station.city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: station.cityId)?.asModel
             }
             
-            Logging.l(tag: "MapTabViewModel", "Number of new stations \(_stations.count)")
+            Logging.l(tag: "MapTabViewModel", "Number of new stations \(_stations.count) from server")
             await onLoadStations(_stations)
         }
     }
@@ -106,17 +110,17 @@ extension MapTabViewModel {
             return
         }
         
-        DispatchQueue.global(qos: .background).async {
-            self.interactor.filterStationsByDefaultFromDatabase(filter, location: pickedLocation) { [weak self] stations in
-                guard let self else {
-                    return
-                }
-                
-                DispatchQueue.main.async {
-                    self.removeMarkers()
-                    self.stations = stations
-                    self.setupMarkers()
-                }
+        self.interactor.filterStationsByDefaultFromDatabase(filter, location: pickedLocation) { [weak self] stations in
+            guard let self else {
+                return
+            }
+            
+            Logging.l(tag: "MapTabViewModel", "Number of new stations \(stations.count) from db")
+            
+            DispatchQueue.main.async {
+                self.removeMarkers()
+                self.stations = stations
+                self.setupMarkers()
             }
         }
     }

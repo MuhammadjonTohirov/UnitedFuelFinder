@@ -63,9 +63,9 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         }
     }
     
-    private var didAppear: Bool = false
+    private(set) var didAppear: Bool = false
     
-    var didDisappear: Bool = false
+    private(set) var didDisappear: Bool = false
     
     @Published var push: Bool = false
     
@@ -145,10 +145,12 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         }
         
         didAppear = true
-                
+        
         self.focusToCurrentLocation()
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            self.isMapReady = MapTabUtils.shared.mapPoints?.isEmpty ?? true
+
             self.focusToCurrentLocation()
         }
         
@@ -204,20 +206,13 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
             self.filter = filter
             self.removeMarkers()
             self.removeStations()
-            switch self.state {
-            case .routing:
-                self.filterStationsByRoute()
-            case .default:
-                self.filterStationsByDefault()
-            default:
-                break
-            }
+            self.startFilterStations()
         }
     }
     
     func onDisappear() {
-        didDisappear = true
-        removeMarkers()
+        self.didDisappear = true
+        self.removeMarkers()
     }
     
     private func restoreSavedRoute() {
@@ -232,11 +227,11 @@ final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
         
         self.destinations = savedDestinations
         
-        Task {
-            await drawRoute()
+        Task.detached(priority: .high) { [weak self] in
+            await self?.drawAndFilterStations()
             
-            await MainActor.run {
-                startFilterStations()
+            await MainActor.run { [weak self] in
+                self?.isMapReady = true
             }
         }
     }

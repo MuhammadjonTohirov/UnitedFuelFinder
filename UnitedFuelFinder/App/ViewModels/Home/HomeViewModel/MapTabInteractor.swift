@@ -77,6 +77,7 @@ struct ServerRouteSearcher: SearchRouteProtocol {
 class MapTabInteractor: MapTabInteractorProtocol {
     var routeSearcher: any SearchRouteProtocol
     private var isFiltering: Bool = false
+    private var searchDispatchWork: DispatchWorkItem?
     
     required init(routeSearcher: any SearchRouteProtocol) {
         self.routeSearcher = routeSearcher
@@ -114,13 +115,14 @@ class MapTabInteractor: MapTabInteractorProtocol {
         return _stations
     }
     
-    func filterStationsByDefaultFromDatabase(_ filter: MapFilterInput, location: CLLocation, completion: @escaping ([StationItem]) -> Void) {
-        if isFiltering {
-            return
-        }
+    func filterStationsByDefaultFromDatabase(
+        _ filter: MapFilterInput,
+        location: CLLocation,
+        completion: @escaping ([StationItem]) -> Void
+    ) {
+        searchDispatchWork?.cancel()
         
-        debugPrint("Filter stations in \(filter.radius) at \(location)")
-        DispatchQueue.global(qos: .utility).async {
+        searchDispatchWork = .init(block: {
             self.isFiltering = true
             
             var filteredStations = DStationItem.all?.filter
@@ -175,9 +177,18 @@ class MapTabInteractor: MapTabInteractorProtocol {
                 station.city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: station.cityId)?.asModel
             }
 
-            completion(filteredStations)
+            let isCancelled = self.searchDispatchWork?.isCancelled ?? false
+            
+            if !isCancelled {
+                debugPrint("Filter stations in \(filter.radius) at \(location.coordinate)")
+                completion(filteredStations)
+            }
 
             self.isFiltering = false
+        })
+
+        DispatchQueue.global(qos: .utility).async {
+            self.searchDispatchWork?.perform()
         }
     }
 }
