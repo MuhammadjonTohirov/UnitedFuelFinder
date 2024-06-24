@@ -54,7 +54,8 @@ enum AppDestination: Hashable, ScreenRoute {
     case pin
     case test
     
-    @ViewBuilder var screen: some View {
+    @ViewBuilder 
+    var screen: some View {
         switch self {
         case .language:
             SelectLanguageView()

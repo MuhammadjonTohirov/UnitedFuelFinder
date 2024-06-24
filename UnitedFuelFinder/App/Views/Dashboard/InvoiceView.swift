@@ -8,11 +8,16 @@
 import SwiftUI
 
 struct InvoiceView: View {
-    @State var invoice: String = "INV-37869"
-    @State var amount: Float = 500.2
-    @State var secoundAmount: Float = 124
-    @State var companyName: String = "JK CARGO INC"
-    @State var date: String = "12:00 10.11.2023"
+//    @State var invoice: String = "INV-37869"
+//    @State var amount: Float = 500.2
+//    @State var secoundAmount: Float = 124
+//    @State var companyName: String = "JK CARGO INC"
+//    @State var date: String = "12:00 10.11.2023"
+    
+    var item: InvoiceItem
+    init(item:InvoiceItem) {
+        self.item = item
+    }
     var body: some View {
         ZStack {
             Rectangle()
@@ -21,9 +26,9 @@ struct InvoiceView: View {
                 
             VStack(spacing: 10) {
                 HStack {
-                    Text(invoice)
+                    Text(item.invoiceNumber ?? "")
                     Spacer()
-                    Text("$\(String(format: "%g", amount))/$\(String(format: "%g", secoundAmount))")
+                    Text("$\(String(format: "%g", item.totalAmount))/$\(String(format: "%g", item.totalDiscount ?? 0))")
                 }
                 .fontWeight(.bold)
                 
@@ -35,7 +40,7 @@ struct InvoiceView: View {
                 HStack {
                     Text("Company")
                     Spacer()
-                    Text(companyName)
+                    Text(item.companyAccount?.name ?? "")
                         .fontWeight(.bold)
                 }
                 
@@ -47,7 +52,7 @@ struct InvoiceView: View {
                 HStack {
                     Text("Date")
                     Spacer()
-                    Text(date)
+                    Text(item.fromToDate)
                 }
             }
             .foregroundColor(.label)
@@ -59,6 +64,6 @@ struct InvoiceView: View {
     }
 }
 
-#Preview {
-    InvoiceView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
-}
+//#Preview {
+//    InvoiceView(invoice: "INV-37869", amount: 500.2, secoundAmount: 124, companyName: "JK CARGO INC", date: "12:00 10.11.2023")
+//}

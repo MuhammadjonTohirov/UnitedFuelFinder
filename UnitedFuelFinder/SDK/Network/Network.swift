@@ -48,7 +48,10 @@ struct Network {
                 for: request.request()
             )
             
-            
+            let path = request.request().url?.relativePath ?? ""
+            if path.contains("Config"){
+                print(request)
+            }
             let data = result.0
             let code = (result.1 as! HTTPURLResponse).statusCode
             let string = String(data: data, encoding: .utf8) ?? ""
@@ -83,9 +86,6 @@ struct Network {
                 await Network.sendToTgBot(statusCode:code, responseString: string, bodyJson: requestJson, url:request.url.absoluteString, header: headerString)
 
             }
-            //if statusCode != 200{
-            //                return nil
-            //          }
             return res
             
         } catch let error {

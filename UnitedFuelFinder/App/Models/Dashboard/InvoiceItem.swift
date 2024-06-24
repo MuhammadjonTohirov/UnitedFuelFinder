@@ -57,6 +57,16 @@ struct InvoiceItem: Identifiable {
         self.averageDiscountPerGallon = from.averageDiscountPerGallon
         self.discountEditedInfo = from.discountEditedInfo
     }
+    
+    public static func mockItems()->[InvoiceItem]{
+        let item = InvoiceItem(from: NetResInvoiceItem(id: 1, companyAccountId: 1, invoiceNumber: "234-MNO", isSentToEmail: true, startPeriod: "01.02.2022", endPeriod: "01.02.2024", totalDiscount: 5.3, totalFees: 3.4, totalAmount: 8.2, totalPaid: 7.9, remainingAmount: 8, additionalCharge: 9, bonus: 1, invoiceDate: "01.02.2022", dueDate: "01.02.2024", lastPaymentDate: "01.02.2024", lastPaymentNote: "Note", status: "success", notes: "notes", companyAccount: nil, totalDiscountedGallons: 2, averageDiscountPerGallon: 5, discountEditedInfo: "Test"))
+
+        let item2 = InvoiceItem(from: NetResInvoiceItem(id: 9, companyAccountId: 1, invoiceNumber: "1234 -NOC", isSentToEmail: true, startPeriod: "01.02.2020", endPeriod: "01.02.2022", totalDiscount: 5.3, totalFees: 3.4, totalAmount: 8.2, totalPaid: 7.9, remainingAmount: 8, additionalCharge: 9, bonus: 1, invoiceDate: "01.02.2020", dueDate: "01.02.2020", lastPaymentDate: "01.02.2024", lastPaymentNote: "Note2", status: "success", notes: "notes", companyAccount: nil, totalDiscountedGallons: 2, averageDiscountPerGallon: 5, discountEditedInfo: "Test"))
+
+        
+        return [item, item2]
+    }
+    
 }
 
 struct CompanyAccount {

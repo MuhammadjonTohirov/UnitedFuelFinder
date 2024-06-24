@@ -71,6 +71,9 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
     @Published var discountedStations: [StationItem] = []
     @Published var isLoading: Bool = false
     @Published var currentLocation: CLLocation?
+    
+    @Published var chartData:[(Double, Color)] = []
+    
     private var didAppear: Bool = false
     
     init(interactor: any DashboardInteractorProtocol = DashboardInteractor()) {

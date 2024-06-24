@@ -88,14 +88,6 @@ final class MainViewModel: ObservableObject {
         Logging.l("Access token: \(UserSettings.shared.accessToken ?? "-")")
     }
     
-    @available(*, deprecated, message: "Not used for now")
-    private func initLocalize() {
-        if UserSettings.shared.language?.code !=  (Locale.current.language.languageCode?.identifier ?? "en") {
-            UserSettings.shared.language = Language.language(Locale.current.language.languageCode?.identifier ?? "en")
-            language = UserSettings.shared.language!
-        }
-    }
-    
     func set(language: Language) {
         UserSettings.shared.language = language
         self.language = language

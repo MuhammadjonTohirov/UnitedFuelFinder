@@ -313,6 +313,10 @@
 		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
 		849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */; };
 		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
+		AD0403A92C123309009639D3 /* HomeContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0403A82C123309009639D3 /* HomeContainerView.swift */; };
+		AD1422D32C06541B00DB8124 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1422D22C06541B00DB8124 /* RecentView.swift */; };
+		AD4B17962C1B74630087D2B6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4B17952C1B74630087D2B6 /* HomeViewModel.swift */; };
+		ADE325322C0E4F7300B542A4 /* PieChartExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE325312C0E4F7300B542A4 /* PieChartExampleView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -635,6 +639,10 @@
 		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsView.swift; sourceTree = "<group>"; };
 		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
+		AD0403A82C123309009639D3 /* HomeContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContainerView.swift; sourceTree = "<group>"; };
+		AD1422D22C06541B00DB8124 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
+		AD4B17952C1B74630087D2B6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ADE325312C0E4F7300B542A4 /* PieChartExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -854,6 +862,7 @@
 		2E527A722ACC83A1005B8B95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AD0403A72C1232E2009639D3 /* HomeViews */,
 				8422A6662B7762B000017681 /* Dashboard */,
 				2E7739FD2B6AA4C1007A65BF /* TabView */,
 				2EF3A1FE2ADD91FF00CA8DE2 /* Settings */,
@@ -1766,6 +1775,7 @@
 		8422A6662B7762B000017681 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				ADE325312C0E4F7300B542A4 /* PieChartExampleView.swift */,
 				2EBF9DAD2B85225A00374613 /* AllInvoices */,
 				2EBF9DAA2B851F7000374613 /* AllTransactions */,
 				2E43DA022B7B8BE600716DB0 /* DashboardView.swift */,
@@ -1775,8 +1785,18 @@
 				8422A6962B782BD600017681 /* DiscountStationView.swift */,
 				8422A6982B784B6200017681 /* TransactionView.swift */,
 				8422A69A2B785AFB00017681 /* InvoiceView.swift */,
+				AD1422D22C06541B00DB8124 /* RecentView.swift */,
 			);
 			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		AD0403A72C1232E2009639D3 /* HomeViews */ = {
+			isa = PBXGroup;
+			children = (
+				AD0403A82C123309009639D3 /* HomeContainerView.swift */,
+				AD4B17952C1B74630087D2B6 /* HomeViewModel.swift */,
+			);
+			path = HomeViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1943,6 +1963,7 @@
 				2E5DF97D2AEACD64005BE20D /* YKeychainWrapper.swift in Sources */,
 				2E0F93CA2B012BCC00660DEB /* StationCommentItemView.swift in Sources */,
 				2E5DF9602AEACD63005BE20D /* UMap.swift in Sources */,
+				AD0403A92C123309009639D3 /* HomeContainerView.swift in Sources */,
 				2E5DF9402AEACD63005BE20D /* TextFieldProtocol.swift in Sources */,
 				2E5DF92F2AEACD63005BE20D /* Combine+.swift in Sources */,
 				2E454F2B2BA0C93E00998EC6 /* DStationItem.swift in Sources */,
@@ -2036,6 +2057,7 @@
 				2E5DF9882AEACD64005BE20D /* URL+Extensions.swift in Sources */,
 				2EA5C22B2B833DE500DFB989 /* NetResTotalSpending.swift in Sources */,
 				2E723B112BA5B2CC007DFE49 /* GMapsViewWrapper+Coordinator.swift in Sources */,
+				ADE325322C0E4F7300B542A4 /* PieChartExampleView.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
 				8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */,
 				2E5DF95C2AEACD63005BE20D /* MapPin.swift in Sources */,
@@ -2093,6 +2115,7 @@
 				2EA5C2362B836B5A00DFB989 /* PopularStations.swift in Sources */,
 				2ED38FEA2BBC73C0008400CF /* ForgotPasswordView.swift in Sources */,
 				2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */,
+				AD1422D32C06541B00DB8124 /* RecentView.swift in Sources */,
 				2ED38FEC2BBC7716008400CF /* NetReqForgotPassword.swift in Sources */,
 				2E5DF9842AEACD64005BE20D /* NSMutableData+Extensions.swift in Sources */,
 				2E243DB32AE16D83008C3E8C /* HomeBottomSheetInput.swift in Sources */,
@@ -2135,6 +2158,7 @@
 				2ED9FB0D2B7E7BD100EEDDFB /* NetResTransactions.swift in Sources */,
 				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
 				2E5DF9812AEACD64005BE20D /* Array+Extensions.swift in Sources */,
+				AD4B17962C1B74630087D2B6 /* HomeViewModel.swift in Sources */,
 				2E5DF9342AEACD63005BE20D /* Color+Extension.swift in Sources */,
 				2E0F93D02B0131FC00660DEB /* StationDetailsViewModel.swift in Sources */,
 				2E1E920B2B77EC3A00AF1D7C /* MainTabViewModel.swift in Sources */,

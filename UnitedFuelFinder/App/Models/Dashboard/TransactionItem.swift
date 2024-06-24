@@ -83,4 +83,30 @@ struct TransactionItem: Identifiable {
         self.hash = hash
         self.fileName = fileName
     }
+    
+    public var totalSumString: String  {
+        return String.init(format: "$%.2f", amount ?? 0)
+    }
+    public var savedAmountString: String  {
+        return "@saved".localize(arguments: String(format: "$%.2f", discAmount ?? 0))
+    }
+    public var quantityString:String{
+        return String(format: "%g", quantity ?? 0)
+    }
+    public  var pricePerUnitString:String{
+        return String(format: "%g", discPpu ?? 0)
+    }
+    public var transactionDateString:String{
+        let date = transactionDate
+        let dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
+        return Date.from(string: date, format: dateFormat)?.toString(format: "dd/MM/yyyy") ?? "-"
+    }
+    
+    public static func mockItems()->[TransactionItem]{
+        let item = TransactionItem(from: NetResTransactions(id: 892, cardNumber: "010982934012041", transactionDate: "", invoiceNumber: "", unit: "", driverName: "", odometer: 1, locationName: "", city: "", state: "", fees: 1, item: "", unitPrice: 1, discPpu: 1, discCost: 1, quantity: 1, discAmount: 1, discType: "", amount: 1, db: "", currency: "", hash: "", fileName: ""))
+        let item2 = TransactionItem(from: NetResTransactions(id: 892, cardNumber: "010982934012345", transactionDate: "", invoiceNumber: "", unit: "", driverName: "", odometer: 1, locationName: "", city: "", state: "", fees: 1, item: "", unitPrice: 1, discPpu: 1, discCost: 1, quantity: 1, discAmount: 1, discType: "", amount: 1, db: "", currency: "", hash: "", fileName: ""))
+        
+        return [item, item2]
+    }
+    
 }
