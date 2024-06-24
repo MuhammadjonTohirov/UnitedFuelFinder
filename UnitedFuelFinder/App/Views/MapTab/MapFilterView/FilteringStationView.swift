@@ -22,23 +22,31 @@ struct FilteringStationView: View {
                 ZStack {
                     RoundedRectangle(cornerRadius: 6)
                         .foregroundStyle(
-                            isSelected ? .appCardBackground : .clear
+                            isSelected ? .appCardBackground : .appBackground
                         )
                         .border(.appDarkGray2, width: 1, cornerRadius: 6)
                         .padding(.bottom, 8)
                         .readRect(rect: $bigRect)
                         .overlay(content: {content})
                     
-                    RoundedRectangle(cornerRadius: 1)
+                    RoundedRectangle(cornerRadius: 3)
                         .frame(width: 13, height: 13)
-                        .foregroundStyle(isSelected ? .appCardBackground : .clear)
+                        .foregroundStyle(
+                            .appUnselectedCardBackground
+                        )
                         .border(
-                            .appDarkGray2, width: 1.3, cornerRadius: 1
+                            .appDarkGray2, width: 1.3, cornerRadius: 3
                         )
                         .overlay {
                             Image("icon_check")
                                 .resizable()
-                                .frame(width: 10, height: 10, alignment: .center)
+                                .renderingMode(.template)
+                                .frame(
+                                    width: 10,
+                                    height: 10,
+                                    alignment: .center
+                                )
+                                .foregroundStyle(.appCardBackground)
                                 .opacity(isSelected ? 1 : 0)
                         }
                         .position(.init(x: bigRect.width / 2, y: bigRect.height - 8))
@@ -67,6 +75,5 @@ struct FilteringStationView: View {
 }
 
 #Preview {
-    FilteringStationView(logo: "", title: "TA/Petro", isSelected: false)
-        
+    FilteringStationView(logo: "", title: "TA/Petro", isSelected: true)
 }

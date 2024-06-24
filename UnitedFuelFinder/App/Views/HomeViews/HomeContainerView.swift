@@ -14,9 +14,6 @@ struct HomeContainerView: View {
     @ObservedObject var viewModel: DashboardViewModel
     
     init(viewModel: DashboardViewModel) {
-        viewModel.chartData = [
-            (2.0, Color.yellow),
-            (6.0, Color.green)]
         self.viewModel = viewModel
         
     }

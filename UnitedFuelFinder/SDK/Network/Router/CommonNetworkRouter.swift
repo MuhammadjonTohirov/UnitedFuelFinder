@@ -44,7 +44,7 @@ enum CommonNetworkRouter: URLRequestProtocol {
         case .findRoute:
             return URL.baseAPI.appendingPath("Driver", "DrawRoutes")
         case .findMultipleRoute:
-            return URL.init(string: "http://15.235.212.129:50000/api/Driver/DrawMultipleRoutes")!
+            return URL.baseExtra.appendingPath("api", "Driver", "DrawMultipleRoutes")
         }
     }
     

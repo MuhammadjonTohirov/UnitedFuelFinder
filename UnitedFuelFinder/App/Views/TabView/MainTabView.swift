@@ -188,7 +188,6 @@ struct MainTabView: View {
     
     private var tabView: some View {
         TabView(selection: $viewModel.selectedTag) {
-            DashboardView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
             HomeContainerView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
                 .environmentObject(mainViewModel)
                 .tabItem {
