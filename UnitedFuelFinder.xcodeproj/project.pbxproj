@@ -255,6 +255,8 @@
 		2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AED052B8E3B3E00701590 /* Network+Google.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91A8352B8643B10045D8FE /* MapTabListView.swift */; };
+		2E962D592C29EF3E00F61E11 /* StationDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E962D582C29EF3E00F61E11 /* StationDService.swift */; };
+		2E962D5D2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E962D5C2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift */; };
 		2EA5C22B2B833DE500DFB989 /* NetResTotalSpending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */; };
 		2EA5C22D2B833E9E00DFB989 /* TotalSpendings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA5C22C2B833E9E00DFB989 /* TotalSpendings.swift */; };
 		2EA5C2302B83592500DFB989 /* SwiftfulLoadingIndicators in Frameworks */ = {isa = PBXBuildFile; productRef = 2EA5C22F2B83592500DFB989 /* SwiftfulLoadingIndicators */; };
@@ -595,6 +597,8 @@
 		2E8AED052B8E3B3E00701590 /* Network+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Google.swift"; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2E91A8352B8643B10045D8FE /* MapTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabListView.swift; sourceTree = "<group>"; };
+		2E962D582C29EF3E00F61E11 /* StationDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDService.swift; sourceTree = "<group>"; };
+		2E962D5C2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabInteractor+Fetch.swift"; sourceTree = "<group>"; };
 		2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResTotalSpending.swift; sourceTree = "<group>"; };
 		2EA5C22C2B833E9E00DFB989 /* TotalSpendings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalSpendings.swift; sourceTree = "<group>"; };
 		2EA5C2312B83657F00DFB989 /* NetResCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResCard.swift; sourceTree = "<group>"; };
@@ -782,6 +786,7 @@
 				2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */,
 				2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */,
 				2E78EA292C1B8865003F8DDA /* MapTabUtils.swift */,
+				2E962D5C2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift */,
 			);
 			path = HomeViewModel;
 			sourceTree = "<group>";
@@ -1237,6 +1242,7 @@
 			isa = PBXGroup;
 			children = (
 				2E5DF8F42AEACD63005BE20D /* MainDService.swift */,
+				2E962D582C29EF3E00F61E11 /* StationDService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -2003,6 +2009,7 @@
 				2E502D072B272CBA002CE669 /* SettingsSecurity.swift in Sources */,
 				2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */,
 				2E2420752B8323EF003DE3E5 /* InvoiceItem.swift in Sources */,
+				2E962D5D2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift in Sources */,
 				846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */,
 				2E5DF9522AEACD63005BE20D /* MapMultiPolyline.swift in Sources */,
 				84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */,
@@ -2232,6 +2239,7 @@
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
 				2E5DF9712AEACD64005BE20D /* Network.swift in Sources */,
+				2E962D592C29EF3E00F61E11 /* StationDService.swift in Sources */,
 				2E2420692B82AB80003DE3E5 /* TransactionItem.swift in Sources */,
 				2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */,
 				2E028A302BA7AED100A7DB89 /* Icon.swift in Sources */,

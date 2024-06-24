@@ -19,9 +19,11 @@ extension MainService {
             return DStationItem.create(resStation)
         } ?? []
         
-        try? await Task.sleep(for: .milliseconds(100))
-        DStationItem.deleteAll()
-        try? await Task.sleep(for: .milliseconds(100))
-        DStationItem.insertAll(stations)
+//        try? await Task.sleep(for: .milliseconds(100))
+//        DStationItem.deleteAll()
+        await StationDService.shared.deleteAll()
+//        try? await Task.sleep(for: .milliseconds(100))
+        await StationDService.shared.addStations(stations)
+//        DStationItem.insertAll(stations)
     }
 }
