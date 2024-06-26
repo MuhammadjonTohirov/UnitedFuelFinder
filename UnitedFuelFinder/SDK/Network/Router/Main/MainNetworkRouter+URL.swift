@@ -17,7 +17,7 @@ extension MainNetworkRouter {
         case .filterStations2:
             return URL.baseAPI.appendingPath("Driver", "FilterStationsV2")
         case .filterStations3:
-            return URL.baseExtra.appendingPath("api", "Driver", "MultipleStationsFilter")
+            return URL.baseAPI.appendingPath("Driver", "MultipleStationsFilter")
         case .feedbacksFor(let stationId):
             return URL.baseAPI.appendingPath("Driver", "StationFeedbacks", stationId)
         case .postFeedback(let stationId, _):

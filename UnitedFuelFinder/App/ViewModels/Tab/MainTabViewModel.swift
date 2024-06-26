@@ -14,7 +14,7 @@ struct MapTabDetail {
 }
 
 class MainTabViewModel: ObservableObject {
-    @Published var selectedTag: MainTabs = .map
+    @Published var selectedTag: MainTabs = .settings
     
     let dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
     let mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()

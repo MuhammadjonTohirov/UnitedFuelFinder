@@ -12,12 +12,16 @@ struct DarkAuthBody: View {
     @EnvironmentObject var viewModel: AuthorizationViewModel
     @State var showAlert: Bool = false
     
+    var userType: String {
+        (UserSettings.shared.userType == .driver ? "driver" : "company").localize
+    }
+    
     var body: some View {
         ZStack {
             VStack {
                 headerImage
                     .overlay {
-                        Text("driver".localize)
+                        Text(userType)
                             .font(.system(size: 48, weight: .bold, design: .rounded))
                     }
                     .ignoresSafeArea()
