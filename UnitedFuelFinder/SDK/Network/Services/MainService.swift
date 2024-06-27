@@ -35,6 +35,7 @@ actor MainService {
         let result: NetRes<[NetResCustomerItem]>? = await Network.send(request: MainNetworkRouter.getCustomers)
         let customers = ((result?.data)?.map({CustomerItem.create(from: $0)})) ?? []
         await MainDService.shared.removeAllCustomers()
+        try? await Task.sleep(for: .microseconds(200))
         await MainDService.shared.addCustomers(customers)
         ShortStorage.default.customers = result?.data
         return customers

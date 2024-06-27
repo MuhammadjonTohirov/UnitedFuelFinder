@@ -67,7 +67,7 @@ enum AppDestination: Hashable, ScreenRoute {
         case .pin:
             PinCodeView(viewModel: .init(title: "setup_pin".localize, reason: .login))
         case .auth:
-            AuthView()
+            PreloginView()
         case .main:
             MapTabView(viewModel: .init())
         case .test:

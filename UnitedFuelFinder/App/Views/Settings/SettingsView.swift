@@ -12,9 +12,24 @@ struct SettingsView: View {
     @StateObject var viewModel: SettingsViewModel = SettingsViewModel()
     @State private var showLogoutAlert: Bool = false
     @EnvironmentObject var mainModel: MainViewModel
+   
+    private var userFullName: String {
+        UserSettings.shared.userInfo?.fullName ?? "profile".localize.capitalized
+    }
+    
+    private var userType: UserType {
+        UserSettings.shared.userType ?? .driver
+    }
     
     var body: some View {
         innerBody
+            .background(content: {
+                VStack {
+                    Spacer()
+                    Image("image_placeholder")
+                        .padding(.bottom, Padding.large * 2)
+                }
+            })
             .toolbar(content: {
                 ToolbarItem(placement: .principal) {
                     Text("settings".localize)
@@ -30,50 +45,69 @@ struct SettingsView: View {
     
     var innerBody: some View {
         VStack(spacing: 12) {
-            SettingsViewUtils.row(image: userAvatar, title: UserSettings.shared.userInfo?.fullName ?? "profile".localize.capitalized
-            ) {
-                viewModel.navigate(to: .profile)
-            }
+            profileRow
             
             Divider()
             
-            SettingsViewUtils.row(image: Image("icon_appearance")
-                .resizable()
-                .renderingMode(.template)
-                .fixedSize()
-                .foregroundStyle(Color.label)
-                .frame(width: 24, height: 24),
-                                  title: "appearance".localize
+            SettingsViewUtils.row(
+                image: Image("icon_appearance")
+                    .resizable()
+                    .renderingMode(.template)
+                    .fixedSize()
+                    .foregroundStyle(Color.label)
+                    .frame(width: 24, height: 24),
+                title: "appearance".localize,
+                descr: "lang.theme".localize
             ) {
                 viewModel.navigate(to: .appearance)
             }
             
             Divider()
             
-            SettingsViewUtils.row(image: Image(systemName: "lock")
-                .resizable()
-                .renderingMode(.template)
-                .fixedSize()
-                .foregroundStyle(Color.label)
-                .frame(width: 24, height: 24),
-                                  title: "security".localize
+            SettingsViewUtils.row(
+                image: Image(systemName: "lock")
+                    .resizable()
+                    .renderingMode(.template)
+                    .fixedSize()
+                    .foregroundStyle(Color.label)
+                    .frame(width: 24, height: 24),
+                title: "security".localize,
+                descr: "change.pin.devcsess.pass".localize
             ) {
                 viewModel.navigate(to: .security)
             }
             
             Divider()
             
-            SettingsViewUtils.row(image: Image("icon_feedback")
-                .resizable()
-                .renderingMode(.template)
-                .foregroundStyle(Color.label)
-                .frame(width: 24, height: 24),
-                                  title: "contact_us".localize
+            SettingsViewUtils.row(
+                image: Image("icon_feedback")
+                    .resizable()
+                    .renderingMode(.template)
+                    .foregroundStyle(Color.label)
+                    .frame(width: 24, height: 24),
+                title: "contact_us".localize,
+                descr: "email.help.service".localize
             ) {
                 viewModel.navigate(to: .contactUs)
             }
             
             Divider()
+            
+            if userType == .company {
+                SettingsViewUtils.row(
+                    image: Image("icon_driver")
+                        .resizable()
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.label)
+                        .frame(width: 24, height: 24),
+                    title: "driver.manager".localize,
+                    descr: "driver.set".localize
+                ) {
+                    viewModel.navigate(to: .contactUs)
+                }
+                
+                Divider()
+            }
             
             SettingsViewUtils.row(image: Image("icon_logout")
                 .renderingMode(.template)
@@ -138,19 +172,34 @@ struct SettingsView: View {
         KF(
             imageUrl: UserSettings.shared.userAvatarURL,
             cacheKey: (UserSettings.shared.photoUpdateDate ?? Date()).toString(),
-            storageExpiration: .expired,
-            memoryExpiration: .expired,
-            placeholder: Image(uiImage: UIImage(named: "icon_man_placeholder")!)
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .frame(width: 24.f.sw(), height: 24.f.sw(), alignment: .center)
-                .clipShape(Circle())
+            storageExpiration: .seconds(10),
+            memoryExpiration: .seconds(10),
+            placeholder: Circle()
+                .foregroundStyle(.gray.opacity(0.3))
+                .frame(width: 72.f.sw(), height: 72.f.sw(), alignment: .center)
+                .overlay(content: {
+                    ProgressView()
+                })
                 .anyView
         )
-        .frame(width: 24.f.sw(), height: 24.f.sw())
+        .frame(width: 72.f.sw(), height: 72.f.sw())
         .background {
             Circle()
                 .foregroundColor(Color(uiColor: .secondarySystemBackground))
+        }
+    }
+    
+    private var profileRow: some View {
+        HStack(spacing: 12) {
+            userAvatar
+
+            VStack(alignment: .leading, spacing: 7.f.sh()) {
+                Text(userFullName)
+                    .font(.bold(size: 20))
+                Text("edit.delete".localize)
+                    .font(.regular(size: 12))
+            }
+            Spacer()
         }
     }
     
@@ -171,8 +220,9 @@ struct SettingsView: View {
 
 
 #Preview {
-    NavigationView(content: {
+    UserSettings.shared.setupForTest()
+    return NavigationStack {
         SettingsView()
             .environmentObject(MainViewModel())
-    })
+    }
 }

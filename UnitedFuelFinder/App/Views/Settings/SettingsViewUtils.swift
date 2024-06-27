@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SettingsViewUtils {
-    static func row<IMG: View>(image: IMG, title: String, details: String = "", onClick: @escaping () -> Void) -> some View {
+    static func row<IMG: View>(image: IMG, title: String, details: String = "", descr: String = "", onClick: @escaping () -> Void) -> some View {
         Button {
             onClick()
         } label: {
@@ -22,9 +22,17 @@ struct SettingsViewUtils {
                     }
                     .padding(.trailing, 8)
                 
-                Text(title)
-                    .font(.system(size: 12, weight: .medium))
-                    .foregroundStyle(Color.label)
+                VStack(alignment: .leading) {
+                    Text(title)
+                        .font(.system(size: 14, weight: .medium))
+                        .foregroundStyle(Color.label)
+                    
+                    if !descr.isEmpty {
+                        Text(descr)
+                            .font(.system(size: 12, weight: .regular))
+                            .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                    }
+                }
 
                 Spacer()
                 

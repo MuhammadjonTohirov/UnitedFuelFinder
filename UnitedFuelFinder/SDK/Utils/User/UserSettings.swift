@@ -22,6 +22,7 @@ final public class UserSettings {
     public static let testEmail: String = "tokhirov.mukhammadjon@gmail.com"
     
     func setupForTest(){
+        UserSettings.shared.userType = .company
         UserSettings.shared.accessToken = UserSettings.testAccessToken
         UserSettings.shared.refreshToken = UserSettings.testRefreshToken
         UserSettings.shared.userEmail = UserSettings.testEmail
@@ -73,7 +74,7 @@ final public class UserSettings {
     @codableWrapper(key: "currentAPIVersion")
     public var currentAPIVersion: ServerVersion?
     
-    @codableWrapper(key: "userType")
+    @codableWrapper(key: "userType", .driver)
     public var userType: UserType?
     
     @codableWrapper(key: "appPin")
@@ -99,7 +100,7 @@ final public class UserSettings {
     public var theme: Theme?
     
     func clear() {
-        userType = nil
+        userType = .driver
         accessToken = nil
         refreshToken = nil
         tokenExpireDate = nil

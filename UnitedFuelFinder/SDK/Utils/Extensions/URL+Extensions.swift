@@ -11,13 +11,16 @@ import UniformTypeIdentifiers
 public extension URL {
     
     static var base: URL {
-//        Pro: http://15.235.212.129:5000/
-//        Dev: "http://178.33.123.109:5000"
-        .init(string: "http://15.235.212.129:5000/")!
+        let environmentVariable = ProcessInfo.processInfo.environment["mode"]
+        return environmentVariable == "dev" ? .dev : .prod
     }
     
-    static var baseExtra: URL {
+    static var dev: URL {
         .init(string: "http://15.235.212.129:50000/")!
+    }
+    
+    static var prod: URL {
+        .init(string: "http://15.235.212.129:5000/")!
     }
     
     static var baseAPI: URL {

@@ -102,6 +102,8 @@
 		2E527A772ACC83C0005B8B95 /* SelectLanguageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E527A762ACC83C0005B8B95 /* SelectLanguageView.swift */; };
 		2E527A792ACC83DB005B8B95 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E527A782ACC83DB005B8B95 /* AuthView.swift */; };
 		2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */; };
+		2E53131E2C2C11BA00CB31E3 /* PreloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53131D2C2C11BA00CB31E3 /* PreloginView.swift */; };
+		2E5313202C2C172500CB31E3 /* PreloginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53131F2C2C172500CB31E3 /* PreloginViewModel.swift */; };
 		2E5DF9212AEACD63005BE20D /* ScrollableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8922AEACD63005BE20D /* ScrollableModifier.swift */; };
 		2E5DF9222AEACD63005BE20D /* CloseKeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8932AEACD63005BE20D /* CloseKeyboardModifier.swift */; };
 		2E5DF9232AEACD63005BE20D /* RectModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8942AEACD63005BE20D /* RectModifer.swift */; };
@@ -248,13 +250,14 @@
 		2E89DD2A2BF4A45000CC7EBF /* CleanAuthBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD292BF4A45000CC7EBF /* CleanAuthBody.swift */; };
 		2E89DD2C2BF4A4BC00CC7EBF /* DarkAuthBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD2B2BF4A4BC00CC7EBF /* DarkAuthBody.swift */; };
 		2E89DD2F2BF4B9EC00CC7EBF /* AppleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD2E2BF4B9EC00CC7EBF /* AppleButton.swift */; };
-		2E89DD322BF4C39200CC7EBF /* IntroView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD312BF4C39200CC7EBF /* IntroView.swift */; };
 		2E89DD352BF5318D00CC7EBF /* UserType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E89DD342BF5318D00CC7EBF /* UserType.swift */; };
 		2E8A49DE2C0CFA4D00169F5B /* MapTabViewModel+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */; };
 		2E8A49E02C0CFA7700169F5B /* MapDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */; };
 		2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AED052B8E3B3E00701590 /* Network+Google.swift */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91A8352B8643B10045D8FE /* MapTabListView.swift */; };
+		2E962D592C29EF3E00F61E11 /* StationDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E962D582C29EF3E00F61E11 /* StationDService.swift */; };
+		2E962D5D2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E962D5C2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift */; };
 		2EA5C22B2B833DE500DFB989 /* NetResTotalSpending.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */; };
 		2EA5C22D2B833E9E00DFB989 /* TotalSpendings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA5C22C2B833E9E00DFB989 /* TotalSpendings.swift */; };
 		2EA5C2302B83592500DFB989 /* SwiftfulLoadingIndicators in Frameworks */ = {isa = PBXBuildFile; productRef = 2EA5C22F2B83592500DFB989 /* SwiftfulLoadingIndicators */; };
@@ -450,6 +453,8 @@
 		2E527A762ACC83C0005B8B95 /* SelectLanguageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectLanguageView.swift; sourceTree = "<group>"; };
 		2E527A782ACC83DB005B8B95 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
 		2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterProfileView.swift; sourceTree = "<group>"; };
+		2E53131D2C2C11BA00CB31E3 /* PreloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloginView.swift; sourceTree = "<group>"; };
+		2E53131F2C2C172500CB31E3 /* PreloginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloginViewModel.swift; sourceTree = "<group>"; };
 		2E5DF8922AEACD63005BE20D /* ScrollableModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableModifier.swift; sourceTree = "<group>"; };
 		2E5DF8932AEACD63005BE20D /* CloseKeyboardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseKeyboardModifier.swift; sourceTree = "<group>"; };
 		2E5DF8942AEACD63005BE20D /* RectModifer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectModifer.swift; sourceTree = "<group>"; };
@@ -591,13 +596,14 @@
 		2E89DD292BF4A45000CC7EBF /* CleanAuthBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanAuthBody.swift; sourceTree = "<group>"; };
 		2E89DD2B2BF4A4BC00CC7EBF /* DarkAuthBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkAuthBody.swift; sourceTree = "<group>"; };
 		2E89DD2E2BF4B9EC00CC7EBF /* AppleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleButton.swift; sourceTree = "<group>"; };
-		2E89DD312BF4C39200CC7EBF /* IntroView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntroView.swift; sourceTree = "<group>"; };
 		2E89DD342BF5318D00CC7EBF /* UserType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserType.swift; sourceTree = "<group>"; };
 		2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+Map.swift"; sourceTree = "<group>"; };
 		2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDestination.swift; sourceTree = "<group>"; };
 		2E8AED052B8E3B3E00701590 /* Network+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Google.swift"; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2E91A8352B8643B10045D8FE /* MapTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabListView.swift; sourceTree = "<group>"; };
+		2E962D582C29EF3E00F61E11 /* StationDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDService.swift; sourceTree = "<group>"; };
+		2E962D5C2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabInteractor+Fetch.swift"; sourceTree = "<group>"; };
 		2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResTotalSpending.swift; sourceTree = "<group>"; };
 		2EA5C22C2B833E9E00DFB989 /* TotalSpendings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalSpendings.swift; sourceTree = "<group>"; };
 		2EA5C2312B83657F00DFB989 /* NetResCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResCard.swift; sourceTree = "<group>"; };
@@ -788,6 +794,7 @@
 				2E870A1F2B86E2D600C37675 /* Array+StationItem+Extension.swift */,
 				2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */,
 				2E78EA292C1B8865003F8DDA /* MapTabUtils.swift */,
+				2E962D5C2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift */,
 			);
 			path = HomeViewModel;
 			sourceTree = "<group>";
@@ -949,6 +956,7 @@
 				2E527A762ACC83C0005B8B95 /* SelectLanguageView.swift */,
 				2EDF8C452AD2DD58003D64FC /* LoadingView.swift */,
 				2ED9A31F2B164E1D009ADCE9 /* Launch Screen.storyboard */,
+				2E53131D2C2C11BA00CB31E3 /* PreloginView.swift */,
 			);
 			path = Intro;
 			sourceTree = "<group>";
@@ -1244,6 +1252,7 @@
 			isa = PBXGroup;
 			children = (
 				2E5DF8F42AEACD63005BE20D /* MainDService.swift */,
+				2E962D582C29EF3E00F61E11 /* StationDService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1488,12 +1497,12 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		2E89DD302BF4C38900CC7EBF /* Intro */ = {
+		2E89DD302BF4C38900CC7EBF /* Prelogin */ = {
 			isa = PBXGroup;
 			children = (
-				2E89DD312BF4C39200CC7EBF /* IntroView.swift */,
+				2E53131F2C2C172500CB31E3 /* PreloginViewModel.swift */,
 			);
-			path = Intro;
+			path = Prelogin;
 			sourceTree = "<group>";
 		};
 		2E89DD332BF5317E00CC7EBF /* User */ = {
@@ -1691,7 +1700,7 @@
 		2EDF8C6D2AD443F4003D64FC /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				2E89DD302BF4C38900CC7EBF /* Intro */,
+				2E89DD302BF4C38900CC7EBF /* Prelogin */,
 				2EDF8C912AD466C9003D64FC /* Authorization */,
 				2EDF8C782AD445BB003D64FC /* OTP */,
 				2EDF8C6E2AD443F8003D64FC /* Pin */,
@@ -2016,11 +2025,13 @@
 				2E5DF9782AEACD64005BE20D /* CommonService.swift in Sources */,
 				2E5DF93D2AEACD63005BE20D /* RadioButton.swift in Sources */,
 				2E7BC70F2AF40527003A1CE5 /* SelectCompanyView.swift in Sources */,
+				2E53131E2C2C11BA00CB31E3 /* PreloginView.swift in Sources */,
 				2E5DF93F2AEACD63005BE20D /* ActivityIndicatorView.swift in Sources */,
 				2E5DF9582AEACD63005BE20D /* MKMapAnnotationView.swift in Sources */,
 				2E502D072B272CBA002CE669 /* SettingsSecurity.swift in Sources */,
 				2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */,
 				2E2420752B8323EF003DE3E5 /* InvoiceItem.swift in Sources */,
+				2E962D5D2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift in Sources */,
 				846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */,
 				2E5DF9522AEACD63005BE20D /* MapMultiPolyline.swift in Sources */,
 				84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */,
@@ -2211,6 +2222,7 @@
 				2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */,
 				2E5DF94E2AEACD63005BE20D /* MapMultiPolygon.swift in Sources */,
 				2E48ECBE2B945393002B369C /* NetResDrawRoute.swift in Sources */,
+				2E5313202C2C172500CB31E3 /* PreloginViewModel.swift in Sources */,
 				2E5DF97A2AEACD64005BE20D /* AuthNetworkRouter.swift in Sources */,
 				2EB76B1C2B13B1B90055610A /* CustomerItem.swift in Sources */,
 				2E345AA22C16D0D400CE6287 /* DestinationsViewModel.swift in Sources */,
@@ -2252,6 +2264,7 @@
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
 				2E5DF9712AEACD64005BE20D /* Network.swift in Sources */,
+				2E962D592C29EF3E00F61E11 /* StationDService.swift in Sources */,
 				2E2420692B82AB80003DE3E5 /* TransactionItem.swift in Sources */,
 				2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */,
 				2E028A302BA7AED100A7DB89 /* Icon.swift in Sources */,
@@ -2263,7 +2276,6 @@
 				2EB189FD2AEFF81800BCFBE3 /* GasStationItemView.swift in Sources */,
 				2EB81D892C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift in Sources */,
 				2E7BC70D2AF3F0FD003A1CE5 /* NetResCompany.swift in Sources */,
-				2E89DD322BF4C39200CC7EBF /* IntroView.swift in Sources */,
 				2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */,
 				2E5DF9662AEACD63005BE20D /* MapPitchControl.swift in Sources */,
 				2E5DF9332AEACD63005BE20D /* Padding.swift in Sources */,
@@ -2409,7 +2421,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -2452,7 +2464,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

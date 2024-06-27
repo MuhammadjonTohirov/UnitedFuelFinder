@@ -112,6 +112,12 @@ struct MapFilterView: View {
                 }
                 .padding(.horizontal, Padding.default)
                 .padding(.bottom, Padding.default)
+                .background {
+                    Rectangle()
+                        .padding(.top, -Padding.small)
+                        .foregroundStyle(Color.background)
+                        .ignoresSafeArea()
+                }
             }
         }
         .keyboardDismissable()
