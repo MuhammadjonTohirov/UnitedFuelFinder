@@ -328,9 +328,12 @@
 		846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846A291C2AFAB355008A8E0B /* CommentsView.swift */; };
 		849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */; };
 		84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */; };
+		AD00D44B2C2B426C005ECA12 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD00D44A2C2B426C005ECA12 /* CardView.swift */; };
 		AD0403A92C123309009639D3 /* HomeContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0403A82C123309009639D3 /* HomeContainerView.swift */; };
 		AD1422D32C06541B00DB8124 /* RecentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD1422D22C06541B00DB8124 /* RecentView.swift */; };
 		AD4B17962C1B74630087D2B6 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4B17952C1B74630087D2B6 /* HomeViewModel.swift */; };
+		ADB98FC22C2C95AA00821BB9 /* CardsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB98FC12C2C95AA00821BB9 /* CardsViewModel.swift */; };
+		ADB98FC42C2C960300821BB9 /* CardsContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB98FC32C2C960300821BB9 /* CardsContainerView.swift */; };
 		ADE325322C0E4F7300B542A4 /* PieChartExampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADE325312C0E4F7300B542A4 /* PieChartExampleView.swift */; };
 /* End PBXBuildFile section */
 
@@ -669,9 +672,12 @@
 		846A291C2AFAB355008A8E0B /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		849A7D7B2B7A9EEB00FC9A4B /* AllTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllTransactionsView.swift; sourceTree = "<group>"; };
 		84D39D3C2AFA33C800F8EFFC /* StationDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsView.swift; sourceTree = "<group>"; };
+		AD00D44A2C2B426C005ECA12 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		AD0403A82C123309009639D3 /* HomeContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeContainerView.swift; sourceTree = "<group>"; };
 		AD1422D22C06541B00DB8124 /* RecentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentView.swift; sourceTree = "<group>"; };
 		AD4B17952C1B74630087D2B6 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		ADB98FC12C2C95AA00821BB9 /* CardsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsViewModel.swift; sourceTree = "<group>"; };
+		ADB98FC32C2C960300821BB9 /* CardsContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardsContainerView.swift; sourceTree = "<group>"; };
 		ADE325312C0E4F7300B542A4 /* PieChartExampleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PieChartExampleView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -914,6 +920,7 @@
 		2E527A722ACC83A1005B8B95 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AD00D4492C2B425B005ECA12 /* Cards */,
 				AD0403A72C1232E2009639D3 /* HomeViews */,
 				8422A6662B7762B000017681 /* Dashboard */,
 				2E7739FD2B6AA4C1007A65BF /* TabView */,
@@ -1867,6 +1874,16 @@
 			path = Dashboard;
 			sourceTree = "<group>";
 		};
+		AD00D4492C2B425B005ECA12 /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				AD00D44A2C2B426C005ECA12 /* CardView.swift */,
+				ADB98FC12C2C95AA00821BB9 /* CardsViewModel.swift */,
+				ADB98FC32C2C960300821BB9 /* CardsContainerView.swift */,
+			);
+			path = Cards;
+			sourceTree = "<group>";
+		};
 		AD0403A72C1232E2009639D3 /* HomeViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -1984,6 +2001,7 @@
 				2E5DF97E2AEACD64005BE20D /* Language.swift in Sources */,
 				2E5DF9642AEACD63005BE20D /* MapScale.swift in Sources */,
 				2EDF8C442AD2DCB8003D64FC /* MainViewModel.swift in Sources */,
+				AD00D44B2C2B426C005ECA12 /* CardView.swift in Sources */,
 				2E60E6942B5EACEC009E1CE5 /* RichAlertView.swift in Sources */,
 				2E5DF9592AEACD63005BE20D /* MapMarker.swift in Sources */,
 				2E870A202B86E2D600C37675 /* Array+StationItem+Extension.swift in Sources */,
@@ -2074,6 +2092,7 @@
 				2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */,
 				2E5DF96F2AEACD64005BE20D /* NetResVerifyAccount.swift in Sources */,
 				2E5DF94D2AEACD63005BE20D /* MapPolyline.swift in Sources */,
+				ADB98FC22C2C95AA00821BB9 /* CardsViewModel.swift in Sources */,
 				2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */,
 				2E5DF9502AEACD63005BE20D /* MapOverlay.swift in Sources */,
 				2E5DF92E2AEACD63005BE20D /* Variadic.swift in Sources */,
@@ -2119,6 +2138,7 @@
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
 				2ED38FF32BBD18E4008400CF /* ShortStorage.swift in Sources */,
 				2E5DF9732AEACD64005BE20D /* NetReqVerifyAccount.swift in Sources */,
+				ADB98FC42C2C960300821BB9 /* CardsContainerView.swift in Sources */,
 				2E5DF98B2AEACD64005BE20D /* CGFloat+Extension.swift in Sources */,
 				2E5DF92B2AEACD63005BE20D /* PreviewHelpers.swift in Sources */,
 				2E5DF9472AEACD63005BE20D /* MapCameraZoomRange.swift in Sources */,
