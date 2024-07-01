@@ -17,6 +17,7 @@ struct RectModifer: ViewModifier {
             .background(
                 GeometryReader { proxy in
                     Color.clear
+                        .preference(key: RectPreferenceKey.self, value: proxy.frame(in: .global))
                         .onAppear {
                             if rect == .zero {
                                 rect = proxy.frame(in: .global)
@@ -25,13 +26,7 @@ struct RectModifer: ViewModifier {
                 }
             )
             .onPreferenceChange(RectPreferenceKey.self) { preferences in
-                if rect == .zero {
-                    Logging.l(
-                        tag: "RectModifier",
-                        "On change preferneces \(preferences)"
-                    )
-                    rect = preferences
-                }
+                rect = preferences
             }
     }
 }

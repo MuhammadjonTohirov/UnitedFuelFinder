@@ -14,7 +14,7 @@ struct MapTabDetail {
 }
 
 class MainTabViewModel: ObservableObject {
-    @Published var selectedTag: MainTabs = .settings
+    @Published var selectedTag: MainTabs = .dashboard
     
     let dashboardViewModel: any DashboardViewModelProtocol = DashboardViewModel()
     let mapViewModel: any MapTabViewModelProtocl = MapTabViewModel()
@@ -30,6 +30,7 @@ class MainTabViewModel: ObservableObject {
     
     private var lastLocationUpdate: Date = .now.before(days: 1)
     private var didAppear: Bool = false
+    
     func onAppear() {
         if didAppear {
             return
@@ -39,17 +40,9 @@ class MainTabViewModel: ObservableObject {
 
         setupLocation()
         
-        isLoading = true
-        
         didAppear = true
         
-        Task.detached(priority: .high) { [weak self] in
-            await MainService.shared.syncAllStations()
-            
-            await MainActor.run { [weak self] in
-                self?.isLoading = false
-            }
-        }
+        loadDataIfNeeded()
     }
    
     private func setupLocation() {
@@ -157,6 +150,30 @@ class MainTabViewModel: ObservableObject {
 //                checkActualVersion()
 //            }
 //        }
+    }
+    
+    private func loadDataIfNeeded() {
+        isLoading = true
+        
+        Task.detached(priority: .high) { [weak self] in
+            guard let self else {
+                return
+            }
+            
+            if UserSettings.shared.userInfo == nil {
+                await AuthService.shared.syncUserInfo()
+            }
+            
+            if DStationItem.all?.isEmpty ?? false {
+                await AuthService.shared.syncUserInfo()
+                await MainService.shared.syncCustomers()
+                await MainService.shared.syncAllStations()
+            }
+            
+            await MainActor.run {
+                self.isLoading = false
+            }
+        }
     }
 }
 

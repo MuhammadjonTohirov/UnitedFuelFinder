@@ -45,7 +45,9 @@ struct SettingsView: View {
     
     var innerBody: some View {
         VStack(spacing: 12) {
-            profileRow
+            profileRow.onTapGesture {
+                self.viewModel.route = .profile
+            }
             
             Divider()
             

@@ -22,6 +22,9 @@ struct PreloginView: View {
                 ) {
                     AuthView()
                 }
+                .onAppear {
+                    UserSettings.shared.userType = .driver
+                }
         }
     }
     
@@ -41,7 +44,7 @@ struct PreloginView: View {
                     Spacer()
                     HStack(spacing: 32) {
                         largeRadioButton(
-                            title: "Driver",
+                            title: "driver".localize.capitalized,
                             selected: selectedType == 0
                         ).onTapGesture {
                             selectedType = 0
@@ -49,7 +52,7 @@ struct PreloginView: View {
                         }
                         
                         largeRadioButton(
-                            title: "Company",
+                            title: "company".localize.capitalized,
                             selected: selectedType == 1
                         ).onTapGesture {
                             selectedType = 1
