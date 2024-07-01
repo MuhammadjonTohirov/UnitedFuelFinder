@@ -106,7 +106,7 @@ class PinCodeViewModel: ObservableObject {
         switch reason {
         case .login:
             Task {
-                await appDelegate?.navigate(to: .mainTab)
+                await appDelegate?.navigate(to: .loading)
             }
         case .setup:
             route = .confirmWith(code: pin, completion: { [weak self] isOK in

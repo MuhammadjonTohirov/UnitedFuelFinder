@@ -97,16 +97,8 @@ struct MainTabView: View {
                         self.didAppear = true
                     }
                 }
-            }
-            .overlay {
-                if viewModel.isLoading {
-                    Rectangle()
-                        .foregroundStyle(.appBackground.opacity(0.5))
-                } else {
-                    EmptyView()
-                        .opacity(0)
-                }
-            }
+                .coveredLoading(isLoading: $viewModel.isLoading)
+        }
     }
     
     @ViewBuilder

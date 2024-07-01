@@ -15,14 +15,8 @@ enum AuthNetworkErrorReason: Error {
     
     var localizedDescription: String {
         switch self {
-            //        case .notConfirmedByAdmin:
-            //            return "not_confirmed_by_admin".localize
-            //        case .userAlreadyExists:
-            //            return "user_already_exists".localize
-            //        case .unknown:
-            //            return "Unknown error".localize
         case .unknown:
-            return "unknown_address".localize
+            return "unknown_error".localize
             
         case .custom(let message):
             return message

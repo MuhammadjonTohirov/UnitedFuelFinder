@@ -25,7 +25,8 @@ struct VerticalValueAdjuster: View {
     var onEnd: ((_ value: Double, _ percentage: Double) -> Void)
     
     private var calculatedBarHeight: CGFloat {
-        rect.height * (currentValue / maxValue)
+        debugPrint(rect)
+        return rect.height * (currentValue / maxValue)
     }
     
     var body: some View {

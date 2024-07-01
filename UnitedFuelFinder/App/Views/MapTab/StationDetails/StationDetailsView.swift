@@ -150,8 +150,7 @@ struct StationDetailsView: View {
             }
             .padding(.leading)
             StationDetailsWarning()
-                .frame(maxWidth: .infinity)
-
+                .padding(.horizontal, Padding.default)
             [
                 row(
                     title: "distance".localize,

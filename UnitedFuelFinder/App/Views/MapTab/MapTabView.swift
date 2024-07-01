@@ -16,7 +16,7 @@ struct MapTabView: View {
     @ObservedObject var viewModel: MapTabViewModel
     @EnvironmentObject var mainModel: MainViewModel
     @EnvironmentObject var tabModel: MainTabViewModel
-    
+    @State private var areaRadius: CGFloat = UserSettings.shared.maxRadius.f
     init(viewModel: MapTabViewModel) {
         self.viewModel = viewModel
     }
@@ -52,6 +52,7 @@ struct MapTabView: View {
                 })
                 .navigationBarTitleDisplayMode(.inline)
                 .onAppear {
+                    areaRadius = UserSettings.shared.maxRadius.f
                     viewModel.onAppear()
                 }
                 .onChange(of: tabModel.mapBodyState, perform: { value in
@@ -207,6 +208,17 @@ struct MapTabView: View {
             .frame(height: pointerHeight)
             .offset(.init(width: 0, height: -(115 / 2) - bottomSafeArea))
             .opacity(viewModel.state != HomeViewState.routing ? 1 : 0)
+        }
+        .overlay {
+            VerticalValueAdjuster(
+                maxValue: UserSettings.shared.maxRadius.f,
+                currentValue: $areaRadius
+            ) { value, percentage in
+                viewModel.filter?.radius = Int(value)
+                viewModel.startFilterStations()
+            }
+            .vertical(alignment: .top)
+            .horizontal(alignment: .leading)
         }
     }
     
