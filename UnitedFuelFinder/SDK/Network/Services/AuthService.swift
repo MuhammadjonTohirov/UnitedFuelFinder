@@ -50,12 +50,13 @@ public struct AuthService {
         return (nil, "Unknown error".localize)
     }
     
-    func login(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
+    func login(username: String, password: String, role: String) async -> (Bool, AuthNetworkErrorReason?) {
         guard let result: NetRes<NetResLogin> = await Network.send(
             request: UserNetworkRouter.login(
                 request: .init(
                     email: username,
-                    password: password
+                    password: password,
+                    role: role
                 )
             ),
             refreshTokenIfNeeded: false
@@ -78,8 +79,18 @@ public struct AuthService {
         UserSettings.shared.refreshTokenExpireDate = .init(timeIntervalSinceNow: data.refreshExpiresIn)
         UserSettings.shared.userEmail = username
         
+        await syncUserInfo()
+        
         let isOK = result.data != nil
         return (isOK, isOK ? nil : .custom(result.error ?? "Unknown error"))
+    }
+    
+    func driverLogin(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
+        await login(username: username, password: password, role: "driver")
+    }
+    
+    func companyLogin(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
+        await login(username: username, password: password, role: "company")
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {

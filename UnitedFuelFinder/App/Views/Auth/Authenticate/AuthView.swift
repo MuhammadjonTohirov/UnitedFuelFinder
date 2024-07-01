@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct AuthView: View {
-    @StateObject var viewModel: AuthorizationViewModel = .init()
+    @ObservedObject var viewModel: AuthorizationViewModel = .init()
     @State var showAlert: Bool = false
     
     var body: some View {
@@ -17,25 +17,22 @@ struct AuthView: View {
     }
     
     private var mainBody: some View {
-        NavigationStack {
-            DarkAuthBody()
-                .environmentObject(viewModel)
-                .keyboardDismissable()
-                .alert("warning".localize,
-                       isPresented: $viewModel.shouldShowAlert,
-                       actions: {
-                    Button("ok".localize.uppercased()) {
-                        viewModel.hideAlert()
-                    }
-                }, message: {
-                    Text(viewModel.alert.title ?? "")
-                })
-                .navigationDestination(isPresented: $viewModel.present) {
-                    viewModel.route?.screen
-                        .background(.appBackground)
+        DarkAuthBody()
+            .environmentObject(viewModel)
+            .keyboardDismissable()
+            .alert("warning".localize,
+                   isPresented: $viewModel.shouldShowAlert,
+                   actions: {
+                Button("ok".localize.uppercased()) {
+                    viewModel.hideAlert()
                 }
-        }
-        .ignoresSafeArea(.keyboard, edges: .all)
+            }, message: {
+                Text(viewModel.alert.title ?? "")
+            })
+            .navigationDestination(isPresented: $viewModel.present) {
+                viewModel.route?.screen
+                    .background(.appBackground)
+            }
     }
     
     @ViewBuilder
@@ -84,5 +81,7 @@ struct AuthView: View {
 
 #Preview {
     UserSettings.shared.language = .english
-    return AuthView()
+    return NavigationStack {
+        AuthView()
+    }
 }

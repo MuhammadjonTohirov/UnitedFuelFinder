@@ -25,9 +25,11 @@ class CardItem:Identifiable{
 }
 struct CardView: View {
     var cardItem: CardItem
+    
     init(cardItem: CardItem) {
         self.cardItem = cardItem
     }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
             

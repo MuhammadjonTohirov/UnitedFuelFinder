@@ -14,6 +14,10 @@
 		2E01E5DF2B53908100F6231D /* NetResDelete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5DE2B53908100F6231D /* NetResDelete.swift */; };
 		2E01E5E12B53918C00F6231D /* NetReqDeleteConfirm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */; };
 		2E028A302BA7AED100A7DB89 /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E028A2F2BA7AED100A7DB89 /* Icon.swift */; };
+		2E073F692C2FF7C100E79476 /* NetReqSaveDriverSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E073F682C2FF7C100E79476 /* NetReqSaveDriverSettings.swift */; };
+		2E073F6B2C30007100E79476 /* NetResDriverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E073F6A2C30007100E79476 /* NetResDriverCard.swift */; };
+		2E073F6D2C3000B500E79476 /* DriverCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E073F6C2C3000B500E79476 /* DriverCard.swift */; };
+		2E073F6F2C31C45300E79476 /* DynamicSheetModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E073F6E2C31C45300E79476 /* DynamicSheetModifier.swift */; };
 		2E0E4DCB2AD9157400E846B6 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0E4DCA2AD9157400E846B6 /* Accelerate.framework */; };
 		2E0E4DCD2AD9157F00E846B6 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0E4DCC2AD9157F00E846B6 /* CoreData.framework */; };
 		2E0E4DCF2AD9158600E846B6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E0E4DCE2AD9158600E846B6 /* CoreGraphics.framework */; };
@@ -40,6 +44,10 @@
 		2E0FBEFD2B1307C400A39EBA /* MapTabViewModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */; };
 		2E13A3692BFE519D00A33606 /* FilteringStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E13A3682BFE519D00A33606 /* FilteringStationView.swift */; };
 		2E13A36B2BFE5A8200A33606 /* StationDetailsWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */; };
+		2E1B2DEB2C2DE03D00412B55 /* ManageDrivers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1B2DEA2C2DE03D00412B55 /* ManageDrivers.swift */; };
+		2E1B2DED2C2DE19900412B55 /* CompanyNetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1B2DEC2C2DE19900412B55 /* CompanyNetworkRouter.swift */; };
+		2E1B2DF02C2DE8DD00412B55 /* CompnayService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1B2DEF2C2DE8DD00412B55 /* CompnayService.swift */; };
+		2E1B2DF42C2E174300412B55 /* DriverProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1B2DF32C2E174300412B55 /* DriverProperties.swift */; };
 		2E1E92052B77B8C300AF1D7C /* MapTabToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E92042B77B8C300AF1D7C /* MapTabToggleView.swift */; };
 		2E1E92082B77D9CF00AF1D7C /* MapFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */; };
 		2E1E920B2B77EC3A00AF1D7C /* MainTabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1E920A2B77EC3A00AF1D7C /* MainTabViewModel.swift */; };
@@ -364,6 +372,10 @@
 		2E01E5DE2B53908100F6231D /* NetResDelete.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResDelete.swift; sourceTree = "<group>"; };
 		2E01E5E02B53918C00F6231D /* NetReqDeleteConfirm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqDeleteConfirm.swift; sourceTree = "<group>"; };
 		2E028A2F2BA7AED100A7DB89 /* Icon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
+		2E073F682C2FF7C100E79476 /* NetReqSaveDriverSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqSaveDriverSettings.swift; sourceTree = "<group>"; };
+		2E073F6A2C30007100E79476 /* NetResDriverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResDriverCard.swift; sourceTree = "<group>"; };
+		2E073F6C2C3000B500E79476 /* DriverCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverCard.swift; sourceTree = "<group>"; };
+		2E073F6E2C31C45300E79476 /* DynamicSheetModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicSheetModifier.swift; sourceTree = "<group>"; };
 		2E0E4DCA2AD9157400E846B6 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		2E0E4DCC2AD9157F00E846B6 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		2E0E4DCE2AD9158600E846B6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -391,6 +403,11 @@
 		2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+Extensions.swift"; sourceTree = "<group>"; };
 		2E13A3682BFE519D00A33606 /* FilteringStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringStationView.swift; sourceTree = "<group>"; };
 		2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsWarning.swift; sourceTree = "<group>"; };
+		2E1B2DEA2C2DE03D00412B55 /* ManageDrivers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageDrivers.swift; sourceTree = "<group>"; };
+		2E1B2DEC2C2DE19900412B55 /* CompanyNetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyNetworkRouter.swift; sourceTree = "<group>"; };
+		2E1B2DEE2C2DE52C00412B55 /* UnitedFuelFinder.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = UnitedFuelFinder.entitlements; sourceTree = "<group>"; };
+		2E1B2DEF2C2DE8DD00412B55 /* CompnayService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompnayService.swift; sourceTree = "<group>"; };
+		2E1B2DF32C2E174300412B55 /* DriverProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverProperties.swift; sourceTree = "<group>"; };
 		2E1E92042B77B8C300AF1D7C /* MapTabToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabToggleView.swift; sourceTree = "<group>"; };
 		2E1E92072B77D9CF00AF1D7C /* MapFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapFilterView.swift; sourceTree = "<group>"; };
 		2E1E920A2B77EC3A00AF1D7C /* MainTabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabViewModel.swift; sourceTree = "<group>"; };
@@ -799,6 +816,15 @@
 			path = HomeViewModel;
 			sourceTree = "<group>";
 		};
+		2E1B2DE92C2DE03600412B55 /* ManageDriver */ = {
+			isa = PBXGroup;
+			children = (
+				2E1B2DEA2C2DE03D00412B55 /* ManageDrivers.swift */,
+				2E1B2DF32C2E174300412B55 /* DriverProperties.swift */,
+			);
+			path = ManageDriver;
+			sourceTree = "<group>";
+		};
 		2E1E92062B77D9BC00AF1D7C /* MapFilterView */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,6 +931,7 @@
 		2E527A3F2ACC80C6005B8B95 /* UnitedFuelFinder */ = {
 			isa = PBXGroup;
 			children = (
+				2E1B2DEE2C2DE52C00412B55 /* UnitedFuelFinder.entitlements */,
 				2E5DF8902AEACD63005BE20D /* AppUIKit */,
 				2E5DF8ED2AEACD63005BE20D /* SDK */,
 				2EDF8C3F2AD2D84C003D64FC /* App */,
@@ -985,6 +1012,7 @@
 				2E5DF8952AEACD63005BE20D /* RoundedTextFieldStyle.swift */,
 				2E5DF8962AEACD63005BE20D /* TopLeftDismissModifier.swift */,
 				2EC47CA02B7F151E007A14CB /* CoverNavigationBarModifier.swift */,
+				2E073F6E2C31C45300E79476 /* DynamicSheetModifier.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -1296,6 +1324,7 @@
 				2E48ECBD2B945393002B369C /* NetResDrawRoute.swift */,
 				2E29670C2C1852DF002050FC /* NetResDrawMultipleRoute.swift */,
 				2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */,
+				2E073F6A2C30007100E79476 /* NetResDriverCard.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1314,6 +1343,7 @@
 				2ED38FEB2BBC7716008400CF /* NetReqForgotPassword.swift */,
 				2ED38FED2BBC7751008400CF /* NetReqChangePassword.swift */,
 				2E29670A2C1852B7002050FC /* NetReqDrawMultipleRoute.swift */,
+				2E073F682C2FF7C100E79476 /* NetReqSaveDriverSettings.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1336,6 +1366,7 @@
 				2E454F2C2BA0CC0B00998EC6 /* MainService+Filter.swift */,
 				2E454F2E2BA0CC4200998EC6 /* MainService+Station+Details.swift */,
 				2E454F372BA0CCF100998EC6 /* MainService+Stations.swift */,
+				2E1B2DEF2C2DE8DD00412B55 /* CompnayService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1346,6 +1377,7 @@
 				2E454F362BA0CCBA00998EC6 /* Main */,
 				2E5DF9072AEACD63005BE20D /* CommonNetworkRouter.swift */,
 				2E5DF9082AEACD63005BE20D /* AuthNetworkRouter.swift */,
+				2E1B2DEC2C2DE19900412B55 /* CompanyNetworkRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1404,6 +1436,7 @@
 				2ED9B7562B11F3A800150F0D /* AuditLog.swift */,
 				2EB76B1B2B13B1B90055610A /* CustomerItem.swift */,
 				2E00707D2B7D527900A39E6D /* MultipartForm.swift */,
+				2E073F6C2C3000B500E79476 /* DriverCard.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1844,6 +1877,7 @@
 		2EF3A1FE2ADD91FF00CA8DE2 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				2E1B2DE92C2DE03600412B55 /* ManageDriver */,
 				2ED38FEF2BBC7D9B008400CF /* Security */,
 				2E01E5DB2B52FAA700F6231D /* Profile */,
 				2E739C202B3DB1CA000350EA /* Appearance */,
@@ -2005,6 +2039,7 @@
 				2E5DF9252AEACD63005BE20D /* TopLeftDismissModifier.swift in Sources */,
 				2E2420732B832271003DE3E5 /* NetResInvoiceItem.swift in Sources */,
 				2E13A3692BFE519D00A33606 /* FilteringStationView.swift in Sources */,
+				2E073F6B2C30007100E79476 /* NetResDriverCard.swift in Sources */,
 				2E5DF9292AEACD63005BE20D /* MultiPicker.swift in Sources */,
 				2EA5C2322B83657F00DFB989 /* NetResCard.swift in Sources */,
 				2E5DF97E2AEACD64005BE20D /* Language.swift in Sources */,
@@ -2030,8 +2065,10 @@
 				2E5DF9582AEACD63005BE20D /* MKMapAnnotationView.swift in Sources */,
 				2E502D072B272CBA002CE669 /* SettingsSecurity.swift in Sources */,
 				2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */,
+				2E073F6D2C3000B500E79476 /* DriverCard.swift in Sources */,
 				2E2420752B8323EF003DE3E5 /* InvoiceItem.swift in Sources */,
 				2E962D5D2C29F6F000F61E11 /* MapTabInteractor+Fetch.swift in Sources */,
+				2E1B2DEB2C2DE03D00412B55 /* ManageDrivers.swift in Sources */,
 				846A291D2AFAB355008A8E0B /* CommentsView.swift in Sources */,
 				2E5DF9522AEACD63005BE20D /* MapMultiPolyline.swift in Sources */,
 				84D39D3D2AFA33C800F8EFFC /* StationDetailsView.swift in Sources */,
@@ -2066,6 +2103,7 @@
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
 				2E00707C2B7D268700A39E6D /* DonutChart.swift in Sources */,
 				8422A69B2B785AFB00017681 /* InvoiceView.swift in Sources */,
+				2E073F692C2FF7C100E79476 /* NetReqSaveDriverSettings.swift in Sources */,
 				2E29670B2C1852B7002050FC /* NetReqDrawMultipleRoute.swift in Sources */,
 				2EDBE0392B0F35B800123CE0 /* SessionItem.swift in Sources */,
 				2E89DD1B2BF4709D00CC7EBF /* TrimbleViewController.swift in Sources */,
@@ -2130,6 +2168,7 @@
 				2E5DF9542AEACD63005BE20D /* NativeHostingController.swift in Sources */,
 				2E5DF9762AEACD64005BE20D /* NetResProtocol.swift in Sources */,
 				2E5DF98E2AEACD64005BE20D /* AddressObjects.swift in Sources */,
+				2E1B2DF02C2DE8DD00412B55 /* CompnayService.swift in Sources */,
 				2E5DF9722AEACD64005BE20D /* NetReqRegister.swift in Sources */,
 				2E5DF9572AEACD63005BE20D /* MapRegistry.swift in Sources */,
 				2EF3A2002ADD920500CA8DE2 /* SettingsView.swift in Sources */,
@@ -2190,6 +2229,7 @@
 				2E5DF9802AEACD64005BE20D /* DatabaseConfig.swift in Sources */,
 				2E454F352BA0CCB300998EC6 /* MainNetworkRouter+Method+Request.swift in Sources */,
 				2EDF8C462AD2DD58003D64FC /* LoadingView.swift in Sources */,
+				2E073F6F2C31C45300E79476 /* DynamicSheetModifier.swift in Sources */,
 				2E502D0B2B2750D0002CE669 /* SettingsViewModel.swift in Sources */,
 				2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */,
 				2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */,
@@ -2209,6 +2249,7 @@
 				8422A6952B781B5400017681 /* PopularStationsView.swift in Sources */,
 				2E5DF9612AEACD63005BE20D /* Map+Watch.swift in Sources */,
 				2E454F312BA0CC7A00998EC6 /* MainNetworkRouter+URL.swift in Sources */,
+				2E1B2DF42C2E174300412B55 /* DriverProperties.swift in Sources */,
 				2E5DF94B2AEACD63005BE20D /* MapCameraBoundary.swift in Sources */,
 				2EDF8C412AD2D865003D64FC /* AppDestination.swift in Sources */,
 				2E5DF97F2AEACD64005BE20D /* Logging.swift in Sources */,
@@ -2231,6 +2272,7 @@
 				2E243DB02AE163EE008C3E8C /* PointButton.swift in Sources */,
 				2E7D8DAE2AFADE980074AB7E /* NetReqEditProfile.swift in Sources */,
 				2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */,
+				2E1B2DED2C2DE19900412B55 /* CompanyNetworkRouter.swift in Sources */,
 				2E5DF9452AEACD63005BE20D /* AlertToast.swift in Sources */,
 				2E7266EC2AFD193B008099D0 /* RateView.swift in Sources */,
 				2EA5C2362B836B5A00DFB989 /* PopularStations.swift in Sources */,
@@ -2419,6 +2461,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;
@@ -2462,6 +2505,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 5;

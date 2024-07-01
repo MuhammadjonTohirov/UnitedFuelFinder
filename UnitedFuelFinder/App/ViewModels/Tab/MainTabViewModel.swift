@@ -44,7 +44,6 @@ class MainTabViewModel: ObservableObject {
         didAppear = true
         
         Task.detached(priority: .high) { [weak self] in
-            await MainService.shared.syncCustomers()
             await MainService.shared.syncAllStations()
             
             await MainActor.run { [weak self] in
@@ -88,9 +87,10 @@ class MainTabViewModel: ObservableObject {
         
         self.lastLocationUpdate = Date()
         
-        Task {
-            await loadDiscountedStations(location)
-        }
+//        MARK: this no need to load discounted stations anymore
+//        Task {
+//            await loadDiscountedStations(location)
+//        }
     }
     
     func alertWarning() {

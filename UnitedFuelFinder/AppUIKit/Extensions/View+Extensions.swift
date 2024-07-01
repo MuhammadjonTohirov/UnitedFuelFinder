@@ -130,6 +130,7 @@ extension View {
             .overlay(
                 RoundedRectangle(cornerRadius: cornerRadius)
                     .stroke(color, lineWidth: width)
+                    .padding(1)
             )
     }
     

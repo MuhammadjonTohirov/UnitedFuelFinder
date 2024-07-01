@@ -90,8 +90,28 @@
         }
       }
     },
-    "6 hours ego" : {
-
+    "account.cards" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Account cards"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Карты счета"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hisob raqamlari"
+          }
+        }
+      }
     },
     "address" : {
       "extractionState" : "manual",
@@ -142,6 +162,29 @@
     "Alert" : {
 
     },
+    "all" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barchasi"
+          }
+        }
+      }
+    },
     "All comments" : {
       "localizations" : {
         "ru" : {
@@ -177,6 +220,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barcha shaxobchalar"
+          }
+        }
+      }
+    },
+    "get.started" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get started"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало работы"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boshlash"
           }
         }
       }
@@ -437,9 +503,6 @@
     "Balance" : {
 
     },
-    "Blue" : {
-
-    },
     "camera" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -597,6 +660,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Parolni o'zgartirish"
+          }
+        }
+      }
+    },
+    "change.pin.devcsess.pass" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change PIN-code, Divice session, Change password"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Изменить ПИН-код, Сеанс устройства, Изменить пароль"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PIN kod, Device session, Parolni o'zgartirish"
           }
         }
       }
@@ -1387,6 +1473,29 @@
         }
       }
     },
+    "driver.set" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Driver settings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Настройки водителя"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haydovchi sozlamalari"
+          }
+        }
+      }
+    },
     "edit" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1433,6 +1542,29 @@
         }
       }
     },
+    "edit.delete" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit profile, Delete account"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Редактировать профиль, Удалить аккаунт"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Profilni tahrirlash, Istifodan chiqarish"
+          }
+        }
+      }
+    },
     "email" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1452,6 +1584,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Elektron pochta"
+          }
+        }
+      }
+    },
+    "email.help.service" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Client Service, Help Desk, Email"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Служба клиента, Помощь в поддержке, Электронная почта"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Xizmat, Yordam, Elektron manzil"
           }
         }
       }
@@ -1772,9 +1927,6 @@
         }
       }
     },
-    "Green" : {
-
-    },
     "help_desk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1797,9 +1949,6 @@
           }
         }
       }
-    },
-    "Indigo" : {
-
     },
     "information" : {
       "extractionState" : "manual",
@@ -1934,6 +2083,29 @@
     },
     "Key" : {
       "extractionState" : "manual"
+    },
+    "lang.theme" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language, Theme"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Язык, Тема"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Til, Tema"
+          }
+        }
+      }
     },
     "language" : {
       "extractionState" : "manual",
@@ -2349,6 +2521,29 @@
         }
       }
     },
+    "manage.drivers" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Manage drivers"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Управление водителями"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vodiylarni boshqarish"
+          }
+        }
+      }
+    },
     "map" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2723,6 +2918,29 @@
         }
       }
     },
+    "no.cards.selected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No cards selected"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ничего не выбрано"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hech nima tanlanmagan"
+          }
+        }
+      }
+    },
     "no.invoices" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2914,9 +3132,6 @@
 
     },
     "Only One" : {
-
-    },
-    "Orange" : {
 
     },
     "organization_reqs" : {
@@ -3358,9 +3573,6 @@
           }
         }
       }
-    },
-    "Red" : {
-
     },
     "region" : {
       "extractionState" : "manual",
@@ -3919,6 +4131,52 @@
     "Show" : {
 
     },
+    "shown_discount_prices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show discount prices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать скидочные цены"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chegirmalarni ko’rsatish"
+          }
+        }
+      }
+    },
+    "shown_discounted_prices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show discounted prices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать скидочные цены"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chegirmalarni ko’rsatish"
+          }
+        }
+      }
+    },
     "Sign in with Apple" : {
 
     },
@@ -4256,6 +4514,29 @@
         }
       }
     },
+    "view_invoices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Invoices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Счета"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fakturalar"
+          }
+        }
+      }
+    },
     "view_larger" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4275,6 +4556,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Ko'roq"
+          }
+        }
+      }
+    },
+    "view_transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transactions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Транзакции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Transaksiyalar"
           }
         }
       }
@@ -4301,9 +4605,6 @@
           }
         }
       }
-    },
-    "Violet" : {
-
     },
     "warning" : {
       "extractionState" : "manual",
@@ -4396,9 +4697,6 @@
           }
         }
       }
-    },
-    "Yellow" : {
-
     },
     "Русский" : {
 

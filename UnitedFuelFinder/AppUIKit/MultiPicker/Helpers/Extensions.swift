@@ -52,6 +52,9 @@ extension Font{
     public static func semibold(size:CGFloat)->Font?{
         return Font.system(size: size, weight: .semibold)
     }
+    public static func medium(size:CGFloat)->Font?{
+        return Font.system(size: size, weight: .medium)
+    }
     public static func bold(size:CGFloat)->Font?{
         return Font.system(size: size, weight: .bold)
     }

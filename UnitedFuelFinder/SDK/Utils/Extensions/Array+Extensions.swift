@@ -68,3 +68,13 @@ extension Array where Element: View {
         }
     }
 }
+
+extension Array where Element == AnyView {
+    func vstack(alignment: HorizontalAlignment = .center, spacing: CGFloat = 4) -> some View {
+        VStack(alignment: alignment, spacing: spacing) {
+            ForEach(self.indices, id: \.self) { index in
+                self[index]
+            }
+        }
+    }
+}

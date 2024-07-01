@@ -27,6 +27,7 @@ struct Network {
         do {
             Logging.l("--- --- REQUEST --- ---")
             Logging.l(request.url.absoluteString)
+            Logging.l(request.request().allHTTPHeaderFields ?? [:])
             
             if refreshTokenIfNeeded {
                 if (UserSettings.shared.tokenExpireDate?.timeIntervalSinceNow ?? 0) < 3600 {

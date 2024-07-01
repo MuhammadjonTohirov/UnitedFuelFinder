@@ -41,8 +41,8 @@ struct DarkAuthBody: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 form
-                    .scrollable(axis: .vertical)
-                    .scrollBounceBehavior(.basedOnSize)
+//                    .scrollable(axis: .vertical)
+//                    .scrollBounceBehavior(.basedOnSize)
                     .frame(height: 152)
                     .ignoresSafeArea(.keyboard, edges: .bottom)
                     .padding(.bottom, Padding.large.sh())
@@ -56,7 +56,8 @@ struct DarkAuthBody: View {
                 .set(isEnabled: viewModel.isValidForm)
                 .padding(.horizontal, Padding.default.sh())
                 .padding(.bottom, Padding.medium.sh())
-                
+                .ignoresSafeArea(.keyboard, edges: .all)
+
                 SubmitButton(action: {
                     viewModel.onClickRegister()
                 }, label: {

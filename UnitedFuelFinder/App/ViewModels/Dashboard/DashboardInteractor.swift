@@ -36,8 +36,9 @@ class DashboardInteractor: DashboardInteractorProtocol {
     }
     
     func loadCustomers() async {
-        _ = await MainService.shared.syncCustomers()
+        // TODO: should remove this
     }
+    
     func getVersion() async{
 //        if let serverVersion = await CommonService.shared.getVersion() {
 //            UserSettings.shared.currentAPIVersion = serverVersion

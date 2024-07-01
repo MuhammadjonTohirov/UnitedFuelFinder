@@ -17,8 +17,8 @@ extension MapTabInteractor {
             searchDispatchWork?.cancel()
             
             searchDispatchWork = .init(block: {
-                
                 var filteredStations = DStationItem.all?.filter
+                
                 { station in
                     let distance = location.distance(from: CLLocation(latitude: station.lat, longitude: station.lng)).f.asMile
                     return Int(distance) < filter.radius && filter.selectedStations.contains(station.customerId)

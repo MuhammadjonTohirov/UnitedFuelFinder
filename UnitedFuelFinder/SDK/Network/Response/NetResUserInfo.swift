@@ -9,14 +9,14 @@ import Foundation
 
 struct NetResUserInfo: NetResBody {
     let id: String?
-    let fullName: String
+    let fullName: String?
     
     let firstName: String?
     let lastName: String?
     
-    let email: String
-    let phone: String
-    let cardNumber: String
+    let email: String?
+    let phone: String?
+    let cardNumber: String?
     let companyId: Int?
     let companyName: String?
     let address: String?
@@ -32,6 +32,9 @@ struct NetResUserInfo: NetResBody {
     let driverUnit: String?
     let accountId: Int?
     let accountName: String?
-    
+    let efsAccountId: Int?
+    let efsAccountName: String?
+    var includeStations: [String]?
+    var roleCode: String?
 }
 
