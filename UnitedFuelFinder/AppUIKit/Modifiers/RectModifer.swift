@@ -17,10 +17,6 @@ struct RectModifer: ViewModifier {
             .background(
                 GeometryReader { proxy in
                     Color.clear
-//                        .preference(
-//                            key: SizePreferenceKey.self,
-//                            value: proxy.frame(in: .global)
-//                        )
                         .onAppear {
                             if rect == .zero {
                                 rect = proxy.frame(in: .global)
@@ -28,7 +24,7 @@ struct RectModifer: ViewModifier {
                         }
                 }
             )
-            .onPreferenceChange(SizePreferenceKey.self) { preferences in
+            .onPreferenceChange(RectPreferenceKey.self) { preferences in
                 if rect == .zero {
                     Logging.l(
                         tag: "RectModifier",
@@ -42,7 +38,7 @@ struct RectModifer: ViewModifier {
 
 //SizePreferenceKey
 
-struct SizePreferenceKey: PreferenceKey {
+struct RectPreferenceKey: PreferenceKey {
     typealias Value = CGRect
     
     static var defaultValue: Value = .zero
@@ -58,3 +54,30 @@ public extension View {
     }
 }
 
+struct SizePreferenceKey: PreferenceKey {
+    typealias Value = CGSize
+
+    static var defaultValue: CGSize = .zero
+
+    static func reduce(value: inout CGSize, nextValue: () -> CGSize) {
+        value = nextValue()
+    }
+}
+
+struct SizeModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content
+            .background(
+                GeometryReader { geometry in
+                    Color.clear.preference(key: SizePreferenceKey.self, value: geometry.size)
+                }
+            )
+    }
+}
+
+extension View {
+    func onSizeChange(_ onChange: @escaping (CGSize) -> Void) -> some View {
+        self.modifier(SizeModifier())
+            .onPreferenceChange(SizePreferenceKey.self, perform: onChange)
+    }
+}

@@ -50,7 +50,7 @@ struct VerticalValueAdjuster: View {
                 .transaction { transaction in
                     transaction.animation = .bouncy
                 }
-                .shadow(color: Color.black.opacity(0.4), radius: 4)
+                .shadow(color: Color.black.opacity(0.2), radius: 4)
             
             Text("\(Int(currentValue)) mi")
                 .position(.init(x: bodyRect.width / 2, y: -16))

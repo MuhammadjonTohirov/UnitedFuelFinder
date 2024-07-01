@@ -14,6 +14,10 @@ struct StationTipView: View {
     let onClickShow: (StationItem) -> Void
     let onClickNavigate: (StationItem) -> Void
     
+    var userInfo: UserInfo? {
+        UserSettings.shared.userInfo
+    }
+    
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -28,7 +32,7 @@ struct StationTipView: View {
                 Text("price_update".localize)
                     .font(.system(size: 13, weight: .regular))
                 Spacer()
-                Text("6 hours ego")
+                Text(station.priceUpdateInfo)
             }
             
             HStack {
@@ -38,6 +42,7 @@ struct StationTipView: View {
                 Text(station.actualPriceInfo)
             }
             .font(.system(size: 13, weight: .semibold))
+            .set(isVisible: userInfo?.showDiscountedPrices ?? true)
 
             HStack {
                 Text("discount".localize)
@@ -45,7 +50,8 @@ struct StationTipView: View {
                 Text(station.discountInfo)
             }
             .font(.system(size: 13, weight: .regular))
-
+            .set(isVisible: userInfo?.showDiscountPrices ?? true)
+            
             HStack {
                 Text("retail_price".localize)
                 Spacer()

@@ -14,13 +14,16 @@ struct StationDetailsView: View {
     @Environment (\.dismiss) var dismiss
     
     @StateObject var viewModel: StationDetailsViewModel = .init()
-    private var station: StationItem
     
-    init(station: StationItem){
+    @State private var commentsPresented: Bool = false
+    private var station: StationItem
+    init(station: StationItem) {
         self.station = station
     }
     
-    @State private var commentsPresented: Bool = false
+    private var userInfo: UserInfo? {
+        UserSettings.shared.userInfo
+    }
     
     var body: some View {
         ZStack {
@@ -30,7 +33,7 @@ struct StationDetailsView: View {
         }
         .background(.appBackground)
         .onAppear {
-            self.viewModel.station = station
+            viewModel.station = station
             viewModel.onAppear()
         }
         .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 1.5)
@@ -62,7 +65,9 @@ struct StationDetailsView: View {
     }
     private var navigateButton: some View {
         Button(action: {
-            self.openStation(station)
+            if let station = viewModel.station {
+                self.openStation(station)
+            }
         }, label: {
             Label(
                 title: {
@@ -152,27 +157,37 @@ struct StationDetailsView: View {
                     title: "distance".localize,
                     detail: Text(viewModel.station?.distanceFromCurrentLocationInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
-                ),
-                
+                ).anyView,
+
                 row(
                     title: "discounted_price".localize,
                     detail: Text(viewModel.station?.actualPriceInfo ?? "")
                         .font(.system(size: 12, weight: .bold))
                         .foregroundStyle(Color.init(uiColor: .systemGreen))
 
-                ),
+                )
+                .set(isVisible: userInfo?.showDiscountedPrices ?? false)
+                .anyView,
                 
                 row(
                     title: "discount".localize,
                     detail: Text(viewModel.station?.discountInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
-                ),
+                )
+                .set(isVisible: userInfo?.showDiscountPrices ?? false)
+                .anyView,
                 
                 row(
                     title: "retail_price".localize,
                     detail: Text(viewModel.station?.retailPriceInfo ?? "")
                         .font(.system(size: 12, weight: .medium))
-                ),
+                ).anyView,
+                
+                row(
+                    title: "price_update".localize,
+                    detail: Text(viewModel.station?.priceUpdateInfo ?? "")
+                        .font(.system(size: 12, weight: .medium))
+                ).anyView,
             ]
                 .vstack(spacing: Padding.small)
                 .padding(.horizontal, Padding.medium)

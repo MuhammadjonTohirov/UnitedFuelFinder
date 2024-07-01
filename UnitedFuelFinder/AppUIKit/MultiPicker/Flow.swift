@@ -102,26 +102,3 @@ struct ContainerSizeKey: PreferenceKey {
         value = nextValue()
     }
 }
-
-#if DEBUG
-struct SwiftUIView_Previews: PreviewProvider {
-    static var items = [
-        Model(title: String(localized: "Red"), color: .red),
-        Model(title: String(localized: "Orange"), color: .orange),
-        Model(title: String(localized: "Yellow"), color: .yellow),
-        Model(title: String(localized: "Green"), color: .green),
-        Model(title: String(localized: "Blue"), color: .blue),
-        Model(title: String(localized: "Indigo"), color: .indigo),
-        Model(title: String(localized: "Violet"), color: .purple),
-    ]
-    static var previews: some View {
-        ZStack {
-            Flow {
-                ForEach(Self.items) {
-                    ModelCell(model: $0)
-                }
-            }
-        }
-    }
-}
-#endif

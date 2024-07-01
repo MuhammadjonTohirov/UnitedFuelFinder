@@ -100,10 +100,10 @@ struct SettingsView: View {
                         .renderingMode(.template)
                         .foregroundStyle(Color.label)
                         .frame(width: 24, height: 24),
-                    title: "driver.manager".localize,
+                    title: "manage.drivers".localize,
                     descr: "driver.set".localize
                 ) {
-                    viewModel.navigate(to: .contactUs)
+                    viewModel.navigate(to: .manageDriver)
                 }
                 
                 Divider()
@@ -176,13 +176,21 @@ struct SettingsView: View {
             memoryExpiration: .seconds(10),
             placeholder: Circle()
                 .foregroundStyle(.gray.opacity(0.3))
-                .frame(width: 72.f.sw(), height: 72.f.sw(), alignment: .center)
-                .overlay(content: {
+                .frame(
+                    width: 72.f.sw(),
+                    height: 72.f.sw(),
+                    alignment: .center
+                )
+                .opacity(0.1)
+                .overlay {
                     ProgressView()
-                })
+                }
                 .anyView
         )
-        .frame(width: 72.f.sw(), height: 72.f.sw())
+        .frame(
+            width: 72.f.sw(),
+            height: 72.f.sw()
+        )
         .background {
             Circle()
                 .foregroundColor(Color(uiColor: .secondarySystemBackground))

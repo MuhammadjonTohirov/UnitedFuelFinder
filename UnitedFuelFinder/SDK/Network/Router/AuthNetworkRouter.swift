@@ -11,7 +11,7 @@ enum UserNetworkRouter: URLRequestProtocol {
     var url: URL {
         switch self {
         case .verifyAccount:
-            return URL.baseAPI.appendingPath("Account", "DriverVerify")
+            return URL.baseAPI.appendingPath("Account", "VerifyClient")
         case .login:
             return URL.baseAPI.appendingPath("Account", "ClientLogin")
         case .register:
@@ -19,7 +19,7 @@ enum UserNetworkRouter: URLRequestProtocol {
         case .refresh(let refreshToken):
             return URL.baseAPI.appendingPath("Account", "RefreshToken").queries(.init(name: "token", value: refreshToken))
         case .userInfo:
-            return URL.baseAPI.appendingPath("Driver", "UserInfo")
+            return URL.baseAPI.appendingPath("Account", "UserInfo")
         case .editUserInfo:
             return URL.baseAPI.appendingPath("Driver", "UpdateProfile")
         case .deleteProfile:

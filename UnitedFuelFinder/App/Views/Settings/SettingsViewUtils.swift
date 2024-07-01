@@ -31,6 +31,7 @@ struct SettingsViewUtils {
                         Text(descr)
                             .font(.system(size: 12, weight: .regular))
                             .foregroundStyle(Color.init(uiColor: .secondaryLabel))
+                            .multilineTextAlignment(.leading)
                     }
                 }
 

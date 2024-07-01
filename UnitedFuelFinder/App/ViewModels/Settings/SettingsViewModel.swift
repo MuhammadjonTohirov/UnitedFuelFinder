@@ -32,6 +32,8 @@ enum SettingsRoute: ScreenRoute {
             return "mapSettings"
         case .changePassword:
             return "changePassword"
+        case .manageDriver:
+            return "manageDriver"
         }
     }
     
@@ -53,6 +55,7 @@ enum SettingsRoute: ScreenRoute {
     case mapSettings
     case profile
     case changePassword
+    case manageDriver
     
     @ViewBuilder
     var screen: some View {
@@ -79,6 +82,8 @@ enum SettingsRoute: ScreenRoute {
             SettingsMap()
         case .changePassword:
             ChangePasswordView()
+        case .manageDriver:
+            ManageDriverView()
         }
     }
 }

@@ -10,4 +10,5 @@ import Foundation
 struct NetReqLogin: Codable {
     let email: String
     let password: String
+    let role: String // driver, company, admin
 }

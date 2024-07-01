@@ -25,8 +25,8 @@ public struct CoveredLoadingView: View {
             .ignoresSafeArea()
             .overlay {
                 VStack {
-                    LoadingIndicator(animation: .circleTrim, color: .label, size: .medium, speed: .normal)
-                    
+//                    LoadingIndicator(animation: .circleTrim, color: .label, size: .medium, speed: .normal)
+                    ActivityIndicatorView()
                     Text(message)
                         .background {
                             Capsule()
