@@ -224,53 +224,6 @@
         }
       }
     },
-    
-    "loading.prerequisites" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Loading prerequisites"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Загрузка предварительных условий"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Yuklanmoqda"
-          }
-        }
-      }
-    },
-    "get.started" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Get started"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Начало работы"
-          }
-        },
-        "uz" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Boshlash"
-          }
-        }
-      }
-    },
     "all.directions" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1951,6 +1904,29 @@
         }
       }
     },
+    "get.started" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get started"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Начало работы"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boshlash"
+          }
+        }
+      }
+    },
     "help_desk" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2407,6 +2383,29 @@
         }
       }
     },
+    "loading.prerequisites" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Loading prerequisites"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Загрузка предварительных условий"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Yuklanmoqda"
+          }
+        }
+      }
+    },
     "loading.stations" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2682,12 +2681,6 @@
           }
         }
       }
-    },
-    "Multi" : {
-
-    },
-    "MultiPicker" : {
-
     },
     "navigate" : {
       "extractionState" : "manual",
@@ -3151,12 +3144,6 @@
           }
         }
       }
-    },
-    "One or None" : {
-
-    },
-    "Only One" : {
-
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -3689,9 +3676,6 @@
           }
         }
       }
-    },
-    "Regular" : {
-
     },
     "reset.pass.failed" : {
       "extractionState" : "manual",
@@ -4300,9 +4284,6 @@
       }
     },
     "Submit" : {
-
-    },
-    "SwiftUI" : {
 
     },
     "system" : {

@@ -219,6 +219,7 @@ struct MapTabView: View {
             }
             .vertical(alignment: .top)
             .horizontal(alignment: .leading)
+            .set(isVisible: viewModel.state == .default)
         }
     }
     
