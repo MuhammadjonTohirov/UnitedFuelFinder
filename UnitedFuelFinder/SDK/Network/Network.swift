@@ -50,9 +50,11 @@ struct Network {
             )
             
             let path = request.request().url?.relativePath ?? ""
-            if path.contains("Config"){
+            
+            if path.contains("Config") {
                 print(request)
             }
+            
             let data = result.0
             let code = (result.1 as! HTTPURLResponse).statusCode
             let string = String(data: data, encoding: .utf8) ?? ""
@@ -62,7 +64,7 @@ struct Network {
                 await session.cancelAllTasks()
                 UserSettings.shared.clear()
                 delegate?.onAuthRequired()
-                return nil
+                return .init(success: false, data: nil, error: "401 error code", code: nil)
             }
                     
             Logging.l("--- --- RESPONSE --- ---")
@@ -85,7 +87,7 @@ struct Network {
                     headerString.append("\(key) : \(items[key] ?? "")")
                     headerString.append("\n")
                 }
-                await Network.sendToTgBot(statusCode:code, responseString: string, bodyJson: requestJson, url:request.url.absoluteString, header: headerString)
+                await Network.sendToTgBot(statusCode: code, responseString: string, bodyJson: requestJson, url:request.url.absoluteString, header: headerString)
 
             }
             return res
@@ -94,7 +96,8 @@ struct Network {
             Logging.l("Error: \(error)")
             Logging.l(request.url.relativePath)
             Logging.l("Error: endline")
-            return nil
+            let error = "\(request.url.absoluteString)\n\((error as NSError).description)"
+            return .init(success: false, data: nil, error: error, code: nil)
         }
     }
     @MainActor

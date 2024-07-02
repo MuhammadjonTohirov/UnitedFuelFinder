@@ -13,12 +13,32 @@ protocol MapTabViewModelDelegate: AnyObject {
     func onResetMap(viewModel: MapTabViewModel)
 }
 
-final class MapTabViewModel: ObservableObject, MapTabViewModelProtocl {
+final class MapTabViewModel: NSObject, ObservableObject, MapTabViewModelProtocl, Alertable {
     @Published var focusableLocation: CLLocation?
     @Published var filter: MapFilterInput?
     
     @Published var searchAddressViewModel = SearchAddressViewModel()
     @Published var destinationsViewModel = DestinationsViewModel()
+    
+    @Published var shouldShowAlert: Bool = false
+    
+    var pointLabel: Character {
+        if destinations.isEmpty {
+            return "A"
+        }
+        
+        if destinations.count == 1 && state == .default {
+            return "A"
+        }
+        
+        if destinations.count == 1 && state == .pickLocation {
+            return "B"
+        }
+        
+        return destinations.count.label
+    }
+    
+    var alert: AlertToast = .init(displayMode: .alert, type: .regular)
     
     weak var delegate: MapTabViewModelDelegate?
     

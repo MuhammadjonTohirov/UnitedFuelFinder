@@ -34,7 +34,6 @@ extension MapTabViewModel {
             return
         }
         
-        
         @Sendable func onLoadStations(_ _stations: [StationItem]) async {
             await MainActor.run {
                 self.setupMarkersByStations(_stations)

@@ -11,7 +11,7 @@ import UniformTypeIdentifiers
 public extension URL {
     
     static var base: URL {
-        let environmentVariable = ProcessInfo.processInfo.environment["mode"]
+        let environmentVariable = Bundle.main.appMode()
         return environmentVariable == "dev" ? .dev : .prod
     }
     
@@ -111,4 +111,11 @@ extension Language {
 
 extension URLSession {
     static var filter: URLSession = URLSession.init(configuration: .default)
+}
+
+extension Bundle {
+    // App mode
+    public func appMode() -> String? {
+        return object(forInfoDictionaryKey: "APP_MODE") as? String
+    }
 }

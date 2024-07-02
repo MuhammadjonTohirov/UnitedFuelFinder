@@ -12,7 +12,7 @@ import RealmSwift
 protocol SearchRouteProtocol {
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void)
     
-    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel?
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> (MultipleRouteModel?, Error?)
 }
 
 protocol MapTabInteractorProtocol {
@@ -20,9 +20,9 @@ protocol MapTabInteractorProtocol {
     
     func searchRoute(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D, completion: @escaping ([CLLocationCoordinate2D]) -> Void)
     
-    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel?
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> (MultipleRouteModel?, Error?)
     
-    func filterStationsByDefault(_ filter: MapFilterInput, location: CLLocation) async -> [StationItem]
+    func filterStationsByDefault(_ filter: MapFilterInput, location: CLLocation) async -> (data: [StationItem], error: Error?)
     
     func filterStationsByDefaultFromDatabase(_ filter: MapFilterInput, location: CLLocation, completion: @escaping ([StationItem]) -> Void)
 }
@@ -36,8 +36,8 @@ struct GoogleRouteSearcher: SearchRouteProtocol {
             }
     }
     
-    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel? {
-        return nil
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> (MultipleRouteModel?, Error?) {
+        fatalError()
     }
 }
 
@@ -57,7 +57,7 @@ struct ServerRouteSearcher: SearchRouteProtocol {
         }
     }
     
-    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel? {
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> (MultipleRouteModel?, Error?) {
         let result: NetRes<NetResDrawMultipleRoute>? = await Network.send(
             request: CommonNetworkRouter.findMultipleRoute(
                 request: .init(
@@ -66,19 +66,24 @@ struct ServerRouteSearcher: SearchRouteProtocol {
             )
         )
         
-        guard let data = result?.data else {
-            return nil
+        guard let result else {
+            return (nil, NSError(domain: "No route data", code: -1))
         }
         
-        return .init(res: data)
+        guard let data = result.data else {
+            return (nil, NSError(domain: result.error ?? "Cannot draw route server error", code: result.code ?? -1))
+        }
+        
+        return (.init(res: data), nil)
     }
 }
 
 class MapTabInteractor: MapTabInteractorProtocol {
-    var routeSearcher: any SearchRouteProtocol
-
+    
     var searchDispatchWork: DispatchWorkItem?
     private var searchTask: Task<(), Never>?
+    
+    var routeSearcher: any SearchRouteProtocol
     
     required init(routeSearcher: any SearchRouteProtocol) {
         self.routeSearcher = routeSearcher
@@ -88,11 +93,11 @@ class MapTabInteractor: MapTabInteractorProtocol {
         routeSearcher.searchRoute(from: from, to: to, completion: completion)
     }
     
-    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> MultipleRouteModel? {
+    func searchRoute(addresses: [CLLocationCoordinate2D]) async -> (MultipleRouteModel?, (any Error)?) {
         await routeSearcher.searchRoute(addresses: addresses)
     }
     
-    func filterStationsByDefault(_ filter: MapFilterInput, location: CLLocation) async -> [StationItem] {
+    func filterStationsByDefault(_ filter: MapFilterInput, location: CLLocation) async -> (data: [StationItem], error: Error?) {
         let maxRadius = filter.radius
         
         var _request: NetReqFilterStations = .init(
@@ -105,7 +110,7 @@ class MapTabInteractor: MapTabInteractorProtocol {
             lng: location.coordinate.longitude
         )
         
-        let (_stations, _) = await MainService.shared.filterStations2(req: _request)
+        let (_stations, error) = await MainService.shared.filterStations2(req: _request)
         
         _stations.forEach { station in
             station.customer = DCustomer.all?.filter("id = %d", station.customerId).first?.asModel
@@ -113,7 +118,7 @@ class MapTabInteractor: MapTabInteractorProtocol {
             station.city = Realm.new?.object(ofType: DCity.self, forPrimaryKey: station.cityId)?.asModel
         }
 
-        return _stations
+        return (_stations, error)
     }
     
     func asyncFilterStationsByDatabase(_ filter: MapFilterInput, location: CLLocation) async -> [StationItem] {

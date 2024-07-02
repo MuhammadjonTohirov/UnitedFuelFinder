@@ -74,6 +74,7 @@ struct MapTabView: View {
                 }
             })
         }
+        .toast($viewModel.shouldShowAlert, viewModel.alert, duration: 2)
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
                 .environmentObject(mainModel)
@@ -203,7 +204,7 @@ struct MapTabView: View {
             
             PinPointerView(
                 isActive: viewModel.isDragging,
-                type: viewModel.state == HomeViewState.default ? .pinA : .pinB
+                label: viewModel.pointLabel
             )
             .frame(height: pointerHeight)
             .offset(.init(width: 0, height: -(115 / 2) - bottomSafeArea))

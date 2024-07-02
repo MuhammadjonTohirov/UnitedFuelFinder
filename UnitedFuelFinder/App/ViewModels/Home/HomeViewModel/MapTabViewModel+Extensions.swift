@@ -80,12 +80,18 @@ extension MapTabViewModel {
             self.showLoader(message: "searching.route".localize)
         }
         
-        guard let result = await interactor.searchRoute(
+        let searchResult = await interactor.searchRoute(
             addresses: destinations.map({$0.location})
-        ) else {
+        )
+        
+        guard let result = searchResult.0 else {
             await MainActor.run {
                 self.hideLoader()
+                self.showAlert(message: searchResult.1?.localizedDescription ?? "Cannot draw route")
             }
+            
+            try? await Task.sleep(for: .seconds(2))
+            
             return
         }
         
@@ -99,6 +105,8 @@ extension MapTabViewModel {
             self.delegate?.onLoadTollCost(viewModel: self, result.toll)
             self.hideLoader()
         }
+        
+        try? await Task.sleep(for: .milliseconds(300))
     }
     
     func onClickSearchAddressFrom() {

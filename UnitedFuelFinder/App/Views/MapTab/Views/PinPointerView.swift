@@ -11,6 +11,7 @@ import SwiftUI
 enum PinPointerType {
     case pinA
     case pinB
+    case custom(label: Character)
     
     var imageName: String {
         switch self {
@@ -18,21 +19,28 @@ enum PinPointerType {
             return "icon_pin_a"
         case .pinB:
             return "icon_pin_b"
+        case .custom:
+            return "icon_pin_pointer"
         }
     }
 }
 
 struct PinPointerView: View {
     var isActive: Bool = true
-    var type: PinPointerType
+    var label: Character
 
     var body: some View {
         ZStack {
-            Image(type.imageName)
+            Image("icon_pin_pointer")
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 50)
-                .shadow(color: Color.black.opacity(0.15), radius: 2)
+                .overlay {
+                    Text(label.description.uppercased())
+                        .font(.bold(size: 10))
+                        .padding(.bottom, 20)
+                        .foregroundStyle(Color.white)
+                }
                 .offset(.init(width: 0, height: isActive ? -58 : -44))
             Circle()
                 .foregroundStyle(Color.clear)
@@ -48,5 +56,5 @@ struct PinPointerView: View {
 }
 
 #Preview {
-    return PinPointerView(type: .pinA)
+    return PinPointerView(label: "b".first!)
 }
