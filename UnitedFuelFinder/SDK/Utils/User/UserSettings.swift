@@ -22,12 +22,15 @@ final public class UserSettings {
     public static let testEmail: String = "tokhirov.mukhammadjon@gmail.com"
     
     func setupForTest(){
-        UserSettings.shared.userType = .company
         UserSettings.shared.accessToken = UserSettings.testAccessToken
         UserSettings.shared.refreshToken = UserSettings.testRefreshToken
         UserSettings.shared.userEmail = UserSettings.testEmail
         UserSettings.shared.tokenExpireDate = Date().after(days: 2)
         UserSettings.shared.appPin = "0000"
+        UserSettings.shared.userInfo = .init(email: "abbos@mail.ru", phone: "935852415", cardNumber: "1232 1232 1233 3212", stations: [
+            "1", "2", "3", "4", "0", "5"
+        ])
+        UserSettings.shared.userInfo?.roleCode = "company"
     }
     
     @codableWrapper(key: "currentAppVersion")
@@ -74,8 +77,9 @@ final public class UserSettings {
     @codableWrapper(key: "currentAPIVersion")
     public var currentAPIVersion: ServerVersion?
     
-    @codableWrapper(key: "userType", .driver)
-    public var userType: UserType?
+    public var userType: UserType? {
+        userInfo?.roleCode == "company" ? .company : .driver
+    }
     
     @codableWrapper(key: "appPin")
     public var appPin: String?
@@ -100,7 +104,6 @@ final public class UserSettings {
     public var theme: Theme?
     
     func clear() {
-        userType = .driver
         accessToken = nil
         refreshToken = nil
         tokenExpireDate = nil

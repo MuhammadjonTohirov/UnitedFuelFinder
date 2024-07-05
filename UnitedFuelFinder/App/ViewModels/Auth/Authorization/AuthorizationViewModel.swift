@@ -52,8 +52,10 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     @Published var password: String = ""
     @Published var isOfferAccepted: Bool = false
     
+    @Published var userType: UserType = .driver
+    
     var isDriver: Bool {
-        UserSettings.shared.userType == .driver
+        userType == .driver
     }
     
     var pageTitle: String {
@@ -234,14 +236,17 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     }
     
     private func getAccessToken() async -> AuthNetworkErrorReason? {
-        guard let type = UserSettings.shared.userType?.rawValue.nilIfEmpty else {
+        guard let type = userType.rawValue.nilIfEmpty else {
             return AuthNetworkErrorReason.unknown
         }
         
         showLoading()
         
         let (isOK, error) = await AuthService.shared.login(username: self.username, password: password, role: type)
-
+        
+        await MainService.shared.syncCustomers()
+        await MainService.shared.syncAllStations()
+        
         hideLoading()
         
         return isOK ? nil : error

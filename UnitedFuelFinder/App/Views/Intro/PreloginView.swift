@@ -12,7 +12,7 @@ struct PreloginView: View {
     @StateObject var viewModel = PreloginViewModel()
     
     @State
-    private var selectedType: Int = 0
+    private var selectedType: UserType = .driver
     
     var body: some View {
         NavigationStack {
@@ -20,10 +20,7 @@ struct PreloginView: View {
                 .navigationDestination(
                     isPresented: $viewModel.showLoginPage
                 ) {
-                    AuthView()
-                }
-                .onAppear {
-                    UserSettings.shared.userType = .driver
+                    AuthView(userType: selectedType)
                 }
         }
     }
@@ -45,18 +42,16 @@ struct PreloginView: View {
                     HStack(spacing: 32) {
                         largeRadioButton(
                             title: "driver".localize.capitalized,
-                            selected: selectedType == 0
+                            selected: selectedType == .driver
                         ).onTapGesture {
-                            selectedType = 0
-                            UserSettings.shared.userType = .driver
+                            selectedType = .driver
                         }
                         
                         largeRadioButton(
                             title: "company".localize.capitalized,
-                            selected: selectedType == 1
+                            selected: selectedType == .company
                         ).onTapGesture {
-                            selectedType = 1
-                            UserSettings.shared.userType = .company
+                            selectedType = .company
                         }
                     }
                     .frame(width: 240.f.sw())

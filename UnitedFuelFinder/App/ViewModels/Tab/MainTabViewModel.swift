@@ -165,7 +165,6 @@ class MainTabViewModel: ObservableObject {
             }
             
             if DStationItem.all?.isEmpty ?? false {
-                await AuthService.shared.syncUserInfo()
                 await MainService.shared.syncCustomers()
                 await MainService.shared.syncAllStations()
             }

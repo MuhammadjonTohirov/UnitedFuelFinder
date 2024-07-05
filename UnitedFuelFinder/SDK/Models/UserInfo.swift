@@ -149,4 +149,8 @@ public struct UserInfo: Codable, Hashable {
     func customer(id: String) -> CustomerItem? {
         DCustomer.all?.filter("id = %@", Int(id) ?? 0).first?.asModel
     }
+    
+    var userType: UserType {
+        self.roleCode == "company" ? .company : .driver
+    }
 }

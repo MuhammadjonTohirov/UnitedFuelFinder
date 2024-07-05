@@ -11,6 +11,7 @@ import SwiftUI
 struct AuthView: View {
     @ObservedObject var viewModel: AuthorizationViewModel = .init()
     @State var showAlert: Bool = false
+    var userType: UserType
     
     var body: some View {
         mainBody
@@ -32,6 +33,9 @@ struct AuthView: View {
             .navigationDestination(isPresented: $viewModel.present) {
                 viewModel.route?.screen
                     .background(.appBackground)
+            }
+            .onAppear {
+                viewModel.userType = userType
             }
     }
     
@@ -82,6 +86,6 @@ struct AuthView: View {
 #Preview {
     UserSettings.shared.language = .english
     return NavigationStack {
-        AuthView()
+        AuthView(userType: .driver)
     }
 }

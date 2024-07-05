@@ -13,7 +13,7 @@ struct DarkAuthBody: View {
     @State var showAlert: Bool = false
     
     var userType: String {
-        (UserSettings.shared.userType == .driver ? "driver" : "company").localize
+        viewModel.userType.rawValue.capitalized
     }
     
     var body: some View {
