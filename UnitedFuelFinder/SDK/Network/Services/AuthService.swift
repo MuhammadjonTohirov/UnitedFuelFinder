@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AuthNetworkErrorReason: Error {
+public enum AuthNetworkErrorReason: Error {
     //case notConfirmedByAdmin
     //case userAlreadyExists
     case unknown
@@ -27,21 +27,33 @@ enum AuthNetworkErrorReason: Error {
 public struct AuthService {
     public static let shared = AuthService()
     
-    public func verifyAccount(_ username: String) async -> ((exist: Bool, code: String, session: String)?, error: String?) {
-        
-        let result: NetRes<NetResVerifyAccount>? = await Network.send(
-            request: UserNetworkRouter.verifyAccount(request: .init(email: username)),
+    public func verifyAccount(_ email: String) async -> (Bool, error: AuthNetworkErrorReason?) {
+        guard let result: NetRes<NetResLogin> = await Network.send(
+            request: UserNetworkRouter.verifyAccount(email: email),
             refreshTokenIfNeeded: false
-        )
-        
-        if let data = result?.data {
-            UserSettings.shared.session = data.session
-            UserSettings.shared.lastOTP = data.code
-            UserSettings.shared.userEmail = username
-            return ((data.exists, data.code, data.session), nil)
+        ) else {
+            return (false, .unknown)
         }
         
-        return (nil, "Unknown error".localize)
+        if !result.success && result.error?.contains("expire") ?? false {
+            return (false, .custom(result.error ?? "Unknown error"))
+        }
+        
+        guard let data = result.data else {
+            //return (false, .notConfirmedByAdmin)
+            return (false, .custom(result.error ?? "Unknown error"))
+        }
+        
+        UserSettings.shared.accessToken = data.accessToken
+        UserSettings.shared.refreshToken = data.refreshToken
+        UserSettings.shared.tokenExpireDate = .init(timeIntervalSinceNow: data.expiresIn)
+        UserSettings.shared.refreshTokenExpireDate = .init(timeIntervalSinceNow: data.refreshExpiresIn)
+        UserSettings.shared.userEmail = email
+        
+        await syncUserInfo()
+        
+        let isOK = result.data != nil
+        return (isOK, isOK ? nil : .custom(result.error ?? "Unknown error"))
     }
     
     func login(username: String, password: String, role: String) async -> (Bool, AuthNetworkErrorReason?) {

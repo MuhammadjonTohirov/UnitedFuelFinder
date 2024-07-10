@@ -30,12 +30,65 @@ public extension CGFloat {
 }
 
 
-extension Float {
+public extension Float {
     var asMoney: String {
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
         formatter.locale = Locale(identifier: "en_US")
+        formatter.currencySymbol = ""
+        formatter.generatesDecimalNumbers = false
+        formatter.alwaysShowsDecimalSeparator = false
+        formatter.usesGroupingSeparator = true
+        formatter.groupingSeparator = ","
         return formatter.string(from: NSNumber(value: self)) ?? ""
+    }
+    
+    var asMoneyBeautiful: AttributedString {
+        let attr = NSMutableAttributedString()
+        
+        let left = self.rounded(.down).asDouble.asInt
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale(identifier: "en_US")
+        formatter.currencySymbol = ""
+        formatter.generatesDecimalNumbers = false
+        formatter.alwaysShowsDecimalSeparator = false
+        let leftStr = formatter.string(from: NSNumber(value: left)) ?? ""
+        
+        let right = (self.asDouble.truncatingRemainder(dividingBy: 1) * 100).asInt
+        
+        attr.append(.init(
+            string: "$",
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 18, weight: .black),
+                .foregroundColor: Color.black,
+                .baselineOffset: 6
+            ]
+        ))
+        attr.append(.init(
+            string: leftStr,
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 28, weight: .bold),
+                .foregroundColor: Color.black
+            ]
+        ))
+        
+        attr.append(.init(
+            string: "." + right.asString,
+            attributes: [
+                .font: UIFont.systemFont(ofSize: 18, weight: .black),
+                .foregroundColor: Color.black
+            ]
+        ))
+        
+        // convert to attributed string
+        return convertToAttributedString(attr)
+    }
+    
+    // Sample function to demonstrate conversion
+    private func convertToAttributedString(_ mutableAttributedString: NSMutableAttributedString) -> AttributedString {
+        // Use the initializer to convert
+        return AttributedString(mutableAttributedString)
     }
 }
 

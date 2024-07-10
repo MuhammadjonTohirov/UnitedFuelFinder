@@ -25,4 +25,9 @@ public struct CompanyService {
         let result: NetRes<[NetResDriverCard]>? = await Network.send(request: CompanyNetworkRouter.driverCardList)
         return result?.data?.map { .init(res: $0) } ?? []
     }
+    
+    public func loadAllCards() async -> [CardModelItem] {
+        let result: NetRes<[NetResCard]>? = await Network.send(request: CompanyNetworkRouter.getAllCards)
+        return result?.data?.map { .init(res: $0) } ?? []
+    }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct DashboardView: View {
     
     @ObservedObject var viewModel: DashboardViewModel
+    @State var headerRect: CGRect = .zero
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
@@ -27,23 +28,6 @@ struct DashboardView: View {
                     Rectangle()
                         .foregroundStyle(Color.background)
                 }
-            
-            GeometryReader(content: { geometry in
-                VStack(spacing: 0) {
-                    Rectangle()
-                        .frame(height: geometry.safeAreaInsets.top)
-                        .foregroundStyle(Color.background)
-                        .ignoresSafeArea()
-
-                    
-                    Spacer()
-                    
-                    Rectangle()
-                        .foregroundStyle(Color.background)
-                        .ignoresSafeArea(.container, edges: .bottom)
-                        .frame(height: 0)
-                }
-            })
         }
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
@@ -51,29 +35,66 @@ struct DashboardView: View {
         .onAppear {
             self.viewModel.onAppear()
         }
-        .coveredLoading(isLoading: $viewModel.isLoading)
-    }
-    
-    var innerBody: some View {
-        VStack(alignment: .leading, spacing: 20) {
-            CardWidgetView()
-            
-            Text("total.spendings".localize)
-            SpendingsWidgetView()
-            
-            transactionsView.set(isVisible: showTransitions)
-
-            invoicesView.set(isVisible: showInvoices)
-        }
-        .padding(.horizontal)
-        .font(.system(size: 14))
-        .fontWeight(.semibold)
-        .frame(maxWidth: .infinity)
-        .scrollable(showIndicators: false)
         .onAppear {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.showTransitions = UserSettings.shared.userInfo?.canViewTransactions ?? false
                 self.showInvoices = UserSettings.shared.userInfo?.canViewInvoices ?? false
+            }
+        }
+        .coveredLoading(isLoading: $viewModel.isLoading)
+    }
+    
+    var headerView: some View {
+        Group {
+            switch UserSettings.shared.userInfo?.userType {
+            case .company:
+                CompanyDashboardHeader(onClickCards: {
+                    viewModel.route = .cards
+                }, onClickTransactions: {
+                    viewModel.route = .transferringStations
+                }, onClickInvoices: {
+                    viewModel.route = .invoices
+                })
+                .padding(.top, 20)
+            case .driver:
+                DriverDashboardHeader()
+            default:
+                EmptyView()
+            }
+        }
+    }
+    
+    var innerBody: some View {
+        GeometryReader { fullView in
+            VStack(alignment: .leading, spacing: 20) {
+                headerView
+                    .readRect(rect: $headerRect)
+                
+                AveragesWidgetView()
+                
+                TotalSpendingsWidgetView(
+                    viewModel: viewModel.sepndingsViewModel
+                )
+                                
+                transactionsView.set(isVisible: showTransitions)
+
+                invoicesView.set(isVisible: showInvoices)
+            }
+            .padding(.horizontal)
+            .padding(.bottom)
+            .font(.system(size: 14))
+            .fontWeight(.semibold)
+            .frame(maxWidth: .infinity)
+            .scrollable(showIndicators: false)
+            .background {
+                Image("image_header")
+                    .opacity(0.8)
+                    .frame(
+                        height: headerRect.height + UIApplication.shared.safeArea.top + 120
+                    )
+                    .clipped()
+                    .offset(y: -fullView.frame(in: .local).height / 2 + fullView.safeAreaInsets.top / 2)
+                    .ignoresSafeArea()
             }
         }
     }
@@ -82,11 +103,21 @@ struct DashboardView: View {
         LazyVStack {
             HStack {
                 Text("transf.transactions".localize) // Transferring transactions
+                    .shadow(color: Color.appBackground, radius: 2)
+                    .font(.bold(size: 16))
+
                 Spacer()
                 Button(action: {
                     viewModel.navigate(to: .transferringStations)
                 }, label: {
                     Text("view.all".localize)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, Padding.medium)
+                        .padding(.vertical, Padding.small)
+                        .background {
+                            Capsule()
+                                .foregroundStyle(.appDarkGray)
+                        }
                 })
                 .opacity(viewModel.transactions.isEmpty ? 0 : 1)
             }
@@ -96,8 +127,11 @@ struct DashboardView: View {
                     .frame(height: 120.f.sh())
                     .foregroundStyle(Color.secondaryBackground)
                     .overlay {
-                        Text("no.transactions".localize)
-                            .font(.system(size: 13, weight: .medium))
+                        VStack(spacing: 16) {
+                            Image(systemName: "list.clipboard")
+                            Text("no.transactions".localize)
+                                .font(.system(size: 13, weight: .medium))
+                        }
                     }
                     .opacity(viewModel.transactions.isEmpty ? 1 : 0)
                 
@@ -112,11 +146,21 @@ struct DashboardView: View {
         LazyVStack {
             HStack {
                 Text("popul.invoices".localize)
+                    .shadow(color: Color.appBackground, radius: 2)
+                    .font(.bold(size: 16))
+
                 Spacer()
                 Button(action: {
                     viewModel.navigate(to: .invoices)
                 }, label: {
                     Text("view.all".localize)
+                        .foregroundStyle(.white)
+                        .padding(.horizontal, Padding.medium)
+                        .padding(.vertical, Padding.small)
+                        .background {
+                            Capsule()
+                                .foregroundStyle(.appDarkGray)
+                        }
                 })
                 .opacity(viewModel.invoices.isEmpty ? 0 : 1)
             }
@@ -125,8 +169,11 @@ struct DashboardView: View {
                     .frame(height: 120.f.sh())
                     .foregroundStyle(Color.secondaryBackground)
                     .overlay {
-                        Text("no.invoices".localize)
-                            .font(.system(size: 13, weight: .medium))
+                        VStack(spacing: 16, content: {
+                            Image(systemName: "pencil.and.list.clipboard.rtl")
+                            Text("no.invoices".localize)
+                                .font(.system(size: 13, weight: .medium))
+                        })
                     }
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
                 
@@ -172,28 +219,35 @@ struct DashboardView: View {
 }
 
 #Preview {
-    UserSettings.shared.accessToken = UserSettings.testAccessToken
+    UserSettings.shared.setupForTest()
     return NavigationStack {
         DashboardView(viewModel: .init())
             .navigationBarTitleDisplayMode(.inline)
             .environmentObject(DashboardViewModel())
-            .navigationTitle("Dashboard")
+            .toolbar(content: {
+                ToolbarItem(placement: .principal) {
+                    Text("dashboard".localize)
+                        .font(.bold(size: 16))
+                        .foregroundStyle(.white)
+                        .shadow(color: .black, radius: 4, x: 0, y: 0)
+                }
+            })
             .onAppear {
                 let appearance = UINavigationBarAppearance()
                 appearance.configureWithTransparentBackground()
-                
-                let back = UIBarButtonItemAppearance(style: .done)
-                back.normal.backgroundImage = UIImage()
-                
-                back.normal.titlePositionAdjustment = .init(horizontal: -1000, vertical: 0)
-                
-                appearance.backButtonAppearance = back
-                appearance.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
-                appearance.shadowImage = UIImage()
-                appearance.shadowColor = .clear
-                
+//
+//                let back = UIBarButtonItemAppearance(style: .done)
+//                back.normal.backgroundImage = UIImage()
+//                
+//                back.normal.titlePositionAdjustment = .init(horizontal: -1000, vertical: 0)
+//                
+//                appearance.backButtonAppearance = back
+//                appearance.titlePositionAdjustment = .init(horizontal: 0, vertical: 0)
+//                appearance.shadowImage = UIImage()
+//                appearance.shadowColor = .clear
+//                
                 UINavigationBar.appearance().standardAppearance = appearance
-                UINavigationBar.appearance().compactAppearance = appearance
+//                UINavigationBar.appearance().compactAppearance = appearance
             }
     }
 }

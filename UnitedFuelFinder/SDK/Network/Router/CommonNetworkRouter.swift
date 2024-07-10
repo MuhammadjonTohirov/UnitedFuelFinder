@@ -21,15 +21,17 @@ enum CommonNetworkRouter: URLRequestProtocol {
         case .actualAppVersion:
             return URL.baseAPI.appendingPath("Common", "Config")
             
-        case let .filterTransactions(fromDate, to):
-            return URL.baseAPI.appendingPath("Driver", "FilterTransactions").queries(
+        case let .filterTransactions(fromDate, to, card, isCompany):
+            return URL.baseAPI.appendingPath(isCompany ? "Company" : "Driver", "FilterTransactions").queries(
                 .init(name: "fromDate", value: fromDate),
-                .init(name: "toDate", value: to)
+                .init(name: "toDate", value: to),
+                .init(name: "cardNumber", value: card)
             )
-        case let .filterInvoices(fromDate, to):
-            return URL.baseAPI.appendingPath("Driver", "FilterInvoices").queries(
+        case let .filterInvoices(fromDate, to, card, isCompany):
+            return URL.baseAPI.appendingPath(isCompany ? "Company" : "Driver", "FilterInvoices").queries(
                 .init(name: "fromDate", value: fromDate),
-                .init(name: "toDate", value: to)
+                .init(name: "toDate", value: to),
+                .init(name: "cardNumber", value: card)
             )
         case let .totalSpendings(type):
             return URL.baseAPI.appendingPath("Driver", "TotalSpendsV2").queries(
@@ -87,8 +89,8 @@ enum CommonNetworkRouter: URLRequestProtocol {
     case cities(id: String)
     case companies
     case version
-    case filterTransactions(fromDate: String, to: String)
-    case filterInvoices(fromDate: String, to: String)
+    case filterTransactions(fromDate: String, to: String, card: String?, isCompany: Bool)
+    case filterInvoices(fromDate: String, to: String, card: String?, isCompany: Bool)
     case findRoute(req: NetReqDrawRoute)
     /// 0: Today, 1: Week, 2: Month
     case totalSpendings(type: Int)

@@ -37,12 +37,11 @@ struct Network {
                     }
                 }
             }
-            var requestJson:[String : Any]? = nil
+            
             if let requestBody = request.request().httpBody,
                let json = try JSONSerialization.jsonObject(with: requestBody, options: .fragmentsAllowed) as? [String: Any]
             {
                 Logging.l(json)
-                requestJson = json
             }
             
             let result = try await session.data(

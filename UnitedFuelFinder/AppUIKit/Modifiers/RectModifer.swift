@@ -19,9 +19,10 @@ struct RectModifer: ViewModifier {
                     Color.clear
                         .preference(key: RectPreferenceKey.self, value: proxy.frame(in: .global))
                         .onAppear {
-                            if rect == .zero {
-                                rect = proxy.frame(in: .global)
-                            }
+//                            if rect == .zero {
+//                                rect = proxy.frame(in: .global)
+//                            }
+                            rect = proxy.frame(in: .global)
                         }
                 }
             )

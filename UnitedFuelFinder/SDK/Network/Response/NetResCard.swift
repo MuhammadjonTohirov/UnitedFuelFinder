@@ -12,6 +12,7 @@ public struct NetResCard: NetResBody {
     let cardNumber: String
     let accountName: String
     let totalBalance: Double
+    let color: String?
 }
 
 public struct NetResActualVersion: NetResBody {

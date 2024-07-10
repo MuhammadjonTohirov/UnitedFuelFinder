@@ -25,9 +25,18 @@ struct SpendingsWidgetView: View {
     @State private var isLoading: Bool = false
     @State private var selectyionType: TotalSpendingFilterType = .today
     @State private var result: TotalSpendings?
-    
     @State private var donutRect: CGRect = .zero
+    
     var body: some View {
+        VStack(alignment: .leading) {
+            Text("total.spendings".localize)
+                .font(.bold(size: 16))
+            
+            innerBody
+        }
+    }
+    
+    var innerBody: some View {
         ZStack {
             VStack {
                 filterView

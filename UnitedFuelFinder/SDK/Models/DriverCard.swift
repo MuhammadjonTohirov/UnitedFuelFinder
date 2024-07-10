@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct DriverCard {
+public struct DriverCard: Equatable {
     public var id: String
     public var name: String
     

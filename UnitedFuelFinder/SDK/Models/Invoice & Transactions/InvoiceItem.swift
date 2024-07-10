@@ -7,30 +7,30 @@
 
 import Foundation
 
-struct InvoiceItem: Identifiable {
-    let id: Int
-    let companyAccountId: Int
-    let invoiceNumber: String?
-    let isSentToEmail: Bool?
-    let startPeriod: String?
-    let endPeriod: String?
-    let totalDiscount: Double?
-    let totalFees: Double?
-    let totalAmount: Double
-    let totalPaid: Double?
-    let remainingAmount: Int?
-    let additionalCharge: Int?
-    let bonus: Int?
-    let invoiceDate: String?
-    let dueDate: String?
-    let lastPaymentDate: String?
-    let lastPaymentNote: String?
-    let status: String?
-    let notes: String?
-    let companyAccount: NetResCompanyAccount?
-    let totalDiscountedGallons: Double?
-    let averageDiscountPerGallon: Double?
-    let discountEditedInfo: String?
+public struct InvoiceItem: Identifiable {
+    public let id: Int
+    public let companyAccountId: Int
+    public let invoiceNumber: String?
+    public let isSentToEmail: Bool?
+    public let startPeriod: String?
+    public let endPeriod: String?
+    public let totalDiscount: Double?
+    public let totalFees: Double?
+    public let totalAmount: Double
+    public let totalPaid: Double?
+    public let remainingAmount: Int?
+    public let additionalCharge: Int?
+    public let bonus: Int?
+    public let invoiceDate: String?
+    public let dueDate: String?
+    public let lastPaymentDate: String?
+    public let lastPaymentNote: String?
+    public let status: String?
+    public let notes: String?
+    public let companyAccount: NetResCompanyAccount?
+    public let totalDiscountedGallons: Double?
+    public let averageDiscountPerGallon: Double?
+    public let discountEditedInfo: String?
     
     init(from: NetResInvoiceItem) {
         self.id = from.id

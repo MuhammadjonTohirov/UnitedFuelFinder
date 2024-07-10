@@ -15,6 +15,13 @@ struct AllTransactionsView: View {
     @State private var buttonNumber = 0
     @State private var isLoading = false
     @State private var transactions: [TransactionItem] = []
+    @State private var showSelectCard: Bool = false
+    @State private var selectedCard: DriverCard? = nil
+    @State private var cards: [DriverCard] = []
+    
+    private var isCompany: Bool {
+        UserSettings.shared.userType == .company
+    }
     
     @Environment(\.scenePhase)
     private var scenePhase
@@ -23,6 +30,11 @@ struct AllTransactionsView: View {
         VStack {
             datePicker
                 .padding(.top, 0)
+                .padding(.horizontal, Padding.default)
+            
+            cardField
+                .set(isVisible: isCompany)
+            
             LazyVStack {
                 ForEach(transactions) { item in
                     TransactionView(item: item)
@@ -56,8 +68,24 @@ struct AllTransactionsView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.reloadData()
                 }
+                
+                Task {
+                    await loadCards()
+                }
             }
         }
+        .sheet(isPresented: $showSelectCard, content: {
+            SelectCardListView(
+                selectedCard: $selectedCard,
+                cards: cards
+            )
+            .dynamicSheet()
+            .scrollable()
+        })
+        .onChange(of: selectedCard, perform: { _ in
+            showSelectCard = false
+            reloadData()
+        })
         .background(.appBackground)
         .onChange(of: scenePhase) { newValue in
             switch newValue {
@@ -68,6 +96,28 @@ struct AllTransactionsView: View {
             default:
                 break
             }
+        }
+    }
+    
+    private var cardField: some View {
+        HStack {
+            Text(selectedCard == nil ? "all".localize : selectedCard?.name ?? "")
+                .font(.regular(size: 12))
+            Spacer()
+            Image(systemName: "chevron.down")
+        }
+        .padding(.leading, Padding.medium)
+        .padding(.trailing, Padding.small)
+        .frame(height: 40)
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(lineWidth: 1)
+                .foregroundColor(Color(hex: "#D4D4D4"))
+        )
+        .background(RoundedRectangle(cornerRadius: 5).foregroundStyle(.appBackground))
+        .padding(.horizontal, Padding.default)
+        .onTapGesture {
+            showSelectCard = true
         }
     }
     
@@ -85,16 +135,18 @@ struct AllTransactionsView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .padding()
                 .font(.system(size: 13))
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(uiColor: .label))
             })
-            .frame(width: 163, height: 40)
+            .frame(height: 40)
+            .padding(.leading, Padding.medium)
+            .padding(.trailing, Padding.small)
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(lineWidth: 1)
-                    .foregroundColor(Color(hex: "#D4D4D4")))
+                    .foregroundColor(Color(hex: "#D4D4D4"))
+            )
             
             Button(action: {
                 buttonNumber = 2
@@ -108,17 +160,20 @@ struct AllTransactionsView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .padding()
                 .font(.system(size: 13))
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(uiColor: .label))
             })
-            .frame(width: 163, height: 40)
+            .frame(height: 40)
+            .padding(.leading, Padding.medium)
+            .padding(.trailing, Padding.small)
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(lineWidth: 1)
-                    .foregroundColor(Color(hex: "#D4D4D4")))
+                    .foregroundColor(Color(hex: "#D4D4D4"))
+            )
         }
+        
     }
     
     private func formattedDate(_ date: Date) -> String {
@@ -137,13 +192,23 @@ struct AllTransactionsView: View {
         }
     }
     
+    private func loadCards() async {
+        let _cards = await CompanyService.shared.loadDriverCards()
+        
+        await MainActor.run {
+            self.cards = _cards
+        }
+    }
+    
     private func loadTransactions(from: Date, to: Date) async {
         let _from = from.toString(format: "ddMMyyyy")
         let _to = to.toString(format: "ddMMyyyy")
         
         let _transactions = (await CommonService.shared.fetchTransactions(
             fromDate: _from,
-            to: _to
+            to: _to,
+            card: selectedCard?.id,
+            isCompany: isCompany
         )).compactMap {
             TransactionItem(from: $0)
         }

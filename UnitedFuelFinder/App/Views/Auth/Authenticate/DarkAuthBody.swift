@@ -11,27 +11,25 @@ import SwiftUI
 struct DarkAuthBody: View {
     @EnvironmentObject var viewModel: AuthorizationViewModel
     @State var showAlert: Bool = false
-    
+    @State private var bottomRect: CGRect = .zero
+    @State private var bodyRect: CGRect = .zero
+    @State private var formRect: CGRect = .zero
     var userType: String {
         viewModel.userType.rawValue.capitalized
     }
     
     var body: some View {
         ZStack {
-            VStack {
-                headerImage
-                    .overlay {
-                        Text(userType)
-                            .font(.system(size: 48, weight: .bold, design: .rounded))
-                    }
-                    .ignoresSafeArea()
-                    
-                Spacer()
-            }
+            headerImage
+                .overlay {
+                    Text(userType)
+                        .font(.system(size: 48, weight: .bold, design: .rounded))
+                }
+                .vertical(alignment: .top)
+                .readRect(rect: $bodyRect)
+                .ignoresSafeArea()
             
             VStack(alignment: .center) {
-                Spacer()
-                
                 Text(
                     "lets_sign_in_you".localize
                 )
@@ -41,12 +39,14 @@ struct DarkAuthBody: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 form
-//                    .scrollable(axis: .vertical)
-//                    .scrollBounceBehavior(.basedOnSize)
                     .frame(height: 152)
-                    .ignoresSafeArea(.keyboard, edges: .bottom)
                     .padding(.bottom, Padding.large.sh())
-
+                
+            }
+            .readRect(rect: $formRect)
+            .padding(.top, (bodyRect.height / 2 - bottomRect.height - formRect.height / 2))
+            
+            VStack {
                 SubmitButton {
                     viewModel.onClickAuthenticate()
                 } label: {
@@ -56,7 +56,6 @@ struct DarkAuthBody: View {
                 .set(isEnabled: viewModel.isValidForm)
                 .padding(.horizontal, Padding.default.sh())
                 .padding(.bottom, Padding.medium.sh())
-                .ignoresSafeArea(.keyboard, edges: .all)
 
                 SubmitButton(action: {
                     viewModel.onClickRegister()
@@ -66,16 +65,29 @@ struct DarkAuthBody: View {
                 }, backgroundColor: .clear)
                 .padding(.horizontal, Padding.default.sh())
                 .padding(.bottom, Padding.small.sh())
-                .ignoresSafeArea()
                 
                 AppleButton()
+                    .onTapGesture {
+                        viewModel.loginWithApple()
+                    }
                     .padding(.bottom, Padding.medium.sh())
-                    .ignoresSafeArea()
             }
+            .readRect(rect: $bottomRect)
+            .vertical(alignment: .bottom)
+            .ignoresSafeArea(.keyboard, edges: .all)
         }
-        .ignoresSafeArea(.keyboard)
         .foregroundStyle(.white)
         .background(Color.appDarkGray)
+        
+        .onChange(of: bodyRect, perform: { value in
+            debugPrint("Body rect \(value)")
+        })
+        .onChange(of: bottomRect, perform: { value in
+            debugPrint("Bottom rect \(value)")
+        })
+        .onChange(of: formRect, perform: { value in
+            debugPrint("Form rect \(value)")
+        })
     }
     
     private var form: some View {
@@ -85,6 +97,7 @@ struct DarkAuthBody: View {
                     text: $viewModel.username,
                     placeholder: "sample@domain.com",
                     placeholderColor: .white.opacity(0.5),
+                    contentType: .username,
                     autoCapitalization: .never,
                     left: {
                         Image(systemName: "person.fill")
@@ -92,7 +105,7 @@ struct DarkAuthBody: View {
                             .padding(.horizontal, Padding.small.sh())
                     }
                 )
-                .keyboardType(.emailAddress)
+                .keyboardType(.default)
             }
             .set(error: viewModel.emailError ?? "")
             .background(
@@ -104,7 +117,6 @@ struct DarkAuthBody: View {
                 .horizontal, Padding.medium.sh()
             )
             .padding(.bottom, 8)
-            .ignoresSafeArea(.keyboard, edges: .bottom)
 
             YRoundedTextField(radius: 32) {
                 YTextField(

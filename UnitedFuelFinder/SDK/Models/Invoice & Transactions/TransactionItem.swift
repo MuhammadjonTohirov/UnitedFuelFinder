@@ -7,30 +7,30 @@
 
 import Foundation
 
-struct TransactionItem: Identifiable {
-    var id: Int
-    let cardNumber: String
-    let transactionDate: String
-    let invoiceNumber: String?
-    let unit: String?
-    let driverName: String?
-    let odometer: Int?
-    let locationName: String?
-    let city: String?
-    let state: String?
-    let fees: Double?
-    let item: String?
-    let unitPrice: Double?
-    let discPpu: Double?
-    let discCost: Double?
-    let quantity: Double?
-    let discAmount: Double?
-    let discType: String?
-    let amount: Double?
-    let db: String?
-    let currency: String?
-    let hash: String?
-    let fileName: String?
+public struct TransactionItem: Identifiable {
+    public var id: Int
+    public let cardNumber: String
+    public let transactionDate: String
+    public let invoiceNumber: String?
+    public let unit: String?
+    public let driverName: String?
+    public let odometer: Int?
+    public let locationName: String?
+    public let city: String?
+    public let state: String?
+    public let fees: Double?
+    public let item: String?
+    public let unitPrice: Double?
+    public let discPpu: Double?
+    public let discCost: Double?
+    public let quantity: Double?
+    public let discAmount: Double?
+    public let discType: String?
+    public let amount: Double?
+    public let db: String?
+    public let currency: String?
+    public let hash: String?
+    public let fileName: String?
     
     init(from: NetResTransactions) {
         self.id = from.id
@@ -58,7 +58,7 @@ struct TransactionItem: Identifiable {
         self.fileName = from.fileName
     }
     
-    init(id: Int, cardNumber: String, transactionDate: String, invoiceNumber: String?, unit: String?, driverName: String?, odometer: Int?, locationName: String?, city: String?, state: String?, fees: Double?, item: String?, unitPrice: Double?, discPpu: Double?, discCost: Double?, quantity: Double?, discAmount: Double?, discType: String?, amount: Double?, db: String?, currency: String?, hash: String?, fileName: String?) {
+    public init(id: Int, cardNumber: String, transactionDate: String, invoiceNumber: String?, unit: String?, driverName: String?, odometer: Int?, locationName: String?, city: String?, state: String?, fees: Double?, item: String?, unitPrice: Double?, discPpu: Double?, discCost: Double?, quantity: Double?, discAmount: Double?, discType: String?, amount: Double?, db: String?, currency: String?, hash: String?, fileName: String?) {
         self.id = id
         self.cardNumber = cardNumber
         self.transactionDate = transactionDate

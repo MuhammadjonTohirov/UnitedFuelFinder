@@ -42,6 +42,7 @@
 		2E0F93D72B013C4900660DEB /* CoveredLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D62B013C4900660DEB /* CoveredLoadingView.swift */; };
 		2E0F93D92B030D2700660DEB /* VerticalValueAdjuster.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */; };
 		2E0FBEFD2B1307C400A39EBA /* MapTabViewModel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */; };
+		2E10804A2C38709F00CDCF3E /* CompanyDashboardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1080492C38709F00CDCF3E /* CompanyDashboardHeader.swift */; };
 		2E13A3692BFE519D00A33606 /* FilteringStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E13A3682BFE519D00A33606 /* FilteringStationView.swift */; };
 		2E13A36B2BFE5A8200A33606 /* StationDetailsWarning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */; };
 		2E1B2DEB2C2DE03D00412B55 /* ManageDrivers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1B2DEA2C2DE03D00412B55 /* ManageDrivers.swift */; };
@@ -112,6 +113,11 @@
 		2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */; };
 		2E53131E2C2C11BA00CB31E3 /* PreloginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53131D2C2C11BA00CB31E3 /* PreloginView.swift */; };
 		2E5313202C2C172500CB31E3 /* PreloginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E53131F2C2C172500CB31E3 /* PreloginViewModel.swift */; };
+		2E594F122C3D35D9001DB638 /* NetResSummarySpend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F112C3D35D9001DB638 /* NetResSummarySpend.swift */; };
+		2E594F152C3DA82D001DB638 /* NetResWebInvoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F142C3DA82D001DB638 /* NetResWebInvoice.swift */; };
+		2E594F172C3DA909001DB638 /* NetResWebTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F162C3DA909001DB638 /* NetResWebTransaction.swift */; };
+		2E594F1A2C3E12DD001DB638 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F192C3E12DD001DB638 /* CardListView.swift */; };
+		2E594F1E2C3E4365001DB638 /* Network+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F1D2C3E4365001DB638 /* Network+Download.swift */; };
 		2E5DF9212AEACD63005BE20D /* ScrollableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8922AEACD63005BE20D /* ScrollableModifier.swift */; };
 		2E5DF9222AEACD63005BE20D /* CloseKeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8932AEACD63005BE20D /* CloseKeyboardModifier.swift */; };
 		2E5DF9232AEACD63005BE20D /* RectModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8942AEACD63005BE20D /* RectModifer.swift */; };
@@ -190,11 +196,9 @@
 		2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8F42AEACD63005BE20D /* MainDService.swift */; };
 		2E5DF96D2AEACD64005BE20D /* NetRes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8F72AEACD63005BE20D /* NetRes.swift */; };
 		2E5DF96E2AEACD64005BE20D /* NetResAddres.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8F82AEACD63005BE20D /* NetResAddres.swift */; };
-		2E5DF96F2AEACD64005BE20D /* NetResVerifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8F92AEACD63005BE20D /* NetResVerifyAccount.swift */; };
 		2E5DF9702AEACD64005BE20D /* NetResLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8FA2AEACD63005BE20D /* NetResLogin.swift */; };
 		2E5DF9712AEACD64005BE20D /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8FB2AEACD63005BE20D /* Network.swift */; };
 		2E5DF9722AEACD64005BE20D /* NetReqRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8FD2AEACD63005BE20D /* NetReqRegister.swift */; };
-		2E5DF9732AEACD64005BE20D /* NetReqVerifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8FE2AEACD63005BE20D /* NetReqVerifyAccount.swift */; };
 		2E5DF9742AEACD64005BE20D /* NetReqLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8FF2AEACD63005BE20D /* NetReqLogin.swift */; };
 		2E5DF9752AEACD64005BE20D /* URLRequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF9012AEACD63005BE20D /* URLRequestProtocol.swift */; };
 		2E5DF9762AEACD64005BE20D /* NetResProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF9022AEACD63005BE20D /* NetResProtocol.swift */; };
@@ -321,6 +325,14 @@
 		2EDF8C7A2AD445C3003D64FC /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C792AD445C3003D64FC /* OTPViewModel.swift */; };
 		2EDF8C932AD466D2003D64FC /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */; };
 		2EDF8C962AD474AA003D64FC /* MapTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EDF8C952AD474AA003D64FC /* MapTabView.swift */; };
+		2EF227152C38F8DA00FD45BF /* DriverNetworkRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF227142C38F8DA00FD45BF /* DriverNetworkRouter.swift */; };
+		2EF227172C38F98C00FD45BF /* DriverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF227162C38F98C00FD45BF /* DriverService.swift */; };
+		2EF227192C38FAAB00FD45BF /* AveragesWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF227182C38FAAB00FD45BF /* AveragesWidgetView.swift */; };
+		2EF2271B2C3A012300FD45BF /* TotalSpendingsWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF2271A2C3A012300FD45BF /* TotalSpendingsWidgetView.swift */; };
+		2EF2271F2C3A7A6C00FD45BF /* TotalSpendingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF2271E2C3A7A6C00FD45BF /* TotalSpendingsViewModel.swift */; };
+		2EF227212C3ABAE600FD45BF /* CardItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF227202C3ABAE600FD45BF /* CardItem.swift */; };
+		2EF227242C3AD62100FD45BF /* AllCardsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF227232C3AD62100FD45BF /* AllCardsView.swift */; };
+		2EF227262C3B003B00FD45BF /* LargeCardItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF227252C3B003B00FD45BF /* LargeCardItemView.swift */; };
 		2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1D92ADD88F900CA8DE2 /* City.swift */; };
 		2EF3A1E62ADD88F900CA8DE2 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */; };
 		2EF3A1EA2ADD88F900CA8DE2 /* GMapsViewWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */; };
@@ -331,7 +343,7 @@
 		2EF746AB2B1CE7B0009E2D8D /* Station+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */; };
 		2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */; };
 		841D81062AF75DBC00C5932C /* ProfileVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841D81052AF75DBC00C5932C /* ProfileVIew.swift */; };
-		8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6862B77B05000017681 /* CardWidgetView.swift */; };
+		8422A6872B77B05000017681 /* DriverDashboardHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6862B77B05000017681 /* DriverDashboardHeader.swift */; };
 		8422A6952B781B5400017681 /* PopularStationsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6942B781B5400017681 /* PopularStationsView.swift */; };
 		8422A6972B782BD600017681 /* DiscountStationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6962B782BD600017681 /* DiscountStationView.swift */; };
 		8422A6992B784B6200017681 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8422A6982B784B6200017681 /* TransactionView.swift */; };
@@ -401,6 +413,7 @@
 		2E0F93D62B013C4900660DEB /* CoveredLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoveredLoadingView.swift; sourceTree = "<group>"; };
 		2E0F93D82B030D2700660DEB /* VerticalValueAdjuster.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerticalValueAdjuster.swift; sourceTree = "<group>"; };
 		2E0FBEFC2B1307C400A39EBA /* MapTabViewModel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+Extensions.swift"; sourceTree = "<group>"; };
+		2E1080492C38709F00CDCF3E /* CompanyDashboardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyDashboardHeader.swift; sourceTree = "<group>"; };
 		2E13A3682BFE519D00A33606 /* FilteringStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteringStationView.swift; sourceTree = "<group>"; };
 		2E13A36A2BFE5A8200A33606 /* StationDetailsWarning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDetailsWarning.swift; sourceTree = "<group>"; };
 		2E1B2DEA2C2DE03D00412B55 /* ManageDrivers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManageDrivers.swift; sourceTree = "<group>"; };
@@ -472,6 +485,11 @@
 		2E527A7A2ACC8402005B8B95 /* RegisterProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterProfileView.swift; sourceTree = "<group>"; };
 		2E53131D2C2C11BA00CB31E3 /* PreloginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloginView.swift; sourceTree = "<group>"; };
 		2E53131F2C2C172500CB31E3 /* PreloginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreloginViewModel.swift; sourceTree = "<group>"; };
+		2E594F112C3D35D9001DB638 /* NetResSummarySpend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResSummarySpend.swift; sourceTree = "<group>"; };
+		2E594F142C3DA82D001DB638 /* NetResWebInvoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResWebInvoice.swift; sourceTree = "<group>"; };
+		2E594F162C3DA909001DB638 /* NetResWebTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResWebTransaction.swift; sourceTree = "<group>"; };
+		2E594F192C3E12DD001DB638 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
+		2E594F1D2C3E4365001DB638 /* Network+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Download.swift"; sourceTree = "<group>"; };
 		2E5DF8922AEACD63005BE20D /* ScrollableModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableModifier.swift; sourceTree = "<group>"; };
 		2E5DF8932AEACD63005BE20D /* CloseKeyboardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseKeyboardModifier.swift; sourceTree = "<group>"; };
 		2E5DF8942AEACD63005BE20D /* RectModifer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectModifer.swift; sourceTree = "<group>"; };
@@ -550,11 +568,9 @@
 		2E5DF8F42AEACD63005BE20D /* MainDService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainDService.swift; sourceTree = "<group>"; };
 		2E5DF8F72AEACD63005BE20D /* NetRes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetRes.swift; sourceTree = "<group>"; };
 		2E5DF8F82AEACD63005BE20D /* NetResAddres.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResAddres.swift; sourceTree = "<group>"; };
-		2E5DF8F92AEACD63005BE20D /* NetResVerifyAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResVerifyAccount.swift; sourceTree = "<group>"; };
 		2E5DF8FA2AEACD63005BE20D /* NetResLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResLogin.swift; sourceTree = "<group>"; };
 		2E5DF8FB2AEACD63005BE20D /* Network.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		2E5DF8FD2AEACD63005BE20D /* NetReqRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetReqRegister.swift; sourceTree = "<group>"; };
-		2E5DF8FE2AEACD63005BE20D /* NetReqVerifyAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetReqVerifyAccount.swift; sourceTree = "<group>"; };
 		2E5DF8FF2AEACD63005BE20D /* NetReqLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetReqLogin.swift; sourceTree = "<group>"; };
 		2E5DF9012AEACD63005BE20D /* URLRequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestProtocol.swift; sourceTree = "<group>"; };
 		2E5DF9022AEACD63005BE20D /* NetResProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetResProtocol.swift; sourceTree = "<group>"; };
@@ -674,6 +690,14 @@
 		2EDF8C922AD466D2003D64FC /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		2EDF8C952AD474AA003D64FC /* MapTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabView.swift; sourceTree = "<group>"; };
 		2EF121B62AEAC1F600D76378 /* Realm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Realm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EF227142C38F8DA00FD45BF /* DriverNetworkRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverNetworkRouter.swift; sourceTree = "<group>"; };
+		2EF227162C38F98C00FD45BF /* DriverService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverService.swift; sourceTree = "<group>"; };
+		2EF227182C38FAAB00FD45BF /* AveragesWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AveragesWidgetView.swift; sourceTree = "<group>"; };
+		2EF2271A2C3A012300FD45BF /* TotalSpendingsWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalSpendingsWidgetView.swift; sourceTree = "<group>"; };
+		2EF2271E2C3A7A6C00FD45BF /* TotalSpendingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalSpendingsViewModel.swift; sourceTree = "<group>"; };
+		2EF227202C3ABAE600FD45BF /* CardItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardItem.swift; sourceTree = "<group>"; };
+		2EF227232C3AD62100FD45BF /* AllCardsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllCardsView.swift; sourceTree = "<group>"; };
+		2EF227252C3B003B00FD45BF /* LargeCardItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCardItemView.swift; sourceTree = "<group>"; };
 		2EF3A1D92ADD88F900CA8DE2 /* City.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		2EF3A1DA2ADD88F900CA8DE2 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		2EF3A1E02ADD88F900CA8DE2 /* GMapsViewWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GMapsViewWrapper.swift; sourceTree = "<group>"; };
@@ -687,7 +711,7 @@
 		2EF746AA2B1CE7B0009E2D8D /* Station+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Station+Extensions.swift"; sourceTree = "<group>"; };
 		2EF746AC2B1CE887009E2D8D /* MarkerViewsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkerViewsManager.swift; sourceTree = "<group>"; };
 		841D81052AF75DBC00C5932C /* ProfileVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVIew.swift; sourceTree = "<group>"; };
-		8422A6862B77B05000017681 /* CardWidgetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardWidgetView.swift; sourceTree = "<group>"; };
+		8422A6862B77B05000017681 /* DriverDashboardHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverDashboardHeader.swift; sourceTree = "<group>"; };
 		8422A6942B781B5400017681 /* PopularStationsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularStationsView.swift; sourceTree = "<group>"; };
 		8422A6962B782BD600017681 /* DiscountStationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscountStationView.swift; sourceTree = "<group>"; };
 		8422A6982B784B6200017681 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
@@ -821,6 +845,7 @@
 			children = (
 				2E1B2DEA2C2DE03D00412B55 /* ManageDrivers.swift */,
 				2E1B2DF32C2E174300412B55 /* DriverProperties.swift */,
+				2E594F192C3E12DD001DB638 /* CardListView.swift */,
 			);
 			path = ManageDriver;
 			sourceTree = "<group>";
@@ -845,8 +870,6 @@
 		2E2420672B82AB77003DE3E5 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
-				2E2420682B82AB80003DE3E5 /* TransactionItem.swift */,
-				2E2420742B8323EF003DE3E5 /* InvoiceItem.swift */,
 				2EA5C22C2B833E9E00DFB989 /* TotalSpendings.swift */,
 				2EA5C2352B836B5A00DFB989 /* PopularStations.swift */,
 			);
@@ -986,6 +1009,26 @@
 				2E53131D2C2C11BA00CB31E3 /* PreloginView.swift */,
 			);
 			path = Intro;
+			sourceTree = "<group>";
+		};
+		2E594F132C3DA81E001DB638 /* Transactions & Invoices */ = {
+			isa = PBXGroup;
+			children = (
+				2E2420722B832271003DE3E5 /* NetResInvoiceItem.swift */,
+				2ED9FB0C2B7E7BD100EEDDFB /* NetResTransactions.swift */,
+				2E594F142C3DA82D001DB638 /* NetResWebInvoice.swift */,
+				2E594F162C3DA909001DB638 /* NetResWebTransaction.swift */,
+			);
+			path = "Transactions & Invoices";
+			sourceTree = "<group>";
+		};
+		2E594F182C3DA975001DB638 /* Invoice & Transactions */ = {
+			isa = PBXGroup;
+			children = (
+				2E2420682B82AB80003DE3E5 /* TransactionItem.swift */,
+				2E2420742B8323EF003DE3E5 /* InvoiceItem.swift */,
+			);
+			path = "Invoice & Transactions";
 			sourceTree = "<group>";
 		};
 		2E5DF8902AEACD63005BE20D /* AppUIKit */ = {
@@ -1291,6 +1334,7 @@
 				2E5DF9002AEACD63005BE20D /* Protocols */,
 				2E5DF8FB2AEACD63005BE20D /* Network.swift */,
 				2E8AED052B8E3B3E00701590 /* Network+Google.swift */,
+				2E594F1D2C3E4365001DB638 /* Network+Download.swift */,
 				2E5DF8F62AEACD63005BE20D /* Response */,
 				2E5DF8FC2AEACD63005BE20D /* Requests */,
 				2E5DF9032AEACD63005BE20D /* Services */,
@@ -1302,10 +1346,10 @@
 		2E5DF8F62AEACD63005BE20D /* Response */ = {
 			isa = PBXGroup;
 			children = (
+				2E594F132C3DA81E001DB638 /* Transactions & Invoices */,
 				2E7BC70C2AF3F0FD003A1CE5 /* NetResCompany.swift */,
 				2E5DF8F72AEACD63005BE20D /* NetRes.swift */,
 				2E5DF8F82AEACD63005BE20D /* NetResAddres.swift */,
-				2E5DF8F92AEACD63005BE20D /* NetResVerifyAccount.swift */,
 				2E5DF8FA2AEACD63005BE20D /* NetResLogin.swift */,
 				2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */,
 				2E36A7462AEECE2C0033363E /* NetResStationItem.swift */,
@@ -1316,8 +1360,6 @@
 				2EB76B192B13B1870055610A /* NetResCustomer.swift */,
 				2EAFDF572B34E1090058EED3 /* NetResSearchAddressItem.swift */,
 				2E01E5DE2B53908100F6231D /* NetResDelete.swift */,
-				2ED9FB0C2B7E7BD100EEDDFB /* NetResTransactions.swift */,
-				2E2420722B832271003DE3E5 /* NetResInvoiceItem.swift */,
 				2EA5C22A2B833DE500DFB989 /* NetResTotalSpending.swift */,
 				2EA5C2312B83657F00DFB989 /* NetResCard.swift */,
 				2EA5C2332B836AC300DFB989 /* NetResPopularStation.swift */,
@@ -1325,6 +1367,7 @@
 				2E29670C2C1852DF002050FC /* NetResDrawMultipleRoute.swift */,
 				2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */,
 				2E073F6A2C30007100E79476 /* NetResDriverCard.swift */,
+				2E594F112C3D35D9001DB638 /* NetResSummarySpend.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1333,7 +1376,6 @@
 			isa = PBXGroup;
 			children = (
 				2E5DF8FD2AEACD63005BE20D /* NetReqRegister.swift */,
-				2E5DF8FE2AEACD63005BE20D /* NetReqVerifyAccount.swift */,
 				2E5DF8FF2AEACD63005BE20D /* NetReqLogin.swift */,
 				2E36A7442AEECDD00033363E /* NetReqFilterStations.swift */,
 				2EB81D882C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift */,
@@ -1360,13 +1402,11 @@
 		2E5DF9032AEACD63005BE20D /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				2EF227132C38F32900FD45BF /* Main */,
 				2E5DF9042AEACD63005BE20D /* AuthService.swift */,
 				2E5DF9052AEACD63005BE20D /* CommonService.swift */,
-				2E36A7422AEECD380033363E /* MainService.swift */,
-				2E454F2C2BA0CC0B00998EC6 /* MainService+Filter.swift */,
-				2E454F2E2BA0CC4200998EC6 /* MainService+Station+Details.swift */,
-				2E454F372BA0CCF100998EC6 /* MainService+Stations.swift */,
 				2E1B2DEF2C2DE8DD00412B55 /* CompnayService.swift */,
+				2EF227162C38F98C00FD45BF /* DriverService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -1378,6 +1418,7 @@
 				2E5DF9072AEACD63005BE20D /* CommonNetworkRouter.swift */,
 				2E5DF9082AEACD63005BE20D /* AuthNetworkRouter.swift */,
 				2E1B2DEC2C2DE19900412B55 /* CompanyNetworkRouter.swift */,
+				2EF227142C38F8DA00FD45BF /* DriverNetworkRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -1427,6 +1468,7 @@
 		2E5DF91E2AEACD63005BE20D /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2E594F182C3DA975001DB638 /* Invoice & Transactions */,
 				2E7BC70A2AF3F0DC003A1CE5 /* CompanyItem.swift */,
 				2E5DF91F2AEACD63005BE20D /* Objectify.swift */,
 				2E5DF9202AEACD63005BE20D /* AddressObjects.swift */,
@@ -1437,6 +1479,7 @@
 				2EB76B1B2B13B1B90055610A /* CustomerItem.swift */,
 				2E00707D2B7D527900A39E6D /* MultipartForm.swift */,
 				2E073F6C2C3000B500E79476 /* DriverCard.swift */,
+				2EF227202C3ABAE600FD45BF /* CardItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1858,6 +1901,44 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		2EF227132C38F32900FD45BF /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				2E36A7422AEECD380033363E /* MainService.swift */,
+				2E454F2C2BA0CC0B00998EC6 /* MainService+Filter.swift */,
+				2E454F2E2BA0CC4200998EC6 /* MainService+Station+Details.swift */,
+				2E454F372BA0CCF100998EC6 /* MainService+Stations.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		2EF2271D2C3A7A5D00FD45BF /* TotalSpendings */ = {
+			isa = PBXGroup;
+			children = (
+				2EF2271A2C3A012300FD45BF /* TotalSpendingsWidgetView.swift */,
+				2EF2271E2C3A7A6C00FD45BF /* TotalSpendingsViewModel.swift */,
+			);
+			path = TotalSpendings;
+			sourceTree = "<group>";
+		};
+		2EF227222C3AD61B00FD45BF /* AllCards */ = {
+			isa = PBXGroup;
+			children = (
+				2EF227232C3AD62100FD45BF /* AllCardsView.swift */,
+				2EF227252C3B003B00FD45BF /* LargeCardItemView.swift */,
+			);
+			path = AllCards;
+			sourceTree = "<group>";
+		};
+		2EF227272C3BA57300FD45BF /* Header */ = {
+			isa = PBXGroup;
+			children = (
+				2E1080492C38709F00CDCF3E /* CompanyDashboardHeader.swift */,
+				8422A6862B77B05000017681 /* DriverDashboardHeader.swift */,
+			);
+			path = Header;
+			sourceTree = "<group>";
+		};
 		2EF3A1D82ADD88F900CA8DE2 /* GoogleMapsSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
@@ -1902,12 +1983,15 @@
 		8422A6662B7762B000017681 /* Dashboard */ = {
 			isa = PBXGroup;
 			children = (
+				2EF227272C3BA57300FD45BF /* Header */,
+				2EF227222C3AD61B00FD45BF /* AllCards */,
+				2EF2271D2C3A7A5D00FD45BF /* TotalSpendings */,
 				ADE325312C0E4F7300B542A4 /* PieChartExampleView.swift */,
 				2EBF9DAD2B85225A00374613 /* AllInvoices */,
 				2EBF9DAA2B851F7000374613 /* AllTransactions */,
 				2E43DA022B7B8BE600716DB0 /* DashboardView.swift */,
 				2E43DA072B7B9C4200716DB0 /* SpendingsWidgetView.swift */,
-				8422A6862B77B05000017681 /* CardWidgetView.swift */,
+				2EF227182C38FAAB00FD45BF /* AveragesWidgetView.swift */,
 				8422A6942B781B5400017681 /* PopularStationsView.swift */,
 				8422A6962B782BD600017681 /* DiscountStationView.swift */,
 				8422A6982B784B6200017681 /* TransactionView.swift */,
@@ -2076,6 +2160,7 @@
 				2E243DA62AE02D01008C3E8C /* HomeBottomSheetView.swift in Sources */,
 				2E454F332BA0CC8E00998EC6 /* MainNetworkRouter+Data.swift in Sources */,
 				2EBD45F52C198D6300285895 /* DestinationMarkerView.swift in Sources */,
+				2EF227172C38F98C00FD45BF /* DriverService.swift in Sources */,
 				2E5DF92A2AEACD63005BE20D /* SupportingTypes.swift in Sources */,
 				2E5DF9352AEACD63005BE20D /* View+Extensions.swift in Sources */,
 				2E5DF9512AEACD63005BE20D /* MapPolygon.swift in Sources */,
@@ -2098,6 +2183,7 @@
 				2E243DAA2AE0D8ED008C3E8C /* MapStyles.swift in Sources */,
 				2E5DF96C2AEACD63005BE20D /* MainDService.swift in Sources */,
 				849A7D7C2B7A9EEB00FC9A4B /* AllTransactionsView.swift in Sources */,
+				2E594F1E2C3E4365001DB638 /* Network+Download.swift in Sources */,
 				2E5DF9532AEACD63005BE20D /* MapKit.swift in Sources */,
 				2E5DF95E2AEACD63005BE20D /* Map+Coordinator.swift in Sources */,
 				2E7D8DB02AFAEB650074AB7E /* DRecentSearchedAddress.swift in Sources */,
@@ -2109,6 +2195,7 @@
 				2E89DD1B2BF4709D00CC7EBF /* TrimbleViewController.swift in Sources */,
 				2EF746A52B1C4EB8009E2D8D /* MapTabRouter.swift in Sources */,
 				2E0F93CD2B012FCE00660DEB /* StationCommentItem.swift in Sources */,
+				2EF227242C3AD62100FD45BF /* AllCardsView.swift in Sources */,
 				2E5DF9652AEACD63005BE20D /* MapZoomControl.swift in Sources */,
 				2E5DF97D2AEACD64005BE20D /* YKeychainWrapper.swift in Sources */,
 				2E0F93CA2B012BCC00660DEB /* StationCommentItemView.swift in Sources */,
@@ -2139,7 +2226,6 @@
 				2E5DF9232AEACD63005BE20D /* RectModifer.swift in Sources */,
 				2E5DF9632AEACD63005BE20D /* Map+AppKit.swift in Sources */,
 				2EB189FB2AEFF43200BCFBE3 /* AllStationsView.swift in Sources */,
-				2E5DF96F2AEACD64005BE20D /* NetResVerifyAccount.swift in Sources */,
 				2E5DF94D2AEACD63005BE20D /* MapPolyline.swift in Sources */,
 				ADB98FC22C2C95AA00821BB9 /* CardsViewModel.swift in Sources */,
 				2EF3A1E52ADD88F900CA8DE2 /* City.swift in Sources */,
@@ -2148,6 +2234,9 @@
 				2E5DF98C2AEACD64005BE20D /* UserSettings.swift in Sources */,
 				2E5DF9482AEACD63005BE20D /* MapInteractionModes.swift in Sources */,
 				2E5DF9772AEACD64005BE20D /* AuthService.swift in Sources */,
+				2EF227152C38F8DA00FD45BF /* DriverNetworkRouter.swift in Sources */,
+				2E594F122C3D35D9001DB638 /* NetResSummarySpend.swift in Sources */,
+				2E594F1A2C3E12DD001DB638 /* CardListView.swift in Sources */,
 				2EBD45F22C19611100285895 /* NetResFilterMultipleStations.swift in Sources */,
 				2EB76B1A2B13B1870055610A /* NetResCustomer.swift in Sources */,
 				2ED9B7572B11F3A800150F0D /* AuditLog.swift in Sources */,
@@ -2167,6 +2256,7 @@
 				2E5DF96E2AEACD64005BE20D /* NetResAddres.swift in Sources */,
 				2E5DF9542AEACD63005BE20D /* NativeHostingController.swift in Sources */,
 				2E5DF9762AEACD64005BE20D /* NetResProtocol.swift in Sources */,
+				2EF227212C3ABAE600FD45BF /* CardItem.swift in Sources */,
 				2E5DF98E2AEACD64005BE20D /* AddressObjects.swift in Sources */,
 				2E1B2DF02C2DE8DD00412B55 /* CompnayService.swift in Sources */,
 				2E5DF9722AEACD64005BE20D /* NetReqRegister.swift in Sources */,
@@ -2187,7 +2277,6 @@
 				2E5DF9242AEACD63005BE20D /* RoundedTextFieldStyle.swift in Sources */,
 				2E527A7B2ACC8402005B8B95 /* RegisterProfileView.swift in Sources */,
 				2ED38FF32BBD18E4008400CF /* ShortStorage.swift in Sources */,
-				2E5DF9732AEACD64005BE20D /* NetReqVerifyAccount.swift in Sources */,
 				ADB98FC42C2C960300821BB9 /* CardsContainerView.swift in Sources */,
 				2E5DF98B2AEACD64005BE20D /* CGFloat+Extension.swift in Sources */,
 				2E5DF92B2AEACD63005BE20D /* PreviewHelpers.swift in Sources */,
@@ -2200,6 +2289,7 @@
 				2E5DF9392AEACD63005BE20D /* AppWindowGroup.swift in Sources */,
 				2E5DF9212AEACD63005BE20D /* ScrollableModifier.swift in Sources */,
 				2E48ED022B9639EE002B369C /* WarningAlertView.swift in Sources */,
+				2EF2271B2C3A012300FD45BF /* TotalSpendingsWidgetView.swift in Sources */,
 				2E0F93D72B013C4900660DEB /* CoveredLoadingView.swift in Sources */,
 				2E5DF9282AEACD63005BE20D /* Flow.swift in Sources */,
 				2E48ECBC2B945245002B369C /* MapTabInteractor.swift in Sources */,
@@ -2214,7 +2304,7 @@
 				2E723B112BA5B2CC007DFE49 /* GMapsViewWrapper+Coordinator.swift in Sources */,
 				ADE325322C0E4F7300B542A4 /* PieChartExampleView.swift in Sources */,
 				2E5DF9692AEACD63005BE20D /* DCity.swift in Sources */,
-				8422A6872B77B05000017681 /* CardWidgetView.swift in Sources */,
+				8422A6872B77B05000017681 /* DriverDashboardHeader.swift in Sources */,
 				2E5DF95C2AEACD63005BE20D /* MapPin.swift in Sources */,
 				2E454F382BA0CCF200998EC6 /* MainService+Stations.swift in Sources */,
 				2E502D052B272CA8002CE669 /* SettingsAppearance.swift in Sources */,
@@ -2225,6 +2315,7 @@
 				2EB5996B2B09E39A0038F5F0 /* StationTipInfoView.swift in Sources */,
 				2E67901A2B1FCC9300239B03 /* ChangeLanguageView.swift in Sources */,
 				2E5DF9412AEACD63005BE20D /* YTextField.swift in Sources */,
+				2EF227192C38FAAB00FD45BF /* AveragesWidgetView.swift in Sources */,
 				2EDF8C962AD474AA003D64FC /* MapTabView.swift in Sources */,
 				2E5DF9802AEACD64005BE20D /* DatabaseConfig.swift in Sources */,
 				2E454F352BA0CCB300998EC6 /* MainNetworkRouter+Method+Request.swift in Sources */,
@@ -2233,6 +2324,7 @@
 				2E502D0B2B2750D0002CE669 /* SettingsViewModel.swift in Sources */,
 				2E60B6212AFAB1E400573049 /* SearchAddressViewModel.swift in Sources */,
 				2E60B61E2AFA8C3C00573049 /* SearchAddressView.swift in Sources */,
+				2E10804A2C38709F00CDCF3E /* CompanyDashboardHeader.swift in Sources */,
 				2E2967102C1854A8002050FC /* MultipleRouteModel.swift in Sources */,
 				2E5DF96B2AEACD63005BE20D /* Database.swift in Sources */,
 				2E5DF9792AEACD64005BE20D /* CommonNetworkRouter.swift in Sources */,
@@ -2258,6 +2350,7 @@
 				2E454EF32B9F720400998EC6 /* MapTabViewModel+Filter.swift in Sources */,
 				2E7266EA2AFD140A008099D0 /* YTextView.swift in Sources */,
 				2E5DF9832AEACD64005BE20D /* String+Extensions.swift in Sources */,
+				2E594F152C3DA82D001DB638 /* NetResWebInvoice.swift in Sources */,
 				2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */,
 				2EDF8C772AD44565003D64FC /* OTPView.swift in Sources */,
 				2E6F3CBE2B3CA62F0015C623 /* PageCoverUI.swift in Sources */,
@@ -2292,6 +2385,7 @@
 				2E502D092B272D39002CE669 /* SettingsViewUtils.swift in Sources */,
 				2E5DF97C2AEACD64005BE20D /* AnyWrapper.swift in Sources */,
 				2E7739FF2B6AA4D1007A65BF /* MainTabView.swift in Sources */,
+				2EF227262C3B003B00FD45BF /* LargeCardItemView.swift in Sources */,
 				2E5DF96A2AEACD63005BE20D /* DState.swift in Sources */,
 				2E5DF9492AEACD63005BE20D /* MapInformationVisibility.swift in Sources */,
 				2E36A7432AEECD380033363E /* MainService.swift in Sources */,
@@ -2306,6 +2400,7 @@
 				2E36A74B2AEF94500033363E /* StationItem.swift in Sources */,
 				2EDF8C682AD442AE003D64FC /* KeyboardKey.swift in Sources */,
 				2E5DF9712AEACD64005BE20D /* Network.swift in Sources */,
+				2E594F172C3DA909001DB638 /* NetResWebTransaction.swift in Sources */,
 				2E962D592C29EF3E00F61E11 /* StationDService.swift in Sources */,
 				2E2420692B82AB80003DE3E5 /* TransactionItem.swift in Sources */,
 				2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */,
@@ -2325,6 +2420,7 @@
 				2EF746AD2B1CE887009E2D8D /* MarkerViewsManager.swift in Sources */,
 				2E5DF9812AEACD64005BE20D /* Array+Extensions.swift in Sources */,
 				AD4B17962C1B74630087D2B6 /* HomeViewModel.swift in Sources */,
+				2EF2271F2C3A7A6C00FD45BF /* TotalSpendingsViewModel.swift in Sources */,
 				2E5DF9342AEACD63005BE20D /* Color+Extension.swift in Sources */,
 				2E0F93D02B0131FC00660DEB /* StationDetailsViewModel.swift in Sources */,
 				2E1E920B2B77EC3A00AF1D7C /* MainTabViewModel.swift in Sources */,
@@ -2467,7 +2563,7 @@
 				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -2512,7 +2608,7 @@
 				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

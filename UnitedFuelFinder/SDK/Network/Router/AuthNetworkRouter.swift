@@ -10,8 +10,8 @@ import Foundation
 enum UserNetworkRouter: URLRequestProtocol {
     var url: URL {
         switch self {
-        case .verifyAccount:
-            return URL.baseAPI.appendingPath("Account", "VerifyClient")
+        case .verifyAccount(let email):
+            return URL.baseAPI.appendingPath("Account", "VerifyClient").queries(.init(name: "email", value: email))
         case .login:
             return URL.baseAPI.appendingPath("Account", "ClientLogin")
         case .register:
@@ -35,8 +35,6 @@ enum UserNetworkRouter: URLRequestProtocol {
     
     var body: Data? {
         switch self {
-        case .verifyAccount(let request):
-            return request.asData
         case .login(let request):
             return request.asData
         case .register(let request):
@@ -84,7 +82,7 @@ enum UserNetworkRouter: URLRequestProtocol {
         return request!
     }
     
-    case verifyAccount(request: NetReqVerifyAccount)
+    case verifyAccount(email: String)
     case login(request: NetReqLogin)
     case register(request: NetReqRegister)
     case refresh(refreshToken: String)

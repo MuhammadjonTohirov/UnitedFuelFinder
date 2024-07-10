@@ -105,7 +105,12 @@ struct MainTabView: View {
     private var leadingTopBar: some View {
         switch viewModel.selectedTag {
         case .dashboard:
-            Icon(name: "icon_bell_active")
+            Image("icon_bell_active")
+                .renderingMode(.template)
+                .resizable()
+                .frame(width: 24, height: 24)
+                .foregroundStyle(.white)
+                .shadow(color: .black, radius: 4, x: 0, y: 0)
                 .onTapGesture {
                     viewModel.dashboardViewModel.navigate(to: .notifications)
                 }
@@ -126,6 +131,9 @@ struct MainTabView: View {
         case .dashboard:
             Text("Dashboard")
                 .font(.system(size: 16, weight: .bold))
+                .foregroundStyle(.white)
+                .shadow(color: .black, radius: 4, x: 0, y: 0)
+
         case .map:
             MapTabToggleView(selectedIndex: $viewModel.mapBodyState)
         case .settings:
@@ -180,7 +188,7 @@ struct MainTabView: View {
     
     private var tabView: some View {
         TabView(selection: $viewModel.selectedTag) {
-            HomeContainerView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
+            DashboardView(viewModel: viewModel.dashboardViewModel as! DashboardViewModel)
                 .environmentObject(mainViewModel)
                 .tabItem {
                     Image("icon_pie")

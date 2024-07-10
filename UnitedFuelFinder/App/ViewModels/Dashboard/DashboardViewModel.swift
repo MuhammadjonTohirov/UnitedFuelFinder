@@ -31,6 +31,8 @@ enum DashboardRoute: ScreenRoute {
             return "profile"
         case .stationInfo:
             return "station"
+        case .cards:
+            return "cards"
         }
     }
     
@@ -39,6 +41,7 @@ enum DashboardRoute: ScreenRoute {
     case notifications
     case profile
     case stationInfo(_ station: StationItem)
+    case cards
     
     @ViewBuilder
     var screen: some View {
@@ -53,6 +56,8 @@ enum DashboardRoute: ScreenRoute {
             ProfileVIew()
         case .stationInfo(let sta):
             StationDetailsView(station: sta)
+        case .cards:
+            AllCardsView()
         }
     }
 }
@@ -66,21 +71,23 @@ protocol DashboardViewModelProtocol: ObservableObject {
 class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
     @Published var push: Bool = false
     private(set) var interactor: (any DashboardInteractorProtocol)
+    
+    var sepndingsViewModel: TotalSpendingsViewModel = .init()
+    
     @Published var transactions: [TransactionItem] = []
     @Published var invoices: [InvoiceItem] = []
     @Published var discountedStations: [StationItem] = []
+    
     @Published var isLoading: Bool = false
     @Published var currentLocation: CLLocation?
     
-    @Published var chartData:[(Double, Color)] = []
+    @Published var chartData:[PieSlice] = []
     
     private var didAppear: Bool = false
     
     init(interactor: any DashboardInteractorProtocol = DashboardInteractor()) {
         self.interactor = interactor
         self.chartData = [
-            (2.0, Color.yellow),
-            (6.0, Color.green)
         ]
     }
     
@@ -98,6 +105,11 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
         didAppear = true
         
         reloadData()
+        
+        sepndingsViewModel.data = [
+            .init(id: 0, value: 120, title: "spendings".localize, color: .yellow),
+            .init(id: 1, value: 50, title: "savings".localize, color: .green)
+        ]
     }
     
     func navigate(to page: DashboardRoute) {

@@ -34,6 +34,7 @@ struct AuthView: View {
                 viewModel.route?.screen
                     .background(.appBackground)
             }
+            .coveredLoading(isLoading: $viewModel.isLoading)
             .onAppear {
                 viewModel.userType = userType
             }

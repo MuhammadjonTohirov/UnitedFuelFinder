@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-
+import UIKit
 
 struct AllInvoicesView: View {
     @Environment (\.dismiss) var dismiss
@@ -18,14 +18,39 @@ struct AllInvoicesView: View {
     @State private var buttonNumber = 0
     @State private var isLoading = false
     @State private var invoices: [InvoiceItem] = []
+    @State private var showSelectCard: Bool = false
+    @State private var selectedCard: DriverCard? = nil
+    @State private var cards: [DriverCard] = []
     
+    private var isCompany: Bool {
+        UserSettings.shared.userType == .company
+    }
+
     @Environment(\.scenePhase)
     private var scenePhase
+    
+    private var downloadURL: URL {
+//        /api/Company/PrintInvoices
+        URL.baseAPI.appendingPath(isCompany ? "Company" : "Driver", "PrintInvoices")
+            .queries(
+                .init(name: "fromDate", value: date1.toString(format: "ddMMyyyy")),
+                .init(name: "toDate", value: date2.toString(format: "ddMMyyyy")),
+                .init(name: "cardNumber", value: selectedCard?.id)
+            )
+    }
+    
+    @State private var pdfURL: URL?
+    @State private var showShareSheet: Bool = false
     
     var body: some View {
         VStack {
             datePicker
-                .padding(.top, 20)
+                .padding(.top, 0)
+                .padding(.horizontal, Padding.default)
+
+            cardField
+                .set(isVisible: isCompany)
+            
             LazyVStack {
                 ForEach(invoices) { invo in
                     InvoiceView(item: invo)
@@ -57,16 +82,78 @@ struct AllInvoicesView: View {
                 }
             })
             .onAppear {
-                reloadData()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    self.reloadData()
+                }
+                
+                Task {
+                    await loadCards()
+                }
             }
-            
             .onChange(of: scenePhase, perform: { newValue in
                 if newValue == .active {
                     reloadData()
                 }
             })
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    isLoading = true
+                    Network().downloadPDF(
+                        url: downloadURL.absoluteString
+                    ) { pdfUrl in
+                        DispatchQueue.main.async {
+                            self.isLoading = false
+                            self.pdfURL = pdfUrl
+                            self.showShareSheet = true
+                        }
+                    }
+                }, label: {
+                    Image("icon_pdf_download")
+                })
+            }
+        })
+        .sheet(isPresented: $showShareSheet, content: {
+            if let pdfURL = pdfURL {
+                ShareSheet(items: [pdfURL])
+            }
+        })
+        .sheet(isPresented: $showSelectCard, content: {
+            SelectCardListView(
+                selectedCard: $selectedCard,
+                cards: cards
+            )
+            .dynamicSheet()
+            .scrollable()
+        })
+        .onChange(of: selectedCard, perform: { _ in
+            showSelectCard = false
+            reloadData()
+        })
         .background(.appBackground)
+    }
+    
+    private var cardField: some View {
+        HStack {
+            Text(selectedCard == nil ? "all".localize : selectedCard?.name ?? "")
+                .font(.regular(size: 12))
+            Spacer()
+            Image(systemName: "chevron.down")
+        }
+        .padding(.leading, Padding.medium)
+        .padding(.trailing, Padding.small)
+        .frame(height: 40)
+        .background(
+            RoundedRectangle(cornerRadius: 5)
+                .stroke(lineWidth: 1)
+                .foregroundColor(Color(hex: "#D4D4D4"))
+        )
+        .background(RoundedRectangle(cornerRadius: 5).foregroundStyle(.appBackground))
+        .padding(.horizontal, Padding.default)
+        .onTapGesture {
+            showSelectCard = true
+        }
     }
     
     private var datePicker: some View {
@@ -83,16 +170,18 @@ struct AllInvoicesView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .padding()
                 .font(.system(size: 13))
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(uiColor: .label))
             })
-            .frame(width: 163, height: 40)
+            .frame(height: 40)
+            .padding(.leading, Padding.medium)
+            .padding(.trailing, Padding.small)
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(lineWidth: 1)
-                    .foregroundColor(Color(hex: "#D4D4D4")))
+                    .foregroundColor(Color(hex: "#D4D4D4"))
+            )
             
             Button(action: {
                 buttonNumber = 2
@@ -106,17 +195,20 @@ struct AllInvoicesView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .padding()
                 .font(.system(size: 13))
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(uiColor: .label))
             })
-            .frame(width: 163, height: 40)
+            .frame(height: 40)
+            .padding(.leading, Padding.medium)
+            .padding(.trailing, Padding.small)
             .background(
                 RoundedRectangle(cornerRadius: 5)
                     .stroke(lineWidth: 1)
-                    .foregroundColor(Color(hex: "#D4D4D4")))
+                    .foregroundColor(Color(hex: "#D4D4D4"))
+            )
         }
+        
     }
     
     private func formattedDate(_ date: Date) -> String {
@@ -141,13 +233,23 @@ struct AllInvoicesView: View {
         
         let _invoices = (await CommonService.shared.fetchInvoices(
             fromDate: _from,
-            to: _to
+            to: _to,
+            card: selectedCard?.id,
+            isCompany: isCompany
         )).compactMap {
             InvoiceItem(from: $0)
         }
 
         await MainActor.run {
             self.invoices = _invoices
+        }
+    }
+    
+    private func loadCards() async {
+        let _cards = await CompanyService.shared.loadDriverCards()
+        
+        await MainActor.run {
+            self.cards = _cards
         }
     }
 }
@@ -158,3 +260,15 @@ struct AllInvoicesView: View {
     }
 }
 
+struct ShareSheet: UIViewControllerRepresentable {
+    var items: [Any]
+    var excludedActivityTypes: [UIActivity.ActivityType]? = nil
+
+    func makeUIViewController(context: Context) -> UIActivityViewController {
+        let controller = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        controller.excludedActivityTypes = excludedActivityTypes
+        return controller
+    }
+
+    func updateUIViewController(_ uiViewController: UIActivityViewController, context: Context) {}
+}

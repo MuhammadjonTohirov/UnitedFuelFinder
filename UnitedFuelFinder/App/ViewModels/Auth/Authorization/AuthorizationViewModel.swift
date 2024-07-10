@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+import AuthenticationServices
 import SwiftUI
 
 enum AuthRoute: ScreenRoute {
@@ -79,8 +79,6 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     
     @Published var isLoading: Bool = false
     
-    var needRegistration: Bool = false
-    
     var otpViewModel: OtpViewModel?
     
     @available(*, deprecated, message: "Not used anymore")
@@ -97,12 +95,6 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
             
             try? await Task.sleep(for: .seconds(0.5))
             
-            if self.needRegistration {
-                self.showFillProfile()
-                self.clearOTPModel()
-                return (true, nil)
-            }
-            
             let error = await self.getAccessToken()
             
             await MainActor.run {
@@ -110,8 +102,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
                     self.closeOTP()
                     self.showOnError(error)
                 } else {
-                    self.needRegistration ? self.showFillProfile() : self.showPinSetup()
-
+                    self.showPinSetup()
                     self.clearOTPModel()
                 }
             }
@@ -174,35 +165,6 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         }))
     }
     
-    func verifyEmail() {
-        guard username.isValidEmail else {
-            emailError = "invalid_email".localize
-            return
-        }
-        
-        emailError = nil
-    }
-    
-    @available(*, deprecated, message: "Not used anymore")
-    func onClickVerifyUsername() {
-        showLoading()
-        
-        Task.init {
-            let response = await AuthService.shared.verifyAccount(username)
-            
-            DispatchQueue.main.async {
-                self.hideLoading()
-                
-                if let result = response.0 {
-                    self.needRegistration = !result.exist
-                    self.showOtp()
-                } else {
-                    self.showAlert(message: response.error ?? "Cannot verify account".localize)
-                }
-            }
-        }
-    }
-    
     func showLoading() {
         mainIfNeeded {
             self.isLoading = true
@@ -244,8 +206,10 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
         
         let (isOK, error) = await AuthService.shared.login(username: self.username, password: password, role: type)
         
-        await MainService.shared.syncCustomers()
-        await MainService.shared.syncAllStations()
+        if isOK {
+            await MainService.shared.syncCustomers()
+            await MainService.shared.syncAllStations()
+        }
         
         hideLoading()
         
@@ -254,5 +218,58 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     
     private func showOnError(_ error: AuthNetworkErrorReason) {
         self.showError(message: error.localizedDescription)
+    }
+    
+    func loginWithApple() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.email]
+        
+        let authorizationController =  ASAuthorizationController(
+            authorizationRequests: [request]
+        )
+        authorizationController.delegate = self
+        authorizationController.performRequests(options: [
+            .preferImmediatelyAvailableCredentials
+        ])
+    }
+}
+
+extension AuthorizationViewModel: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: any Error) {
+        self.showError(message: error.localizedDescription)
+    }
+    
+    func authorizationController(
+        controller: ASAuthorizationController,
+        didCompleteWithAuthorization authorization: ASAuthorization
+    ) {
+        guard
+            let credential = authorization.credential as? ASAuthorizationAppleIDCredential//,
+//            let tokenData = credential.authorizationCode,
+//            let token = String(data: tokenData, encoding: .utf8)
+        else { return }
+        
+        guard let email = credential.email?.nilIfEmpty else {
+            self.showError(message: "unable.to.detect.email".localize)
+            return
+        }
+        
+        self.showLoading()
+        
+        Task {
+            let result = await AuthService.shared.verifyAccount(email)
+            
+            await MainActor.run {
+                self.hideLoading()
+                
+                if result.0 {
+                    self.showPinSetup()
+                    self.clearOTPModel()
+                } else if let error = result.error {
+                    
+                }
+            }
+        }
     }
 }

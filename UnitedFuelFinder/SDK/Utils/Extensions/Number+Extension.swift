@@ -93,3 +93,15 @@ extension Int {
         return Character(UnicodeScalar("A".unicodeScalars.first!.value + UInt32(self))!)
     }
 }
+
+extension Int: NetResBody {
+    
+}
+
+extension Float: NetResBody {
+    
+}
+
+extension Double: NetResBody {
+    
+}

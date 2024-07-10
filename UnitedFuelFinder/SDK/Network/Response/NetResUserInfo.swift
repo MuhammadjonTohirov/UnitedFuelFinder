@@ -17,8 +17,13 @@ struct NetResUserInfo: NetResBody {
     let email: String?
     let phone: String?
     let cardNumber: String?
+    
+    let organizationId: Int?
+    let organizationName: String?
+    
     let companyId: Int?
     let companyName: String?
+    
     let address: String?
     let cityId: Int?
     let cityName: String?

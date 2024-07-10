@@ -9,6 +9,10 @@ import Foundation
 
 extension DashboardViewModel {
     func loadTransactions() async {
+        guard UserSettings.shared.userInfo?.canViewTransactions ?? true else {
+            return
+        }
+        
         let _transactions = await interactor.getTransactions(
             from: Date().before(monthes: 3),
             to: Date()
@@ -21,6 +25,10 @@ extension DashboardViewModel {
     }
     
     func loadInvoices() async {
+        guard UserSettings.shared.userInfo?.canViewInvoices ?? true else {
+            return
+        }
+        
         let _invoices = await interactor.getInvoices(
             from: Date().before(monthes: 3),
             to: Date()

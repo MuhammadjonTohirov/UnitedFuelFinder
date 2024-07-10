@@ -15,7 +15,7 @@ final public class UserSettings {
     
     public private(set) var userAvatarURL: URL = URL.baseAPI.appendingPath("Driver", "DownloadAvatar")
     
-    public static let testAccessToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFVXEwcHJTaVA4bkV6Zy1HZ2J1MVFTVnVXV1ZQU0pEbE9GNEJxSVRkWTJzIn0.eyJleHAiOjE3MzAxMTk0OTAsImlhdCI6MTcxOTc1MTQ5MCwianRpIjoiN2I2ZWU3NmEtMDQyMi00NTdiLTlkMGQtYzcwN2M0MmNiZTQzIiwiaXNzIjoiaHR0cDovLzE1LjIzNS4yMTIuMTI5OjgwODAvYXV0aC9yZWFsbXMvVUZDIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjU3MjVkOGRjLWIxYWMtNGY5YS1iOGI5LTZlNzEwYjlkNGQ3ZiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNhYmluZXQiLCJzZXNzaW9uX3N0YXRlIjoiMjdiNGEwNzEtY2M2Ny00MmFlLWFlMTEtYzE4YTNjM2Y3NGUxIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy11ZmMiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlJhZGlzIFNhYmlyb3YiLCJyb2xlX2NvZGUiOiJjb21wYW55IiwicHJlZmVycmVkX3VzZXJuYW1lIjoicmFkbGVuLmluY0BnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiUmFkaXMiLCJmYW1pbHlfbmFtZSI6IlNhYmlyb3YiLCJlbWFpbCI6InJhZGxlbi5pbmNAZ21haWwuY29tIn0.BSsJgLhFPkly4JAmMq6EdpTz92E91aQFZgewQZj2Ivil9hD5aR8nNW_-dTsI1v1yjsflESGDNWq7bGeKysnTDDrzoJlL7Brn3TzxgIttBqb3jrdau5RVs8UERis9XFa81eEiMLYydDCgmTuaDeXXs7rhpf4g2_dUBCzIxs8k-uk-apzu335XfqEKoDOtJkR2scT_yipJdI47gfAySNbPH-tXNSvpu6aU2yeN5pGdrJ-MGWqVTZc3WFcOt9vawy_cbUgvmGK1txSsMZq0370zk4TFwuEU3cGmwLiHLD4n9GOxLqMITJkOWc2KqNz-NMNioT1vf4bEXNzpLw1zYvpY8g"
+    public static let testAccessToken = "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJFVXEwcHJTaVA4bkV6Zy1HZ2J1MVFTVnVXV1ZQU0pEbE9GNEJxSVRkWTJzIn0.eyJleHAiOjE3MzAzOTU5MTMsImlhdCI6MTcyMDAyNzkxMywianRpIjoiNDg2ODUyNTAtM2Q1OC00NjkxLWFlNWEtZTYwZWFhZGM1ODAwIiwiaXNzIjoiaHR0cDovLzE1LjIzNS4yMTIuMTI5OjgwODAvYXV0aC9yZWFsbXMvVUZDIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6IjU3MjVkOGRjLWIxYWMtNGY5YS1iOGI5LTZlNzEwYjlkNGQ3ZiIsInR5cCI6IkJlYXJlciIsImF6cCI6ImNhYmluZXQiLCJzZXNzaW9uX3N0YXRlIjoiODE4ZWI4ZmUtNWU4NS00OGY5LTljZTItOTEwM2JmODE4YzRhIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwiZGVmYXVsdC1yb2xlcy11ZmMiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6ImVtYWlsIHByb2ZpbGUiLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmFtZSI6IlJhZGlzIFNhYmlyb3YiLCJyb2xlX2NvZGUiOiJjb21wYW55IiwicHJlZmVycmVkX3VzZXJuYW1lIjoicmFkbGVuLmluY0BnbWFpbC5jb20iLCJnaXZlbl9uYW1lIjoiUmFkaXMiLCJmYW1pbHlfbmFtZSI6IlNhYmlyb3YiLCJlbWFpbCI6InJhZGxlbi5pbmNAZ21haWwuY29tIn0.DTCgZV8o8l1DKLXun5o4aL61YJsYb7OaVdusY6B12qC_Gp2cqNUy03BVDKtJvemvGoUKRJ_85eo5Arc-ZcXirmha1L7sQdgLZRvtIyF8VSP_FMYlb_SbPG2dj3UHX4qAJuAcanwKzSY4EQ1Vm-Ql2y1stDaqoTzApb1ZjnuDkHOo_QqtJbAgSdnUlKpCD9vMP5i9V499MB0-ixuTvUQOmwQHavNiA1_DqRi5CCWVbxJ4fNoHtgoJHuKEqMmproy2aF7vqug5VwHCJHKLABMCHBMDWHrNev0bNYfiD-HNrfl3WleBrSKPNBQj-HpNE6HBpqSUUHYncS9yA6MdpMy8-g"
     
     public static let testRefreshToken = "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJmMTBmNTBjZS0wYzViLTQwZjEtOTc3MC0yMzhkZmNiMmFkYjcifQ.eyJleHAiOjE3MzUwNjUxODAsImlhdCI6MTcxOTUxMzE4MCwianRpIjoiMTQ4ZDEwYjctYjA3YS00YWFlLWEyNDQtOGIwYTFkNGJiM2ZkIiwiaXNzIjoiaHR0cDovLzE1LjIzNS4yMTIuMTI5OjgwODAvYXV0aC9yZWFsbXMvVUZDIiwiYXVkIjoiaHR0cDovLzE1LjIzNS4yMTIuMTI5OjgwODAvYXV0aC9yZWFsbXMvVUZDIiwic3ViIjoiNTcyNWQ4ZGMtYjFhYy00ZjlhLWI4YjktNmU3MTBiOWQ0ZDdmIiwidHlwIjoiUmVmcmVzaCIsImF6cCI6ImNhYmluZXQiLCJzZXNzaW9uX3N0YXRlIjoiMjVmYjQ0MzQtMzk5NC00NjI2LWJjMmItNmIyYjBkMzJjNjliIiwic2NvcGUiOiJlbWFpbCBwcm9maWxlIn0.BKS_rWvlreqcBqIQO9ncUNHwbgqyh5XPpZSwOTBnu6M"
     
@@ -31,6 +31,9 @@ final public class UserSettings {
             "1", "2", "3", "4", "0", "5"
         ])
         UserSettings.shared.userInfo?.roleCode = "company"
+        UserSettings.shared.userInfo?.permissionList = [
+            "view_invoices", "view_transactions"
+        ]
     }
     
     @codableWrapper(key: "currentAppVersion")
@@ -77,8 +80,16 @@ final public class UserSettings {
     @codableWrapper(key: "currentAPIVersion")
     public var currentAPIVersion: ServerVersion?
     
+    private var _userType: UserType?
+    
     public var userType: UserType? {
-        userInfo?.roleCode == "company" ? .company : .driver
+        if let _userType {
+            return _userType
+        }
+        
+        _userType = userInfo?.roleCode == "company" ? .company : .driver
+        
+        return _userType
     }
     
     @codableWrapper(key: "appPin")

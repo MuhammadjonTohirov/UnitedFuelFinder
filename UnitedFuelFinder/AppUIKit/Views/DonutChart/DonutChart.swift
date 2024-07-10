@@ -12,6 +12,7 @@ struct DonutChartSlice: Identifiable {
     var id = UUID()
     var value: Double
     var color: Color
+    var selected: Bool = false
 }
 
 struct DonutChartView: View {

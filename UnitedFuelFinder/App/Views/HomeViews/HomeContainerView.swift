@@ -8,9 +8,7 @@
 import UIKit
 import SwiftUI
 
-
 struct HomeContainerView: View {
-    
     @ObservedObject var viewModel: DashboardViewModel
     
     init(viewModel: DashboardViewModel) {
@@ -39,10 +37,10 @@ struct HomeContainerView: View {
     private var innerBody: some View {
         VStack(alignment: .leading, spacing: 20) {
             //CardWidgetView()
-            ChartView(data: viewModel.chartData, spending: 1, saving: 45)
-                .padding()
-                .background(Color.gray)
-                .cornerRadius(8)
+//            TotalSpendingsWidgetView(data: viewModel.chartData, spending: 1, saving: 45)
+//                .padding()
+//                .background(Color.gray)
+//                .cornerRadius(8)
             
             recentTransactionView
             recentInvoicesView

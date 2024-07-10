@@ -42,19 +42,38 @@ public actor CommonService {
         return result?.data?.ios
     }
     
-    public func fetchTransactions(fromDate: String, to: String) async -> [NetResTransactions] {
-        let result: NetRes<[NetResTransactions]>? = await Network.send(request: CommonNetworkRouter.filterTransactions(fromDate: fromDate, to: to))
+    public func fetchTransactions(fromDate: String, to: String, card: String? = nil, isCompany: Bool = false) async -> [NetResTransactions] {
+        let result: NetRes<[NetResTransactions]>? = await Network.send(request: CommonNetworkRouter.filterTransactions(
+            fromDate: fromDate,
+            to: to,
+            card: card,
+            isCompany: isCompany
+        ))
         return result?.data ?? []
     }
 
-    public func fetchInvoices(fromDate: String, to: String) async -> [NetResInvoiceItem] {
-        let result: NetRes<[NetResInvoiceItem]>? = await Network.send(request: CommonNetworkRouter.filterInvoices(fromDate: fromDate, to: to))
+    public func fetchInvoices(fromDate: String, to: String, card: String? = nil, isCompany: Bool = false) async -> [NetResInvoiceItem] {
+        let result: NetRes<[NetResInvoiceItem]>? = await Network.send(request: CommonNetworkRouter.filterInvoices(
+            fromDate: fromDate,
+            to: to,
+            card: card,
+            isCompany: isCompany
+        ))
         return result?.data ?? []
     }
     
     public func fetchTotalSpending(type: Int) async -> NetResTotalSpending {
         let result: NetRes<NetResTotalSpending>? = await Network.send(request: CommonNetworkRouter.totalSpendings(type: type))
         return result?.data ?? NetResTotalSpending(total: 0, records: [])
+    }
+    
+    public func invoicePdfURL(fromDate: String, to: String, card: String? = nil) -> URL {
+        return URL.baseAPI.appendingPath("Company", "PrintCompany")
+            .queries(
+                .init(name: "fromDate", value: fromDate),
+                .init(name: "toDate", value: to),
+                .init(name: "cardNumber", value: card)
+            )
     }
     
     public func fetchCardInfo() async -> NetResCard? {

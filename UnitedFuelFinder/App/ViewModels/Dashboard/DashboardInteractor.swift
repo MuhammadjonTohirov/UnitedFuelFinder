@@ -22,7 +22,8 @@ class DashboardInteractor: DashboardInteractorProtocol {
         let _to = to.toString(format: "ddMMyyyy")
         return (await CommonService.shared.fetchTransactions(
             fromDate: _from,
-            to: _to
+            to: _to,
+            isCompany: UserSettings.shared.userType == .company
         )).compactMap({TransactionItem(from: $0)})
     }
     
@@ -31,7 +32,8 @@ class DashboardInteractor: DashboardInteractorProtocol {
         let _to = to.toString(format: "ddMMyyyy")
         return (await CommonService.shared.fetchInvoices(
             fromDate: _from,
-            to: _to
+            to: _to,
+            isCompany: UserSettings.shared.userType == .company
         )).compactMap({InvoiceItem(from: $0)})
     }
     

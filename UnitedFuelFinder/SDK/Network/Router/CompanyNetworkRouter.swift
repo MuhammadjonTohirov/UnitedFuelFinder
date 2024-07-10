@@ -14,6 +14,7 @@ enum CompanyNetworkRouter: URLRequestProtocol {
         request: NetReqSaveDriverSettings
     )
     case driverCardList
+    case getAllCards
     
     var url: URL {
         switch self {
@@ -25,6 +26,8 @@ enum CompanyNetworkRouter: URLRequestProtocol {
             return URL.baseAPI.appendingPath("Company", "DriverSettings", id)
         case .driverCardList:
             return URL.baseAPI.appendingPath("Company", "DriverCards")
+        case .getAllCards:
+            return URL.baseAPI.appendingPath("Company", "AllCards")
         }
     }
     

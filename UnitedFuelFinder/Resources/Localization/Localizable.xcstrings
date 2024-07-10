@@ -59,9 +59,6 @@
         }
       }
     },
-    "******" : {
-
-    },
     "#%lld" : {
 
     },
@@ -72,6 +69,9 @@
 
     },
     "%lld mi" : {
+
+    },
+    "$ %@" : {
 
     },
     "$%@" : {
@@ -220,6 +220,52 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Barcha shaxobchalar"
+          }
+        }
+      }
+    },
+    "all.balance" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All balance"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все балансы"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha balans"
+          }
+        }
+      }
+    },
+    "all.cards" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "All cards"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все карты"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha kartalar"
           }
         }
       }
@@ -2682,6 +2728,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2935,6 +2987,29 @@
         }
       }
     },
+    "no.card.selected" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No cards selected"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет карты выбранной"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tejalganlar"
+          }
+        }
+      }
+    },
     "no.cards.selected" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -2953,7 +3028,30 @@
         "uz" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Hech nima tanlanmagan"
+            "value" : "Karta tanlanmagan"
+          }
+        }
+      }
+    },
+    "no.data.available" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data available"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Нет доступных данных"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ma'lumotlar yo'q"
           }
         }
       }
@@ -3144,6 +3242,12 @@
           }
         }
       }
+    },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -3585,6 +3689,52 @@
         }
       }
     },
+    "recent.invoices" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent invoices"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Последние счета"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So'ngi hisoblar"
+          }
+        }
+      }
+    },
+    "recent.transactions" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent transactions"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Последние транзакции"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "So'ngi transaksiyalar"
+          }
+        }
+      }
+    },
     "region" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3676,6 +3826,9 @@
           }
         }
       }
+    },
+    "Regular" : {
+
     },
     "reset.pass.failed" : {
       "extractionState" : "manual",
@@ -3884,8 +4037,28 @@
         }
       }
     },
-    "Savings" : {
-
+    "savings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Savings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбережения"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tejalganlar"
+          }
+        }
+      }
     },
     "search_address" : {
       "extractionState" : "manual",
@@ -4211,6 +4384,29 @@
         }
       }
     },
+    "spendings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spendings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Расходы"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sarflar"
+          }
+        }
+      }
+    },
     "Spendings" : {
 
     },
@@ -4284,6 +4480,9 @@
       }
     },
     "Submit" : {
+
+    },
+    "SwiftUI" : {
 
     },
     "system" : {
@@ -4404,6 +4603,52 @@
         }
       }
     },
+    "total.gallons" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total gallons"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всего бутылок"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha galon"
+          }
+        }
+      }
+    },
+    "total.savings" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total savings"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всего сбережений"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Barcha saqlashlar"
+          }
+        }
+      }
+    },
     "total.spendings" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4423,6 +4668,29 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Jami xarajatlar"
+          }
+        }
+      }
+    },
+    "total.spendings.by.period" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total spendings by period"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Всего потрачено за период"
+          }
+        },
+        "uz" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vaqt oralig'idagi barcha sarflar"
           }
         }
       }

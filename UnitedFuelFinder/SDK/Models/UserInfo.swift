@@ -39,6 +39,8 @@ public struct UserInfo: Codable, Hashable {
     var efsAccountName: String?
     var includeStations: [String]?
     var roleCode: String
+    var organizationId: Int?
+    var organizationName: String?
     
     var registerTimeBeautified: String {
         // mm/dd/YYYY HH:mm:ss
@@ -117,6 +119,8 @@ public struct UserInfo: Codable, Hashable {
         self.efsAccountId = res.efsAccountId
         self.efsAccountName = res.efsAccountName
         self.includeStations = res.includeStations
+        self.organizationId = res.organizationId
+        self.organizationName = res.organizationName
     }
     
     var permissionsString: String {

@@ -76,25 +76,15 @@ struct DriverPropertiesView: View {
         .scrollBounceBehavior(.basedOnSize)
         .padding(.horizontal, 20)
         .sheet(isPresented: $selectCard, content: {
-            VStack {
-                ForEach(cards, id: \.id) { card in
-                    VStack(alignment: .leading) {
-                        Text(card.name)
-                    }
-                    .horizontal(alignment: .leading)
-                    .padding(10)
-                    .background(Color.appSecondaryBackground)
-                    .border(.gray.opacity(0.5), width: 1, cornerRadius: 8)
-                    .onTapGesture {
-                        self.selectedCard = card
-                    }
-                    .padding(.horizontal, Padding.medium)
-                    .padding(.bottom, 8)
-                }
-            }
-            .padding(.top, 20)
+            SelectCardListView(
+                selectedCard: $selectedCard,
+                cards: cards
+            )
             .dynamicSheet()
             .scrollable()
+        })
+        .onChange(of: selectedCard, perform: { value in
+            self.selectCard = false
         })
         .navigationTitle(userInfo.fullName)
         .onAppear {
@@ -157,11 +147,10 @@ struct DriverPropertiesView: View {
             
             HStack(spacing: 10) {
                 Text(selectedCard?.name ?? "")
+                    .lineLimit(1)
                     .font(.medium(size: 13))
                 Spacer()
                 
-//                Image(systemName: "xmark.circle")
-//                    .foregroundStyle(.gray)
                 Image(systemName: "chevron.down")
             }
             .padding(14)
