@@ -14,6 +14,8 @@ struct TotalSpendingsWidgetView: View {
     
     private let chartSize = UIScreen.main.bounds.size.width * 0.35
     @State private var selectedCount: Int?
+    @State private var bodySize: CGRect = .zero
+    @State private var filterViewSize: CGRect = .zero
     
     var body: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -28,7 +30,24 @@ struct TotalSpendingsWidgetView: View {
                     RoundedRectangle(cornerRadius: 16)
                         .foregroundStyle(.appSecondaryBackground)
                 }
-        }.onAppear {
+                .coveredLoading(isLoading: $viewModel.isLoading)
+                .readRect(rect: $bodySize)
+        }
+        .sheet(isPresented: $viewModel.showFilterSheet, content: {
+            ForEach(0..<TotalSpendingsFilter.allCases.count, id: \.self) { i in
+                Text(TotalSpendingsFilter.allCases[i].title)
+                    .padding(.horizontal, Padding.default)
+                    .padding(.vertical, 4)
+                    .onTapGesture {
+                        viewModel.filter = TotalSpendingsFilter.allCases[i]
+                        viewModel.showFilterSheet = false
+                        viewModel.loadData()
+                    }
+            }
+            .padding(.top, Padding.default)
+            .dynamicSheet()
+        })
+        .onAppear {
             viewModel.loadData()
         }
     }
@@ -64,8 +83,36 @@ struct TotalSpendingsWidgetView: View {
             }
         }
         .background(Color.clear)
+        .overlay {
+            filterView
+                .readRect(rect: $filterViewSize)
+                .onTapGesture {
+                    viewModel.showFilterSheet = true
+                }
+                .position(
+                    x: bodySize.width - filterViewSize.width / 2 - 8,
+                    y: filterViewSize.height / 2
+                )
+        }
     }
     
+    private var filterView: some View {
+        HStack(spacing: 5) {
+            Text(viewModel.filter.title)
+                .font(.regular(size: 10))
+            Image(systemName: "chevron.down")
+                .resizable()
+                .frame(width: 8, height: 5)
+                .foregroundStyle(.appIcon)
+        }
+        .padding(.horizontal, 10)
+        .padding(.vertical, 6)
+        .background {
+            Capsule()
+                .foregroundStyle(.appBackground)
+                .border(.accent, width: 1, cornerRadius: 20)
+        }
+    }
     
     @available(iOS 17.0, *)
     @ViewBuilder
@@ -115,5 +162,6 @@ struct TotalSpendingsWidgetView: View {
 }
 
 #Preview {
-    TotalSpendingsWidgetView(viewModel: .test)
+    UserSettings.shared.language = .english
+    return TotalSpendingsWidgetView(viewModel: .test)
 }

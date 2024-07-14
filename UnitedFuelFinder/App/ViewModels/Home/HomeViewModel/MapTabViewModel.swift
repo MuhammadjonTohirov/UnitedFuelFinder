@@ -202,8 +202,9 @@ final class MapTabViewModel: NSObject, ObservableObject, MapTabViewModelProtocl,
             if self.stations.isEmpty {
                 if !destinations.isEmpty {
                     Task {
-                        await self.drawRoute()
-                        self.startFilterStations()
+                        await self.drawRoute().ifTrue {
+                            self.startFilterStations()
+                        }
                     }
                 }
             } else {

@@ -115,6 +115,7 @@ final public class UserSettings {
     public var theme: Theme?
     
     func clear() {
+        _userType = nil
         accessToken = nil
         refreshToken = nil
         tokenExpireDate = nil

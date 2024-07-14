@@ -107,8 +107,9 @@ extension MapTabViewModel: SearchAddressProtocol {
                 self.destinations = _destinations
                 
                 Task {
-                    await self.drawRoute()
-                    self.startFilterStations()
+                    (await self.drawRoute()).ifTrue {
+                        self.startFilterStations()
+                    }
                 }
             }
         }
@@ -137,8 +138,9 @@ extension MapTabViewModel: SearchAddressProtocol {
                     self.state = .routing
                 }
                 
-                await self.drawRoute()
-                self.startFilterStations()
+                await self.drawRoute().ifTrue {
+                    self.startFilterStations()
+                }
             }
         }
     }

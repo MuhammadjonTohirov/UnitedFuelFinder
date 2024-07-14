@@ -19,11 +19,34 @@ struct SpendingItem: Identifiable {
     }
 }
 
+enum TotalSpendingsFilter: Int, CaseIterable {
+    case week = 0
+    case week2
+    case week3
+    
+    var title: String {
+        switch self {
+        case .week:
+            return "last.7.days".localize
+        case .week2:
+            return "last.30.days".localize
+        case .week3:
+            return "last.90.days".localize
+        }
+    }
+}
+
 final class TotalSpendingsViewModel: ObservableObject {
     @Published var data: [SpendingItem] = []
     @Published var selected: Int = 0
-    @Published var type: Int = 0
+    
+    var type: Int {
+        filter.rawValue
+    }
+    
     @Published var isLoading: Bool = false
+    @Published var filter: TotalSpendingsFilter = .week
+    @Published var showFilterSheet = false
     
     var pieData: [PieSlice] {
         data.map{$0.pie}.sorted(by: {$0.id < $1.id})
@@ -35,8 +58,8 @@ final class TotalSpendingsViewModel: ObservableObject {
             let result = await DriverService.shared.summarySpending(type: type)
             await MainActor.run {
                 self.data = [
-                    .init(id: 0, value: result.spending, title: "spendings".localize, color: .green),
-                    .init(id: 1, value: result.saving, title: "savings".localize, color: .yellow)
+                    .init(id: 0, value: result.spending, title: "spendings".localize, color: .yellow),
+                    .init(id: 1, value: result.saving, title: "savings".localize, color: .green)
                 ]
                 isLoading = false
             }

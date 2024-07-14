@@ -59,9 +59,17 @@ extension MapTabViewModel {
             if filterTask?.isCancelled ?? true {
                 return
             }
-            
-            let _stations = await MainService.shared.filterStations3(req: _request)
-                .0
+            let result = await MainService.shared.filterStations3(req: _request)
+            if let error = result.1 {
+                Logging.l(tag: "MapTabViewModel", error.localizedDescription)
+                
+                await MainActor.run {
+                    self.onClickResetMap()
+                }
+                
+                return
+            }
+            let _stations = result.0
                 .sorted(by: {$0.distanceFromCurrentLocation < $1.distanceFromCurrentLocation})
 
             _stations.forEach { station in

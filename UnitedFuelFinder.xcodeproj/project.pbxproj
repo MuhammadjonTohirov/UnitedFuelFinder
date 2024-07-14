@@ -118,6 +118,7 @@
 		2E594F172C3DA909001DB638 /* NetResWebTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F162C3DA909001DB638 /* NetResWebTransaction.swift */; };
 		2E594F1A2C3E12DD001DB638 /* CardListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F192C3E12DD001DB638 /* CardListView.swift */; };
 		2E594F1E2C3E4365001DB638 /* Network+Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F1D2C3E4365001DB638 /* Network+Download.swift */; };
+		2E594F5A2C43AF18001DB638 /* Bool+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E594F592C43AF18001DB638 /* Bool+Extensions.swift */; };
 		2E5DF9212AEACD63005BE20D /* ScrollableModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8922AEACD63005BE20D /* ScrollableModifier.swift */; };
 		2E5DF9222AEACD63005BE20D /* CloseKeyboardModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8932AEACD63005BE20D /* CloseKeyboardModifier.swift */; };
 		2E5DF9232AEACD63005BE20D /* RectModifer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E5DF8942AEACD63005BE20D /* RectModifer.swift */; };
@@ -490,6 +491,7 @@
 		2E594F162C3DA909001DB638 /* NetResWebTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResWebTransaction.swift; sourceTree = "<group>"; };
 		2E594F192C3E12DD001DB638 /* CardListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardListView.swift; sourceTree = "<group>"; };
 		2E594F1D2C3E4365001DB638 /* Network+Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Download.swift"; sourceTree = "<group>"; };
+		2E594F592C43AF18001DB638 /* Bool+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bool+Extensions.swift"; sourceTree = "<group>"; };
 		2E5DF8922AEACD63005BE20D /* ScrollableModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollableModifier.swift; sourceTree = "<group>"; };
 		2E5DF8932AEACD63005BE20D /* CloseKeyboardModifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseKeyboardModifier.swift; sourceTree = "<group>"; };
 		2E5DF8942AEACD63005BE20D /* RectModifer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectModifer.swift; sourceTree = "<group>"; };
@@ -1461,6 +1463,7 @@
 				2E5DF91A2AEACD63005BE20D /* Date+Extensions.swift */,
 				2E5DF91B2AEACD63005BE20D /* Realm+Extensions.swift */,
 				2E5DF91C2AEACD63005BE20D /* CGFloat+Extension.swift */,
+				2E594F592C43AF18001DB638 /* Bool+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2344,6 +2347,7 @@
 				2E1B2DF42C2E174300412B55 /* DriverProperties.swift in Sources */,
 				2E5DF94B2AEACD63005BE20D /* MapCameraBoundary.swift in Sources */,
 				2EDF8C412AD2D865003D64FC /* AppDestination.swift in Sources */,
+				2E594F5A2C43AF18001DB638 /* Bool+Extensions.swift in Sources */,
 				2E5DF97F2AEACD64005BE20D /* Logging.swift in Sources */,
 				2E5DF94F2AEACD63005BE20D /* RendererMapOverlay.swift in Sources */,
 				2E5DF9952AEACEC9005BE20D /* SearchField.swift in Sources */,
@@ -2563,7 +2567,7 @@
 				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;
@@ -2608,7 +2612,7 @@
 				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 12;
 				DEVELOPMENT_ASSET_PATHS = "\"UnitedFuelFinder/Preview Content\"";
 				DEVELOPMENT_TEAM = 98RHHYF7KQ;
 				ENABLE_PREVIEWS = YES;

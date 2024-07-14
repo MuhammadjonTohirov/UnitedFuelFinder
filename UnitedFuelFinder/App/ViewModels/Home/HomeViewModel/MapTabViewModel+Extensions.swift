@@ -62,18 +62,17 @@ extension MapTabViewModel {
             self.isDrawing = true
         }
         
-        await drawRoute()
+        await drawRoute().ifTrue {
+            self.filterStationsByRoute()
+        }
         
         await MainActor.run {
             self.isDrawing = false
         }
-        
-        await MainActor.run {
-            self.filterStationsByRoute()
-        }
     }
     
-    func drawRoute() async {
+    @discardableResult
+    func drawRoute() async -> Bool {
         await MainActor.run {
             self.mapRoute = []
             
@@ -88,11 +87,10 @@ extension MapTabViewModel {
             await MainActor.run {
                 self.hideLoader()
                 self.showAlert(message: searchResult.1?.localizedDescription ?? "Cannot draw route")
+                self.onClickResetMap()
             }
-            
             try? await Task.sleep(for: .seconds(2))
-            
-            return
+            return false
         }
         
         await MainActor.run {
@@ -107,6 +105,7 @@ extension MapTabViewModel {
         }
         
         try? await Task.sleep(for: .milliseconds(300))
+        return true
     }
     
     func onClickSearchAddressFrom() {
