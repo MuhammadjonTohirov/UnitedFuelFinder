@@ -129,7 +129,7 @@ struct MainTabView: View {
     private var centerTopBar: some View {
         switch viewModel.selectedTag {
         case .dashboard:
-            Text("Dashboard")
+            Text("dashboard".localize)
                 .font(.system(size: 16, weight: .bold))
                 .foregroundStyle(.white)
                 .shadow(color: .black, radius: 4, x: 0, y: 0)
@@ -137,7 +137,7 @@ struct MainTabView: View {
         case .map:
             MapTabToggleView(selectedIndex: $viewModel.mapBodyState)
         case .settings:
-            Text("Settings")
+            Text("settings".localize)
                 .font(.system(size: 16, weight: .bold))
         }
     }

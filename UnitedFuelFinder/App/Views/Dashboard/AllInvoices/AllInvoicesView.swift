@@ -111,6 +111,8 @@ struct AllInvoicesView: View {
                     }
                 }, label: {
                     Image("icon_pdf_download")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.appIcon)
                 })
             }
         })

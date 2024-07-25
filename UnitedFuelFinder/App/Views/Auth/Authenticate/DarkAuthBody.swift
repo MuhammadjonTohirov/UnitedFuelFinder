@@ -11,6 +11,7 @@ import SwiftUI
 struct DarkAuthBody: View {
     @EnvironmentObject var viewModel: AuthorizationViewModel
     @State var showAlert: Bool = false
+    @State var alert: AlertToast = .init(type: .regular)
     @State private var bottomRect: CGRect = .zero
     @State private var bodyRect: CGRect = .zero
     @State private var formRect: CGRect = .zero
@@ -68,7 +69,7 @@ struct DarkAuthBody: View {
                 
                 AppleButton()
                     .onTapGesture {
-                        viewModel.loginWithApple()
+                        showToast("coming_soon".localize)
                     }
                     .padding(.bottom, Padding.medium.sh())
             }
@@ -78,16 +79,7 @@ struct DarkAuthBody: View {
         }
         .foregroundStyle(.white)
         .background(Color.appDarkGray)
-        
-        .onChange(of: bodyRect, perform: { value in
-            debugPrint("Body rect \(value)")
-        })
-        .onChange(of: bottomRect, perform: { value in
-            debugPrint("Bottom rect \(value)")
-        })
-        .onChange(of: formRect, perform: { value in
-            debugPrint("Form rect \(value)")
-        })
+        .toast($showAlert, self.alert, duration: 2)
     }
     
     private var form: some View {
@@ -148,6 +140,11 @@ struct DarkAuthBody: View {
             .ignoresSafeArea(.keyboard, edges: .bottom)
 
         }
+    }
+    
+    private func showToast(_ message: String) {
+        self.alert = .init(displayMode: .alert, type: .regular, title: message)
+        self.showAlert = true
     }
     
     private var headerImage: some View {

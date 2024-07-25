@@ -1059,6 +1059,7 @@
       }
     },
     "Dashboard" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -2797,6 +2798,12 @@
         }
       }
     },
+    "Multi" : {
+
+    },
+    "MultiPicker" : {
+
+    },
     "navigate" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -3305,6 +3312,12 @@
           }
         }
       }
+    },
+    "One or None" : {
+
+    },
+    "Only One" : {
+
     },
     "organization_reqs" : {
       "extractionState" : "manual",
@@ -3884,6 +3897,9 @@
         }
       }
     },
+    "Regular" : {
+
+    },
     "reset.pass.failed" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4337,9 +4353,6 @@
         }
       }
     },
-    "Settings" : {
-
-    },
     "setup_pin" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -4534,6 +4547,9 @@
       }
     },
     "Submit" : {
+
+    },
+    "SwiftUI" : {
 
     },
     "system" : {
