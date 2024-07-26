@@ -25,7 +25,7 @@ public struct TopLeftDismissModifier: ViewModifier {
                 dismiss()
                 onDismiss?()
             } label: {
-                Image(systemName: "xmark")
+                Icon(systemName: "xmark")
                     .frame(width: 20, height: 20)
                     .fixedSize()
                     .foregroundStyle(Color.label)

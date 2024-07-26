@@ -28,8 +28,8 @@ struct PageCoverUI<Content: View>: View {
                                 Button(action: {
                                     closePage()
                                 }, label: {
-                                    Image(systemName: "chevron.left")
-                                        .font(.system(size: 18, weight: .medium))
+                                    Icon(systemName: "chevron.left")
+                                        .font(.lato(size: 18, weight: .medium))
                                         .foregroundColor(.label)
                                 })
                             }

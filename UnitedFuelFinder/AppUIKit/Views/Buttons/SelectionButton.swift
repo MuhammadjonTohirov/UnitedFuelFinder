@@ -27,17 +27,16 @@ public struct SelectionButton: View {
     public var innerBody: some View {
         HStack {
             Text(title)
-                .font(.system(size: 14, weight: .regular))
+                .font(.lato(size: 14, weight: .regular))
             Spacer()
             Text(value)
-                .font(.system(size: 13, weight: .medium))
+                .font(.lato(size: 13, weight: .medium))
                 .padding(.trailing, 4)
                 .foregroundStyle(Color.init(uiColor: .secondaryLabel))
             
-            Image(systemName: "chevron.right")
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(height: 16)
+            Icon(systemName: "chevron.right")
+                .size(.init(width: 16, height: 16))
+                .aspectRatio(.fit)
         }
         .foregroundStyle(Color.label)
         .frame(height: 50)

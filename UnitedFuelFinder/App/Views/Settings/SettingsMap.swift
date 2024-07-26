@@ -39,7 +39,7 @@ struct SettingsMap: View {
                 Text(mainPoint.name)
                     .foregroundStyle(Color.secondary)
                 
-                Image(systemName: "chevron.forward")
+                Icon(systemName: "chevron.forward")
                     .foregroundStyle(Color.secondary)
             }
             .background {
@@ -62,7 +62,7 @@ struct SettingsMap: View {
                 .padding(.top, Padding.small)
             Spacer()
         }
-        .font(.system(size: 14))
+        .font(.lato(size: 14))
         .padding(Padding.default)
         .navigationTitle("map_settings".localize)
         .onAppear {
@@ -75,7 +75,7 @@ struct SettingsMap: View {
             HStack {
                 Text(MapCenterType.currentLocation.name)
                 Spacer()
-                Image(systemName: "checkmark.circle.fill")
+                Icon(systemName: "checkmark.circle.fill")
                     .renderingMode(.template)
                     .opacity(mainPoint == .currentLocation ? 1 : 0)
                     .foregroundStyle(Color.accentColor)
@@ -92,7 +92,7 @@ struct SettingsMap: View {
             HStack {
                 Text(MapCenterType.pin.name)
                 Spacer()
-                Image(systemName: "checkmark.circle.fill")
+                Icon(systemName: "checkmark.circle.fill")
                     .opacity(mainPoint == .currentLocation ? 0 : 1)
                     .foregroundStyle(Color.accentColor)
             }

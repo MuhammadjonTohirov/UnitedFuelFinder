@@ -59,7 +59,8 @@ struct SearchAddressView: View {
                     )
                 }
                 
-                Image(systemName: "map.fill")
+                Icon(systemName: "map.fill")
+                    .iconColor(.accent)
                     .padding(.leading, 6)
                     .onClick {
                         viewModel.onClickMap()
@@ -68,7 +69,7 @@ struct SearchAddressView: View {
             
             if viewModel.addressList.isEmpty && viewModel.addressHistoryList.isEmpty {
                 Text("no_results".localize)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.lato(size: 14, weight: .semibold))
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                     .padding(Padding.large)
                     .horizontal(alignment: .center)
@@ -100,7 +101,7 @@ struct SearchAddressView: View {
                         .foregroundStyle(Color(address.type == .history ? .secondaryLabel : .accent))
                     
                     Text(address.address?.nilIfEmpty ?? address.title)
-                        .font(.system(size: 13, weight: .regular))
+                        .font(.lato(size: 13, weight: .regular))
                         .padding(.vertical, Padding.small)
                         .foregroundStyle(Color.label)
                         .lineLimit(1)

@@ -22,14 +22,14 @@ struct StationCommentItemView: View {
             HStack {
                 Text(sender)
                     .fontWeight(.medium)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.lato(size: 13, weight: .medium))
                 
                 Spacer()
                 
                 Button(action: {
                     self.onClickDelete?()
                 }, label: {
-                    Image(systemName: "trash")
+                    Icon(systemName: "trash")
                         .foregroundStyle(.red)
                 })
                 .opacity(canDelete ? 1 : 0)
@@ -37,14 +37,14 @@ struct StationCommentItemView: View {
             
             Text(comment)
                 .fontWeight(.light)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
             
             HStack(spacing: 5) {
                 RateView(rate: rate, canRate: false)
                     .frame(width: 80, height: 16)
                 Spacer()
                 Text(dateValue)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(.gray).opacity(0.7)
             }
         }

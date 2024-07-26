@@ -72,7 +72,7 @@ struct StationDetailsView: View {
             Label(
                 title: {
                     Text("navigate".localize)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                 },
                 icon: {
                     Image(
@@ -90,7 +90,7 @@ struct StationDetailsView: View {
             .background(content: {
                 RoundedRectangle(cornerRadius: 6)
             })
-            .font(.system(size: 12))
+            .font(.lato(size: 12))
             .padding(.vertical, 6)
         })
     }
@@ -142,10 +142,10 @@ struct StationDetailsView: View {
                 
                 VStack(alignment: .leading, spacing: 8) {
                     Text(viewModel.name)
-                        .font(.system(size: 13, weight: .semibold))
+                        .font(.lato(size: 13, weight: .semibold))
                     
                     Text(viewModel.address ?? "unknown_address".localize)
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                 }
             }
             .padding(.leading)
@@ -155,13 +155,13 @@ struct StationDetailsView: View {
                 row(
                     title: "distance".localize,
                     detail: Text(viewModel.station?.distanceFromCurrentLocationInfo ?? "")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                 ).anyView,
 
                 row(
                     title: "discounted_price".localize,
                     detail: Text(viewModel.station?.actualPriceInfo ?? "")
-                        .font(.system(size: 12, weight: .bold))
+                        .font(.lato(size: 12, weight: .bold))
                         .foregroundStyle(Color.init(uiColor: .systemGreen))
 
                 )
@@ -171,7 +171,7 @@ struct StationDetailsView: View {
                 row(
                     title: "discount".localize,
                     detail: Text(viewModel.station?.discountInfo ?? "")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                 )
                 .set(isVisible: userInfo?.showDiscountPrices ?? false)
                 .anyView,
@@ -179,13 +179,13 @@ struct StationDetailsView: View {
                 row(
                     title: "retail_price".localize,
                     detail: Text(viewModel.station?.retailPriceInfo ?? "")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                 ).anyView,
                 
                 row(
                     title: "price_update".localize,
                     detail: Text(viewModel.station?.priceUpdateInfo ?? "")
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                 ).anyView,
             ]
                 .vstack(spacing: Padding.small)
@@ -198,7 +198,7 @@ struct StationDetailsView: View {
         VStack {
             HStack {
                 Text(title)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                 Spacer()
                 AnyView(detail)
             }

@@ -55,7 +55,7 @@ public struct SubmitButton<Content: View>: View {
                     .padding(.horizontal, Padding.medium)
                 }
         })
-        .font(.system(size: 14, weight: .semibold))
+        .font(.lato(size: 14, weight: .semibold))
         .foregroundStyle(Color.black)
         .frame(height: height, alignment: .center)
         .frame(maxWidth: .infinity)

@@ -25,12 +25,12 @@ struct SearchAddressItem: Identifiable {
     var coordinate: CLLocation?
     var address: String?
     
-    var icon: Image {
+    var icon: Icon {
         switch type {
         case .address:
-            Image(systemName: "mappin")
+            Icon(systemName: "mappin")
         case .history:
-            Image(systemName: "clock")
+            Icon(systemName: "clock")
         }
     }
 }

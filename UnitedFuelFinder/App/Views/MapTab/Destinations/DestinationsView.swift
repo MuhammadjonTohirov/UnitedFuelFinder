@@ -21,7 +21,7 @@ struct DestinationsView: View {
                         .frame(width: 30, height: 30)
                         .foregroundStyle(.clear)
                         .overlay {
-                            Image(systemName: "plus.circle.fill")
+                            Icon(systemName: "plus.circle.fill")
                                 .resizable()
                                 .frame(width: 24, height: 24)
                         }

@@ -48,7 +48,7 @@ struct ProfileVIew: View {
                         showPickerAlert = true
                     }, label: {
                         Text("edit".localize)
-                            .font(.system(size: 13, weight: .medium))
+                            .font(.lato(size: 13, weight: .medium))
                             .frame(maxWidth: .infinity)
                     })
                 }
@@ -140,7 +140,7 @@ struct ProfileVIew: View {
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("address_info".localize)
-                .font(.system(size: 16, weight: .medium))
+                .font(.lato(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
             SelectionButton(title: "state".localize, value: viewModel.state?.name ?? "") {
@@ -162,7 +162,7 @@ struct ProfileVIew: View {
     private var organizationRequisites: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("organization_reqs".localize)
-                .font(.system(size: 16, weight: .medium))
+                .font(.lato(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
             YRoundedTextField {

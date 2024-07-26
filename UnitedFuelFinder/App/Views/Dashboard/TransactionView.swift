@@ -35,7 +35,7 @@ struct TransactionView: View {
                 Text("location".localize)
                 Spacer()
                 Text(item.locationName ?? "-")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .fontWeight(.bold)
             }
             
@@ -89,7 +89,7 @@ struct TransactionView: View {
         }
         .foregroundColor(.label)
         .font(.regular(size: 12))
-        //.font(.system(size: 12))
+        //.font(.lato(size: 12))
         //.fontWeight(.regular)
         .padding(.horizontal)
         .background {

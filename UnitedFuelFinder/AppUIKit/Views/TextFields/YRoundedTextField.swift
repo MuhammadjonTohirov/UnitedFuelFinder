@@ -55,7 +55,7 @@ public struct YRoundedTextField<Content: TextFieldProtocol>: View {
             
             if hasError {
                 Text(errorText)
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundStyle(borderColor)
             }
         }
@@ -78,7 +78,7 @@ public struct YRoundedTextField<Content: TextFieldProtocol>: View {
     @State var text: String = ""
     return YRoundedTextField(textField: {
         YTextField(text: $text, placeholder: "Placeholder", left: {
-            Image(systemName: "touchid").padding(.trailing, 4)
+            Icon(systemName: "touchid").padding(.trailing, 4)
         })
     }).set(error: "Invalid email")
 }

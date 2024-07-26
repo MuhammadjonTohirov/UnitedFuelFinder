@@ -44,7 +44,7 @@ public struct ItemSelectionView<C: Object & Identifiable>: View {
                             
                             Spacer()
 
-                            Image(systemName: "checkmark")
+                            Icon(systemName: "checkmark")
                                 .opacity(viewModel.selectedObjectsIds.contains(item.id) ? 1 : 0)
                         }
                         .overlay {

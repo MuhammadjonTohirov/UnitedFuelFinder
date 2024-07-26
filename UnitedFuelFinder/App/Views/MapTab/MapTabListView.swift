@@ -39,7 +39,7 @@ struct MapTabListView: View {
             .scrollable(axis: .vertical)
             
             Text(centerMessage)
-                .font(.system(size: 32, weight: .bold))
+                .font(.lato(size: 32, weight: .bold))
                 .opacity(0.5)
                 .opacity(stations.isEmpty ? 1 : 0 )
             

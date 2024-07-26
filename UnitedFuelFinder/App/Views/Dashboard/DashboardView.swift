@@ -82,7 +82,7 @@ struct DashboardView: View {
             }
             .padding(.horizontal)
             .padding(.bottom)
-            .font(.system(size: 14))
+            .font(.lato(size: 14))
             .fontWeight(.semibold)
             .frame(maxWidth: .infinity)
             .scrollable(showIndicators: false)
@@ -128,9 +128,9 @@ struct DashboardView: View {
                     .foregroundStyle(Color.secondaryBackground)
                     .overlay {
                         VStack(spacing: 16) {
-                            Image(systemName: "list.clipboard")
+                            Icon(systemName: "list.clipboard")
                             Text("no.transactions".localize)
-                                .font(.system(size: 13, weight: .medium))
+                                .font(.lato(size: 13, weight: .medium))
                         }
                     }
                     .opacity(viewModel.transactions.isEmpty ? 1 : 0)
@@ -170,9 +170,9 @@ struct DashboardView: View {
                     .foregroundStyle(Color.secondaryBackground)
                     .overlay {
                         VStack(spacing: 16, content: {
-                            Image(systemName: "pencil.and.list.clipboard.rtl")
+                            Icon(systemName: "pencil.and.list.clipboard.rtl")
                             Text("no.invoices".localize)
-                                .font(.system(size: 13, weight: .medium))
+                                .font(.lato(size: 13, weight: .medium))
                         })
                     }
                     .opacity(viewModel.invoices.isEmpty ? 1 : 0)
@@ -191,7 +191,7 @@ struct DashboardView: View {
                 .foregroundStyle(Color.secondaryBackground)
                 .overlay {
                     Text("no.stations".localize)
-                        .font(.system(size: 13, weight: .medium))
+                        .font(.lato(size: 13, weight: .medium))
                 }
                 .opacity(viewModel.discountedStations.isEmpty ? 1 : 0)
             

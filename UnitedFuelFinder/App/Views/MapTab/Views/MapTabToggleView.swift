@@ -36,7 +36,7 @@ struct MapTabToggleView: View {
     
     private func toggleItem(_ text: String, _ selected: Bool) -> some View {
         Text(text)
-            .font(.system(size: 12, weight: .medium))
+            .font(.lato(size: 12, weight: .medium))
             .frame(width: 74.f.sw(), height: 40.f.sh())
             .foregroundStyle(selected ? .white : .label)
             .background {

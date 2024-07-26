@@ -13,7 +13,7 @@ struct SettingsSecurity: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            SettingsViewUtils.row(image: Image(systemName: "lock.open.rotation")
+            SettingsViewUtils.row(image: Icon(systemName: "lock.open.rotation")
                 .resizable()
                 .renderingMode(.template)
                 .fixedSize()

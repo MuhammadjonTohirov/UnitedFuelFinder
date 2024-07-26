@@ -18,7 +18,7 @@ struct HomeContainerView: View {
     var body: some View {
         ZStack {
             VStack(){
-                Image(systemName: "star.fill")
+                Icon(systemName: "star.fill")
                     .aspectRatio(contentMode: .fill)
                     .clipped()
                     .background(.red)
@@ -49,7 +49,7 @@ struct HomeContainerView: View {
             viewModel.route?.screen
         })
         .padding(.horizontal)
-        .font(.system(size: 14))
+        .font(.lato(size: 14))
         .fontWeight(.semibold)
         .frame(maxWidth: .infinity)
         .scrollable(showIndicators: false)

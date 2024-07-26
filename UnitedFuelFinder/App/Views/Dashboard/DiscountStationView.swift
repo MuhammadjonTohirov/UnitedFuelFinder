@@ -31,7 +31,7 @@ struct DiscountStationView: View {
                             Text(title)
                             Text(location)
                         }
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .foregroundStyle(.gray)
 
                         Spacer()
@@ -39,7 +39,7 @@ struct DiscountStationView: View {
                         let discountedPrice = price - discount
                         
                         Text("$\(String(format: "%g", discountedPrice))")
-                            .font(.system(size: 12))
+                            .font(.lato(size: 12))
                             .fontWeight(.semibold)
                     }
                     .padding(.horizontal)
@@ -53,7 +53,7 @@ struct DiscountStationView: View {
                             Text("Retail price ")
                             + Text("$\(String(format: "%g", price))").foregroundColor(Color.accentColor)
                         }
-                        .font(.system(size: 12))
+                        .font(.lato(size: 12))
                         .fontWeight(.regular)
                         
                         Spacer()
@@ -62,14 +62,13 @@ struct DiscountStationView: View {
                             
                         }, label: {
                             HStack {
-                                Image(systemName: "smallcircle.filled.circle")
-                                    .resizable()
+                                Icon(systemName: "smallcircle.filled.circle")
                                     .aspectRatio(contentMode: .fill)
                                     .frame(width: 12, height: 12)
                                 
                                 Text("Focus")
                             }
-                            .font(.system(size: 12))
+                            .font(.lato(size: 12))
                             .fontWeight(.medium)
                         })
                         .foregroundStyle(Color.white)

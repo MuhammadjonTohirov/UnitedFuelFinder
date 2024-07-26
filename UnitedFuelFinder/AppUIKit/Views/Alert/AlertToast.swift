@@ -225,7 +225,7 @@ public struct AlertToast: View {
             }, label: {
                 Text(title)
                     .frame(minWidth: 60)
-                    .font(.system(size: 14, weight: .medium, design: .default))
+                    .font(.lato(size: 14, weight: .medium, design: .default))
                     .foregroundColor(style == .destructive ? .init(uiColor: .systemRed) : .accentColor)
             })
             .buttonStyle(.bordered)
@@ -287,14 +287,14 @@ public struct AlertToast: View {
                 HStack{
                     switch type{
                     case .complete(let color):
-                        Image(systemName: "checkmark")
+                        Icon(systemName: "checkmark")
                             .foregroundColor(color)
                     case .error(let color):
                         Image("icon_error")
                             .renderingMode(.template)
                             .foregroundColor(color)
                     case .systemImage(let name, let color):
-                        Image(systemName: name)
+                        Icon(systemName: name)
                             .foregroundColor(color)
                     case .image(let name, let color):
                         Image(name)
@@ -332,7 +332,7 @@ public struct AlertToast: View {
             HStack(spacing: 16) {
                 switch type{
                 case .complete(let color):
-                    Image(systemName: "checkmark")
+                    Icon(systemName: "checkmark")
                         .hudModifier()
                         .foregroundColor(color)
                 case .error(let color):
@@ -340,7 +340,7 @@ public struct AlertToast: View {
                         .hudModifier()
                         .foregroundColor(color)
                 case .systemImage(let name, let color):
-                    Image(systemName: name)
+                    Icon(systemName: name)
                         .hudModifier()
                         .foregroundColor(color)
                 case .image(let name, let color):
@@ -401,7 +401,7 @@ public struct AlertToast: View {
                 Spacer()
             case .systemImage(let name, let color):
                 Spacer()
-                Image(systemName: name)
+                Icon(systemName: name)
                     .renderingMode(.template)
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -723,6 +723,16 @@ fileprivate struct TextForegroundModifier: ViewModifier{
 @available(iOS 13, macOS 11, *)
 fileprivate extension Image{
     
+    func hudModifier() -> some View{
+        self
+            .renderingMode(.template)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: 20, maxHeight: 20, alignment: .center)
+    }
+}
+
+extension Icon {
     func hudModifier() -> some View{
         self
             .renderingMode(.template)

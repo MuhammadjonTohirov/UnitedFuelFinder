@@ -37,7 +37,7 @@ public struct BouncingLoadingView: View {
                 .frame(width: circleRadius, height: circleRadius)
                 
                 Text(message)
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .background {
                         Capsule()
                             .foregroundStyle(Color.background)

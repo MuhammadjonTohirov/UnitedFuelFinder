@@ -34,7 +34,7 @@ public struct YTextField: View, TextFieldProtocol {
     @State private var oldValue: String = ""
     
     private var font: Font = {
-        .system(size: 14, weight: .medium)
+        .lato(size: 14, weight: .medium)
     }()
     
     private var contentType: UITextContentType = .name
@@ -103,7 +103,7 @@ public struct YTextField: View, TextFieldProtocol {
             ZStack(alignment: zStackAlignment) {
                 Text(placeholder)
                     .padding(.top, 4)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.lato(size: 14, weight: .medium))
                     .foregroundColor(hintColor)
                     .opacity(hintOpacity)
                     .zIndex(0)
@@ -159,7 +159,7 @@ public struct YTextField: View, TextFieldProtocol {
             Button(action: {
                 self.passwordVisible.toggle()
             }, label: {
-                Image(systemName: passwordVisible ? "eye" : "eye.slash")
+                Icon(systemName: passwordVisible ? "eye" : "eye.slash")
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)

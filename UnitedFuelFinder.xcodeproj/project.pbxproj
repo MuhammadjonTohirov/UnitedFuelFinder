@@ -267,6 +267,17 @@
 		2E8A49DE2C0CFA4D00169F5B /* MapTabViewModel+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */; };
 		2E8A49E02C0CFA7700169F5B /* MapDestination.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */; };
 		2E8AED062B8E3B3E00701590 /* Network+Google.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8AED052B8E3B3E00701590 /* Network+Google.swift */; };
+		2E8B8AEA2C53C34100476E88 /* Lato-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8ADE2C53C34100476E88 /* Lato-Black.ttf */; };
+		2E8B8AEB2C53C34100476E88 /* Lato-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8ADF2C53C34100476E88 /* Lato-BlackItalic.ttf */; };
+		2E8B8AEC2C53C34100476E88 /* Lato-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE02C53C34100476E88 /* Lato-Bold.ttf */; };
+		2E8B8AED2C53C34100476E88 /* Lato-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE12C53C34100476E88 /* Lato-BoldItalic.ttf */; };
+		2E8B8AEE2C53C34100476E88 /* Lato-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE22C53C34100476E88 /* Lato-Italic.ttf */; };
+		2E8B8AEF2C53C34100476E88 /* Lato-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE32C53C34100476E88 /* Lato-Light.ttf */; };
+		2E8B8AF02C53C34100476E88 /* Lato-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE42C53C34100476E88 /* Lato-LightItalic.ttf */; };
+		2E8B8AF12C53C34100476E88 /* Lato-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE52C53C34100476E88 /* Lato-Regular.ttf */; };
+		2E8B8AF22C53C34100476E88 /* Lato-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE62C53C34100476E88 /* Lato-Thin.ttf */; };
+		2E8B8AF32C53C34100476E88 /* Lato-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE72C53C34100476E88 /* Lato-ThinItalic.ttf */; };
+		2E8B8AF42C53C34100476E88 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2E8B8AE82C53C34100476E88 /* OFL.txt */; };
 		2E8FDF6B2AED6012007271D9 /* NetResRefreshToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */; };
 		2E91A8362B8643B10045D8FE /* MapTabListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E91A8352B8643B10045D8FE /* MapTabListView.swift */; };
 		2E962D592C29EF3E00F61E11 /* StationDService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E962D582C29EF3E00F61E11 /* StationDService.swift */; };
@@ -289,6 +300,7 @@
 		2EB76B1E2B13B1C20055610A /* DCustomer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB76B1D2B13B1C20055610A /* DCustomer.swift */; };
 		2EB81D892C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB81D882C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift */; };
 		2EB9A1F12C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9A1F02C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift */; };
+		2EB9B4992C53C47E00AA5EFD /* Font+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EB9B4982C53C47E00AA5EFD /* Font+Extensions.swift */; };
 		2EBD43C82AE5102A0033401A /* CLLocation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */; };
 		2EBD45F22C19611100285895 /* NetResFilterMultipleStations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */; };
 		2EBD45F52C198D6300285895 /* DestinationMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EBD45F42C198D6300285895 /* DestinationMarkerView.swift */; };
@@ -635,6 +647,17 @@
 		2E8A49DD2C0CFA4D00169F5B /* MapTabViewModel+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+Map.swift"; sourceTree = "<group>"; };
 		2E8A49DF2C0CFA7700169F5B /* MapDestination.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDestination.swift; sourceTree = "<group>"; };
 		2E8AED052B8E3B3E00701590 /* Network+Google.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Network+Google.swift"; sourceTree = "<group>"; };
+		2E8B8ADE2C53C34100476E88 /* Lato-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Black.ttf"; sourceTree = "<group>"; };
+		2E8B8ADF2C53C34100476E88 /* Lato-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BlackItalic.ttf"; sourceTree = "<group>"; };
+		2E8B8AE02C53C34100476E88 /* Lato-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Bold.ttf"; sourceTree = "<group>"; };
+		2E8B8AE12C53C34100476E88 /* Lato-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-BoldItalic.ttf"; sourceTree = "<group>"; };
+		2E8B8AE22C53C34100476E88 /* Lato-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Italic.ttf"; sourceTree = "<group>"; };
+		2E8B8AE32C53C34100476E88 /* Lato-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Light.ttf"; sourceTree = "<group>"; };
+		2E8B8AE42C53C34100476E88 /* Lato-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-LightItalic.ttf"; sourceTree = "<group>"; };
+		2E8B8AE52C53C34100476E88 /* Lato-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Regular.ttf"; sourceTree = "<group>"; };
+		2E8B8AE62C53C34100476E88 /* Lato-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-Thin.ttf"; sourceTree = "<group>"; };
+		2E8B8AE72C53C34100476E88 /* Lato-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Lato-ThinItalic.ttf"; sourceTree = "<group>"; };
+		2E8B8AE82C53C34100476E88 /* OFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = OFL.txt; sourceTree = "<group>"; };
 		2E8FDF6A2AED6012007271D9 /* NetResRefreshToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResRefreshToken.swift; sourceTree = "<group>"; };
 		2E91A8352B8643B10045D8FE /* MapTabListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTabListView.swift; sourceTree = "<group>"; };
 		2E962D582C29EF3E00F61E11 /* StationDService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StationDService.swift; sourceTree = "<group>"; };
@@ -656,6 +679,7 @@
 		2EB76B1D2B13B1C20055610A /* DCustomer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DCustomer.swift; sourceTree = "<group>"; };
 		2EB81D882C18B0E200E26233 /* NetReqFilterStationsMultipleStops.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetReqFilterStationsMultipleStops.swift; sourceTree = "<group>"; };
 		2EB9A1F02C0F2F9800D2D8E4 /* MapTabViewModel+SearchAddress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapTabViewModel+SearchAddress.swift"; sourceTree = "<group>"; };
+		2EB9B4982C53C47E00AA5EFD /* Font+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Font+Extensions.swift"; sourceTree = "<group>"; };
 		2EBD43C72AE5102A0033401A /* CLLocation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLocation+Extensions.swift"; sourceTree = "<group>"; };
 		2EBD45F12C19611100285895 /* NetResFilterMultipleStations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetResFilterMultipleStations.swift; sourceTree = "<group>"; };
 		2EBD45F42C198D6300285895 /* DestinationMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationMarkerView.swift; sourceTree = "<group>"; };
@@ -1464,6 +1488,7 @@
 				2E5DF91B2AEACD63005BE20D /* Realm+Extensions.swift */,
 				2E5DF91C2AEACD63005BE20D /* CGFloat+Extension.swift */,
 				2E594F592C43AF18001DB638 /* Bool+Extensions.swift */,
+				2EB9B4982C53C47E00AA5EFD /* Font+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1593,6 +1618,32 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		2E8B8ADD2C53C2DE00476E88 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				2E8B8AE92C53C34100476E88 /* Lato */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		2E8B8AE92C53C34100476E88 /* Lato */ = {
+			isa = PBXGroup;
+			children = (
+				2E8B8ADE2C53C34100476E88 /* Lato-Black.ttf */,
+				2E8B8ADF2C53C34100476E88 /* Lato-BlackItalic.ttf */,
+				2E8B8AE02C53C34100476E88 /* Lato-Bold.ttf */,
+				2E8B8AE12C53C34100476E88 /* Lato-BoldItalic.ttf */,
+				2E8B8AE22C53C34100476E88 /* Lato-Italic.ttf */,
+				2E8B8AE32C53C34100476E88 /* Lato-Light.ttf */,
+				2E8B8AE42C53C34100476E88 /* Lato-LightItalic.ttf */,
+				2E8B8AE52C53C34100476E88 /* Lato-Regular.ttf */,
+				2E8B8AE62C53C34100476E88 /* Lato-Thin.ttf */,
+				2E8B8AE72C53C34100476E88 /* Lato-ThinItalic.ttf */,
+				2E8B8AE82C53C34100476E88 /* OFL.txt */,
+			);
+			path = Lato;
+			sourceTree = "<group>";
+		};
 		2EB189F92AEFF42600BCFBE3 /* StationDetails */ = {
 			isa = PBXGroup;
 			children = (
@@ -1700,6 +1751,7 @@
 		2EDF8C3A2AD2CCD2003D64FC /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				2E8B8ADD2C53C2DE00476E88 /* Fonts */,
 				2EDF8C3B2AD2CCD9003D64FC /* Localization */,
 				2E527A442ACC80C8005B8B95 /* Assets.xcassets */,
 			);
@@ -2099,11 +2151,22 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E8B8AEE2C53C34100476E88 /* Lato-Italic.ttf in Resources */,
 				2E527A482ACC80C8005B8B95 /* Preview Assets.xcassets in Resources */,
 				2E527A452ACC80C8005B8B95 /* Assets.xcassets in Resources */,
+				2E8B8AEF2C53C34100476E88 /* Lato-Light.ttf in Resources */,
+				2E8B8AEB2C53C34100476E88 /* Lato-BlackItalic.ttf in Resources */,
+				2E8B8AED2C53C34100476E88 /* Lato-BoldItalic.ttf in Resources */,
+				2E8B8AF42C53C34100476E88 /* OFL.txt in Resources */,
 				2EDF8C3D2AD2CD3F003D64FC /* Localizable.xcstrings in Resources */,
+				2E8B8AF32C53C34100476E88 /* Lato-ThinItalic.ttf in Resources */,
+				2E8B8AF02C53C34100476E88 /* Lato-LightItalic.ttf in Resources */,
 				2ED9A3202B164E1D009ADCE9 /* Launch Screen.storyboard in Resources */,
+				2E8B8AF22C53C34100476E88 /* Lato-Thin.ttf in Resources */,
+				2E8B8AEA2C53C34100476E88 /* Lato-Black.ttf in Resources */,
+				2E8B8AF12C53C34100476E88 /* Lato-Regular.ttf in Resources */,
 				2E3F17CC2AD914F500F4DC52 /* GoogleMaps.bundle in Resources */,
+				2E8B8AEC2C53C34100476E88 /* Lato-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2269,6 +2332,7 @@
 				2E5DF9552AEACD63005BE20D /* NativeColor.swift in Sources */,
 				2E5DF93A2AEACD63005BE20D /* SubmitButton.swift in Sources */,
 				2EBFB99F2ADFA058007FA786 /* MapTabViewModel.swift in Sources */,
+				2EB9B4992C53C47E00AA5EFD /* Font+Extensions.swift in Sources */,
 				2E5DF95F2AEACD63005BE20D /* Map+UIKit.swift in Sources */,
 				2E5DF93C2AEACD63005BE20D /* SelectionButton.swift in Sources */,
 				2E89DD2A2BF4A45000CC7EBF /* CleanAuthBody.swift in Sources */,
@@ -2561,7 +2625,7 @@
 		2E527A4C2ACC80C8005B8B95 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				APP_MODE = prod;
+				APP_MODE = dev;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = UnitedFuelFinder/UnitedFuelFinder.entitlements;

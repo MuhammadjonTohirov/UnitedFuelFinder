@@ -82,7 +82,7 @@ struct RegisterProfileView: View {
                 contentType: .emailAddress,
                 autoCapitalization: .never,
                 left: {
-                    Image(systemName: "person.fill")
+                    Icon(systemName: "person.fill")
                         .frame(width: 24)
                         .padding(.horizontal, Padding.small)
                 }
@@ -127,7 +127,7 @@ struct RegisterProfileView: View {
             Text(
                 "lets_create_account".localize
             )
-            .font(.system(size: 24, weight: .semibold))
+            .font(.lato(size: 24, weight: .semibold))
             
             credentials
         }
@@ -136,7 +136,7 @@ struct RegisterProfileView: View {
     private var personalDetails: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("personal_details".localize)
-                .font(.system(size: 16, weight: .medium))
+                .font(.lato(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
             YRoundedTextField {
@@ -157,7 +157,7 @@ struct RegisterProfileView: View {
     private var organizationRequisites: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("organization_reqs".localize)
-                .font(.system(size: 16, weight: .medium))
+                .font(.lato(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
             YRoundedTextField {
@@ -175,7 +175,7 @@ struct RegisterProfileView: View {
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("address_info".localize)
-                .font(.system(size: 16, weight: .medium))
+                .font(.lato(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
             SelectionButton(title: "State", value: viewModel.state?.name ?? "") {
@@ -197,11 +197,11 @@ struct RegisterProfileView: View {
     private var offerView: some View {
         VStack(alignment: .leading, spacing: 4) {
             Text("auth_offer".localize)
-                .font(.system(size: 16, weight: .medium))
+                .font(.lato(size: 16, weight: .medium))
                 .foregroundColor(.init(.label))
             
             Text("auth_offer_description".localize)
-                .font(.system(size: 12, weight: .regular))
+                .font(.lato(size: 12, weight: .regular))
                 .foregroundColor(.init(.label.opacity(0.7)))
                 .lineSpacing(4)
             

@@ -17,7 +17,7 @@ struct TotalCostView: View {
             .overlay {
                 VStack(spacing: 0) {
                     Text("toll.cost".localize)
-                        .font(.system(size: 11, weight: .semibold))
+                        .font(.lato(size: 11, weight: .semibold))
                         .foregroundStyle(Color.white)
                         .frame(height: 22)
                         
@@ -28,7 +28,7 @@ struct TotalCostView: View {
                             Text(value)
                         }
                 }
-                .font(.system(size: 12, weight: .medium))
+                .font(.lato(size: 12, weight: .medium))
                 .clipShape(RoundedRectangle(cornerRadius: 10.f.sw()))
             }
             // setup border 1 with radius 10

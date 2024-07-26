@@ -17,12 +17,12 @@ enum RichAlertType {
     var image: some View {
         switch self {
         case .success:
-            Image(systemName: "checkmark.seal.fill")
+            Icon(systemName: "checkmark.seal.fill")
                 .resizable()
                 .frame(width: 56, height: 56, alignment: .center)
                 .foregroundStyle(Color.green)
         case .failure:
-            Image(systemName: "exclamationmark.triangle.fill")
+            Icon(systemName: "exclamationmark.triangle.fill")
                 .resizable()
                 .frame(width: 56, height: 56, alignment: .center)
                 .foregroundStyle(Color.red)
@@ -54,7 +54,7 @@ struct RichAlertView: View {
                     type.image
                     
                     Text(title)
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+                        .font(.lato(size: 24, weight: .semibold, design: .rounded))
                     
                     if let message = message {
                         message
@@ -166,7 +166,7 @@ struct UpdateAlerView: View {
                     type.image
                     
                     Text(title)
-                        .font(.system(size: 24, weight: .semibold, design: .rounded))
+                        .font(.lato(size: 24, weight: .semibold, design: .rounded))
                     
                     if let message = message {
                         message
@@ -263,7 +263,7 @@ extension View {
             RichAlertViewModifier(
                 type: type,
                 title: title,
-                message: message != nil ? Text(message!).font(.system(size: 14, weight: .medium, design: .rounded)).anyView : nil,
+                message: message != nil ? Text(message!).font(.lato(size: 14, weight: .medium, design: .rounded)).anyView : nil,
                 isPresented: isPresented.animation(.easeInOut(duration: 0.2)),
                 onDismiss: onDismiss
             )

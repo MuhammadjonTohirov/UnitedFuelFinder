@@ -69,7 +69,7 @@ struct FilteringStationView: View {
             .frame(width: 38, height: 44)
             Text(title)
                 .foregroundStyle(isSelected ? Color.accent : .label)
-                .font(.system(size: 12, weight: .medium))
+                .font(.lato(size: 12, weight: .medium))
         }
     }
 }

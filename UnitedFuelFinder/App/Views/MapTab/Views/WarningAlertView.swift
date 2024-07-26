@@ -21,7 +21,7 @@ struct WarningAlertView: View {
                 dismiss.callAsFunction()
             }, label: {
                 Text("ok".localize)
-                    .font(.system(size: 16, weight: .bold))
+                    .font(.lato(size: 16, weight: .bold))
                     .foregroundColor(.white)
                     .frame(maxWidth: .infinity)
                     .frame(height: 48)
@@ -39,12 +39,12 @@ struct WarningAlertView: View {
     private func smallBody(title: String, desc: String) -> some View {
         VStack {
             Text(title)
-                .font(.system(size: 24, weight: .bold))
+                .font(.lato(size: 24, weight: .bold))
                 .foregroundColor(Color.init(uiColor: .label))
                 .padding(.bottom, 8)
             
             Text(desc)
-                .font(.system(size: 16, weight: .regular))
+                .font(.lato(size: 16, weight: .regular))
                 .foregroundColor(Color.init(uiColor: .label))
                 .multilineTextAlignment(.center)
                 .padding(.bottom, 24)

@@ -57,17 +57,17 @@ struct HomeBottomSheetView: View {
     private var pickLocationView: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("destination_address".localize)
-                .font(.system(size: 24, weight: .semibold))
+                .font(.lato(size: 24, weight: .semibold))
             
             HStack {
                 Text(input.pickedAddress.isEmpty ? "loading_address".localize : input.pickedAddress)
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .frame(height: 32)
                 
                 Spacer()
                 
                 Text(input.distance)
-                    .font(.system(size: 13))
+                    .font(.lato(size: 13))
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
             }
             
@@ -118,7 +118,7 @@ struct HomeBottomSheetView: View {
                 .frame(width: 50, height: 50)
                 .foregroundStyle(.background)
                 .overlay {
-                    Image(systemName: "plus.circle.fill")
+                    Icon(systemName: "plus.circle.fill")
                 }
                 .onTapGesture {
                     input.onClickAddDestination()

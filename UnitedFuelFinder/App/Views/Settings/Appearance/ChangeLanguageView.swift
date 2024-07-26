@@ -44,12 +44,12 @@ struct ChangeLanguageView: View {
         } label: {
             HStack {
                 Text(title)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.lato(size: 12, weight: .medium))
                     .foregroundStyle(Color.label)
 
                 Spacer()
                 
-                Image(systemName: "checkmark.circle.fill")
+                Icon(systemName: "checkmark.circle.fill")
                     .opacity(isSelected ? 1 : 0)
             }
         }

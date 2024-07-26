@@ -23,25 +23,25 @@ struct StationTipView: View {
     var body: some View {
         VStack(alignment: .center, spacing: 4) {
             Text(station.displayName ?? station.name)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .horizontal(alignment: .leading)
             
             Divider()
             
             HStack {
                 Text("price_update".localize)
-                    .font(.system(size: 13, weight: .regular))
+                    .font(.lato(size: 13, weight: .regular))
                 Spacer()
                 Text(station.priceUpdateInfo)
             }
             
             HStack {
                 Text("discounted_price".localize)
-                    .font(.system(size: 13, weight: .regular))
+                    .font(.lato(size: 13, weight: .regular))
                 Spacer()
                 Text(station.actualPriceInfo)
             }
-            .font(.system(size: 13, weight: .semibold))
+            .font(.lato(size: 13, weight: .semibold))
             .set(isVisible: userInfo?.showDiscountedPrices ?? true)
 
             HStack {
@@ -49,7 +49,7 @@ struct StationTipView: View {
                 Spacer()
                 Text(station.discountInfo)
             }
-            .font(.system(size: 13, weight: .regular))
+            .font(.lato(size: 13, weight: .regular))
             .set(isVisible: userInfo?.showDiscountPrices ?? true)
             
             HStack {
@@ -57,7 +57,7 @@ struct StationTipView: View {
                 Spacer()
                 Text(station.retailPriceInfo)
             }
-            .font(.system(size: 13, weight: .regular))
+            .font(.lato(size: 13, weight: .regular))
 
             Divider()
             
@@ -68,19 +68,18 @@ struct StationTipView: View {
             }
             
             HStack {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .renderingMode(.template)
+                Icon(systemName: "exclamationmark.triangle.fill")
                     .foregroundStyle(.accent)
                 
                 Text("price.change.warning".localize)
-                    .font(.system(size: 12, weight: .regular))
+                    .font(.lato(size: 12, weight: .regular))
                     .foregroundStyle(Color.secondary)
             }
             .frame(height: 40.f.sh())
             
             actions
         }
-        .font(.system(size: 13, weight: .regular))
+        .font(.lato(size: 13, weight: .regular))
         .padding()
     }
     
@@ -91,7 +90,7 @@ struct StationTipView: View {
             }, label: {
                 Text("close".localize.capitalized)
                     .foregroundStyle(Color.label)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.lato(size: 12, weight: .medium))
             }, height: 40)
             
             Spacer()
@@ -101,7 +100,7 @@ struct StationTipView: View {
                 onClickShow(station)
             }, label: {
                 Text("view_larger".localize)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.lato(size: 12, weight: .medium))
                     .foregroundStyle(Color.white)
             }, backgroundColor: Color.init(uiColor: .systemGreen), height: 40)
             
@@ -112,7 +111,7 @@ struct StationTipView: View {
                 onClickNavigate(station)
             }, label: {
                 Text("navigate".localize)
-                    .font(.system(size: 12, weight: .medium))
+                    .font(.lato(size: 12, weight: .medium))
             }, height: 40)
         }
         .padding(.top, Padding.small)

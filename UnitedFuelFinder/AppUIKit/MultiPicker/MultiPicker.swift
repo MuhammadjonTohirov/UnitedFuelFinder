@@ -285,7 +285,7 @@ fileprivate struct MultiPickerSelectionList<SelectionValue: Hashable, Content: V
     }
 
     @ViewBuilder private func checkmark(tag: SelectionValue?) -> some View {
-        Image(systemName: "checkmark")
+        Icon(systemName: "checkmark")
             .resizable()
             .fixedSize()
             .font(.body)

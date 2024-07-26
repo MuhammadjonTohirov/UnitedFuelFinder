@@ -50,16 +50,16 @@ extension Binding {
 
 extension Font{
     public static func semibold(size:CGFloat)->Font?{
-        return Font.system(size: size, weight: .semibold)
+        return Font.lato(size: size, weight: .semibold)
     }
     public static func medium(size:CGFloat)->Font?{
-        return Font.system(size: size, weight: .medium)
+        return Font.lato(size: size, weight: .medium)
     }
     public static func bold(size:CGFloat)->Font?{
-        return Font.system(size: size, weight: .bold)
+        return Font.lato(size: size, weight: .bold)
     }
     public static func regular(size:CGFloat)->Font{
-        return Font.system(size: size, weight: .regular)
+        return Font.lato(size: size, weight: .regular)
     }
     
 }

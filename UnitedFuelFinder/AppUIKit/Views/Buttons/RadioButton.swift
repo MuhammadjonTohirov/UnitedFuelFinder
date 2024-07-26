@@ -42,7 +42,7 @@ public struct RadioButton<Content: View>: View {
                 .position(x: titleRect.minX - 16, y: (titleRect.height + 4) / 2)
                 
             title()
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundStyle(self.isEnabled ? Color.label : Color.secondary)
                 .background(content: {
                     GeometryReader(content: { geometry in

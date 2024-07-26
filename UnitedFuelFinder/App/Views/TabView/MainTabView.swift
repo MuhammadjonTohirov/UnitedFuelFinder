@@ -34,10 +34,9 @@ struct MainTabView: View {
         tabBarViewBody
             .richAlert(
                 type: .custom(
-                    image: Image(systemName: "exclamationmark.triangle")
-                        .resizable()
-                        .foregroundStyle(.accent)
-                        .frame(width: 56, height: 56, alignment: .center)
+                    image: Icon(systemName: "exclamationmark.triangle")
+                        .size(.init(width: 56, height: 56))
+                        .iconColor(.accent)
                         .anyView
                 ),
                 title: "attention".localize,
@@ -45,18 +44,20 @@ struct MainTabView: View {
                     "disclamer.desc".localize,
                     configure: { attr in
                         if let range = attr.range(of: "disclamer.desc.bold1".localize) {
-                            attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                            attr[range].font = UIFont.lato(ofSize: 16, weight: .semibold)
                         }
                         
                         if let range = attr.range(of: "disclamer.desc.bold2".localize) {
-                            attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                            attr[range].font = UIFont.lato(ofSize: 16, weight: .semibold)
                         }
                         
                         if let range = attr.range(of: "disclamer.desc.bold3".localize) {
-                            attr[range].font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+                            attr[range].font = UIFont.lato(ofSize: 16, weight: .semibold)
                         }
                     }
-                ).anyView,
+                )
+                .font(.lato(size: 16, weight: .regular))
+                .anyView,
                 isPresented: $viewModel.showWarningAlert, onDismiss: {
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                         viewModel.checkActualVersion()
@@ -64,8 +65,7 @@ struct MainTabView: View {
                 }
             )
             .warningAlert(type: .custom(
-                image: Image(systemName: "exclamationmark.triangle")
-                    .resizable()
+                image: Icon(systemName: "exclamationmark.triangle")
                     .foregroundStyle(.accent)
                     .frame(width: 56, height: 56, alignment: .center)
                     .anyView
@@ -130,7 +130,7 @@ struct MainTabView: View {
         switch viewModel.selectedTag {
         case .dashboard:
             Text("dashboard".localize)
-                .font(.system(size: 16, weight: .bold))
+                .font(.lato(size: 16, weight: .bold))
                 .foregroundStyle(.white)
                 .shadow(color: .black, radius: 4, x: 0, y: 0)
 
@@ -138,7 +138,7 @@ struct MainTabView: View {
             MapTabToggleView(selectedIndex: $viewModel.mapBodyState)
         case .settings:
             Text("settings".localize)
-                .font(.system(size: 16, weight: .bold))
+                .font(.lato(size: 16, weight: .bold))
         }
     }
     

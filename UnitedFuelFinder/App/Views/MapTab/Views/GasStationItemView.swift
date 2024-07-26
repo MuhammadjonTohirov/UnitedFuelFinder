@@ -40,14 +40,14 @@ struct GasStationItemView: View {
                 
                 Text(station.actualPriceInfo)
                     .foregroundStyle(Color.label)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.lato(size: 12, weight: .semibold))
                     .padding(.vertical, 4)
                     .padding(.horizontal, 4)
             }
             
             HStack {
                 Text(station.fullAddress.nilIfEmpty ?? "no.address".localize)
-                    .font(.system(size: 11))
+                    .font(.lato(size: 11))
                     .foregroundStyle(Color.label)
                 Spacer()
             }
@@ -97,7 +97,7 @@ struct GasStationItemView: View {
                 ])
             )
         )
-        .font(.system(size: 12))
+        .font(.lato(size: 12))
     }
     
     private var retailPriceView: some View {
@@ -118,7 +118,7 @@ struct GasStationItemView: View {
                 ])
             )
         )
-        .font(.system(size: 12))
+        .font(.lato(size: 12))
     }
     
     private var info: some View {
@@ -127,7 +127,7 @@ struct GasStationItemView: View {
             Text(station.distanceFromCurrentLocationInfo)
                 .foregroundStyle(Color.init(uiColor: .secondaryLabel))
         }
-        .font(.system(size: 12))
+        .font(.lato(size: 12))
     }
     
     private var logo: some View {
@@ -158,7 +158,7 @@ struct GasStationItemView: View {
             Label(
                 title: {
                     Text("navigate".localize)
-                        .font(.system(size: 12, weight: .medium))
+                        .font(.lato(size: 12, weight: .medium))
                 },
                 icon: {
                     Image(
@@ -179,7 +179,7 @@ struct GasStationItemView: View {
             .background(content: {
                 RoundedRectangle(cornerRadius: 6)
             })
-            .font(.system(size: 12))
+            .font(.lato(size: 12))
             .padding(.vertical, 6)
         })
         .foregroundStyle(.appBlack)

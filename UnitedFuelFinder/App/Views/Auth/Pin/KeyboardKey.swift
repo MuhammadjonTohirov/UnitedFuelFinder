@@ -57,7 +57,7 @@ enum Key: Identifiable {
                 .foregroundStyle(Color.primary)
                 .minimumScaleFactor(0.1)
         case .backSpace:
-            Image(systemName: "delete.backward.fill")
+            Icon(systemName: "delete.backward.fill")
                 .renderingMode(.template)
                 .foregroundStyle(Color.primary)
         default:

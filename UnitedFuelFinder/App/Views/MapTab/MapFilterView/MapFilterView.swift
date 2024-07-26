@@ -164,7 +164,7 @@ struct MapFilterView: View {
     private var sortedByRow: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("sorted.by".localize)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundStyle(Color.label)
             
             HStack(spacing: 0) {
@@ -178,7 +178,7 @@ struct MapFilterView: View {
                                 .foregroundStyle(
                                     self.sortType == _case ? .black : Color.label
                                 )
-                                .font(.system(size: 11.5, weight: .medium))
+                                .font(.lato(size: 11.5, weight: .medium))
                         }
                         .frame(height: 40)
                         .onTapGesture {
@@ -193,7 +193,7 @@ struct MapFilterView: View {
             }
             
             Text("filter.sort.by.info".localize)//Can be sorted by cheapest price or highest discount
-                .font(.system(size: 10, weight: .regular))
+                .font(.lato(size: 10, weight: .regular))
                 .foregroundStyle(Color(uiColor: .secondaryLabel))
         }
         .padding(.horizontal, Padding.default)
@@ -202,7 +202,7 @@ struct MapFilterView: View {
     private var priceRange: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("price.range".localize)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundStyle(Color.label)
             
             HStack {
@@ -224,7 +224,7 @@ struct MapFilterView: View {
             }
             
             Text("filter.price.range.info".localize)//This range will be applied to discounted price
-                .font(.system(size: 10, weight: .regular))
+                .font(.lato(size: 10, weight: .regular))
                 .foregroundStyle(Color(uiColor: .secondaryLabel))
                 .padding(.top, -10)
 
@@ -235,7 +235,7 @@ struct MapFilterView: View {
     private var radiusView: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("radius.mile".localize)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundStyle(Color.label)
             
             YRoundedTextField {
@@ -254,7 +254,7 @@ struct MapFilterView: View {
     private var stationsView: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("stations".localize)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundStyle(Color.label)
             
             HStack(spacing: 14) {
@@ -289,7 +289,7 @@ struct MapFilterView: View {
     private var addressInfo: some View {
         VStack(alignment: .leading, spacing: 16) {
             Text("region".localize)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundColor(.init(.label))
             
             SelectionButton(title: "State", value: selectedState?.name ?? "") {

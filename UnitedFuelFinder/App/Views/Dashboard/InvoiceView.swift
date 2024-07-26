@@ -56,7 +56,7 @@ struct InvoiceView: View {
                 }
             }
             .foregroundColor(.label)
-            .font(.system(size: 12))
+            .font(.lato(size: 12))
             .fontWeight(.regular)
             .padding()
         }

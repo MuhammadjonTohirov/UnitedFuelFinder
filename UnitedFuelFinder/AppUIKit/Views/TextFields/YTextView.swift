@@ -18,7 +18,7 @@ public struct YTextView: View {
         TextField("", text: $text, prompt: Text(placeholder), axis: .vertical)
             .padding(Padding.medium)
             .textContentType(.streetAddressLine1)
-            .font(Font.system(size: 14, weight: .regular))
+            .font(Font.lato(size: 14, weight: .regular))
             .lineLimit(lineLimit, reservesSpace: true)
             .background(
                 RoundedRectangle(

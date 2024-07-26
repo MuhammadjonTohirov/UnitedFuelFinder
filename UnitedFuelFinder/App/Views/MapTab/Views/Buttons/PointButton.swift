@@ -34,7 +34,7 @@ struct PointButton: View {
                         } else {
                             Text(text)
                                 .lineLimit(1)
-                                .font(.system(size: 13))
+                                .font(.lato(size: 13))
                         }
                         
                         Spacer()
@@ -49,9 +49,10 @@ struct PointButton: View {
                         .frame(width: 50, height: 50)
                         .foregroundStyle(Color.appIcon)
                         .overlay {
-                            Image(systemName: "map.fill")
+                            Icon(systemName: "map.fill")
+                                .size(.init(width: 20, height: 20))
+                                .iconColor(Color.background)
                                 .renderingMode(.template)
-                                .foregroundStyle(Color.background)
                         }
                         
                 })
@@ -65,7 +66,7 @@ struct PointButton: View {
             .frame(width: 19.f.sw(), height: 19.f.sw())
             .overlay {
                 Text(label)
-                    .font(.system(size: 12, weight: .bold))
+                    .font(.lato(size: 12, weight: .bold))
                     .foregroundStyle(.background)
             }
     }

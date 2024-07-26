@@ -56,7 +56,7 @@ struct VerticalValueAdjuster: View {
             Text("\(Int(currentValue)) mi")
                 .position(.init(x: bodyRect.width / 2, y: -16))
                 .opacity(isDragging ? 1 : 0)
-                .font(.system(size: 13, weight: .semibold))
+                .font(.lato(size: 13, weight: .semibold))
                 .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                 .shadow(color: Color.black.opacity(0.7), radius: 10)
         }

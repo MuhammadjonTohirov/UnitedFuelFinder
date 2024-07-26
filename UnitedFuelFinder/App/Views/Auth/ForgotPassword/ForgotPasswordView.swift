@@ -26,11 +26,11 @@ struct ForgotPasswordView: View {
         ZStack {
             VStack(alignment: .leading, spacing: 8) {
                 Text("forgot.password".localize)
-                    .font(.system(size: 24, weight: .semibold))
+                    .font(.lato(size: 24, weight: .semibold))
                     .padding(.horizontal, Padding.medium)
                 
                 Text("enter.email.to.reset.pass".localize)
-                    .font(.system(size: 14, weight: .medium))
+                    .font(.lato(size: 14, weight: .medium))
                     .padding(.horizontal, Padding.medium)
                 
                 VStack(spacing: 10) {
@@ -69,7 +69,7 @@ struct ForgotPasswordView: View {
                     contentType: UITextContentType.emailAddress,
                     autoCapitalization: .never,
                     left: {
-                        Image(systemName: "person.fill")
+                        Icon(systemName: "person.fill")
                             .frame(width: 24)
                             .padding(.horizontal, Padding.small)
                     }

@@ -16,8 +16,9 @@ struct CloseKeyboardModifier: ViewModifier {
                     Button(action: {
                         UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
                     }, label: {
-                        Image(systemName: "keyboard.chevron.compact.down")
-                            .font(.system(size: 20, weight: .semibold))
+                        Icon(systemName: "keyboard.chevron.compact.down")
+                            .frame(width: 24, height: 24, alignment: .center)
+                            .font(.lato(size: 20, weight: .semibold))
                             .foregroundColor(Color(UIColor.systemGray))
                     })
                 }

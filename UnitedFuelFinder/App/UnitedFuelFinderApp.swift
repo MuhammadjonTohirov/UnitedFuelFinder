@@ -15,6 +15,7 @@ struct UnitedFuelFinderApp: SwiftUI.App {
             MainView()
                 .environment(\.realmConfiguration, Realm.config)
                 .onAppear {
+                    UILabel.appearance().adjustsFontForContentSizeCategory = false
                     debugPrint(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0])
                 }
         }

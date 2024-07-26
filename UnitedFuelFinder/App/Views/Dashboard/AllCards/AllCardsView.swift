@@ -33,7 +33,7 @@ struct AllCardsView: View {
             ToolbarItem(placement: .topBarTrailing) {
                 Group {
                     if !isList {
-                        Image(systemName: "list.bullet")
+                        Icon(systemName: "list.bullet")
                     } else {
                         Image("icon_grid")
                     }

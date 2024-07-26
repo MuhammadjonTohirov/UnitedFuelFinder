@@ -20,7 +20,7 @@ public extension URL {
     }
     
     static var prod: URL {
-        .init(string: "http://15.235.212.129:5000/")!
+        .init(string: "http://15.235.212.129:50000/")!
     }
     
     static var baseAPI: URL {

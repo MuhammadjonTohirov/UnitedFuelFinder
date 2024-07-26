@@ -63,9 +63,7 @@ struct SettingsAppearance: View {
             
             Divider()
             
-            SettingsViewUtils.row(image: Image(systemName: "theatermask.and.paintbrush")
-                .resizable()
-                .renderingMode(.template)
+            SettingsViewUtils.row(image: Icon(systemName: "theatermask.and.paintbrush")
                 .fixedSize()
                 .foregroundStyle(Color.label)
                 .frame(width: 24, height: 24),

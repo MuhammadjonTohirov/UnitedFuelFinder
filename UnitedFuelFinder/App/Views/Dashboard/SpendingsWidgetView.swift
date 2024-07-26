@@ -57,7 +57,7 @@ struct SpendingsWidgetView: View {
                         Text(result?.total.asFloat.asMoney ?? "$0")
                             .lineLimit(2)
                             .multilineTextAlignment(.center)
-                            .font(.system(size: 15, weight: .medium))
+                            .font(.lato(size: 15, weight: .medium))
                             .frame(width: 65, height: 65, alignment: .center)
                     }
                     .overlay {
@@ -101,7 +101,7 @@ struct SpendingsWidgetView: View {
                     onSelect(type: .month)
                 }
         }
-        .font(.system(size: 12, weight: .semibold))
+        .font(.lato(size: 12, weight: .semibold))
         .padding(.bottom, Padding.default)
     }
     
@@ -144,12 +144,12 @@ struct SpendingsWidgetView: View {
                 .frame(width: 8, height: 8, alignment: .center)
             
             Text(name)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
             
             Spacer()
             
             Text(value)
-                .font(.system(size: 12))
+                .font(.lato(size: 12))
         }
     }
     

@@ -24,7 +24,7 @@ struct DarkAuthBody: View {
             headerImage
                 .overlay {
                     Text(userType)
-                        .font(.system(size: 48, weight: .bold, design: .rounded))
+                        .font(.lato(size: 48, weight: .bold, design: .rounded))
                 }
                 .vertical(alignment: .top)
                 .readRect(rect: $bodyRect)
@@ -34,7 +34,7 @@ struct DarkAuthBody: View {
                 Text(
                     "lets_sign_in_you".localize
                 )
-                .font(.system(size: 24, weight: .semibold))
+                .font(.lato(size: 24, weight: .semibold))
                 .padding(.horizontal, Padding.medium.sh())
                 .padding(.bottom, Padding.default.sh() * 2)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -92,7 +92,7 @@ struct DarkAuthBody: View {
                     contentType: .username,
                     autoCapitalization: .never,
                     left: {
-                        Image(systemName: "person.fill")
+                        Icon(systemName: "person.fill")
                             .frame(width: 24)
                             .padding(.horizontal, Padding.small.sh())
                     }

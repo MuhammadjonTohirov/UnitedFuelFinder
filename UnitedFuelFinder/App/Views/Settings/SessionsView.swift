@@ -34,16 +34,16 @@ struct SessionsView: View {
     private func sessionView(_ session: SessionItem) -> some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(session.agent ?? "")
-                .font(.system(size: 13, weight: .semibold))
+                .font(.lato(size: 13, weight: .semibold))
             
             Text(session.ip ?? "")
-                .font(.system(size: 12, weight: .regular))
+                .font(.lato(size: 12, weight: .regular))
             
             HStack {
                 Spacer()
                 Text(session.beautifiedDateTime)
             }
-            .font(.system(size: 12, weight: .regular))
+            .font(.lato(size: 12, weight: .regular))
             .foregroundStyle(Color.init(uiColor: .secondaryLabel))
         }
         .padding(Padding.medium * 2 / 3)

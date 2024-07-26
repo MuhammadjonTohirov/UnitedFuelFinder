@@ -76,7 +76,7 @@ struct KeyboardView: View {
             keyItem(.backSpace)
         }
         
-        .font(.system(size: 24, weight: .medium))
+        .font(.lato(size: 24, weight: .medium))
     }
     
     @ViewBuilder var keyboardFirstRow: some View {

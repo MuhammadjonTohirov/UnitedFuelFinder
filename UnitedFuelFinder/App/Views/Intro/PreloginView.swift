@@ -67,7 +67,7 @@ struct PreloginView: View {
                                 .font(.regular(size: 16))
                         }
                         .overlay {
-                            Image(systemName: "arrow.right")
+                            Icon(systemName: "arrow.right")
                                 .frame(width: 50)
                                 .horizontal(alignment: .trailing)
                         }

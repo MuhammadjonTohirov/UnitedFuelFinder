@@ -36,7 +36,7 @@ public extension View {
                     
                     Button(action: {UIApplication.shared.dismissKeyboard()}, label: {
                         
-                        Image(systemName: "keyboard.chevron.compact.down")
+                        Icon(systemName: "keyboard.chevron.compact.down")
                             .foregroundStyle(Color.label)
                     })
                     .frame(maxWidth: .infinity, alignment: .trailing)

@@ -302,7 +302,7 @@ struct MapTabView: View {
                 .frame(width: 40, height: 40)
                 .foregroundStyle(Color.background)
                 .overlay {
-                    Image(systemName: "bell")
+                    Icon(systemName: "bell")
                         .resizable()
                         .renderingMode(.template)
                         .foregroundStyle(Color.label.opacity(0.5))
@@ -355,7 +355,7 @@ struct MapTabView: View {
                 .frame(width: 40, height: 40)
                 .foregroundStyle(Color.background)
                 .overlay {
-                    Image(systemName: "arrow.clockwise")
+                    Icon(systemName: "arrow.clockwise")
                         .resizable()
                         .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
@@ -376,7 +376,7 @@ struct MapTabView: View {
                 .frame(width: 40, height: 40)
                 .foregroundStyle(Color.background)
                 .overlay {
-                    Image(systemName: "arrow.left")
+                    Icon(systemName: "arrow.left")
                         .renderingMode(.template)
                         .foregroundStyle(Color.label.opacity(0.5))
                 }

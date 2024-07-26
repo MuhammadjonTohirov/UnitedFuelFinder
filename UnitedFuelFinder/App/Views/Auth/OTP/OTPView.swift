@@ -62,11 +62,11 @@ struct OTPView: View {
     private var headlines: some View {
         VStack(alignment: .leading, spacing: 7) {
             Text(viewModel.title)
-                .font(.system(size: 24, weight: .semibold))
+                .font(.lato(size: 24, weight: .semibold))
                 .multilineTextAlignment(.center)
             
             Text("otp_sent_to_email".localize)
-                .font(.system(size: 14, weight: .regular))
+                .font(.lato(size: 14, weight: .regular))
                 .multilineTextAlignment(.center)
                 
             
@@ -74,7 +74,7 @@ struct OTPView: View {
                 .foregroundStyle(Color.accent)
         }
         .padding(.horizontal, Padding.default)
-        .font(.system(size: 14, weight: .regular))
+        .font(.lato(size: 14, weight: .regular))
     }
     
     private var fieldView: some View {
@@ -86,7 +86,7 @@ struct OTPView: View {
                         .foregroundColor(Color.init(uiColor: .secondaryLabel))
                         .padding(.trailing, 4)
                     Text(viewModel.shouldResend ? "retry".localize : viewModel.counter)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.lato(size: 14, weight: .medium))
                         .foregroundColor(viewModel.shouldResend ? .accent : .secondary)
                         .onTapGesture {
                             if viewModel.shouldResend {

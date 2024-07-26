@@ -151,7 +151,7 @@ struct DriverPropertiesView: View {
                     .font(.medium(size: 13))
                 Spacer()
                 
-                Image(systemName: "chevron.down")
+                Icon(systemName: "chevron.down")
             }
             .padding(14)
             .border(.gray, cornerRadius: 8)
@@ -164,7 +164,7 @@ struct DriverPropertiesView: View {
     
     private func checkbox(_ title: String, _ isSelected: Bool) -> some View {
         HStack(alignment: .center, spacing: 5) {
-            Image(systemName: isSelected ? "checkmark.square.fill" : "square")
+            Icon(systemName: isSelected ? "checkmark.square.fill" : "square")
 
             Text(title)
                 .font(.regular(size: 12))

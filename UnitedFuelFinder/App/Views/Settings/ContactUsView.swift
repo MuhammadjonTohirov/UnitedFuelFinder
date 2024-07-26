@@ -79,11 +79,11 @@ struct ContactUsView: View {
             
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
-                    .font(.system(size: 11, weight: .regular))
+                    .font(.lato(size: 11, weight: .regular))
                     .foregroundStyle(Color.secondary)
                 
                 Text(details)
-                    .font(.system(size: 12, weight: .regular))
+                    .font(.lato(size: 12, weight: .regular))
             }
             
             Spacer()

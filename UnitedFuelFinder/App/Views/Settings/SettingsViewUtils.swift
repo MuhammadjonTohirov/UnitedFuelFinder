@@ -24,12 +24,12 @@ struct SettingsViewUtils {
                 
                 VStack(alignment: .leading) {
                     Text(title)
-                        .font(.system(size: 14, weight: .medium))
+                        .font(.lato(size: 14, weight: .medium))
                         .foregroundStyle(Color.label)
                     
                     if !descr.isEmpty {
                         Text(descr)
-                            .font(.system(size: 12, weight: .regular))
+                            .font(.lato(size: 12, weight: .regular))
                             .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                             .multilineTextAlignment(.leading)
                     }
@@ -38,13 +38,12 @@ struct SettingsViewUtils {
                 Spacer()
                 
                 Text(details)
-                    .font(.system(size: 12, weight: .regular))
+                    .font(.lato(size: 12, weight: .regular))
                     .foregroundStyle(Color.secondary)
 
-                Image(systemName: "chevron.right")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(width: 10, height: 10)
+                Icon(systemName: "chevron.right")
+                    .size(.init(width: 14, height: 14))
+                    .aspectRatio(.fit)
             }
         }
     }

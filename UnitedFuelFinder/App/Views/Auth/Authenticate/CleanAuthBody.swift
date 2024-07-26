@@ -21,13 +21,13 @@ struct CleanAuthBody: View {
                         color: .accent
                     ).toSwiftUI
                 )
-                .font(.system(size: 24, weight: .semibold))
+                .font(.lato(size: 24, weight: .semibold))
                 .padding(.horizontal, Padding.medium)
                 
                 Text(
                     "lets_sign_in_you".localize
                 )
-                .font(.system(size: 14, weight: .semibold))
+                .font(.lato(size: 14, weight: .semibold))
                 .padding(.horizontal, Padding.medium)
                 
                 VStack(spacing: 10) {
@@ -70,7 +70,7 @@ struct CleanAuthBody: View {
                 contentType: UITextContentType.emailAddress,
                 autoCapitalization: .never,
                 left: {
-                    Image(systemName: "person.fill")
+                    Icon(systemName: "person.fill")
                         .frame(width: 24)
                         .padding(.horizontal, Padding.small)
                 }

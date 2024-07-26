@@ -67,9 +67,11 @@ struct SettingsView: View {
             Divider()
             
             SettingsViewUtils.row(
-                image: Image(systemName: "lock")
+                image: Icon(systemName: "lock")
                     .resizable()
                     .renderingMode(.template)
+                    .size(.init(width: 18, height: 18))
+                    .aspectRatio(.fit)
                     .fixedSize()
                     .foregroundStyle(Color.label)
                     .frame(width: 24, height: 24),
@@ -127,7 +129,7 @@ struct SettingsView: View {
                 Spacer()
                 
                 Text("app_version".localize + ":")
-                    .fontWeight(.semibold)
+                    .font(.lato(size: 14))
                     .foregroundStyle(Color.init(uiColor: .systemRed))
                     .onTapGesture {
                         #if DEBUG
@@ -136,6 +138,7 @@ struct SettingsView: View {
                     }
                 //Text(UserSettings.shared.currentAPIVersion?.nilIfEmpty ?? Bundle.main.appVersion)
                 Text(Bundle.main.appVersion)
+                    .font(.lato(size: 14))
                     .foregroundStyle(Color.label)
                 
                 Spacer()

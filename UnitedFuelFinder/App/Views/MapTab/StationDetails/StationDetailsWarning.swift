@@ -11,12 +11,11 @@ import SwiftUI
 struct StationDetailsWarning: View {
     var body: some View {
         HStack {
-            Image(systemName: "exclamationmark.triangle.fill")
-                .resizable()
+            Icon(systemName: "exclamationmark.triangle.fill")
                 .frame(width: 32.f.sw(), height: 28.f.sw(), alignment: .center)
             Text("price.change.warning".localize)
                 .multilineTextAlignment(.leading)
-                .font(.system(size: 12, weight: .semibold))
+                .font(.lato(size: 12, weight: .semibold))
         }
         .frame(maxWidth: .infinity)
         .foregroundStyle(.red)

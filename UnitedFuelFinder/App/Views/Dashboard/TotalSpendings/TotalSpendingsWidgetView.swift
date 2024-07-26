@@ -100,9 +100,8 @@ struct TotalSpendingsWidgetView: View {
         HStack(spacing: 5) {
             Text(viewModel.filter.title)
                 .font(.regular(size: 10))
-            Image(systemName: "chevron.down")
-                .resizable()
-                .frame(width: 8, height: 5)
+            Icon(systemName: "chevron.down")
+                .size(.init(width: 8, height: 5))
                 .foregroundStyle(.appIcon)
         }
         .padding(.horizontal, 10)

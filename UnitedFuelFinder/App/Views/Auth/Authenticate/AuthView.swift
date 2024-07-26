@@ -49,7 +49,7 @@ struct AuthView: View {
                 contentType: UITextContentType.emailAddress,
                 autoCapitalization: .never,
                 left: {
-                    Image(systemName: "person.fill")
+                    Icon(systemName: "person.fill")
                         .frame(width: 24)
                         .padding(.horizontal, Padding.small)
                 }

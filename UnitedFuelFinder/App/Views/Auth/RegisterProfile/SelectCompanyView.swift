@@ -19,11 +19,11 @@ struct SelectCompanyView: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(item.name)
                     .foregroundStyle(Color.label)
-                    .font(.system(size: 13, weight: .medium))
+                    .font(.lato(size: 13, weight: .medium))
                     
                 Text(item.address)
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
             }
             .frame(height: 56)
         } onSearching: { item, key in

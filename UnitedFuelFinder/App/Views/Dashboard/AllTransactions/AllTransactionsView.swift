@@ -104,7 +104,7 @@ struct AllTransactionsView: View {
             Text(selectedCard == nil ? "all".localize : selectedCard?.name ?? "")
                 .font(.regular(size: 12))
             Spacer()
-            Image(systemName: "chevron.down")
+            Icon(systemName: "chevron.down")
         }
         .padding(.leading, Padding.medium)
         .padding(.trailing, Padding.small)
@@ -130,12 +130,12 @@ struct AllTransactionsView: View {
                 HStack {
                     Text("\(formattedDate(date1))")
                     Spacer()
-                    Image(systemName: "calendar")
+                    Icon(systemName: "calendar")
+                        .aspectRatio(.fit)
                         .resizable()
-                        .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .font(.system(size: 13))
+                .font(.lato(size: 13))
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(uiColor: .label))
             })
@@ -155,12 +155,12 @@ struct AllTransactionsView: View {
                 HStack {
                     Text("\(formattedDate(date2))")
                     Spacer()
-                    Image(systemName: "calendar")
+                    Icon(systemName: "calendar")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 24, height: 24)
                 }
-                .font(.system(size: 13))
+                .font(.lato(size: 13))
                 .fontWeight(.regular)
                 .foregroundColor(Color.init(uiColor: .label))
             })

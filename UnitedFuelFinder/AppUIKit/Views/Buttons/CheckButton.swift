@@ -27,15 +27,15 @@ public struct CheckButton: View {
     
     public var body: some View {
         HStack(alignment: .center, spacing: 8) {
-            Image(systemName: isSelected ? "checkmark.square" : "square")
+            Icon(systemName: isSelected ? "checkmark.square" : "square")
                 .foregroundColor(.accentColor)
-                .font(.system(size: 20, weight: .bold))
+                .font(.lato(size: 20, weight: .bold))
                 .onTapGesture {
                     isSelected.toggle()
                 }
         
             Text(text)
-                .font(.system(size: 12, weight: .regular))
+                .font(.lato(size: 12, weight: .regular))
                 .onTapGesture(perform: onClickText)
         }
     }

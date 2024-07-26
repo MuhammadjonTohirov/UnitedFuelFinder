@@ -24,13 +24,13 @@ struct PinCodeView: View {
         VStack(spacing: 0) {
             Spacer()
             Text(viewModel.title)
-                .font(.system(size: 24, weight: .semibold))
+                .font(.lato(size: 24, weight: .semibold))
                 .foregroundColor(.label)
 
             Spacer()
 
             Text("Invalid PIN")
-                .font(.system(size: 13, weight: .medium))
+                .font(.lato(size: 13, weight: .medium))
                 .foregroundStyle(Color.init(uiColor: .systemRed))
                 .padding(.bottom, Padding.medium)
                 .opacity(viewModel.errorText == nil ? 0 : 1)

@@ -30,13 +30,13 @@ struct PopularStationsView: View {
                         VStack(alignment: .leading) {
                             HStack {
                                 Text(item.title)
-                                    .font(.system(size: 12))
+                                    .font(.lato(size: 12))
                                     .fontWeight(.regular)
                                 
                                 Spacer()
                                 
                                 Text("#\(item.value)")
-                                    .font(.system(size: 12))
+                                    .font(.lato(size: 12))
                                     .fontWeight(.semibold)
                             }
                             Rectangle()

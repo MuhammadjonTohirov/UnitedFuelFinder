@@ -18,7 +18,7 @@ struct NotificationsView: View {
             VStack {
                 if viewModel.notifications.isEmpty {
                     Text("no_notifications".localize)
-                        .font(.system(size: 20))
+                        .font(.lato(size: 20))
                         .foregroundColor(.secondary)
                 } else {
                     LazyVStack(spacing: 12) {
@@ -49,15 +49,15 @@ struct NotificationRow: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
             Text(notification.title)
-                .font(.system(size: 16, weight: .semibold))
+                .font(.lato(size: 16, weight: .semibold))
                 .foregroundColor(.primary)
             Text(notification.body)
-                .font(.system(size: 14))
+                .font(.lato(size: 14))
                 .foregroundColor(.label)
             HStack {
                 Spacer()
                 Text(notification.createdAt ?? "")
-                    .font(.system(size: 12))
+                    .font(.lato(size: 12))
                     .foregroundColor(.secondary)
             }
         }

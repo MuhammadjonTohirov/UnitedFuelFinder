@@ -53,7 +53,7 @@ struct YPhoneField: View, TextFieldProtocol {
                 .placeholder(placeholder, when: text.isEmpty)
                 .keyboardType(.numberPad)
                 .frame(height: 56)
-                .font(.system(size: 14, weight: .medium))
+                .font(.lato(size: 14, weight: .medium))
 
             AnyView(right())
         }

@@ -57,7 +57,7 @@ struct SelectStateView: View {
             }, label: {
                 Text(item.name)
                     .foregroundStyle(Color.label)
-                    .font(.system(size: 14))
+                    .font(.lato(size: 14))
                     .frame(height: 40)
             })
         } onSearching: { item, key in

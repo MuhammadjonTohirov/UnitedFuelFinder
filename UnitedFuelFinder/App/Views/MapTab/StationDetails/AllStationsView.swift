@@ -54,7 +54,7 @@ struct AllStationsView: View {
             } else {
                 Text("no_item_found".localize)
                     .padding(.top, Padding.default)
-                    .font(.system(size: 14, weight: .semibold))
+                    .font(.lato(size: 14, weight: .semibold))
                     .foregroundStyle(Color.init(uiColor: .secondaryLabel))
                 Spacer()
             }
@@ -68,7 +68,7 @@ struct AllStationsView: View {
                 }, label: {
                     Text("cancel".localize.capitalized)
                         .foregroundStyle(Color.label)
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.lato(size: 14, weight: .semibold))
                 })
             }
         })
@@ -94,7 +94,7 @@ struct AllStationsView: View {
                 return HStack {
                     Text("stations_at_radius".localize(arguments: "\(radius) mi"))
                         .foregroundStyle(Color.init(uiColor: .secondaryLabel))
-                        .font(.system(size: 13, weight: .regular))
+                        .font(.lato(size: 13, weight: .regular))
                     Spacer()
                 }
             }
@@ -119,7 +119,7 @@ struct AllStationsView: View {
                 Text(to)
             }
         }
-        .font(.system(size: 13, weight: .regular))
+        .font(.lato(size: 13, weight: .regular))
     }
 }
 
