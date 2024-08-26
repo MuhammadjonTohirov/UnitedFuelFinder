@@ -83,6 +83,7 @@ struct RegisterProfileView: View {
                 autoCapitalization: .never,
                 left: {
                     Icon(systemName: "person.fill")
+                        .size(.init(width: 18, height: 18))
                         .frame(width: 24)
                         .padding(.horizontal, Padding.small)
                 }

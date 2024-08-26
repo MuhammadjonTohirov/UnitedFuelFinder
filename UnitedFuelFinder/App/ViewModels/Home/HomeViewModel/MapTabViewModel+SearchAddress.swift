@@ -55,12 +55,22 @@ extension MapTabViewModel: SearchAddressProtocol {
         viewModel: SearchAddressViewModel,
         result: SearchAddressViewModel.SearchAddressResult
     ) {
-        self.currentDestination = .init(
-            location: .init(latitude: result.lat, longitude: result.lng),
-            address: result.address
-        )
+        if self.editingDestinationId == result.id, let id = result.id?.nilIfEmpty, let dest = self.destinations.first(where: {$0.id == id}) {
+            dest.location = .init(latitude: result.lat, longitude: result.lng)
+            dest.address = result.address
+            self.editingDestinationId = nil
+            if self.destinations.count == 1 {
+                self.focusToLocation(dest.location)
+            }
+        } else {
+            self.currentDestination = .init(
+                location: .init(latitude: result.lat, longitude: result.lng),
+                address: result.address
+            )
+            
+            addDestination(currentDestination!)
+        }
         
-        addDestination(currentDestination!)
         self.searchAddressViewModel.dispose()
         self.presentableRoute = nil
     }

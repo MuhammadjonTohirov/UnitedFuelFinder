@@ -11,6 +11,7 @@ import SwiftUI
 struct SpendingItem: Identifiable {
     var id: Int
     var value: Double
+    var valueString: String
     var title: String
     var color: Color
     
@@ -56,24 +57,15 @@ final class TotalSpendingsViewModel: ObservableObject {
         isLoading = true
         Task {
             let result = await DriverService.shared.summarySpending(type: type)
+            let shouldShowDiscountPrice = UserSettings.shared.userInfo?.showDiscountPrices ?? false
+            let savings = "$\(result.saving.asFloat.asMoney)"
             await MainActor.run {
                 self.data = [
-                    .init(id: 0, value: result.spending, title: "spendings".localize, color: .yellow),
-                    .init(id: 1, value: result.saving, title: "savings".localize, color: .green)
+                    .init(id: 0, value: result.spending, valueString: "$\(result.spending.asFloat.asMoney)", title: "spendings".localize, color: .yellow),
+                    .init(id: 1, value: shouldShowDiscountPrice ? result.saving : 0, valueString: shouldShowDiscountPrice ? savings : "--", title: "savings".localize, color: .green)
                 ]
                 isLoading = false
             }
         }
-    }
-}
-
-extension TotalSpendingsViewModel {
-    static var test: TotalSpendingsViewModel {
-        let model = TotalSpendingsViewModel()
-        model.data = [
-            .init(id: 0, value: 120, title: "spendings".localize, color: .green),
-            .init(id: 1, value: 150, title: "savings".localize, color: .yellow),
-        ]
-        return model
     }
 }

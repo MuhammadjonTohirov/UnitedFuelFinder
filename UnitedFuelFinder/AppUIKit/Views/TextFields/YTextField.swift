@@ -160,6 +160,7 @@ public struct YTextField: View, TextFieldProtocol {
                 self.passwordVisible.toggle()
             }, label: {
                 Icon(systemName: passwordVisible ? "eye" : "eye.slash")
+                    .size(.init(width: 16, height: 16))
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 16, height: 16)

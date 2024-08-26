@@ -19,6 +19,10 @@ final class LoadingViewModel: LoadingViewModelProtocol, ObservableObject {
     @Published var loadingReason: String = ""
     
     func initialize() {
+        if UserSettings.shared.photoUpdateDate == nil {
+            UserSettings.shared.photoUpdateDate = Date()
+        }
+        
         Task.detached(priority: .high) { [weak self] in
             guard let self else {return}
             await CommonService.shared.syncStates()
@@ -48,10 +52,6 @@ final class LoadingViewModel: LoadingViewModelProtocol, ObservableObject {
         await MainActor.run {
             loadingReason = text
         }
-    }
-    
-    private func showMain() async {
-        await appDelegate?.navigate(to: .mainTab)
     }
     
     private func showAuth() async {

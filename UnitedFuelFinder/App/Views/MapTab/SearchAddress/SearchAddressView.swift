@@ -97,6 +97,7 @@ struct SearchAddressView: View {
                 HStack(alignment: .center) {
                     address
                         .icon
+                        .size(.init(width: 16, height: 16))
                         .renderingMode(.template)
                         .foregroundStyle(Color(address.type == .history ? .secondaryLabel : .accent))
                     

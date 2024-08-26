@@ -15,17 +15,10 @@ struct DarkAuthBody: View {
     @State private var bottomRect: CGRect = .zero
     @State private var bodyRect: CGRect = .zero
     @State private var formRect: CGRect = .zero
-    var userType: String {
-        viewModel.userType.rawValue.capitalized
-    }
     
     var body: some View {
         ZStack {
             headerImage
-                .overlay {
-                    Text(userType)
-                        .font(.lato(size: 48, weight: .bold, design: .rounded))
-                }
                 .vertical(alignment: .top)
                 .readRect(rect: $bodyRect)
                 .ignoresSafeArea()
@@ -63,15 +56,16 @@ struct DarkAuthBody: View {
                 }, label: {
                     Text("no.account".localize)
                         .foregroundStyle(Color.accentColor)
-                }, backgroundColor: .clear)
+                }, backgroundColor: .clear) 
                 .padding(.horizontal, Padding.default.sh())
-                .padding(.bottom, Padding.small.sh())
+                .padding(.bottom, Padding.default.sh())
                 
                 AppleButton()
                     .onTapGesture {
                         showToast("coming_soon".localize)
                     }
                     .padding(.bottom, Padding.medium.sh())
+                    .set(isVisible: false)
             }
             .readRect(rect: $bottomRect)
             .vertical(alignment: .bottom)
@@ -89,10 +83,11 @@ struct DarkAuthBody: View {
                     text: $viewModel.username,
                     placeholder: "sample@domain.com",
                     placeholderColor: .white.opacity(0.5),
-                    contentType: .username,
                     autoCapitalization: .never,
                     left: {
                         Icon(systemName: "person.fill")
+                            .size(.init(width: 18, height: 18))
+                            .iconColor(.white)
                             .frame(width: 24)
                             .padding(.horizontal, Padding.small.sh())
                     }
@@ -116,13 +111,12 @@ struct DarkAuthBody: View {
                     placeholder: "••••••••",
                     placeholderColor: .white.opacity(0.5),
                     isSecure: true,
-                    contentType: UITextContentType.password,
                     autoCapitalization: .never,
                     left: {
                         Image("jcon_key")
                             .renderingMode(.template)
                             .frame(width: 24)
-                            .padding(.horizontal, Padding.small.sh())
+                            .padding(.horizontal, Padding.small.sh  ())
                     }
                 )
                 .keyboardType(.default)

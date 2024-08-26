@@ -42,6 +42,8 @@ extension URLRequest {
         req.addValue("IOS", forHTTPHeaderField: "X-DEVICE-TYPE")
         req.addValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
         req.addValue("application/json", forHTTPHeaderField: "accept")
+        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        req.addValue(appVersion ?? "1.14", forHTTPHeaderField: "X-APP-VERSION")
         
         if let accessToken = UserSettings.shared.accessToken, withAuth {
             req.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")

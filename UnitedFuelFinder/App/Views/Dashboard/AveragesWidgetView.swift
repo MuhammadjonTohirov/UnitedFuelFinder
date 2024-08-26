@@ -10,11 +10,17 @@ import SwiftUI
 
 struct AveragesWidgetView: View {
     @State private var data: (savings: Float, gallons: Float, discount: Float) = (0,0,0)
+    
+    var savings: String {
+        let showDiscountPrice = UserSettings.shared.userInfo?.showDiscountPrices ?? false
+        return showDiscountPrice ? data.savings.asMoney : "--"
+    }
+    
     var body: some View {
         HStack {
             item(
                 title: "total.savings".localize,
-                detail: Text("$ \(data.savings.asMoney)")
+                detail: Text("$ \(savings)")
                     .foregroundStyle(Color.green)
                     .font(.bold(size: 20))
                     .anyView

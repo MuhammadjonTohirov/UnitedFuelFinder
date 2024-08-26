@@ -72,7 +72,7 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
     @Published var push: Bool = false
     private(set) var interactor: (any DashboardInteractorProtocol)
     
-    var sepndingsViewModel: TotalSpendingsViewModel = .init()
+    @Published var sepndingsViewModel: TotalSpendingsViewModel = .init()
     
     @Published var transactions: [TransactionItem] = []
     @Published var invoices: [InvoiceItem] = []
@@ -93,7 +93,7 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
     
     var route: DashboardRoute? {
         didSet {
-            push = route != nil
+            self.push = self.route != nil
         }
     }
     
@@ -106,14 +106,12 @@ class DashboardViewModel: ObservableObject, DashboardViewModelProtocol {
         
         reloadData()
         
-        sepndingsViewModel.data = [
-            .init(id: 0, value: 120, title: "spendings".localize, color: .yellow),
-            .init(id: 1, value: 50, title: "savings".localize, color: .green)
-        ]
     }
     
     func navigate(to page: DashboardRoute) {
-        self.route = page
+        DispatchQueue.main.async {
+            self.route = page
+        }
     }
     
     func reloadData() {

@@ -88,12 +88,19 @@ public struct TransactionItem: Identifiable {
         return String.init(format: "$%.2f", amount ?? 0)
     }
     public var savedAmountString: String  {
+        guard UserSettings.shared.userInfo?.showDiscountPrices ?? false else {
+            return "--"
+        }
+        
         return "@saved".localize(arguments: String(format: "$%.2f", discAmount ?? 0))
     }
     public var quantityString:String{
         return String(format: "%g", quantity ?? 0)
     }
-    public  var pricePerUnitString:String{
+    public  var pricePerUnitString:String {
+        guard UserSettings.shared.userInfo?.showDiscountPrices ?? false else {
+            return "--"
+        }
         return String(format: "%g", discPpu ?? 0)
     }
     public var transactionDateString:String{

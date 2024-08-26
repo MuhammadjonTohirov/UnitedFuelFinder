@@ -63,7 +63,7 @@ struct SelectLanguageView: View {
     
     private func onClickContinue() {
         UserSettings.shared.isLanguageSelected = true
-        Task{
+        Task(priority: .high) {
             await appDelegate?.navigate(to: .auth)
         }
     }

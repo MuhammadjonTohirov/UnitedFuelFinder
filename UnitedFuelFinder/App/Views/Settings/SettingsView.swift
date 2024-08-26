@@ -225,7 +225,7 @@ struct SettingsView: View {
         UserSettings.shared.language = .english
         appDelegate?.timer?.invalidate()
         appDelegate?.timer = nil
-        Task {
+        Task(priority: .high) {
             await appDelegate?.navigate(to: .loading)
         }
     }

@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct CompanyDashboardHeader: View {
-    
     var onClickCards: () -> () = {}
     var onClickTransactions: () -> () = {}
     var onClickInvoices: () -> () = {}
@@ -18,10 +17,6 @@ struct CompanyDashboardHeader: View {
         self.onClickCards = onClickCards
         self.onClickTransactions = onClickTransactions
         self.onClickInvoices = onClickInvoices
-    }
-    
-    init() {
-        
     }
     
     @State private var showBalance = false {
@@ -55,7 +50,7 @@ struct CompanyDashboardHeader: View {
             }
         }
         .onAppear {
-            Task {
+            Task.detached {
                 let info = (await CompanyService.shared.loadAllCards()).reduce(0) { $0 + $1.totalBalance }
                 
                 await MainActor.run {
@@ -106,9 +101,4 @@ struct CompanyDashboardHeader: View {
                 .frame(maxWidth: 100)
         }
     }
-}
-
-#Preview {
-    CompanyDashboardHeader()
-        .background(Rectangle())
 }

@@ -11,14 +11,13 @@ import SwiftUI
 struct AuthView: View {
     @ObservedObject var viewModel: AuthorizationViewModel = .init()
     @State var showAlert: Bool = false
-    var userType: UserType
-    
+
     var body: some View {
         mainBody
     }
     
     private var mainBody: some View {
-        DarkAuthBody()
+        CleanAuthBody()
             .environmentObject(viewModel)
             .keyboardDismissable()
             .alert("warning".localize,
@@ -35,9 +34,6 @@ struct AuthView: View {
                     .background(.appBackground)
             }
             .coveredLoading(isLoading: $viewModel.isLoading)
-            .onAppear {
-                viewModel.userType = userType
-            }
     }
     
     @ViewBuilder
@@ -87,6 +83,6 @@ struct AuthView: View {
 #Preview {
     UserSettings.shared.language = .english
     return NavigationStack {
-        AuthView(userType: .driver)
+        AuthView()
     }
 }

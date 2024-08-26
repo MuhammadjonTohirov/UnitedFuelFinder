@@ -10,7 +10,7 @@ import SwiftUI
 struct DashboardView: View {
     
     @ObservedObject var viewModel: DashboardViewModel
-    @State var headerRect: CGRect = .zero
+    @State private var imagePlaceholder: Image?
     
     init(viewModel: DashboardViewModel) {
         self.viewModel = viewModel
@@ -29,8 +29,35 @@ struct DashboardView: View {
                         .foregroundStyle(Color.background)
                 }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarLeading) {
+                Image("icon_bell_active")
+                    .renderingMode(.template)
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundStyle(.white)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
+                    .onTapGesture {
+                        viewModel.navigate(to: .notifications)
+                    }
+            }
+        })
+        .toolbar(content: {
+            ToolbarItem(placement: .principal) {
+                Text("dashboard".localize)
+                    .font(.lato(size: 16, weight: .bold))
+                    .foregroundStyle(.white)
+                    .shadow(color: .black, radius: 4, x: 0, y: 0)
+            }
+        })
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                avatarView
+            }
+        })
         .navigationDestination(isPresented: $viewModel.push, destination: {
             viewModel.route?.screen
+                .toolbar(.hidden, for: .tabBar)
         })
         .onAppear {
             self.viewModel.onAppear()
@@ -42,18 +69,47 @@ struct DashboardView: View {
             }
         }
         .coveredLoading(isLoading: $viewModel.isLoading)
+        .navigationBarTitleDisplayMode(.inline)
     }
     
-    var headerView: some View {
+    private var avatarView: some View {
+        KF(
+            imageUrl: UserSettings.shared.userAvatarURL,
+            cacheKey: (UserSettings.shared.photoUpdateDate ?? Date()).toString(),
+            storageExpiration: .expired,
+            memoryExpiration: .expired,
+            placeholder: imagePlaceholder?
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 32.f.sw(), height: 32.f.sw(), alignment: .center)
+                .clipShape(Circle())
+                .anyView ?? EmptyView().anyView
+        )
+        .frame(width: 32.f.sw(), height: 32.f.sw())
+        .background {
+            Circle()
+                .foregroundColor(Color(uiColor: .secondarySystemBackground))
+        }
+        .onTapGesture {
+            viewModel.navigate(to: .profile)
+        }
+        .onAppear {
+            if let img = UIImage(named: "icon_man_placeholder") {
+                self.imagePlaceholder = Image(uiImage: img)
+            }
+        }
+    }
+    
+    private var headerView: some View {
         Group {
             switch UserSettings.shared.userInfo?.userType {
             case .company:
                 CompanyDashboardHeader(onClickCards: {
-                    viewModel.route = .cards
+                    viewModel.navigate(to: .cards)
                 }, onClickTransactions: {
-                    viewModel.route = .transferringStations
+                    viewModel.navigate(to: .transferringStations)
                 }, onClickInvoices: {
-                    viewModel.route = .invoices
+                    viewModel.navigate(to: .invoices)
                 })
                 .padding(.top, 20)
             case .driver:
@@ -68,18 +124,18 @@ struct DashboardView: View {
         GeometryReader { fullView in
             VStack(alignment: .leading, spacing: 20) {
                 headerView
-                    .readRect(rect: $headerRect)
                 
                 AveragesWidgetView()
                 
                 TotalSpendingsWidgetView(
                     viewModel: viewModel.sepndingsViewModel
                 )
-                                
+         
                 transactionsView.set(isVisible: showTransitions)
 
                 invoicesView.set(isVisible: showInvoices)
             }
+            
             .padding(.horizontal)
             .padding(.bottom)
             .font(.lato(size: 14))
@@ -90,7 +146,7 @@ struct DashboardView: View {
                 Image("image_header")
                     .opacity(0.8)
                     .frame(
-                        height: headerRect.height + UIApplication.shared.safeArea.top + 120
+                        height: 370 + UIApplication.shared.safeArea.top
                     )
                     .clipped()
                     .offset(y: -fullView.frame(in: .local).height / 2 + fullView.safeAreaInsets.top / 2)

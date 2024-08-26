@@ -12,7 +12,12 @@ struct PreloginView: View {
     @StateObject var viewModel = PreloginViewModel()
     
     @State
-    private var selectedType: UserType = .driver
+    private var selectedType: UserType?
+    
+    private var color: Color {
+//        selectedType == nil ? .gray : .accent
+        .accent
+    }
     
     var body: some View {
         NavigationStack {
@@ -20,7 +25,9 @@ struct PreloginView: View {
                 .navigationDestination(
                     isPresented: $viewModel.showLoginPage
                 ) {
-                    AuthView(userType: selectedType)
+                    if let selectedType {
+                        AuthView()
+                    }
                 }
         }
     }
@@ -28,7 +35,6 @@ struct PreloginView: View {
     var innerBody: some View {
         Rectangle()
             .foregroundStyle(Color.appDarkGray)
-            .ignoresSafeArea()
             .overlay {
                 Image("img_welcome")
                     .resizable()
@@ -36,6 +42,7 @@ struct PreloginView: View {
                     .ignoresSafeArea()
                     .padding(.bottom, 50)
             }
+            .ignoresSafeArea()
             .overlay {
                 VStack(spacing: 32) {
                     Spacer()
@@ -45,14 +52,14 @@ struct PreloginView: View {
                             selected: selectedType == .driver
                         ).onTapGesture {
                             selectedType = .driver
-                        }
+                        }.opacity(0)
                         
                         largeRadioButton(
                             title: "company".localize.capitalized,
                             selected: selectedType == .company
                         ).onTapGesture {
                             selectedType = .company
-                        }
+                        }.opacity(0)
                     }
                     .frame(width: 240.f.sw())
                     
@@ -61,7 +68,7 @@ struct PreloginView: View {
                             width: 202.f.sw(),
                             height: 48.f.sh()
                         )
-                        .foregroundStyle(.accent)
+                        .foregroundStyle(color)
                         .overlay {
                             Text("get.started".localize)
                                 .font(.regular(size: 16))
@@ -72,11 +79,17 @@ struct PreloginView: View {
                                 .horizontal(alignment: .trailing)
                         }
                         .onTapGesture {
+                            if selectedType == nil {
+                                selectedType = .driver
+                            }
+                            
                             viewModel.showLoginPage = true
                         }
-                        .shadow(color: .accent.opacity(0.5), radius: 8, x: 0, y: 0)
+                        .shadow(color: color, radius: 8, x: 0, y: 0)
+                        .padding(.bottom, 20)
                 }
             }
+
     }
     
     private func largeRadioButton(title: String, selected: Bool) -> some View {

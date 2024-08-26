@@ -56,13 +56,12 @@ public struct AuthService {
         return (isOK, isOK ? nil : .custom(result.error ?? "Unknown error"))
     }
     
-    func login(username: String, password: String, role: String) async -> (Bool, AuthNetworkErrorReason?) {
+    func login(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
         guard let result: NetRes<NetResLogin> = await Network.send(
             request: UserNetworkRouter.login(
                 request: .init(
                     email: username,
-                    password: password,
-                    role: role
+                    password: password
                 )
             ),
             refreshTokenIfNeeded: false
@@ -89,14 +88,6 @@ public struct AuthService {
         
         let isOK = result.data != nil
         return (isOK, isOK ? nil : .custom(result.error ?? "Unknown error"))
-    }
-    
-    func driverLogin(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
-        await login(username: username, password: password, role: "driver")
-    }
-    
-    func companyLogin(username: String, password: String) async -> (Bool, AuthNetworkErrorReason?) {
-        await login(username: username, password: password, role: "company")
     }
     
     func register(with request: NetReqRegister) async -> (Bool, AuthNetworkErrorReason?) {
@@ -147,7 +138,7 @@ public struct AuthService {
     func syncUserInfo() async -> Bool {
         let response: NetRes<NetResUserInfo>? = await Network.send(request: UserNetworkRouter.userInfo)
         UserSettings.shared.userInfo = response?.data?.asModel
-        
+        UserSettings.shared.userType = (response?.data?.asModel.roleCode.lowercased().contains("driver") ?? true) ? .driver : .company
         Logging.l("User sync \(response?.data != nil)")
         return response?.data != nil
     }

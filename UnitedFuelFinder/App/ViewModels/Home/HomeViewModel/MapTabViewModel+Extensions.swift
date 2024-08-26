@@ -47,8 +47,9 @@ extension MapTabViewModel {
         } else {
             withAnimation {
                 self.state = .default
-
+                
                 self.clearDestination()
+                self.reloadAddress()
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.startFilterStations()
@@ -125,6 +126,9 @@ extension MapTabViewModel {
         if let edit = self.toLocation {
             self.editingDestinationId = edit.id
             self.searchAddressViewModel.set(input: edit)
+        } else {
+            self.editingDestinationId = nil
+            self.searchAddressViewModel.set(input: nil)
         }
         
         self.presentableRoute = .searchAddress(viewModel: self.searchAddressViewModel)

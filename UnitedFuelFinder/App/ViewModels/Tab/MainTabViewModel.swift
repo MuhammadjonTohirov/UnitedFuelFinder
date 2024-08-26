@@ -50,8 +50,6 @@ class MainTabViewModel: ObservableObject {
             return
         }
         
-        setupSyncVersion()
-        
         GLocationManager.shared.requestLocationPermission()
         
         if let loc = GLocationManager.shared.currentLocation {
@@ -133,15 +131,6 @@ class MainTabViewModel: ObservableObject {
         }
     }
     
-    private func setupSyncVersion() {
-        Task {
-            await AuthService.shared.syncUserInfo()
-            
-//            if let serverVersion = await CommonService.shared.getVersion() {
-//                UserSettings.shared.currentAPIVersion = serverVersion
-//            }
-        }
-    }
     private func getActualVersion() async {
         fatalError("Do not use this method")
 //        Task {

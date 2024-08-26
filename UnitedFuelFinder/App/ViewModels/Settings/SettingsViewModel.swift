@@ -144,7 +144,7 @@ class SettingsViewModel: NSObject, ObservableObject, SettingsProfileModelProtoco
         DispatchQueue.main.async {
             self.otpShow = false
             self.otpModel = nil
-            Task {
+            Task(priority: .high) {
                 UserSettings.shared.clear()
                 await appDelegate?.navigate(to: .loading)
             }

@@ -4459,9 +4459,6 @@
         }
       }
     },
-    "Spendings" : {
-
-    },
     "state" : {
       "extractionState" : "manual",
       "localizations" : {

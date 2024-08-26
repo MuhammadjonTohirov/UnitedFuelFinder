@@ -23,6 +23,7 @@ struct CleanAuthBody: View {
                 )
                 .font(.lato(size: 24, weight: .semibold))
                 .padding(.horizontal, Padding.medium)
+                .padding(.bottom, Padding.medium)
                 
                 Text(
                     "lets_sign_in_you".localize

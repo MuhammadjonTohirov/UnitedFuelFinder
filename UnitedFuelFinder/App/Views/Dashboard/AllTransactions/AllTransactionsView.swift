@@ -19,6 +19,18 @@ struct AllTransactionsView: View {
     @State private var selectedCard: DriverCard? = nil
     @State private var cards: [DriverCard] = []
     
+    private var downloadURL: URL {
+        URL.baseAPI.appendingPath(isCompany ? "Company" : "Driver", "PrintTransactions")
+            .queries(
+                .init(name: "fromDate", value: date1.toString(format: "ddMMyyyy")),
+                .init(name: "toDate", value: date2.toString(format: "ddMMyyyy")),
+                .init(name: "cardNumber", value: selectedCard?.id)
+            )
+    }
+    
+    @State private var pdfURL: URL?
+    @State private var showShareSheet: Bool = false
+    
     private var isCompany: Bool {
         UserSettings.shared.userType == .company
     }
@@ -64,6 +76,11 @@ struct AllTransactionsView: View {
                     }
                 }
             })
+            .sheet(isPresented: $showShareSheet, content: {
+                if let pdfURL = pdfURL {
+                    ShareSheet(items: [pdfURL])
+                }
+            })
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                     self.reloadData()
@@ -97,6 +114,26 @@ struct AllTransactionsView: View {
                 break
             }
         }
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing) {
+                Button(action: {
+                    isLoading = true
+                    Network().downloadPDF(
+                        url: downloadURL.absoluteString
+                    ) { pdfUrl in
+                        DispatchQueue.main.async {
+                            self.isLoading = false
+                            self.pdfURL = pdfUrl
+                            self.showShareSheet = true
+                        }
+                    }
+                }, label: {
+                    Image("icon_pdf_download")
+                        .renderingMode(.template)
+                        .foregroundStyle(Color.appIcon)
+                })
+            }
+        })
     }
     
     private var cardField: some View {

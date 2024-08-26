@@ -97,7 +97,7 @@ class PinCodeViewModel: ObservableObject {
     }
     
     func onSuccessLogin() {
-        Task {
+        Task(priority: .high) {
             await appDelegate?.navigate(to: .mainTab)
         }
     }
@@ -105,7 +105,7 @@ class PinCodeViewModel: ObservableObject {
     func onClickNext() {
         switch reason {
         case .login:
-            Task {
+            Task(priority: .high) {
                 await appDelegate?.navigate(to: .loading)
             }
         case .setup:
@@ -131,7 +131,7 @@ class PinCodeViewModel: ObservableObject {
     func onAppear() {
 #if DEBUG
         if reason == .login {
-            Task {
+            Task(priority: .high) {
                 await appDelegate?.navigate(to: .mainTab)
             }
         }

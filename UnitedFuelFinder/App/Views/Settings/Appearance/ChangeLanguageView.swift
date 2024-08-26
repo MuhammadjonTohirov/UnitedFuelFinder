@@ -61,13 +61,13 @@ struct ChangeLanguageView: View {
     
     private func onClickContinue() {
         UserSettings.shared.isLanguageSelected = true
-        Task {
+        Task(priority: .high) {
             await appDelegate?.navigate(to: .auth)
         }
     }
     
     private func showMain() {
-        Task {
+        Task(priority: .high) {
             try? await Task.sleep(nanoseconds: 200)
             await appDelegate?.navigate(to: .loading)
         }

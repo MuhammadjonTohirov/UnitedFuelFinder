@@ -14,7 +14,6 @@ struct TotalSpendingsWidgetView: View {
     
     private let chartSize = UIScreen.main.bounds.size.width * 0.35
     @State private var selectedCount: Int?
-    @State private var bodySize: CGRect = .zero
     @State private var filterViewSize: CGRect = .zero
     
     var body: some View {
@@ -31,7 +30,6 @@ struct TotalSpendingsWidgetView: View {
                         .foregroundStyle(.appSecondaryBackground)
                 }
                 .coveredLoading(isLoading: $viewModel.isLoading)
-                .readRect(rect: $bodySize)
         }
         .sheet(isPresented: $viewModel.showFilterSheet, content: {
             ForEach(0..<TotalSpendingsFilter.allCases.count, id: \.self) { i in
@@ -71,7 +69,7 @@ struct TotalSpendingsWidgetView: View {
                         Text(item.title)
                             .font(.regular(size: 14))
                         Spacer()
-                        Text("$\(item.value.asFloat.asMoney)")
+                        Text(item.valueString)
                             .multilineTextAlignment(.trailing)
                             .font(.regular(size: 14))
                     }.onTapGesture {
@@ -89,10 +87,8 @@ struct TotalSpendingsWidgetView: View {
                 .onTapGesture {
                     viewModel.showFilterSheet = true
                 }
-                .position(
-                    x: bodySize.width - filterViewSize.width / 2 - 8,
-                    y: filterViewSize.height / 2
-                )
+                .vertical(alignment: .top)
+                .horizontal(alignment: .trailing)
         }
     }
     
@@ -127,7 +123,7 @@ struct TotalSpendingsWidgetView: View {
         } else {
             Chart(viewModel.pieData) { slice in
                 SectorMark(
-                    angle: .value("Spendings", slice.value),
+                    angle: .value("spendings".localize.capitalized, slice.value),
                     innerRadius: .ratio(slice.id != viewModel.selected ? 0.6 : 0.5),
                     outerRadius: .ratio(slice.id != viewModel.selected ? 0.8 : 0.9),
                     angularInset: 2
@@ -158,9 +154,4 @@ struct TotalSpendingsWidgetView: View {
                 y: 1
             )
     }
-}
-
-#Preview {
-    UserSettings.shared.language = .english
-    return TotalSpendingsWidgetView(viewModel: .test)
 }

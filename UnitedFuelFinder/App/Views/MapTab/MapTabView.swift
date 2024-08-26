@@ -87,6 +87,24 @@ struct MapTabView: View {
             tabModel.leadningNavigationOpacity = value == .pickLocation ? 0 : 1
         })
         .background(.appBackground)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                MapTabToggleView(selectedIndex: $tabModel.mapBodyState)
+            }
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Icon(name: "icon_filter_2")
+                    .onTapGesture {
+                        if let filter = self.viewModel.filter {
+                            self.viewModel.route = .filter(filter, { newFilter in
+                                self.viewModel.route = nil
+                                self.viewModel.set(filter: newFilter)
+                            })
+                        }
+                    }
+            }
+        }
     }
     
     var innerBody: some View {
@@ -110,7 +128,7 @@ struct MapTabView: View {
             }
         })
         .fullScreenCover(isPresented: $viewModel.present, content: {
-            NavigationView {
+            NavigationStack {
                 viewModel.presentableRoute?.screen
                     .navigationBarTitleDisplayMode(.inline)
                     .environmentObject(mainModel)
@@ -221,6 +239,15 @@ struct MapTabView: View {
             .vertical(alignment: .top)
             .horizontal(alignment: .leading)
             .set(isVisible: viewModel.state == .default)
+        }
+        .toolbar {
+            ToolbarItem(placement: .topBarLeading) {
+                if let tollCost = tabModel.mapDetails {
+                    TotalCostView(value: "$\(tollCost.tollCost)")
+                } else {
+                    EmptyView()
+                }
+            }
         }
     }
     
@@ -356,6 +383,7 @@ struct MapTabView: View {
                 .foregroundStyle(Color.background)
                 .overlay {
                     Icon(systemName: "arrow.clockwise")
+                        .size(.init(width: 18, height: 18))
                         .resizable()
                         .renderingMode(.template)
                         .aspectRatio(contentMode: .fit)
@@ -378,6 +406,7 @@ struct MapTabView: View {
                 .overlay {
                     Icon(systemName: "arrow.left")
                         .renderingMode(.template)
+                        .size(.init(width: 18, height: 18))
                         .foregroundStyle(Color.label.opacity(0.5))
                 }
                 .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 0)

@@ -80,17 +80,7 @@ final public class UserSettings {
     @codableWrapper(key: "currentAPIVersion")
     public var currentAPIVersion: ServerVersion?
     
-    private var _userType: UserType?
-    
-    public var userType: UserType? {
-        if let _userType {
-            return _userType
-        }
-        
-        _userType = userInfo?.roleCode == "company" ? .company : .driver
-        
-        return _userType
-    }
+    public var userType: UserType?
     
     @codableWrapper(key: "appPin")
     public var appPin: String?
@@ -115,7 +105,7 @@ final public class UserSettings {
     public var theme: Theme?
     
     func clear() {
-        _userType = nil
+        userType = nil
         accessToken = nil
         refreshToken = nil
         tokenExpireDate = nil

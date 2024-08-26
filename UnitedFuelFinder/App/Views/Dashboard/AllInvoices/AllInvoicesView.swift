@@ -30,7 +30,6 @@ struct AllInvoicesView: View {
     private var scenePhase
     
     private var downloadURL: URL {
-//        /api/Company/PrintInvoices
         URL.baseAPI.appendingPath(isCompany ? "Company" : "Driver", "PrintInvoices")
             .queries(
                 .init(name: "fromDate", value: date1.toString(format: "ddMMyyyy")),

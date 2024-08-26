@@ -71,7 +71,9 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     
     @Published var route: AuthRoute? = nil {
         didSet {
-            present = route != nil
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
+                self.present = self.route != nil
+            }
         }
     }
     
@@ -152,7 +154,7 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     }
     
     private func showMain() {
-        Task {
+        Task(priority: .high) {
             await appDelegate?.navigate(to: .mainTab)
         }
     }
@@ -198,15 +200,12 @@ class AuthorizationViewModel: NSObject, ObservableObject, Alertable {
     }
     
     private func getAccessToken() async -> AuthNetworkErrorReason? {
-        guard let type = userType.rawValue.nilIfEmpty else {
-            return AuthNetworkErrorReason.unknown
-        }
-        
         showLoading()
         
-        let (isOK, error) = await AuthService.shared.login(username: self.username, password: password, role: type)
+        let (isOK, error) = await AuthService.shared.login(username: self.username, password: password)
         
         if isOK {
+            await AuthService.shared.syncUserInfo()
             await MainService.shared.syncCustomers()
             await MainService.shared.syncAllStations()
         }
@@ -246,8 +245,6 @@ extension AuthorizationViewModel: ASAuthorizationControllerDelegate {
     ) {
         guard
             let credential = authorization.credential as? ASAuthorizationAppleIDCredential//,
-//            let tokenData = credential.authorizationCode,
-//            let token = String(data: tokenData, encoding: .utf8)
         else { return }
         
         guard let email = credential.email?.nilIfEmpty else {
@@ -267,7 +264,7 @@ extension AuthorizationViewModel: ASAuthorizationControllerDelegate {
                     self.showPinSetup()
                     self.clearOTPModel()
                 } else if let error = result.error {
-                    
+                    debugPrint(error.localizedDescription)
                 }
             }
         }

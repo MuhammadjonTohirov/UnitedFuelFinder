@@ -123,9 +123,9 @@ final class SearchAddressViewModel: ObservableObject {
         searchCancellables.removeAll()
     }
     
-    func set(input: MapDestination) {
+    func set(input: MapDestination?) {
         self.input = input
-        self.addressText = input.address ?? ""
+//        self.addressText = input?.address ?? ""
     }
     
     private func searchPlaces(_ text: String) {
@@ -187,6 +187,7 @@ final class SearchAddressViewModel: ObservableObject {
         delegate?.searchAddress(
             viewModel: self,
             result: .init(
+                id: input?.id ?? nil,
                 address: address.address?.nilIfEmpty ?? address.title,
                 lat: _coor.latitude,
                 lng: _coor.longitude

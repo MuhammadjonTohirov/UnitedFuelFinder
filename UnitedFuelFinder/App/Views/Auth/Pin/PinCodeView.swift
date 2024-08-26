@@ -42,7 +42,7 @@ struct PinCodeView: View {
             KeyboardView(text: $viewModel.pin, viewModel: viewModel.keyboardModel) {
                 if viewModel.reason == .login {
                     UserSettings.shared.appPin = nil
-                    Task {
+                    Task(priority: .high) {
                         await appDelegate?.navigate(to: .auth)
                     }
                 }
